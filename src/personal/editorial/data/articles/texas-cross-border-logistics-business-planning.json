@@ -8,14 +8,14 @@
   "subtitle": "Freight growth, border counts and bridge schedules answer different questions. A supplier decision needs the full delivery and landed-cost record.",
   "seoDescription": "Texas–Mexico logistics research using July 2026 BTS freight and crossing data, Laredo commercial schedules, USMCA documentation and a declared routing-cost model.",
   "date": "2026-10-12",
-  "dateModified": "2026-10-12",
+  "dateModified": "2026-10-13",
   "author": "Sulayman Bowles",
   "kind": "research",
   "readTime": "9 MIN",
   "openingPresentation": "integrated",
-  "evidenceBoundary": "Primary sources reviewed October 12, 2026. Freight and crossing examples describe July 2026; Laredo traffic-share context describes 2025. Published bridge information is not a guarantee of day-of-dispatch inspection availability. The route costs and delivery failures are hypothetical. No product-specific tariff rate, carrier quote or measured door-to-door service level is asserted.",
+  "evidenceBoundary": "Primary sources reviewed October 12, 2026. Freight and crossing examples describe July 2026; Laredo traffic-share context describes 2025. Published bridge information is not a guarantee of day-of-dispatch inspection availability. The route costs and delivery failures are hypothetical. No product-specific tariff rate, carrier quote or measured door-to-door service level is asserted. Targeted October 13 revision: a route service target, inventory-capital boundary and variability sensitivity. Original source-check dates remain attached to the individual references.",
   "content": [
-    "A Texas company sourcing from Mexico should compare the cost of usable goods at its receiving dock. The invoice price and linehaul quote leave out the inventory tied up in transit, the receiving window that a shipment can miss, and the documentation needed for the goods to enter correctly. A busy corridor is not evidence that your shipment will arrive on schedule.",
+    "Price the shipment at the Texas receiving dock. The supplier’s invoice and linehaul quote do not capture the cost of inventory in transit, missed receiving windows or customs documentation. A useful sourcing comparison follows the goods through those handoffs and assigns the cost when one fails.",
     "July 2026 illustrates the difference between scale and service. BTS reported $94.8 billion of U.S.–Mexico freight value, up 27.5% over July 2025. A separate crossing release reported 650,466 trucks entering the United States from Mexico, essentially unchanged over the year. Both observations can be true because they measure different things. [Freight release](#source-freight); [crossing release](#source-crossings).",
     "The operating decision is to qualify a route, a customs process and a receiving plan together. Public evidence can identify corridors and expose assumptions; the commitment needs shipment-level records and terms that tell the business who owns each handoff."
   ],
@@ -96,8 +96,8 @@
         "Consider a hypothetical buyer with 120 shipments per year and steady consumption of goods costing $20,000 per calendar day. Route A costs $3,000 per shipment and has an assumed five-day pipeline. Route B costs $3,200 per shipment and has an assumed three-day pipeline. Assume annual inventory carrying cost of 20%. These are scenario inputs, not observed carrier prices or border transit times.",
         "Annual freight is $360,000 for A and $384,000 for B. At steady consumption, average pipeline inventory is $100,000 and $60,000 respectively. Applying the assumed annual carrying rate gives $20,000 and $12,000. The extra freight costs $24,000 a year, while the smaller pipeline saves $8,000 a year under the stated assumptions.",
         "Now assume six missed receiving windows on A and two on B annually, with $5,000 of incremental cost per incident. The modeled failure costs are $30,000 and $10,000. The comparison totals $410,000 for A and $406,000 for B: B is $4,000 lower in this particular scenario. Nothing in the BTS crossing count supplies those missed-window assumptions.",
-        "One additional $5,000 incident on B reverses the result. That sensitivity is useful: the route preference is small relative to an uncertain service assumption. Run comparable shipments, record actual receipt performance, and obtain a quote defining detention, transfers, insurance and exception charges before relying on the difference.",
-        "Both routes assume identical goods and unchanged duties and common handling costs, excluded from this incremental table. Those costs still belong in the full landed-cost model. Inventory carrying cost is applied to the average pipeline once per year; it is not charged again for each shipment."
+        "Before incident savings, B costs $16,000 more annually: $24,000 extra freight less $8,000 carrying savings. At $5,000 per missed-window incident, it must avoid more than 3.2 incidents a year to win; four fewer leave only $4,000. Define comparable events and avoid assigning the same production stoppage to every delayed truck. One additional B incident reverses the modeled choice.",
+        "Both routes assume identical goods and unchanged duties and common handling costs, excluded from this incremental table. Those costs still belong in the full landed-cost model. Inventory carrying cost is applied to the average pipeline once per year; it is not charged again for each shipment. The $40,000 pipeline-inventory release is a one-time capital difference, not the $8,000 annual carrying saving. If B instead needs $20,000 more average safety stock because of worse variability, its 20% carrying cost consumes the whole $4,000 advantage. That extra stock is a sensitivity, not an observed feature of either route."
       ],
       "table": {
         "caption": "Declared annual route comparison, USD unless noted",
@@ -287,8 +287,8 @@
   "resources": [
     {
       "label": "Texas business source and decision ledger",
-      "href": "/research/texas-business-library-2026-10-12.json",
-      "description": "Primary evidence, declared assumptions and update triggers across the Texas business library.",
+      "href": "/research/texas-research-library-2026-10-13.json",
+      "description": "Primary evidence, declared assumptions and update triggers across the Texas business and autonomy library.",
       "format": "JSON"
     }
   ]

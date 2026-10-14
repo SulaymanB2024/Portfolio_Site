@@ -18,13 +18,14 @@
     },
     {
       "id": "interconnection-rule-status-and-scope",
-      "claim": "Adopted §25.194 was filed September 18, published October 2 and effective October 8, 2026. Applicability covers specified non-energized single-site new loads, expansions and co-location; incremental additions are the relevant expansion scope.",
+      "claim": "Adopted \u00a725.194 was filed September 18, published October 2 and effective October 8, 2026. Applicability covers specified non-energized single-site new loads, expansions and co-location; incremental additions are the relevant expansion scope.",
       "sources": [
         {
           "url": "https://www.sos.texas.gov/texreg/archive/October22026/Adopted%20Rules/16.ECONOMIC%20REGULATION.html",
           "date": "2026-10-02",
           "status": "adopted; effective 2026-10-08",
-          "locator": "§25.194(b), (h), and effective-date notice"
+          "locator": "\u00a725.194(b), (h), and effective-date notice",
+          "pinpoint": "\u00a725.194(b), (h), and effective-date notice"
         }
       ],
       "recheckTrigger": "Amendment, litigation affecting applicability, or transaction-specific grandfathering claim. Do not reuse March 2026 proposal thresholds or fee structure."
@@ -37,7 +38,8 @@
           "url": "https://www.sos.texas.gov/texreg/archive/October22026/Adopted%20Rules/16.ECONOMIC%20REGULATION.html",
           "date": "2026-10-02",
           "status": "effective rule",
-          "locator": "§25.194(d)(2), (d)(3), (f)(2), (h)"
+          "locator": "\u00a725.194(d)(2), (d)(3), (f)(2), (h)",
+          "pinpoint": "\u00a725.194(d)(2), (d)(3), (f)(2), (h)"
         }
       ],
       "recheckTrigger": "Rule inflation adjustments, subsequent tariff/cost-allocation rules, SLLIA adoption, or actual project agreements and credit instruments."
@@ -50,7 +52,8 @@
           "url": "https://www.ercot.com/files/docs/2026/07/29/ERCOT-Senate-July-29-Panel-1-Assessing-The-Grid.pdf",
           "date": "2026-07-29",
           "status": "dated reported request snapshot",
-          "locator": "Page 6"
+          "locator": "Page 6",
+          "pinpoint": "Page 6"
         }
       ],
       "units": "GW requested; percent of large-load request capacity by project type",
@@ -71,13 +74,14 @@
     },
     {
       "id": "audit-and-classification-sequence",
-      "claim": "ERCOT described an August 3 Batch Zero pause and delayed final classification, then issued conditional classifications September 3 subject to verification/model cures/possible exceptions. December 10 was the August presentation’s planned eligibility-report date.",
+      "claim": "ERCOT described an August 3 Batch Zero pause and delayed final classification, then issued conditional classifications September 3 subject to verification/model cures/possible exceptions. December 10 was the August presentation\u2019s planned eligibility-report date.",
       "sources": [
         {
           "url": "https://www.ercot.com/files/docs/2026/08/20/Batch-Zero-Verification-and-Audit-PUCT-Presentation.pdf",
           "date": "2026-08-20",
           "status": "agency process update; future dates are planned",
-          "locator": "Pages 2 and 10"
+          "locator": "Pages 2 and 10",
+          "pinpoint": "Pages 2 and 10"
         },
         {
           "url": "https://www.ercot.com/services/comm/mkt_notices/M-A080326-04",
@@ -125,61 +129,130 @@
     },
     {
       "id": "curtailment-and-program-state",
-      "claim": "SB6 distinguishes post-December-31-2025 transmission-voltage firm-load-shed protocols with critical-load exceptions from a >=75-MW demand-management service with a 24-hour notice provision. §25.521 published August 14 was proposed; September ERCOT report described implementation as in progress. No service revenue is assumed.",
+      "claim": "SB6 distinguishes post-December-31-2025 transmission-voltage firm-load-shed protocols with critical-load exceptions from a >=75-MW demand-management service with a 24-hour notice provision. \u00a725.521 published August 14 was proposed; September ERCOT report described implementation as in progress. No service revenue is assumed.",
       "sources": [
         {
           "url": "https://capitol.texas.gov/tlodocs/89R/billtext/html/SB00006F.HTM",
           "date": "2025-05-30",
           "status": "enrolled statutory requirements",
-          "locator": "§39.170"
+          "locator": "\u00a739.170",
+          "pinpoint": "\u00a739.170"
         },
         {
           "url": "https://www.sos.texas.gov/texreg/archive/August142026/Proposed%20Rules/16.ECONOMIC%20REGULATION.html",
           "date": "2026-08-14",
-          "status": "proposed §25.521; not treated as effective terms"
+          "status": "proposed \u00a725.521; not treated as effective terms"
         },
         {
           "url": "https://www.ercot.com/files/docs/2025/09/15/89th-Legislative-Session-PPTX-ERCOT-Status-September-2026.pdf",
           "date": "2026-09-15",
           "status": "dated implementation-in-progress report",
-          "locator": "Pages 10–12"
+          "locator": "Pages 10\u201312",
+          "pinpoint": "Pages 10\u201312"
         }
       ],
       "recheckTrigger": "Final adoption and effective date, implemented ERCOT protocols and actual program participation/procurement notices. Public retrieval of the PUCT project page failed; do not claim final adoption was exhaustively ruled out."
     },
     {
       "id": "generation-and-cost-recovery",
-      "claim": "SB6 addresses new co-located loads at specified existing stand-alone generators; ERCOT’s July example distinguishes existing from new co-located generation. SB6 section 6 required transmission-cost-recovery review and rules by December 31, 2026; this deadline does not determine a buyer’s tariff.",
+      "claim": "SB6 addresses new co-located loads at specified existing stand-alone generators; ERCOT\u2019s July example distinguishes existing from new co-located generation. SB6 section 6 required transmission-cost-recovery review and rules by December 31, 2026; this deadline does not determine a buyer\u2019s tariff.",
       "sources": [
         {
           "url": "https://capitol.texas.gov/tlodocs/89R/billtext/html/SB00006F.HTM",
           "date": "2025-05-30",
           "status": "enrolled statutory provisions",
-          "locator": "§39.169 and section 6"
+          "locator": "\u00a739.169 and section 6",
+          "pinpoint": "\u00a739.169 and section 6"
         },
         {
           "url": "https://www.ercot.com/files/docs/2026/07/29/ERCOT-Senate-July-29-Panel-1-Assessing-The-Grid.pdf",
           "date": "2026-07-29",
           "status": "agency example",
-          "locator": "Page 2"
+          "locator": "Page 2",
+          "pinpoint": "Page 2"
         }
       ],
       "recheckTrigger": "Co-location decision for the actual project, amended rules, December cost-recovery rules, current utility tariffs."
     },
     {
       "id": "illustrative-calculations",
-      "claim": "Two hypothetical 80-MW allocations: Site A requests 100 MW, gives $5m intermediate security and $6m SLLIA security on assumed $6m upgrades; Site B requests 80 MW, gives $4m intermediate and SLLIA security on assumed $3m upgrades. Assumed CIAC $3m/$4.2m. 18 months × $150k = $2.7m delay sensitivity. 80 MW × 70% × 8,760 h = 490,560 MWh; × assumed $65/MWh = $31,886,400 supply expense.",
+      "claim": "Two hypothetical 80-MW allocations: Site A requests 100 MW, gives $5m intermediate security and $6m SLLIA security on assumed $6m upgrades; Site B requests 80 MW, gives $4m intermediate and SLLIA security on assumed $3m upgrades. Assumed CIAC $3m/$4.2m. 18 months \u00d7 $150k = $2.7m delay sensitivity. 80 MW \u00d7 70% \u00d7 8,760 h = 490,560 MWh; \u00d7 assumed $65/MWh = $31,886,400 supply expense.",
       "sources": [
         {
           "url": "https://www.sos.texas.gov/texreg/archive/October22026/Adopted%20Rules/16.ECONOMIC%20REGULATION.html",
           "date": "2026-10-02",
           "status": "formula source only; every project and price input explicitly illustrative",
-          "locator": "§25.194(d), (f)"
+          "locator": "\u00a725.194(d), (f)",
+          "pinpoint": "\u00a725.194(d), (f)"
         }
       ],
       "status": "calculated illustration, not observed project data or tariff forecast",
       "recheckTrigger": "Any changed rule formula or input. Preserve explicit assumptions, do not add intermediate and SLLIA security, and do not label supply-only calculation total delivered cost."
+    },
+    {
+      "id": "minimum-billing-and-release",
+      "claim": "The SLLIA acknowledges minimum billing, can require related additional security, and returns remaining security in staged 20% increments tied to agreement milestones.",
+      "status": "adopted rule; targeted content review",
+      "qualification": "The adopted acknowledgment does not establish that the July proposed \u00a725.193(d) method, 20-year period or \u00a725.252 tariff terms became effective. No actual minimum bill, tariff charge, release calendar or project agreement inferred.",
+      "sources": [
+        {
+          "url": "https://www.sos.texas.gov/texreg/archive/October22026/Adopted%20Rules/16.ECONOMIC%20REGULATION.html",
+          "date": "Content reviewed 2026-10-13",
+          "pinpoint": "Adopted \u00a725.194(f)(2)(B)(ii),(D), (f)(3)(A)\u2013(C)"
+        }
+      ],
+      "recheck": "Governing provision, actual contract, input cohort or operating evidence changes."
+    },
+    {
+      "id": "material-change",
+      "claim": "A material interconnection-request change requires a new request under \u00a725.194(e)(4).",
+      "status": "adopted rule",
+      "qualification": "Not every routine design update is determined material here; actual utility/ERCOT treatment remains project-specific.",
+      "sources": [
+        {
+          "url": "https://www.sos.texas.gov/texreg/archive/October22026/Adopted%20Rules/16.ECONOMIC%20REGULATION.html",
+          "date": "Content reviewed 2026-10-13",
+          "pinpoint": "Adopted \u00a725.194(e)(4)"
+        }
+      ],
+      "recheck": "Governing provision, actual contract, input cohort or operating evidence changes."
+    },
+    {
+      "id": "collateral-carry",
+      "claim": "At an invented 4% annual net spread and three-year flat hold, $2M extra cash collateral costs $240,000 to carry; 15 years equals $1.2M permanent CIAC.",
+      "status": "calculated hypothetical",
+      "qualification": "Simple comparison after collateral interest; no actual financing quote, release path, tax, exit or tariff treatment assumed.",
+      "sources": [],
+      "recheck": "Governing provision, actual contract, input cohort or operating evidence changes."
+    },
+    {
+      "id": "minimum-billing-implementation-boundary",
+      "claim": "The July 24 Project 58000 publication proposed minimum billing from available service, including before energization/full use, for at least 20 years. October 2 adoption of \u00a725.194 expressly assigns minimum-charge details to that separate proceeding. No later adopted billing method was retrieved in this bounded review.",
+      "status": "verified dated proposal and adopted cross-reference; later final implementation unresolved",
+      "sources": [
+        {
+          "url": "https://www.sos.texas.gov/texreg/archive/July242026/Proposed%20Rules/16.ECONOMIC%20REGULATION.html",
+          "date": "2026-07-24",
+          "lastVerified": "2026-10-13",
+          "locator": "Introductory proposal; \u00a725.193(d)(2)\u2013(3); proposed \u00a725.252(c)(3), (e), (f); TRD-202602812/2813",
+          "pinpoint": "Introductory proposal; \u00a725.193(d)(2)\u2013(3); proposed \u00a725.252(c)(3), (e), (f); TRD-202602812/2813"
+        },
+        {
+          "url": "https://www.sos.texas.gov/texreg/archive/October22026/Adopted%20Rules/16.ECONOMIC%20REGULATION.html",
+          "date": "2026-10-02",
+          "lastVerified": "2026-10-13",
+          "locator": "Minimum transmission/minimum demand charge Commission Response; \u00a725.194(f)(2)\u2013(3)",
+          "pinpoint": "Minimum transmission/minimum demand charge Commission Response; \u00a725.194(f)(2)\u2013(3)"
+        }
+      ],
+      "qualification": "Current official docket and rule endpoint access failed. This is not an exhaustive nonadoption finding or proof of a utility tariff. Use an actual final rule, approved tariff and SLLIA for a real project.",
+      "recheckTrigger": "Project 58000 adoption order and effective-date notice; current \u00a725.193; approved utility tariff and actual agreement."
     }
   ],
-  "remainingBoundary": "Root must integrate the article, validate rendered anchors and tables, inspect desktop and phone presentation, and verify publication separately. No actual site contract, utility study, permit file, operational program participation or future bill has been verified."
+  "remainingBoundary": "No actual site contract, utility study, permit file, operational program participation or future bill has been verified.",
+  "revisionReview": {
+    "date": "2026-10-13",
+    "scope": "Adopted minimum-billing acknowledgment versus separate proposed billing terms; collateral release, material change and declared financing comparison.",
+    "originalSourceDatesPreserved": true
+  }
 }

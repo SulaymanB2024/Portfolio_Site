@@ -1,6 +1,6 @@
 {
   "article": "texas-driverless-freight-route-economics",
-  "checkedAt": "2026-10-12",
+  "checkedAt": "2026-10-13",
   "claims": [
     {
       "id": "freight-endpoints",
@@ -11,17 +11,17 @@
         {
           "url": "https://ir.aurora.tech/sec-filings/all-sec-filings/content/0001828108-26-000075/aurora26q2shareholderlet.htm",
           "date": "2026-07-29",
-          "pinpoint": "Aurora pages 7–8; Warp current-operation paragraphs; Ryder pilot"
+          "pinpoint": "Aurora pages 7\u20138; Warp current-operation paragraphs; Ryder pilot"
         },
         {
           "url": "https://www.waabi.ai/insights/volvo-and-waabi-kick-off-customer-operations-in-texas-starting-with-warp",
           "date": "2026-10-05",
-          "pinpoint": "Aurora pages 7–8; Warp current-operation paragraphs; Ryder pilot"
+          "pinpoint": "Aurora pages 7\u20138; Warp current-operation paragraphs; Ryder pilot"
         },
         {
           "url": "https://news.international.com/2026-03-31-International-Launches-Level-4-Autonomous-Fleet-Trial-on-Live-Freight-Lane",
           "date": "2026-03-31",
-          "pinpoint": "Aurora pages 7–8; Warp current-operation paragraphs; Ryder pilot"
+          "pinpoint": "Aurora pages 7\u20138; Warp current-operation paragraphs; Ryder pilot"
         }
       ],
       "recheck": "Endpoint, platform or operating-role change"
@@ -114,6 +114,51 @@
         }
       ],
       "recheck": "Method or material service-data change"
+    },
+    {
+      "id": "freight-warning-exemption",
+      "claim": "FMCSA grants a limited cab-mounted warning-beacon exemption effective October 7, 2026\u2013October 7, 2031; other Level 4 carriers must give prior written notice.",
+      "status": "official final exemption",
+      "qualification": "Specific warning-device alternative only. Other federal rules continue; no competitor participation or fleet compliance verified. Intrastate treatment must be resolved separately from federal interstate preemption.",
+      "sources": [
+        {
+          "url": "https://www.govinfo.gov/content/pkg/FR-2026-10-09/html/2026-20734.htm",
+          "date": "2026-10-09",
+          "pinpoint": "DATES; VI.A\u2013C.1\u20135; VI.D"
+        }
+      ],
+      "recheck": "Current exemption, participating carrier evidence, cargo, configuration, domain or state intrastate treatment changes."
+    },
+    {
+      "id": "texas-intrastate-beacon-basis",
+      "claim": "Official current \u00a74.11 incorporates federal amendments through September 1, 2022; the complete inspected \u00a74.12 exception list does not adopt the October 2026 beacon relief. Federal permission alone does not establish a Texas intrastate legal basis.",
+      "status": "current official rendered rule text checked 2026-10-13; bounded interpretation",
+      "sources": [
+        {
+          "url": "https://texas-sos.appianportalsgov.com/rules-and-meetings?recordId=211918&queryAsDate=10%2F13%2F2026&interface=VIEW_TAC_SUMMARY&$locale=en_US",
+          "date": "2023-01-08",
+          "lastVerified": "2026-10-13",
+          "locator": "37 TAC \u00a74.11(a), (b)(3), (b)(6), (c)",
+          "pinpoint": "37 TAC \u00a74.11(a), (b)(3), (b)(6), (c)"
+        },
+        {
+          "url": "https://texas-sos.appianportalsgov.com/rules-and-meetings?recordId=226974&queryAsDate=10%2F13%2F2026&interface=VIEW_TAC_SUMMARY&$locale=en_US",
+          "date": "2025-12-11",
+          "lastVerified": "2026-10-13",
+          "locator": "37 TAC \u00a74.12 entire exception list and source note",
+          "pinpoint": "37 TAC \u00a74.12 entire exception list and source note"
+        }
+      ],
+      "qualification": "No exhaustive absence finding about other DPS instruments, no individual state permit process inferred, and no real shipment classification determined. Two Texas endpoints alone do not establish intrastate commerce.",
+      "recheckTrigger": "Current Texas rule amendment, actual applicable relief instrument/interpretation, changed shipment classification or proposed warning-device arrangement."
+    },
+    {
+      "id": "road-quote-ceiling",
+      "claim": "At 800 accepted loads, the declared $1,433 whole-route variable-cost ceiling less $100 common warehouse and $60 added release work gives a $1,273 maximum provider road quote; $1,150 base quote leaves $123 headroom. Setup and incremental expected exceptions were already deducted in deriving the ceiling.",
+      "status": "calculated hypothetical using existing inputs",
+      "sources": [],
+      "qualification": "Suggested purchaser analysis; all original source dates, access restrictions, legal conditions and unresolved provider-specific facts remain in the article.",
+      "recheckTrigger": "Change to the proposed itinerary, route, contract, fleet stage, accepted volume or stated model input."
     }
   ],
   "scenario": {
@@ -196,6 +241,16 @@
       "Lost contribution is separate from extra transport cost; no probability distribution or realized ROI asserted.",
       "The comparison is first-year shipper cost; it does not estimate vehicle hours, fleet utilization, manufacturer unit economics or gross margin."
     ],
-    "recheck": "Replace assumptions with actual endpoint-approved quotes, requested/accepted/completed shipment records, invoices, extra staff time and measured exceptions after a bounded trial."
+    "recheck": "Replace assumptions with actual endpoint-approved quotes, requested/accepted/completed shipment records, invoices, extra staff time and measured exceptions after a bounded trial.",
+    "economicCostBoundary": "Consistent comparison includes allocated existing warehouse/release labor, assumed paid carrier/recovery/setup costs and incremental lost contribution. It is not a cash invoice total. The 2% is incremental to conventional service, not an AV-only failure rate.",
+    "exceptionSplitUSD": {
+      "recoveryInvoices": 5600,
+      "lostContribution": 8000
+    }
+  },
+  "revisionReview": {
+    "date": "2026-10-13",
+    "scope": "Final exemption and cash/allocated-labor/lost-contribution boundaries reviewed; source-specific dates preserved.",
+    "originalSourceDatesPreserved": true
   }
 }

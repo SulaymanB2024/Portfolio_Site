@@ -40,7 +40,7 @@ The original hash remains intact. Each revision points to the prior hash and car
 
 Generate the selected public projection and check that it matches the reviewed library:
 
-The manifest's `bundlePath` selects the eighteen-article October 13 edition. The frozen twelve-article October 12 download remains available at its established URL. New edition paths must stay inside `public/research` and use JSON; choose a new edition rather than silently replacing a previously linked download. Source checks retain their actual individual dates even when the prepared release date advances.
+The manifest's `bundlePath` selects the current reviewed eighteen-article revision at `public/research/texas-research-library-2026-10-13.json`. The frozen twelve-article October 12 download and the initially approved eighteen-article October 13 download remain available at their established URLs. New edition paths must stay inside `public/research` and use JSON; choose a new edition rather than silently replacing a previously linked download. Update both hub and article-footer download links. Source checks retain their actual individual dates; a targeted revision does not imply every original source was refetched.
 
 ```sh
 npm run texas:bundle
@@ -55,6 +55,8 @@ node --experimental-strip-types tools/verify-search.mjs
 The local Node22 release and search commands need the type-stripping flag; configured Node24 CI runs the repository's normal release and search gates. Use the exact commands supported by the checkout. Broaden testing only for a new failure or a changed boundary.
 
 Inspect each new or materially changed page on desktop and phone. Check the opening, comparison tables, source/FAQ ending, guide targets, return context, share image and readable static HTML. Verify any tested behavior in the actual rendered result. Correct visible defects before delivery; passing a build is an intermediate state.
+
+For changes to decision models, run `python3 docs/texas-business/research/decision-models.py` and reconcile its scope with the manuscript and ledger. The adjacent executed notebook is a portable calculation companion, not a source of observed prices or a replacement for controlling records. Review cash-flow timing, population, refunds, common costs and incremental exceptions explicitly. Keep the model's interpretation limits beside the reader-facing result.
 
 Search hygiene comes from precise titles, distinct questions, source-backed answers, truthful Person/Article/CollectionPage identity, canonical URLs and linked reading paths. The existing static renderer creates sitemap, feed and machine projections from the same records. Do not add keyword stuffing, unsupported schema claims or unseen answers. No format guarantees Google indexing, rankings or citation by an AI service.
 

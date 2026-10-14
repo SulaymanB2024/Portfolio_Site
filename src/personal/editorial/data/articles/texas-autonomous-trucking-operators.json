@@ -11,13 +11,13 @@
   "dateModified": "2026-10-13",
   "author": "Sulayman Bowles",
   "kind": "research",
-  "readTime": "11 MIN",
+  "readTime": "13 MIN",
   "openingPresentation": "integrated",
-  "evidenceBoundary": "Reviewed October 12, 2026. This is a selected comparison of documented Texas freight programs, not an exhaustive census or safety ranking. Operating milestones and performance figures are attributed to their issuers. A driverless customer load, an observer-supported run, closed-course validation, a responder plan and future capacity are separate evidence. Public reports do not establish the reader’s price, accepted lane, reserved truck or contractual service level.",
+  "evidenceBoundary": "Operator stages checked October 12, 2026; FMCSA’s October 9 final exemption reviewed October 13. Issuer operating measures are attributed and are not independent safety, profitability or available-capacity findings. No carrier-specific exemption participation, current quote or complete Texas fleet census verified. Current official Texas carrier incorporation and exceptions were inspected October 13; no separate intrastate beacon relief or carrier-specific state instrument was established.",
   "content": [
-    "Texas autonomous trucking is already a purchasing question, but the useful unit is a defined freight job. A retailer replenishing stores in Dallas–Fort Worth, a sand supplier serving Permian well sites and a carrier covering I-45 need different vehicles, endpoints and support. Grouping them under one driverless-truck headline conceals the conditions that decide whether a service can move the buyer’s goods.",
+    "Start an autonomous-trucking purchase with the freight job. A retailer replenishing Dallas–Fort Worth stores, a sand supplier serving Permian well sites and a carrier covering I-45 need different equipment, endpoints and support. Match the operator to that job, then establish the operating role and capacity the buyer can actually purchase.",
     "At the October 12, 2026 cutoff, Aurora reports commercial driverless freight on public roads; Gatik identifies operating driverless regional networks; and Bot Auto has documented a paid Houston–Hutchins load with nobody in the cab. Other important programs retain onboard personnel or describe a future driver-out launch. The task is to match each statement to its route and operating role before assigning capacity. [Aurora October update](#source-aurora-october); [Gatik regional operations](#source-gatik-pepsico); [Bot Auto commercial load](#source-bot-commercial).",
-    "A qualified shortlist starts with evidence of the required operation, then moves to a dated service proposal. A company can be technically advanced and commercially unsuitable for a particular shipment. It can also provide useful supervised freight service without meeting a buyer’s requirement for a driverless operation."
+    "Screen by the freight job. The reviewed Gatik configuration addresses DFW regional replenishment; Atlas/Kodiak evidence addresses Permian industrial movement; Aurora and the documented Bot Auto load establish distinct public-road linehaul cases to investigate. Waabi reports customer freight with an observer in the driver’s seat; PlusAI’s disclosed trial uses a human safety driver. These are evidence-based screening categories, not available quotes or endorsements."
   ],
   "sections": [
     {
@@ -90,7 +90,7 @@
       "paragraphs": [
         "Aurora’s July 22 explanation says its second-generation International LT trucks operate with an empty driver’s seat. Some trips may carry roadside-assistance staff in a rear seat; Aurora expressly says that person neither drives nor supervises the driving. Record the role accurately. An empty driver seat establishes something different from a guarantee that every trip has an empty cab. [July launch explanation](#source-aurora-faq).",
         "Its July 29 shareholder letter describes deployed driverless operations between Detmar’s Midland facility and Capital Sand’s Monahans mining site along I-20. The letter separately labels fueling and weigh-station work as supervised testing. That distinction matters when a proposed lane depends on those activities. Ask for the exact released configuration instead of extending one successful capability to every stop. [Customer endpoint and support-stage evidence, pages 7–8](#source-aurora-q2).",
-        "The October 8 update reports more than 500,000 driverless miles since commercial launch. That is a company-reported accumulated operating measure, not a count of available trucks or evidence that an unreviewed customer yard is supported. Treat it as experience to investigate, then request lane-specific acceptance and dispatch terms. [October update](#source-aurora-october)."
+        "Aurora’s October 8 accumulated driverless-mile measure provides dated operating experience to investigate, not trucks available to a new customer. Its empty-seat configuration also needs a lawful way to meet roadside duties. The latest federal warning-device decision supplies a concrete equipment and route check below. [October disclosure](#source-aurora-october)."
       ]
     },
     {
@@ -107,7 +107,7 @@
       "title": "Gatik and Bot Auto answer different freight questions",
       "paragraphs": [
         "Gatik’s January disclosure identifies driverless Dallas–Fort Worth operations using 26- and 30-foot trucks between distribution facilities and stores. The June PepsiCo announcement identifies existing driverless operations across Texas, Arizona and Arkansas. This is a regional replenishment proposition: stop frequency, vehicle capacity, temperature needs and receiving access can matter more than a long-haul terminal map. [Vehicle and regional scope](#source-gatik-driverless); [PepsiCo operating statement](#source-gatik-pepsico).",
-        "The August 25 update reports 85,000 completed driverless orders and 99% on-time delivery across Gatik’s operations. Those are issuer-reported network measures, not Texas-only observations or a matched comparison with another company. Its contracted-revenue figure also differs from recognized revenue and cash received. Request the period, accepted-load denominator, cancellation treatment and route-level record relevant to your stores. [Latest reviewed operating update](#source-gatik-august).",
+        "Gatik’s August update reports recurring network activity; its aggregate on-time figure cannot become a Texas store’s service guarantee. Request the accepted-order denominator, period, cancellations and receiving-window record for the proposed route. Keep contracted revenue separate from recognized revenue or cash. [Network update and metric scope](#source-gatik-august).",
         "Bot Auto’s April 30 company release documents a 230-mile commercial load from northeast Houston to Hutchins, booked through Ryan Transportation, without an onboard safety driver, observer or dependence on low-latency remote human feedback. That is a concrete completed shipment. The issuer’s cost and profitability language does not supply an independently reviewed cost ledger or a shipper tariff. Its current site provides a freight inquiry path; current recurring capacity still needs a proposal. [Dated commercial load](#source-bot-commercial); [Current company overview](#source-bot-current)."
       ]
     },
@@ -127,6 +127,24 @@
         "Torc’s February 2026 update describes established Dallas–Fort Worth testing and a fleet operations facility. Its production-platform article separates driver-out validation on a closed multi-lane track from Fort Worth operations and a 2027 market-entry roadmap. Closed-track validation is important technical work, but it does not demonstrate an unsupervised customer run on the buyer’s highway lane. [Current-year testing description](#source-torc-2026); [Platform and roadmap](#source-torc-roadmap).",
         "Einride’s March 17 memorandum with SH 130 Concession Company describes a validation testbed on Segments 5 and 6 and plans for frontage-road connectivity. The March 24 release reports NHTSA approval and an Austin cabless demonstration explicitly belonging to an R&D project. The reviewed releases do not provide a bookable Texas commercial lane or the underlying approval instrument. [Testbed memorandum](#source-einride-testbed); [Austin research demonstration](#source-einride-austin).",
         "These programs may justify technical diligence, facility discussions or a future option. Tie any capacity commitment to named release conditions and a delivery date the counterparty will actually support. A press-event vehicle, a future manufacturing program and a service slot should remain different entries."
+      ]
+    },
+    {
+      "id": "roadside-warning-gate",
+      "title": "Check the roadside duty behind an empty driver seat",
+      "paragraphs": [
+        "FMCSA’s October 9 final exemption, effective October 7, 2026–October 7, 2031, permits specified cab-mounted warning beacons instead of conventional roadside warning devices. Aurora is covered; other Level 4 carriers must give prior written notice. This is a particular compliance alternative, not a blanket driverless authorization or evidence that another named operator uses it. [Final exemption](#source-beacon-exemption).",
+        "The terms confine operation to the specific vehicle’s validated domain, exclude passenger and defined hazardous-material work, and limit longer combinations to two 28-foot trailers. Beacon specifications include redundant power and activation within five minutes of a qualifying highway stop. That deadline is not a recovery-arrival promise. Ask for the proposed load, configuration and compliance route before treating the driver’s roadside task as removed. Classify the actual shipment: the federal grant’s interstate preemption does not itself establish Texas treatment of an intrastate-only operation. Two Texas endpoints alone do not settle that classification.",
+        "For genuinely intrastate-only service, federal permission alone is not a demonstrated Texas legal basis. Texas’s current incorporation rule references federal amendments through September 1, 2022, and its inspected exception list does not adopt this beacon relief. Require the applicable Texas basis or another compliant warning-device arrangement before removing the roadside task from the purchase specification. This bounded review does not rule out every other instrument or establish an individual DPS permit process. [Incorporation, §4.11](#source-texas-carrier-incorporation); [exceptions, §4.12](#source-texas-carrier-exceptions)."
+      ]
+    },
+    {
+      "id": "retailer-tender-example",
+      "title": "Run one replenishment job through the shortlist",
+      "paragraphs": [
+        "Take an illustrative retailer replenishing stores from a DFW distribution center. Write the actual tender first: commodities, temperature requirements, trailer and dock compatibility, load release, store windows and return movements. The reviewed Gatik regional operation is a reason to investigate that type of service. Buyer-specific endpoints, equipment, volume and commercial availability still need confirmation. [Regional program](#source-gatik-pepsico).",
+        "Send the same job description to each candidate. Ask it to mark accepted and rejected movements, the vehicle and human roles at every segment, and who performs inspection, gate access, unloading and recovery. Keep rejected loads in the plan; they require capacity from another carrier and can alter the economics of the accepted portion.",
+        "Build the tender file around three usable outputs: an accepted-lane schedule, a responsibility sheet and a quote on that scope. Compare candidates after those outputs are complete. The issuer’s reported operating stage helps choose whom to investigate; the completed purchasing file determines whether this retailer can rely on the proposed service."
       ]
     },
     {
@@ -407,6 +425,33 @@
       "date": "2026-09-03",
       "lastVerified": "2026-10-12",
       "note": "Current issuer announcement separates Texas Ryder/International fleet trials from targeted 2027 commercial launch of factory-built SuperDrive trucks. No funding transaction completion, forecast revenue or open driverless service is inferred."
+    },
+    {
+      "id": "beacon-exemption",
+      "label": "FMCSA final warning-beacon exemption and operating conditions",
+      "href": "https://www.govinfo.gov/content/pkg/FR-2026-10-09/html/2026-20734.htm",
+      "publisher": "FMCSA / Federal Register",
+      "date": "2026-10-09; effective 2026-10-07–2031-10-07",
+      "lastVerified": "2026-10-13",
+      "note": "91 FR 64736–64741, VI.B–C: prior notice for other carriers, validated domain, excluded cargo/passenger work, equipment and activation conditions. This replaces specified warning-device requirements; it is not a general driverless approval or recovery-time guarantee."
+    },
+    {
+      "id": "texas-carrier-incorporation",
+      "label": "37 TAC §4.11: current commercial-vehicle incorporation rule",
+      "href": "https://texas-sos.appianportalsgov.com/rules-and-meetings?recordId=211918&queryAsDate=10%2F13%2F2026&interface=VIEW_TAC_SUMMARY&$locale=en_US",
+      "publisher": "Texas Secretary of State / Texas Department of Public Safety",
+      "date": "2023-01-08",
+      "lastVerified": "2026-10-13",
+      "note": "Official current rendered text: §4.11(a) incorporates federal amendments/interpretations through September 1, 2022; (b)(6) substitutes the DPS director for intrastate vehicles. That text does not automatically adopt a later federal exemption."
+    },
+    {
+      "id": "texas-carrier-exceptions",
+      "label": "37 TAC §4.12: current Texas exemptions and exceptions",
+      "href": "https://texas-sos.appianportalsgov.com/rules-and-meetings?recordId=226974&queryAsDate=10%2F13%2F2026&interface=VIEW_TAC_SUMMARY&$locale=en_US",
+      "publisher": "Texas Secretary of State / Texas Department of Public Safety",
+      "date": "2025-12-11",
+      "lastVerified": "2026-10-13",
+      "note": "Complete current exception list inspected, latest amendment effective December 11, 2025. The inspected rule contains no beacon relief or blanket prospective adoption of federal exemptions; this bounded reading does not rule out every other legal instrument."
     }
   ],
   "searchTerms": [
@@ -427,8 +472,8 @@
   "resources": [
     {
       "label": "Texas autonomy source and decision ledger",
-      "href": "/research/texas-autonomy-library-2026-10-13.json",
-      "description": "Dated primary evidence, operating boundaries, declared scenarios and update triggers for the Texas autonomy edition.",
+      "href": "/research/texas-research-library-2026-10-13.json",
+      "description": "Primary evidence, declared assumptions and update triggers across the Texas business and autonomy library.",
       "format": "JSON"
     }
   ],

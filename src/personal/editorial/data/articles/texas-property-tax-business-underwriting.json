@@ -16,14 +16,14 @@
     "Texas property tax underwriting"
   ],
   "date": "2026-10-12",
-  "dateModified": "2026-10-12",
+  "dateModified": "2026-10-13",
   "author": "Sulayman Bowles",
   "kind": "research",
-  "readTime": "10 MIN",
+  "readTime": "11 MIN",
   "openingPresentation": "integrated",
-  "evidenceBoundary": "Primary statutes and Comptroller guidance verified October 12, 2026. No parcel’s value, exemption, adopted local rate, lease or appeal outcome was verified. All financial scenarios use declared assumptions and are not estimates of a particular transaction.",
+  "evidenceBoundary": "Primary statutes and Comptroller guidance verified October 12, 2026. No parcel’s value, exemption, adopted local rate, lease or appeal outcome was verified. All financial scenarios use declared assumptions and are not estimates of a particular transaction. Targeted October 13 revision: ownership tax-year provision and a declared debt-service sensitivity. Original source-check dates remain attached to the individual references.",
   "content": [
-    "A seller’s property-tax bill describes a particular owner, tax year, valuation and set of taxing units. It can be a poor forecast of the cost a buyer or tenant will bear after the deal. The business needs to reconstruct the bill and then test the assumptions that can change.",
+    "Underwrite the property-tax bill your business will bear after the transaction. The seller’s invoice reflects its owner, tax year, valuation and taxing units. A purchase, new equipment or a lease allocation can change that expense. Reconstruct the bill before using it to value the property or size the business’s debt service.",
     "Two provisions make that work particularly timely in 2026. Texas’s $125,000 exemption for qualifying income-producing tangible personal property took effect January 1. Separately, the non-homestead real-property appraisal limitation is scheduled to expire December 31, 2026 under the law reviewed here. The equipment exemption and real-estate limitation operate differently; neither is a general promise that every business’s tax bill falls. [Personal-property exemption](#source-exemption-code); [appraisal limitation](#source-appraisal-code).",
     "For a purchase, lease or expansion, build a model that identifies each taxable asset, the applicable value and rate, the party bearing the cost, and the dates when those inputs can change. That model is more useful than carrying the latest bill forward unchanged."
   ],
@@ -84,7 +84,7 @@
       "title": "The 20% rule limits a value, not the whole bill",
       "paragraphs": [
         "Section 23.231 limits qualifying non-homestead real-property appraised value to the lesser of market value or the preceding appraised value plus 20% and the market value of new improvements. It excludes specified special-appraisal property and is ownership-dependent. The Comptroller publishes a $5,320,000 maximum eligibility amount for 2026; the statute ties the threshold to the year of initial qualification. [Statutory conditions](#source-appraisal-code); [2026 threshold](#source-valuing-guidance).",
-        "A model must preserve that formula. New improvements can add value beyond the percentage increase. An ownership change can affect continued eligibility. The limitation does not freeze the tax rate, supply the residence-homestead rules to commercial property, or remove the need to verify qualification against the actual record.",
+        "Preserve the formula and the tax-year clock. New improvements can add value beyond the percentage increase. Under §23.231(f), the owner’s limitation expires January 1 of the tax year following the year ownership ceases; a transfer does not simply replace the existing bill at closing. The separate December 31, 2026 statutory expiration also remains relevant. Verify the actual qualification history, lien and closing allocation. [Ownership timing](#source-appraisal-code).",
         "The reviewed statute expressly expires December 31, 2026. Treat continued relief in a later-year budget as a scenario requiring a new legal basis. This article does not predict whether legislators will renew or replace it. The immediate underwriting question is how much of the current bill depends on a temporary difference between market and limited appraised value. [§23.231(k)](#source-appraisal-code).",
         "Ask the seller for both values and the limitation history. If an investment memo shows only the lower number, the buyer cannot see the exposure. For a development, ask when completed improvements enter the appraisal and which tax year carries them. Keeping an expense low during construction does not establish the stabilized operating cost."
       ]
@@ -95,7 +95,8 @@
       "paragraphs": [
         "Assume a hypothetical property qualifies for the 2026 limitation, has a preceding appraised value of $3 million, a current market value of $4.5 million, and no new improvements or exemptions. Assume every taxing unit applies the same value and their combined rate is $2.00 per $100. The limited appraised value is $3.6 million: $3 million × 1.20. Its modeled tax is $72,000.",
         "At the same assumed market value and rate without the limitation, tax is $90,000. The $18,000 difference is a 25% increase over the $72,000 modeled bill, despite unchanged market value. The table isolates value and rate effects. These are scenarios, not actual bills or a forecast that this exact increase will occur in 2027.",
-        "Suppose the owner’s net operating income before this tax expense is $200,000. After the modeled tax, it is $128,000 in the limited case and $110,000 in the uncapped case. At an assumed 7.5% capitalization rate, a recurring $18,000 expense difference corresponds to a $240,000 value sensitivity. This arithmetic holds other revenue, expense and valuation assumptions constant; it is not an appraisal or an observed sale effect."
+        "Suppose the owner’s net operating income before this tax expense is $200,000. After the modeled tax, it is $128,000 in the limited case and $110,000 in the uncapped case. At an assumed 7.5% capitalization rate, a recurring $18,000 expense difference corresponds to a $240,000 value sensitivity. This arithmetic holds other revenue, expense and valuation assumptions constant; it is not an appraisal or an observed sale effect.",
+        "The tax difference also changes financing headroom. Assume $100,000 annual debt service and a lender requirement of 1.25 times debt-service coverage. The modeled $128,000 and $110,000 after-tax NOI produce ratios of 1.28 and 1.10. At that assumed requirement, maximum annual debt service is $102,400 versus $88,000. This is a financing-schedule sensitivity, not a loan offer, covenant finding or automatic change in principal value."
       ],
       "table": {
         "caption": "Illustrative sensitivity: change one tax assumption at a time",
@@ -208,7 +209,7 @@
       "href": "https://tcss.legis.texas.gov/resources/TX/htm/TX.23.htm",
       "publisher": "Texas Legislature",
       "date": "Circuit breaker effective 2024-01-01; expires 2026-12-31 under reviewed text",
-      "lastVerified": "2026-10-12",
+      "lastVerified": "2026-10-13",
       "note": "Formula, first-qualification threshold, ownership timing, special-appraisal exclusions, new improvements and statutory expiration. No renewal assumed."
     },
     {
@@ -288,8 +289,8 @@
   "resources": [
     {
       "label": "Texas business source and decision ledger",
-      "href": "/research/texas-business-library-2026-10-12.json",
-      "description": "Primary evidence, declared assumptions and update triggers across the Texas business library.",
+      "href": "/research/texas-research-library-2026-10-13.json",
+      "description": "Primary evidence, declared assumptions and update triggers across the Texas business and autonomy library.",
       "format": "JSON"
     }
   ]

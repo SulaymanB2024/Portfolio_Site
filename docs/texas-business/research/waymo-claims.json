@@ -2,8 +2,8 @@
   "schemaVersion": 1,
   "article": "texas-waymo-business-travel",
   "articleSlug": "texas-waymo-business-travel",
-  "checkedAt": "2026-10-12",
-  "researchCutoff": "2026-10-12",
+  "checkedAt": "2026-10-13",
+  "researchCutoff": "2026-10-13",
   "sourcePolicy": "Current operator/platform help and dated launch disclosures. Service claims remain issuer-stated; no ride was booked and no live supply, private contract, fare or reliability dataset was observed.",
   "claims": [
     {
@@ -208,6 +208,28 @@
       "qualification": "No company quote, observed failure frequency, safety comparison or predicted return. Time value is an allocated opportunity cost, not guaranteed payroll savings.",
       "sources": [],
       "recheck": "Actual fares, comparable door-to-door time, completed/failed requests or organizational payment evidence replaces any input."
+    },
+    {
+      "id": "waymo-15",
+      "claim": "NTSB\u2019s preliminary January 12 Austin account describes a Waymo vehicle passing a stopped school bus after an incorrect remote-assistance response; no crash occurred. The reviewed page lists the investigation as ongoing.",
+      "status": "preliminary official investigation; status observed 2026-10-13",
+      "qualification": "Not final probable cause, proof a defect persists today, a measured rate or a provider ranking. Remote assistance is advice/information, not automatically remote driving.",
+      "sources": [
+        {
+          "url": "https://www.ntsb.gov/investigations/Pages/HWY26FH007.aspx",
+          "date": "2026-03-03",
+          "pinpoint": "What Happened paragraphs 1\u20138; Investigation Details; footnote 4"
+        }
+      ],
+      "recheck": "Final findings, corrective evidence or applicable operating restrictions change."
+    },
+    {
+      "id": "itinerary-approval",
+      "claim": "Suggested illustrative buyer workflow: Give the traveler a usable departure plan. No private provider contract, actual site design, service entitlement or observed performance inferred. Separate invented timetable: 10-minute pickup + 25-minute travel + 10-minute access/buffer = 45 minutes; a 10 a.m. meeting gives a 9:15 a.m. latest switch.",
+      "status": "editorial recommendation and illustrative workflow",
+      "sources": [],
+      "qualification": "Suggested purchaser analysis; all original source dates, access restrictions, legal conditions and unresolved provider-specific facts remain in the article. Timetable inputs are independent of the fare-and-wait comparison and are not provider performance estimates.",
+      "recheckTrigger": "Change to the proposed itinerary, route, contract, fleet stage, accepted volume or stated model input."
     }
   ],
   "calculations": [
@@ -227,9 +249,12 @@
         "fallbackCoordinationWaitMinutes": 20
       },
       "formulas": [
-        "minuteValue = employeeHourlyValueUSD ÷ 60",
-        "baseCost = monthlyTrips × (fare + waitWalkMinutes × minuteValue)",
-        "fallbackSensitivity = (monthlyTrips − fallbackTrips) × autonomousTripCost + fallbackTrips × (fallbackFareUSD + fallbackCoordinationWaitMinutes × minuteValue)"
+        "minuteValue = employeeHourlyValueUSD \u00f7 60",
+        "baseCost = monthlyTrips \u00d7 (fare + waitWalkMinutes \u00d7 minuteValue)",
+        "fallbackSensitivity = (monthlyTrips \u2212 fallbackTrips) \u00d7 autonomousTripCost + fallbackTrips \u00d7 (fallbackFareUSD + fallbackCoordinationWaitMinutes \u00d7 minuteValue)",
+        "breakEvenHourlyTimeValue = fareSaving \u00f7 (extraMinutes \u00f7 60)",
+        "fallbackFareCash = successfulJourneys \u00d7 autonomousFare + fallbackJourneys \u00d7 fallbackFare",
+        "fallbackTimeValue = (successfulJourneys \u00d7 baseWaitWalkMinutes + fallbackJourneys \u00d7 totalFallbackMinutes) \u00d7 minuteValue"
       ],
       "results": {
         "minuteValueUSD": 1,
@@ -245,7 +270,12 @@
         "additionalEmployeeHours": 20,
         "fallbackShare": 0.2,
         "fallbackSensitivityTotalUSD": 7440,
-        "fallbackDifferenceToAlternativeUSD": 1240
+        "fallbackDifferenceToAlternativeUSD": 1240,
+        "breakEvenHourlyTimeValueUSD": 50,
+        "fallbackFareCashUSD": 5360,
+        "fallbackTimeMinutes": 2080,
+        "fallbackTimeValueUSD": 2080,
+        "fallbackFareSavingUSD": 440
       },
       "boundaries": [
         "Same in-vehicle travel time excluded from both sides.",
@@ -261,5 +291,10 @@
     "A documented Texas employer program changes organizational payment eligibility or terms.",
     "Current route, pickup, fare or support rules materially change the usable trip.",
     "Observed pilot requests, complete door-to-door times and fallback outcomes warrant replacing declared assumptions."
-  ]
+  ],
+  "revisionReview": {
+    "date": "2026-10-13",
+    "scope": "NTSB preliminary/status body and cash/time threshold reviewed; original access/payment checks remain October 12.",
+    "originalSourceDatesPreserved": true
+  }
 }

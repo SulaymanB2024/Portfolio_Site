@@ -68,7 +68,7 @@
     },
     {
       "id": "hiring-03",
-      "claim": "DFW August manufacturing 312.7 thousand and −0.5% annual",
+      "claim": "DFW August manufacturing 312.7 thousand and \u22120.5% annual",
       "sourceId": "dallas-jobs",
       "primaryUrl": "https://www.bls.gov/eag/eag.tx_dallas_msa.htm",
       "referencePeriod": "2026-08",
@@ -78,7 +78,7 @@
     },
     {
       "id": "hiring-04",
-      "claim": "Houston August manufacturing 240.4 thousand and −0.2% annual",
+      "claim": "Houston August manufacturing 240.4 thousand and \u22120.2% annual",
       "sourceId": "houston-jobs",
       "primaryUrl": "https://www.bls.gov/eag/eag.tx_houston_msa.htm",
       "referencePeriod": "2026-08",
@@ -132,6 +132,22 @@
       "primaryUrl": "https://www.bls.gov/cps/definitions.htm",
       "pinpoint": "Unemployed and Civilian labor force definitions",
       "status": "official definition; role-availability implication is interpretation"
+    },
+    {
+      "id": "hiring-horizon",
+      "claim": "The declared recurring $104k premium costs $268,018 PV over three years or $415,242 over five at 8%, versus an immediate one-off launch delay.",
+      "status": "calculated hypothetical",
+      "qualification": "20.8 days is one-year equivalence only; no recruiting response or permanent benefit demonstrated.",
+      "sources": [],
+      "recheck": "Governing provision, actual contract, input cohort or operating evidence changes."
+    },
+    {
+      "id": "productive-starts-funnel",
+      "claim": "Declared 80% acceptance \u00d7 90% start \u00d7 75% training completion yields 54 productive workers per 100 offers; twenty requires about 38 offers in an expected-volume model.",
+      "status": "calculated hypothetical",
+      "qualification": "Not a guaranteed discrete outcome, measured labor conversion or substitute for role-specific hiring cohorts.",
+      "sources": [],
+      "recheck": "Governing provision, actual contract, input cohort or operating evidence changes."
     }
   ],
   "calculations": [
@@ -171,6 +187,36 @@
         "equivalentDelayDays": 20.8
       },
       "qualification": "No recruiting response to pay assumed. Loss applies only if staffing gap binds production; contribution excludes avoidable costs; recurring annual pay and scenario delay are distinguished."
+    },
+    {
+      "id": "recurring-wage-horizon",
+      "status": "declared hypothetical",
+      "inputs": {
+        "annualPremiumUSD": 104000,
+        "discountRate": 0.08,
+        "horizonsYears": [
+          3,
+          5
+        ],
+        "immediateLostContributionPerDayUSD": 5000
+      },
+      "formulas": [
+        "premiumPV = annualPremium * sum((1 + discountRate) ** -year for year in 1..horizon)",
+        "immediateDelayEquivalentDays = premiumPV / dailyLostContribution"
+      ],
+      "results": {
+        "premiumPVUSD": [
+          268018.0866737794,
+          415241.84385612083
+        ],
+        "equivalentDays": [
+          53.60361733475588,
+          83.04836877122416
+        ]
+      },
+      "boundaries": [
+        "Year-end recurring premium versus immediate one-off delay; no causal recruiting, retention or productivity benefit assumed."
+      ]
     }
   ],
   "updateTriggers": [
@@ -183,5 +229,10 @@
     "No October role-specific offer or candidate-availability observations were supplied or invented.",
     "No pay-to-hiring causal effect is established.",
     "Live TWC/BLS endpoints can advance or revise; retained observations identify the cutoff."
-  ]
+  ],
+  "revisionReview": {
+    "date": "2026-10-13",
+    "scope": "recurring-versus-one-off cost horizon and a qualified productive-starter denominator",
+    "originalSourceDatesPreserved": true
+  }
 }

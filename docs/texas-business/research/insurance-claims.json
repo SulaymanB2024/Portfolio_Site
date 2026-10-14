@@ -142,7 +142,7 @@
     },
     {
       "id": "hypothetical-quote-and-liquidity",
-      "claim": "$12m×3%=$360k; $600k−$360k=$240k; $600k−$100k=$500k. Premium difference $120k−$90k=$30k; extra retention $260k; $260k/$30k≈8.7 years. 168h/24=7 days; ×assumed $8k/day=$56k. All prices/losses invented; no loss probability or claim result estimated.",
+      "claim": "$12m\u00d73%=$360k; $600k\u2212$360k=$240k; $600k\u2212$100k=$500k. Premium difference $120k\u2212$90k=$30k; extra retention $260k; $260k/$30k\u22488.7 years. 168h/24=7 days; \u00d7assumed $8k/day=$56k. All prices/losses invented; no loss probability or claim result estimated.",
       "sources": [
         {
           "url": "https://www.tdi.texas.gov/pubs/consumer/cb021.html",
@@ -157,6 +157,28 @@
       ],
       "status": "calculated hypothetical comparison and cash-flow sensitivity",
       "recheckTrigger": "Any input/coverage change; preserve denominator, covered-loss assumptions and omitted terms"
+    },
+    {
+      "id": "repair-revenue-boundary",
+      "claim": "TWIA-17 restoration and cessation conditions concern repair/reasonable-speed and coverage limits, with a separate post-resumption contract suspension/lapse/cancellation exclusion.",
+      "status": "current linked form; targeted content review",
+      "qualification": "No actual issued endorsement, claim, covered contribution amount or entitlement determined. Revenue recovery alone does not establish a covered tail.",
+      "sources": [
+        {
+          "url": "https://www.twia.org/wp-content/uploads/Business_Income_and_Extra_Expense_Form_2011.11.pdf",
+          "date": "Content reviewed 2026-10-13",
+          "pinpoint": "TWIA-17 C, D and H, printed pages 3\u20134"
+        }
+      ],
+      "recheck": "Governing provision, actual contract, input cohort or operating evidence changes."
+    },
+    {
+      "id": "post-restoration-sensitivity",
+      "claim": "Fourteen invented extra days at $8k contribution add $112k operating exposure; lower-loss retention differences vary with the covered loss.",
+      "status": "calculated hypothetical",
+      "qualification": "Not an insurance recovery, actual restart delay, event probability or expected loss.",
+      "sources": [],
+      "recheck": "Governing provision, actual contract, input cohort or operating evidence changes."
     }
   ],
   "checks": [
@@ -179,5 +201,10 @@
       "result": "passed"
     }
   ],
-  "remainingBoundary": "Root integrates and visually verifies. Issued policy wording, facility physical evidence, actual quotations, eligibility, private flood terms and claim facts remain transaction-specific."
+  "remainingBoundary": "Issued policy wording, facility physical evidence, actual quotations, eligibility, private flood terms and claim facts remain transaction-specific.",
+  "revisionReview": {
+    "date": "2026-10-13",
+    "scope": "actual repair-versus-revenue coverage boundary and declared retained-loss sensitivities",
+    "originalSourceDatesPreserved": true
+  }
 }

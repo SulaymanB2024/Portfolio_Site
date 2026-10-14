@@ -19,11 +19,11 @@
   "dateModified": "2026-10-13",
   "author": "Sulayman Bowles",
   "kind": "research",
-  "readTime": "10 MIN",
+  "readTime": "13 MIN",
   "openingPresentation": "integrated",
-  "evidenceBoundary": "Public-source research checked October 12, 2026. This is a business diligence framework, not an operator-specific approval, civil-liability determination or fleet inspection. The pilot costs and interruption inputs are hypothetical.",
+  "evidenceBoundary": "Texas authorization research checked October 12, 2026; controlling statutory scope and selected federal records reviewed October 13. Public rules do not verify an individual holder, vehicle, private agreement or insurance policy. Hypothetical continuity costs do not estimate enforcement probability. Current official Texas carrier incorporation and exceptions were inspected October 13; no separate intrastate beacon relief or carrier-specific state instrument was established.",
   "content": [
-    "A Texas robotaxi company and a driverless freight carrier can both hold automated-vehicle authorization while offering very different services. The useful procurement question is which legal entity, vehicles and operating conditions support the commitment the business is about to make. Put those facts in the file before signing a transport agreement or building a schedule around the fleet.",
+    "Match the Texas authorization to the service the business is buying. A robotaxi operator and a freight carrier can hold authorization while using different vehicles, people and operating conditions. Identify the holder, vehicle platform and supported operation before signing a transport agreement or building the customer schedule around the fleet.",
     "This is a current operating requirement. TxDMV’s June 2, 2026 announcement confirms that commercial automated-vehicle authorization requirements became enforceable May 28 and that a public complaint process is available. A 2025 legislative summary or an earlier 2026 implementation forecast is no longer enough to describe the regime. [Implemented enforcement](#source-enforcement).",
     "The commercial consequence extends beyond the application: a nonexpiring authorization needs current supporting information, an actual vehicle association and a workable response to a service restriction. Separate the state authorization, technical operating conditions and customer agreement so that a change in one reaches the teams relying on the others."
   ],
@@ -33,6 +33,7 @@
       "title": "Identify the operation that needs the authorization",
       "paragraphs": [
         "The governing test concerns transporting passengers or property in furtherance of a commercial enterprise on Texas highways or streets without a human driver. The code distinguishes an automated motor vehicle capable of Level 4 or Level 5 operation from an automated driving system that can perform the driving task at Levels 3–5. Read the vehicle, engaged feature and human role together. [Definitions and scope](#source-code).",
+        "Section 545.455(b) supplies the general operating conditions: applicable traffic and federal compliance, recording equipment, a minimal-risk capability, title/registration and coverage. Subsection (c) adds authorization and a responder plan for commercial operation without a human driver. An onboard driving role changes the additional gate; it does not erase the general conditions. The application itself acknowledges federal compliance. [Sections 545.455(b)–(c) and 545.456(b)](#source-code).",
         "Section 545.451(7) defines a human driver as an onboard natural person controlling all or part of the dynamic driving task. Mere observer presence does not establish that role. For procurement, ask who performs steering, braking, roadway monitoring and tactical decisions on the actual service. A safety driver, a non-driving observer, remote assistance and roadside support represent different responsibilities. Obtain the written operation description and evidence relevant to the trip being purchased. [Human-driver definition](#source-code).",
         "A fleet’s commercial driverless service also differs from an employee using a driver-assistance feature in a personally owned car. TxDMV’s guidance excludes individually owned vehicles operated for personal use from this authorization requirement. That distinction does not supply an exemption for every business transport arrangement; classify the proposed operation from its facts. [Agency scope](#source-program)."
       ]
@@ -60,7 +61,8 @@
       "title": "Build a file that connects authority to service",
       "paragraphs": [
         "State authorization is one item in a commercial launch file. The operational design domain defines where and under which conditions the system is designed to function; the contract defines what the supplier promises the customer. The code’s definition expressly includes geography, environmental conditions and time-of-day restrictions. A statewide authorization number therefore needs a separate answer about a particular route. [Operating-domain definition](#source-code).",
-        "Use the table as a procurement framework. It does not imply that the state supplies every commercial assurance in the final column. The buyer should obtain the relevant evidence from the party that owns it and identify the team responsible for acting on a change."
+        "Two federal records make the layers concrete. NHTSA’s September 4 Cybercab inquiry examines self-certification after Austin deployment; its opening does not establish a violation or service ban. FMCSA’s October 9 exemption instead supplies a conditional roadside-warning alternative for Level 4 carriers. A Texas operating number settles neither a vehicle-certification question nor an exemption’s cargo, equipment and domain conditions. [Cybercab inquiry](#source-cybercab-audit); [truck warning-device grant](#source-beacon-exemption). For an intrastate-only operation, verify applicable Texas treatment separately; the federal notice’s interstate preemption does not settle it.",
+        "Texas operating authorization also does not supply intrastate roadside-warning relief. The inspected current §4.11 incorporates federal amendments through September 1, 2022; §4.12’s listed exceptions do not adopt this beacon exemption. For genuinely intrastate commerce, identify an applicable Texas legal basis or another compliant arrangement. This bounded review is not an exhaustive finding about every possible state instrument, nor proof that a separate individual DPS approval process exists. [§4.11](#source-texas-carrier-incorporation); [§4.12](#source-texas-carrier-exceptions)."
       ],
       "table": {
         "caption": "The evidence behind a Texas commercial AV commitment",
@@ -74,6 +76,11 @@
             "Current holder/vehicle record",
             "Observed authorization status and fleet association",
             "Match the transport counterparty and actual platform"
+          ],
+          [
+            "Applicable federal vehicle / carrier record",
+            "Certification, exemption or operating conditions relevant to this configuration",
+            "Resolve the distinct federal obligation; do not infer it from the state number"
           ],
           [
             "Operating-domain and service description",
@@ -122,8 +129,25 @@
       "title": "Separate administrative restriction from on-road enforcement",
       "paragraphs": [
         "TxDMV administers authorization compliance; DPS and local law enforcement retain on-road traffic authority. The agency’s serious-public-safety administrative route and the code’s document-maintenance route are distinct. A customer should ask which notice or action applies and which vehicles or conditions it affects. [Agency responsibilities](#source-enforcement); [administrative process](#source-program).",
+        "Section 545.452(b) bars a political subdivision’s franchise or other regulation related to AV operation. An assumed municipal AV franchise is therefore the wrong substitute for the state gate. Keep property, site and airport-access questions separate; this provision does not establish permission to use every curb or private facility. [State/local boundary](#source-code).",
         "For the unsafe-operation process, section 545.459 describes a notice, a reasonable correction period and review steps. It does not create a universal 30-day cure period for every service interruption. The separate 30-day rule concerns updating changed material information. Keep those clocks out of each other’s spreadsheet cells. [Enforcement and updates](#source-code).",
         "Continuity terms should specify how a supplier communicates a pause, which conventional or alternate capacity can replace it and what evidence supports restarting. Separate an operational recovery from the legal status of an authorization. For a buyer, the material exposure is often the lost receiving window or an unavailable passenger transfer while the parties resolve the underlying issue."
+      ]
+    },
+    {
+      "id": "operating-decision-sequence",
+      "title": "Use a separate decision for launch, change and interruption",
+      "paragraphs": [
+        "At launch, match the actual human driving role to the state gate and resolve applicable federal and responder conditions. On a material document change, identify the update duty and the affected vehicle/service. On an unsafe-operation notice, follow that distinct process and the restriction’s actual scope before promising a restart. The legal reason for a pause changes which evidence can resolve it; substitute capacity answers the customer’s timetable, not the authority question. [Governing provisions](#source-code)."
+      ]
+    },
+    {
+      "id": "service-change-example",
+      "title": "Review a driverless service change before promising the new capacity",
+      "paragraphs": [
+        "Consider a supplier proposing to replace a supervised freight pilot with driverless service on a lane the buyer already uses. Start with a written description of the changed vehicle, driving role and supported route. Check the state authorization for the commercial operation, the holder and vehicle association, applicable federal conditions and the platform’s responder plan. The earlier pilot’s delivery record remains useful performance evidence; the new operating arrangement needs its own review. [State operating conditions](#source-code).",
+        "Ask operations to check docks, access and recovery against the changed service. Ask finance to reconcile the new quote and retained staff work. Keep required state-information updates distinct from the private notice or acceptance terms negotiated with the supplier. A vendor’s proposed launch date should enter the customer schedule after the relevant operating conditions and commercial responsibilities are resolved.",
+        "If service is restricted, record what the notice actually covers and which evidence can support a restart. Use the agreed substitute capacity for affected deliveries while the authority question is resolved. This is a suggested buyer workflow; it does not impose a universal voluntary shutdown or replace the governing enforcement process."
       ]
     },
     {
@@ -131,7 +155,7 @@
       "title": "Price the work around a free authorization",
       "paragraphs": [
         "TxDMV states that the authorization has no fee. The buyer’s commercial diligence and continuity work can still consume resources. Consider a hypothetical six-week distribution pilot with 60 loads per week. Assume 360 base loads at $900 each, unchanged across the scenarios. The following comparison concerns additional preparedness and interruption costs, excluding that $324,000 base freight spend. No figure is a vendor quote or legally prescribed budget. [Authorization fee](#source-program).",
-        "Assume 12 hours of record and contract reconciliation at $125 an hour, 16 hours of responder/site coordination at $100 an hour, and a $400 weekly backup-capacity reservation for six weeks. These inputs total $5,500. The reservation pays for priority access only; replacement loads still cost an additional assumed $120 each above the base service.",
+        "Assume 12 hours of record and contract reconciliation at $125 an hour, 16 hours of responder/site coordination at $100 an hour, and a $400 weekly backup-capacity reservation for six weeks. These inputs total $5,500. The reservation pays for priority access only; replacement loads still cost an additional assumed $120 each above the base service. Here the $3,100 of hourly work values existing staff time, while the $2,400 reservation is an assumed new cash payment. The $5,500 total is an economic-resource comparison, not all additional cash spend.",
         "A five-operating-day interruption affecting all 60 loads in one week adds $7,200 of incremental replacement freight. Total preparedness plus interruption cost becomes $12,700. This is a declared stress case, not an estimated frequency of government action or supplier failure. Replace its duration, affected loads, reservation treatment and incremental price with the actual arrangement."
       ],
       "table": {
@@ -139,7 +163,7 @@
         "columns": [
           "Item",
           "Assumption and calculation",
-          "Incremental cost"
+          "Incremental economic cost"
         ],
         "rows": [
           [
@@ -282,14 +306,50 @@
       "date": "2025 amendment effective 2025-06-16; current release through 2026-08-17",
       "lastVerified": "2026-10-12",
       "note": "ADS and Level 2 ADAS reporting conditions differ. Incident counts are not exposure-normalized, may have incomplete information and need careful entity/deduplication treatment."
+    },
+    {
+      "id": "beacon-exemption",
+      "label": "FMCSA final warning-beacon exemption and operating conditions",
+      "href": "https://www.govinfo.gov/content/pkg/FR-2026-10-09/html/2026-20734.htm",
+      "publisher": "FMCSA / Federal Register",
+      "date": "2026-10-09; effective 2026-10-07–2031-10-07",
+      "lastVerified": "2026-10-13",
+      "note": "91 FR 64736–64741, VI.B–C: prior notice for other carriers, validated domain, excluded cargo/passenger work, equipment and activation conditions. This replaces specified warning-device requirements; it is not a general driverless approval or recovery-time guarantee."
+    },
+    {
+      "id": "cybercab-audit",
+      "label": "NHTSA announces Cybercab certification audit after Austin deployment",
+      "href": "https://www.nhtsa.gov/press-releases/investigation-tesla-cybercab-self-certification",
+      "publisher": "National Highway Traffic Safety Administration",
+      "date": "2026-09-04",
+      "lastVerified": "2026-10-13",
+      "note": "Announced audit of self-certification against applicable FMVSS. Establishes the inquiry opening, not noncompliance, suspension or its current disposition; future rulemaking does not itself change existing standards."
+    },
+    {
+      "id": "texas-carrier-incorporation",
+      "label": "37 TAC §4.11: current commercial-vehicle incorporation rule",
+      "href": "https://texas-sos.appianportalsgov.com/rules-and-meetings?recordId=211918&queryAsDate=10%2F13%2F2026&interface=VIEW_TAC_SUMMARY&$locale=en_US",
+      "publisher": "Texas Secretary of State / Texas Department of Public Safety",
+      "date": "2023-01-08",
+      "lastVerified": "2026-10-13",
+      "note": "Official current rendered text: §4.11(a) incorporates federal amendments/interpretations through September 1, 2022; (b)(6) substitutes the DPS director for intrastate vehicles. That text does not automatically adopt a later federal exemption."
+    },
+    {
+      "id": "texas-carrier-exceptions",
+      "label": "37 TAC §4.12: current Texas exemptions and exceptions",
+      "href": "https://texas-sos.appianportalsgov.com/rules-and-meetings?recordId=226974&queryAsDate=10%2F13%2F2026&interface=VIEW_TAC_SUMMARY&$locale=en_US",
+      "publisher": "Texas Secretary of State / Texas Department of Public Safety",
+      "date": "2025-12-11",
+      "lastVerified": "2026-10-13",
+      "note": "Complete current exception list inspected, latest amendment effective December 11, 2025. The inspected rule contains no beacon relief or blanket prospective adoption of federal exemptions; this bounded reading does not rule out every other legal instrument."
     }
   ],
   "image": "/images/social/texas-automated-vehicle-authorization.png",
   "resources": [
     {
       "label": "Texas autonomy source and decision ledger",
-      "href": "/research/texas-autonomy-library-2026-10-13.json",
-      "description": "Primary records, declared comparisons and update triggers for autonomous mobility, freight and the Texas business library.",
+      "href": "/research/texas-research-library-2026-10-13.json",
+      "description": "Primary evidence, declared assumptions and update triggers across the Texas business and autonomy library.",
       "format": "JSON"
     }
   ]

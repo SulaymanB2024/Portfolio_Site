@@ -8,14 +8,14 @@
   "seoDescription": "Texas JETI research for site-selection and finance teams: eligible property, school M&O tax limits, jobs, wages, competitive-site evidence and a worked return model.",
   "category": "TEXAS BUSINESS",
   "date": "2026-10-12",
-  "dateModified": "2026-10-12",
+  "dateModified": "2026-10-13",
   "readTime": "10 MIN",
   "kind": "research",
   "author": "Sulayman Bowles",
   "openingPresentation": "integrated",
-  "evidenceBoundary": "Texas Government Code Subchapter T and official program documents checked October 12, 2026. Published application and reporting records are evidence of those documents, not an independent audit of operating output, employment or investment. All return calculations use declared hypothetical inputs. Actual project eligibility, agreements, tax treatment and compliance require professional review.",
+  "evidenceBoundary": "Texas Government Code Subchapter T and official program documents checked October 12, 2026. Published application and reporting records are evidence of those documents, not an independent audit of operating output, employment or investment. All return calculations use declared hypothetical inputs. Actual project eligibility, agreements, tax treatment and compliance require professional review. Targeted October 13 revision: actual fixed-end deferral mechanism and separately labeled present-value sensitivities. Original source-check dates remain attached to the individual references.",
   "content": [
-    "A Texas incentive can be described as a 50 percent limitation without cutting a project's total property-tax bill in half. JETI limits the taxable value of eligible property for a school district's maintenance-and-operations tax. It does not automatically reduce school debt-service taxes, county or city taxes, every asset at the site, or the project's construction cost. The first underwriting task is to locate the benefit in the actual tax stack. [Government Code §403.605](#source-code)",
+    "Locate the JETI benefit in the project’s tax bill before valuing the incentive. Ordinarily, eligible property’s school maintenance-and-operations taxable value is 50 percent of market value; qualifying opportunity-zone property receives a 25 percent limit. School debt-service, county and city taxes remain separate, as do other assets and construction costs. That narrower tax base determines how much the incentive can contribute to the investment return. [Government Code §403.605](#source-code)",
     "The Jobs, Energy, Technology and Innovation program connects a company, school district and governor through an agreement with investment, employment, wage and other requirements. Current public records now include both signed agreements and 2026 reporting documents. For a business choosing a site or a supplier assessing a proposed plant, those are different stages of evidence. [Program overview](#source-overview) · [Current agreements](#source-agreements)",
     "A financeable decision needs more than a projected incentive total. It needs eligible property, a credible competing-location process, an executable construction schedule, the signed agreement and an owner for continuing obligations. Put those alongside power, water, hiring and customer qualification. A tax benefit improves the economics of an operating project; it cannot by itself make that project deliver usable capacity."
   ],
@@ -99,7 +99,7 @@
         "A normal 50 percent M&O value limitation reduces the assumed M&O tax from $1.8 million to $900,000. The other $4.05 million of taxes remain in this simplified model, making total annual tax $4.95 million. The annual savings are $900,000, or about 15.4 percent of the full unassisted bill. Applying a 50 percent discount to $5.85 million would materially overstate the benefit.",
         "If the same assumed eligible value satisfied the opportunity-zone treatment, M&O tax would be $450,000 and the total bill $4.5 million, a $1.35 million annual reduction. Eligibility and the property's zone boundary must be demonstrated independently. This is a comparison of statutory mechanics using declared inputs, not a recommendation for a particular location.",
         "For the normal limitation, ten level annual savings of $900,000 discounted at an assumed 8 percent have a present value of approximately $6.04 million. Assume, separately, $150,000 of incremental annual program-related cost during those ten years and $250,000 upfront. The simplified net present value falls to approximately $4.78 million. This estimate excludes construction-period benefits, changing rates and values, financing effects, taxes on income, post-incentive obligations and downside liabilities.",
-        "The actual investment decision should replace every assumed cost with the agreed requirement or a defensible operating estimate. Include bond cost, administration, any incremental wage or staffing cost, recordkeeping, and obligations after the discount stops. Evaluate a delay scenario: postponed production can consume more value than an attractive annual tax saving produces."
+        "Delay has a specific legal mechanism. Under §403.613(c), a permitted start deferral for projected investment shortfall leaves the agreement’s end unchanged. If the example loses its first $900,000 saving but retains years 2–10, gross present value falls from $6.039 million to $5.206 million at the same assumed 8% rate: an $833,333 loss. This is not the same as moving an intact ten-year annuity one year later. Modifying both dates under subsection (d) is a separate notice, review and objection process, and can be blocked. [Incentive-period provisions](#source-code)."
       ],
       "table": {
         "caption": "A 50 percent value limitation is not a 50 percent total-tax cut",
@@ -134,7 +134,7 @@
       "paragraphs": [
         "The agreement specifies employment and investment obligations, a wage requirement and health-benefit provisions. The statutory wage test requires the relevant average to exceed 110 percent of the applicable industry-sector average computed by TWC using the most recent available four quarters. Count qualifying jobs and the appropriate payroll, rather than assume any announced construction headcount satisfies the agreement. [§403.612(b)](#source-code) The full-time definition requires at least 1,600 hours annually and excludes construction jobs. Transferring an existing Texas job generally requires filling the resulting vacancy. Test the staffing plan against those definitions before counting the promised positions. [§403.602(10); §403.604(c)](#source-code)",
         "The law provides penalties for specified jobs or wage failures across two consecutive reports, subject to the statutory tax-benefit cap. It separately allows termination after notice and a 180-day cure-and-dispute period, with a penalty equal to lost ad valorem revenue plus interest if termination occurs under that provision. Those are distinct mechanisms; a general statement that there is a cure period should not erase the modeled downside. [§403.614; §403.612(d)](#source-code)",
-        "Assign the obligation register to an accountable finance owner with operating, HR and legal support. It should show each deadline, definition, data source, evidence file, certification and escalation route. Keep the construction workforce separate from required permanent jobs and reconcile contractors against the actual agreement and reporting instructions.",
+        "Price the tail separately from the benefit years. If the example’s assumed $150,000 incremental annual compliance/staffing cost persists in years 11–13, its additional present value is $179,054 at 8%. Deducting that invented tail from the original $4.783 million net case yields $4.604 million; it is a separate sensitivity, not the combined deferral scenario above. Actual obligations determine which costs persist after savings stop.",
         "The official process includes a three-year maintain-viable-presence period after the incentive period. An exit model should therefore address sale, closure, refinancing and assignment during that tail. The proposed selling price should not assume the incentive can be transferred with no consent, ongoing requirement or liability review. [Program timeline](#source-process)"
       ]
     },
@@ -183,7 +183,7 @@
       "href": "https://tcss.legis.texas.gov/resources/GV/htm/GV.403.htm",
       "publisher": "Texas Legislature",
       "date": "Current consolidated statute checked October 12, 2026",
-      "lastVerified": "2026-10-12",
+      "lastVerified": "2026-10-13",
       "note": "Sections 403.602, .604, .605, .612 and .614 supply definitions, thresholds, value, obligations and enforcement. Read each route separately."
     },
     {
@@ -245,8 +245,8 @@
   "resources": [
     {
       "label": "Texas business source and decision ledger",
-      "href": "/research/texas-business-library-2026-10-12.json",
-      "description": "Primary evidence, declared assumptions and update triggers across the Texas business library.",
+      "href": "/research/texas-research-library-2026-10-13.json",
+      "description": "Primary evidence, declared assumptions and update triggers across the Texas business and autonomy library.",
       "format": "JSON"
     }
   ],

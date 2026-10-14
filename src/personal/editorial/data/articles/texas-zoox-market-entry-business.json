@@ -21,11 +21,11 @@
   "dateModified": "2026-10-13",
   "author": "Sulayman Bowles",
   "kind": "research",
-  "readTime": "10 MIN",
+  "readTime": "11 MIN",
   "openingPresentation": "integrated",
-  "evidenceBoundary": "Public-source research checked October 12, 2026. City and fleet stages are issuer-reported; no live Austin ride access, private fleet allocation, depot contract, fare, utilization or safety outcome was independently verified. Fleet and cost calculations are declared hypotheticals.",
+  "evidenceBoundary": "Rendered Zoox city, fleet and app research checked October 12, 2026; binding Federal Register grant conditions and throughput definitions reviewed October 13. Issuer plans are not delivered capacity. No current Texas-specific Operational Authorization, private depot scope, actual fleet allocation or fare has been established.",
   "content": [
-    "A Zoox vehicle on a Texas street can matter to a hotel, fleet supplier or property owner. The decision depends on what that appearance establishes. A testing operation may need facilities and staff before a guest can book a ride. A purpose-built vehicle may carry a restricted group before a business can rely on it for an event.",
+    "Zoox’s Texas expansion presents different opportunities for a hotel, fleet supplier and property owner. Testing can create paid work and facility needs before guests can book a ride. A restricted rollout can support a rider pilot before it supports an event promise. Tie the proposed commitment to the fleet and service stage behind it.",
     "At this review, Zoox’s current Austin page says its service is coming soon and directs people to an app waitlist. Its March 25 rollout began with employees, family and friends, with an early-rider program planned later in the year. The current invitation does not establish general public Austin booking. [Austin city page](#source-austin-current), [dated rollout](#source-austin-rollout).",
     "Dallas’s March announcement and Houston’s September announcement describe testing expansion. Those developments create questions about facilities, suppliers and future transport, but their dates are not substitute evidence for a commercial ride commitment. Match each proposed business decision to the stage that has actually been documented."
   ],
@@ -81,7 +81,7 @@
       "paragraphs": [
         "The July 31, 2026 Federal Register grant provides a commercial exemption through July 31, 2028, with a ceiling of 2,500 exempted vehicles introduced into interstate commerce for commercial deployment in any 12-month period. Simultaneous operation is governed by separate Operational Authorizations, whose conditions can change. NHTSA limits its safety-equivalence analysis to the specific FMVSS requirements involved. [Grant and conditions](#source-commercial-grant).",
         "Zoox’s July 30 announcement distinguishes this commercial path from its 2025 demonstration exemption. It says the company was working through further requirements in its existing Nevada and California service markets. The announcement changes the regulatory route toward charging fares; it does not give a Texas business a fare, vehicle allocation or launch commitment. [Company commercial-transition notice](#source-commercial-transition).",
-        "For a procurement or property decision, ask which current authorization and operating conditions apply to the proposed vehicle, location and use. Review the actual agreement and applicable requirements before making a commitment. A national introduction ceiling is an upper permission boundary, not a count of vehicles placed in Austin or available at a particular hotel.",
+        "Section X.A requires the applicable Operational Authorizations to be made public in docket NHTSA-2025-0523. Those instruments, rather than the national introduction ceiling, govern public-road operation and can differ by area or route. This review has not established a current Texas-specific instrument or its fleet and route conditions. Retrieve the applicable authorization before treating a national grant as local service evidence. [Grant X.A and public docket](#source-commercial-grant).",
         "Keep regulatory status, physical fleet readiness, rider admission and commercial terms as separate fields in the decision record. The source that proves one field may be silent on the others. A business can acknowledge a meaningful regulatory milestone while still requiring operational evidence for its own use."
       ]
     },
@@ -89,7 +89,7 @@
       "id": "owned-service-model",
       "title": "Evaluate the service organization around the vehicle",
       "paragraphs": [
-        "The grant records Zoox’s intended ownership and daily operating responsibilities: fleet management, maintenance, routing, remote support and customer service. Its described vehicle carries up to four passengers in inward-facing rows. This is a fleet-service model with an operating organization behind it. [Vehicle and operating description](#source-commercial-grant).",
+        "The fleet structure is a binding condition, not merely a marketing preference. Section X.G requires Zoox to maintain operational control for the vehicles’ entire lives and restricts sale, transfer of possession or title, licensing and public-road operation except on NHTSA-authorized terms. A Texas landlord or supplier should underwrite a relationship with the responsible fleet organization, rather than assume the vehicles can be bought and independently operated under the same exemption. [Grant X.G](#source-commercial-grant).",
         "Zoox’s vehicle page describes bidirectional design, four-wheel steering and live rider assistance. These are company-stated features, not measured Texas pickup performance or a support-response guarantee. A business using the service needs to test the usable pickup, boarding, luggage and assistance arrangement rather than infer them from the cabin design. [Vehicle and support page](#source-vehicle-and-support).",
         "The app page says distribution is through the US App Store and US Google Play. Check whether an international guest can obtain and use the required app and whether their account has city access before presenting it as a travel option. Downloading an app and receiving permission to ride are separate steps. [App availability](#source-app-access).",
         "For a supplier, determine which entity signs the contract and owns acceptance. A depot maintenance proposal, a charging arrangement and a guest ride program serve different needs. Each should identify volume, service windows, response responsibilities and the consequences of a delayed rollout. Public fleet presence cannot supply those private commercial terms."
@@ -99,13 +99,13 @@
       "id": "depot-to-trip",
       "title": "Translate fleet assumptions into completed trips",
       "paragraphs": [
-        "A depot plan is financially meaningful only when its costs connect to the work the fleet can complete. Track scheduled vehicle hours, downtime, repositioning, passenger time and trip completion separately. Name the system boundary: a robotaxi at a depot, a service-ready vehicle on the road and a vehicle carrying passengers are different measures.",
+        "A depot proposal needs a service workload, not a global vehicle headline. Track scheduled hours, downtime, repositioning and occupied trips separately. A vehicle parked at a depot, available on the road and carrying passengers represents a different input to staffing, access and charging requirements.",
         "Consider a deliberately hypothetical fleet of 40 vehicles, each scheduled for 16 hours a day. Assume 80% of scheduled hours are available for service after downtime. Of those service hours, assume 55% are spent on occupied trips, with an average occupied duration of 24 minutes. None of these inputs describes the actual Zoox fleet in Texas.",
-        "Forty vehicles create 640 scheduled vehicle-hours. Availability reduces that to 512 service-hours; the occupied share produces 281.6 passenger-trip vehicle-hours. Dividing by 0.4 hour per occupied trip yields 704 vehicle trips per day. This is an assumed throughput calculation, not a dispatch forecast or demonstrated fleet capacity.",
-        "Assume a daily allocated cost of $250 per vehicle plus $2,000 of fleet overhead: $12,000 in total. Dividing that cost pool by 704 trips yields approximately $17.05 per trip. The table changes only the occupied share, keeping available service hours, trip duration and cost pool fixed."
+        "Forty vehicles create 640 scheduled vehicle-hours. Availability reduces that to 512 service-hours; the occupied share produces 281.6 vehicle-hours. Assume all occupied time belongs to completed trips and average duration refers to that same population. Dividing by 0.4 hour gives 704 completed vehicle trips. If interrupted trips consume occupied hours, separate them before calling the result completions.",
+        "At 40% occupied share, the same available hours and trip duration yield 512 trips, 192 fewer than the base case. These are invented throughput inputs, not actual Texas fleet size, measured demand or usable peak capacity. They do not supply an operating-cost pool, tariff or property rent; those need a defined contract and engineering scope."
       ],
       "table": {
-        "caption": "Illustrative utilization changes the cost spread over each trip",
+        "caption": "Declared hours produce a throughput scenario, not a fare",
         "columns": [
           "Assumed or calculated item",
           "Base case",
@@ -146,29 +146,61 @@
             "Completed vehicle trips under assumptions",
             "704",
             "512"
-          ],
-          [
-            "Daily assumed allocated cost pool",
-            "$12,000",
-            "$12,000"
-          ],
-          [
-            "Cost pool divided by vehicle trips",
-            "$17.05 per trip",
-            "$23.44 per trip"
           ]
         ],
-        "note": "Declared hypothetical. Four seats do not imply four passengers on every trip. No actual Zoox fare, fleet cost, utilization, fleet size or profit is estimated; financing, expansion and other costs require their own explicit scope."
+        "note": "Hypothetical inputs. Occupied hours and trip duration use the same completed-trip population; interrupted work must be separated. Four seats do not imply four passengers per trip. No cost, fare, profit or actual fleet allocation is estimated."
       }
     },
     {
       "id": "capacity-boundaries",
       "title": "Keep capacity, demand and the customer outcome separate",
       "paragraphs": [
-        "Reducing the occupied share from 55% to 40% cuts the example by 192 trips a day and raises allocated cost per trip by roughly 37.5%. This result follows from the assumptions. It shows the importance of spreading a fixed cost pool over completed work, without estimating how often a real fleet will achieve either case.",
+        "A 192-trip daily difference can change support workload, but it cannot price a lease without knowing when vehicles arrive, dwell, charge and depart. Obtain the peak sequence and site responsibilities from an executed scope. A daily average can leave a depot queue or passenger surge unresolved even when the arithmetic reconciles.",
         "Capacity does not create demand. A future hotel program would still need eligible riders and requested trips that fit the service area and hours. A four-seat vehicle may serve one traveler or several colleagues; vehicle trips, passenger journeys and unique users should be reported separately. Multiplying every trip by maximum seating would conceal the occupancy assumption.",
         "Nor does average daily throughput establish peak service. Event attendees can request rides within the same short window while much of the fleet is elsewhere. Require a specific arrangement before promising group transport. Measure the request-to-ready-at-destination outcome, including failed requests and alternative rides, so the guest experience remains connected to the commercial evaluation.",
         "If the business is considering a depot property, obtain the proposed charging load, usable power date, site access, queueing space and maintenance scope from the actual project team. A company expansion announcement does not verify those engineering inputs. Link the proposal to a [Texas power and large-load review](/research/texas/texas-power-large-load-business-diligence) before underwriting an opening schedule."
+      ]
+    },
+    {
+      "id": "commitment-by-role",
+      "title": "Choose the commitment that the current stage can support",
+      "paragraphs": [
+        "The three business roles need different approval objects. The following is an editorial contracting framework, not a description of existing Zoox agreements. A defined testing-support contract can have value before public passenger launch; a guest ride promise depends on rider admission and actual trip access."
+      ],
+      "table": {
+        "caption": "A Texas announcement supports different commitments by business role",
+        "columns": [
+          "Business role",
+          "Reviewable commitment",
+          "Evidence that changes the decision"
+        ],
+        "rows": [
+          [
+            "Hotel or event organizer",
+            "Offer rides only for admitted guests and supported journeys",
+            "Current admission, booking, capacity arrangement and fallback"
+          ],
+          [
+            "Testing or fleet supplier",
+            "Contract a specified workload and acceptance procedure",
+            "Signing entity, work stage, volume, response and payment terms"
+          ],
+          [
+            "Depot property owner",
+            "Stage site and capital obligations against executed milestones",
+            "Power readiness, access/charging scope, commencement, delay and exit terms"
+          ]
+        ],
+        "note": "Recommended decision boundaries; no private contract, guaranteed demand or Texas fleet entitlement is asserted."
+      }
+    },
+    {
+      "id": "depot-commitment-example",
+      "title": "Turn a depot enquiry into a staged property proposal",
+      "paragraphs": [
+        "For a landlord evaluating a hypothetical Zoox enquiry, ask the prospective tenant to identify the fleet and the work the site will support. A mapping fleet and a later purpose-built fleet can require different layouts and equipment. Obtain the proposed vehicle envelope, turning paths, charging specification, power requirement, maintenance work and access hours before pricing improvements. These are recommended diligence requests, not published Zoox site specifications.",
+        "Separate ordinary property works from equipment and alterations that depend on the fleet plan. Put drawings, approvals, completion and acceptance beside the proposed commencement milestones. Agree who bears delay and redesign costs, then model the signed terms. This gives the owner a commercial case for the facility even while general passenger access remains unresolved.",
+        "Keep public ride demand outside that lease forecast unless a supported service and demand record justify it. An executed testing-support workload may support rent or supplier revenue on its own terms. The current Austin waitlist and the federal exemption do not supply a Texas passenger-volume commitment. [Austin access](#source-austin-current); [federal conditions](#source-commercial-grant)."
       ]
     },
     {
@@ -192,7 +224,7 @@
       "title": "Watch for a change that alters the business decision",
       "paragraphs": [
         "Update this research when Austin’s current admission page changes, Explorers receive documented local access, or a later Dallas or Houston disclosure establishes a new vehicle or service stage. A dated announcement should replace a forecast with evidence of what happened, while retaining the original plan as history.",
-        "Also revisit the regulatory interpretation when Operational Authorizations or exemption conditions change. Refresh the fleet calculation when actual service-hours, occupied share, trip duration, costs or commercial volume are supplied. A new depot or job announcement can justify a supplier conversation; the contract and operating evidence determine the commitment.",
+        "Also revisit the regulatory interpretation when Operational Authorizations or exemption conditions change. Refresh the fleet calculation when actual service-hours, occupied share, trip duration or completed commercial volume are supplied. A new depot or job announcement can justify a supplier conversation; the contract and operating evidence determine the commitment.",
         "For Texas businesses, Zoox’s arrival is an opportunity to investigate a specific relationship: traveler, customer, property owner or supplier. Keep the proposed commitment proportional to the documented service stage, and make the next proof requirement explicit. That is how a developing fleet becomes useful business information."
       ]
     }
@@ -276,8 +308,8 @@
       "href": "https://www.govinfo.gov/content/pkg/FR-2026-07-31/html/2026-15485.htm",
       "publisher": "NHTSA / Federal Register",
       "date": "2026-07-31",
-      "note": "Effective through July 31, 2028; commercial introduction ceiling and simultaneous-operation conditions differ. Safety-equivalence analysis is limited to specific FMVSS exemptions.",
-      "lastVerified": "2026-10-12"
+      "note": "Effective through July 31, 2028; commercial introduction ceiling and simultaneous-operation conditions differ. Safety-equivalence analysis is limited to specific FMVSS exemptions. X.A specifies the public docket; X.G binds lifetime operational control and limits transfer/licensing. Applicable Texas-specific Operational Authorization not established.",
+      "lastVerified": "2026-10-13"
     },
     {
       "id": "commercial-transition",
@@ -307,15 +339,15 @@
       "answer": "No. It supplies a conditional federal commercial path, with separate operating conditions. Local vehicle readiness, rider access and commercial terms still require evidence. [Federal grant](#source-commercial-grant)."
     },
     {
-      "question": "Is the fleet cost table an estimate of Zoox’s unit economics?",
-      "answer": "No. It uses declared hypothetical vehicles, hours, utilization and costs. Zoox’s public operating maps include testing and do not establish a fare-earning fleet for the model. [Map scope](#source-operating-areas)."
+      "question": "Does the throughput example estimate Zoox’s Texas fleet or unit economics?",
+      "answer": "No. The vehicle count, available hours, occupied share and duration are invented inputs illustrating completed vehicle trips. It estimates neither actual deployment, fares nor costs. Zoox’s operating maps include testing rather than proving a fare-earning fleet. [Map scope](#source-operating-areas)."
     }
   ],
   "resources": [
     {
       "label": "Texas autonomous mobility source and decision ledger",
-      "href": "/research/texas-autonomy-library-2026-10-13.json",
-      "description": "Primary evidence, declared scenarios and update triggers for the Texas autonomy edition.",
+      "href": "/research/texas-research-library-2026-10-13.json",
+      "description": "Primary evidence, declared assumptions and update triggers across the Texas business and autonomy library.",
       "format": "JSON"
     }
   ],

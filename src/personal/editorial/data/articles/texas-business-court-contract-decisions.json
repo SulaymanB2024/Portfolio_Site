@@ -8,14 +8,14 @@
   "seoDescription": "Texas Business Court research for business leaders: HB40's $5 million thresholds, September 2026 decisions, contract diligence, and a worked dispute example.",
   "category": "TEXAS BUSINESS",
   "date": "2026-10-12",
-  "dateModified": "2026-10-12",
+  "dateModified": "2026-10-13",
   "readTime": "10 MIN",
   "kind": "research",
   "author": "Sulayman Bowles",
   "openingPresentation": "integrated",
-  "evidenceBoundary": "Primary legislation, published trial-court opinions, and the court's April 2026 reporting cutoff were checked on October 12, 2026. The commercial example is hypothetical. The case discussion describes the published trial-court decisions; no subsequent appellate disposition is asserted. Contract drafting and case-specific jurisdiction require counsel's review.",
+  "evidenceBoundary": "Primary legislation, published trial-court opinions, and the court's April 2026 reporting cutoff were checked on October 12, 2026. The commercial example is hypothetical. The case discussion describes the published trial-court decisions; no subsequent appellate disposition is asserted. Contract drafting and case-specific jurisdiction require counsel's review. Targeted October 13 revision: precise jurisdiction-screen labeling and a distinct contract-recovery approval boundary. Original source-check dates remain attached to the individual references.",
   "content": [
-    "A business can sign a large Texas contract and still find that its eventual dispute does not meet the Texas Business Court's amount requirement. It can also negotiate an economically important promise and then sign language that undermines a later attempt to enforce that promise. These are different risks, and a single forum-selection paragraph does not manage both.",
+    "Work through the failed-deal case before signing a large Texas contract: what could the business lose, what claim could it support and what recovery would the agreement permit? The size and kind of claim affect the forum question. The written bargain affects what the business can enforce. Address both while the commercial terms are still negotiable.",
     "September 2026 supplied two useful examples. The Bakery v. Naterra examined when counterclaims put a dispute within the court's monetary jurisdiction. Beard v. Perot examined how releases and reliance language affected claims built around alleged oral promises. Read together, they suggest a practical agenda for executives: preserve the bargain, distinguish transaction size from recoverable claims, and keep a dated record of how a dispute develops. [The Bakery opinion](#source-bakery) · [Beard opinion](#source-beard)",
     "The commercial opportunity is to make dispute planning part of deal underwriting. A contract's expected cash flow depends on what happens when performance breaks down, which obligations can be demonstrated, and how long cash remains tied up. The analysis below turns the statutory changes and recent decisions into questions a finance, procurement, or deal team can take to counsel."
   ],
@@ -39,9 +39,14 @@
         ],
         "rows": [
           [
-            "Is there a qualified transaction?",
-            "At least $5M aggregate consideration under the amended definition",
-            "Identify related transactions and the statutory exclusions; retain the underlying agreements."
+            "Which statutory jurisdictional route applies?",
+            "The actual claim category, parties, venue and exclusions",
+            "Have counsel select the route before applying monetary screens."
+          ],
+          [
+            "Does the consideration limb meet the qualified-transaction definition?",
+            "At least $5M aggregate consideration; the money-or-credit limb and exclusions also apply",
+            "Identify related transactions, qualifying consideration and excluded parties/transactions."
           ],
           [
             "Does this commercial-action route meet the amount requirement?",
@@ -114,7 +119,7 @@
       "paragraphs": [
         "Consider a hypothetical manufacturer buying a five-year technology service for $12 million. The business case depends on deployment by an agreed production date. A commercial-action analysis under the qualified-transaction route must separate the $12 million commitment from the claims arising if deployment fails.",
         "Scenario A models $3.4 million of qualifying claims. The finance team also lists $2 million in exemplary damages and $600,000 in attorney's fees. Adding those lines produces a $6 million headline, but it does not turn $3.4 million into an amount exceeding $5 million under the exclusions in the commercial-action provision. Scenario B instead models $6.2 million of qualifying claims. It clears that monetary screen, but counsel must still assess the category, venue, facts, and exclusions. [HB40, section 45](#source-hb40)",
-        "The example deliberately leaves recoverability unresolved. Lost output, replacement services, contractual limits, mitigation, and proof can change the actual claim. Those questions belong in legal and commercial diligence; a finance forecast should not imply that every modeled loss will be pleaded or recovered.",
+        "Separate modeled loss, a supportable claim and practical recovery. If scenario B’s $6.2 million loss meets an assumed $2 million contract cap, counsel must assess the cap’s validity, scope and carveouts before finance records a recovery. The arithmetic cannot determine what may be pleaded, jurisdiction or what a court will award. Tie the approval to the executed cap, acceptance conditions and payment staging rather than carrying the whole loss automatically into a recovery cell.",
         "A sensible business decision might be to protect the launch milestone with clearer acceptance terms, stage payments against delivery, and retain an executable transition plan. Those steps improve the operating downside case whether the eventual forum is the business court or another court. The forum decision sits alongside that work rather than carrying the entire risk-management burden.",
         "Compare the two contract structures on cash at risk and practical recovery, not just nominal damages. A lower upfront commitment with independently testable milestones may be more useful than a large theoretical damages figure available only after a prolonged dispute. That is an underwriting judgment to discuss with counsel and the operating team."
       ]
@@ -227,8 +232,8 @@
   "resources": [
     {
       "label": "Texas business source and decision ledger",
-      "href": "/research/texas-business-research-2026-10-12.json",
-      "description": "Primary-source claims, research dates, update triggers, and decision checklists for this edition.",
+      "href": "/research/texas-research-library-2026-10-13.json",
+      "description": "Primary evidence, declared assumptions and update triggers across the Texas business and autonomy library.",
       "format": "JSON"
     }
   ],

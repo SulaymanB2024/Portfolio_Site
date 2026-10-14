@@ -18,7 +18,7 @@
     },
     {
       "id": "plan-projections",
-      "claim": "TWDB projects 6% demand growth and 10% decline in existing drought-reliable supplies for 2030–2080; approximately 3,000 recommended projects. These are statewide planning estimates.",
+      "claim": "TWDB projects 6% demand growth and 10% decline in existing drought-reliable supplies for 2030\u20132080; approximately 3,000 recommended projects. These are statewide planning estimates.",
       "sources": [
         {
           "url": "https://texaswaternewsroom.org/pressreleases/2026-7-23_2027_swp_approved.html",
@@ -122,7 +122,7 @@
     },
     {
       "id": "hypothetical-math",
-      "claim": "300,000 gal/day × 365 = 109.5m gallons/year. 600,000 peak minus 400,000 supply = 200,000 daily gap; 400,000 usable storage / gap = 2 days; refill at 100,000/day = 4 days. 109.5m/1000 × $4/$4.75 = $438,000/$520,125; difference $82,125. Ten days × $60,000 = $600,000. All inputs invented.",
+      "claim": "300,000 gal/day \u00d7 365 = 109.5m gallons/year. 600,000 peak minus 400,000 supply = 200,000 daily gap; 400,000 usable storage / gap = 2 days; refill at 100,000/day = 4 days. 109.5m/1000 \u00d7 $4/$4.75 = $438,000/$520,125; difference $82,125. Ten days \u00d7 $60,000 = $600,000. All inputs invented.",
       "sources": [
         {
           "url": "https://www.tceq.texas.gov/permitting/water_rights/watersupplycontracts",
@@ -132,6 +132,14 @@
       ],
       "status": "calculated illustration; no real contract or quoted price",
       "recheckTrigger": "Any input change; preserve annual/daily/instantaneous distinctions and omitted costs"
+    },
+    {
+      "id": "water-operating-threshold",
+      "claim": "The declared $82,125 annual price advantage equals 1.36875 lost-production days at $60,000/day; a third consecutive peak exceeds the modeled storage.",
+      "status": "calculated hypothetical",
+      "qualification": "No outage probability, actual supply reliability, design approval or instantaneous-flow sufficiency inferred.",
+      "sources": [],
+      "recheck": "Governing provision, actual contract, input cohort or operating evidence changes."
     }
   ],
   "checks": [
@@ -150,5 +158,10 @@
       "result": "passed"
     }
   ],
-  "remainingBoundary": "Root owns integration and visual/publication verification. No local supplier, contract, well, engineering design or site-specific regulatory outcome verified."
+  "remainingBoundary": "No local supplier, contract, well, engineering design or site-specific regulatory outcome verified.",
+  "revisionReview": {
+    "date": "2026-10-13",
+    "scope": "storage/refill sequence and a marginal interruption-loss boundary; no new local supply measurement",
+    "originalSourceDatesPreserved": true
+  }
 }

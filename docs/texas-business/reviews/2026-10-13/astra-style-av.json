@@ -1,0 +1,176 @@
+{
+  "reviewer": "Independent Astra AV reviewer",
+  "reviewDate": "2026-10-13",
+  "scope": "Focused writing-pass review of six complete final AV manuscripts, decoded pre-style comparisons, six relevant claim ledgers and AV reader guides. Accepted legal and issuer research retained; no repeat full-source research.",
+  "branch": "codex/texas-research-quality-20261013",
+  "verdict": "No material defect found in the new leads or six examples. Three optional editorial refinements below. The $1,273 provider road-price ceiling is correct.",
+  "reviewedFiles": [
+    {
+      "path": "src/personal/editorial/data/articles/texas-waymo-business-travel.json",
+      "sha256": "f3d8127b0836ebc6bce1ca28c5abd036b1607623b2b3a9cd203adc60d2956332"
+    },
+    {
+      "path": "src/personal/editorial/data/articles/texas-zoox-market-entry-business.json",
+      "sha256": "2312ec01fa8852753c502aaf2ef9dc4d224fd918bfdac07494f394d0c5e38e6f"
+    },
+    {
+      "path": "src/personal/editorial/data/articles/texas-robotaxi-business-service-map.json",
+      "sha256": "1b359a9e81e546659eb3c2b4608430b1fb857e0cd98d1d969c382ae5ee2c6282"
+    },
+    {
+      "path": "src/personal/editorial/data/articles/texas-autonomous-trucking-operators.json",
+      "sha256": "032ec661e27b9c1db42c09f5e4efabdeb9998fd90e6ffcacc8787256ac4a0fc1"
+    },
+    {
+      "path": "src/personal/editorial/data/articles/texas-driverless-freight-route-economics.json",
+      "sha256": "d92dc5ce1e665072bce18056728d56fe49e8f7e6cc5171fc08b850629ead1f44"
+    },
+    {
+      "path": "src/personal/editorial/data/articles/texas-automated-vehicle-authorization.json",
+      "sha256": "0235c3452da3fa9e3eb2251d1195497d0de2b3226765fd0d1b80f5b122f50bfa"
+    },
+    {
+      "path": "docs/texas-business/research/waymo-claims.json",
+      "sha256": "a89ba57d579ce454dcc8d0ccb7d5a7b2dc82531c3363990734f9709d47a80454"
+    },
+    {
+      "path": "docs/texas-business/research/zoox-claims.json",
+      "sha256": "7c10956093c5593603eba809818be38869d1dbe329ccdb786d9f056227159bfe"
+    },
+    {
+      "path": "docs/texas-business/research/robotaxi-map-claims.json",
+      "sha256": "7aa75ca227d8262d61b4fbb4d1422933799dd758ecfa5240ae947941ba7b7cfb"
+    },
+    {
+      "path": "docs/texas-business/research/autonomous-trucking-claims.json",
+      "sha256": "29350ff2fdad41bfaa7b0b9401741888da68fb85289243a3a26522b9abea9862"
+    },
+    {
+      "path": "docs/texas-business/research/driverless-freight-claims.json",
+      "sha256": "6c2bdf84227842dfc70b9845cbe22bccf852c6a5a9959ebabb95465f8efa0c43"
+    },
+    {
+      "path": "docs/texas-business/research/av-authorization-claims.json",
+      "sha256": "9748f9875cc02b8133964e748c4d29cd9f26248fff520c52be09b6189d22bf1b"
+    },
+    {
+      "path": "src/personal/editorial/data/reader-guides.json",
+      "sha256": "558ff4813f3f4b5a5eabcd79a96690c110ed92be11ed9006f7007632f337d736"
+    }
+  ],
+  "changesChecked": [
+    {
+      "article": "texas-waymo-business-travel",
+      "semanticChanges": [
+        "content[0]",
+        "sections[id=itinerary-approval]"
+      ],
+      "existingSectionsPreserved": true
+    },
+    {
+      "article": "texas-zoox-market-entry-business",
+      "semanticChanges": [
+        "content[0]",
+        "sections[id=depot-commitment-example]"
+      ],
+      "existingSectionsPreserved": true
+    },
+    {
+      "article": "texas-robotaxi-business-service-map",
+      "semanticChanges": [
+        "content[0]",
+        "sections[id=itinerary-example]"
+      ],
+      "existingSectionsPreserved": true
+    },
+    {
+      "article": "texas-autonomous-trucking-operators",
+      "semanticChanges": [
+        "content[0]",
+        "sections[id=retailer-tender-example]"
+      ],
+      "existingSectionsPreserved": true
+    },
+    {
+      "article": "texas-driverless-freight-route-economics",
+      "semanticChanges": [
+        "content[0]",
+        "sections[id=road-quote-ceiling]"
+      ],
+      "existingSectionsPreserved": true
+    },
+    {
+      "article": "texas-automated-vehicle-authorization",
+      "semanticChanges": [
+        "content[0]",
+        "sections[id=service-change-example]"
+      ],
+      "existingSectionsPreserved": true
+    }
+  ],
+  "materialFindings": [],
+  "optionalEditorialFindings": [
+    {
+      "id": "STYLE-AV-1",
+      "severity": "P3 / optional",
+      "file": "src/personal/editorial/data/articles/texas-waymo-business-travel.json",
+      "location": "content[0] and content[2]",
+      "quotes": [
+        "Approve each Waymo leg against the traveler\u2019s account, supported route and pickup arrangement.",
+        "Approve Waymo by itinerary leg."
+      ],
+      "finding": "The revised lead now states the same instruction twice within three opening paragraphs. The latter paragraph contains useful market-specific qualifications, so retain those rather than shortening the factual boundaries.",
+      "suggestedCorrection": "Remove only the opening sentence of content[2], allowing \u201cThe reviewed evidence supports considering Dallas/Houston\u2026\u201d to begin that paragraph."
+    },
+    {
+      "id": "STYLE-AV-2",
+      "severity": "P3 / optional",
+      "file": "src/personal/editorial/data/articles/texas-waymo-business-travel.json",
+      "location": "sections[id=itinerary-approval].paragraphs[0]",
+      "quote": "Set the latest switch time from a usable alternative\u2019s pickup and travel estimate.",
+      "finding": "This new illustrative example repeats the earlier planning instructions but does not yet demonstrate the departure/switch decision. One declared timetable would supply more usable detail with little extra length.",
+      "suggestedCorrection": "After this sentence, add a clearly invented calculation such as: \u201cFor a hypothetical 10 a.m. meeting, an alternative needing 10 minutes for pickup, 25 minutes for travel and 10 minutes for final access and the arrival buffer puts the latest switch at 9:15 a.m. These are planning assumptions, not observed provider times.\u201d Preserve the existing no-availability qualification."
+    },
+    {
+      "id": "STYLE-AV-3",
+      "severity": "P3 / optional precision",
+      "file": "src/personal/editorial/data/reader-guides.json",
+      "location": "texas-driverless-freight-route-economics.answer, final sentence",
+      "quote": "In the declared 800-load case, the $1,433 whole-route ceiling becomes a $1,273 road-service quote after subtracting the shipper\u2019s $160 of retained work.",
+      "finding": "The surrounding answer correctly says the thresholds are not quotes, but its new last sentence then calls the derived number a quote. The manuscript itself consistently labels it a maximum price.",
+      "suggestedCorrection": "Change \u201ca $1,273 road-service quote\u201d to \u201ca $1,273 ceiling for the provider\u2019s road-service quote\u201d."
+    }
+  ],
+  "quantitativeAudit": {
+    "source": "docs/texas-business/research/driverless-freight-claims.json scenario.inputs",
+    "currentEconomicPerLoadUSD": 1500,
+    "setupPerAcceptedLoadUSD": 50.0,
+    "incrementalExpectedExceptionPerAcceptedLoadUSD": 17.0,
+    "retainedAllocatedStaffWorkUSD": 160,
+    "wholeRouteVariableCeilingUSD": 1433.0,
+    "maximumProviderRoadPriceUSD": 1273.0,
+    "headroomAbove1150USD": 123.0,
+    "annualEconomicCostAtCeilingUSD": 1500000.0,
+    "baselineUSD": 1500000,
+    "result": "PASS: 1500 - 40000/800 - .02*(350+500) - (100+60) = 1273; at that provider price the complete annual model equals the baseline. Retained staff time and lost contribution remain economic burdens, not provider invoices."
+  },
+  "acceptedBoundaries": [
+    "Waymo itinerary explicitly assumes no particular provider availability and preserves Austin Uber versus direct-app/payment distinctions.",
+    "Conference illustration preserves eligibility, self-booking and airport confirmation; it does not promise an AV fleet reservation.",
+    "Zoox depot enquiry and fleet specifications are hypothetical diligence requests; no existing lease, site design, passenger volume or general Texas booking is inferred.",
+    "Replenishment example explicitly requires buyer-specific endpoints, equipment, volume and commercial confirmation; Gatik is a candidate to investigate.",
+    "Service-change example distinguishes statutory updates, negotiated private terms and the actual restriction; it explicitly labels the workflow advisory.",
+    "All pre-existing manuscript sections, FAQs, source notes and evidence boundaries are semantically unchanged against pre-style snapshots. Escaped Unicode serialization is not a prose change."
+  ],
+  "checks": [
+    "Parsed all 13 reviewed JSON files.",
+    "Read six complete article bodies and FAQs; inspected applicable source notes and relevant claim/guide entries.",
+    "Compared decoded JSON with all six pre-style snapshots; only first lead paragraph and one added section per manuscript changed.",
+    "Independently recomputed $1,273, $123 headroom and zero saving at the ceiling from declared ledger inputs."
+  ],
+  "limits": [
+    "No new legal/provider research or live availability check; accepted independently reviewed factual paragraphs were preserved.",
+    "No renderer, receipt, public bundle, CI or publication validation; root owns integration and delivery."
+  ],
+  "writes": "Only .cache/texas-quality-20261013/astra-style-av.json; no source edits or publishing."
+}

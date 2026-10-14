@@ -8,14 +8,14 @@
   "subtitle": "What the latest workforce releases can tell an employer about location, pay and the cost of an unfilled production role.",
   "seoDescription": "Texas hiring research using August 2026 TWC and BLS job signals, May 2025 metro wages, role-specific recruiting and an auditable labor-cost scenario.",
   "date": "2026-10-12",
-  "dateModified": "2026-10-12",
+  "dateModified": "2026-10-13",
   "author": "Sulayman Bowles",
   "kind": "research",
   "readTime": "9 MIN",
   "openingPresentation": "integrated",
-  "evidenceBoundary": "Reviewed October 12, 2026. Employment and unemployment observations refer to August 2026; wage estimates refer to May 2025 and were released in August 2026. Official estimates can be revised. The payroll and delay example is hypothetical, with declared assumptions; no employer recruiting results or current wage offers are asserted.",
+  "evidenceBoundary": "Reviewed October 12, 2026. Employment and unemployment observations refer to August 2026; wage estimates refer to May 2025 and were released in August 2026. Official estimates can be revised. The payroll and delay example is hypothetical, with declared assumptions; no employer recruiting results or current wage offers are asserted. Targeted October 13 revision: recurring-versus-one-off cost horizon and a qualified productive-starter denominator. Original source-check dates remain attached to the individual references.",
   "content": [
-    "The cheapest hourly wage can produce an expensive operating plan if a facility cannot staff its launch. A Texas employer deciding where to expand needs to price a specific job, a reachable recruiting market, and the time required to bring new employees to productive work. A statewide unemployment rate answers only part of that decision.",
+    "The wage decision is also an opening-date decision. A Texas employer choosing a site needs a reachable recruiting market, a credible route from offer to productive employee, and enough budget to sustain the team. Price those steps together: a lower hourly rate has little value if the operation cannot staff its launch.",
     "The latest Texas Labor Market Review available at this review reports 14,469,300 seasonally adjusted nonfarm jobs in August 2026, up 5,600 from revised July. The state unemployment rate was 4.4%. Those are different measures: establishment jobs and unemployed people as a share of the civilian labor force. Neither counts qualified applicants for your shift. [TWC August indicators](#source-twc-review).",
     "For an operator, the useful conclusion is to combine the public baseline with a small, dated recruiting test. Use the data to choose the questions, then fund the plan against wages, acceptance, training and vacancy exposure that the actual role can support."
   ],
@@ -85,7 +85,7 @@
         "BLS unemployment concepts require people to be without a job, available for work, and actively seeking work, with specified temporary-layoff treatment. The measure does not screen for your equipment experience, license, commute, schedule or pay. It also does not include every employed person who might accept a better job. [BLS definitions](#source-unemployment-definition).",
         "TWC’s report lists 8,972 August online advertisements for general maintenance and repair workers statewide. The figure describes reported advertisements for that occupation, not completed hires or locally available technicians. Likewise, the report’s statewide unemployed-to-advertised-vacancy relationship cannot be applied to one plant’s maintenance positions. [TWC online job-ad section](#source-twc-review).",
         "A practical recruiting test starts with the worksite and shift. Record inquiries, candidates meeting essential requirements, interviews, offers, acceptances, starts, and survival through the initial training period. Keep denominators distinct: an acceptance rate needs offers as its denominator; a training-completion rate needs the defined starting cohort. Twenty applications cannot be reported as twenty qualified available workers.",
-        "Retain rejection reasons that can change the plan: compensation, commute, shift, required skills, or the hiring process itself. These observations can tell the business whether to change the offer, widen transport access, simplify unnecessary requirements, or stage the opening. They do not require an invented forecast about the entire Texas labor market."
+        "Convert the funnel into the launch requirement. At invented rates of 80% offer acceptance, 90% conversion from accepted offer to start and 75% training completion, one hundred offers yield 54 productive workers. Twenty productive starters require approximately 38 offers on that planning identity. It is an expected-volume calculation, not a guarantee or a measured Texas conversion rate; role-specific cohorts, integer outcomes and rejection reasons determine the real staffing plan."
       ]
     },
     {
@@ -94,7 +94,8 @@
       "paragraphs": [
         "Consider a hypothetical operation recruiting twenty employees. Assume 2,080 paid hours per employee per year, base offers of either $30 or $32 per hour, and additional employer costs equal to 25% of base payroll. Those rates and the burden are scenario assumptions, not measured market offers or a statutory payroll-tax estimate.",
         "At $30, base payroll is $1,248,000 and the assumed loaded annual cost is $1,560,000. At $32, the corresponding figures are $1,331,200 and $1,664,000. The extra annual cost is $104,000. The table keeps that recurring commitment separate from a delay cost.",
-        "Now assume the twenty-position staffing gap is the binding reason the operation cannot reach its planned output, and every business day delayed sacrifices $5,000 of contribution after avoidable costs. About 20.8 days of that loss equals the $104,000 annual pay difference. The calculation identifies a decision boundary; it does not prove that a $2 increase would fill the positions or avoid twenty-one days of delay.",
+        "If staffing is the binding launch constraint, assume each lost business day sacrifices $5,000 of contribution after avoidable costs. The $104,000 pay premium equals 20.8 lost days over one year only. It is recurring compensation compared with a one-off delay, not a durable break-even result or proof that higher pay fills the jobs.",
+        "If the premium persists for three years, an invented 8% discount rate and year-end wage payments produce $268,018 present value, equivalent to 53.6 days of immediate $5,000 losses. Five years produces $415,242, or 83.0 days. Keep the launch-delay loss at time zero for this sensitivity and exclude any recurring retention or productivity benefit not demonstrated. A temporary sign-on or ramp arrangement needs its own terms and evidence; it cannot be assumed to recruit as effectively as lasting pay.",
         "Run the sensitivity against the actual constraint. If equipment delivery is already limiting the opening, faster recruiting may save no launch days. If several vacancies reduce output gradually, model the staffing curve rather than treating every vacancy as a full shutdown. If trained internal transfers can cover the bottleneck, their opportunity cost belongs in the comparison."
       ],
       "table": {
@@ -131,7 +132,7 @@
             "+$104,000"
           ]
         ],
-        "note": "Hypothetical rates and burden. At assumed lost contribution of $5,000 per business day, $104,000 ÷ $5,000 = 20.8 days. No recruiting response or operational saving is asserted."
+        "note": "Hypothetical rates and burden. At assumed lost contribution of $5,000 per business day, $104,000 ÷ $5,000 = 20.8 days. No recruiting response or operational saving is asserted. The 20.8-day equivalence concerns one annual premium; multiyear comparisons require the declared horizon and payment timing."
       }
     },
     {
@@ -266,8 +267,8 @@
   "resources": [
     {
       "label": "Texas business source and decision ledger",
-      "href": "/research/texas-business-library-2026-10-12.json",
-      "description": "Primary evidence, declared assumptions and update triggers across the Texas business library.",
+      "href": "/research/texas-research-library-2026-10-13.json",
+      "description": "Primary evidence, declared assumptions and update triggers across the Texas business and autonomy library.",
       "format": "JSON"
     }
   ]

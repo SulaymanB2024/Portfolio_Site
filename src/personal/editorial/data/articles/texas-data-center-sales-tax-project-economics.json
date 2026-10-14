@@ -8,14 +8,14 @@
   "seoDescription": "Texas data-center tax research: standard versus large-project eligibility, state and local sales tax, certification timing, qualifying purchases and repayment risk.",
   "category": "TEXAS BUSINESS",
   "date": "2026-10-12",
-  "dateModified": "2026-10-12",
-  "readTime": "10 MIN",
+  "dateModified": "2026-10-13",
+  "readTime": "11 MIN",
   "kind": "research",
   "author": "Sulayman Bowles",
   "openingPresentation": "integrated",
-  "evidenceBoundary": "Current Tax Code §§151.359 and 151.3595, official agency guidance, July 2026 application forms and the certification list checked October 12, 2026. A material investment-clock discrepancy between the statute and agency summary is identified explicitly. Scenarios are original hypothetical inputs, not certified projects or tax advice. No site-specific power, water, permit, job or compliance outcome is asserted.",
+  "evidenceBoundary": "Current Tax Code §§151.359 and 151.3595, official agency guidance, July 2026 application forms and the certification list checked October 12, 2026. A material investment-clock discrepancy between the statute and agency summary is identified explicitly. Scenarios are original hypothetical inputs, not certified projects or tax advice. No site-specific power, water, permit, job or compliance outcome is asserted. Targeted October 13 revision: controlling job exclusions, two agency-summary conflicts and separate purchase cohorts. Original source-check dates remain attached to the individual references.",
   "content": [
-    "Texas's data-center sales-tax benefit can be material, but the phrase tax-exempt data center leaves several underwriting questions unanswered. The standard qualifying-data-center route exempts eligible purchases from the 6.25 percent state tax while local tax remains due. The qualifying-large-project route covers state and local sales and use tax on eligible purchases. The facility and purchaser must actually qualify under the relevant route. [Official program overview](#source-overview) · [Exemption certificate](#source-certificate)",
+    "Identify the exemption route before putting Texas tax savings into a data-center equipment budget. The standard qualifying-data-center route exempts eligible purchases from the 6.25 percent state tax while local tax remains due. The qualifying-large-project route covers state and local sales and use tax on eligible purchases. Qualification of the facility, purchase and purchaser determines which benefit belongs in the model. [Official program overview](#source-overview) · [Exemption certificate](#source-certificate)",
     "The current public register includes new 2026 certifications, so the program is more than a proposed incentive. Its LBB01 row, for example, lists a July 10, 2026 effective date and separately identifies the owner, occupant and operator. That is evidence of the listed certification roles and date. It is not evidence that a prospective customer's rack is ready, that every capital commitment has been fulfilled or that an unregistered purchaser can claim the exemption. [Official certification list](#source-list)",
     "For finance, the decision has three parts: establish the exact certification route and timeline, determine which purchases and parties are eligible, and retain an operating plan that meets the commitments behind the benefit. Treat the power connection, water supply and permits as separate conditions. A tax registration number cannot substitute for the evidence needed to energize a facility."
   ],
@@ -27,7 +27,8 @@
         "The standard application describes at least 100,000 square feet in a single building or part of one, a single qualifying occupant, at least 20 qualifying jobs, and at least $200 million of capital investment over five years beginning at certification. The exemption lasts ten years for investment below $250 million but at least $200 million, or fifteen years when the required investment reaches $250 million. All other conditions still apply. [Standard application](#source-standard) · [Duration guidance](#source-overview)",
         "The large-project application describes at least 250,000 square feet in one or more qualifying buildings, at least 40 qualifying jobs, $500 million of investment and a commitment to contract for at least 20 megawatts of transmission capacity. The application accepts a contract or proposed contract; certification does not establish an executed power commitment. The statutory investment definition excludes replacing personal property previously placed in service in that large project. A large procurement budget or a proposed 20MW load does not alone establish eligibility. [Large-project application, pages 1–2](#source-large) · [§151.3595(d)](#source-code)",
         "Both routes involve a single qualifying occupant and operating safeguards such as backup power, fire protection and physical security. The applications prohibit that occupant from subleasing the qualifying space or property. A multi-tenant leasing strategy therefore deserves a specific eligibility review before the tax benefit enters the investment case. Floor area cannot resolve the business-model question by itself. [Applications, first pages](#source-standard) · [Large-project application](#source-large)",
-        "Jobs must be qualifying full-time permanent positions, with pay at least 120 percent of the applicable county average weekly wage and a five-year duration. The statute defines the wage reference when the qualifying job is created. Retain the actual benchmark, role, employer and evidence, including the required permanent assignment for third-party-employer jobs. A construction-headcount announcement is a different measure. [§151.359(a); §151.3595(a)](#source-code)"
+        "Jobs must be qualifying full-time permanent positions, with pay at least 120 percent of the applicable county average weekly wage and a five-year duration. The statute defines the wage reference when the qualifying job is created. Retain the actual benchmark, role, employer and evidence, including the required permanent assignment for third-party-employer jobs. A construction-headcount announcement is a different measure. [§151.359(a); §151.3595(a)](#source-code)",
+        "Both routes exclude jobs moved from another Texas county from their job-creation minimum. A hypothetical 25-position standard-route plan containing ten such transfers supplies only fifteen countable positions before the other conditions, below the required twenty. A headcount plan must classify created jobs, moved jobs, wage benchmarks and duration separately. [§151.359(d)(2)(A); §151.3595(d)(2)(A)](#source-code)."
       ],
       "table": {
         "caption": "Certification routes should occupy separate underwriting columns",
@@ -91,7 +92,7 @@
       "title": "Classify the purchase and the party making it",
       "paragraphs": [
         "The official exemption certificate lists eligible operating equipment and systems, including servers, cooling, electricity, emergency generation, network equipment and software, subject to the necessary-and-essential requirement. It separately lists exclusions such as office supplies, short-term rentals and specified services. A construction budget therefore cannot be multiplied by a tax rate wholesale to produce an exemption estimate. [Form 01-929, front and back](#source-certificate)",
-        "Use one procurement register with the item, purpose, facility, contracting party, purchase timing, claimed route, state and local treatment, and evidence reference. The standard route leaves local sales or use tax on eligible purchases; the large route's certificate is different. Set the tax code at line-item level and preserve the eligibility review when the purchasing party or use changes.",
+        "Use one procurement register with the item, purpose, facility, contracting party, purchase timing, claimed route, state and local treatment, and evidence reference. The standard route leaves local sales or use tax on eligible purchases; the large route's certificate is different. Set the tax code at line-item level and preserve the eligibility review when the purchasing party or use changes. The overview repeats state-only/local-collected language inside its large-project claiming subsection, while its separate local-tax subsection says qualifying large-project purchases are exempt. This article uses the statute and Form 01-929’s route-specific checkbox, rather than that inconsistent summary. [Overview conflict](#source-overview); [certificate](#source-certificate).",
         "The seller's certificate needs the qualifying facility registration and the qualifying purchaser's registration. The owner, operator and occupant are distinct roles even when one company fills more than one. A tenant should obtain its own applicable registration evidence; an owner's press release or unrelated affiliate's number does not establish the buyer's status. [Certificate](#source-certificate) · [Registration guidance](#source-overview)",
         "Electricity also deserves a metering review. The agency guidance distinguishes a standalone facility with a sole qualifying occupant from mixed use on one meter, for which a predominant-use study can be required. Keep the use study, metering plan and utility documents with the tax workpaper. Tax treatment and operational curtailment exposure are separate parts of the power decision. [Electricity guidance](#source-overview)",
         "The applications and statute exclude facilities subject to the specified old Chapter313 property-value-limitation agreements. Do not infer that every tax incentive stacks because it concerns a different tax. Build a benefit map naming the exact authority, property, party, period and compatibility condition, then have the advisers reconcile it with the executed agreements. [Applications](#source-standard) · [Large-project application](#source-large)"
@@ -106,7 +107,7 @@
         "Now assume $1.5 million of monthly qualifying electricity purchases for a full year after the exemption begins. Annual spend is $18 million, giving a simplified $1.125 million state-tax saving under the standard route. This requires supported electricity eligibility and does not assume the facility runs at a particular utilization, power price or profit margin. Budget local tax and the actual contract separately.",
         "For a project genuinely qualifying under the large route, the same assumed eligible-purchase amount and local rate would avoid another $3.2 million of local tax. That does not justify spending an additional $220 million solely to move this $280 million example above the $500 million large-project threshold. Commercial demand, construction cost, wage commitments, power and the other eligibility conditions determine whether the larger operating project makes sense.",
         "Run a loss-of-certification case alongside the benefit case. If the standard example's entire assumed $160 million purchase cohort lost its exemption, the associated state tax alone would be $10 million before applicable penalty and interest. Do not give that contingent exposure a probability based only on a public certification list. Ask what record demonstrates each continuing commitment and what remedy exists if a counterparty fails to perform. [Revocation guidance](#source-overview)",
-        "This model deliberately omits income-tax effects, discounting, later equipment refreshes, actual utility taxability, rate changes and financing. Its purpose is to identify where an inflated saving or omitted liability enters the capital proposal. A final model should replace the assumed cohorts with a reconciled purchasing schedule and validated route-specific treatment."
+        "Map purchase cohorts to certification rather than treating eligible investment and exempt spending as one event. If an assumed $20 million of this standard example’s $160 million purchase cohort instead occurs before certification and is ineligible for the exemption, state tax avoided falls by $1.25 million to $8.75 million. Whether that spending counts toward qualifying investment is a separate timing question. The sensitivity does not alter a statutory investment clock or establish actual transaction taxability. [Exemption start and refund boundary](#source-code); [agency guidance](#source-overview)."
       ],
       "table": {
         "caption": "Worked standard-route purchase and operating case",
@@ -195,7 +196,7 @@
       "href": "https://tcss.legis.texas.gov/resources/TX/htm/TX.151.htm",
       "publisher": "Texas Legislature",
       "date": "Current consolidated law checked October 12, 2026",
-      "lastVerified": "2026-10-12",
+      "lastVerified": "2026-10-13",
       "note": "The large-project investment period begins at the earlier application/certification date under151.3595(d)(2)(B); the exemption begins on certification under(f)."
     },
     {
@@ -204,8 +205,8 @@
       "href": "https://comptroller.texas.gov/taxes/data-centers/",
       "publisher": "Texas Comptroller of Public Accounts",
       "date": "Current agency guidance",
-      "lastVerified": "2026-10-12",
-      "note": "The large-project investment-clock summary differs from the current statute; this article flags that difference."
+      "lastVerified": "2026-10-13",
+      "note": "Overview has both an earlier-application investment-clock discrepancy and inconsistent large-route state/local claiming language. Use controlling §§151.359/.3595 and route-specific Form 01-929; no private eligibility determination."
     },
     {
       "id": "standard",
@@ -248,8 +249,8 @@
   "resources": [
     {
       "label": "Texas business source and decision ledger",
-      "href": "/research/texas-business-library-2026-10-12.json",
-      "description": "Primary evidence, declared assumptions and update triggers across the Texas business library.",
+      "href": "/research/texas-research-library-2026-10-13.json",
+      "description": "Primary evidence, declared assumptions and update triggers across the Texas business and autonomy library.",
       "format": "JSON"
     }
   ],

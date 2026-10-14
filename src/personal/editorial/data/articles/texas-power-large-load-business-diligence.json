@@ -12,13 +12,13 @@
     "Texas business electricity ERCOT SB6 large load interconnection data center power site selection Batch Zero"
   ],
   "date": "2026-10-12",
-  "dateModified": "2026-10-12",
+  "dateModified": "2026-10-13",
   "author": "Sulayman Bowles",
   "kind": "research",
-  "readTime": "11 MIN",
+  "readTime": "13 MIN",
   "openingPresentation": "integrated",
   "content": [
-    "A Texas site can have attractive land, a negotiated electricity price and an ambitious power request while its operating date remains unresolved. Each document answers a different question. A business committing to a factory, data center or major expansion needs evidence that the right quantity of power can reach the facility when the business needs it.",
+    "Before buying a Texas site, establish when it can receive the power the operation requires. A land contract, electricity price and large-load request each answer part of the question. The investment case comes together when the delivery schedule, usable megawatts and remaining conditions line up with equipment installation and customer commitments.",
     "The distinction became more consequential on October 8, 2026, when Texas’s large-load interconnection standards took effect. Meanwhile, ERCOT’s September classifications remained conditional, with verification still required. Treating either an old utility agreement or a place in the connection process as finished diligence can put the real estate, equipment and customer schedule ahead of the power. [Effective standards](#source-interconnection-rule); [conditional classifications](#source-conditional-classification).",
     "This investigation explains how to assess an ERCOT-connected site as of October 12, 2026. The practical objective is an investment case built around documented capacity, dated conditions, financial exposure and an operating plan for interruptions. The public record supports those questions. It does not establish a particular site’s connection date or future electricity bill."
   ],
@@ -97,7 +97,8 @@
       "title": "Model committed capital separately from electricity expense",
       "paragraphs": [
         "Under §25.194, the intermediate agreement carries a $100,000 study fee and $50,000/MW of requested peak demand in security. At the standard large-load interconnection agreement, security becomes the greater of $50,000/MW of contracted demand or allocated system-upgrade costs. Direct interconnection costs are paid through nonrefundable cash contribution in aid of construction, or CIAC. [§25.194(d), (f)](#source-interconnection-rule).",
-        "A model should keep four accounts: study expenditure, security, construction contributions and the recurring electricity bill. Security restricts financial capacity and may be supplied through an eligible instrument; it does not become electricity expense simply because it is expressed per megawatt. Cash construction payments and their recovery terms need their own treatment. Ask the finance team to model when each commitment is required, what can be credited and what is exposed if the development changes.",
+        "Keep study expenditure, collateral, permanent construction payments and recurring charges in separate accounts. The standard large-load interconnection agreement (SLLIA) also acknowledges a minimum-billing obligation under §25.193 and may require additional related security. Under §25.194(f)(3)(C), energization returns 20% of the remaining security balance; further 20% increments follow agreement milestones tied to that billing obligation. Refundable collateral is therefore neither electricity expense nor cash guaranteed to return at opening. [§25.194(f)(2)–(3)](#source-interconnection-rule).",
+        "Minimum billing needs its own implementation check. The July 24 publication in Project 58000 proposed billing from available service, even before energization or full use, for at least 20 years. The October 2 interconnection adoption expressly left charge details to that separate proceeding. This review did not retrieve a later adopted billing method; it does not establish a currently effective 20-year charge. Obtain the applicable final rule, approved utility tariff and signed agreement before pricing a slow ramp or exit. [July proposal, §25.193(d)](#source-minimum-billing-proposal); [adoption response](#source-interconnection-rule).",
         "Consider two hypothetical sites for the same business. Assume the study allocates 80 MW to each; all security is posted as cash; no outstanding obligations complicate credits; and the listed upgrade and direct-connection costs are estimates supplied for this illustration. The figures below apply the rule’s security formula to those assumed inputs. They are not utility quotations or observed project outcomes."
       ],
       "table": {
@@ -144,14 +145,15 @@
             "$100,000"
           ]
         ],
-        "note": "Calculated illustration, not an estimate of Texas market costs. Earlier security is assumed to be credited toward the later requirement, so the two security rows are not added together. Instrument costs, additional obligations, unused study-fee returns and project-specific terms are omitted."
+        "note": "Calculated illustration, not an estimate of Texas market costs. Earlier security is assumed to be credited toward the later requirement, so the two security rows are not added together. Instrument costs, additional obligations, unused study-fee returns and project-specific terms are omitted. The model excludes possible minimum-billing security and obligations; obtain the actual SLLIA, release schedule and applicable §25.193 treatment."
       }
     },
     {
       "id": "compare-whole-project",
       "title": "Compare the whole operating case",
       "paragraphs": [
-        "Site B has the same assumed allocation, $2 million less agreement-stage security and $1.2 million more direct-connection CIAC. That does not identify a winner: liquidity, irreversible expenditure, credit support, timing and withdrawal exposure can change the comparison.",
+        "Site B has the same assumed allocation, $2 million less agreement-stage cash collateral and $1.2 million more permanent CIAC. Compare their economic character before adding nominal dollars. Assume a 4% annual net financing spread on A’s extra collateral, after collateral interest, and a three-year hold with no intermediate release: simple carrying cost is $240,000. It would take a 15-year hold at that spread to equal the $1.2 million CIAC difference. These invented inputs isolate financing cost; they are not a forecast of a legally permitted release schedule.",
+        "Replace the flat hold with the actual staged-release schedule and price withdrawal amounts separately. Outstanding amounts can include the minimum-billing obligation; specified withdrawal treatment also subtracts 20% of associated security before returning the balance. A slower ramp or exit can therefore affect liquidity and irreversible exposure differently. Obtain the applicable tariff and signed agreement instead of assuming the nominal security is either fully spent or fully recoverable. [§25.194(f)(3)](#source-interconnection-rule).",
         "Now add the revenue schedule. Assume, solely for sensitivity analysis, that a delayed opening costs the business $150,000 per month in carrying expenses and unavailable contribution. An 18-month delay is $2.7 million: $150,000 multiplied by 18. That assumed exposure exceeds the example’s CIAC difference. The point is to obtain a defensible date range and price the dependency before purchasing long-lead equipment or promising a customer launch.",
         "Operating expenditure needs its own boundary. At an assumed 80 MW allocation and 70% average load, annual energy is 490,560 MWh: 80 × 0.70 × 8,760. Applying an assumed $65/MWh supply price gives $31.89 million annually. This is arithmetic for a non-leap year, not a Texas price forecast or a total delivered bill; it excludes delivery charges, losses, contract adjustments and other costs.",
         "Test a lower utilization case, a later ramp, an outage case and the exact tariff treatment. SB6 also required a review of transmission-cost recovery, with rule changes due by December 31, 2026. That statutory deadline does not establish the final charges a particular buyer will pay. Keep any assumed savings dependent on an identified, effective tariff or contract term. [SB6, section 6](#source-sb6-text)."
@@ -182,7 +184,7 @@
       "id": "investment-decision",
       "title": "Make the commitment conditional on usable evidence",
       "paragraphs": [
-        "Attach each spending commitment to evidence. Where commercially available, preserve an option while capacity is unresolved and tie construction obligations to defined milestones. Align equipment delivery with the documented commissioning sequence. These are proposed controls; their availability and enforceability depend on the transaction.",
+        "Attach spending to the actual allocation and release milestones. A redesign is also a regulatory dependency: §25.194(e)(4) requires a new interconnection request for a material change, including requested demand, phased energization, site configuration or load composition. Have the utility identify whether a revised cooling or ramp plan restarts the request before approving it. Then align equipment delivery and irreversible construction commitments with the resulting schedule. [Material-change rule](#source-interconnection-rule).",
         "The public evidence also supplies a useful counterweight to alarmist conclusions. A huge requested-load pipeline is not a forecast of guaranteed construction. Conditional classifications show that the process continues while projects are tested. The new standards aim to make commitments more concrete. None of those observations establishes abundant power at every site, inevitable shortages, or a universal increase in electricity prices.",
         "The unresolved facts are local: allocated MW and years, study assumptions, the facilities on the critical path, approval conditions, security and construction exposure, tariff terms, and the operations that can tolerate an interruption. Obtain those facts before ranking locations. A larger request or a lower headline price can win a presentation while a smaller, better documented allocation wins the business case."
       ],
@@ -221,7 +223,7 @@
       "href": "https://www.sos.texas.gov/texreg/archive/October22026/Adopted%20Rules/16.ECONOMIC%20REGULATION.html",
       "publisher": "Texas Secretary of State / Public Utility Commission of Texas",
       "date": "2026-10-02",
-      "lastVerified": "2026-10-12",
+      "lastVerified": "2026-10-13",
       "note": "Filed September 18; effective October 8, 2026. Applicability and transitional treatment must be read against the specific project and its prior agreements."
     },
     {
@@ -304,6 +306,15 @@
       "date": "2026-09-15",
       "lastVerified": "2026-10-12",
       "note": "The cover and current index identify September 2026 despite the URL directory. Pages 10–12 record demand-management implementation in progress; this dated status does not establish later final adoption."
+    },
+    {
+      "id": "minimum-billing-proposal",
+      "label": "Proposed transmission-cost recovery and large-load tariff rules, Project 58000",
+      "href": "https://www.sos.texas.gov/texreg/archive/July242026/Proposed%20Rules/16.ECONOMIC%20REGULATION.html",
+      "publisher": "Texas Secretary of State / Public Utility Commission of Texas",
+      "date": "2026-07-24",
+      "lastVerified": "2026-10-13",
+      "note": "Proposed §25.193(d) and §25.252; July 9 filing and August 23 earliest possible adoption are not an effective-date notice. October 2 adopted §25.194 assigns charge details to the separate proceeding. Current docket/rule retrieval was limited; no later final billing treatment or implemented utility tariff was verified."
     }
   ],
   "faqs": [
@@ -328,10 +339,10 @@
   "resources": [
     {
       "label": "Texas business source and decision ledger",
-      "href": "/research/texas-business-research-2026-10-12.json",
-      "description": "Primary-source claims, research dates, update triggers, and decision checklists for this edition.",
+      "href": "/research/texas-research-library-2026-10-13.json",
+      "description": "Primary evidence, declared assumptions and update triggers across the Texas business and autonomy library.",
       "format": "JSON"
     }
   ],
-  "evidenceBoundary": "ERCOT-region legislation, adopted standards, and published agency notices checked October 12, 2026. Queue and forecast figures retain their own observation dates. Site comparisons, energy prices, and delay costs are declared illustrative assumptions; actual allocation, energization, tariffs, and permits require project documents."
+  "evidenceBoundary": "ERCOT-region legislation, adopted standards, and published agency notices checked October 12, 2026. Queue and forecast figures retain their own observation dates. Site comparisons, energy prices, and delay costs are declared illustrative assumptions; actual allocation, energization, tariffs, and permits require project documents. Targeted October 13 revision: adopted minimum-billing acknowledgment, collateral-release and material-change clauses; separate July billing proposal and unverified final implementation; declared financing comparison. Original source-check dates remain attached to the individual references."
 }

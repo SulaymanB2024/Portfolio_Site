@@ -92,7 +92,7 @@ export const readingTopics: ReadingTopic[] = [
   ],
   "sourceDownload": {
     "label": "Download the eighteen-article source and decision ledger (JSON)",
-    "href": "/research/texas-autonomy-library-2026-10-13.json"
+    "href": "/research/texas-research-library-2026-10-13.json"
   }
 },
   {
@@ -134,7 +134,7 @@ export const readingTopics: ReadingTopic[] = [
       { slug: 'texas-business-court-contract-decisions', reason: 'Use September court decisions to distinguish transaction value, pleaded claims, and the promises preserved in signed contracts.' },
     ],
     relatedTopics: ['texas-autonomy', 'financial-systems', 'industrial-capacity'],
-    sourceDownload: { label: 'Download the eighteen-article source and decision ledger (JSON)', href: '/research/texas-autonomy-library-2026-10-13.json' },
+    sourceDownload: { label: 'Download the eighteen-article source and decision ledger (JSON)', href: '/research/texas-research-library-2026-10-13.json' },
     featuredPath: { slug: 'texas-autonomy', label: 'Explore robotaxis and driverless freight in Texas' },
   },
   {

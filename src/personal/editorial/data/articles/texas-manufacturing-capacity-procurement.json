@@ -8,14 +8,14 @@
   "subtitle": "How to turn semiconductor announcements, production starts and customer qualifications into a defensible purchasing plan.",
   "seoDescription": "Texas semiconductor procurement research comparing TI Sherman, Samsung Taylor and GlobalWafers evidence, with qualification, allocation and yield planning.",
   "date": "2026-10-12",
-  "dateModified": "2026-10-12",
+  "dateModified": "2026-10-13",
   "author": "Sulayman Bowles",
   "kind": "research",
-  "readTime": "9 MIN",
+  "readTime": "10 MIN",
   "openingPresentation": "integrated",
-  "evidenceBoundary": "Reviewed October 12, 2026. This is a comparison of public company and Commerce evidence, not a census of Texas manufacturing capacity. Production and qualification claims are attributed to their issuers. Company plans, economic-impact estimates and historical funding awards do not establish buyer-specific availability. The output model is a declared hypothetical; no company yield, utilization, allocation or delivery performance is estimated.",
+  "evidenceBoundary": "Reviewed October 12, 2026. This is a comparison of public company and Commerce evidence, not a census of Texas manufacturing capacity. Production and qualification claims are attributed to their issuers. Company plans, economic-impact estimates and historical funding awards do not establish buyer-specific availability. The output model is a declared hypothetical; no company yield, utilization, allocation or delivery performance is estimated. Targeted October 13 revision: conditional named customer-financing mechanism and yield/allocation thresholds. Original source-check dates remain attached to the individual references.",
   "content": [
-    "A Texas factory can strengthen a supply chain before it can supply your product. The purchasing decision turns on which part is qualified, how much output is assigned to the buyer, and when accepted units can arrive. A construction budget or a ribbon cutting helps identify a supplier to investigate; a production plan needs more specific evidence.",
+    "A procurement team needs a qualified product, an allocated quantity and a delivery date it can defend. Texas factory announcements help identify suppliers to investigate; the purchasing decision depends on how much accepted output reaches the buyer. Follow the project from construction and production to product approval, allocation and delivery.",
     "As of October 12, 2026, three prominent projects illustrate different stages. Texas Instruments has announced production at Sherman SM1. Samsung’s October update still describes Taylor operation by year-end as an expectation. GlobalWafers reports customer qualifications at its new Sherman facility. These developments deserve different treatment in a sourcing model. [TI production start](#source-ti-production); [Samsung update](#source-samsung-october); [GlobalWafers qualifications](#source-globalwafers-q2).",
     "The practical response is to maintain two records: the public evidence about the facility, and the supplier evidence supporting the buyer’s actual order. Advance a project through the purchasing plan when the second record improves. This preserves the value of Texas expansion without turning future capacity into an unsupported delivery commitment."
   ],
@@ -85,7 +85,7 @@
       "paragraphs": [
         "Commerce’s December 2024 final award notices for TI and GlobalWafers are historical funding evidence. They describe disbursement following project milestones; the GlobalWafers notice distinguishes construction, technology, production and commercial milestones. The notices cover projects across more than one state. They are not current statements of cash paid, completed Texas output or supply reserved for an individual customer. [TI award notice](#source-nist-ti); [GlobalWafers award notice](#source-nist-globalwafers).",
         "Samsung’s October 7 release reports a $10.9 billion estimate of combined Austin and Taylor economic impact in 2025. The stated scope includes Austin fab operations and Taylor construction, with Taylor office activity beginning in the fourth quarter. That is a regional economic-impact measure, not Taylor semiconductor revenue or an observed quantity of qualified chips. [Samsung’s stated report scope](#source-samsung-october).",
-        "The procurement interpretation is to preserve separate fields for financing, construction, qualification and commercial supply. An incentive can help explain investment support. An impact report can explain local business activity. Neither should populate the spreadsheet cell for components available to your production line next month."
+        "A named customer relationship offers a more specific mechanism. Micron’s July 9 release proposes $500 million of financing for GlobalWafers America in Sherman and a ten-year raw-wafer supply agreement, subject to definitive agreements, approvals and closing. GlobalWafers’ August update describes strategic funding and a long-term Micron relationship, without allocating supply to other readers. Customer capital plus reserved access can support a ramp and demand visibility while leaving uncommitted capacity unknown. That is a procurement inference, not proof of paid financing, a completed closing or wafers available to your factory. [Conditional Micron proposal](#source-micron-financing); [GlobalWafers account](#source-globalwafers-q2)."
       ]
     },
     {
@@ -144,7 +144,7 @@
       "paragraphs": [
         "At 94% assembly/test yield, the allocation falls to 39,950 components, enough for 19,975 complete assemblies. The shortage is twenty-five assemblies. The exercise demonstrates why a large gross number can coexist with a small purchasing margin: losses occur before the buyer receives its share. It does not predict a particular supplier’s yield.",
         "If the business assumes $100 of lost contribution per undelivered assembly, the twenty-five-assembly shortfall creates $2,500 of monthly exposure before any customer penalty. That additional assumption gives finance a starting point for comparing a buffer, an alternate qualified source, or an expedite quote. It is not a recommendation to pay $2,500 for any solution; compare the actual probability, timing and recoverable loss.",
-        "The model also omits product mix changes, maintenance interruptions, allocation reductions and transport delays. Test those separately rather than adding a vague safety percentage to every stage. If the buyer needs an exact part that is not qualified on the new route, the relevant available quantity for that route is zero until release. A strong plant-level forecast cannot close that gap."
+        "The demand threshold is also an allocation question. Holding the other inputs fixed, assembly/test yield must reach 94.1176% at 25% allocation, or allocation must reach 24.7678% at 95% yield. The assumed 25% allocation therefore tolerates only a 0.2322 percentage-point reduction before missing demand. A small contract allocation change can matter as much as factory yield. Product qualification, transport and timing still need separate evidence; these are not actual supplier thresholds."
       ]
     },
     {
@@ -270,14 +270,23 @@
       "date": "2024-12-20",
       "lastVerified": "2026-10-12",
       "note": "Archived historical award notice, updated October 6, 2025. Award covers Texas and Utah projects; disbursement follows project milestones. No current award balance or cash receipt is inferred."
+    },
+    {
+      "id": "micron-financing",
+      "label": "Micron’s conditional Sherman financing and ten-year wafer-access proposal",
+      "href": "https://micron.gcs-web.com/news-releases/news-release-details/micron-announces-3-billion-strategic-investment-strengthen-us",
+      "publisher": "Micron Technology",
+      "date": "2026-07-09",
+      "lastVerified": "2026-10-13",
+      "note": "Proposed $500M support and ten-year supply relationship expressly subject to definitive agreements, approvals and closing. No cash payment, closing or reader allocation independently verified."
     }
   ],
   "image": "/images/social/texas-manufacturing-capacity-procurement.png",
   "resources": [
     {
       "label": "Texas business source and decision ledger",
-      "href": "/research/texas-business-library-2026-10-12.json",
-      "description": "Primary evidence, declared assumptions and update triggers across the Texas business library.",
+      "href": "/research/texas-research-library-2026-10-13.json",
+      "description": "Primary evidence, declared assumptions and update triggers across the Texas business and autonomy library.",
       "format": "JSON"
     }
   ]
