@@ -1,0 +1,31 @@
+{
+  "asOf": "2026-10-14",
+  "articlePath": "src/personal/editorial/data/articles/kalshi-40-billion-question.json",
+  "sourceLedger": "The article.sources array is the canonical 17-source register, including exact URLs, publishers, dates, access scope and limitations. References here resolve to that array by source ID.",
+  "claims": [
+    {"source": "K1", "claim": "$1bn Series F at $22bn; $178bn annualized volume", "status": "Company announcement, 2026-05-07; not audited accounts"},
+    {"source": "K2", "claim": "Approximately $40bn proposed financing valuation", "status": "Reuters report of discussions, 2026-09-29; closing not established"},
+    {"source": "K3", "claim": "$4bn annualized July revenue; about $7bn of June perpetuals activity", "status": "Sacra estimates; revenue not reconciled to economic net revenue; perpetuals initially zero-fee"},
+    {"source": "K4", "claim": "Default taker fee 0.07*C*P*(1-P), subject to multiplier and rounding", "status": "July fee schedule, page 2 visually inspected; fee-curve examples use multiplier 1"},
+    {"source": "K5", "claim": "In-game order-book depth falls 76% in research sample", "status": "Original historical study; not a current all-market measurement"},
+    {"source": "K6", "claim": "Robinhood selected contracts use Rothera; disclosures also name KalshiEX and ForecastEx", "status": "Primary June announcement; no routing percentages or fee-sharing terms inferred"},
+    {"source": "K7", "claim": "Alpaca API distribution partnership", "status": "Announced plans, not realized volume"},
+    {"source": "K8", "claim": "Kalshi perpetual-futures launch", "status": "May primary product announcement; exposure separated from binary payout notional"},
+    {"source": "K9", "claim": "ICE distributes Polymarket institutional signals", "status": "Primary February product announcement"},
+    {"source": "K10", "claim": "CFTC event-contract swap-definition proposal", "status": "October 9 proposal, not a final rule"},
+    {"source": "K11", "claim": "Contrasting Third, Ninth and Sixth Circuit positions", "status": "Agency discussion on pages 9–11; PDF pages visually inspected; agency advocacy is not a final judicial resolution"},
+    {"source": "K12", "claim": "Nasdaq surveillance integration", "status": "Announced phased implementation; no claim of completed risk removal"},
+    {"source": "K13", "claim": "ICE Q2 Exchanges GAAP margin 74%; consolidated 52%", "status": "Primary results; segment and consolidated scopes kept separate"},
+    {"source": "K14", "claim": "CME average daily margin efficiencies $95bn", "status": "Primary Q2 results; not a Kalshi capability"},
+    {"source": "K15", "claim": "Activity-to-revenue and reinvestment valuation method", "status": "Indexed December 2020 Airbnb archive text; underlying spreadsheet not accessed"},
+    {"source": "K16", "claim": "Historical regulation-first thesis", "status": "Early Contrary profile; old operating figures excluded from current anchors"},
+    {"source": "K17", "claim": "September initiation-report context", "status": "Public abstract only; paid report and full model not accessed or used as model inputs"}
+  ],
+  "modelBoundary": {
+    "inputs": "All forecast volumes, retained yields, margins, weights, taxes, capital ratios, discount rates and net cash are author assumptions.",
+    "cash": "$1bn net cash is illustrative. Customer assets, required regulatory capital, financing preferences and options require a separate equity allocation.",
+    "notional": "Event contracts counted once at $1 maximum payout; perpetuals use exposure traded. Neither is customer spending.",
+    "reproduction": "public/research-assets/kalshi-valuation-2026/model.py and model.mjs",
+    "knownOmissions": ["Audited historical income statement", "Verified unrestricted net cash", "Partner revenue-sharing and routing terms", "Full cap table and security preferences", "Independent legal opinion", "Forecast loss carryforwards"]
+  }
+}
