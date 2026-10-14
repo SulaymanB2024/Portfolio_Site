@@ -11,13 +11,13 @@
     "Texas business AI law HB149 TRAIGA compliance TDPSA privacy procurement healthcare"
   ],
   "date": "2026-10-12",
-  "dateModified": "2026-10-12",
+  "dateModified": "2026-10-13",
   "author": "Sulayman Bowles",
   "kind": "research",
   "readTime": "11 MIN",
   "openingPresentation": "integrated",
   "content": [
-    "Buying an AI system puts a Texas business in charge of decisions the vendor cannot make for it: which information enters the tool, what the output can influence, and who responds when it goes wrong. Texas’s AI law makes those choices more consequential, but the duties depend on the operator and the use.",
+    "Approve the business use before approving the AI tool. A Texas company decides which information enters the system, what its output can influence and who can correct a problem. Those choices determine the legal and operating questions to put to the vendor, from a support assistant to a system that helps make a financing decision.",
     "The Texas Responsible Artificial Intelligence Governance Act, or TRAIGA, took effect January 1, 2026. House Bill 149 establishes prohibited uses, disclosure duties in government and healthcare, enforcement procedures, and a regulatory sandbox framework. It also changes Texas’s biometric law and a processor duty under the Texas Data Privacy and Security Act. Use the enrolled version; introduced bills and committee substitutes are historical proposals. [Enacted HB149](#source-hb149).",
     "The useful operating question is what evidence should exist before deployment. A business should be able to describe its use, justify its data handling, and identify who can investigate and correct a problem. That is the basis for the procurement approach below."
   ],
@@ -141,7 +141,8 @@
       "paragraphs": [
         "Consider a hypothetical Texas retailer that falls within TDPSA scope. It buys an assistant to draft answers about delivery delays. Staff approve replies; the tool receives order details, and the vendor proposes retaining conversations for its own product improvement. The first review should resolve permitted data use, access, retention, processor terms, and whether that additional purpose changes the relationship.",
         "Three months later, a team proposes using the same assistant to recommend which customers should be offered financing. This changes the review even though the software subscription stays the same. A solely automated assessment of personal aspects could fall within profiling; profiling in furtherance of a significant financial or lending decision connects to the statutory opt-out right. Risky profiling can also require a data protection assessment. [Profiling and assessments](#source-privacy).",
-        "An operator should map exactly how the recommendation reaches a decision, document meaningful staff authority, assess the data and affected customers, and approve the changed use before launch. Adding a human click is insufficient evidence of what the workflow actually does. These are governance recommendations for the hypothetical retailer, not a determination that every financing assistant has the same legal classification. The operational insight is that a changed business purpose can matter more than a changed model name."
+        "An operator should map exactly how the recommendation reaches a decision, document meaningful staff authority, assess the data and affected customers, and approve the changed use before launch. Adding a human click is insufficient evidence of what the workflow actually does. These are governance recommendations for the hypothetical retailer, not a determination that every financing assistant has the same legal classification. The operational insight is that a changed business purpose can matter more than a changed model name.",
+        "Now consider the same vendor used for employee attendance through face identification. TDPSA’s consumer definition excludes the employment context, but that does not decide the separate biometric or TRAIGA question. Determine whether the system captures a statutory biometric identifier, uniquely identifies a person and serves an exempt security/fraud purpose or ordinary attendance purpose. Review actual notice, consent, retention and human decisions against the applicable provisions. An employment-context exclusion cannot be copied into a blanket permission for identification. [§541.001(7)](#source-privacy); [§503.001](#source-biometrics); [TRAIGA linkage](#source-ai-protection)."
       ]
     },
     {
@@ -166,7 +167,7 @@
       "id": "decisions",
       "title": "What to resolve before approving the deployment",
       "paragraphs": [
-        "An approval should leave an inspectable record of the use and its boundaries. For an acquisition, request that record alongside the system inventory: it helps distinguish an established process from undocumented exposure. My recommended decision sequence is:"
+        "Preserve a proportionate evidence chain: complaint or review date, deployed version, relevant input cohort, output, human action, safeguard and corrective change. Each item helps connect the questioned business decision to the actual workflow. This is an operational recommendation, not a universal statutory logging mandate; limit personal-data retention to its justified purpose and applicable duties. Use that record for a new deployment or an acquisition review, then resolve the following decisions:"
       ],
       "bullets": [
         "Identify the deployed use, developer and deployer, Texas connection, and government or healthcare involvement.",
@@ -233,7 +234,7 @@
       "href": "https://tcss.legis.texas.gov/resources/BC/htm/BC.541.htm",
       "publisher": "Texas Legislature",
       "date": "Effective 2024-07-01; AI amendment effective 2026-01-01",
-      "lastVerified": "2026-10-12",
+      "lastVerified": "2026-10-13",
       "note": "Current codified scope, definitions, rights, controller and processor duties, contract terms, assessments, exemptions and enforcement. HB149 amended §541.104(a)."
     },
     {
@@ -242,7 +243,7 @@
       "href": "https://tcss.legis.texas.gov/resources/BC/htm/BC.503.htm",
       "publisher": "Texas Legislature",
       "date": "AI amendments effective 2026-01-01",
-      "lastVerified": "2026-10-12",
+      "lastVerified": "2026-10-13",
       "note": "Commercial capture, notice and consent, retention, penalties, AI training and security exclusions, and subsequent non-exempt commercial use. Biometric identifier differs from the biometric data definition in Chapters 541 and 552."
     },
     {
@@ -295,10 +296,10 @@
   "resources": [
     {
       "label": "Texas business source and decision ledger",
-      "href": "/research/texas-business-research-2026-10-12.json",
-      "description": "Primary-source claims, research dates, update triggers, and decision checklists for this edition.",
+      "href": "/research/texas-research-library-2026-10-13.json",
+      "description": "Primary evidence, declared assumptions and update triggers across the Texas business and autonomy library.",
       "format": "JSON"
     }
   ],
-  "evidenceBoundary": "Enacted and current codified Texas law and official implementation guidance checked October 12, 2026. The retailer example is hypothetical. HB149 business-sandbox intake was not verified; the federal-policy discussion is not a comprehensive preemption or litigation review."
+  "evidenceBoundary": "Enacted and current codified Texas law and official implementation guidance checked October 12, 2026. The retailer example is hypothetical. HB149 business-sandbox intake was not verified; the federal-policy discussion is not a comprehensive preemption or litigation review. Targeted October 13 revision: actual privacy/biometric scope applied to a distinct employee workflow and proportionate deployment evidence. Original source-check dates remain attached to the individual references."
 }

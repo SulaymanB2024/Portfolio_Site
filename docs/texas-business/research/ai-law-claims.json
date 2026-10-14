@@ -44,7 +44,7 @@
       "additionalAuthorities": [
         {
           "primaryUrl": "https://tcss.legis.texas.gov/resources/BC/htm/BC.552.htm",
-          "pinpoint": "Section 552.001(1)–(2)",
+          "pinpoint": "Section 552.001(1)\u2013(2)",
           "effectiveDate": "2026-01-01"
         }
       ],
@@ -64,10 +64,10 @@
       "status": "enacted and effective",
       "sourceId": "ai-protection",
       "primaryUrl": "https://tcss.legis.texas.gov/resources/BC/htm/BC.552.htm",
-      "pinpoint": "Section 552.051(b)–(e)",
+      "pinpoint": "Section 552.051(b)\u2013(e)",
       "sourceDate": "2026-01-01",
       "dateType": "Effective date",
-      "qualification": "This is not a blanket disclosure duty for every ordinary private-business chatbot. The chapter uses governmental agency in §552.051 and defines governmental entity in §552.001; a specific institution's classification requires attention to the exact text.",
+      "qualification": "This is not a blanket disclosure duty for every ordinary private-business chatbot. The chapter uses governmental agency in \u00a7552.051 and defines governmental entity in \u00a7552.001; a specific institution's classification requires attention to the exact text.",
       "updateTriggers": [
         "Disclosure amendments",
         "Official interpretation of agency scope or disclosure implementation"
@@ -115,10 +115,10 @@
       "status": "enacted and effective",
       "sourceId": "ai-protection",
       "primaryUrl": "https://tcss.legis.texas.gov/resources/BC/htm/BC.552.htm",
-      "pinpoint": "Sections 552.052–.055 and 552.057",
+      "pinpoint": "Sections 552.052\u2013.055 and 552.057",
       "sourceDate": "2026-01-01",
       "dateType": "Effective date",
-      "qualification": "Preserve intentionally aims in §552.052, sole intent in §552.055 and §552.057(1), intentional development/distribution in §552.057(2), and governmental entity in §§552.053–.054(b). §552.054(c)'s link to §503.001 is separately mapped in ai-10. No claim that every persuasion, scoring, scraping or content-generation use is banned.",
+      "qualification": "Preserve intentionally aims in \u00a7552.052, sole intent in \u00a7552.055 and \u00a7552.057(1), intentional development/distribution in \u00a7552.057(2), and governmental entity in \u00a7\u00a7552.053\u2013.054(b). \u00a7552.054(c)'s link to \u00a7503.001 is separately mapped in ai-10. No claim that every persuasion, scoring, scraping or content-generation use is banned.",
       "updateTriggers": [
         "Amendments to intent thresholds or referenced Penal Code provisions",
         "Judicial interpretation of these prohibitions"
@@ -133,7 +133,7 @@
       "status": "enacted and effective",
       "sourceId": "ai-protection",
       "primaryUrl": "https://tcss.legis.texas.gov/resources/BC/htm/BC.552.htm",
-      "pinpoint": "Section 552.056(b)–(e)",
+      "pinpoint": "Section 552.056(b)\u2013(e)",
       "sourceDate": "2026-01-01",
       "dateType": "Effective date",
       "additionalAuthorities": [
@@ -180,7 +180,7 @@
       "status": "enacted and effective",
       "sourceId": "privacy",
       "primaryUrl": "https://tcss.legis.texas.gov/resources/BC/htm/BC.541.htm",
-      "pinpoint": "Sections 541.001(11), (24), 541.051(b)(5), 541.101–.103 and 541.105",
+      "pinpoint": "Sections 541.001(11), (24), 541.051(b)(5), 541.101\u2013.103 and 541.105",
       "sourceDate": "2024-07-01",
       "dateType": "Effective date of the cited provisions",
       "qualification": "Assessment duties depend on processing activities and risk, rather than all AI purchases. The financing example is hypothetical and conditional; no claim that all staff-approved recommendations constitute solely automated profiling.",
@@ -201,7 +201,7 @@
       "status": "enacted and effective; HB149 amendment effective 2026-01-01",
       "sourceId": "privacy",
       "primaryUrl": "https://tcss.legis.texas.gov/resources/BC/htm/BC.541.htm",
-      "pinpoint": "Section 541.104(a)(2), (b)–(e)",
+      "pinpoint": "Section 541.104(a)(2), (b)\u2013(e)",
       "sourceDate": "2026-01-01",
       "dateType": "Effective date of HB149 amendment; contract provisions originally effective 2024-07-01",
       "additionalAuthorities": [
@@ -220,7 +220,7 @@
     },
     {
       "id": "ai-10",
-      "claim": "Amended biometric law contains specified AI training/development and security exclusions, a unique-identification limit, a public-media consent clause with an individual-publication exception, and consequences for subsequent non-exempt commercial use. A §503.001 violation also violates TRAIGA §552.054(c).",
+      "claim": "Amended biometric law contains specified AI training/development and security exclusions, a unique-identification limit, a public-media consent clause with an individual-publication exception, and consequences for subsequent non-exempt commercial use. A \u00a7503.001 violation also violates TRAIGA \u00a7552.054(c).",
       "articleLocations": [
         "privacy-and-biometrics"
       ],
@@ -237,7 +237,7 @@
           "effectiveDate": "2026-01-01"
         }
       ],
-      "qualification": "Biometric identifier in §503.001 differs from biometric data in Chapters 541/552. The individual-publication exception is not described as unconditional permission for any biometric processing. Subsequent-use clause specifically mentions possession, destruction and penalties.",
+      "qualification": "Biometric identifier in \u00a7503.001 differs from biometric data in Chapters 541/552. The individual-publication exception is not described as unconditional permission for any biometric processing. Subsequent-use clause specifically mentions possession, destruction and penalties.",
       "updateTriggers": [
         "Biometric amendments",
         "AG or court interpretation of unique identification or subsequent use",
@@ -246,14 +246,14 @@
     },
     {
       "id": "ai-11",
-      "claim": "The AG has principal/exclusive Chapter 552 enforcement subject to the licensing-agency provision; there is no private right of action under the chapter. A qualifying online complaint can lead to a civil investigative demand for the categories of information listed in §552.103.",
+      "claim": "The AG has principal/exclusive Chapter 552 enforcement subject to the licensing-agency provision; there is no private right of action under the chapter. A qualifying online complaint can lead to a civil investigative demand for the categories of information listed in \u00a7552.103.",
       "articleLocations": [
         "enforcement"
       ],
       "status": "enacted and effective; official complaint link observed",
       "sourceId": "ai-protection",
       "primaryUrl": "https://tcss.legis.texas.gov/resources/BC/htm/BC.552.htm",
-      "pinpoint": "Sections 552.101–.103 and 552.106",
+      "pinpoint": "Sections 552.101\u2013.103 and 552.106",
       "sourceDate": "2026-01-01",
       "dateType": "Effective date",
       "additionalAuthorities": [
@@ -273,20 +273,20 @@
     },
     {
       "id": "ai-12",
-      "claim": "TRAIGA has a 60-day notice/cure framework and statutory penalties of $10,000–$12,000 for each court-determined curable violation or statement breach, $80,000–$200,000 for each uncurable violation, and $2,000–$40,000 per continued-violation day. Licensing sanctions require a violation finding and AG recommendation and may include up to $100,000. TDPSA uses a separate 30-day cure and up to $7,500 per violation.",
+      "claim": "TRAIGA has a 60-day notice/cure framework and statutory penalties of $10,000\u2013$12,000 for each court-determined curable violation or statement breach, $80,000\u2013$200,000 for each uncurable violation, and $2,000\u2013$40,000 per continued-violation day. Licensing sanctions require a violation finding and AG recommendation and may include up to $100,000. TDPSA uses a separate 30-day cure and up to $7,500 per violation.",
       "articleLocations": [
         "enforcement"
       ],
       "status": "enacted and effective",
       "sourceId": "ai-protection",
       "primaryUrl": "https://tcss.legis.texas.gov/resources/BC/htm/BC.552.htm",
-      "pinpoint": "Sections 552.104, 552.105(a)–(b) and 552.106",
+      "pinpoint": "Sections 552.104, 552.105(a)\u2013(b) and 552.106",
       "sourceDate": "2026-01-01",
       "dateType": "Effective date",
       "additionalAuthorities": [
         {
           "primaryUrl": "https://tcss.legis.texas.gov/resources/BC/htm/BC.541.htm",
-          "pinpoint": "Sections 541.154–.155",
+          "pinpoint": "Sections 541.154\u2013.155",
           "effectiveDate": "2024-07-01"
         }
       ],
@@ -299,7 +299,7 @@
     },
     {
       "id": "ai-13",
-      "claim": "TRAIGA's liability provisions address another person's prohibited use, discovery through specified processes, a rebuttable reasonable-care presumption, and no civil-penalty action under §552.105 for a system not deployed. Framework compliance alone does not establish the statutory discovery condition.",
+      "claim": "TRAIGA's liability provisions address another person's prohibited use, discovery through specified processes, a rebuttable reasonable-care presumption, and no civil-penalty action under \u00a7552.105 for a system not deployed. Framework compliance alone does not establish the statutory discovery condition.",
       "articleLocations": [
         "enforcement",
         "faqs.2"
@@ -307,7 +307,7 @@
       "status": "enacted and effective; framework conclusion is textual interpretation",
       "sourceId": "ai-protection",
       "primaryUrl": "https://tcss.legis.texas.gov/resources/BC/htm/BC.552.htm",
-      "pinpoint": "Section 552.105(c)–(f)",
+      "pinpoint": "Section 552.105(c)\u2013(f)",
       "sourceDate": "2026-01-01",
       "dateType": "Effective date",
       "qualification": "Section 552.105(e)(2)(D) ties substantial recognized-framework compliance to an internal review process discovering a violation. No blanket NIST immunity claim, no assertion that adopting an untested policy establishes substantial compliance, and no claim of a judicial ruling on these defenses.",
@@ -371,6 +371,20 @@
         "Texas-relevant final court order",
         "Material federal policy or litigation development"
       ]
+    },
+    {
+      "id": "employment-is-not-biometric-permission",
+      "claim": "TDPSA\u2019s employment-context exclusion does not determine separately applicable CUBI/TRAIGA duties for an employee face-identification workflow.",
+      "status": "statutory scope analysis for a hypothetical use",
+      "qualification": "Actual identifier, capture/purpose, unique identification and security/fraud exceptions must be assessed; no universal classification or logging requirement asserted.",
+      "sources": [
+        {
+          "url": "https://tcss.legis.texas.gov/resources/BC/htm/BC.503.htm",
+          "date": "Content reviewed 2026-10-13",
+          "pinpoint": "\u00a7503.001(a)\u2013(c),(e)\u2013(f); compare \u00a7541.001(7) and \u00a7552.054(c)"
+        }
+      ],
+      "recheck": "Governing provision, actual contract, input cohort or operating evidence changes."
     }
   ],
   "remainingUncertainty": [
@@ -378,5 +392,10 @@
     "No comprehensive federal preemption or court-docket determination was made. The March 20 proposal is identified accurately without claiming that it resolves later legal developments.",
     "Intent, qualifying discovery processes, healthcare deployment scope, and controller/processor role can require fact-specific legal interpretation. This article cites statutory text and current guidance, not purported precedent resolving those questions.",
     "Undated AG and DIR pages carry the observation date rather than a fabricated publication date. Future revisions should compare the text, not rely solely on the page URL."
-  ]
+  ],
+  "revisionReview": {
+    "date": "2026-10-13",
+    "scope": "actual privacy/biometric scope applied to a distinct employee workflow and proportionate deployment evidence",
+    "originalSourceDatesPreserved": true
+  }
 }

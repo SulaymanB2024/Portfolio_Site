@@ -1,0 +1,55 @@
+{
+  "cutoff": "2026-10-13",
+  "scope": "Focused minimum-billing implementation research; no article/source edits",
+  "conclusion": "Verified: \u00a725.194 is adopted/effective and requires SLLIA acknowledgment of minimum billing under \u00a725.193. Verified: the Project 58000 large-load minimum-billing treatment in the July 24 Texas Register is proposed. No later adopted \u00a725.193 body or effective date was verified. Treat numerical/duration/start-of-billing terms as proposed, and the October 13 current status as pending/not verified adopted rather than claiming an operative charge.",
+  "currentStatusConfidence": "Primary bodies establish proposal versus cross-reference distinction; exhaustive October 13 docket/current-code verification unavailable because official current endpoints blocked access.",
+  "primaryEvidence": [
+    {
+      "url": "https://www.sos.texas.gov/texreg/archive/July242026/Proposed%20Rules/16.ECONOMIC%20REGULATION.html",
+      "date": "2026-07-24",
+      "pinpoint": "Introductory proposal; Project 58000 comments and questions; proposed \u00a725.193(d)(2)-(3); filing TRD-202602812",
+      "status": "proposed",
+      "details": "Proposes greatest-of contracted peak/prior-year NCP/12CP minimum demand, commencement at available service irrespective of energization or full utilization, and no less than 20 years. Filed July 9; earliest possible adoption August 23 is not adoption/effective date."
+    },
+    {
+      "url": "https://www.sos.texas.gov/texreg/archive/July242026/Proposed%20Rules/16.ECONOMIC%20REGULATION.html",
+      "date": "2026-07-24",
+      "pinpoint": "proposed \u00a725.252(c)(3), (e)(1)-(2), (f); TRD-202602813",
+      "status": "proposed",
+      "details": "Proposes at-least-20-year agreement, billing first cycle after capacity available, 240 consecutive payments, and tariff compliance filing within 30 days of adoption. These proposed tariff provisions are not proof of utility implementation."
+    },
+    {
+      "url": "https://www.sos.texas.gov/texreg/archive/October22026/Adopted%20Rules/16.ECONOMIC%20REGULATION.html",
+      "date": "2026-10-02",
+      "pinpoint": "Minimum transmission/minimum demand charge Commission Response (51 TexReg 6879); \u00a725.194(f)(2)(B)(ii), (f)(2)(D), (f)(3)(A)(iii)(V), (f)(3)(C); effective-date notice",
+      "status": "adopted; effective 2026-10-08",
+      "details": "Commission expressly assigns charge details to Project 58000; operative \u00a725.194 requires acknowledgment, allows related additional security, includes billing obligation among outstanding amounts, and links staged security return to agreement milestones. It supplies no charge amount or duration itself."
+    }
+  ],
+  "materialConflicts": [
+    "Adopted \u00a725.194 cross-references \u00a725.193 while its response explicitly defers charge details to Project 58000. Do not convert that reference into adoption of the July proposal.",
+    "Secondary summaries sometimes describe Commission approval without distinguishing proposal-for-publication from adoption. No such summary overrides the official Proposed Rules label.",
+    "July proposed \u00a725.193 says no less than 20 years while proposed \u00a725.252 specifies first 20 years/240 payments. Both remain proposal terms; avoid choosing a final duration from them."
+  ],
+  "blockedPrimaryChecks": [
+    {
+      "url": "https://interchange.puc.texas.gov/search/filings/?ControlNumber=58000",
+      "result": "web fetch 402; direct HTTP 403"
+    },
+    {
+      "url": "https://www.puc.texas.gov/agency/rulesnlaws/subrules/electric/25.193/25.193.pdf",
+      "result": "web inaccessible; direct HTTP 403"
+    },
+    {
+      "url": "https://www.sos.texas.gov/texreg/archive/October92026/Adopted%20Rules/16.ECONOMIC%20REGULATION.html",
+      "result": "web inaccessible; direct HTTP 403"
+    },
+    {
+      "url": "https://interchange.puc.texas.gov/Documents/58317_69_1685516.PDF",
+      "result": "September 22 implementation-roadmap lead discovered through linked secondary source; actual primary body 403, so its claimed December schedule is not adopted as evidence"
+    }
+  ],
+  "supportedReaderImplication": "The adopted interconnection rule makes minimum billing and related security part of diligence, but a business cannot price a recurring bill, minimum-demand duration, or security-release calendar from \u00a725.194 alone. Obtain the final applicable \u00a725.193 treatment, approved tariff, and actual SLLIA terms before modeling a ramp or exit.",
+  "recommendedArticleQualification": "The adopted SLLIA provisions anticipate minimum billing under \u00a725.193; the July transmission-cost-recovery proposal supplies proposed terms, not a verified effective minimum charge or duration. Keep actual billing and collateral release subject to the applicable final rule, tariff and agreement.",
+  "nextVerification": "Inspect complete Project 58000 docket through October 13 and latest official \u00a725.193/current-code history; retrieve any adoption order and TexReg effective-date notice. Verify utility tariff/SLLIA separately; do not infer private terms."
+}

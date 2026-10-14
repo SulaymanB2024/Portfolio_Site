@@ -21,13 +21,13 @@
   "dateModified": "2026-10-13",
   "author": "Sulayman Bowles",
   "kind": "research",
-  "readTime": "9 MIN",
+  "readTime": "11 MIN",
   "openingPresentation": "integrated",
-  "evidenceBoundary": "Public-source research checked October 12, 2026. Operator guidance establishes stated access rules, not live vehicle supply, a private corporate contract, a quoted fare or guaranteed arrival. Cost and fallback examples are hypothetical; no first-hand ride or comparative safety result is claimed.",
+  "evidenceBoundary": "Access and payment research checked October 12, 2026; NTSB Austin oversight record and economic thresholds reviewed October 13. Individual source dates remain visible. No live supply, corporate contract, quoted fare, first-hand ride or comparative safety result is claimed. Cost and fallback inputs are hypothetical.",
   "content": [
-    "A sales visit can require three different journeys: the airport transfer, the hotel-to-client trip and the ride back after dinner. A robotaxi available for the middle leg does not establish transport for the other two. The useful question for a Texas business traveler is whether Waymo can complete the actual itinerary, through the right account, with enough time left when the first option fails.",
+    "A sales visit has several transport decisions: the airport transfer, hotel-to-client trip and ride back after dinner. Approve each Waymo leg against the traveler’s account, supported route and pickup arrangement. Then leave enough time and a reachable alternative to protect the appointment if the request fails.",
     "Waymo opened Dallas to all riders on August 4, 2026, and Houston on August 20. Austin uses a different arrangement: riders request an eligible Uber trip and may receive a Waymo match. Current Waymo Help still describes San Antonio as gradually adding riders. These are different access conditions, even though all four cities appear in Waymo’s Texas service story. [Dallas opening](#source-dallas-open), [Houston opening](#source-houston-open), [current access guidance](#source-service-areas).",
-    "For a travel manager, the practical unit is an eligible, completed trip. Establish the pickup and destination, rider access, booking channel, party requirements and fallback before deciding where autonomous rides belong in the travel policy. Then compare the total journey cost with alternatives that can serve the same requirement."
+    "The reviewed evidence supports considering Dallas/Houston direct-app local trips, eligible Austin Uber matches and SAT service for already admitted San Antonio riders. It does not establish that any visitor can complete an entire airport-to-client itinerary autonomously. Price the supported legs together with the transfers and fallback they require."
   ],
   "sections": [
     {
@@ -97,7 +97,8 @@
         "Uber’s July guidance says a traveler accepting a Waymo match pays the same price as the requested eligible Uber product would have charged for a driver match. That comparison is within the selected booking product. It does not establish that every Texas Waymo trip is cheaper than another service, or that prices remain fixed between requests. [Uber pricing explanation](#source-uber-price).",
         "For direct Waymo bookings, the help page points travelers to a current in-app estimate and lists factors including route distance, duration, demand and applicable fees. Do not transplant its published Las Vegas pricing into a Dallas budget. Compare contemporaneous estimates for the same endpoints, time and passenger requirement. [Pricing guidance](#source-pricing).",
         "Consider a hypothetical month with 200 eligible local trips, one employee on each. Assume a direct-booked autonomous option costs $24 a trip with eight minutes of paid waiting and walking, while an alternative costs $29 with two such minutes. Value employee time at $60 an hour, or $1 a minute. These are invented inputs for an operating decision, not Waymo fares or measured wait times.",
-        "The lower fare saves $1,000 in cash across the example month, but six additional minutes per trip consume 20 employee hours, valued here at $1,200. The autonomous option’s combined fare and time cost is $200 higher. This allocated time value is not automatically a payroll saving or loss; use it only where that time has a meaningful business cost."
+        "The lower fare saves $1,000 in cash across the example month, but six additional minutes per trip consume 20 employee hours, valued here at $1,200. The autonomous option’s combined fare and time cost is $200 higher. This allocated time value is not automatically a payroll saving or loss; use it only where that time has a meaningful business cost.",
+        "The reusable threshold is $5 divided by six extra minutes: a break-even time value of $50 per employee-hour. Above $50, the autonomous option costs more on these inputs before any fallback; below it, remaining savings can absorb some exceptions. This is a decision rule from invented fares and times, not a Texas wage estimate. Changing either quoted fare or the time difference changes the threshold."
       ],
       "table": {
         "caption": "Illustrative fare savings can be outweighed by extra time",
@@ -151,7 +152,7 @@
       "title": "Cost the failed request without inventing its frequency",
       "paragraphs": [
         "Now suppose 40 of the 200 planned journeys require a conventional fallback after an unavailable or failed AV request. Assume each fallback journey incurs only a $38 conventional fare, with no AV charge, and 20 total paid minutes of waiting, walking and coordination across the failed request and fallback. At $60 an hour that journey costs $58. The 20 minutes replace the base case’s eight minutes; they are not additional to them. No observed failure rate or provider refund rule is estimated. The other 160 journeys retain the $32 combined cost. Total cost is 160 × $32 + 40 × $58 = $7,440, or $1,240 above the all-alternative comparison.",
-        "The assumed 20% fallback share is a sensitivity, not a measured Waymo failure rate or a prediction. A live travel pilot should establish its own denominator, including unsuccessful requests. The calculation shows why a price advantage on completed rides cannot alone justify changing a transport policy.",
+        "The fallback sensitivity still spends only $5,360 on fares, $440 below the alternative’s $5,800. But it uses 2,080 minutes of waiting, walking and coordination, valued at $2,080, versus $400 for the alternative. The $1,240 combined disadvantage is chiefly time exposure, not $1,240 of extra cash travel spending. The assumed 20% fallback share is not a measured Waymo failure rate; retain failed requests when measuring a real pilot.",
         "Deadline exposure needs another decision. A missed customer appointment and a late return to the hotel have different consequences even if their fares match. Set a latest-switch time for critical journeys and test whether the fallback can still meet it. Keep any missed-meeting cost separate unless the business has evidence for its frequency and value."
       ]
     },
@@ -165,16 +166,28 @@
       ]
     },
     {
+      "id": "itinerary-approval",
+      "title": "Give the traveler a usable departure plan",
+      "paragraphs": [
+        "Consider an illustrative employee staying at a hotel before a timed client meeting. Confirm the app and account first, then the supported pickup entrance and destination. Work backward from the appointment through walking, pickup, the offered route and the employer’s arrival buffer. Set the latest switch time from a usable alternative’s pickup and travel estimate. This is a suggested planning method; it assumes no particular provider’s availability.",
+        "Record the approved journey with the traveler’s booking channel, payment profile and receipt process. For Austin, that means the applicable Uber arrangement; for a direct Waymo-app journey, check the Waymo profile. An employer benefit belongs in the estimate only after eligibility is confirmed. [Business profiles](#source-business-profile).",
+        "Give the employee the alternate contact or booking method before departure. If the AV request fails, log the original request, the substitute trip and actual elapsed time. Finance can then distinguish a fare saving from a subsidy, extra employee time or a second transport charge.",
+        "A separate, hypothetical timetable shows how the switch deadline works. For a 10 a.m. meeting, allow an assumed 10 minutes for the alternative’s pickup, 25 minutes for travel and 10 minutes for final access and the arrival buffer. Those 45 minutes put the latest switch at 9:15 a.m. Replace them with the traveler’s current estimates; these are invented planning inputs, independent of the fare comparison above."
+      ]
+    },
+    {
       "id": "travel-pilot",
       "title": "Make a bounded travel decision",
       "paragraphs": [
-        "Start with a defined class of journeys: for example, noncritical local trips between approved offices and hotels, with an available fallback. Evaluate actual trips in that class before applying the result to airport transfers, customer events or every employee. This preserves a useful experiment while keeping its conclusion tied to what was observed."
+        "Start with a defined class of journeys: for example, noncritical local trips between approved offices and hotels, with an available fallback. Evaluate actual trips in that class before applying the result to airport transfers, customer events or every employee. This preserves a useful experiment while keeping its conclusion tied to what was observed.",
+        "One specific public record belongs in that decision. NTSB’s preliminary January 12 Austin school-bus account describes an incorrect remote-assistance response followed by a Waymo vehicle passing the stopped bus; no crash occurred. The page remained ongoing on October 13. Ask what current corrective evidence and remote-support procedure apply to the purchased service. The account does not establish final probable cause, a present defect or comparative risk. [Preliminary investigation](#source-austin-school-bus)."
       ],
       "bullets": [
         "Confirm both endpoints, the traveler’s ride access and the correct booking channel before departure.",
         "Record the requested trip, offer, completed journey, fare, total elapsed time and any fallback; retain unsuccessful requests in the denominator.",
         "Check party size, luggage, walking needs, boarding assistance and the usable pickup entrance.",
         "Validate the payment profile and any employer program independently of vehicle availability.",
+        "Review material local oversight records, the applicable corrective evidence and remote-support role; distinguish preliminary findings from final conclusions.",
         "Set a deadline for switching providers, with a responsible person and a reachable alternative.",
         "Recheck published access, airport and route guidance when planning a trip; update the policy when those rules materially change."
       ]
@@ -287,6 +300,15 @@
       "date": "Undated current program page",
       "note": "Named markets in the public program description do not include Texas at review. An Other city inquiry option does not establish a contract or local program eligibility.",
       "lastVerified": "2026-10-12"
+    },
+    {
+      "id": "austin-school-bus",
+      "label": "NTSB preliminary Austin school-bus investigation",
+      "href": "https://www.ntsb.gov/investigations/Pages/HWY26FH007.aspx",
+      "publisher": "National Transportation Safety Board",
+      "date": "Event 2026-01-12; preliminary release 2026-03-03",
+      "lastVerified": "2026-10-13",
+      "note": "HWY26FH007: preliminary narrative says no crash; remote-assistance response preceded passing. Status observed Ongoing October 13. No final probable cause, current defect persistence or comparative failure rate established."
     }
   ],
   "faqs": [
@@ -314,8 +336,8 @@
   "resources": [
     {
       "label": "Texas autonomous mobility source and decision ledger",
-      "href": "/research/texas-autonomy-library-2026-10-13.json",
-      "description": "Primary evidence, declared scenarios and update triggers for the Texas autonomy edition.",
+      "href": "/research/texas-research-library-2026-10-13.json",
+      "description": "Primary evidence, declared assumptions and update triggers across the Texas business and autonomy library.",
       "format": "JSON"
     }
   ],

@@ -87,7 +87,7 @@
     },
     {
       "id": "manufacturing-04",
-      "claim": "TI 28nm–130nm processes serve analog and embedded products",
+      "claim": "TI 28nm\u2013130nm processes serve analog and embedded products",
       "sourceId": "ti-capital",
       "primaryUrl": "https://investor.ti.com/static-files/8c327c57-cd94-439d-a276-ef7cffcdc438",
       "sourceDate": "2026-02-24",
@@ -183,6 +183,28 @@
       "pinpoint": "Award scope and disbursement paragraphs; updated 2025-10-06",
       "status": "archived historical final award notice",
       "qualification": "Not a current funding balance, procurement allocation or proof of delivered output."
+    },
+    {
+      "id": "customer-financing-access",
+      "claim": "Micron\u2019s July 9 proposal links planned $500M Sherman financing to a ten-year raw-wafer supply relationship, expressly conditional on definitive agreements, approvals and closing.",
+      "status": "dated issuer proposal; targeted primary content review",
+      "qualification": "August issuer account does not establish paid/closed cash, uncommitted capacity or another buyer\u2019s allocation.",
+      "sources": [
+        {
+          "url": "https://micron.gcs-web.com/news-releases/news-release-details/micron-announces-3-billion-strategic-investment-strengthen-us",
+          "date": "Content reviewed 2026-10-13",
+          "pinpoint": "Financing and ten-year supply paragraphs; proposed-transaction conditions"
+        }
+      ],
+      "recheck": "Governing provision, actual contract, input cohort or operating evidence changes."
+    },
+    {
+      "id": "supply-allocation-threshold",
+      "claim": "Declared demand requires 94.1176% assembly/test yield at 25% allocation, or 24.7678% allocation at 95% yield, leaving 0.2322 percentage points allocation headroom.",
+      "status": "calculated hypothetical",
+      "qualification": "Same demand and other inputs held fixed; percentages and percentage-point differences kept separate. No actual factory yield or allocation inferred.",
+      "sources": [],
+      "recheck": "Governing provision, actual contract, input cohort or operating evidence changes."
     }
   ],
   "calculations": [
@@ -201,14 +223,14 @@
         "assumedLostContributionPerAssemblyUSD": 100
       },
       "formulas": [
-        "grossDie = monthlyCompletedWafers × grossDiePerWafer",
-        "functionalDie = grossDie × functionalYield",
-        "testedComponents = functionalDie × assemblyTestYield",
-        "buyerComponents = testedComponents × buyerAllocation",
-        "requiredComponents = monthlyFinishedAssemblyDemand × componentsPerAssembly",
-        "bufferPercent = (buyerComponents − requiredComponents) ÷ requiredComponents × 100",
-        "completeAssemblies = floor(buyerComponents ÷ componentsPerAssembly)",
-        "lostContribution = (monthlyFinishedAssemblyDemand − sensitivityCompleteAssemblies) × assumedLostContributionPerAssemblyUSD"
+        "grossDie = monthlyCompletedWafers \u00d7 grossDiePerWafer",
+        "functionalDie = grossDie \u00d7 functionalYield",
+        "testedComponents = functionalDie \u00d7 assemblyTestYield",
+        "buyerComponents = testedComponents \u00d7 buyerAllocation",
+        "requiredComponents = monthlyFinishedAssemblyDemand \u00d7 componentsPerAssembly",
+        "bufferPercent = (buyerComponents \u2212 requiredComponents) \u00f7 requiredComponents \u00d7 100",
+        "completeAssemblies = floor(buyerComponents \u00f7 componentsPerAssembly)",
+        "lostContribution = (monthlyFinishedAssemblyDemand \u2212 sensitivityCompleteAssemblies) \u00d7 assumedLostContributionPerAssemblyUSD"
       ],
       "results": {
         "grossDie": 200000,
@@ -223,7 +245,10 @@
         "sensitivityComponentShortfall": 50,
         "sensitivityCompleteAssemblies": 19975,
         "sensitivityAssemblyShortfall": 25,
-        "sensitivityLostContributionUSD": 2500
+        "sensitivityLostContributionUSD": 2500,
+        "requiredAssemblyTestYield": 0.9411764705882353,
+        "requiredAllocationShare": 0.2476780185758514,
+        "allocationReductionHeadroomPercentagePoints": 0.23219814241486
       },
       "boundaries": [
         "Completed wafers, not starts; steady monthly flow after cycle time; expected quantities rather than a production guarantee.",
@@ -268,5 +293,10 @@
     "Samsung October release has inconsistent employment totals; no employment figure is used.",
     "Some Samsung direct-open attempts timed out; the primary indexed October 7 statement and its full report-scope/outlook text were read. The linked full economic-impact PDF was not needed or used.",
     "Historical NIST award notices are archived and do not establish current cash receipts or amendment status."
-  ]
+  ],
+  "revisionReview": {
+    "date": "2026-10-13",
+    "scope": "conditional named customer-financing mechanism and yield/allocation thresholds",
+    "originalSourceDatesPreserved": true
+  }
 }

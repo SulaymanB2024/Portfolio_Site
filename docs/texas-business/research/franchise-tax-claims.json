@@ -3,7 +3,7 @@
   "checkedAt": "2026-10-12",
   "claims": [
     {
-      "claim": "2026–2027 no-tax-due threshold $2.65M; ordinary and retail/wholesale rates 0.75% and 0.375%; EZ threshold $20M and rate0.331%",
+      "claim": "2026\u20132027 no-tax-due threshold $2.65M; ordinary and retail/wholesale rates 0.75% and 0.375%; EZ threshold $20M and rate0.331%",
       "source": "https://comptroller.texas.gov/taxes/franchise/",
       "locator": "Tax rates, thresholds and deduction limits table",
       "status": "Current report-year guidance",
@@ -71,6 +71,19 @@
       "locator": "Taxable entity that does not owe franchise tax; Due Date",
       "status": "Agency stated cutoff; actual calendar-adjusted taxpayer deadline not independently determined",
       "recheck": "Form, instructions, underlying period or calendar-date clarification"
+    },
+    {
+      "id": "deduction-choice-threshold",
+      "claim": "On the declared $12M/75%/0.75% assumptions, allowable compensation must exceed $6.704M for lower long-form tax, or $7.095111M including $2,200 extra preparation and no credit.",
+      "status": "calculated hypothetical",
+      "qualification": "All other assumptions fixed; deduction eligibility, other margin choices and credits remain separate. No taxpayer computation validated.",
+      "sources": [],
+      "recheck": "Governing provision, actual contract, input cohort or operating evidence changes."
     }
-  ]
+  ],
+  "revisionReview": {
+    "date": "2026-10-13",
+    "scope": "allowable-deduction sensitivity and explicit 2026 scope for the credit constraint",
+    "originalSourceDatesPreserved": true
+  }
 }

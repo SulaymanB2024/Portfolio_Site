@@ -17,14 +17,14 @@
     "facility insurance diligence"
   ],
   "date": "2026-10-12",
-  "dateModified": "2026-10-12",
+  "dateModified": "2026-10-13",
   "author": "Sulayman Bowles",
   "kind": "research",
-  "readTime": "10 MIN",
+  "readTime": "11 MIN",
   "openingPresentation": "integrated",
-  "evidenceBoundary": "Primary insurance guidance, public filing records and sample commercial forms verified October 12, 2026. No actual facility, insurer quotation or claim outcome was verified. Hypothetical prices and losses are not commercial market estimates; residential data is not used to infer commercial premiums.",
+  "evidenceBoundary": "Primary insurance guidance, public filing records and sample commercial forms verified October 12, 2026. No actual facility, insurer quotation or claim outcome was verified. Hypothetical prices and losses are not commercial market estimates; residential data is not used to infer commercial premiums. Targeted October 13 revision: actual repair-versus-revenue coverage boundary and declared retained-loss sensitivities. Original source-check dates remain attached to the individual references.",
   "content": [
-    "A commercial-property quote becomes useful when a business can explain what happens after a specific loss. Which property is damaged? What caused it? How is the damage valued? What portion stays with the business, and what pays while operations are suspended? The premium is only one input to that sequence.",
+    "Compare commercial-property policies through the loss the business has to survive. Identify the damaged property, cause, valuation, retained cost and funding while operations recover. Read the premium alongside that sequence so a cheaper quote does not conceal a larger demand on the company’s cash.",
     "A current Texas development shows why the distinction matters. TWIA’s board voted August 4, 2026 to file no rate change for 2027, and TDI lists the commercial filing as File and Use. That is evidence about one wind-and-hail insurer’s filing, not a promise that a facility’s total premium stays flat or that its recovery needs are covered. [Board action](#source-rate-action); [commercial filing record](#source-rate-register).",
     "For a purchase, lease or renewal, compare policies against the same asset inventory and loss scenarios. The stronger insurance decision connects coverage to the business’s ability to recover, with enough liquidity for the exposures it retains."
   ],
@@ -151,7 +151,7 @@
       "title": "Price retained loss without inventing an expected-loss estimate",
       "paragraphs": [
         "Quote A saves $30,000 annually while retaining $260,000 more in the modeled event. That additional retention equals about 8.7 years of the premium difference. It does not prove Quote B is better: no probability of loss, financing cost or alternate use of cash has been estimated. The comparison reveals the decision that a premium-only table hides.",
-        "Test smaller and larger losses as well. A loss below a deductible, an excluded cause and a loss above a sublimit produce different outcomes. Retained exposure can also accumulate across sites or events. Ask finance what liquidity is available at the same time a facility is losing income and paying recovery expenses.",
+        "For an otherwise covered loss within the same modeled limits, simple retained damage is the lesser of loss and deductible. At a $200,000 loss, A retains $200,000 and B $100,000; at the original $600,000 loss, A retains $360,000 and B $100,000. Exclusions, limits and other actual terms can change this function. The 8.7-year premium arithmetic is not a payback period or expected-loss decision; use the event distribution and available cash before choosing.",
         "Risk reduction belongs in the comparison. A roof improvement, drainage work, fire protection or protected placement of critical equipment could change physical damage or interruption consequences. Obtain evidence about the measure and ask how the insurer treats it. Do not book a discount or a reduction in event probability solely because an improvement appears in a plan.",
         "The insurance and operating decisions should meet at one recovery schedule. Identify equipment lead times, repair access, qualification testing, inventory replacement and customer restart requirements. Coverage needs to be assessed against that sequence, not merely the date when walls and a roof are repaired."
       ]
@@ -163,7 +163,8 @@
         "TDI describes business-interruption coverage as generally following direct physical loss or damage from a covered peril, with policy wording controlling. Contingent interruption and civil-authority extensions have their own conditions. A supplier delay, government order or undamaged facility without power does not by itself establish a covered business-income claim. [Interruption guidance](#source-business-income).",
         "TWIA’s currently linked TWIA-17 endorsement gives a concrete commercial example. It connects suspension to covered wind or hail damage at specified property, uses scheduled daily and total limits, and includes a 168-hour time deductible. Its extra-expense maximum is $10,000. The form is effective November 27, 2011 and remains in the current catalogue; it is not a new 2026 rule or proof that any policy includes the endorsement. [TWIA-17](#source-income-endorsement). The form waives another time deductible for a subsequent covered loss while the prior restoration continues, but applies a new one after the earlier restoration ends. Match that rule to the actual event sequence.",
         "A 168-hour waiting period is seven days. For an illustrative business operating every day and losing an assumed $8,000 daily contribution during that period, the exposure is $56,000. This is a cash-flow sensitivity, not a claim calculation: policy definitions, working days, limits, mitigation and actual financial evidence determine any payment. Compare temporary-operation costs with the separate extra-expense limit as well.",
-        "Identify the income being insured and the records supporting it. Sales alone are not the recovery measure. The TWIA form defines business income using net income and continuing normal operating expenses. Ask the adviser to reconcile the coverage basis with payroll, saved expenses, seasonality and the restoration schedule. [Income definition](#source-income-endorsement).",
+        "Repair and revenue recovery are separate clocks. TWIA-17’s restoration definition ends when property is repaired/replaced or should have been repaired with reasonable speed; section D also uses the earliest applicable cessation condition and limit. Its contract suspension/lapse/cancellation exclusion can cut off losses extending beyond when operations could resume. Fourteen assumed extra days of weak production or demand at $8,000 contribution per day adds $112,000 of operating exposure. Revenue remaining low alone does not establish payment for that tail. [Sections C, D and H](#source-income-endorsement).",
+        "Identify the income actually insured. The form defines business income through net income and continuing normal operating expenses, rather than sales alone. Reconcile payroll, saved expenses, working days, mitigation, limits and the repair timeline with the issued endorsement. The illustrative contribution figures are operating sensitivities, not that reconciliation. [Income definition](#source-income-endorsement).",
         "For grid and water interruptions, connect the policy review with the facility’s own operating plan. Insurance can complement backup, alternate sourcing and safe shutdown, but coverage should not be assumed for a contractual curtailment. The [Texas power investigation](/research/texas/texas-power-large-load-business-diligence) explains why interruption restrictions need separate diligence."
       ]
     },
@@ -275,7 +276,7 @@
       "href": "https://www.twia.org/wp-content/uploads/Business_Income_and_Extra_Expense_Form_2011.11.pdf",
       "publisher": "Texas Windstorm Insurance Association / Texas Department of Insurance",
       "date": "Effective 2011-11-27; currently linked",
-      "lastVerified": "2026-10-12",
+      "lastVerified": "2026-10-13",
       "note": "Scheduled daily/total limits, 168-hour time deductible, $10,000 extra-expense maximum and income definition. A form-specific example, not universal Texas coverage."
     },
     {
@@ -319,8 +320,8 @@
   "resources": [
     {
       "label": "Texas business source and decision ledger",
-      "href": "/research/texas-business-library-2026-10-12.json",
-      "description": "Primary evidence, declared assumptions and update triggers across the Texas business library.",
+      "href": "/research/texas-research-library-2026-10-13.json",
+      "description": "Primary evidence, declared assumptions and update triggers across the Texas business and autonomy library.",
       "format": "JSON"
     }
   ]

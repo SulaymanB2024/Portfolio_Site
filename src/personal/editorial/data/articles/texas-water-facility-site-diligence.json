@@ -17,14 +17,14 @@
     "water site selection"
   ],
   "date": "2026-10-12",
-  "dateModified": "2026-10-12",
+  "dateModified": "2026-10-13",
   "author": "Sulayman Bowles",
   "kind": "research",
   "readTime": "10 MIN",
   "openingPresentation": "integrated",
-  "evidenceBoundary": "Public-source research verified October 12, 2026. No particular facility’s water right, supplier commitment, well performance, treatment design or permit outcome was verified. Site comparisons and financial inputs are explicitly hypothetical.",
+  "evidenceBoundary": "Public-source research verified October 12, 2026. No particular facility’s water right, supplier commitment, well performance, treatment design or permit outcome was verified. Site comparisons and financial inputs are explicitly hypothetical. Targeted October 13 revision: storage/refill sequence and a marginal interruption-loss boundary; no new local supply measurement. Original source-check dates remain attached to the individual references.",
   "content": [
-    "An annual water allocation can look sufficient while a factory cannot run through its busiest day. A nearby reservoir can look reassuring while the supplier lacks the right, treatment capacity or contractual obligation to deliver the facility’s requirement. Water diligence has to follow the supply all the way to the process that consumes it.",
+    "A water-dependent facility needs a supply that can carry its busiest operating period. Annual volume is a starting point; the hard questions are peak delivery, usable storage, treatment and recovery after a shortage. Follow the water from the legal source to the process that consumes it, then test how that chain behaves on a difficult day.",
     "Texas adopted the initial 2027 State Water Plan on July 23, 2026. Its enhanced amendment remained proposed at this review: comments closed September 25, and consideration of adoption was tentatively scheduled for December. That distinction matters when a business cites a planning project as support for a near-term opening. A strategy in the plan is useful evidence to investigate, but it is not a completed supply commitment. [Current plan status](#source-plan-status).",
     "For a Texas manufacturing, computing or other water-dependent facility, the decision is whether the full supply arrangement can support the operating plan under ordinary conditions and the relevant shortage scenario. Start with the legal source, then test the contract, physical delivery, quality and interruption consequences."
   ],
@@ -105,7 +105,7 @@
       "paragraphs": [
         "Consider a hypothetical facility averaging 300,000 gallons a day over a 365-day year, with a peak-day requirement of 600,000 gallons. Annual use is 109.5 million gallons. Assume that two suppliers offer the annual quantities and daily limits below, both at the quality the process requires. The limits, prices and storage are invented comparison inputs, not quotations from Texas utilities.",
         "Both annual offers exceed the assumed annual requirement. Site A’s assumed daily delivery falls 200,000 gallons short on a peak day. With 400,000 gallons of usable storage dedicated to that gap, it could cover two consecutive such days if delivery continues at 400,000 gallons per day. That calculation does not establish fire reserve, pressure, pump capacity, treatment losses or recovery time.",
-        "If demand returns to 300,000 gallons per day while delivery stays at 400,000, the depleted 400,000-gallon reserve takes four days to refill. A second peak arriving earlier changes the outcome. Write the sequence into the operating case rather than treating tank nameplate as permanent additional supply."
+        "A third consecutive peak day would leave a 200,000-gallon gap after the two-day storage draw. One normal 300,000-gallon day with 400,000-gallon delivery restores only 100,000 gallons; two normal days are needed to cover one further 200,000-gallon peak deficit, and four to refill the reserve completely. A named tank volume cannot replace that sequence. These calculations still exclude fire reserve, treatment losses and instantaneous-flow constraints."
       ],
       "table": {
         "caption": "Illustrative annual sufficiency can conceal a daily constraint",
@@ -160,7 +160,7 @@
       "paragraphs": [
         "TWDB describes drought contingency plans as supplier responses to drought or temporary shortage, separate from long-term planning. A facility should read the current supplier’s plan and its own contract together, then ask which restrictions apply to its customer category. A statewide planning assumption cannot answer that local operational question. [Drought planning](#source-drought).",
         "Run a concrete interruption case: the delivered amount falls, the process slows, a batch must finish safely, and the facility restarts. Identify essential sanitary, process, cooling and fire requirements. Ask engineering which requirements can be reduced without creating another failure. Those dependencies make a percentage curtailment meaningful in dollars, product and time.",
-        "For an illustrative sensitivity, assume ten lost production days reduce contribution by $60,000 per day. The resulting $600,000 exposure is more than seven times the example’s $82,125 annual supply-price difference. It is not an expected loss; no outage probability has been estimated. It shows why a water-price comparison needs the consequence of interruption beside it.",
+        "The $82,125 annual supply-price saving equals only 1.37 production days at an assumed $60,000 of lost contribution per day. An invented ten-day interruption would expose $600,000, but no event probability is supplied. The decision boundary is whether defensible interruption loss plus incremental storage, treatment and capital cost stays below the saving over the same horizon. A cheaper tariff earns no expected-loss advantage until local delivery and operating evidence support it.",
         "A second supplier or well is useful only to the extent it survives the same event. Investigate shared reservoirs, aquifers, power supply, treatment assets and pipeline routes. Backup that depends on the same failed pump or depleted source may change the paperwork more than the operating outcome. Connect the water case to the facility’s [power-availability diligence](/research/texas/texas-power-large-load-business-diligence)."
       ]
     },
@@ -298,8 +298,8 @@
   "resources": [
     {
       "label": "Texas business source and decision ledger",
-      "href": "/research/texas-business-library-2026-10-12.json",
-      "description": "Primary evidence, declared assumptions and update triggers across the Texas business library.",
+      "href": "/research/texas-research-library-2026-10-13.json",
+      "description": "Primary evidence, declared assumptions and update triggers across the Texas business and autonomy library.",
       "format": "JSON"
     }
   ]

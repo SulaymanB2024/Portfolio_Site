@@ -71,9 +71,9 @@
     },
     {
       "id": "avmap-4",
-      "claim": "Current Uber Dallas guidance identifies Avride service north of Trinity River, an onboard specialist able to take control and three rear-seat riders; May’s reviewed Arlington evidence leaves public access unresolved.",
+      "claim": "Current Uber Dallas guidance identifies Avride service north of Trinity River, an onboard specialist able to take control and three rear-seat riders; May\u2019s reviewed Arlington evidence leaves public access unresolved.",
       "status": "current issuer guidance plus unresolved May access",
-      "qualification": "Historical nine-square-mile launch area is separate. Qualifying request and match still need verification; omission from May’s list does not prove no activity.",
+      "qualification": "Historical nine-square-mile launch area is separate. Qualifying request and match still need verification; omission from May\u2019s list does not prove no activity.",
       "sources": [
         {
           "url": "https://www.uber.com/us/en/newsroom/avride-on-uber/",
@@ -124,6 +124,55 @@
       "qualification": "No actual quote, exception rate or vendor choice; original AV charge retained and refunds separate. Fare cash and allocated exception time are shown separately; normal trip time is excluded/held equal.",
       "sources": [],
       "recheck": "Relevant provider access/role/domain change, official record change or actual pilot evidence"
+    },
+    {
+      "id": "avmap-7",
+      "claim": "NTSB\u2019s preliminary January 12 Austin account describes a Waymo vehicle passing a stopped school bus after an incorrect remote-assistance response; no crash occurred. The reviewed page lists the investigation as ongoing.",
+      "status": "preliminary official investigation; status observed 2026-10-13",
+      "qualification": "Not final probable cause, proof a defect persists today, a measured rate or a provider ranking. Remote assistance is advice/information, not automatically remote driving.",
+      "sources": [
+        {
+          "url": "https://www.ntsb.gov/investigations/Pages/HWY26FH007.aspx",
+          "date": "2026-03-03",
+          "pinpoint": "What Happened paragraphs 1\u20138; Investigation Details; footnote 4"
+        }
+      ],
+      "recheck": "Final findings, corrective evidence or applicable operating restrictions change."
+    },
+    {
+      "id": "avmap-8",
+      "claim": "NHTSA announced a Cybercab self-certification audit following Austin commercial deployment on September 4, 2026.",
+      "status": "dated official inquiry opening",
+      "qualification": "Does not establish violation, service suspension or present inquiry status. Underlying technical response and later disposition were not verified.",
+      "sources": [
+        {
+          "url": "https://www.nhtsa.gov/press-releases/investigation-tesla-cybercab-self-certification",
+          "date": "2026-09-04",
+          "pinpoint": "Opening; How It Works; Additional Information"
+        }
+      ],
+      "recheck": "Official disposition, remedy, compliance basis or restrictions change."
+    },
+    {
+      "id": "avmap-9",
+      "claim": "The declared model\u2019s combined saving reaches zero at 20 paid fallbacks out of 120 AV attempts, or 16.7%.",
+      "status": "calculated hypothetical",
+      "qualification": "Original AV charge retained; rate is a break-even sensitivity, not observed provider performance.",
+      "sources": [],
+      "recheck": "Actual fares, refunds, eligible requests and incremental time replace assumptions."
+    },
+    {
+      "id": "itinerary-example",
+      "claim": "Suggested illustrative buyer workflow: Build a conference plan one journey at a time. No private provider contract, actual site design, service entitlement or observed performance inferred.",
+      "status": "editorial recommendation and illustrative workflow",
+      "sources": [],
+      "qualification": "Suggested purchaser analysis; all original source dates, access restrictions, legal conditions and unresolved provider-specific facts remain in the article.",
+      "recheckTrigger": "Change to the proposed itinerary, route, contract, fleet stage, accepted volume or stated model input."
     }
-  ]
+  ],
+  "revisionReview": {
+    "date": "2026-10-13",
+    "scope": "Two official oversight bodies and the attempt denominator reviewed; established operator-source dates preserved.",
+    "originalSourceDatesPreserved": true
+  }
 }

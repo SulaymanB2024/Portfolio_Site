@@ -1,6 +1,6 @@
 {
   "article": "texas-autonomous-trucking-operators",
-  "checkedAt": "2026-10-12",
+  "checkedAt": "2026-10-13",
   "claims": [
     {
       "id": "trucking-aurora-platform",
@@ -18,14 +18,14 @@
     },
     {
       "id": "trucking-aurora-endpoints",
-      "claim": "Aurora reports deployed driverless Midland–Monahans operations; fueling and weigh-station work are separately supervised testing.",
+      "claim": "Aurora reports deployed driverless Midland\u2013Monahans operations; fueling and weigh-station work are separately supervised testing.",
       "status": "issuer-reported operation and testing",
       "qualification": "Specific endpoint/trailer configuration does not establish universal customer access.",
       "sources": [
         {
           "url": "https://ir.aurora.tech/sec-filings/all-sec-filings/content/0001828108-26-000075/aurora26q2shareholderlet.htm",
           "date": "2026-07-29",
-          "pinpoint": "Pages 7–8"
+          "pinpoint": "Pages 7\u20138"
         }
       ],
       "recheck": "Released endpoint, fueling or weigh-station capability change"
@@ -65,7 +65,7 @@
     },
     {
       "id": "trucking-kodiak-highway",
-      "claim": "September 25 Dallas–Houston release describes observer-supported preparation deliveries and closed-course driverless testing; highway driver-out launch remains targeted end 2026.",
+      "claim": "September 25 Dallas\u2013Houston release describes observer-supported preparation deliveries and closed-course driverless testing; highway driver-out launch remains targeted end 2026.",
       "status": "preparation and forward-looking target",
       "qualification": "Intervention-free supervised/observer-supported delivery does not demonstrate removal of the observer.",
       "sources": [
@@ -79,7 +79,7 @@
     },
     {
       "id": "trucking-kodiak-charger",
-      "claim": "October 8 Charger Dallas–Laredo customer operation has a safety driver; 96% ARM at September-end measures materially completed safety-case claims/evidence.",
+      "claim": "October 8 Charger Dallas\u2013Laredo customer operation has a safety driver; 96% ARM at September-end measures materially completed safety-case claims/evidence.",
       "status": "issuer-reported current supervised service",
       "qualification": "96% is not autonomous distance, successful delivery share, route availability or launch probability.",
       "sources": [
@@ -126,7 +126,7 @@
     },
     {
       "id": "trucking-bot-commercial",
-      "claim": "Bot Auto reports a paid 230-mile Houston–Hutchins load without onboard driver/observer or low-latency remote human feedback.",
+      "claim": "Bot Auto reports a paid 230-mile Houston\u2013Hutchins load without onboard driver/observer or low-latency remote human feedback.",
       "status": "issuer-reported dated commercial delivery",
       "qualification": "Company-issued April 30 PRNewswire record; no independently verified cost/profitability or unlimited recurring capacity claim.",
       "sources": [
@@ -140,7 +140,7 @@
     },
     {
       "id": "trucking-waabi-warp",
-      "claim": "October 5 Waabi/Volvo release reports direct third-party facility freight in Warp’s Dallas–Houston network with an observer in the driver’s seat.",
+      "claim": "October 5 Waabi/Volvo release reports direct third-party facility freight in Warp\u2019s Dallas\u2013Houston network with an observer in the driver\u2019s seat.",
       "status": "issuer-reported customer service with onboard role",
       "qualification": "Does not establish driver-out operation or observer intervention frequency.",
       "sources": [
@@ -154,7 +154,7 @@
     },
     {
       "id": "trucking-plus-ryder",
-      "claim": "International/Ryder report daily 600-mile Laredo–Temple live-freight pilot with 92% autonomous route coverage supervised by human safety driver and inspection below 30 minutes.",
+      "claim": "International/Ryder report daily 600-mile Laredo\u2013Temple live-freight pilot with 92% autonomous route coverage supervised by human safety driver and inspection below 30 minutes.",
       "status": "issuer-reported supervised pilot",
       "qualification": "Coverage is not driverless availability; inspection is a pilot KPI, not universal allowance or legal standard.",
       "sources": [
@@ -245,6 +245,56 @@
         }
       ],
       "recheck": "Dated driver-out customer operation and completed commercial release"
+    },
+    {
+      "id": "trucking-warning-exemption",
+      "claim": "FMCSA grants a limited cab-mounted warning-beacon exemption effective October 7, 2026\u2013October 7, 2031; other Level 4 carriers must give prior written notice.",
+      "status": "official final exemption",
+      "qualification": "Specific warning-device alternative only. Other federal rules continue; no competitor participation or fleet compliance verified. Intrastate treatment must be resolved separately from federal interstate preemption.",
+      "sources": [
+        {
+          "url": "https://www.govinfo.gov/content/pkg/FR-2026-10-09/html/2026-20734.htm",
+          "date": "2026-10-09",
+          "pinpoint": "DATES; VI.A\u2013C.1\u20135; VI.D"
+        }
+      ],
+      "recheck": "Current exemption, participating carrier evidence, cargo, configuration, domain or state intrastate treatment changes."
+    },
+    {
+      "id": "texas-intrastate-beacon-basis",
+      "claim": "Official current \u00a74.11 incorporates federal amendments through September 1, 2022; the complete inspected \u00a74.12 exception list does not adopt the October 2026 beacon relief. Federal permission alone does not establish a Texas intrastate legal basis.",
+      "status": "current official rendered rule text checked 2026-10-13; bounded interpretation",
+      "sources": [
+        {
+          "url": "https://texas-sos.appianportalsgov.com/rules-and-meetings?recordId=211918&queryAsDate=10%2F13%2F2026&interface=VIEW_TAC_SUMMARY&$locale=en_US",
+          "date": "2023-01-08",
+          "lastVerified": "2026-10-13",
+          "locator": "37 TAC \u00a74.11(a), (b)(3), (b)(6), (c)",
+          "pinpoint": "37 TAC \u00a74.11(a), (b)(3), (b)(6), (c)"
+        },
+        {
+          "url": "https://texas-sos.appianportalsgov.com/rules-and-meetings?recordId=226974&queryAsDate=10%2F13%2F2026&interface=VIEW_TAC_SUMMARY&$locale=en_US",
+          "date": "2025-12-11",
+          "lastVerified": "2026-10-13",
+          "locator": "37 TAC \u00a74.12 entire exception list and source note",
+          "pinpoint": "37 TAC \u00a74.12 entire exception list and source note"
+        }
+      ],
+      "qualification": "No exhaustive absence finding about other DPS instruments, no individual state permit process inferred, and no real shipment classification determined. Two Texas endpoints alone do not establish intrastate commerce.",
+      "recheckTrigger": "Current Texas rule amendment, actual applicable relief instrument/interpretation, changed shipment classification or proposed warning-device arrangement."
+    },
+    {
+      "id": "retailer-tender-example",
+      "claim": "Suggested illustrative buyer workflow: Run one replenishment job through the shortlist. No private provider contract, actual site design, service entitlement or observed performance inferred.",
+      "status": "editorial recommendation and illustrative workflow",
+      "sources": [],
+      "qualification": "Suggested purchaser analysis; all original source dates, access restrictions, legal conditions and unresolved provider-specific facts remain in the article.",
+      "recheckTrigger": "Change to the proposed itinerary, route, contract, fleet stage, accepted volume or stated model input."
     }
-  ]
+  ],
+  "revisionReview": {
+    "date": "2026-10-13",
+    "scope": "Actual final exemption terms reviewed; operator program evidence retains original dates and attribution.",
+    "originalSourceDatesPreserved": true
+  }
 }

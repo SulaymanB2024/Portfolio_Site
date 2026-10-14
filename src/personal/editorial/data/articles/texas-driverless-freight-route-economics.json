@@ -11,11 +11,11 @@
   "dateModified": "2026-10-13",
   "author": "Sulayman Bowles",
   "kind": "research",
-  "readTime": "11 MIN",
+  "readTime": "13 MIN",
   "openingPresentation": "integrated",
-  "evidenceBoundary": "Reviewed October 12, 2026. Public operator and federal-agency records establish selected capabilities and diligence questions, not a current shipper quote or an operator’s unit economics. Every price, shipment count, acceptance share, exception rate and loss amount in the worked model is a declared assumption. The model compares one hypothetical Texas lane; it does not forecast company savings, safety, profitability or guaranteed 24-hour service.",
+  "evidenceBoundary": "Route and operator evidence checked October 12, 2026; final FMCSA exemption and economic-cost boundaries reviewed October 13. All prices, labor values, acceptance and incremental exception assumptions are hypothetical. No vendor quote, empirical failure rate, profit estimate or carrier-specific exemption participation established. Current official Texas carrier incorporation and exceptions were inspected October 13; no separate intrastate beacon relief or carrier-specific state instrument was established.",
   "content": [
-    "A driverless freight proposal becomes useful when it can deliver a defined load to the receiving business at a known total cost. The price of automated highway miles is only one input. A shipper also needs accepted endpoints, available receiving windows, equipment compatibility, inspection and release work, recovery capacity and somebody responsible when a shipment leaves the planned operating domain.",
+    "Buy a completed delivery, with a total cost and a plan for the disrupted load. Automated highway miles sit inside a longer job: accepted gates and docks, receiving windows, compatible equipment, inspection, release and recovery. Put a responsible party and a price beside each step before comparing the driverless proposal with current transport.",
     "Texas offers several operating designs. Aurora reports driverless service between customer facilities; Volvo and Waabi’s Warp operation also reaches third-party facilities but retains an observer in the driver’s seat. International and Ryder’s PlusAI trial uses existing customer locations with a safety driver. A universal two-terminal transfer model would misdescribe these cases. [Aurora endpoints](#source-aurora-q2); [Warp boundaries](#source-waabi-warp); [Ryder pilot](#source-international-ryder).",
     "The buying decision is therefore about a complete route and a fallback arrangement. Use the public evidence to identify a candidate, then replace the declared assumptions below with a scoped quote, actual shipment history and a measured trial. A lower cost per automated mile should earn a closer look; it cannot authorize a production-critical route by itself."
   ],
@@ -43,7 +43,7 @@
       "title": "Compare direct delivery and handoffs explicitly",
       "paragraphs": [
         "If the provider accepts both facilities, price a direct option. If it accepts only transfer points, price local drayage at both ends and the custody, inspection and waiting work at those points. Transfers can be a valid design when they create a usable lane; they should be a priced option rather than an assumption applied to every operator.",
-        "The example assumes 1,000 one-way Dallas–Houston shipments over one year, each with 250 loaded road miles in the planning model. No actual operator is assigned these endpoints or prices. Current human transport costs $1,400 per load, plus $100 of shipper loading and receiving labor. The quote includes the carrier’s fuel, equipment, tolls, normal support and repositioning. All alternatives include the same $100 warehouse work.",
+        "The example assumes 1,000 one-way Dallas–Houston shipments over one year, each with 250 loaded road miles in the planning model. No actual operator is assigned these endpoints or prices. Current human transport costs $1,400 per load, plus $100 of shipper loading and receiving labor. The quote includes the carrier’s fuel, equipment, tolls, normal support and repositioning. All alternatives include the same $100 warehouse work. The warehouse and added release amounts are allocated existing-staff time in this model, not assumed new payroll or invoices; apply that treatment consistently across alternatives.",
         "The direct-service assumption is $1,150 inclusive of provider road-operation expenses, plus $60 of additional shipper inspection/release work. The transfer option assumes $950 linehaul, two $120 local moves, $40 transfer processing and $50 extra inspection/release work. Each autonomous option also has $40,000 of first-year integration and setup cost, accounted for annually rather than hidden inside a high-volume unit price."
       ],
       "table": {
@@ -114,8 +114,8 @@
       "id": "exception-economics",
       "title": "Price recovery and business interruption without inventing a failure rate",
       "paragraphs": [
-        "The base stress assumption is an incremental exception on 2% of the 800 new-service shipments, relative to the current arrangement:16 events. Each event adds $350 of recovery or substitute transport and $500 of lost contribution, for $850 total. These are invented sensitivity inputs, not observed rates or claims about any provider. Recovery is additional cargo-moving work beyond the normal roadside support already included in the quote.",
-        "The declared annual exception allowance is 16 × $850 = $13,600. It reduces direct-service savings to $98,400 and transfer-option savings to $42,400. Count service credits or insurance recoveries only when their actual terms and collectability justify doing so; this scenario assumes neither. Also avoid counting the same substitute transport in both the ordinary invoice and recovery line.",
+        "The base stress assumption is an incremental exception on 2% of the 800 new-service shipments, relative to the current arrangement: 16 events. Each event adds $350 of recovery or substitute transport and $500 of lost contribution, for $850 total. These are invented sensitivity inputs, not observed rates or claims about any provider. Recovery is additional cargo-moving work beyond the normal roadside support already included in the quote.",
+        "The 16 events add $5,600 of assumed recovery invoices and $8,000 of lost contribution: $13,600 of incremental economic burden. Including allocated labor and setup, total economic cost is $1,401,600 for direct service and $1,457,600 for transfers, saving $98,400 and $42,400 respectively against the same boundary. These are not all carrier invoices or cash spending. Assume no service credit or insurance recovery, and count each substitute move once.",
         "The three direct-option scenarios below change accepted volume and price explicitly. They keep total demand, current-service cost, fixed setup, assumed incremental exception rate and cost per exception unchanged. They are useful questions for a quote and trial, not a probability distribution or a market-rate survey."
       ],
       "table": {
@@ -158,7 +158,7 @@
             "$17,000"
           ],
           [
-            "Total annual comparison cost",
+            "Total annual economic cost",
             "$1,510,800",
             "$1,401,600",
             "$1,367,000"
@@ -170,23 +170,70 @@
             "$133,000"
           ]
         ],
-        "note": "Each new-service variable cost includes the $100 loading/receiving labor. All numbers are assumptions; the downside adds $100 to the direct price stack and reduces acceptance. Fractional expected exceptions are permitted in the formula, although these examples produce whole event counts."
+        "note": "Each new-service variable cost includes the $100 loading/receiving labor. All numbers are assumptions; the downside adds $100 to the direct price stack and reduces acceptance. Fractional expected exceptions are permitted in the formula, although these examples produce whole event counts. Totals include allocated existing labor and lost contribution; recovery invoices and integration are assumed incremental paid costs."
       }
     },
     {
       "id": "decision-thresholds",
       "title": "Convert the model into a negotiating threshold",
       "paragraphs": [
-        "At base pricing, every completed direct shipment saves $190 before fixed setup and incremental exceptions. The modeled exception burden is $17 per new-service shipment, leaving $173 to recover the $40,000 setup. Break-even is $40,000 ÷ $173, or approximately 231.2 shipments; the first whole-load threshold is 232 under these assumptions. That is a shipment threshold, not a claim about required truck utilization.",
+        "The usable rule is: annual economic saving = accepted completed shipments × (current variable cost − new variable cost − incremental exception burden) − fixed setup. On the direct base inputs, that is N × $173 − $40,000. Break-even is approximately 231.2 shipments; 232 is the first whole-load threshold. The 2% exception input is the added burden relative to current transport, not the absolute AV failure rate.",
         "For 800 accepted shipments, the $98,400 base saving leaves only $123 per shipment for additional unpriced costs before the comparison turns negative. At a quoted all-in variable cost above $1,433, keeping the same fixed cost and exception assumptions, the direct option exceeds the baseline. This ceiling includes warehouse work; compare quotes on the same basis.",
         "A single additional $100,000 production-interruption loss, outside the 16 modeled recoveries, would turn the base saving into a $1,600 loss. The point is to measure the reader’s exposure and a usable fallback, not assume such an event occurs. Expedited transport, inventory or a retained human allocation can be valuable even when it reduces the nominal freight saving."
       ]
+    },
+    {
+      "id": "road-quote-ceiling",
+      "title": "Translate the route threshold into a provider’s quote",
+      "paragraphs": [
+        "The $1,433 ceiling is a whole-route variable-cost boundary in the declared 800-load case. The provider’s road-service invoice is only part of it. Subtract the assumed $100 of common warehouse work and $60 of additional inspection/release: the maximum road-service price is $1,273 per accepted shipment. At the example’s $1,150 road price, the same $123 headroom remains.",
+        "The derivation is $1,500 current economic cost, less $50 of setup per accepted load, $17 of incremental expected exception burden, and $160 of retained shipper work. All figures are hypothetical. The $17 combines expected paid recovery and lost contribution; the $160 is allocated staff time. Keep those economic burdens visible when reconciling the model with cash invoices.",
+        "Request a quote that states whether fuel, tolls, maintenance, support and repositioning sit inside the road price. Add an excluded charge to the provider side of this comparison once. If the shipper’s workload or accepted volume changes, recompute the ceiling before negotiating against it. The break-even price provides a check on the defined case; it leaves no saving at the threshold."
+      ],
+      "table": {
+        "caption": "Declared 800-load case: convert the total-cost boundary into a road-service price",
+        "columns": [
+          "Item",
+          "Per accepted shipment",
+          "Treatment"
+        ],
+        "rows": [
+          [
+            "Current economic cost",
+            "$1,500",
+            "Starting comparison"
+          ],
+          [
+            "First-year setup: $40,000 ÷ 800",
+            "$50",
+            "Deduct"
+          ],
+          [
+            "Incremental exception burden: 2% × $850",
+            "$17",
+            "Deduct"
+          ],
+          [
+            "Retained warehouse and extra release work: $100 + $60",
+            "$160",
+            "Deduct"
+          ],
+          [
+            "Maximum provider road-service price",
+            "$1,273",
+            "Remainder before any additional excluded cost"
+          ]
+        ],
+        "note": "Calculated illustration using the earlier route scenario. Provider price includes the stated road-operation expenses; allocated labor and expected exception cost are economic model items, not all invoices."
+      }
     },
     {
       "id": "inspection-weather-and-support",
       "title": "Verify the constraints that can erase the capacity benefit",
       "paragraphs": [
         "International’s Ryder pilot reports inspection below 30 minutes, alongside human supervision. Use that as evidence that inspection remains operating work, not a promised allowance for your trailer or a legal standard. Time your own inspection, yard release and dock tasks in the proposed configuration. A capability demonstration cannot absorb an unmeasured operating queue. [Supervised pilot and inspection KPI](#source-international-ryder).",
+        "A public condition can reject a configuration before price negotiation. FMCSA’s October 9 beacon exemption requires prior notice from carriers other than Aurora, compliant warning equipment and operation within the validated domain; it excludes defined hazardous-material and passenger work. Confirm whether the proposed carrier relies on it or uses another compliant warning-device arrangement. The grant alone does not verify a particular carrier’s participation or your cargo fit. [Final conditions](#source-beacon-exemption). For an intrastate-only operation, verify applicable Texas treatment separately; the federal notice’s interstate preemption does not settle it.",
+        "Classify the shipment before accepting a beacon-only operating plan: two Texas endpoints alone do not settle whether the movement is interstate commerce. The current Texas incorporation and exception rules inspected do not themselves adopt the new federal relief for genuinely intrastate work. Require the applicable Texas legal basis or another compliant arrangement and price its labor, response and service limits before comparing routes. No carrier-specific state exemption or permit process is established here. [§4.11](#source-texas-carrier-incorporation); [§4.12](#source-texas-carrier-exceptions).",
         "Aurora’s February 2026 disclosure reports expanded software validation for rain, fog and heavy wind. It does not establish unlimited operation in every weather condition. Ask each provider for dispatch thresholds, suspension rules, approved reroutes, safe-stop handling and the recovery response attached to your service. Give the backup carrier enough notice to act when a restriction prevents dispatch. [Dated operating-domain expansion](#source-aurora-weather).",
         "An empty cab also needs reachable people for cargo coordination, roadside work and first-responder interaction. Agree on contact, escalation, cargo access and proof of delivery before the trial. Specify whether rejected loads trigger a charge, whether a stopped truck reserves another service slot and who pays when the recovery crosses the receiving window."
       ]
@@ -322,6 +369,33 @@
       "publisher": "NHTSA",
       "lastVerified": "2026-10-12",
       "note": "Current official methodology: incomplete/unverified initial reports, possible duplicates, unequal reporting visibility, no normalization for miles/fleet/domain and different ADS/Level 2 reporting thresholds. No operator crash ranking is derived."
+    },
+    {
+      "id": "beacon-exemption",
+      "label": "FMCSA final warning-beacon exemption and operating conditions",
+      "href": "https://www.govinfo.gov/content/pkg/FR-2026-10-09/html/2026-20734.htm",
+      "publisher": "FMCSA / Federal Register",
+      "date": "2026-10-09; effective 2026-10-07–2031-10-07",
+      "lastVerified": "2026-10-13",
+      "note": "91 FR 64736–64741, VI.B–C: prior notice for other carriers, validated domain, excluded cargo/passenger work, equipment and activation conditions. This replaces specified warning-device requirements; it is not a general driverless approval or recovery-time guarantee."
+    },
+    {
+      "id": "texas-carrier-incorporation",
+      "label": "37 TAC §4.11: current commercial-vehicle incorporation rule",
+      "href": "https://texas-sos.appianportalsgov.com/rules-and-meetings?recordId=211918&queryAsDate=10%2F13%2F2026&interface=VIEW_TAC_SUMMARY&$locale=en_US",
+      "publisher": "Texas Secretary of State / Texas Department of Public Safety",
+      "date": "2023-01-08",
+      "lastVerified": "2026-10-13",
+      "note": "Official current rendered text: §4.11(a) incorporates federal amendments/interpretations through September 1, 2022; (b)(6) substitutes the DPS director for intrastate vehicles. That text does not automatically adopt a later federal exemption."
+    },
+    {
+      "id": "texas-carrier-exceptions",
+      "label": "37 TAC §4.12: current Texas exemptions and exceptions",
+      "href": "https://texas-sos.appianportalsgov.com/rules-and-meetings?recordId=226974&queryAsDate=10%2F13%2F2026&interface=VIEW_TAC_SUMMARY&$locale=en_US",
+      "publisher": "Texas Secretary of State / Texas Department of Public Safety",
+      "date": "2025-12-11",
+      "lastVerified": "2026-10-13",
+      "note": "Complete current exception list inspected, latest amendment effective December 11, 2025. The inspected rule contains no beacon relief or blanket prospective adoption of federal exemptions; this bounded reading does not rule out every other legal instrument."
     }
   ],
   "searchTerms": [
@@ -339,8 +413,8 @@
   "resources": [
     {
       "label": "Texas autonomy source and decision ledger",
-      "href": "/research/texas-autonomy-library-2026-10-13.json",
-      "description": "Dated primary evidence, operating boundaries, declared scenarios and update triggers for the Texas autonomy edition.",
+      "href": "/research/texas-research-library-2026-10-13.json",
+      "description": "Primary evidence, declared assumptions and update triggers across the Texas business and autonomy library.",
       "format": "JSON"
     }
   ],

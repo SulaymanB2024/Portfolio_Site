@@ -2,8 +2,8 @@
   "schemaVersion": 1,
   "article": "texas-zoox-market-entry-business",
   "articleSlug": "texas-zoox-market-entry-business",
-  "checkedAt": "2026-10-12",
-  "researchCutoff": "2026-10-12",
+  "checkedAt": "2026-10-13",
+  "researchCutoff": "2026-10-13",
   "sourcePolicy": "Current rendered Zoox city/app/map pages, dated Texas expansion disclosures and NHTSA's Federal Register grant. Company stage and design descriptions remain issuer-reported; no live rides, depot agreement, fleet allocation or operating dataset supplied.",
   "claims": [
     {
@@ -128,7 +128,7 @@
     },
     {
       "id": "zoox-09",
-      "claim": "Commercial grant runs July 31 2026–July 31 2028; ≤2,500 commercial introductions per 12 months.",
+      "claim": "Commercial grant runs July 31 2026\u2013July 31 2028; \u22642,500 commercial introductions per 12 months.",
       "status": "official grant",
       "qualification": "Separate Operational Authorizations limit simultaneous operations; no Texas allocation inferred.",
       "sources": [
@@ -136,7 +136,7 @@
           "sourceId": "commercial-grant",
           "url": "https://www.govinfo.gov/content/pkg/FR-2026-07-31/html/2026-15485.htm",
           "date": "2026-07-31",
-          "pinpoint": "DATES; Executive Summary; VIII.D (1)–(2)"
+          "pinpoint": "DATES; Executive Summary; VIII.D (1)\u2013(2)"
         }
       ],
       "recheck": "Grant or Operational Authorization changes."
@@ -158,15 +158,15 @@
     },
     {
       "id": "zoox-11",
-      "claim": "Grant records Zoox retaining fleet ownership/operations and up to four passengers.",
-      "status": "issuer model described in official notice",
-      "qualification": "No private allocation or four-passenger average occupancy inferred.",
+      "claim": "Section X.G binds lifetime Zoox operational control and restricts sale, transfer, licensing and public-road operation except on NHTSA-authorized terms.",
+      "status": "binding official grant condition",
+      "qualification": "No independent third-party ownership/operation entitlement or Texas allocation inferred.",
       "sources": [
         {
           "sourceId": "commercial-grant",
           "url": "https://www.govinfo.gov/content/pkg/FR-2026-07-31/html/2026-15485.htm",
           "date": "2026-07-31",
-          "pinpoint": "Executive Summary; III Zoox's Application"
+          "pinpoint": "X.G Sale and Transfer of Possession"
         }
       ],
       "recheck": "Ownership, vehicle or service model changes."
@@ -188,11 +188,33 @@
     },
     {
       "id": "zoox-13",
-      "claim": "Declared fleet example yields 704 trips and $17.05 allocated cost per trip; lower occupied share yields 512 and $23.44.",
+      "claim": "Declared available and occupied hours yield 704 completed vehicle trips; lower occupied share yields 512, a reduction of 192.",
       "status": "calculated hypothetical",
-      "qualification": "No actual Zoox fleet count, tariff, utilization, cost or profit estimate; vehicle trips are not unique riders or automatic four-person journeys.",
+      "qualification": "Same completed-trip population for hours and duration; no actual fleet, cost, fare, occupancy or peak-capacity estimate.",
       "sources": [],
-      "recheck": "Actual contracted scope, available service-hours, occupied share, trip duration and cost evidence changes inputs."
+      "recheck": "Actual completed-trip population, available service-hours, occupied share and trip duration replace model inputs."
+    },
+    {
+      "id": "zoox-14",
+      "claim": "Grant X.A specifies public Operational Authorizations in docket NHTSA-2025-0523.",
+      "status": "official oversight condition",
+      "qualification": "No current Texas-specific instrument retrieved; failure to retrieve is not evidence one does not exist.",
+      "sources": [
+        {
+          "url": "https://www.govinfo.gov/content/pkg/FR-2026-07-31/html/2026-15485.htm",
+          "date": "2026-07-31",
+          "pinpoint": "X.A Operational Authorization"
+        }
+      ],
+      "recheck": "Applicable area/route authorization changes or becomes retrievable."
+    },
+    {
+      "id": "depot-commitment-example",
+      "claim": "Suggested illustrative buyer workflow: Turn a depot enquiry into a staged property proposal. No private provider contract, actual site design, service entitlement or observed performance inferred.",
+      "status": "editorial recommendation and illustrative workflow",
+      "sources": [],
+      "qualification": "Suggested purchaser analysis; all original source dates, access restrictions, legal conditions and unresolved provider-specific facts remain in the article.",
+      "recheckTrigger": "Change to the proposed itinerary, route, contract, fleet stage, accepted volume or stated model input."
     }
   ],
   "calculations": [
@@ -205,18 +227,13 @@
         "availableShare": 0.8,
         "occupiedShare": 0.55,
         "sensitivityOccupiedShare": 0.4,
-        "occupiedTripMinutes": 24,
-        "allocatedCostPerVehicleDayUSD": 250,
-        "dailyFleetOverheadUSD": 2000
+        "occupiedTripMinutes": 24
       },
       "formulas": [
-        "scheduledVehicleHours = fleetVehicles × scheduledHoursPerVehicleDay",
-        "availableServiceHours = scheduledVehicleHours × availableShare",
-        "occupiedVehicleHours = availableServiceHours × occupiedShare",
-        "vehicleTrips = occupiedVehicleHours ÷ (occupiedTripMinutes ÷ 60)",
-        "dailyAllocatedCost = fleetVehicles × allocatedCostPerVehicleDayUSD + dailyFleetOverheadUSD",
-        "allocatedCostPerTrip = dailyAllocatedCost ÷ vehicleTrips",
-        "costPerTripIncreasePercent = (baseTrips ÷ sensitivityTrips − 1) × 100"
+        "scheduledVehicleHours = fleetVehicles \u00d7 scheduledHoursPerVehicleDay",
+        "availableServiceHours = scheduledVehicleHours \u00d7 availableShare",
+        "occupiedVehicleHours = availableServiceHours \u00d7 occupiedShare",
+        "vehicleTrips = occupiedVehicleHours \u00f7 (occupiedTripMinutes \u00f7 60)"
       ],
       "results": {
         "scheduledVehicleHours": 640,
@@ -224,20 +241,16 @@
         "occupiedVehicleHours": 281.6,
         "occupiedTripHours": 0.4,
         "vehicleTrips": 704,
-        "dailyAllocatedCostUSD": 12000,
-        "allocatedCostPerTripUSD": 17.045454545454547,
         "sensitivityOccupiedVehicleHours": 204.8,
         "sensitivityVehicleTrips": 512,
-        "sensitivityAllocatedCostPerTripUSD": 23.4375,
-        "vehicleTripDecrease": 192,
-        "costPerTripIncreasePercent": 37.5
+        "vehicleTripDecrease": 192
       },
       "boundaries": [
         "All vehicles and hours are invented model inputs, not a Texas deployment estimate.",
         "Available hours exclude assumed downtime; occupied share is the part carrying passengers; remaining available hours include unoccupied activity.",
         "Trip duration held constant; actual peak demand, repositioning, route/ODD constraints and support events could change output.",
-        "Allocated cost pool has only declared vehicle-day and overhead inputs; no complete profitability or fare projection.",
-        "Trip is a completed occupied vehicle trip; no occupancy, passenger-journey or unique-user multiplication assumed."
+        "Trip is a completed occupied vehicle trip; no occupancy, passenger-journey or unique-user multiplication assumed.",
+        "Occupied hours and average trip duration refer to the same completed-trip population; interrupted occupied work is not silently counted as completed trips."
       ]
     }
   ],
@@ -247,6 +260,11 @@
     "Current Federal Register grant or Operational Authorization conditions change.",
     "Actual local depot scope, lease, charging/power readiness, vendor contract or fleet allocation becomes available.",
     "Current app distribution, service area, operating hours, fares or rider support changes.",
-    "Observed or contracted fleet hours, occupied share, trip durations, demand and costs replace hypothetical inputs."
-  ]
+    "Observed or contracted completed-trip fleet hours, occupied share, trip durations and demand replace hypothetical inputs."
+  ],
+  "revisionReview": {
+    "date": "2026-10-13",
+    "scope": "Actual grant X.A/X.G conditions and throughput population reviewed; original complete issuer captures remain October 12.",
+    "originalSourceDatesPreserved": true
+  }
 }

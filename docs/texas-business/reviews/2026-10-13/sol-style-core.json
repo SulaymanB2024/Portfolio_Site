@@ -1,0 +1,50 @@
+{
+  "scope": "Twelve changed core first paragraphs compared with pre-style snapshots; nearby openings for preservation; JETI normal/zone limitation paragraphs and ledger; freight new quote ceiling, prior thresholds, ledger and portable model. No external research or full factual reaudit.",
+  "conclusion": "The openings give clearer reader actions and business purposes in natural, less abstract prose. One changed JETI sentence loses a useful scope qualification; otherwise no material factual regression identified in the bounded comparison. Freight ceiling independently agrees.",
+  "materialFindings": [
+    {
+      "article": "texas-jeti-incentives-project-underwriting",
+      "location": "content[0], second sentence",
+      "issue": "The new categorical statement that a 50 percent limitation applies suppresses the normal-versus-opportunity-zone distinction. The nearby controlling-mechanics paragraph and ledger say normal taxable value is 50% and qualifying opportunity-zone value 25%. The prior opening described how an incentive can be described, rather than universal application.",
+      "repair": "Change to: \"The normal limitation sets eligible property\u2019s taxable value at 50 percent of market value for school maintenance-and-operations tax; qualifying opportunity-zone property receives a different limit.\" Or simply insert \"normal\" and explicitly refer to the different qualifying-zone treatment."
+    }
+  ],
+  "optionalFindings": [
+    {
+      "article": "texas-cross-border-logistics-business-planning",
+      "location": "content[0], second sentence",
+      "issue": "The construction \"invoice and linehaul quote leave inventory tied up ... still to be resolved\" is slightly awkward and can blur costs excluded from the quotation with costs caused by the quotation.",
+      "repair": "\"The supplier\u2019s invoice and linehaul quote do not capture the cost of inventory in transit, missed receiving windows or customs documentation.\""
+    }
+  ],
+  "freightRecomputation": {
+    "acceptedLoads": 800,
+    "setupPerAcceptedLoadUSD": 50.0,
+    "incrementalExceptionPerAcceptedLoadUSD": 17.0,
+    "retainedShipperWorkPerAcceptedLoadUSD": 160,
+    "allInVariableCeilingUSD": 1433.0,
+    "providerRoadQuoteCeilingUSD": 1273.0,
+    "headroomAt1150RoadQuoteUSD": 123.0,
+    "full1000LoadYearAtCeilingUSD": 1500000.0,
+    "baseline1000LoadYearUSD": 1500000,
+    "assessment": "$1,273 per accepted load gives exactly zero first-year economic saving under the declared case. $160 allocated existing staff time is retained economic burden; $17 combines $7 expected recovery invoice and $10 lost contribution. These deductions are not all cash invoices. No double count of common warehouse labor found."
+  },
+  "inspectedSHA256": {
+    "src/personal/editorial/data/articles/texas-power-large-load-business-diligence.json": "f78b0809071411850644c7476def9dfaec81c42f54f9e9087c761ebcf96b1521",
+    "src/personal/editorial/data/articles/texas-water-facility-site-diligence.json": "288f66624069a274a68435c8b54ad13ce0b66e467d7ece919027d0dfea22cb31",
+    "src/personal/editorial/data/articles/texas-property-tax-business-underwriting.json": "4fc11f0d3523dc0cc4ae04f25b908263cf31068645849e74ea56225b0de92fcd",
+    "src/personal/editorial/data/articles/texas-data-center-sales-tax-project-economics.json": "2c4857c3bf2d64916668d8ded824cc0b97f0529b07462bf8f996a71bc7cd4dc7",
+    "src/personal/editorial/data/articles/texas-jeti-incentives-project-underwriting.json": "1ae0d191c11c316226d836ec3553121ce7aee2b4844416c22a05666590a03817",
+    "src/personal/editorial/data/articles/texas-franchise-tax-reporting-business-decisions.json": "e2345a864b45992a2ad7b1e52b85a512ff30aed4a2bb2f04ac2013c6f1ffa2f2",
+    "src/personal/editorial/data/articles/texas-hiring-labor-cost-planning.json": "2a7ce9e67c3661a9cfe96d5c3aa67b8569c1bc1770c4337ccebb450107caeddb",
+    "src/personal/editorial/data/articles/texas-cross-border-logistics-business-planning.json": "ff616c97dfc160e1e613139d4881636fefbd4e05d14606c81835fd9bd045dca0",
+    "src/personal/editorial/data/articles/texas-manufacturing-capacity-procurement.json": "19d08a4b744554aea0a080a0da9d18deefa45479bc316df8feb41e3b90f4fede",
+    "src/personal/editorial/data/articles/texas-commercial-property-insurance-diligence.json": "ad319137c38afb93a72c67e824be0fce55151dce773324a4335c1e4b32b64a44",
+    "src/personal/editorial/data/articles/texas-ai-law-business-compliance.json": "526141c31a2ec6149dba4e70fee98afd3a7e4cd3c9d5ea641e109f651d5e15bd",
+    "src/personal/editorial/data/articles/texas-business-court-contract-decisions.json": "f9ac7becf54ed8fd6cdae0c08ae9e95bd066ebba7f42ae0ac4f084f8b63ecd1a",
+    "src/personal/editorial/data/articles/texas-driverless-freight-route-economics.json": "d92dc5ce1e665072bce18056728d56fe49e8f7e6cc5171fc08b850629ead1f44",
+    "docs/texas-business/research/driverless-freight-claims.json": "6c2bdf84227842dfc70b9845cbe22bccf852c6a5a9959ebabb95465f8efa0c43",
+    "docs/texas-business/research/jeti-claims.json": "d4df970e30e8d87624ddad3fecd360b2af78d65c3e5cecb1eb8f237abf1ab713",
+    "docs/texas-business/research/decision-models.py": "e07c0b52e011d0ea3174159f7b9d2251a7056123c1555586dd6989ff8272ef10"
+  }
+}

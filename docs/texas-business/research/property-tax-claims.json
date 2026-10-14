@@ -23,7 +23,7 @@
     },
     {
       "id": "circuit-breaker-scope",
-      "claim": "§23.231 limits qualifying non-homestead real-property appraised value to lesser of market or prior value +20%+new improvements. Initial-qualification, special-appraisal and ownership conditions apply.",
+      "claim": "\u00a723.231 limits qualifying non-homestead real-property appraised value to lesser of market or prior value +20%+new improvements. Initial-qualification, special-appraisal and ownership conditions apply.",
       "sources": [
         {
           "url": "https://tcss.legis.texas.gov/resources/TX/htm/TX.23.htm",
@@ -36,7 +36,7 @@
     },
     {
       "id": "2026-threshold-and-expiration",
-      "claim": "Comptroller publishes 2026 $5,320,000 eligibility threshold. §23.231(k) expires December 31, 2026 under text reviewed October 12; later relief requires new authority.",
+      "claim": "Comptroller publishes 2026 $5,320,000 eligibility threshold. \u00a723.231(k) expires December 31, 2026 under text reviewed October 12; later relief requires new authority.",
       "sources": [
         {
           "url": "https://comptroller.texas.gov/taxes/property-tax/valuing-property.php",
@@ -111,7 +111,7 @@
     },
     {
       "id": "2026-deadline-rule",
-      "claim": "§1.06 updated effective January 1, 2026 covers weekends/holidays and collector-office closures for payment; act on next regular business day. January 31, 2027 is Sunday.",
+      "claim": "\u00a71.06 updated effective January 1, 2026 covers weekends/holidays and collector-office closures for payment; act on next regular business day. January 31, 2027 is Sunday.",
       "sources": [
         {
           "url": "https://tcss.legis.texas.gov/resources/TX/htm/TX.1.htm",
@@ -129,7 +129,7 @@
     },
     {
       "id": "hypothetical-real-estate",
-      "claim": "Prior $3m ×1.20=$3.6m; ×2%=$72k. $4.5m×2%=$90k; ×2.2%=$99k. $3.6m+$0.4m=$4m; ×2%=$80k. $18k/$72k=25%; $200k−$72k=$128k; $200k−$90k=$110k; $18k/7.5%=$240k. Inputs invented and eligibility assumed.",
+      "claim": "Prior $3m \u00d71.20=$3.6m; \u00d72%=$72k. $4.5m\u00d72%=$90k; \u00d72.2%=$99k. $3.6m+$0.4m=$4m; \u00d72%=$80k. $18k/$72k=25%; $200k\u2212$72k=$128k; $200k\u2212$90k=$110k; $18k/7.5%=$240k. Inputs invented and eligibility assumed.",
       "sources": [
         {
           "url": "https://tcss.legis.texas.gov/resources/TX/htm/TX.23.htm",
@@ -142,7 +142,7 @@
     },
     {
       "id": "hypothetical-equipment-and-lease",
-      "claim": "$300k−$125k=$175k; ×2%=$3,500 versus $6,000; saving $2,500. 40%×$18k=$7,200 tenant sensitivity. Inputs invented, qualification and uniform rate assumed.",
+      "claim": "$300k\u2212$125k=$175k; \u00d72%=$3,500 versus $6,000; saving $2,500. 40%\u00d7$18k=$7,200 tenant sensitivity. Inputs invented, qualification and uniform rate assumed.",
       "sources": [
         {
           "url": "https://tcss.legis.texas.gov/resources/TX/htm/TX.11.htm",
@@ -157,6 +157,28 @@
       ],
       "status": "calculated scenarios; actual aggregation/lease unverified",
       "recheckTrigger": "Different exemptions, situs, taxing units, related entities or contractual share"
+    },
+    {
+      "id": "ownership-tax-year",
+      "claim": "The owner\u2019s circuit-breaker limitation expires January 1 following the year ownership ceases; statutory expiration is separately December 31, 2026.",
+      "status": "current statute; targeted content review",
+      "qualification": "No parcel qualification or replacement of the current bill at closing determined.",
+      "sources": [
+        {
+          "url": "https://tcss.legis.texas.gov/resources/TX/htm/TX.23.htm",
+          "date": "Content reviewed 2026-10-13",
+          "pinpoint": "\u00a723.231(f),(k)"
+        }
+      ],
+      "recheck": "Governing provision, actual contract, input cohort or operating evidence changes."
+    },
+    {
+      "id": "debt-service-headroom",
+      "claim": "Declared NOI $128k/$110k gives DSCR 1.28/1.10 at $100k debt service and permits $102,400/$88,000 annual service at an assumed 1.25 requirement.",
+      "status": "calculated hypothetical",
+      "qualification": "Debt service, covenant and NOI are invented; no actual loan sizing or lender acceptance established.",
+      "sources": [],
+      "recheck": "Governing provision, actual contract, input cohort or operating evidence changes."
     }
   ],
   "checks": [
@@ -175,5 +197,10 @@
       "result": "passed"
     }
   ],
-  "remainingBoundary": "Root integrates and visually verifies. Specific accounts, local adopted rates, notices, leases, liens and appeal outcomes require transaction-level evidence."
+  "remainingBoundary": "Specific accounts, local adopted rates, notices, leases, liens and appeal outcomes require transaction-level evidence.",
+  "revisionReview": {
+    "date": "2026-10-13",
+    "scope": "ownership tax-year provision and a declared debt-service sensitivity",
+    "originalSourceDatesPreserved": true
+  }
 }

@@ -170,7 +170,8 @@
       "triggers": [
         "Provider rider admission, booking rules or service area changes",
         "Onboard role, platform or business payment program changes",
-        "Actual trip costs and exception evidence diverge"
+        "Actual trip costs and exception evidence diverge",
+        "Official passenger-safety findings, remedies, certification inquiry disposition or restrictions change"
       ]
     },
     {
@@ -183,7 +184,8 @@
       "triggers": [
         "Waymo rider admission, airport or pickup guidance changes",
         "Uber matching or business payment availability changes",
-        "Actual travel cohort or fallback evidence changes"
+        "Actual travel cohort or fallback evidence changes",
+        "Official passenger-safety findings, remedies, certification inquiry disposition or restrictions change"
       ]
     },
     {
@@ -209,7 +211,8 @@
       "triggers": [
         "A driver-out launch, onboard role or accepted endpoint changes",
         "Operator disclosures revise the program stage or metric definitions",
-        "Current buyer-specific capacity or recovery evidence changes"
+        "Current buyer-specific capacity or recovery evidence changes",
+        "Roadside-warning exemption, carrier participation, cargo/configuration or intrastate treatment changes"
       ]
     },
     {
@@ -222,7 +225,8 @@
       "triggers": [
         "Quoted inclusions, price, acceptance or support arrangements change",
         "Actual trial completion, exception and interruption evidence changes",
-        "Carrier records or insurance evidence change"
+        "Carrier records or insurance evidence change",
+        "Roadside-warning exemption, carrier participation, cargo/configuration or intrastate treatment changes"
       ]
     },
     {
@@ -235,9 +239,10 @@
       "triggers": [
         "Governing law, agency rules or enforcement guidance changes",
         "Holder, fleet, responder plan or operating domain changes",
-        "Actual interruption, replacement and restart evidence changes"
+        "Actual interruption, replacement and restart evidence changes",
+        "Roadside-warning exemption, carrier participation, cargo/configuration or intrastate treatment changes"
       ]
     }
   ],
-  "bundlePath": "public/research/texas-autonomy-library-2026-10-13.json"
+  "bundlePath": "public/research/texas-research-library-2026-10-13.json"
 }
