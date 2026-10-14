@@ -45,7 +45,7 @@ def explicit_flows(s: dict[str, Any], reserve_share: float) -> list[dict[str, fl
 
 
 def value(flows5: list[float], r: float = .18, g: float = .03, supply_m: float = 955.31) -> dict[str, Any]:
-    if len(flows5) != 5 or min(flows5) <= 0 or not (0 <= g < r < 1) or supply_m <= 0:
+    if len(flows5) != 5 or not all(math.isfinite(x) and x > 0 for x in flows5) or not (0 <= g < r < 1) or not math.isfinite(supply_m) or supply_m <= 0:
         raise ValueError('Need five positive flows, positive supply, and 0 <= g < r < 1.')
     flows = list(flows5)
     last_growth = flows[-1] / flows[-2] - 1
@@ -65,13 +65,13 @@ def value(flows5: list[float], r: float = .18, g: float = .03, supply_m: float =
     }
 
 
-def solve_growth(start_b: float, target_b: float, r: float, g: float) -> dict[str, Any]:
+def solve_growth(start_b: float, target_b: float, r: float, g: float, supply_m: float = 955.31) -> dict[str, Any]:
     """Inverse valuation: five equal-growth years, then the same five-year fade."""
-    if start_b <= 0 or target_b <= 0:
+    if not all(math.isfinite(x) and x > 0 for x in (start_b, target_b)):
         raise ValueError('Positive starting flow and target value required.')
     lo, hi = -.5, 3.
     def objective(c: float) -> float:
-        return value([start_b*(1+c)**t for t in range(1, 6)], r, g)['valueB'] - target_b
+        return value([start_b*(1+c)**t for t in range(1, 6)], r, g, supply_m)['valueB'] - target_b
     if objective(lo) > 0 or objective(hi) < 0:
         raise ValueError('Target outside inverse-model bracket.')
     for _ in range(100):
@@ -79,7 +79,7 @@ def solve_growth(start_b: float, target_b: float, r: float, g: float) -> dict[st
         if objective(mid) > 0: hi = mid
         else: lo = mid
     c = (lo+hi)/2
-    return {'growth': c, **value([start_b*(1+c)**t for t in range(1, 6)], r, g)}
+    return {'growth': c, **value([start_b*(1+c)**t for t in range(1, 6)], r, g, supply_m)}
 
 
 def build(data: dict[str, Any]) -> dict[str, Any]:
@@ -94,7 +94,7 @@ def build(data: dict[str, Any]) -> dict[str, Any]:
     start_b = obs['allProductHolderReceipts30dM']/1000 * annualization
     reference_b = data['referencePrice'] * supply/1000
     base5 = [p['totalB'] for p in cases['base']['periods']]
-    inverse = solve_growth(start_b, reference_b, r, g)
+    inverse = solve_growth(start_b, reference_b, r, g, supply)
     result = {
         'asOf': data['asOf'], 'cases': cases,
         'diagnostics': {
