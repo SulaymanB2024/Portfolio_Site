@@ -159,6 +159,7 @@ export const readingTopics: ReadingTopic[] = [
       { slug: 'crocs-cash-and-brand-test', reason: 'Separate brand demand from per-share growth, then protect the cash budget against debt and tax claims.' },
       { slug: 'expedia-network-and-cash', reason: 'Remove travel-deposit financing and compare consumer and partner economics before making a dated price forecast.' },
       { slug: 'hyperliquid-valuation', reason: 'Separate exchange growth from token value by tracing retained fees, reserve income, dilution and the assumptions implied by price.' },
+      { slug: 'kalshi-40-billion-question', reason: 'Value an event exchange through retained fees, distribution bargaining power and the cash flows needed to justify its financing price.' },
       { slug: 'chegg-cash-flow-turnaround', reason: 'Reconcile Chegg’s cash-flow improvement and test whether legacy cash generation can finance a skilling transition.' },
       { slug: 'who-owns-texas-toll-roads', reason: 'Separate public title, concession rights, shareholders, creditors and toll collection. Start here for the ownership question.' },
       { slug: 'why-texas-toll-roads-stay-tolled', reason: 'Follow the pledged system and its obligations to understand why repaying one road does not necessarily end its tolls.' },

@@ -30,6 +30,7 @@ export const articlePresentations: Record<string, ArticlePresentation> = {
   'paypal-margin-dollar-recovery': { form: 'model', lines: ["PayPal: a modest recovery","at $56."] },
   'adobe-paid-workflows': { form: 'model', lines: ["Adobe: paid workflows","at a price I like."] },
   'chegg-cash-flow-turnaround': { form: 'case-study', lines: ['Why I believe in', 'Chegg’s reinvention.'] },
+  'kalshi-40-billion-question': { form: 'model', lines: ['Kalshi’s $40 billion', 'question'] },
   'atlas-building-an-evidence-console': { form: 'case-study', lines: ['Building', 'Atlas'] },
   'jane-street-exact-search-solver-verification': { form: 'proof', lines: ['Verifying a 54-move', 'exact search.'] },
   'why-texas-toll-roads-stay-tolled': { form: 'ledger', lines: ['Why Texas toll roads', 'stay tolled.'] },

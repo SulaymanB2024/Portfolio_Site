@@ -1,5 +1,30 @@
 [
   {
+    "slug": "kalshi-40-billion-question",
+    "path": "/research/financial-systems/kalshi-40-billion-question",
+    "title": "Kalshi’s $40 Billion Question",
+    "displayTitle": "Kalshi’s $40 billion question",
+    "seoTitle": "Kalshi Valuation: What Would Justify $40 Billion?",
+    "seoDescription": "A Kalshi valuation models sports contracts, perpetuals, fee compression and regulatory risk. Base enterprise value: $26.4 billion, with reproducible scenarios.",
+    "category": "FINANCIAL SYSTEMS",
+    "subtitle": "The market can grow faster than the fees Kalshi keeps. A valuation built around distribution, sports access, and the cash left for shareholders.",
+    "searchTerms": [
+      "Kalshi",
+      "valuation",
+      "prediction markets",
+      "DCF",
+      "event contracts",
+      "Robinhood",
+      "Polymarket",
+      "exchange economics"
+    ],
+    "date": "2026-10-14",
+    "dateModified": "2026-10-14",
+    "readTime": "20 MIN",
+    "image": "/images/social/kalshi-40-billion-question.png",
+    "kind": "research"
+  },
+  {
     "slug": "hyperliquid-valuation",
     "path": "/research/financial-systems/hyperliquid-valuation",
     "title": "Hyperliquid Can Win Without HYPE Being Cheap",

@@ -1802,5 +1802,40 @@
         "href": "https://www.sec.gov/Archives/edgar/data/1324424/000132442426000053/expe-20260630.htm"
       }
     ]
+  },
+  "kalshi-40-billion-question": {
+    "question": "What would justify a $40 billion valuation for Kalshi?",
+    "answer": "Value the fees Kalshi retains, not a single multiple of headline trading activity. The October 14, 2026 model produces $26.4 billion of base enterprise value and $29.5 billion of weighted aggregate equity with an assumed $1 billion of unrestricted net cash. Supporting $40 billion under the base margins and capital assumptions requires roughly 50% more revenue in every forecast year, reaching $13.25 billion in 2031. The financing benchmark is reported discussions, the revenue checkpoint is a third-party annualized estimate, and the forecast is not company guidance.",
+    "paths": [
+      {
+        "label": "Inspect the operating assumptions",
+        "section": "the-operating-model",
+        "description": "Separate event notional, perpetuals exposure and retained fees by business line."
+      },
+      {
+        "label": "Compare the three outcomes",
+        "section": "three-businesses-three-values",
+        "description": "See how sports access, pricing and operating leverage change enterprise and equity value."
+      },
+      {
+        "label": "Solve for the proposed price",
+        "section": "what-forty-billion-requires",
+        "description": "Reproduce the revenue path and fee sensitivities behind the $40 billion benchmark."
+      }
+    ],
+    "sources": [
+      {
+        "label": "Kalshi Series F announcement",
+        "href": "https://news.kalshi.com/p/kalshi-raises-1-billion-22-billion-valuation-institutional-demand-surges"
+      },
+      {
+        "label": "Kalshi July fee schedule",
+        "href": "https://kalshi.com/docs/kalshi-fee-schedule.pdf"
+      },
+      {
+        "label": "CFTC October event-contract proposal",
+        "href": "https://www.cftc.gov/PressRoom/PressReleases/9310-26"
+      }
+    ]
   }
 }

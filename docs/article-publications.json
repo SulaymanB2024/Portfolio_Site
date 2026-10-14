@@ -3,6 +3,17 @@
   "purpose": "Bind newly researched initial editions without inventing historical restoration or revision provenance.",
   "records": [
     {
+      "slug": "kalshi-40-billion-question",
+      "path": "src/personal/editorial/data/articles/kalshi-40-billion-question.json",
+      "canonicalPath": "/research/financial-systems/kalshi-40-billion-question",
+      "datePublished": "2026-10-14",
+      "dateModified": "2026-10-14",
+      "articleSha256": "4fcb6c753bfea11f0dc4d258df9ddb7974c7c60ddca67f5cab2307d6e13d47d7",
+      "proseWords": 3728,
+      "readTime": "20 MIN",
+      "claimsPath": "docs/kalshi-valuation-2026/source-register.json"
+    },
+    {
       "slug": "hyperliquid-valuation",
       "path": "src/personal/editorial/data/articles/hyperliquid-valuation.json",
       "canonicalPath": "/research/financial-systems/hyperliquid-valuation",
