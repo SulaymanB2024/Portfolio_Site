@@ -850,11 +850,55 @@
       "path": "src/personal/editorial/data/articles/chegg-cash-flow-turnaround.json",
       "canonicalPath": "/research/financial-systems/chegg-cash-flow-turnaround",
       "datePublished": "2026-10-12",
-      "dateModified": "2026-10-12",
-      "articleSha256": "8cd8b4999f2ca631835c8c57943d6c2132721f9cfbc343bfc5373a711857fa00",
-      "proseWords": 2789,
-      "readTime": "16 MIN",
+      "dateModified": "2026-10-13",
+      "articleSha256": "7972b6da7f79736106f07d9b2bb903fe7faad63a1116579a2c8f00b48a7e3e8e",
+      "proseWords": 3282,
+      "readTime": "19 MIN",
       "claimsPath": "docs/chegg-case-study/source-register.json"
+    },
+    {
+      "slug": "adobe-paid-workflows",
+      "path": "src/personal/editorial/data/articles/adobe-paid-workflows.json",
+      "canonicalPath": "/research/financial-systems/adobe-paid-workflows",
+      "datePublished": "2026-10-13",
+      "dateModified": "2026-10-13",
+      "articleSha256": "b0cd261d81289bf27a9f41b072ccf2a1d84532e678247162c14959a0081ed128",
+      "proseWords": 1957,
+      "readTime": "12 MIN",
+      "claimsPath": "docs/long-pitches-20261012/source-register.json"
+    },
+    {
+      "slug": "paypal-margin-dollar-recovery",
+      "path": "src/personal/editorial/data/articles/paypal-margin-dollar-recovery.json",
+      "canonicalPath": "/research/financial-systems/paypal-margin-dollar-recovery",
+      "datePublished": "2026-10-13",
+      "dateModified": "2026-10-13",
+      "articleSha256": "7903a14278f5bf9a8cc5fbeb0c609a50a34f533110cd36249adad948d28cb57b",
+      "proseWords": 1953,
+      "readTime": "12 MIN",
+      "claimsPath": "docs/long-pitches-20261012/source-register.json"
+    },
+    {
+      "slug": "crocs-cash-and-brand-test",
+      "path": "src/personal/editorial/data/articles/crocs-cash-and-brand-test.json",
+      "canonicalPath": "/research/financial-systems/crocs-cash-and-brand-test",
+      "datePublished": "2026-10-13",
+      "dateModified": "2026-10-13",
+      "articleSha256": "8c4ede78cd8704051e439a19548737299f0424414878d9f2bfc228207d317c9a",
+      "proseWords": 1985,
+      "readTime": "12 MIN",
+      "claimsPath": "docs/long-pitches-20261012/source-register.json"
+    },
+    {
+      "slug": "expedia-network-and-cash",
+      "path": "src/personal/editorial/data/articles/expedia-network-and-cash.json",
+      "canonicalPath": "/research/financial-systems/expedia-network-and-cash",
+      "datePublished": "2026-10-13",
+      "dateModified": "2026-10-13",
+      "articleSha256": "0b7a5ad0a109b869cd540ea4076a05e1e1d378e82c1a1566cd050c11c5816c80",
+      "proseWords": 2025,
+      "readTime": "12 MIN",
+      "claimsPath": "docs/long-pitches-20261012/source-register.json"
     }
   ]
 }

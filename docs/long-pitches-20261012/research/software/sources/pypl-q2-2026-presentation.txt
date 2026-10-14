@@ -1,0 +1,858 @@
+PAGE 1
+PayPal 2Q'26 Performance
+July 28, 2026
+Financial results & company highlights
+PAGE 2
+2©2026 PayPal Holdings, Inc.
+Non-GAAP Financial Measures
+This presentation contains non-GAAP measures relating to our performance. These measures may exclude certain expenses, gains and losses that may not be indicative of our core operating results
+and business outlook, and, in each case, may be different from the non-GAAP financial measures used by other companies. The presentation of this financial information, which is not prepared
+under any comprehensive set of accounting rules or principles, is not intended to be considered in isolation of, or as a substitute for, the financial information prepared and presented in accordance
+with generally accepted accounting principles. You can find the reconciliation of these non-GAAP financial measures to the most directly comparable GAAP measures in the GAAP to non-GAAP
+reconciliation section of this presentation.
+Growth Rates
+All growth rates represent year-over-year comparisons, except as otherwise noted. FX-Neutral (which we also refer to as FXN or currency-neutral) results are calculated by translating the current
+period’s local currency results by the prior period’s exchange rate. FX-Neutral growth rates are calculated by comparing the current period's FX-Neutral results with the prior period's results,
+excluding the impact from currency hedging activities.
+Forward-Looking Statements
+This presentation contains forward-looking statements relating to, among other things, the future results of operations, financial condition, expectations and plans of PayPal Holdings, Inc. and its
+consolidated subsidiaries (“PayPal”) that reflect current projections and forecasts. Forward-looking statements can be identified by words such as “may,” “will,” “would,” “should,” “could,”
+“expect,” “anticipate,” “believe,” “estimate,” “intend,” “continue,” “strategy,” “future,” ”opportunity,” “plan,” “guidance,” “project,” “forecast,” “outlook,” and other similar expressions. Forward-
+looking statements may include, but are not limited to, statements regarding our guidance and projected financial and operating results for third quarter and full year 2026; our capital return
+program, including share repurchases and dividend payments, if any; our plans with respect to PayPal's business structure and operating model, and the anticipated benefits; our plans to reduce our
+cost structure, including anticipated cost savings; the timing and impact of product launches and acquisitions; and the projected future growth of PayPal’s businesses. Forward-looking statements
+are based upon various estimates and assumptions, as well as information known to PayPal as of the date of this presentation and are inherently subject to numerous risks and uncertainties.
+Our actual results could differ materially from those estimated or implied by forward-looking statements. Factors that could cause or contribute to such differences include, but are not limited to: our
+ability to compete in markets that are highly competitive and subject to rapid technological change, and to develop and deliver new or enhanced products and services on a timely basis;
+cyberattacks and security vulnerabilities, and associated impacts; the effect of global and regional political, economic, market and trade conditions including military conflicts, supply chain issues,
+tariffs or uncertainty thereof, and related events that affect payments or commerce activity, including inflation and interest rates; the impact of catastrophic events, such as global pandemics, that
+may disrupt our business, as well as our customers, suppliers, vendors and other business partners; the stability, security and performance of our payments platform; the effect of extensive
+government regulation and oversight related to our business, products and services in a variety of areas, including, but not limited to, laws covering payments, lending and consumer protection; the
+impact of complex and changing laws and regulations worldwide, including, but not limited to, laws covering cybersecurity, privacy, data protection, and artificial intelligence; the impact of
+payment card, bank, or other network rules or practices; risks related to our credit products, including our ability to realize benefits from our agreements with third parties such as our agreements to
+sell our credit receivables; changes in how consumers fund transactions; our ability to effectively detect and prevent the use of our services for fraud, abusive behaviors, illegal activities, or improper
+purposes; our ability to manage regulatory and litigation risks, and the outcome of legal and regulatory proceedings; our reliance on third parties in many aspects of our business; damage to our
+reputation or brands; fluctuations in foreign currency exchange rates; changes in tax rates and exposure to additional tax liabilities; changes to our capital allocation, management of operating
+cash or incurrence of indebtedness; our ability to timely develop and upgrade our technology systems, infrastructure and customer service capabilities; the impact of proposed or completed
+acquisitions, divestitures, strategic investments, or entries into new businesses or markets; and our ability to attract, hire, and retain talented employees. The forward-looking statements in this
+presentation do not include the potential impact of any acquisitions or divestitures that may be announced and/or contemplated after the date of this presentation.
+More information about factors that could adversely affect PayPal's results of operations, financial condition and prospects or that could cause actual results to differ from those expressed or
+implied in forward-looking statements is included in PayPal’s most recent annual report on Form 10-K, and its subsequent quarterly reports on Form 10-Q. All information in this presentation is as of
+July 28, 2026. For the reasons discussed above, you should not place undue reliance on the forward-looking statements in this presentation. PayPal assumes no obligation to update such forward-
+looking statements.
+PAGE 3
+©2026 PayPal Holdings, Inc. 3
+2Q’26 financial highlights
+• Delivered +1% TM$ growth, +3% ex-interest on customer balances1,2
+◦ Product contributions from Venmo, credit, Braintree; investing for growth
+◦ Branded checkout TPV growth further stabilized at +2% FXN
+◦ Raising FY expectation to low single-digit growth
+• Diversifying growth through Venmo and Braintree
+◦ Venmo Debit Card MAAs3 grew >50%; Pay With Venmo MAAs ~30%
+◦ Braintree TPV continued acceleration in the mid-teens
+◦ Robust FCF generation, +$1.8B and capital return, +$1.6B
+• Raising 2026 TM$ guidance and low-end of non-GAAP EPS guidance
+◦ While making deliberate opex investments to support growth and platform
+initiatives
+◦ Reiterated adjusted free cash flow and share repurchase guidance
+All growth rates reference 2Q'26 year-over-year growth unless otherwise noted. Additional financial detail provided in Supplemental
+Information.
+(1) For a reconciliation of non-GAAP financial measures to the most directly comparable GAAP financial measures, please see the GAAP to
+non-GAAP Reconciliations on slides 22-26.
+(2) Interest on customer balances is reported within OVAS revenue in this presentation and in our quarterly/annual SEC filings and primarily
+comprises interest and revenue earned on customer assets.
+(3) MAAs are a subset of active accounts that have completed a transaction at least once during the month of measurement. MAAs presented
+at the end of a quarter or year are the average of each month’s MAAs in the respective quarter or year.
+
+3
+PAGE 4
+©2026 PayPal Holdings, Inc. 4
+A More Focused PayPal
+All growth rates reference 2Q'26 year-over-year growth unless otherwise noted. Additional financial detail provided in
+Supplemental Information. Detailed definitions on slides 27-28.
+(1) MAAs are a subset of active accounts that have completed a transaction at least once during the month of measurement.
+Early Proof Points in 2Q What’s Different
+
+1 Diversifying beyond checkout into
+financial services
+• BNPL TPV accelerated 3pts to +26% and BNPL MAAs1 >20%
+• Debit card and tap-to pay TPV growing >60%; Venmo Debit Card MAAs1 grew >50%
+2 Accelerating Venmo & Braintree
+• Both businesses growing TPV mid-teens
+• 4x acceleration in Venmo product feature development2
+3
+Rebalancing towards the consumer
+side of the network
+• Improving experience and reducing friction: scaling biometrics on Venmo, major app refreshes
+soon; higher passkey usage drove checkout login friction to an all-time low3
+• Increased investment in consumer data, technology and local market capabilities
+4 Simplifying our operating model and
+leveraging AI
+• On-track to at least $1.5B in gross run-rate savings over the next 2-3 years and ~$400M of run-
+rate savings achieved by year-end
+• AI-assisted coding significantly increasing productivity, implementation time decreased 25%
+5 Innovating with discipline
+• Expanding in agentic, stablecoin, identity/biometrics: leveraging two-sided network, risk
+infrastructure, and trust across consumers, merchants, agents
+• PayPal World facilitating ~$200M TPV between Venmo/PayPal
+(2) Venmo feature development increasing 4x refers to 1H’26 compared to 1H’25.
+(3) Checkout login friction measured as login attempts requiring a password divided by total
+login attempts.
+PAGE 5
+©2026 PayPal Holdings, Inc.
+Strengthen the fundamentals
+• Refocus and rebuild consumer side of PayPal’s
+two-sided network
+• Continue modernizing technology platform
+• Sharpen business portfolios, innovation
+agenda and geographic focus through
+disciplined investment and prioritization
+• Focus on quality customer experiences
+• Simplify organization and reduce cost
+structure to increase growth investment
+A phased approach to fuel faster growth
+Transforming PayPal over time
+2026-2027 2027-2028 2028+
+Build momentum
+• Shift from stabilization to growth investment
+• Re-energize two-sided network by deepening
+engagement and customer lifetime value with
+our most valuable customers
+• Double down on BNPL and accelerate
+expansion into consumer financial services
+• Scale differentiated value-added services
+Accelerate and disrupt
+• Expand two-sided network and financial
+services to more countries
+• Build the next-generation network and
+broaden in-store capabilities
+• Scale AI commerce capabilities across the
+platform and embed throughout the customer
+experience
+• Scale impact of early-stage investments
+launched in prior years
+• Lead in digital identity and trusted verification
+Timing of impact
+©2026 PayPal Holdings, Inc. 5
+PAGE 6
+©2026 PayPal Holdings, Inc.
+• Increased adoption of VAS helping
+merchants address complex commerce
+challenges
+• High quality, profitable processing
+• Modernized, interoperable platform
+with expanding right-to-win
+Checkout Solutions
+& PayPal
+Consumer Financial
+Services & Venmo
+Payment Services
+& Crypto
+Aligned around consumer-led strategy, clear accountability, and concentration of resources
+Sharper focus with stronger conviction
+• Higher consumer selection in focus
+cohorts
+• Sustained BNPL growth
+• Higher customer lifetime value
+through product attach and habituation
+• Expanded merchant distribution
+• Increased ARPA through higher
+engagement and broader financial
+services product set
+• Greater total funds in
+• Increased financial services
+penetration
+Trusted and valuable payments
+network
+Go-to money movement and
+management platform
+Reliable, differentiated processing
+platform with premium services
+• Strengthen the consumer value proposition:
+improved experience, deeper consumer
+engagement, and compelling loyalty program
+• Prioritize high-value users who make up less
+than a third of user-base but more than half of
+TPV
+• Differentiate with a seamless, unified platform
+and premium value-added-services (VAS)
+• Execute targeted GTM motion incorporating
+expanded platform capabilities and VAS
+• Build on durable growth and profitability
+• Evolve from a P2P app into a broader
+money management platform
+• Expand on a product roadmap that resonates
+with target cohorts
+• Build on engagement and monetization
+Vision
+Focus
+Areas
+Key
+success
+indicators
+6
+PAGE 7
+2026 2027 2028 2029 Expected gross run-rate
+savings
+1. Simplified structure & alignment ~20-30% of total savings
+2. Operational & portfolio optimization ~30-40% of total savings
+3. Accelerated AI Adoption ~40% of total savings
+~$400M run-rate by
+year-end
+At least $1.5B
+Gross run-rate savings
+Optimize role ratios
+Three broad drivers, phased through 2029.
+Multiple paths to at least $1.5B gross run-rate
+savings over the next 2-3 years
+Improve productivity and performance across business units and enabling functions
+Drive AI enabled process re-design and execution of AI and automation use cases
+Simplified operating model
+Drive productivity, process improvements and
+efficiencies
+Integrate AI, automation across the business
+Reduce spans and layers across organization
+Refine location strategies
+Portfolio and geographic optimization
+Increase efficiency in marketing, outside services & vendor spend
+Deepen integration further into technology, risk, ops, fraud, and workforce planning
+Technology modernization and focus on customer support redesign
+1. Simplified structure & alignment
+Optimize spans, layers, and location of workforce
+2. Operational & portfolio optimization
+Drive productivity, process improvements and efficiencies
+3. Accelerated AI Adoption
+Integrate AI, automation across the business
+©2026 PayPal Holdings, Inc. 7
+PAGE 8
+©2026 PayPal Holdings, Inc.
+Completed
+Product launch / upgrade
+and /or technology milestone
+Area 1H 2025 2H 2025 1H 2026 2H 2026 1H 2027 2H 2027 1H 2028 2H 2028
+Customer
+Offerings
+PayPal
+Venmo
+Merchant
+Offerings
+PSP
+Payouts
+Other products
+Core Platform &
+Services
+Risk
+Identity
+Payments
+Servicing
+Checkout
+BNPL/Credit
+Enablers Finance
+Security
+Infrastructure Data
+Cloud
+We’re here
+On-track
+Delayed
+Corrective action
+needed
+Internal timelineKey
+Enhancing our technology platform
+8
+PAGE 9
+9©2026 PayPal Holdings, Inc.
+2Q'26 snapshot
+(in millions, except % and per share data) Results Y/Y growth
+Total payment volume (TPV) $486,448 10%; 9% FXN
+Revenue $8,682 5%; 3% FXN
+Transaction margin $ (TM$)1 $3,900 1%
+TM$ ex. interest on customer balances1,2 $3,619 3%
+Non-GAAP EPS1 $1.38 (1%)
+Adjusted free cash flow1,3 $1,832 179%
+All growth rates reference 2Q'26 year-over-year growth unless otherwise noted. Additional financial detail provided in Supplemental Information.
+(1) For a reconciliation of non-GAAP financial measures to the most directly comparable GAAP financial measures, please see the GAAP to non-GAAP Reconciliations on slides 22-26.
+(2) Interest on customer balances is reported within OVAS revenue in this presentation and in our quarterly/annual SEC filings and primarily comprises interest and revenue earned on customer assets.
+(3) Adjusted free cash flow excludes the net impact from timing differences between originating BNPL receivables classified as held for sale and their subsequent sale. See slide 26 for more detail.
+PAGE 10
+10©2026 PayPal Holdings, Inc.
+Account and activity metrics1
+(in millions, except % and TPA) 2Q'26
+Active accounts2 439
+Y/Y growth —%
+Monthly active accounts (MAA)3 228
+Y/Y growth 1%
+Number of payment transactions 6,750
+Y/Y growth 8%
+Number of payment transactions ex. PSP
+(unbranded card processing) 4,233
+Y/Y growth 7%
+Transactions per active account (TPA)4 60.0
+Y/Y growth 3%
+TPA ex. PSP4 37.9
+Y/Y growth 7%
+All growth rates reference 2Q'26 year-over-year growth unless otherwise noted.
+(1) Detailed definitions on slides 27-28.
+(2) Active accounts are accounts that have completed a transaction within the past 12 months.
+(3) MAAs are a subset of active accounts (primarily PayPal and Venmo) that have completed a transaction at
+least once during the month of measurement. MAAs presented at the end of a quarter or year are the average
+of each month’s MAAs in the respective quarter or year.
+(4) TPA and TPA ex. PSP are trailing 12-month metrics, reflecting transactions within the previous 12-month
+period, divided by active accounts at the end of the period. TPA ex. PSP excludes both unbranded card
+processing transactions and unbranded active accounts (primarily Braintree).
+• Active accounts2 grew +0.3% and MAA3 1%, largely driven by
+Venmo
+• 12-month trailing TPA4 +3%, inflecting to positive growth following
+price-value actions in Braintree in prior quarters
+• Number of payment transactions ex. PSP +7% driven by growth
+across the portfolio
+• TPA ex. PSP4 +7%, accelerating for a second consecutive quarter,
+reflecting continued strong Venmo engagement
+PAGE 11
+11©2026 PayPal Holdings, Inc.
+• Branded experiences growth
+supported by strong omni adoption
+• Venmo momentum continues,
+second consecutive quarter of mid-
+teens growth
+• Branded checkout further
+stabilized, consistent with 1Q, with
+strength in BNPL, PwV, and the U.S.
+• P2P & other consumer continues to
+grow double digits, reflecting
+Venmo and debit card momentum
+• PSP acceleration continued with
+Braintree growing in the mid-teens
+TPV mix across PayPal’s platform
+2Q'25 1Q'26 2Q'26
+Branded experiences
+(online & offline)1
+FXN GROWTH 8% 5% 6%
+% OF TOTAL 31% 31% 31%
+Venmo2
+FXN GROWTH 12% 14% 14%
+% OF TOTAL 18% 19% 19%
+Branded checkout (online)3
+FXN GROWTH 5% 2% 2%
+% OF TOTAL 29% 29% 28%
+P2P & other consumer4
+FXN GROWTH 10% 10% 10%
+% OF TOTAL 27% 26% 27%
+Payment service provider (PSP)5
+FXN GROWTH 2% 11% 13%
+% OF TOTAL 44% 45% 45%
+Total TPV FXN GROWTH 5% 8% 9%
+*Percent of total may not sum to 100% due to rounding. Additional financial detail provided in Supplemental Information and Definitions on slides 27-28.
+(1) Branded experiences (online & offline): branded checkout (online) as well as in-store payment methods, including debit (PayPal and Venmo) and tap to pay.
+(2) Venmo: Venmo P2P, Pay with Venmo, and Venmo debit.
+(3) Branded Checkout (online): PayPal branded checkout, Pay with Venmo, and eBay.
+(4) P2P & Other Consumer: P2P (PayPal and Venmo) and debit (PayPal and Venmo), except when used to fund a branded checkout (online) transaction and remittances.
+(5) PSP: unbranded card processing across Enterprise and SMB, as well as other merchant solutions (e.g., payouts, invoicing, point-of-sale solutions, etc.).
+PAGE 12
+12©2026 PayPal Holdings, Inc.
+• Transaction revenue +5%, driven by Braintree and Venmo as well
+as FX favorability
+• Other value-added services (OVAS) revenue flat, with higher
+credit revenue offset by lower interest on customer balances
+• TM$ +1%, +3% ex. interest on customer balances driven by Venmo,
+credit, and Braintree, with FX favorability and lower losses
+◦ TM$ growth more than offset two headwinds: strategic
+investments in checkout/BNPL habituation and growing over
+prior year non-recurring benefit of 1.5pts
+• Returned $1.5B via share repurchases and ~$125M in dividends,
+$6.0B in shares returned on a trailing 12-month basis, reducing
+weighted average shares by 10%
+All growth rates reference 2Q'26 year-over-year growth unless otherwise noted.
+Additional financial detail provided in Supplemental Information.
+(1) For a reconciliation of non-GAAP financial measures to the most directly comparable GAAP financial measures, please
+see the GAAP to non-GAAP Reconciliations on slides 22-26.
+(2) Interest on customer balances is reported within OVAS revenue in this presentation and in our quarterly/annual SEC
+filings and primarily comprises interest and revenue earned on customer assets.
+2Q'26 key financial results
+(in millions, except % and per share data) 2Q'26
+Total revenue $8,682
+Y/Y growth 5%
+FXN Y/Y growth 3%
+Transaction margin $ (TM$)1 $3,900
+Y/Y growth 1%
+Y/Y growth ex. int. on cust. balances1,2 3%
+Non-transaction related expenses1 $2,393
+Y/Y growth 9%
+Non-GAAP operating income1 $1,507
+Y/Y growth (8%)
+Non-GAAP operating margin %1 17.4%
+Y/Y change (248bps)
+Non-GAAP EPS1 $1.38
+Y/Y growth (1%)
+PAGE 13
+13©2026 PayPal Holdings, Inc.
+Raising FY’26 TM$ & low-end of non-GAAP EPS guidance
+FY'26
+Transaction margin $ ~$15.6B
+TM$ ex. interest on customer
+balances1 ~$14.5B
+Non-GAAP non-transaction
+operating expenses ~7% - 8% growth
+Non-GAAP effective tax rate 18% - 20%
+Non-GAAP EPS3 ~$5.38
+FY'25: $5.31
+GAAP EPS4 growth Mid-single digit decline
+FY'25: $5.41
+Adjusted free cash flow $6B+
+Share repurchase $6B
+CAPEX ~$1B
+(1) Interest on customer balances is reported within OVAS revenue in this presentation and in our quarterly/annual SEC filings and primarily comprises interest and revenue earned on customer assets.
+(2) Estimated non-GAAP amounts for 3Q'26 reflect adjustments of $35M.
+(3) Estimated non-GAAP amounts for FY'26 reflect adjustments of $350M which excludes potential second half 2026 transformation related charges.
+(4) FY'25 GAAP EPS included a ~$0.14 positive impact from PayPal’s strategic investment portfolio and crypto assets held for investment.
+For a reconciliation of non-GAAP financial measures to the most directly comparable GAAP financial measures, please see the GAAP to non-GAAP Reconciliations on slides 22-26.
+3Q'26
+Transaction margin $ Slightly positive
+TM$ ex. interest on customer
+balances1 Slightly positive to low-single digit
+Non-GAAP effective tax rate 19% - 21%
+Non-GAAP EPS2 growth Low-single digit decline
+3Q'25: $1.34
+GAAP EPS growth Low-single digit decline
+3Q'25: $1.30
+PAGE 14
+14©2026 PayPal Holdings, Inc.
+Q&A
+14
+PayPal’s Cannes Lions activation showed brands how
+PayPal Ads is delivering measurable results for
+merchants, driven by real purchase behavior across our
+439M active accounts. Read more here.
+14
+PAGE 15
+15©2026 PayPal Holdings, Inc.
+Supplemental
+information
+PAGE 16
+16©2026 PayPal Holdings, Inc.
+(in millions, except %) 1Q'25 2Q'25 3Q'25 4Q'25 1Q'26 2Q'26
+Total payment volume $417,208 $443,547 $458,088 $475,135 $463,955 $486,448
+Y/Y growth 3% 6% 8% 9% 11% 10%
+FXN Y/Y growth 4% 5% 7% 6% 8% 9%
+U.S. TPV $269,916 $276,778 $285,966 $300,798 $300,131 $315,580
+Y/Y growth 4% 4% 8% 9% 11% 14%
+International TPV $147,293 $166,768 $172,122 $174,337 $163,824 $170,868
+Y/Y growth 2% 10% 10% 8% 11% 2%
+FXN Y/Y growth 5% 6% 5% 2% 2% —%
+P2P TPV1 $101,383 $108,442 $110,746 $109,810 $108,643 $115,198
+Y/Y growth 5% 8% 8% 7% 7% 6%
+Venmo TPV $75,942 $81,976 $85,226 $85,793 $86,206 $93,806
+Y/Y growth 10% 12% 14% 13% 14% 14%
+Total take rate 1.87% 1.87% 1.84% 1.83% 1.80% 1.78%
+Transaction take rate 1.68% 1.68% 1.64% 1.65% 1.62% 1.61%
+Total revenue $7,791 $8,288 $8,417 $8,676 $8,353 $8,682
+Y/Y growth 1% 5% 7% 4% 7% 5%
+FXN Y/Y growth 2% 5% 6% 3% 5% 3%
+Transaction revenue $7,016 $7,441 $7,522 $7,819 $7,501 $7,832
+Y/Y growth —% 4% 6% 3% 7% 5%
+OVAS revenue $775 $847 $895 $857 $852 $850
+Y/Y growth 17% 16% 15% 10% 10% —%
+US revenue Y/Y growth —% 3% 5% 4% 9% 7%
+International revenue FXN Y/Y growth 5% 7% 7% 1% —% (3%)
+% international 43% 43% 44% 43% 42% 42%
+TPV, revenue, & take rate detail
+All results & growth rates reference 2Q'26 results & year-over-year growth unless
+otherwise noted. Definitions on slides 27-28.
+(1) P2P TPV comprises Venmo, PayPal, and Xoom P2P.
+• US TPV +14%, driven by PSP, Venmo, and
+branded experiences
+• International TPV +0% FXN, with branded
+experiences growth offset by PSP
+• Transaction take rate -7bps, driven by higher
+investments in branded checkout and buy now
+pay later, lapping a prior year non-recurring
+benefit, and product mix
+PAGE 17
+17©2026 PayPal Holdings, Inc.
+(in millions, except % and TPA) 1Q'25 2Q'25 3Q'25 4Q'25 1Q'26 2Q'26
+Active accounts1 436 438 438 439 439 439
+Y/Y growth 2% 2% 1% 1% 1% —%
+Monthly active accounts (MAA)2 224 226 227 231 225 228
+Y/Y growth 2% 2% 2% 1% 1% 1%
+Number of payment transactions 6,045 6,226 6,331 6,754 6,475 6,750
+Y/Y growth (7%) (5%) (5%) 2% 7% 8%
+Number of payment transactions ex. PSP 3,805 3,946 4,035 4,284 4,081 4,233
+Y/Y growth 6% 6% 7% 6% 7% 7%
+Transactions per active account (TPA)3 59.4 58.3 57.6 57.7 58.7 60.0
+Y/Y growth (1)% (4%) (6%) (5%) (1%) 3%
+TPA ex. PSP3 35.2 35.6 36.2 36.6 37.2 37.9
+Y/Y growth 4% 4% 5% 5% 6% 7%
+Account and activity metrics detail
+• Active accounts1 0.3% and MAA2 +1%, largely
+driven by Venmo
+• Number of payment transactions +8% driven
+by growth across the portfolio
+• 12-month trailing TPA +3%, inflecting to
+positive growth following price-value actions
+in Braintree in prior quarters
+• Number of payment transactions ex. PSP +7%
+driven by growth across the portfolio
+• TPA ex. PSP3 +7%, accelerating for a second
+consecutive quarter, reflecting continued
+strong Venmo engagement
+All results & growth rates reference 2Q'26 results & year-over-year growth unless otherwise
+noted. Definitions on slides 27-28.
+(1) Active accounts are accounts that have completed a transaction within the past 12 months.
+(2) MAAs are a subset of active accounts (primarily PayPal and Venmo) that have completed
+a transaction at least once during the month of measurement. MAAs presented at the end of
+a quarter or year are the average of each month’s MAAs in the respective quarter or year.
+(3) TPA and TPA ex. PSP are trailing 12-month metrics, reflecting transactions within the
+previous 12-month period, divided by active accounts at the end of the period. TPA ex. PSP
+excludes both unbranded card processing transactions and unbranded active accounts
+(primarily Braintree).
+PAGE 18
+18©2026 PayPal Holdings, Inc.
+(in millions, except %) 1Q'25 2Q'25 3Q'25 4Q'25 1Q'26 2Q'26
+Transaction expense (TE) $3,704 $3,968 $4,063 $4,252 $4,165 $4,385
+TE rate 0.89% 0.89% 0.89% 0.89% 0.90% 0.90%
+Transaction loss (TL) $278 $383 $397 $279 $276 $323
+TL rate 0.07% 0.09% 0.09% 0.06% 0.06% 0.07%
+Credit loss $93 $93 $86 $111 $102 $74
+Credit loss rate 0.02% 0.02% 0.02% 0.02% 0.02% 0.02%
+Volume-based expenses $4,075 $4,444 $4,546 $4,642 $4,543 $4,782
+Y/Y growth (4)% 4% 8% 5% 11% 8%
+Transaction margin $1 $3,716 $3,844 $3,871 $4,034 $3,810 $3,900
+Y/Y growth 7% 7% 6% 3% 3% 1%
+Transaction margin1 47.7% 46.4% 46.0% 46.5% 45.6% 44.9%
+Y/Y change (bps) 274 62 (58) (54) (208) (146)
+TM$ ex. interest on customer balances1,2 $3,418 $3,526 $3,550 $3,741 $3,536 $3,619
+Y/Y growth 7% 8% 7% 4% 3% 3%
+Transaction margin (TM) detail
+• TE rate +1bps, driven by product mix
+• TL rate -2bps, driven by risk mitigation
+strategies
+• Credit loss rate in line with 2Q’25, supported
+by disciplined underwriting
+Definitions on slides 27-28. All results & growth rates reference 2Q'26 results & year-
+over-year growth unless otherwise noted.
+(1) TM, TM$, and TM$ ex. interest on customer balances are non-GAAP measures. A
+reconciliation to the most directly comparable GAAP measure is included on slide 24.
+(2) TM$ is transaction margin dollars. Interest on customer balances is reported within
+other value added services (OVAS) revenue in this presentation and in our quarterly/
+annual SEC filings and primarily comprises interest and revenue earned on customer
+assets.
+PAGE 19
+19©2026 PayPal Holdings, Inc.
+(1) Non-transaction related expenses, total operating expenses, non-GAAP operating income, non-GAAP operating margin, and non-GAAP EPS are non-GAAP
+financial measures. For a reconciliation of non-GAAP financial measures to the most directly comparable GAAP financial measures and additional detail, please see
+the GAAP to non-GAAP Reconciliations on slides 22-26.
+(in millions, except %) 1Q'25 2Q'25 3Q'25 4Q'25 1Q'26 2Q'26
+Customer support and operations $398 $413 $447 $446 $446 $462
+Y/Y growth (12%) (5%) 5% (1%) 12% 12%
+Sales and marketing $448 $542 $482 $666 $495 $523
+Y/Y growth 18% 33% 3% 14% 10% (4%)
+Technology and development $731 $767 $800 $803 $792 $846
+Y/Y growth (1%) 8% 8% 4% 8% 10%
+General and administrative $496 $454 $506 $495 $473 $495
+Y/Y growth 9% (19%) (1%) (16%) (5%) 9%
+Restructuring and other $27 $24 $68 $74 $63 $67
+Y/Y growth (27%) (20%) 143% 100% 133% 179%
+Non-transaction related expenses $2,100 $2,200 $2,303 $2,484 $2,269 $2,393
+Y/Y growth 2% 2% 6% 2% 8% 9%
+Total operating expenses $6,175 $6,644 $6,849 $7,126 $6,812 $7,175
+Y/Y growth (2)% 3% 8% 4% 10% 8%
+Non-GAAP operating income $1,616 $1,644 $1,568 $1,550 $1,541 $1,507
+Y/Y growth 16% 13% 6% 3% (5)% (8%)
+Non-GAAP operating margin % 20.7% 19.8% 18.6% 17.9% 18.4% 17.4%
+Y/Y change (bps) 257 132 (19) (9) (229) (248)
+Non-GAAP EPS $1.33 $1.40 $1.34 $1.23 $1.34 $1.38
+Y/Y growth 23% 18% 12% 3% 1% (1)%
+Non-GAAP1 operating margin detail
+• Non-transaction opex +9%, driven by a
+combination of growth investments in
+technology and risk as well as inflationary
+pressure
+PAGE 20
+20©2026 PayPal Holdings, Inc.
+(in millions, except %) 1Q'25 2Q'25 3Q'25 4Q'25 1Q'26 2Q'26
+Free cash flow $964 $692 $1,718 $2,190 $903 $1,775
+Y/Y growth (45%) (49%) 19% —% (6%) 157%
+Adjusted free cash flow1 $1,381 $656 $2,279 $2,095 $1,720 $1,832
+Y/Y growth (26%) (42%) 48% —% 25% 179%
+Free cash flow (FCF) and capital allocation detail
+All results & growth rates reference 2Q'26 results & year-over-year growth unless
+otherwise noted. Free cash flow and adjusted free cash flow are non-GAAP financial
+metrics. For a reconciliation of non-GAAP financial measures to the most directly
+comparable GAAP financial measures and additional detail, please see the GAAP to
+non-GAAP Reconciliations on slides 22-26.
+(1) Adjusted free cash flow excludes the net timing impact between originating BNPL
+receivables as HFS and the subsequent sale of those receivables.
+• Generated 2Q'26 adjusted FCF of $1.8B
+• Returned $1.5B in capital to stockholders
+through share repurchases and ~$125M in
+dividends
+◦ On a trailing 12-month basis, share
+repurchases of $6.0B reduced weighted
+average shares by 10%
+• Cash, cash equivalents, and investments
+totaled $15.3B and debt totaled $13.4B as of
+June 30, 2026
+PAGE 21
+21©2026 PayPal Holdings, Inc.
+(in millions, except %) 1Q'25 2Q'25 3Q'25 4Q'25 1Q'26 2Q'26
+Hedging Impacts(1)
+Favorable (unfavorable) impact to net revenues (exclusive of hedging impact) $(104) $111 $134 $198 $257 $74
+Hedging impact 35 (70) (49) (82) (86) 6
+Favorable (unfavorable) impact to net revenues (69) 41 85 116 171 80
+Favorable (unfavorable) impact to operating expense 52 (50) (69) (101) (139) (25)
+Net favorable (unfavorable) impact to operating income $(17) $(9) $16 $15 $32 $55
+Credit net charge-offs, reserve builds (releases) and credit losses
+Net charge-offs(2) $78 $75 $90 $85 $74 $101
+Reserve build (release)(3) 15 18 (4) 26 28 (27)
+Credit Losses $93 $93 $86 $111 $102 $74
+(1) Foreign currency movements relative to the US dollar. We calculate the year-over-year impact of foreign currency movements on our business using prior period foreign
+currency exchange rates applied to current period transactional currency amounts. Hedging impact is recognized in international transaction revenue. Based on exchange
+rates on derivative positions as of June 30, 2026, estimated next 12 months hedging gains are $101M.
+(2) Net charge-offs includes principal charge-offs partially offset by recoveries for consumer and merchant receivables.
+(3) Reserve build (release) represents change in allowance for principal receivables excluding foreign currency remeasurement.
+Hedging impacts and credit reserve builds and releases
+PAGE 22
+22©2026 PayPal Holdings, Inc.
+GAAP to non-GAAP
+reconciliations
+PAGE 23
+23©2026 PayPal Holdings, Inc.
+Reconciliation of GAAP operating expenses to non-GAAP operating expenses
+Three Months Ended Year Ended December 31,
+(In Millions/Unaudited) Note June 30,
+2026
+March 31,
+2026
+December 31,
+2025
+September 30,
+2025
+June 30,
+2025
+March 31,
+2025
+December 31,
+2024
+September 30,
+2024
+June 30,
+2024
+March 31,
+2024 2025 2024 2023
+GAAP operating expenses:
+Transaction expense $ 4,385 $ 4,165 $ 4,252 $ 4,063 $ 3,968 $ 3,704 $ 3,997 $ 3,841 $ 3,942 $ 3,917 $ 15,987 $ 15,697 $ 14,385
+Transaction and credit losses 397 378 390 483 476 371 434 352 335 321 1,720 1,442 1,682
+Customer support and operations 462 446 446 447 413 398 451 427 436 454 1,704 1,768 1,919
+Sales and marketing 546 518 691 521 583 488 626 508 446 421 2,283 2,001 1,809
+Technology and development 849 793 804 801 767 731 773 746 718 742 3,103 2,979 2,973
+General and administrative 503 491 502 513 461 503 594 519 570 464 1,979 2,147 2,059
+Restructuring and other 113 74 80 69 116 66 50 63 113 212 331 438 (84)
+Total operating expenses $ 7,255 $ 6,865 $ 7,165 $ 6,897 $ 6,784 $ 6,261 $ 6,925 $ 6,456 $ 6,560 $ 6,531 $ 27,107 $ 26,472 $ 24,743
+Non-GAAP operating expense adjustments:
+Sales and marketing (a) (23) (23) (25) (39) (41) (40) (40) (40) (40) (42) (145) (162) (166)
+Technology and development (a) (3) (1) (1) (1) — — (1) (4) (5) (7) (2) (17) (33)
+General and administrative (a) (8) (8) (7) (7) (7) (7) (7) (7) (7) (7) (28) (28) (28)
+(d) — (10) — — — — — — — — — — —
+(e) — — — — — — — — — — — — (4)
+Restructuring and other (b) (46) (11) (6) (1) (92) (39) (13) (36) (83) (175) (138) (307) (122)
+(c) — — — — — — — 1 — — — 1 (58)
+(d) — — — — — — — — — — — — (21)
+(f) — — — — — — — — — — — — 339
+Total operating expenses $ (80) $ (53) $ (39) $ (48) $ (140) $ (86) $ (61) $ (86) $ (135) $ (231) $ (313) $ (513) $ (93)
+Non-GAAP operating expenses:
+Transaction expense 4,385 4,165 4,252 4,063 3,968 3,704 3,997 3,841 3,942 3,917 $ 15,987 $ 15,697 $ 14,385
+Transaction and credit losses 397 378 390 483 476 371 434 352 335 321 1,720 1,442 1,682
+Customer support and operations 462 446 446 447 413 398 451 427 436 454 1,704 1,768 1,919
+Sales and marketing 523 495 666 482 542 448 586 468 406 379 2,138 1,839 1,643
+Technology and development 846 792 803 800 767 731 772 742 713 735 3,101 2,962 2,940
+General and administrative 495 473 495 506 454 496 587 512 563 457 1,951 2,119 2,027
+Restructuring and other 67 63 74 68 24 27 37 28 30 37 193 132 54
+Total operating expenses $ 7,175 $ 6,812 $ 7,126 $ 6,849 $ 6,644 $ 6,175 $ 6,864 $ 6,370 $ 6,425 $ 6,300 $ 26,794 $ 25,959 $ 24,650
+(a) Amortization of acquired intangible assets.
+(b) Restructuring.
+(c) Right-of-use asset impairment and other charges associated with exiting certain leased properties as well as gains and losses associated with early lease terminations and owned property held for sale or sold.
+(d) CEO exit costs associated with Alex Chriss' separation agreement, including severance payments and acceleration of restricted stock awards.
+(e) Fees related to credit externalization.
+(f) Gain on divestiture of business, net of transaction costs.
+PAGE 24
+24©2026 PayPal Holdings, Inc.
+Reconciliation of GAAP operating income to non-GAAP operating income, Transaction
+margin dollars, and Transaction margin dollars ex-interest on customer balances and GAAP
+operating margin to non-GAAP operating margin and Transaction margin
+Three Months Ended Year Ended December 31,
+(In Millions, Except Percentages/Unaudited)
+June 30,
+2026
+March 31,
+2026
+December 31,
+2025
+September 30,
+2025
+June 30,
+2025
+March 31,
+2025
+December 31,
+2024
+September 30,
+2024
+June 30,
+2024
+March 31,
+2024 2025 2024 2023
+GAAP operating income $ 1,427 $ 1,488 $ 1,511 $ 1,520 $ 1,504 $ 1,530 $ 1,441 $ 1,391 $ 1,325 $ 1,168 $ 6,065 $ 5,325 $ 5,028
+Amortization of acquired intangible assets 34 32 33 47 48 47 48 51 52 56 175 207 227
+Restructuring 46 11 6 1 92 39 13 35 83 175 138 306 180
+Other — 10 — — — — — — — — — — (314)
+Total non-GAAP operating income adjustments 80 53 39 48 140 86 61 86 135 231 313 513 93
+Non-GAAP operating income 1,507 1,541 1,550 1,568 1,644 1,616 1,502 1,477 1,460 1,399 6,378 5,838 5,121
+Transaction margin adjustments:
+Customer support and operations 462 446 446 447 413 398 451 427 436 454 1,704 1,768 1,919
+Sales and marketing 523 495 666 482 542 448 586 468 406 379 2,138 1,839 1,643
+Technology and development 846 792 803 800 767 731 772 742 713 735 3,101 2,962 2,940
+General and administrative 495 473 495 506 454 496 587 512 563 457 1,951 2,119 2,027
+Restructuring and other 67 63 74 68 24 27 37 28 30 37 193 132 54
+Non transaction-related expense 2,393 2,269 2,484 2,303 2,200 2,100 2,433 2,177 2,148 2,062 9,087 8,820 8,583
+Transaction margin dollars 3,900 3,810 4,034 3,871 3,844 3,716 3,935 3,654 3,608 3,461 15,465 14,658 13,704
+Interest on customer balances 281 274 293 321 318 298 332 339 341 272 1,230 1,284 918
+Transaction margin dollars ex-interest on
+customer balances $ 3,619 $ 3,536 $ 3,741 $ 3,550 $ 3,526 $ 3,418 $ 3,603 $ 3,315 $ 3,267 $ 3,189 $ 14,235 $ 13,374 $ 12,786
+GAAP net revenues $ 8,682 $ 8,353 $ 8,676 $ 8,417 $ 8,288 $ 7,791 $ 8,366 $ 7,847 $ 7,885 $ 7,699 $ 33,172 $ 31,797 $ 29,771
+GAAP operating margin 16.4 % 17.8 % 17.4 % 18.1 % 18.1 % 19.6 % 17.2 % 17.7 % 16.8 % 15.2 % 18.3 % 16.7 % 16.9 %
+Non-GAAP operating margin 17.4 % 18.4 % 17.9 % 18.6 % 19.8 % 20.7 % 18.0 % 18.8 % 18.5 % 18.2 % 19.2 % 18.4 % 17.2 %
+Transaction margin 44.9 % 45.6 % 46.5 % 46.0 % 46.4 % 47.7 % 47.0 % 46.6 % 45.8 % 45.0 % 46.6 % 46.1 % 46.0 %
+PAGE 25
+25©2026 PayPal Holdings, Inc.
+Reconciliation of GAAP net income to non-GAAP net income, GAAP diluted EPS to non-
+GAAP diluted EPS, and GAAP effective tax rate to non-GAAP effective tax rate
+Three Months Ended Year Ended December 31,
+(In Millions, Except Percentages and Per Share
+Amount/Unaudited)
+June 30,
+2026
+March 31,
+2026
+December 31,
+2025
+September 30,
+2025
+June 30,
+2025
+March 31,
+2025
+December 31,
+2024
+September 30,
+2024
+June 30,
+2024
+March 31,
+2024 2025 2024 2023
+GAAP income before income taxes $ 1,310 $ 1,393 $ 1,627 $ 1,533 $ 1,529 $ 1,603 $ 1,410 $ 1,311 $ 1,399 $ 1,209 $ 6,292 $ 5,329 $ 5,411
+GAAP income tax expense 206 280 190 285 268 316 289 301 271 321 1,059 1,182 1,165
+GAAP net income 1,104 1,113 1,437 1,248 1,261 1,287 1,121 1,010 1,128 888 5,233 4,147 4,246
+Non-GAAP adjustments to net income:
+Non-GAAP operating income adjustments (see
+table above) 80 53 39 48 140 86 61 86 135 231 313 513 93
+Net (gains) losses on strategic investments and
+crypto assets held for investment 81 74 (117) (9) (12) (39) 59 171 6 49 (177) 285 (201)
+Other certain significant gains, losses, or charges (12) — (223) — — — — — — 31 (223) 31 39
+Tax effect of non-GAAP adjustments (34) (6) 19 1 (19) (5) (32) (39) (26) (44) (4) (141) 63
+Non-GAAP net income $ 1,219 $ 1,234 $ 1,155 $ 1,288 $ 1,370 $ 1,329 $ 1,209 $ 1,228 $ 1,243 $ 1,155 $ 5,142 $ 4,835 $ 4,240
+Shares used in diluted share calculation:
+GAAP 882 920 939 960 977 999 1,014 1,024 1,047 1,072 968 1,039 1,107
+Non-GAAP 882 920 939 960 977 999 1,014 1,024 1,047 1,072 968 1,039 1,107
+Net income per diluted share:
+GAAP $ 1.25 $ 1.21 $ 1.53 $ 1.30 $ 1.29 $ 1.29 $ 1.11 $ 0.99 $ 1.08 $ 0.83 $ 5.41 $ 3.99 $ 3.84
+Non-GAAP $ 1.38 $ 1.34 $ 1.23 $ 1.34 $ 1.40 $ 1.33 $ 1.19 $ 1.20 $ 1.19 $ 1.08 $ 5.31 $ 4.65 $ 3.83
+GAAP effective tax rate 16 % 20 % 12 % 19 % 18 % 20 % 20 % 23 % 19 % 27% 17 % 22 % 22 %
+Tax effect of non-GAAP adjustments to net income 1% (1%) 13% (1%) (1%) (1%) 1% (1%) —% (5%) 3% (1%) (2%)
+Non-GAAP effective tax rate 17 % 19 % 25 % 18 % 17 % 19 % 21 % 22 % 19 % 22 % 20 % 21 % 20 %
+PAGE 26
+26©2026 PayPal Holdings, Inc.
+Reconciliation of operating cash flow to free cash flow and adjusted free cash flow
+Three Months Ended Year Ended December 31,
+(In Millions/Unaudited) June 30,
+2026
+March 31,
+2026
+December 31,
+2025
+September 30,
+2025
+June 30,
+2025
+March 31,
+2025
+December 31,
+2024
+September 30,
+2024
+June 30,
+2024
+March 31,
+2024 2025 2024 2023
+Net cash provided by operating activities $ 1,983 $ 1,134 $ 2,384 $ 1,974 $ 898 $ 1,160 $ 2,394 $ 1,614 $ 1,525 $ 1,917 $ 6,416 $ 7,450 $ 4,843
+Less: Purchases of property and equipment (208) (231) (194) (256) (206) (196) (203) (169) (157) (154) (852) (683) (623)
+Free cash flow 1,775 903 2,190 1,718 692 964 2,191 1,445 1,368 1,763 5,564 6,767 4,220
+Net timing impact between originating
+credit receivables as HFS and the
+subsequent sale of receivables 57 817 (95) 561 (36) 417 (93) 95 (228) 93 847 (133) 334
+Adjusted free cash flow $ 1,832 $ 1,720 $ 2,095 $ 2,279 $ 656 $ 1,381 $ 2,098 $ 1,540 $ 1,140 $ 1,856 $ 6,411 $ 6,634 $ 4,554
+PAGE 27
+27©2026 PayPal Holdings, Inc.
+Our key metrics are calculated using internal company data based on the activity we measure on our payments platform and compiled from multiple systems, including systems that
+are internally developed or acquired through business combinations. While the measurement of our key metrics is based on what we believe to be reasonable methodologies and
+estimates, there are inherent challenges and limitations in measuring our key metrics globally at scale. The methodologies used to calculate our key metrics require significant
+judgment. We regularly review our processes for calculating these key metrics, and from time to time we may make adjustments to improve the accuracy or relevance of our metrics.
+For example, we continuously apply models, processes, and practices designed to detect and prevent fraudulent account creation on our platforms, and work to improve and
+enhance those capabilities. When we detect a significant volume of illegitimate activity, we generally remove the activity identified from our key metrics. Although such adjustments
+may impact key metrics reported in prior periods, we generally do not update previously reported key metrics to reflect these subsequent adjustments unless the retrospective impact
+of process improvements or enhancements is determined by management to be material.
+Active accounts: An active account is an account registered directly with PayPal or a platform access partner that has completed a transaction on our platform, not including
+gateway-exclusive transactions, within the past 12 months. A platform access partner is a third party whose customers are provided access to PayPal’s platform or services through
+such third party’s login credentials, including individuals and entities that utilize Hyperwallet’s payout capabilities. A user may register on our platform to access different products
+and may register more than one account to access a product. Accordingly, a user may have more than one active account. The number of active accounts provides management with
+additional perspective on the overall scale of our platform, but may not have a direct relationship to our operating results.
+Monthly active accounts or “MAA” are a subset of Active Accounts (primarily PayPal and Venmo)1 that have completed a transaction on our platform at least once during the month
+of measurement. The number of MAAs provides management with perspective on the overall scale of our platform reflecting recent usage but may not have a direct relationship to
+our operating results. MAAs presented at of the end of a quarter or year are the average of each month’s MAAs in the respective quarter or year.
+Number of payment transactions is the total number of payments, net of payment reversals, successfully completed on our payments platform or enabled by PayPal via a partner
+payment solution, not including gateway-exclusive transactions.
+Number of payment transactions excluding Unbranded Card Processing2 or “transactions ex. PSP” is the total number of payments, net of reversals, successfully completed on our
+payments platform or enabled by PayPal via a partner payment solution, excluding all unbranded card processing transactions and gateway-exclusive transactions.
+Number of payment transactions per active account or “TPA” reflects the total number of payment transactions within the previous 12-month period, divided by active accounts at
+the end of the period. The number of payment transactions per active account provides management with insight into the average number of times an account engages in payments
+activity on our payments platform in a given period. The number of times a consumer account or a merchant account transacts on our platform may vary significantly from the
+average number of payment transactions per active account.
+Number of payment transactions per active account excluding unbranded card processing2 or “TPA ex. PSP” reflects the total number of payment transactions within the previous
+12-month period excluding all unbranded card processing transactions, divided by active accounts at the end of the period excluding unbranded card processing accounts. This
+metric provides management with insight into the average number of times an account engages in payments activity on our payments platform in a given period, apart from
+unbranded card processing activity.
+Definitions (page 1 of 2)
+(1) MAAs exclude Braintree, Hyperwallet, Zettle, and certain other products that do not reflect engagement from a consumer perspective.
+(2) Unbranded Card Processing primarily comprises Braintree full-stack transactions and does not include gateway-exclusive transactions. Unbranded processing also
+includes unbranded credit and debit card processing on the PayPal platform.
+PAGE 28
+28©2026 PayPal Holdings, Inc.
+Definitions (page 2 of 2)
+Total payment volume or “TPV” is the value of payments, net of payment reversals, successfully completed on our payments platform, or enabled by PayPal via a partner payment
+solution, not including gateway-exclusive transactions.
+Branded checkout (online) TPV comprises PayPal branded checkout, Pay with Venmo, and eBay.
+P2P & other consumer TPV comprises P2P (PayPal and Venmo), debit (PayPal and Venmo) except when used to fund a branded checkout (online) transaction, and remittances.
+PSP TPV comprises unbranded card processing across Enterprise & SMB, as well as other merchant solutions (e.g., payouts, invoicing, point-of-sale solutions, etc.).
+Branded experiences (online & offline) TPV comprises branded checkout (online), debit (PayPal and Venmo), and tap to pay.
+Venmo TPV comprises Venmo P2P, Pay with Venmo, and Venmo debit.
+Total take rate is total revenue divided by TPV.
+Transaction take rate is transaction revenue divided by TPV.
+Transaction expense rate is transaction expense divided by TPV.
+Transaction loss rate is transaction losses divided by TPV.
+Credit loss rate is credit losses divided by TPV.
+Transaction margin or “TM” is total revenue less transaction expense and transaction and credit losses, divided by total revenue.
+Transaction margin dollars ($) or “TM$” is total revenue less transaction expense and transaction and credit losses.
+Transaction margin dollars excluding interest on customer balances is total revenue excluding interest on customer balances, less transaction expense and transaction and credit
+losses. Interest on customer balances is captured as part of Other Value Added Services (OVAS) revenue in this presentation and in our quarterly/annual SEC filings.
+PAGE 29
+29©2026 PayPal Holdings, Inc.
+Upcoming calendar
+Third Quarter 2026 Earnings October 27, 2026

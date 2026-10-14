@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="2160" height="1260" viewBox="0 0 864 504" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>Sulayman Bowles · four equity long pitches</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 504 
+L 864 504 
+L 864 0 
+L 0 0 
+L 0 504 
+z
+" style="fill: none"/>
+  </g>
+  <g id="axes_1">
+   <g id="patch_2">
+    <path d="M 90.72 393.12 
+L 829.44 393.12 
+L 829.44 110.88 
+L 90.72 110.88 
+L 90.72 393.12 
+z
+" style="fill: none"/>
+   </g>
+   <g id="matplotlib.axis_1">
+    <g id="xtick_1">
+     <g id="line2d_1">
+      <path d="M 90.72 393.12 
+L 90.72 110.88 
+" clip-path="url(#p3e2964692a)" style="fill: none; stroke: #d9d4c9; stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_2"/>
+     <g id="text_1">
+      <text style="font-size: 16px; font-family: Arial, sans-serif; text-anchor: middle; fill: #625f56" x="90.72" y="414.27625" transform="rotate(-0 90.72 414.27625)">0</text>
+     </g>
+    </g>
+    <g id="xtick_2">
+     <g id="line2d_3">
+      <path d="M 203.317524 393.12 
+L 203.317524 110.88 
+" clip-path="url(#p3e2964692a)" style="fill: none; stroke: #d9d4c9; stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_4"/>
+     <g id="text_2">
+      <text style="font-size: 16px; font-family: Arial, sans-serif; text-anchor: middle; fill: #625f56" x="203.317524" y="414.27625" transform="rotate(-0 203.317524 414.27625)">50</text>
+     </g>
+    </g>
+    <g id="xtick_3">
+     <g id="line2d_5">
+      <path d="M 315.915047 393.12 
+L 315.915047 110.88 
+" clip-path="url(#p3e2964692a)" style="fill: none; stroke: #d9d4c9; stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_6"/>
+     <g id="text_3">
+      <text style="font-size: 16px; font-family: Arial, sans-serif; text-anchor: middle; fill: #625f56" x="315.915047" y="414.27625" transform="rotate(-0 315.915047 414.27625)">100</text>
+     </g>
+    </g>
+    <g id="xtick_4">
+     <g id="line2d_7">
+      <path d="M 428.512571 393.12 
+L 428.512571 110.88 
+" clip-path="url(#p3e2964692a)" style="fill: none; stroke: #d9d4c9; stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_8"/>
+     <g id="text_4">
+      <text style="font-size: 16px; font-family: Arial, sans-serif; text-anchor: middle; fill: #625f56" x="428.512571" y="414.27625" transform="rotate(-0 428.512571 414.27625)">150</text>
+     </g>
+    </g>
+    <g id="xtick_5">
+     <g id="line2d_9">
+      <path d="M 541.110095 393.12 
+L 541.110095 110.88 
+" clip-path="url(#p3e2964692a)" style="fill: none; stroke: #d9d4c9; stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_10"/>
+     <g id="text_5">
+      <text style="font-size: 16px; font-family: Arial, sans-serif; text-anchor: middle; fill: #625f56" x="541.110095" y="414.27625" transform="rotate(-0 541.110095 414.27625)">200</text>
+     </g>
+    </g>
+    <g id="xtick_6">
+     <g id="line2d_11">
+      <path d="M 653.707619 393.12 
+L 653.707619 110.88 
+" clip-path="url(#p3e2964692a)" style="fill: none; stroke: #d9d4c9; stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_12"/>
+     <g id="text_6">
+      <text style="font-size: 16px; font-family: Arial, sans-serif; text-anchor: middle; fill: #625f56" x="653.707619" y="414.27625" transform="rotate(-0 653.707619 414.27625)">250</text>
+     </g>
+    </g>
+    <g id="xtick_7">
+     <g id="line2d_13">
+      <path d="M 766.305142 393.12 
+L 766.305142 110.88 
+" clip-path="url(#p3e2964692a)" style="fill: none; stroke: #d9d4c9; stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_14"/>
+     <g id="text_7">
+      <text style="font-size: 16px; font-family: Arial, sans-serif; text-anchor: middle; fill: #625f56" x="766.305142" y="414.27625" transform="rotate(-0 766.305142 414.27625)">300</text>
+     </g>
+    </g>
+    <g id="text_8">
+     <text style="font-size: 16px; font-family: Arial, sans-serif; text-anchor: middle; fill: #24221e" x="460.08" y="442.2775" transform="rotate(-0 460.08 442.2775)">Modeled share price · $</text>
+    </g>
+   </g>
+   <g id="matplotlib.axis_2">
+    <g id="ytick_1">
+     <g id="line2d_15"/>
+     <g id="text_9">
+      <text style="font-size: 16px; font-family: Arial, sans-serif; text-anchor: end; fill: #625f56" x="75.72" y="188.571259" transform="rotate(-0 75.72 188.571259)">Bear</text>
+     </g>
+    </g>
+    <g id="ytick_2">
+     <g id="line2d_16"/>
+     <g id="text_10">
+      <text style="font-size: 16px; font-family: Arial, sans-serif; text-anchor: end; fill: #625f56" x="75.72" y="272.822006" transform="rotate(-0 75.72 272.822006)">Base</text>
+     </g>
+    </g>
+    <g id="ytick_3">
+     <g id="line2d_17"/>
+     <g id="text_11">
+      <text style="font-size: 16px; font-family: Arial, sans-serif; text-anchor: end; fill: #625f56" x="75.72" y="357.073377" transform="rotate(-0 75.72 357.073377)">Bull</text>
+     </g>
+    </g>
+   </g>
+   <g id="line2d_18">
+    <path d="M 90.72 182.493134 
+L 239.369955 182.493134 
+" clip-path="url(#p3e2964692a)" style="fill: none; stroke: #d9d4c9; stroke-width: 2; stroke-linecap: square"/>
+   </g>
+   <g id="line2d_19">
+    <path d="M 90.72 266.743881 
+L 462.966263 266.743881 
+" clip-path="url(#p3e2964692a)" style="fill: none; stroke: #d9d4c9; stroke-width: 2; stroke-linecap: square"/>
+   </g>
+   <g id="line2d_20">
+    <path d="M 90.72 350.994627 
+L 706.32 350.994627 
+" clip-path="url(#p3e2964692a)" style="fill: none; stroke: #d9d4c9; stroke-width: 2; stroke-linecap: square"/>
+   </g>
+   <g id="line2d_21">
+    <path d="M 353.97301 393.12 
+L 353.97301 110.88 
+" clip-path="url(#p3e2964692a)" style="fill: none; stroke-dasharray: 3.6,4.8; stroke-dashoffset: 0; stroke: #625f56; stroke-width: 1.2"/>
+   </g>
+   <g id="patch_3">
+    <path d="M 90.72 393.12 
+L 829.44 393.12 
+" style="fill: none; stroke: #d9d4c9; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="PathCollection_1">
+    <defs>
+     <path id="mdb74c21737" d="M 0 5 
+C 1.326016 5 2.597899 4.473168 3.535534 3.535534 
+C 4.473168 2.597899 5 1.326016 5 0 
+C 5 -1.326016 4.473168 -2.597899 3.535534 -3.535534 
+C 2.597899 -4.473168 1.326016 -5 0 -5 
+C -1.326016 -5 -2.597899 -4.473168 -3.535534 -3.535534 
+C -4.473168 -2.597899 -5 -1.326016 -5 0 
+C -5 1.326016 -4.473168 2.597899 -3.535534 3.535534 
+C -2.597899 4.473168 -1.326016 5 0 5 
+z
+" style="stroke: #24221e"/>
+    </defs>
+    <g clip-path="url(#p3e2964692a)">
+     <use xlink:href="#mdb74c21737" x="239.369955" y="182.493134" style="fill: #f5f2ea; stroke: #24221e"/>
+    </g>
+   </g>
+   <g id="text_12">
+    <text style="font-size: 20px; font-family: Arial, sans-serif; text-anchor: start; fill: #24221e" x="260.915955" y="187.689228" transform="rotate(-0 260.915955 187.689228)">$66</text>
+   </g>
+   <g id="PathCollection_2">
+    <defs>
+     <path id="m0a5fe6b778" d="M 0 5 
+C 1.326016 5 2.597899 4.473168 3.535534 3.535534 
+C 4.473168 2.597899 5 1.326016 5 0 
+C 5 -1.326016 4.473168 -2.597899 3.535534 -3.535534 
+C 2.597899 -4.473168 1.326016 -5 0 -5 
+C -1.326016 -5 -2.597899 -4.473168 -3.535534 -3.535534 
+C -4.473168 -2.597899 -5 -1.326016 -5 0 
+C -5 1.326016 -4.473168 2.597899 -3.535534 3.535534 
+C -2.597899 4.473168 -1.326016 5 0 5 
+z
+" style="stroke: #24221e"/>
+    </defs>
+    <g clip-path="url(#p3e2964692a)">
+     <use xlink:href="#m0a5fe6b778" x="462.966263" y="266.743881" style="fill: #24221e; stroke: #24221e"/>
+    </g>
+   </g>
+   <g id="text_13">
+    <text style="font-size: 20px; font-family: Arial, sans-serif; text-anchor: start; fill: #24221e" x="484.512263" y="271.939974" transform="rotate(-0 484.512263 271.939974)">$165</text>
+   </g>
+   <g id="PathCollection_3">
+    <g clip-path="url(#p3e2964692a)">
+     <use xlink:href="#mdb74c21737" x="706.32" y="350.994627" style="fill: #f5f2ea; stroke: #24221e"/>
+    </g>
+   </g>
+   <g id="text_14">
+    <text style="font-size: 20px; font-family: Arial, sans-serif; text-anchor: start; fill: #24221e" x="727.866" y="356.190721" transform="rotate(-0 727.866 356.190721)">$273</text>
+   </g>
+   <g id="text_15">
+    <text style="font-size: 14px; font-family: Arial, sans-serif; text-anchor: middle; fill: #625f56" x="353.97301" y="131.942687" transform="rotate(-0 353.97301 131.942687)">Entry $116.90</text>
+   </g>
+  </g>
+  <g id="text_16">
+   <text style="font-size: 23px; font-family: Georgia, serif; text-anchor: start; fill: #24221e" x="90.72" y="47.716406" transform="rotate(-0 90.72 47.716406)">What the operating cases imply for the share price</text>
+  </g>
+  <g id="text_17">
+   <text style="font-size: 15px; font-family: Arial, sans-serif; text-anchor: start; fill: #625f56" x="90.72" y="79.437656" transform="rotate(-0 90.72 79.437656)">CROX · October 12, 2028 price scenarios · USD per original share</text>
+  </g>
+  <g id="text_18">
+   <text style="font-size: 13px; font-family: Arial, sans-serif; fill: #625f56" transform="translate(90.72 474.859238)">Author operating paths, cash-funded net share reduction and terminal cash multiples.</text>
+   <text style="font-size: 13px; font-family: Arial, sans-serif; fill: #625f56" transform="translate(90.72 490.462793)">Scenarios are not probabilities or confidence intervals. Dividends shown separately in the article.</text>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="p3e2964692a">
+   <rect x="90.72" y="110.88" width="738.72" height="282.24"/>
+  </clipPath>
+ </defs>
+</svg>

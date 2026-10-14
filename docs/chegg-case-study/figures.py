@@ -43,7 +43,7 @@ def save(fig, directory, name, footer):
 
 def build_figures(directory=ROOT/"figures"):
     inputs=load_inputs();actual=inputs["reported"];h=historical(inputs)
-    fig,ax=new_figure("A growing share, a small replacement", "Reported Q2 revenue · USD millions · matching periods")
+    fig,ax=new_figure("Skilling is growing as Chegg’s mix changes", "Reported Q2 revenue · USD millions · matching periods")
     q25,q26=actual["q2_2025"],actual["q2_2026"]
     academic=[float(q25["academic_services"]),float(q26["academic_services"])]
     skill=[float(q25["skilling"]),float(q26["skilling"])]
@@ -59,7 +59,7 @@ def build_figures(directory=ROOT/"figures"):
     ax.legend(frameon=False,loc="upper center",bbox_to_anchor=(.5,1.11),ncol=2,fontsize=14,handlelength=1.7)
     save(fig,directory,"chegg-revenue-replacement","Skilling +$0.317m  /  Academic −$53.588m  /  Only 0.6% of the loss replaced\nSource: Chegg Q2 2026 Form 10-Q; calculations use unrounded reported amounts.")
 
-    fig,ax=new_figure("Lower capex explains the cash-flow improvement", "H1 2025 → H1 2026 · USD millions · historical reconciliation")
+    fig,ax=new_figure("The reset has improved free cash flow", "H1 2025 → H1 2026 · USD millions · historical reconciliation")
     f25,cfo,saving,f26=map(float,[h["fcf_h1_2025"],h["cfo_change"],h["capex_saving"],h["fcf_h1_2026"]])
     after=f25+cfo
     ax.bar([0,3],[f25,f26],width=.58,color=INK)
@@ -72,7 +72,7 @@ def build_figures(directory=ROOT/"figures"):
     ax.set_xticks(range(4),["H1 2025\nfree cash flow","Operating cash\nflow decline","Lower cash\ncapex","H1 2026\nfree cash flow"])
     save(fig,directory,"chegg-free-cash-flow-bridge","FCF = operating cash flow − cash capex. Lower-capex savings exceeded the CFO decline.\nSource: Chegg H1 cash-flow statements; author’s reconciliation. USD millions.")
 
-    fig,ax=new_figure("The transition still consumes a cash cushion", "Illustrative four-quarter stress test · USD millions · not a calendar forecast",height=7.2)
+    fig,ax=new_figure("Operating discipline preserves room to reinvest", "Illustrative four-quarter stress test · USD millions · not a calendar forecast",height=7.2)
     styles=[("Managed decline",INK,"-","o"),("Faster erosion",MUTED,"--","s"),("Stronger transition",INK,":","^")]
     for scenario,(name,color,ls,marker) in zip(inputs["scenarios"],styles):
         rows,summary=run_scenario(inputs,scenario)

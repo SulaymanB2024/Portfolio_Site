@@ -1,0 +1,9 @@
+{
+  "zip_sha256": "021c55d3e5c4b42c1d89913b65a428f722d05b2c5024cbe8994aaf84891d451c",
+  "archive_files": 45,
+  "archive_integrity": "passed",
+  "no_private_workstation_paths": true,
+  "isolated_model_reproduction": "exact JSON/CSV bytes",
+  "isolated_notebook_execution": "8 code cells;12 PNG outputs;models unchanged",
+  "credentials_or_live_api_required": false
+}

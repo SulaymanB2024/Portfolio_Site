@@ -52,6 +52,10 @@ const SKETCH_DETAILS = [
 ] as const satisfies readonly [SketchId, string, string][];
 
 export const ARTICLE_GENERATIVE_ART_ASSIGNMENTS = {
+  '/research/financial-systems/expedia-network-and-cash': 'yuru-28',
+  '/research/financial-systems/crocs-cash-and-brand-test': 'yuru-27',
+  '/research/financial-systems/paypal-margin-dollar-recovery': 'yuru-26',
+  '/research/financial-systems/adobe-paid-workflows': 'yuru-25',
   '/research/financial-systems/chegg-cash-flow-turnaround': 'yuru-22',
   '/research/texas/texas-robotaxi-business-service-map': 'yuru-24',
   '/research/texas/texas-waymo-business-travel': 'yuru-02',

@@ -1,0 +1,20 @@
+{
+  "notebook_code_cells": 8,
+  "embedded_pngs": 12,
+  "all_images_match_export_bytes": true,
+  "figures": [
+    "adobe-growth-quality.png",
+    "adobe-cash-underwriting.png",
+    "adobe-price-scenarios.png",
+    "paypal-transaction-economics.png",
+    "paypal-cash-underwriting.png",
+    "paypal-price-scenarios.png",
+    "crocs-profit-and-shares.png",
+    "crocs-cash-underwriting.png",
+    "crocs-price-scenarios.png",
+    "expedia-segment-conversion.png",
+    "expedia-cash-underwriting.png",
+    "expedia-price-scenarios.png"
+  ],
+  "notebook_sha256": "126ad7201c3071907547bd61cca0ae32ea9548da2be3f3018e795ad9a8fbdbc6"
+}

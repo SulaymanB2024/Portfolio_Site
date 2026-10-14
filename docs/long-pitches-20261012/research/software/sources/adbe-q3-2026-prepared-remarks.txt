@@ -1,0 +1,839 @@
+PAGE 1
+DOUG CLARK
+
+Good afternoon and thank you for joining us. With me on the call today are Shantanu Narayen,
+Adobe’s Chair and CEO, Anil Chakravarthy, President of Customer Experience Orchestration,
+and Steve Day, Senior Vice President and Interim CFO.
+
+On this call, which is being recorded, we will discuss Adobe’s third quarter fiscal year 2026
+financial results. You can find our press release, as well as PDFs of our prepared remarks and
+financial results, on Adobe’s Investor Relations website.
+
+
+
+
+                                                                                                                       1
+
+
+PAGE 2
+The information discussed on this call, including our financial targets and product plans, is as of
+today, September 10, and contains forward-looking statements that involve risk, uncertainty
+and assumptions. Actual results may differ materially from those set forth in these statements.
+For more information on those risks, please review today's earnings release and Adobe's SEC
+filings.
+
+On this call we will discuss GAAP and non-GAAP financial measures. Our reported results
+include GAAP growth rates and non-GAAP growth rates, including constant currency rates.
+During this presentation, Adobe’s executives will refer to revenue growth in constant currency
+rates unless otherwise stated. Non-GAAP reconciliations are available in our earnings release
+and on Adobe’s Investor Relations website.
+
+I will now turn the call over to Shantanu.
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                                                                                       2
+
+
+PAGE 3
+Shantanu Narayen
+
+Thanks, Doug. Good afternoon, everyone, and thank you for joining us.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Adobe reported a strong third quarter, achieving $6.76 billion in
+revenue, representing 12% year-over-year growth. GAAP earnings per share for the quarter was
+$4.62, representing 11% year-over-year growth, and non                -GAAP earnings per share
+was $6.13, representing 15% year-over-year growth.
+
+Over the decades, Adobe’s evolving mission from “changing the world through digital
+experiences” to now “empowering everyone to create” has always focused on creating new
+market categories to serve an expanding set of customers. It has enabled us to build industry-
+                                                                                                                    3
+
+
+PAGE 4
+leading platforms and products in the areas of creativity, productivity and customer
+experience, setting a high bar for innovation and category transformation.
+
+Adobe will leverage AI to increase the reach, value and impact we will deliver to customers to
+drive our next decade of growth. AI enables us to democratize access to every creative
+discipline for everyone from the casual creator to the most seasoned creative professional; it
+enables us to meet the growing creativity and productivity needs of consumers and business
+professionals who are looking to stand out and communicate more effectively. With AI, Adobe
+uniquely empowers enterprises to deliver and orchestrate personalized customer experiences.
+
+As I reflect on 29 years at Adobe, I’m most proud of the innovative products and platforms
+we’ve delivered to customers including Acrobat and PDF, Adobe                    Experience Manager, Adobe
+Experience Platform, InDesign, Photoshop, and Premiere, and, more recently, Express and
+Firefly. It's incredible that these innovations        are now used by over a billion monthly active users
+(MAU) across all businesses, a number that grew greater than                 20% year over year in Q3 with
+the creative freemium MAU           crossing 100M and growing greater than 70% year over year. We
+created the Digital Marketing category and are the leading provider of                  Customer Experience
+Orchestration solutions, delivering over a trillion experiences per year for enterprise customers.
+We are just beginning to capitalize on the massive AI opportunity across creativity, productivity
+and customer experiences with AI          -first ending ARR now exceeding $650 million and growing
+more than 150% year over year. During this time, Adobe’s annual revenue has grown from less
+than $1 billion to over $26 billion.
+
+I’m delighted that Anil Chakravarthy will become Adobe’s next president and chief executive
+officer and join the Board of Directors effective December 1. I would also like to thank David
+Wadhwani for over a decade of partnership, leadership and passion for our creative
+community.
+
+I’m committed to working closely with Anil to ensure a smooth transition and support Adobe’s
+ongoing growth and transformation as executive chair. As an experienced transformation
+leader with strong values, integrity, deep knowledge of our business and passion for products
+to solve customer needs, Anil is the right person to chart Adobe's growth in this                   agentic era. He
+
+                                                                                                                      4
+
+
+PAGE 5
+has a proven record of building and delivering category-defining products that serve our broad
+range of customers, and I have every confidence that Adobe’s best days are ahead of us.
+
+I'll now turn it over to Anil.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                                                                                           5
+
+
+PAGE 6
+Anil Chakravarthy
+Thank you, Shantanu. Hello, everyone.
+
+I am deeply honored to lead Adobe at this pivotal moment. I'm excited by the opportunity to
+drive Adobe's growth and leadership across creativity, productivity and customer
+experiences in the era of agentic software. Adobe’s proven track
+record of empowering individuals and organizations               to express their ideas, tell their stories and
+make an impact continues to inspire us and fuel our commitment to customers. Thanks to
+Shantanu's exceptional leadership in transforming Adobe's                 product portfolio and business
+model over the decades, we are well positioned to capitalize on the massive opportunities
+ahead. I look forward to working closely with our employees and Shantanu to continue serving
+our customers and transforming Adobe              in the era of agentic AI.
+
+Business Professionals & Consumers
+
+Turning to Q3 results: subscription revenue for Business Professionals and Consumers
+was $1.91 billion, growing 15% year over year.
+
+Our strategy for Business Professionals & Consumers is to deliver AI                -powered applications that
+transform how users comprehend, create              and share content. We are delivering new
+conversational and agentic interfaces in Adobe Reader, Acrobat and Express through an
+integrated freemium experience.
+
+                                                                                                                     6
+
+
+PAGE 7
+Our differentiation is grounded in a deep understanding of the PDF format and three decades
+of document expertise to transform Acrobat from the world’s leading PDF tool into a
+comprehensive document productivity platform powered by AI. Today, people open more than
+400 billion PDFs with Acrobat every year to read, edit and create content. By integrating AI
+deeply into our products, we are helping customers realize the value of AI faster, more
+accurately, securely and cost efficiently. We’re meeting users wherever they work and
+expanding our reach across the digital ecosystem by extending Acrobat’s capabilities to major
+platforms including ChatGPT, Chrome, Claude, Microsoft Edge and WhatsApp. This approach
+to innovation positions Adobe to drive deeper user engagement, unlock new enterprise
+opportunities, and sustain our leadership as the trusted platform for digital documents in the
+age of AI.
+
+Yesterday, we announced significant advances in Acrobat, powered by the Adobe Productivity
+Agent, that help people and teams understand the information in their documents faster,
+create polished work more easily and access trusted knowledge at scale. Acrobat now turns
+complex documents into visually rich interactive reports and summary slides, as well as audio
+formats like personal podcasts, enabling users to quickly absorb key insights. New features like
+Knowledge Base and Analyzer empower teams to ask questions across massive document
+collections and surface structured insights from thousands of files. This unlocks the value of
+existing organizational knowledge, driving smarter, faster decision-making at scale, all with
+enterprise-grade governance, security, trust and compliance. With a focus on winning the next
+generation of business professionals,         Student Spaces in Acrobat        is now available globally,
+targeting the higher education market and empowering students to generate flashcards,
+quizzes and study guides to help them better understand and master their curriculum.
+
+
+
+
+
+
+
+
+
+
+
+                                                                                                                     7
+
+
+PAGE 8
+Additional Business Professional & Consumer highlights include:
+
+    •    BP&C MAU grew over 25% year over year to over 900 million;
+
+    •    Acrobat AI Assistant MAU doubled quarter over quarter;
+
+    •    Strong enterprise adoption of Acrobat AI capabilities among ETLA customers;
+
+    •    Notable customer wins this quarter include Amazon, Deutsche Post DHL, Honeywell,
+         JISC, Renault and The U.S. Department of Energy Los Alamos National Laboratory.
+
+Creative and Marketing Professionals
+
+In Q3, subscription revenue for Creative and Marketing Professionals was $4.65 billion, growing
+12% year over year.
+
+Creators & Creative Professionals
+
+Our strategy for Creators & Creative Professionals is to empower everyone to                     bring their
+creative visions to life across any media type and surface            . With Firefly, we’re making creativity
+more accessible, intuitive and efficient for Creators of every experience level. For Creative
+Professionals, we are delivering the most comprehensive AI-driven power and precision
+applications through Creative Cloud across every stage of the creative process.
+
+Our differentiation is rooted in our deep domain expertise across media types, including
+imaging, design, video, photography, illustration, animation and 3D and complemented by
+                                                                                                                      8
+
+
+PAGE 9
+our depth of intelligence across creative workflows. With Firefly and Creative Cloud, Adobe is
+reinventing creative software with agentic AI to deliver immediate, personalized value—
+meeting users where they are, with tools and agents that adapt to their needs. Adobe remains
+committed to delivering intuitive, context-aware experiences that honor creative
+craft, accelerate creative velocity and ensure that the next generation of Creators can thrive in
+an ever-changing world. Adobe’s strategy is to offer customers choice as well as intelligent
+routing to use the best models for their needs, fully integrated in Adobe applications,
+eliminating the friction of switching between workflows and platforms.
+
+The Adobe Creative Agent empowers customers by handling the orchestration and execution of
+complex, repetitive creative workflows. We expanded the Adobe Creative Agent to
+additional Creative Cloud flagship apps, including Photoshop and Premiere, extending
+conversational, agentic workflows deeper into our professional applications.
+We also introduced several innovations in Photoshop, giving professionals more choice and
+control at every stage of the creative process. This includes a new AI Assisted Editor, now in
+beta, offering customers the option of using a dedicated interface and natural-language prompt
+bar alongside our generative tools powered by leading AI models.
+
+Adobe Firefly is the all-in-one creative AI studio for the next generation of Creators. In
+Q3, we added native generation of music, speech and sound effects                   , bringing commercially safe
+AI audio to creative workflows       . We released new creative skills and tools like Create
+Storyboard and Create Brand Kit, purpose built for social creators and solopreneurs, along with
+additional enhancements that help make Firefly AI Assistant more personalized and context-
+aware over time.
+
+We announced our agreement to acquire Topaz Labs, which would add state-of-the-art AI
+enhancement models in Adobe Firefly, Firefly Services and Creative Cloud
+apps, providing Creators, designers, video professionals,              photographers and enterprises the
+tools to achieve exceptional quality across every format and workflow.                  With over a million
+users, Topaz Labs and its Emmy Award-winning AI technology will be integrated across Adobe's
+creative AI portfolio, enabling customers to enhance footage, restore and remaster archival
+
+                                                                                                                      9
+
+
+PAGE 10
+content, and blend AI-generated and traditionally captured content into seamless final
+productions. We expect the transaction to close in Q4, subject to regulatory approvals and
+other customary closing        conditions.
+
+Firefly Enterprise, spanning Firefly Services, Adobe Firefly Foundry and                 Adobe Brand
+Intelligence, helps the world’s largest brands industrialize             content production with brand           safe
+custom models. In July, we expanded Firefly Enterprise with Adobe Firefly Graph Enterprise
+Edition and Firefly Creative Production Enterprise Edition, giving businesses reusable, node                      -
+based creative workflows and mass           -scale production capabilities, alongside a new Simula              te
+feature in Adobe Brand Intelligence that predicts campaign performance before content goes
+live. We announced that Disney Imagineering is integrating Firefly Foundry into its theme park
+design toolkit, bringing Disney stories, characters and experiences to life in Parks faster than
+ever.
+
+We are aggressively executing our global strategy to attract millions of next-generation
+Creators to Adobe. In conjunction with Saudi Arabia’s emphasis on digital literacy and AI, we
+expanded our partnership with          the Ministry of Communications and Information Technology
+(MCIT) and HUMAIN to enable the nation’s 27 million citizens and residents with Adobe Firefly
+and Express, while supporting the development of a new image generation model tuned to
+Saudi culture.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                                                                                      10
+
+
+PAGE 11
+Additional Creators and Creative Professionals highlights include:
+
+    •    Creative freemium MAU now surpassing 100 million and growing                      over 70% year over
+         year;
+
+    •    Intensity of AI usage continues with credit consumption               accelerating quarter on quarter,
+         across Creative Cloud and the Firefly App;
+
+    •    Firefly ending ARR across Firefly App and           Firefly credit packs grew 40% quarter over
+         quarter;
+
+    •    Enterprise wins this quarter include Academy Sports, Disney, Jet2, Perficient, Premier
+         League, Publicis, Tennis Australia and T-Mobile.
+
+I’m excited to host Adobe MAX, the world's largest creativity conference, in November in Miami
+Beach, where we will welcome more than 10,000 members of our global community and
+engage with hundreds of thousands more online. This year, we'll showcase breakthrough
+innovations across Creative Cloud, new capabilities in Firefly, and connected workflows for
+Firefly Enterprise — all powered by agentic AI. MAX is always a celebration of the community's
+creativity, and we look forward to sharing how Adobe magic is transf                 orming creative workflows
+and unlocking new possibilities.
+
+Marketing Professionals
+
+Turning to Marketing Professionals, our strategy is to deliver Adobe CX Enterprise, the agentic
+system of record for Customer Experience Orchestration (CXO), serving the entire customer
+lifecycle from identifying and engaging prospects to driving conversion and developing lasting
+loyalty. Adobe CX Enterprise is focused on three critical solutions — Adobe Experience Platform
+(AEP) and native apps for customer engagement; Adobe GenStudio for content supply chain;
+and Adobe Experience Manager (AEM) and agentic web apps for brand visibility. Over 20,000
+global enterprises rely on Adobe, and we are helping them transform their customer
+experience for the era of agentic AI.
+
+Through Adobe CX Enterprise, we uniquely bring together creativity                  , marketing and agentic AI,
+simplifying and transforming how enterprises manage the customer lifecycle. We deliver this
+
+                                                                                                                    11
+
+
+PAGE 12
+value through proprietary CX intelligence, agentic orchestration, governed workflow execution,
+open ecosystem connectivity and enterprise-grade trust, all of which we’ve built over several
+years, providing our customers a practical path from the apps they use today to an end-to-end
+agentic AI system.
+
+In Q3, we delivered the first unified brand visibility solution bringing together Semrush’s AI
+visibility intelligence with Adobe’s agentic content optimization capabilities, grounded in a deep
+understanding of business and brand context. Adobe Brand Visibility is a comprehensive
+solution for Generative Engine Optimization that combines the industry-leading capabilities of
+Adobe LLM Optimizer with Semrush’s AI Optimization. We're seeing tremendous customer
+interest in tapping our database of nearly 300 million real-world AI search prompts to
+understand how their brands are showing up across leading platforms such as ChatGPT, Google
+AI Mode, Microsoft Copilot and Perplexity AI.
+
+At the Cannes Lions International Festival of Creativity in June, we introduced a major
+expansion of Adobe GenStudio to help brands meet customers wherever they are in the
+moment of purchase, in a stream or in a scroll. GenStudio for Commerce Media Networks gives
+retailers a way to attract advertising partners with self          -serve, on-brand creative built directly
+from product listings and category context.           We also expanded Adobe Brand Intelligence
+capabilities so marketing teams can preview how content will resonate with audiences                        before it
+ever goes live. This is what an agentic content supply chain demands, at the speed our
+customers need.
+
+We are seeing tremendous customer interest in CX Enterprise Coworker, the specialized AI
+agent in CX Enterprise that autonomously executes complex marketing and customer
+engagement workflows. CX Enterprise Coworker, which became generally available in June,
+meets marketers where they are, embedding agentic intelligence directly into the engagement
+lifecycle, offering choice and control while enabling teams to act faster, scale personalization,
+and continuously optimize outcomes. CX Enterprise Coworker synthesizes insights from Adobe
+and third-party applications, while coordinating AI agents and workflows across analytics,
+
+
+
+                                                                                                                    12
+
+
+PAGE 13
+content creation and journey orchestration. Early customer interest is strong with over 1,700
+customers and early adopters of CX Enterprise Coworker                .
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Additional Marketing Professional         s highlights included:
+
+    •    Ending ARR growth of over 20% year over year for each of AEM & agentic
+         web apps, Adobe GenStudio and AEP & apps;
+
+    •    Continued strength in Subscription Services,            driven by Forward Deployed Engineering
+         and strategic value realization engagements with customers                ;
+
+    •    Q3 industry analyst recognition, being named             the top leader in two Forrester Waves:
+         including Customer Data Platforms for B2C and Experience Optimization Solutions                       , as
+         well as two IDC Marketscapes for Worldwide AI-Enabled Customer Data Platforms for
+         B2B Users and B2C Users        ;
+
+    •    Global enterprise customer wins in Q3           included Academy Sports, Alpine Racing, BNP
+         Paribas, Humana, IKEA, Jet2, Marriott, MSC Cruises, Publicis, Royal Bank of Canada,
+         Vanguard and Wells Fargo.
+
+Looking ahead, Adobe is well positioned to be the global leader in agentic software for
+creativity, productivity and customer experience. We are building on tremendous assets: deep
+domain expertise; a proven track record of product innovation; a broad community of
+customers spanning individuals to small businesses to the largest enterprises in the world;
+                                                                                                                    13
+
+
+PAGE 14
+diversified global routes to market; a values-driven culture; highly motivated employees;
+a trusted and well-recognized brand; and the financial strength to invest for the future.
+
+I am incredibly excited by the opportunity in front of us and I look forward to sharing more
+updates.
+
+I'll now pass it to Steve.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                                                                                          14
+
+
+PAGE 15
+Steve Day
+
+Thanks, Anil.
+
+Today, I will start by summarizing Adobe’s performance in Q3 FY26, highlighting growth drivers
+across our customer groups, and I’ll finish with our financial targets.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Q3 FY26 Performance
+
+In Q3, Adobe achieved record revenue of $6.76 billion, growing 13% year over year as reported
+and 12% in constant currency. Diluted earnings per share was $4.62 on a GAAP basis and $6.13
+on a non-GAAP basis.
+
+                                                                                                                    15
+
+
+PAGE 16
+Q3 financial highlights included:
+
+    •    Total Adobe ending ARR of $27.50 billion, growing 11.2% year over year;
+
+    •    Total Customer Group subscription revenue of $6.56 billion, growing 14% year over
+         year, or 13% in constant currency;
+
+    •    RPO of $22.16 billion exiting the quarter          growing 8% year over year and cRPO growing
+         9% year over year, both as reported and in constant currency;
+    •    Cash flows from operations were a Q3 record at $2.52 billion, and ending cash and
+         short-term investments exiting Q3 were $5.64 billion; and
+
+    •    Repurchasing approximately 9.5 million shares of our stock during the quarter. Exiting
+         Q3, we have fully utilized our March 2024            authorization and have approximately $24.             55
+         billion remaining under our        April 2026 authorization.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Customer Group Results and Insights
+
+Business Professionals & Consumers subscription revenue was $1.                   91 billion, increasing 16%
+year over year as reported, or        15% in constant currency.
+
+
+
+
+
+
+
+                                                                                                                     16
+
+
+PAGE 17
+Q3 growth drivers for Business Professionals & Consumers included:
+
+    •    Double-digit ending ARR year-over-year growth across all geographies;
+
+    •    Acrobat + Express MAU surpassed 900 million, growing more than 25% year over year                          ;
+
+    •    Acrobat AI Assistant MAU         doubled quarter over quarter; and
+
+    •    Strong performance in SMB          across inside sales and the reseller channel.
+
+Creative & Marketing Professionals subscription revenue was $4.                  65 billion, increasing 13% year
+over year, or 12% in constant currency.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                                                                                     17
+
+
+PAGE 18
+Q3 growth drivers for Creative & Marketing Professionals included:
+
+    •    Continued strength in Creative Cloud across our Teams and Enterprise offerings;
+
+    •    Creative freemium MAU, which includes Firefly and Express and web and mobile
+         versions of Premiere, Photoshop and Lightroom, crossed 100 million, growing over 70%
+         year over year;
+
+    •    Firefly ending ARR across Firefly Apps and Firefly credit packs grew 40% quarter over
+         quarter;
+
+    •    Customer growth in Firefly Enterprise with accelerating usage quarter over quarter;
+
+    •    Ending ARR growth of >20% year over year for each of Adobe Experience Manager &
+         Agentic web apps, Adobe GenStudio, and Adobe Experience Platform & apps.
+
+    •    Doubled the number of paid customers              quarter on quarter for Brand Visibility solutions          ,
+         helping brands optimize visibility across traditional and generative search;                 and
+
+    •    Continued strength in retention across the Enterprise customer base.
+
+Targets
+
+Let me now turn to our financial targets, which assume current macroeconomic conditions                          .
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                                                                                    18
+
+
+PAGE 19
+For Q4 FY26, we are targeting:
+
+    •    Total Adobe revenue of $6.80 to $6.85 billion;
+
+    •    Business Professionals & Consumers           subscription revenue of $1.       93 to $1.95 billion;
+
+    •    Creative & Marketing Professionals subscription revenue of $4.665 to $4.695 billion;
+
+    •    GAAP EPS of $4.65 to $4.70; and
+
+    •    Non-GAAP EPS of $6.30 to $6.35.
+
+For Q4, we assume non-GAAP operating margin of approximately 44.0%, and GAAP tax rate of
+approximately 22.0% and a non-GAAP tax rate of approximately 18.0%.
+
+Given strong year-to-date performance, we are raising full-year revenue and EPS targets.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+For FY26, we are targeting:
+
+    •    Total Adobe revenue of $26.576 to $26.626 billion;
+
+    •    Business Professionals & Consumers subscription revenue of $7.                 470 to $7.490 billion;
+
+    •    Creative & Marketing Professionals subscription revenue of $18.                242 to $18.272 billion;
+
+    •    Total Adobe ending ARR book of business growth of 10.2% year over year compared to
+         our FY26 beginning book of business of $25.66 billion;
+
+
+                                                                                                                   19
+
+
+PAGE 20
+    •    GAAP EPS of $18.12 to $18.17; and
+
+    •    Non-GAAP EPS of $24.45 to $24.50.
+
+Our FY26 targets assume non         -GAAP operating margin of approximately 45.0%, a GAAP tax rate
+of approximately 22.5% and a non         -GAAP tax rate of approximately 18.0%.
+
+Summary
+
+We are encouraged by the progress we are making against our strategy.                    We are expanding our
+user base and deepening engagement with              existing customers through agentic experiences.
+With focused execution and disciplined investments, we are driving long-term durable growth.
+
+Now, I’ll turn it back to Shantanu.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                                                                                  20
+
+
+PAGE 21
+SHANTANU NARAYEN
+
+Thanks, Steve.
+
+I want to express my deep appreciation to all our employees, customers, partners and investors
+for the support that they've provided to Adobe during my tenure.
+
+Thank you. We will now take your questions.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                                                                                   21
+
+
+PAGE 22
+                                                                                                                                                                         22
+

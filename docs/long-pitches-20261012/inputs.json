@@ -1,0 +1,676 @@
+{
+  "version": 1,
+  "cutoff": "2026-10-12",
+  "authored_on": "2026-10-13",
+  "evaluation_date": "2028-10-12",
+  "forecast_basis": "Price at evaluation date based on annual recurring cash run-rate near the latest financial period available then; scenario prices are not probabilities.",
+  "units": {
+    "financials": "USD millions",
+    "shares": "millions",
+    "prices": "USD per original share",
+    "rates": "fractions"
+  },
+  "share_basis_note": "Latest disclosed shares are dated public proxies, not exact October12 shares. Net retirement and repurchase prices are author assumptions, funded after commitments. Ending cash is not added to terminal value.",
+  "benchmark": {
+    "symbol": "SPY",
+    "entry_close": 778.1,
+    "basis": "Price return, same evaluation session; reconcile corporate actions. Cash distributions evaluated separately without reinvestment when complete."
+  },
+  "companies": [
+    {
+      "symbol": "ADBE",
+      "company": "Adobe Inc.",
+      "entry_close": 238.14,
+      "latest_disclosed_shares_m": 389.2,
+      "share_count_date": "2026-09-18",
+      "ttm_period_end": "2026-08-28",
+      "interim_period_description": "Nine months ended August 28, 2026 versus August 29, 2025",
+      "source_ids": [
+        "adbe-fy-2025",
+        "adbe-q3-2026"
+      ],
+      "reported_cash": {
+        "annual_previous": {
+          "revenue": 23769,
+          "net_income": 7130,
+          "cfo": 10031,
+          "capex": 179,
+          "sbc": 1942,
+          "buybacks": 11281
+        },
+        "interim_previous": {
+          "revenue": 17575,
+          "net_income": 5274,
+          "cfo": 6871,
+          "capex": 145,
+          "sbc": 1453,
+          "buybacks": 8807
+        },
+        "interim_current": {
+          "revenue": 19776,
+          "net_income": 5428,
+          "cfo": 7646,
+          "capex": 180,
+          "sbc": 1582,
+          "buybacks": 6821
+        }
+      },
+      "revenue_anchors": {
+        "consolidated": 25970
+      },
+      "cash_normalizations": [],
+      "scenarios": [
+        {
+          "name": "Bear",
+          "segment_growth": {
+            "consolidated": [
+              -0.04,
+              -0.04
+            ]
+          },
+          "owner_cash_margin": [
+            0.25,
+            0.25
+          ],
+          "desired_net_share_retirement": [
+            0,
+            0
+          ],
+          "average_repurchase_price": [
+            250,
+            250
+          ],
+          "terminal_owner_cash_multiple": 9,
+          "sbc_ratio": 0.085,
+          "net_margin_crosscheck": 0.2,
+          "cash_commitments": [
+            1340,
+            1000
+          ],
+          "dividend_per_share": [
+            0,
+            0
+          ]
+        },
+        {
+          "name": "Base",
+          "segment_growth": {
+            "consolidated": [
+              0.08,
+              0.08
+            ]
+          },
+          "owner_cash_margin": [
+            0.31,
+            0.31
+          ],
+          "desired_net_share_retirement": [
+            0.04,
+            0.04
+          ],
+          "average_repurchase_price": [
+            285,
+            330
+          ],
+          "terminal_owner_cash_multiple": 14,
+          "sbc_ratio": 0.082,
+          "net_margin_crosscheck": 0.27,
+          "cash_commitments": [
+            1340,
+            1000
+          ],
+          "dividend_per_share": [
+            0,
+            0
+          ]
+        },
+        {
+          "name": "Bull",
+          "segment_growth": {
+            "consolidated": [
+              0.12,
+              0.12
+            ]
+          },
+          "owner_cash_margin": [
+            0.33,
+            0.33
+          ],
+          "desired_net_share_retirement": [
+            0.06,
+            0.06
+          ],
+          "average_repurchase_price": [
+            330,
+            420
+          ],
+          "terminal_owner_cash_multiple": 17,
+          "sbc_ratio": 0.082,
+          "net_margin_crosscheck": 0.29,
+          "cash_commitments": [
+            1340,
+            1000
+          ],
+          "dividend_per_share": [
+            0,
+            0
+          ]
+        }
+      ],
+      "sensitivity_multiples": [
+        11,
+        14,
+        17
+      ],
+      "commitment_note": "Author budget: $1bn annual debt/capital flexibility plus $340m first-year acquisition budget, based on announced pending Topaz price. Cash retained receives no terminal bonus."
+    },
+    {
+      "symbol": "PYPL",
+      "company": "PayPal Holdings, Inc.",
+      "entry_close": 56.05,
+      "latest_disclosed_shares_m": 855.460874,
+      "share_count_date": "2026-07-22",
+      "ttm_period_end": "2026-06-30",
+      "interim_period_description": "Six months ended June 30, 2026 versus June 30, 2025",
+      "source_ids": [
+        "pypl-fy-2025",
+        "pypl-q2-2026"
+      ],
+      "reported_cash": {
+        "annual_previous": {
+          "revenue": 33172,
+          "net_income": 5233,
+          "cfo": 6416,
+          "capex": 852,
+          "sbc": 1002,
+          "buybacks": 6052
+        },
+        "interim_previous": {
+          "revenue": 16079,
+          "net_income": 2548,
+          "cfo": 2058,
+          "capex": 402,
+          "sbc": 535,
+          "buybacks": 3051
+        },
+        "interim_current": {
+          "revenue": 17035,
+          "net_income": 2217,
+          "cfo": 3117,
+          "capex": 439,
+          "sbc": 534,
+          "buybacks": 3052
+        }
+      },
+      "revenue_anchors": {
+        "consolidated": 34128
+      },
+      "cash_normalizations": [
+        {
+          "amount": -128,
+          "label": "TTM capitalized SBC: 134 + 62 \u2212 68; economic-cost sensitivity beyond CFO add-back"
+        },
+        {
+          "amount": -653,
+          "label": "TTM retained-loan net investing: (20190\u221219688) + (8026\u22127595) \u2212 (11490\u221211210)"
+        }
+      ],
+      "scenarios": [
+        {
+          "name": "Bear",
+          "segment_growth": {
+            "consolidated": [
+              -0.02,
+              -0.02
+            ]
+          },
+          "owner_cash_margin": [
+            0.105,
+            0.105
+          ],
+          "desired_net_share_retirement": [
+            0.01,
+            0.01
+          ],
+          "average_repurchase_price": [
+            50,
+            50
+          ],
+          "terminal_owner_cash_multiple": 8,
+          "sbc_ratio": 0.035,
+          "net_margin_crosscheck": 0.105,
+          "cash_commitments": [
+            300,
+            300
+          ],
+          "dividend_per_share": [
+            0.56,
+            0.56
+          ]
+        },
+        {
+          "name": "Base",
+          "segment_growth": {
+            "consolidated": [
+              0.04,
+              0.04
+            ]
+          },
+          "owner_cash_margin": [
+            0.145,
+            0.145
+          ],
+          "desired_net_share_retirement": [
+            0.05,
+            0.05
+          ],
+          "average_repurchase_price": [
+            65,
+            75
+          ],
+          "terminal_owner_cash_multiple": 12,
+          "sbc_ratio": 0.033,
+          "net_margin_crosscheck": 0.14,
+          "cash_commitments": [
+            300,
+            300
+          ],
+          "dividend_per_share": [
+            0.56,
+            0.56
+          ]
+        },
+        {
+          "name": "Bull",
+          "segment_growth": {
+            "consolidated": [
+              0.06,
+              0.06
+            ]
+          },
+          "owner_cash_margin": [
+            0.16,
+            0.16
+          ],
+          "desired_net_share_retirement": [
+            0.06,
+            0.06
+          ],
+          "average_repurchase_price": [
+            75,
+            95
+          ],
+          "terminal_owner_cash_multiple": 14,
+          "sbc_ratio": 0.032,
+          "net_margin_crosscheck": 0.15,
+          "cash_commitments": [
+            300,
+            300
+          ],
+          "dividend_per_share": [
+            0.56,
+            0.56
+          ]
+        }
+      ],
+      "sensitivity_multiples": [
+        9,
+        12,
+        15
+      ],
+      "commitment_note": "Forward owner-cash margins already include recurring retained-credit reinvestment and economic stock-compensation charge. $300m yearly additional transformation/liquidity budget; no customer-cash bonus. Dividend assumed held at $0.14 quarterly, not guaranteed."
+    },
+    {
+      "symbol": "CROX",
+      "company": "Crocs, Inc.",
+      "entry_close": 116.9,
+      "latest_disclosed_shares_m": 47.945075,
+      "share_count_date": "2026-07-23",
+      "ttm_period_end": "2026-06-30",
+      "interim_period_description": "Six months ended June 30, 2026 versus June 30, 2025",
+      "source_ids": [
+        "CROX-K25",
+        "CROX-Q226"
+      ],
+      "reported_cash": {
+        "annual_previous": {
+          "revenue": 4040.647,
+          "net_income": -81.198,
+          "cfo": 710.431,
+          "capex": 51.231,
+          "sbc": 36.701,
+          "buybacks": 582.32
+        },
+        "interim_previous": {
+          "revenue": 2086.706,
+          "net_income": -332.179,
+          "cfo": 218.565,
+          "capex": 31.946,
+          "sbc": 20.036,
+          "buybacks": 194.137
+        },
+        "interim_current": {
+          "revenue": 2100.925,
+          "net_income": 342.443,
+          "cfo": 270.768,
+          "capex": 38.729,
+          "sbc": 24.852,
+          "buybacks": 256.157
+        }
+      },
+      "revenue_anchors": {
+        "crocs_brand": 3372.461,
+        "heydude": 682.405
+      },
+      "cash_normalizations": [
+        {
+          "amount": -63.103,
+          "label": "Author rounded recurring-cash underwriting: $600m versus $663.103m observed proxy; tax/working-capital volatility, not a reported cost"
+        }
+      ],
+      "scenarios": [
+        {
+          "name": "Bear",
+          "segment_growth": {
+            "crocs_brand": [
+              -0.05,
+              -0.05
+            ],
+            "heydude": [
+              -0.1,
+              -0.1
+            ]
+          },
+          "owner_cash_margin": [
+            0.11,
+            0.11
+          ],
+          "desired_net_share_retirement": [
+            0,
+            0
+          ],
+          "average_repurchase_price": [
+            110,
+            110
+          ],
+          "terminal_owner_cash_multiple": 8,
+          "sbc_ratio": 0.014,
+          "net_margin_crosscheck": 0.1,
+          "cash_commitments": [
+            150,
+            150
+          ],
+          "dividend_per_share": [
+            0,
+            0
+          ]
+        },
+        {
+          "name": "Base",
+          "segment_growth": {
+            "crocs_brand": [
+              0.04,
+              0.04
+            ],
+            "heydude": [
+              -0.02,
+              -0.02
+            ]
+          },
+          "owner_cash_margin": [
+            0.15,
+            0.15
+          ],
+          "desired_net_share_retirement": [
+            0.07,
+            0.07
+          ],
+          "average_repurchase_price": [
+            145,
+            165
+          ],
+          "terminal_owner_cash_multiple": 11,
+          "sbc_ratio": 0.012,
+          "net_margin_crosscheck": 0.14,
+          "cash_commitments": [
+            250,
+            250
+          ],
+          "dividend_per_share": [
+            0,
+            0
+          ]
+        },
+        {
+          "name": "Bull",
+          "segment_growth": {
+            "crocs_brand": [
+              0.06,
+              0.06
+            ],
+            "heydude": [
+              0.02,
+              0.02
+            ]
+          },
+          "owner_cash_margin": [
+            0.18,
+            0.18
+          ],
+          "desired_net_share_retirement": [
+            0.08,
+            0.08
+          ],
+          "average_repurchase_price": [
+            175,
+            225
+          ],
+          "terminal_owner_cash_multiple": 14,
+          "sbc_ratio": 0.012,
+          "net_margin_crosscheck": 0.16,
+          "cash_commitments": [
+            150,
+            150
+          ],
+          "dividend_per_share": [
+            0,
+            0
+          ]
+        }
+      ],
+      "sensitivity_multiples": [
+        8,
+        11,
+        14
+      ],
+      "additional_cash_stress": {
+        "name": "$600m tax-payment stress",
+        "additional_commitments": [
+          500,
+          0
+        ],
+        "note": "Hypothetical $600m payment in model year1 replaces the $100m base protected cash budget, so its incremental allocation is $500m. This is a use of the existing tax-risk category, not a second $600m reported liability. First-year operating cash shortfall must be tested against current usable cash/funding; do not interpret the price output as fully funded."
+      },
+      "commitment_note": "Author $150m annual debt-paydown plus $100m annual protected tax/liquidity budget in the base case. Protected cash is unavailable for repurchases and receives no terminal valuation bonus. Gross repurchase permission is not funding. Net share retirement is capped by cash available; the two base-year caps bind. June cash is a historical reference, not October cash. $20m post-June refund is absent from the anchor and not added to recurring projections."
+    },
+    {
+      "symbol": "EXPE",
+      "company": "Expedia Group, Inc.",
+      "entry_close": 268.47,
+      "latest_disclosed_shares_m": 120.019343,
+      "share_count_date": "2026-07-24",
+      "ttm_period_end": "2026-06-30",
+      "interim_period_description": "Six months ended June 30, 2026 versus June 30, 2025",
+      "source_ids": [
+        "expe-fy-2025",
+        "expe-q2-2026"
+      ],
+      "reported_cash": {
+        "annual_previous": {
+          "revenue": 14733,
+          "net_income": 1301,
+          "cfo": 3880,
+          "capex": 770,
+          "sbc": 398,
+          "buybacks": 1930
+        },
+        "interim_previous": {
+          "revenue": 6774,
+          "net_income": 125,
+          "cfo": 4073,
+          "capex": 396,
+          "sbc": 203,
+          "buybacks": 1072
+        },
+        "interim_current": {
+          "revenue": 7741,
+          "net_income": 863,
+          "cfo": 5409,
+          "capex": 383,
+          "sbc": 217,
+          "buybacks": 1058
+        }
+      },
+      "revenue_anchors": {
+        "b2c": 9834,
+        "b2b": 5362,
+        "other": 504
+      },
+      "cash_normalizations": [
+        {
+          "amount": -1399,
+          "label": "Author no-growth travel-WC sensitivity: TTM deferred bookings(1958) + merchant AP(319) + total AR cash movement(\u2212878). AR is an imperfect merchant/agency proxy."
+        }
+      ],
+      "equity_sbc_sensitivity_extra": 90,
+      "scenarios": [
+        {
+          "name": "Bear",
+          "segment_growth": {
+            "b2c": [
+              -0.03,
+              -0.03
+            ],
+            "b2b": [
+              0.08,
+              0.08
+            ],
+            "other": [
+              -0.03,
+              -0.03
+            ]
+          },
+          "owner_cash_margin": [
+            0.13,
+            0.13
+          ],
+          "desired_net_share_retirement": [
+            0,
+            0
+          ],
+          "average_repurchase_price": [
+            260,
+            260
+          ],
+          "terminal_owner_cash_multiple": 10,
+          "sbc_ratio": 0.033,
+          "net_margin_crosscheck": 0.085,
+          "cash_commitments": [
+            250,
+            250
+          ],
+          "dividend_per_share": [
+            1.92,
+            1.92
+          ]
+        },
+        {
+          "name": "Base",
+          "segment_growth": {
+            "b2c": [
+              0.05,
+              0.05
+            ],
+            "b2b": [
+              0.15,
+              0.15
+            ],
+            "other": [
+              0,
+              0
+            ]
+          },
+          "owner_cash_margin": [
+            0.17,
+            0.17
+          ],
+          "desired_net_share_retirement": [
+            0.03,
+            0.03
+          ],
+          "average_repurchase_price": [
+            290,
+            325
+          ],
+          "terminal_owner_cash_multiple": 13,
+          "sbc_ratio": 0.032,
+          "net_margin_crosscheck": 0.115,
+          "cash_commitments": [
+            250,
+            250
+          ],
+          "dividend_per_share": [
+            1.92,
+            1.92
+          ]
+        },
+        {
+          "name": "Bull",
+          "segment_growth": {
+            "b2c": [
+              0.08,
+              0.08
+            ],
+            "b2b": [
+              0.2,
+              0.2
+            ],
+            "other": [
+              0.03,
+              0.03
+            ]
+          },
+          "owner_cash_margin": [
+            0.185,
+            0.185
+          ],
+          "desired_net_share_retirement": [
+            0.04,
+            0.04
+          ],
+          "average_repurchase_price": [
+            340,
+            420
+          ],
+          "terminal_owner_cash_multiple": 15,
+          "sbc_ratio": 0.031,
+          "net_margin_crosscheck": 0.135,
+          "cash_commitments": [
+            250,
+            250
+          ],
+          "dividend_per_share": [
+            1.92,
+            1.92
+          ]
+        }
+      ],
+      "sensitivity_multiples": [
+        10,
+        13,
+        16
+      ],
+      "commitment_note": "Forward cash margins exclude incremental net travel-WC financing and include economic stock compensation. Author $250m annual additional liquidity/debt budget. No excess-cash bonus. Dividend held at $0.48 quarterly as an assumption."
+    }
+  ]
+}

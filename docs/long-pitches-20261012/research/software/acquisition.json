@@ -1,0 +1,231 @@
+{
+  "cutoff": "2026-10-12",
+  "retrieved_local_date": "2026-10-12",
+  "sources": [
+    {
+      "id": "adbe-q3-2026",
+      "url": "https://www.sec.gov/Archives/edgar/data/796343/000079634326000156/adbe-20260828.htm",
+      "status": "acquired",
+      "content_type": "text/html",
+      "bytes": 1641565,
+      "sha256": "88a4a12a84c6388d3b698a7450bf66e9fef5b500e2e5fdb478ebd538bdb8b866",
+      "snapshot": "sources/adbe-q3-2026.html"
+    },
+    {
+      "id": "adbe-fy-2025",
+      "url": "https://www.sec.gov/Archives/edgar/data/796343/000079634326000003/adbe-20251128.htm",
+      "status": "acquired",
+      "content_type": "text/html",
+      "bytes": 2321294,
+      "sha256": "00bb15a46a2a32e1c2006c563a16cde31e333d04481eceada3c4d477e619a918",
+      "snapshot": "sources/adbe-fy-2025.html"
+    },
+    {
+      "id": "pypl-q2-2026",
+      "url": "https://www.sec.gov/Archives/edgar/data/1633917/000163391726000082/pypl-20260630.htm",
+      "status": "acquired",
+      "content_type": "text/html",
+      "bytes": 2922584,
+      "sha256": "42612225803384e965d56820df775024aa231e980f26e2e34fed343fe0d1788a",
+      "snapshot": "sources/pypl-q2-2026.html"
+    },
+    {
+      "id": "pypl-fy-2025",
+      "url": "https://www.sec.gov/Archives/edgar/data/1633917/000163391726000024/pypl-20251231.htm",
+      "status": "acquired",
+      "content_type": "text/html",
+      "bytes": 3521703,
+      "sha256": "5887582bf0647b6682a9e6e91fe6cd2b2bef19b6dce7a2ef4101eb2bd58c5e47",
+      "snapshot": "sources/pypl-fy-2025.html"
+    },
+    {
+      "id": "pypl-q2-2026-release",
+      "url": "https://www.sec.gov/Archives/edgar/data/1633917/000163391726000080/pypl2q-26earningsrelease.htm",
+      "status": "acquired",
+      "content_type": "text/html",
+      "bytes": 568514,
+      "sha256": "af095a0b0f261980c1b48222628e8516f84ea295f68e9bd83610b70991348c62",
+      "snapshot": "sources/pypl-q2-2026-release.html"
+    },
+    {
+      "id": "dbx-q2-2026",
+      "url": "https://www.sec.gov/Archives/edgar/data/1467623/000146762326000049/dbx-20260630.htm",
+      "status": "acquired",
+      "content_type": "text/html",
+      "bytes": 1940897,
+      "sha256": "9c91ed18efa11f38666c7387a885c6da2c397fc593e652dbdb0ce575d78ae226",
+      "snapshot": "sources/dbx-q2-2026.html"
+    },
+    {
+      "id": "dbx-fy-2025",
+      "url": "https://www.sec.gov/Archives/edgar/data/1467623/000146762326000008/dbx-20251231.htm",
+      "status": "acquired",
+      "content_type": "text/html",
+      "bytes": 2423607,
+      "sha256": "e98d7cccfb368c1217521419acb265fd4bdf25548074a3ddecc8556dbd9d0ed4",
+      "snapshot": "sources/dbx-fy-2025.html"
+    },
+    {
+      "id": "dbx-q2-2026-release",
+      "url": "https://investors.dropbox.com/news-releases/news-release-details/dropbox-announces-second-quarter-2026-results",
+      "status": "acquired",
+      "content_type": "text/html; charset=UTF-8",
+      "bytes": 803364,
+      "sha256": "b66e91053a06c92e9754b612b9d25de949efbb697fa8cc2d6f4d1e722d1639c3",
+      "snapshot": "sources/dbx-q2-2026-release.html"
+    },
+    {
+      "id": "dbx-ir-index",
+      "url": "https://investors.dropbox.com/",
+      "status": "acquired",
+      "content_type": "text/html; charset=UTF-8",
+      "bytes": 313630,
+      "sha256": "96d6c510d8acebcdf74d017582d2901f81b2b1f20a8d230247d911fabb5f79de",
+      "snapshot": "sources/dbx-ir-index.html"
+    },
+    {
+      "id": "expe-q2-2026",
+      "url": "https://www.sec.gov/Archives/edgar/data/1324424/000132442426000053/expe-20260630.htm",
+      "status": "acquired",
+      "content_type": "text/html",
+      "bytes": 1549141,
+      "sha256": "426a169aae4a9fb6ee2e3c8769cada7f8ecb220f38dd182bdaa086b88b3d8a04",
+      "snapshot": "sources/expe-q2-2026.html"
+    },
+    {
+      "id": "expe-fy-2025",
+      "url": "https://www.sec.gov/Archives/edgar/data/1324424/000132442426000008/expe-20251231.htm",
+      "status": "acquired",
+      "content_type": "text/html",
+      "bytes": 2565930,
+      "sha256": "1746f45ce4d3ff43e04778bb2abd291e7d9bad6c666c42f7aec02fd5758de579",
+      "snapshot": "sources/expe-fy-2025.html"
+    },
+    {
+      "id": "expe-q2-2026-release",
+      "url": "https://www.sec.gov/Archives/edgar/data/1324424/000132442426000051/earningsrelease-q22026.htm",
+      "status": "acquired",
+      "content_type": "text/html",
+      "bytes": 600176,
+      "sha256": "49e738699c117787d1768ad29af5159bc4e4362ed2f0777ca8769d9a8058cf42",
+      "snapshot": "sources/expe-q2-2026-release.html"
+    },
+    {
+      "id": "pypl-ir-quarterly",
+      "url": "https://investor.pypl.com/financials/quarterly-results/default.aspx",
+      "status": "acquired",
+      "content_type": "text/html; charset=utf-8",
+      "bytes": 71104,
+      "sha256": "6a1e039f51284279504e36288c65d7268ccda7cdb8d33205c174d1738511a602",
+      "snapshot": "sources/pypl-ir-quarterly.html"
+    },
+    {
+      "id": "expe-ir-quarterly",
+      "url": "https://ir.expediagroup.com/financial-information/quarterly-results/default.aspx",
+      "status": "acquired",
+      "content_type": "text/html; charset=utf-8",
+      "bytes": 101215,
+      "sha256": "0bf556a602ea170f85e1dc31d4e1fb2f6ffa09c197220f342ae110476115fd3d",
+      "snapshot": "sources/expe-ir-quarterly.html"
+    },
+    {
+      "id": "adbe-q3-2026-release",
+      "url": "https://www.adobe.com/cc-shared/assets/investor-relations/pdfs/01906202/au56y4ter.pdf",
+      "status": "acquired",
+      "content_type": "application/pdf",
+      "bytes": 251125,
+      "sha256": "95197d4998ce1675d2148a705cf2df7a128955745349cf21757a193253c3f8b8",
+      "snapshot": "sources/adbe-q3-2026-release.pdf"
+    },
+    {
+      "id": "adbe-q3-2026-datasheet",
+      "url": "https://www.adobe.com/cc-shared/assets/investor-relations/pdfs/01906202/b75st5a4rwea.pdf",
+      "status": "acquired",
+      "content_type": "application/pdf",
+      "bytes": 165434,
+      "sha256": "fbcb6a0db23627d5fcacaab12bd5459d95542d718a796babbb3035972b7e27be",
+      "snapshot": "sources/adbe-q3-2026-datasheet.pdf"
+    },
+    {
+      "id": "dbx-q2-2026-supplement",
+      "url": "https://investors.dropbox.com/static-files/ed86c070-4173-4339-ad09-aca866a36774",
+      "status": "acquired",
+      "content_type": "application/pdf",
+      "bytes": 117088,
+      "sha256": "65ae7c18df9ae830b6d921bd7f1b2c794b2ea2f64e1a650ceadfcf5d40be4603",
+      "snapshot": "sources/dbx-q2-2026-supplement.pdf"
+    },
+    {
+      "id": "dbx-q2-2026-prepared-remarks",
+      "url": "https://investors.dropbox.com/static-files/47c520a5-a888-4a35-98d2-d20440d56518",
+      "status": "acquired",
+      "content_type": "application/pdf",
+      "bytes": 162320,
+      "sha256": "a55e95af6e0b84d6c2a342b159144323ca9a0186be53dee65997ab226fc9a6ff",
+      "snapshot": "sources/dbx-q2-2026-prepared-remarks.pdf"
+    },
+    {
+      "id": "dbx-q2-2026-presentation",
+      "url": "https://investors.dropbox.com/static-files/85c3f018-bb5c-4207-b33b-1ca09d188ed6",
+      "status": "acquired",
+      "content_type": "application/pdf",
+      "bytes": 1790257,
+      "sha256": "2d93a2c2a8c007a8ffbae5c053d3038ee8ca10febbc7b056308046714be357c7",
+      "snapshot": "sources/dbx-q2-2026-presentation.pdf"
+    },
+    {
+      "id": "pypl-q2-2026-presentation",
+      "url": "https://s205.q4cdn.com/875401827/files/doc_financials/2026/q2/PYPL-2Q-26-Earnings-Presentation.pdf",
+      "status": "acquired",
+      "content_type": "application/pdf",
+      "bytes": 12883442,
+      "sha256": "2222a1388f15784efa5519355331e38a2bae16108b3bb031e35958a959b13b2f",
+      "snapshot": "sources/pypl-q2-2026-presentation.pdf"
+    },
+    {
+      "id": "pypl-q2-2026-newsletter",
+      "url": "https://s205.q4cdn.com/875401827/files/doc_financials/2026/q2/PYPL-2Q-26-Earnings-IR-Newsletter.pdf",
+      "status": "acquired",
+      "content_type": "application/pdf",
+      "bytes": 1208144,
+      "sha256": "276b45b9a69c5f879d5e6a3376e932de25cdca7ae5a57fc5585cb8e26aa8cb22",
+      "snapshot": "sources/pypl-q2-2026-newsletter.pdf"
+    },
+    {
+      "id": "pypl-fy-2025-release",
+      "url": "https://www.sec.gov/Archives/edgar/data/1633917/000163391726000021/pypl4q-25earningsrelease.htm",
+      "status": "acquired",
+      "content_type": "text/html",
+      "bytes": 634899,
+      "sha256": "8f7e7e5046647d0773f6c82129a740494794357136cd4b4e638424e1033d40a2",
+      "snapshot": "sources/pypl-fy-2025-release.html"
+    },
+    {
+      "id": "pypl-q1-2026-release",
+      "url": "https://www.sec.gov/Archives/edgar/data/1633917/000163391726000065/pypl1q-26earningsrelease.htm",
+      "status": "acquired",
+      "content_type": "text/html",
+      "bytes": 505484,
+      "sha256": "5fa7029ac667913644f6b0b9ee0419578e8b441dcd25e5d98cc2dce13e9d4c04",
+      "snapshot": "sources/pypl-q1-2026-release.html"
+    },
+    {
+      "id": "adbe-q3-2026-prepared-remarks",
+      "url": "https://www.adobe.com/cc-shared/assets/investor-relations/pdfs/01906202/c6yetrerew.pdf",
+      "status": "acquired",
+      "content_type": "application/pdf",
+      "bytes": 1853303,
+      "sha256": "feae310fffe2246f0252431bd916943f9c7ad8a789c3792a3de29af69f97baf6",
+      "snapshot": "sources/adbe-q3-2026-prepared-remarks.pdf"
+    },
+    {
+      "id": "adbe-ceo-transition-2026",
+      "url": "https://news.adobe.com/news/2026/09/adobe-announces-anil-chakravarthy-to-become-president-and-ceo",
+      "status": "acquired",
+      "content_type": "text/html; charset=utf-8",
+      "bytes": 15395,
+      "sha256": "2cacbd811bd5e9da7766893bec3e7b5a8ea88c06986ef3ff51a55cb809d95e09",
+      "snapshot": "sources/adbe-ceo-transition-2026.html"
+    }
+  ]
+}

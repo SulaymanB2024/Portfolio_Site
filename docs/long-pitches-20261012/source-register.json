@@ -1,0 +1,277 @@
+{
+  "cutoff": "2026-10-12",
+  "articles": {
+    "ADBE": [
+      {
+        "id": "A1",
+        "label": "Adobe FY2025 Form 10-K",
+        "href": "https://www.sec.gov/Archives/edgar/data/796343/000079634326000003/adbe-20251128.htm",
+        "publisher": "Company / SEC EDGAR",
+        "date": "2026-01-15",
+        "type": "Annual filing",
+        "note": "Annual cash and earnings; Figma termination payment; product and competitive risks.",
+        "limitation": "Reported facts, management guidance and author projections have different status; current share/cash dates remain explicit.",
+        "lastVerified": "2026-10-13"
+      },
+      {
+        "id": "A2",
+        "label": "Adobe Q3FY2026 Form 10-Q",
+        "href": "https://www.sec.gov/Archives/edgar/data/796343/000079634326000156/adbe-20260828.htm",
+        "publisher": "Company / SEC EDGAR",
+        "date": "2026-09-22",
+        "type": "Primary company disclosure",
+        "note": "Comparable nine-month financial statements, share count, acquisition costs, ARR and obligations.",
+        "limitation": "Reported facts, management guidance and author projections have different status; current share/cash dates remain explicit.",
+        "lastVerified": "2026-10-13"
+      },
+      {
+        "id": "A3",
+        "label": "Adobe Q3FY2026 financial results",
+        "href": "https://www.adobe.com/cc-shared/assets/investor-relations/pdfs/01906202/au56y4ter.pdf",
+        "publisher": "Company Investor Relations",
+        "date": "2026-09-10",
+        "type": "Primary company disclosure",
+        "note": "Company results and FY2026 GAAP/non-GAAP guidance; guidance is not a reported result.",
+        "limitation": "Reported facts, management guidance and author projections have different status; current share/cash dates remain explicit.",
+        "lastVerified": "2026-10-13"
+      },
+      {
+        "id": "A4",
+        "label": "Adobe Q3FY2026 investor datasheet",
+        "href": "https://www.adobe.com/cc-shared/assets/investor-relations/pdfs/01906202/b75st5a4rwea.pdf",
+        "publisher": "Company Investor Relations",
+        "date": "2026-09-10",
+        "type": "Primary company disclosure",
+        "note": "Recurring-revenue measures and restated comparisons; acquisitions remain included.",
+        "limitation": "Reported facts, management guidance and author projections have different status; current share/cash dates remain explicit.",
+        "lastVerified": "2026-10-13"
+      },
+      {
+        "id": "A5",
+        "label": "Adobe Q3FY2026 prepared remarks",
+        "href": "https://www.adobe.com/cc-shared/assets/investor-relations/pdfs/01906202/c6yetrerew.pdf",
+        "publisher": "Company Investor Relations",
+        "date": "2026-09-10",
+        "type": "Primary company disclosure",
+        "note": "AI-first ARR greater than $650m is a floor; MAU does not mean paid customers.",
+        "limitation": "Reported facts, management guidance and author projections have different status; current share/cash dates remain explicit.",
+        "lastVerified": "2026-10-13"
+      },
+      {
+        "id": "A6",
+        "label": "Adobe announces its scheduled CEO transition",
+        "href": "https://news.adobe.com/news/2026/09/adobe-announces-anil-chakravarthy-to-become-president-and-ceo",
+        "publisher": "Company Investor Relations",
+        "date": "2026-09-03",
+        "type": "Primary company disclosure",
+        "note": "Anil Chakravarthy's transition is effective December1,2026; no value is added merely for the change.",
+        "limitation": "Reported facts, management guidance and author projections have different status; current share/cash dates remain explicit.",
+        "lastVerified": "2026-10-13"
+      },
+      {
+        "id": "A7",
+        "label": "Adobe expands its creative agent",
+        "href": "https://news.adobe.com/news/2026/06/adobe-unveils-major-expansion",
+        "publisher": "Adobe News",
+        "date": "2026-06-18",
+        "type": "Product announcement",
+        "note": "Public-beta assistants and private-beta unified studio; availability does not establish adoption or profitability.",
+        "limitation": "Company product description, not independent evidence of customer outcomes.",
+        "lastVerified": "2026-10-13"
+      },
+      {
+        "id": "A0",
+        "label": "Alpaca SIP daily close · October12,2026",
+        "href": "https://docs.alpaca.markets/reference/stockbars",
+        "publisher": "Alpaca Markets",
+        "date": "2026-10-12",
+        "type": "Connected market-data snapshot",
+        "note": "Actual SIP daily bars and request parameters are frozen in the downloadable model bundle. This documentation link explains the bar schema; it is not a public display of the quoted close.",
+        "limitation": "Daily close is the entry convention; no historical total-return adjustment is inferred. Corporate actions and distributions must be reconciled for evaluation.",
+        "lastVerified": "2026-10-13"
+      }
+    ],
+    "PYPL": [
+      {
+        "id": "P1",
+        "label": "PayPal FY2025 Form 10-K",
+        "href": "https://www.sec.gov/Archives/edgar/data/1633917/000163391726000024/pypl-20251231.htm",
+        "publisher": "Company / SEC EDGAR",
+        "date": "2026-02-03",
+        "type": "Annual filing",
+        "note": "Annual cash flows, retained-loan investing and compensation; current non-GAAP EPS keeps SBC.",
+        "limitation": "Reported facts, management guidance and author projections have different status; current share/cash dates remain explicit.",
+        "lastVerified": "2026-10-13"
+      },
+      {
+        "id": "P2",
+        "label": "PayPal Q2 2026 Form 10-Q",
+        "href": "https://www.sec.gov/Archives/edgar/data/1633917/000163391726000082/pypl-20260630.htm",
+        "publisher": "Company / SEC EDGAR",
+        "date": "2026-07-28",
+        "type": "Primary company disclosure",
+        "note": "Comparable H1 cash/earnings, dated shares, corporate/customer cash and Luxembourg credit-funding disclosures.",
+        "limitation": "Reported facts, management guidance and author projections have different status; current share/cash dates remain explicit.",
+        "lastVerified": "2026-10-13"
+      },
+      {
+        "id": "P3",
+        "label": "PayPal Q2 2026 earnings release",
+        "href": "https://www.sec.gov/Archives/edgar/data/1633917/000163391726000080/pypl2q-26earningsrelease.htm",
+        "publisher": "Company / SEC EDGAR",
+        "date": "2026-07-28",
+        "type": "Primary company disclosure",
+        "note": "Transaction contribution, costs, payment volume, cash reconciliation and declared dividend.",
+        "limitation": "Reported facts, management guidance and author projections have different status; current share/cash dates remain explicit.",
+        "lastVerified": "2026-10-13"
+      },
+      {
+        "id": "P4",
+        "label": "PayPal Q2 2026 investor presentation",
+        "href": "https://s205.q4cdn.com/875401827/files/doc_financials/2026/q2/PYPL-2Q-26-Earnings-Presentation.pdf",
+        "publisher": "Company Investor Relations",
+        "date": "2026-07-28",
+        "type": "Primary company disclosure",
+        "note": "Branded/Venmo activity, guidance and capital return; overlapping TPV groups are not added.",
+        "limitation": "Reported facts, management guidance and author projections have different status; current share/cash dates remain explicit.",
+        "lastVerified": "2026-10-13"
+      },
+      {
+        "id": "P5",
+        "label": "PayPal Q2 2026 IR newsletter",
+        "href": "https://s205.q4cdn.com/875401827/files/doc_financials/2026/q2/PYPL-2Q-26-Earnings-IR-Newsletter.pdf",
+        "publisher": "Company Investor Relations",
+        "date": "2026-07-28",
+        "type": "Primary company disclosure",
+        "note": "Investment budget and gross savings; savings do not all become net profit.",
+        "limitation": "Reported facts, management guidance and author projections have different status; current share/cash dates remain explicit.",
+        "lastVerified": "2026-10-13"
+      },
+      {
+        "id": "P6",
+        "label": "PayPal FY2025 earnings release",
+        "href": "https://www.sec.gov/Archives/edgar/data/1633917/000163391726000021/pypl4q-25earningsrelease.htm",
+        "publisher": "Company / SEC EDGAR",
+        "date": "2026-02-03",
+        "type": "Primary company disclosure",
+        "note": "Annual BNPL cash-flow reconciliation; timing adjustments do not remove credit economics.",
+        "limitation": "Reported facts, management guidance and author projections have different status; current share/cash dates remain explicit.",
+        "lastVerified": "2026-10-13"
+      },
+      {
+        "id": "P7",
+        "label": "PayPal Q1 2026 earnings release",
+        "href": "https://www.sec.gov/Archives/edgar/data/1633917/000163391726000065/pypl1q-26earningsrelease.htm",
+        "publisher": "Company / SEC EDGAR",
+        "date": "2026-05-05",
+        "type": "Primary company disclosure",
+        "note": "Comparable interim adjusted cash reconciliation used in TTM bridge.",
+        "limitation": "Reported facts, management guidance and author projections have different status; current share/cash dates remain explicit.",
+        "lastVerified": "2026-10-13"
+      },
+      {
+        "id": "P0",
+        "label": "Alpaca SIP daily close · October12,2026",
+        "href": "https://docs.alpaca.markets/reference/stockbars",
+        "publisher": "Alpaca Markets",
+        "date": "2026-10-12",
+        "type": "Connected market-data snapshot",
+        "note": "Actual SIP daily bars and request parameters are frozen in the downloadable model bundle. This documentation link explains the bar schema; it is not a public display of the quoted close.",
+        "limitation": "Daily close is the entry convention; no historical total-return adjustment is inferred. Corporate actions and distributions must be reconciled for evaluation.",
+        "lastVerified": "2026-10-13"
+      }
+    ],
+    "CROX": [
+      {
+        "id": "C1",
+        "label": "Crocs FY2025 Form 10-K",
+        "href": "https://www.sec.gov/Archives/edgar/data/1334036/000133403626000006/crox-20251231.htm",
+        "publisher": "Company / SEC EDGAR",
+        "date": "2026-02-12",
+        "type": "Annual filing",
+        "note": "Annual/earlier cash and revenue, geographic mix, impairment and uncertain tax positions.",
+        "limitation": "Reported facts, management guidance and author projections have different status; current share/cash dates remain explicit.",
+        "lastVerified": "2026-10-13"
+      },
+      {
+        "id": "C2",
+        "label": "Crocs Q2 2026 Form 10-Q",
+        "href": "https://www.sec.gov/Archives/edgar/data/1334036/000133403626000052/crox-20260630.htm",
+        "publisher": "Company / SEC EDGAR",
+        "date": "2026-07-30",
+        "type": "Primary company disclosure",
+        "note": "H1 cash, segments, price/volume bridge, share count, tax payable and subsequent tariff refund.",
+        "limitation": "Reported facts, management guidance and author projections have different status; current share/cash dates remain explicit.",
+        "lastVerified": "2026-10-13"
+      },
+      {
+        "id": "C3",
+        "label": "Crocs Q2 2026 earnings release",
+        "href": "https://www.sec.gov/Archives/edgar/data/1334036/000133403626000050/croxq22026-pressrelease.htm",
+        "publisher": "Company / SEC EDGAR",
+        "date": "2026-07-30",
+        "type": "Primary company disclosure",
+        "note": "Adjusted profit and share bridge; GAAP/adjusted guidance excludes potential tariff refunds.",
+        "limitation": "Reported facts, management guidance and author projections have different status; current share/cash dates remain explicit.",
+        "lastVerified": "2026-10-13"
+      },
+      {
+        "id": "C0",
+        "label": "Alpaca SIP daily close · October12,2026",
+        "href": "https://docs.alpaca.markets/reference/stockbars",
+        "publisher": "Alpaca Markets",
+        "date": "2026-10-12",
+        "type": "Connected market-data snapshot",
+        "note": "Actual SIP daily bars and request parameters are frozen in the downloadable model bundle. This documentation link explains the bar schema; it is not a public display of the quoted close.",
+        "limitation": "Daily close is the entry convention; no historical total-return adjustment is inferred. Corporate actions and distributions must be reconciled for evaluation.",
+        "lastVerified": "2026-10-13"
+      }
+    ],
+    "EXPE": [
+      {
+        "id": "E1",
+        "label": "Expedia FY2025 Form 10-K",
+        "href": "https://www.sec.gov/Archives/edgar/data/1324424/000132442426000008/expe-20251231.htm",
+        "publisher": "Company / SEC EDGAR",
+        "date": "2026-02-12",
+        "type": "Annual filing",
+        "note": "Annual cash, travel working capital, compensation and segment results.",
+        "limitation": "Reported facts, management guidance and author projections have different status; current share/cash dates remain explicit.",
+        "lastVerified": "2026-10-13"
+      },
+      {
+        "id": "E2",
+        "label": "Expedia Q2 2026 Form 10-Q",
+        "href": "https://www.sec.gov/Archives/edgar/data/1324424/000132442426000053/expe-20260630.htm",
+        "publisher": "Company / SEC EDGAR",
+        "date": "2026-08-05",
+        "type": "Primary company disclosure",
+        "note": "Comparable H1 statements, dated shares, customer/supplier obligations, investment/tax effects and segment data.",
+        "limitation": "Reported facts, management guidance and author projections have different status; current share/cash dates remain explicit.",
+        "lastVerified": "2026-10-13"
+      },
+      {
+        "id": "E3",
+        "label": "Expedia Q2 2026 earnings release",
+        "href": "https://www.sec.gov/Archives/edgar/data/1324424/000132442426000051/earningsrelease-q22026.htm",
+        "publisher": "Company / SEC EDGAR",
+        "date": "2026-08-05",
+        "type": "Primary company disclosure",
+        "note": "Q2 segment conversion, booking definitions, guidance and declared dividend.",
+        "limitation": "Reported facts, management guidance and author projections have different status; current share/cash dates remain explicit.",
+        "lastVerified": "2026-10-13"
+      },
+      {
+        "id": "E0",
+        "label": "Alpaca SIP daily close · October12,2026",
+        "href": "https://docs.alpaca.markets/reference/stockbars",
+        "publisher": "Alpaca Markets",
+        "date": "2026-10-12",
+        "type": "Connected market-data snapshot",
+        "note": "Actual SIP daily bars and request parameters are frozen in the downloadable model bundle. This documentation link explains the bar schema; it is not a public display of the quoted close.",
+        "limitation": "Daily close is the entry convention; no historical total-return adjustment is inferred. Corporate actions and distributions must be reconciled for evaluation.",
+        "lastVerified": "2026-10-13"
+      }
+    ]
+  }
+}

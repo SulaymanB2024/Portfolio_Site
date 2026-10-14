@@ -1,0 +1,1501 @@
+PAGE 1
+Financial Results & Investor
+Presentation
+
+Q2 2026
+PAGE 2
+Safe Harbor Statement
+
+
+
+
+This presentation contains forward-looking statements. These statements may relate to, but are not limited to, plans for growth,technological capabilities and new features and products and the long-term financial targets of Dropbox, Inc. ("Dropbox,"
+"we," "us," or similar terms), as well as assumptions relating to the foregoing. Forward-looking statements are inherently subject to risks and uncertainties, some of which cannot be predicted or quantified. In some cases, you can identify forward-looking
+statements by terminology such as "may," "will," "should," "could," "expect," "plan," "anticipate," "believe," "estimate," "predict," "target," "intend," "potential," "would," "continue,"                                         “ongoing” or the negative of theseterms or other comparable
+terminology. You should not put undue reliance on any forward-looking statements. Forward-looking statements should not be read as a guarantee of future performance or results, and                                                    will not necessarily beaccurate indications of the times at, or by,
+which such performance or results will be achieved, if at all.
+Forward-looking statements are based on information available at the time those statements are made or management’s good-faith beliefs and assumptions as of that time with respect to future events, and                                                         are subject to risks and uncertainties that
+could cause actual performance or results to differ materially from those expressed in, or suggested by, the forward-looking statements. In light ofthese risks and uncertainties, the events and circumstances contemplated by the forward-looking
+statements made in this presentation may not occur and actual results could differ materially from those anticipated or implied in the forward-looking statements. These risks and uncertainties are described in greater detail under the heading “Risk
+Factors” in our quarterly report on Form 10-Q for the fiscal yearended March 30, 2026 that we filed with the Securities and Exchange Commission (the “SEC”) on May 8, 2026 and include, but are not limited to, the impact to our financial results, business
+operations, the business of our customers, suppliers, partners and the economy as a result of general macro economic, political and market uncertainty, as well as the potential for a more permanent global shift to remote work; our ability toretain and
+upgrade paying users; our ability to attract new users or convert registered users to paying users; our future financial perf                           ormance, including trends in revenue, costs of revenue, gross profit or gross margin, operating expenses, paying users, annual
+recurring revenue, average revenue per user, free cash flow, unlevered free cash flow, including, in all respects, with respe                            ct to any future targets described herein, and the assumptions underlying such trends; our ability to maintain profitability;
+ourliability for any unauthorized access to our data or our users’ content, including through privacy and data security breache                              s, significant disruption of service on our platform or loss of content, particularly from any potential disruptions in the s                        upply
+chain for hardware necessary to offer our services; any decline in demand for our platform or for content collaboration solut                              ions in general; changes in the interoperability of our platform across devices, operating systems, and third                         -party applications
+that we do not control; our ability to compete successfully in competitive markets; our ability to respond to rapid technolog                             ical changes, extend our platform, develop new features or products, or gain market acceptance for such new features or
+products; our ability to manage our growth or plan for future growth; our various acquisitions of companies and assets and th                               e potential of such acquisitions to require significant management attention, disrupt our business, or dilute stockholder value;
+our ability to attract, retain, integrate and manage key and other highly qualified personnel, including as a result of our V                         irtual First model with an increasingly distributed workforce; our capital allocation plans with respect to our stock repurchase
+program and other investments; and the dual class structure of our common stock and its effect of concentrating voting contro                                 l with certain stockholders who held our capital stock prior to the completion of our initial public offering. These factors cou                          ld
+cause actual results, performance or achievement to differ materially and adversely from those anticipated or implied in the                               forward-looking statements. Additional information will be available in other future reports that we may file with the SEC from
+time-to-time, which could cause actual results to vary from expectations. Except as required by law, Dropbox does not undertake any obligation to publicly update or revise any forward-looking statement, whether as a result ofnew information, future
+developments or otherwise.
+
+In addition to financial information presented in accordance with U.S. generally accepted accounting principles (“GAAP”), this presentation includes certain non-GAAP financial measures, including non-GAAP gross margin, non-GAAP operating income,
+non-GAAP operating expenses (including research and development, sales and marketing and general and administrative), non-GAAP operating margin, free cash flow, non-GAAP earnings per share, EBITDA (earnings before interest, taxes, depreciation,
+and amortization), adjusted EBITDA, and unlevered free cash flow. These non-GAAP measures are presented for supplemental informational purposes only and have limitations as analytical tools; as such, these non-GAAP measures should not be
+considered in isolation or as a substitute for financial information presented in accordance with GAAP. The non-GAAP measures Dropbox uses may differ from the non-GAAP measures used by other companies.
+
+This presentation also contains statistical data, estimates and forecasts that are based on independent industry publicationsorother publicly available information, as well as other information based on our internal sources. This information may be
+based on many assumptions and limitations, and you are cautioned not to give undue weight to such information. We have not in                                    dependently verified the accuracy or completeness of the data contained in the industry publications and other publicly
+available information. Dropbox does not undertake to update such data after the date of this presentation.
+
+All third-party logos appearing in this presentation are trademarks or registered trademarks of their respective holders. Any su                              ch appearance does not necessarily imply any affiliation with or endorsement of Dropbox.
+PAGE 3
+FINANCIAL PERFORMANCE
+     $2.532                          billion                                                                        $1,085M
+     TTM1         revenue                                                                                           TTM uFCF2
+
+     81.2%                                                                                                          39.8%
+     TTM Non-GAAP gross margin4                                                                                     TTM Non-GAAP operating margin4
+
+     18.19M                                                                                                         ~7%
+     Paying users3                                                                                                  TTM Non-GAAP EPS Growth4
+
+
+
+
+
+
+(1) TTM: Trailing Twelve Months
+(2) uFCF: Unlevered Free Cash Flow, defined as Operating Cash Flow less Capital Expenditures and alsoexcludes the impact of interest payments associated with our amended credit agreement, net of their associated
+tax benefit. uFCFis a Non-GAAP financial measure.  See Appendix for a reconciliation to the most directly comparable GAAP measure.
+(3) Paying users as of 6/30/2026
+(4) Non-GAAP financial measure. See Appendix for a reconciliation to the most directly comparable GAAP measure.
+PAGE 4
+                                                                             01      Scaled platform driven by our core File, Sync,
+Investment                                                                           and Share product offering
+Highlights                                                                   02      Subscription-based, recurring revenue model
+
+
+
+                                                                             03      Loyal users with a high retention profile
+
+
+
+                                                                             04      High margin business supported by
+                                                                                     self-serve model
+
+
+
+                                                                             05      Strong free cash flow conversion
+
+
+
+                                                                             06      Self-funded investments for high-growth opportunities
+
+
+
+                                                                             07      Consistent capital return to shareholders
+PAGE 5
+Business Overview
+PAGE 6
+        DROPBOX MISSION
+ Design a more
+enlightened way
+    of working
+PAGE 7
+DROPBOX TODAY
+Our Journey
+
+
+
+
+
+
+
+
+
+
+WHERE WE STARTED                                                                   DROPBOX TODAY                                                                      DROPBOX TOMORROW
+Dropbox Launches                                                                   File, Sync, and Share                                                              Organize and Secure All
+in 2008                                                                                                                                                               Cloud Content
+•  Multi-device usage and universal file sharing in its                             • A leader in the $12bn content sharing                                            •  Dropbox evolves from syncing your files
+   infancy                                                                            and collaboration applications category¹                                            to organizing all your cloud content
+•  Migration to online cloud storage begins                                         • Large-scale infrastructure to support 700m+                                      •  The proliferation of SaaS tools and content
+•  Flagship product: File, Sync, and Share                                            registered users and 18.19m                                                         platforms has created new challenges
+                                                                                      paying customers                                                                    for end users around finding, organizing, securing,
+                                                                                    • Collaborative working tools and advanced security                                   and sharing content
+                                                                                      features                                                                         •  Solving for fragmented content experiences in a
+                                                                                                                                                                          cloud-first workplace
+                                                                                                                                                                       •  Leveraging AI to solve for cloud content
+                                                                                                                                                                          organization, security, real-time suggestions,
+                                                                                                                                                                          knowledge management,
+                                                                                                                                                                          and data insights
+
+
+
+
+
+
+(1) Content Sharing and Collaboration applications are classified as applications that enable users to store, synchronize, and share file-based content and folders across designated devices, people, and applications.
+PAGE 8
+DROPBOX TODAY
+A workplace for digital collaboration
+
+
+
+
+           Secure                                   Organize                                         Share
+    Secure, streamlined content                Enhances where and how you                Effortless sharing and collaboration
+ management with robust scalable              work with seamless integrations            across teams and external partners
+              solutions                             and intuitive content
+                                                        organizations
+PAGE 9
+DROPBOX TODAY
+File Sync and Share (FSS) Plans
+
+
+
+FOR BUSINESS TEAMS
+
+   Standard                                        Advanced                                        Enterprise
+
+   $18.00 / user / month                           $30.00 / user / month                           Negotiated pricing
+   $180.00 / user / year                           $288.00 / user / year
+   1  users minimum                                3 users minimum
+
+   3TB of storage (pooled)                         Starts at 15TB of storage (pooled)              Customized storage
+
+
+
+FOR INDIVIDUALS
+   Basic                                           Simple1                                         Plus                                           Professional1
+
+   Free                                            $6.99 / month                                   $11.99 / month                                 $19.99 / month
+                                                   $69.00 / year                                   $119.88 / year                                 $199.00 / year
+
+
+
+   2GB of storage                                  500GB of storage                                2TB of storage                                 3TB of storage
+
+
+
+
+
+(1) Only available to purchase via mobile channel and in select regions
+PAGE 10
+    Secure
+
+Our robust security features protect
+proprietary information  and provide peace of
+mind to customers as they build relationships
+with their own teams, clients, and partners.
+
+
+
+
+ • Compliance for Files and Data
+ • Two-factor Authentication
+ • Device Approval and Management
+ • File Permissions and Locking
+ • Version History and File Recovery
+PAGE 11
+   Organize
+
+We make file organization effortless and intuitive
+with easy-to-use folder structures and seamless
+integrations, allowing customers to quickly find
+what they need so they can get
+more time to focus more on high-value work.
+
+
+
+
+
+
+
+ • File naming, sorting, tagging, and starring
+ • Smart-search
+ • Automatic file backup and sync
+ • Microsoft co-authoring
+ • PDF annotation
+PAGE 12
+    Share
+
+Sharing is key to growth, so we've focused on
+creating a simple and efficient experience for
+sending large files, managing access, tracking
+document activity, and syncing edits in real-time,
+helping teams work together more effectively.
+
+
+
+
+
+
+
+ • Advanced sharing controls
+ • Assign to-dos
+ • Large file sharing and file transfer
+ • Digital watermarking
+ • Password protection
+ • Folder permission management
+PAGE 13
+DocSend     gives teams a single, scalable deal platform
+that maximizes file sharing security and minimizes file viewing friction all
+while delivering instant alerts that track engagement with documents. We
+remain focused on making execution faster, data-driven, and more secure.
+
+
+  • Secure sharing                                   • Secure client portals
+  • Document analytics                               • eSignature
+  • Video analytics                                  • One-click NDA
+  • Dynamic watermarking
+  • Advanced data rooms
+
+
+
+
+Sign makes agreements easy with simple and secure eSignatures. With
+Sign, anyone can set up a document for signature, eSign, and track the
+agreement process for their most important documents
+
+
+
+  • Standalone or integrated                         • Signer fields with data validation
+    into Dropbox FSS                                 • Template links
+  • Unlimited signatures                             • Audit trail
+  • Tamper-proof documents                           • 22 languages
+  • AES 256-bit encryption
+PAGE 14
+DROPBOX TODAY
+Scaled User Base
+                                                                                                      18.12             18.22            18.08
+                                                                                    17.77
+
+Q2’26 USER METRICS
+700M+                                                              16.79
+Registered Users
+
+
+18.19M                                           15.48                                               $139.38          $140.23           $138.91
+Paying Users
+
+                                                                 $133.73           $134.51
+$139.68                                         $128.50
+ARPU
+
+~575K                                            2020              2021              2022             2023              2024             2025
+Paying Teams                                                                           ARPU        Paying Users
+PAGE 15
+DROPBOX TODAY
+Globally recognized brand in 180 countries
+
+
+
+
+56%
+FY’25
+United States
+Revenue
+44%
+FY’25
+International
+Revenue
+
+
+
+
+more revenue     less revenue
+PAGE 16
+DROPBOX TODAY
+Served by scaled infrastructure                                                                                                             Core Data Center                      Network Point       of Presence (POP)                         Public Data Center
+
+
+
+
+
+                                           Toronto
+
+                                    Chicago
+
+                                                                                                                                     Stockholm
+                                                                                                                                   Oslo
+                                                                                                                            Berlin
+                                                                                                                      Frankfurt
+
+
+
+
+                                                                                                         Amsterdam
+
+                        Seattle                                                                              London
+
+                      Hillsboro                                                                              Paris                                                                                                                 Incheon
+
+                                                                                           New York           Milan
+                      San Jose                                                             Atlanta             Madrid                                                                                                                Tokyo
+
+                      Los Angeles                                                          Ashburn                                                                                                                      Taipei
+
+                               Denver
+
+                                   Dallas
+
+                                     Miami
+
+
+
+
+                                                                                                                                                                                         Singapore
+
+
+
+
+
+                                                                                                                                                                                                                                         Sydney
+PAGE 17
+DROPBOX TODAY
+Securing and                                                                    Total Customer Storage (Petabytes)¹
+organizing 1T+
+                                                                                                                            5100
+                                                                                                        4600      4700
+pieces
+of content                                                                                    3700
+
+
+
+                                                                                    2800
+
+
+                                                                          2100
+
+
+
+
+
+
+
+
+
+
+
+
+                                                                          2020      2021      2022      2023      2024      2025
+
+
+
+(1) Petabytes are rounded to the nearest hundred
+PAGE 18
+DROPBOX TODAY
+Our FSS business:                                                                                                                  Rest of Market
+
+                                                                                                                                        15.9%                                                           Dropbox
+A category leader                                                                                                                                                                                         20.9%
+
+
+
+
+                                                                                                                          Apple
+                                                                                                                          8.6%
+
+                                                                                                                                                            Total Market:
+                                                                                                                                                                   $11.6B
+
+                                                                                                                          Box
+                                                                                                                         8.8%
+
+
+
+
+
+                                                                                                                                                                                                          Microsoft
+                                                                                                                                       Google                                                               29.4%
+                                                                                                                                       16.4%
+
+
+
+
+
+
+
+
+
+
+(1) Source: IDC, May 2024
+(2) Content Sharing and Collaboration applications are classified as applications that enable users to store, synchronize, and share file-based content and folders across designated devices, people, and applications.
+PAGE 19
+DROPBOX TODAY
+Ranked by                                                                           Cloud Content Collaboration Software: All
+G2 as a leader in
+customer satisfaction
+and market presence
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+G2 scores products and sellers based on reviews gathered from our user community, as well as data aggregated from online sourcesand social networks.
+PAGE 20
+DROPBOX TODAY
+                                                                               Activate
+Growth Drivers                                                                 Drive top-of-funnel engagement through increased sharing and
+                                                                               signup activity
+File, Sync, Share
+
+                                                                               Convert
+                                                                               Drive registered users to become paying users of Individual and
+                                                                               Team plans
+
+
+                                                                               Upsell
+                                                                               Prompt existing users to upgrade to premium plans, additional
+                                                                               licenses and add-ons, and new product experiences such as Dash
+
+
+                                                                               Retain
+                                                                               Enhance the core sync experience with a focus on performance
+                                                                               and reliability
+PAGE 21
+Why customers choose Dropbox
+
+                                                                                            “Ausolan's   added value comes from the professionalism of
+                                                                                            our staff and the differentiation of our services. Dropbox
+        Ease of use                                                                         plays a key role in the technological infrastructure we need
+                                                                                            to meet that goal, helping us to work faster and better, in
+                                                                                            both our internal and external processes. We know how
+        Security                                                                            important it is to complete our work on time and to the
+                                                                                            highest quality for our clients. And during the pandemic, that
+                                                                                            would not have been possible without Dropbox.”
+        Seamless Collaboration                                                              —  Ausolan
+
+
+
+        Speed and Reliability
+
+
+        Neutral Platform                                                                    “We can’t imagine doing any of this without Dropbox… We
+                                                                                            just wouldn’t be able to stay organized the way we do now—
+                                                                                            it’s completely integrated into our workflow.”
+                                                                                            —DeMuro Das
+        Storage Capacity
+PAGE 22
+    DROPBOX TODAY
+                                                     Information overload is sinking
+                                                                     team productivity.
+
+
+
+
+                       OBSTACLE                                                               COST
+                       Content everywhere                                                     Workers use 7 apps weekly on average—69%
+                                                                                              report constant context switching.1
+
+                       Knowledge buried                                                       76% of companies are increasing workspace spend to cut
+                                                                                              inefficiency and context switching.2
+
+                       AI-content explosion                                                   72% of GenAI users create content today —
+                                                                                              adoption keeps accelerating3
+
+                       Sharing friction                                                       41% of workers bypass company policies just
+                                                                                              to share files faster.4
+
+
+
+
+
+1.Source: Forrester's Digital Workplace and Employee Technology Survey, 2025
+2.Source: IDC, Intranets, Employee Communication Platforms, and Integrated Employee Workspaces, doc #US51480624, May 2024
+3.Source: Forrester's Digital Workplace and Employee Technology Survey, 2025
+4.Source: Forrester's Digital Workplace and Employee Technology Survey, 2025
+PAGE 23
+                         Dropbox Dash
+The AI teammate who understands
+                                   your work.
+
+
+
+
+              Dropbox Dash combines AI universal search  knowledge management. Search across files,
+            images, videos and more—then draft, summarize, analyze and organize work from one place.
+            Dash brings together your tools and your team, so you can move faster and focus on the work
+                                           that matters most
+PAGE 24
+The “AI Problem”:           AI tools lack business context, typically have
+expensive, lengthy deployments, and are not tailored to SMB needs.
+
+The “Dash” Solution: Dash understands you, your content, and your
+team. With Dash, users get context-rich AI that understands you and
+your team’s work.
+
+Key Features:
+
+Universal Search
+Quickly find what you’re looking for—files, images, videos and more—within and beyond
+Dropbox: universal search works across all connected apps.
+
+AI-powered Chat & insights
+Go beyond search with built-in AI tools that help you uncover insights, summarize files, and
+generate content—all from one place.
+
+Organization & structure via “Stacks”
+Easily collaborate and stay organized with smart, shareable, project-based workspaces
+called Stacks.
+
+Centralized dashboard / Start Page
+Manage your work, stay connected with your team and company, and prep for upcoming
+meetings—all from one central dashboard.
+
+Broad app integrations
+Connect all your company’s content in a few clicks: Dash works with the apps your team
+uses most, including Google Drive, OneDrive, Gmail, Notion, Slack, Confluence, Jira, Asana,
+Microsoft 365, and many more.
+PAGE 25
+Dash’s Right to Win
+
+
+ Established Customer Base
+ •   Leveraging our existing installed base of over 18M paying subscribers and
+     approximately 575K teams
+ •   Dash enhances existing Dropbox workflows, adding value to their FSS experience
+
+ Integrated Product Ecosystem
+ •   Combines AI enterprise search, organization, and governance in a single suite, and
+     connects to your most important cloud applications.
+ •   Broader, more versatile solution versus standalone enterprise search tools
+
+ Trusted Brand in Secure Content Management
+ •   Long-standing reputation for reliability and data protection
+ •   Key advantage when deploying AI-powered productivity tools
+
+ Cross-Platform Security & Governance
+ •   Built-in data access control and remediation across major content platforms
+ •   Differentiated versus other AI enterprise search tools, which largely lack real-time
+     governance
+PAGE 26
+Worldwide Search and                                                                         25.0
+                                                                                                                             +27% CAGR
+Knowledge Discovery                                                                                                                                                  21.6
+
+
+                                                                                             20.0
+Software* TAM                                                                                                                                           17.4
+Category tailwind for
+Dropbox Dash:                                                                                15.0                                           13.6
+AI-powered universal search
+
+                                                                                                                                10.5
+                                                                                             10.0
+                                                                                                                    8.1
+
+                                                                                                        6.5
+
+
+                                                                                              5.0
+
+
+
+
+
+
+                                                                                               .0
+Note: $ USD in Billions                                                                                2023        2024        2025         2026        2027        2028
+
+Source: IDC, Worldwide Search and Knowledge Discovery Software Forecast, 2024–2028
+*Search and knowledge discovery software is software that can find, locate, and provide answers, products, or information forusers.
+PAGE 27
+Financial Highlights
+PAGE 28
+ANNUAL PERFORMANCE
+Strong performance at scale
+
+
+            Revenue (as reported)                                                                         Non-GAAP                                                                         Non-GAAP                                                      Unlevered Free Cash Flow
+                              ($M)(1)                                                             Gross Margin(1)(2)                                                          Operating Margin(1)(2)                                                                   ($M)(1)(2)(3)(4)(5)
+
+
+
+
+
+
+
+             $2,502             $2,548              $2,521                                                                                                                                                                                                                                            $1,016
+
+
+                                                                                                                                                                                                                                                                                    $872
+                                                                                                                 84.0%                                                                                                40.6%
+                                                                                             82.5%                                  81.8%                                                         36.4%                                                         $759
+                                                                                                                                                                               32.8%
+
+
+
+
+
+
+
+
+
+              2023                2024                2025                                    2023                2024               2025                                       2023               2024                2025                                     2023                2024               2025
+
+
+
+
+(1) Graphs presented in this illustration are not drawn to precise scale relative to each other.
+(2) Non-GAAP gross margin and non-GAAP operating margin exclude stock-based compensation expense and certain non-recurring adjustments. See appendix for non-GAAP reconciliation.
+(3) Unlevered Free cash flow is GAAP net cash provided by operating activities lesscapital expenditures and alsoexcludes the impact of interest payments associated with our amended credit agreement, net of their associated tax benefit. Seeappendix for non-
+GAAP reconciliation.
+(4) Free cash flow in 2023 is inclusive of payments of ~$39M related to the reduction in force and ~$28M for the termination of a part of real estate lease in San Francisco
+(5) Free cash flow in 2024 is inclusive of payments of ~$52M related to the reduction in force and ~$15M for the termination of a part of real estate lease in San Francisco
+6) Free cash flow in 2025 is inclusive of payments of ~$13M related to the reduction in force and ~$36M for the termination of apart of real estate lease in San Francisco
+PAGE 29
+QUARTERLY PERFORMANCE
+
+
+
+
+
+                             Revenue (as reported)                                                                         Non-GAAP Operating Income ($M)(2)                                                                         Unlevered Free Cash Flow($M)(3)(4)(5)
+                                             ($M)(1)                                                                            Non-GAAP Operating Margin(2)
+
+
+
+
+
+
+                                                                                                                                                                                                                               $276.4            $314.2                                                 $283.5
+                           $634.4             $636.2                              $631.5                            $259.4            $261.0                                                                                                                       $250.5
+         $625.7                                                 $629.5                                                                                                     $252.2            $250.8                                                                                   $236.4
+
+                                                                                                                     41.5%                               $243.0
+                                                                                                                                       41.1%
+                                                                                                                                                                            40.1%              39.7%
+                                                                                                                                                         38.2%
+
+
+
+
+
+
+
+
+
+
+          Q2'25             Q3'25             Q4'25              Q1'26             Q2'26                            Q2'25             Q3'25              Q4'25             Q1'26             Q2'26                             Q2'25              Q3'25             Q4'25             Q1'26              Q2'26
+
+
+
+
+
+
+
+(1) Graphs presented in this illustration are not drawn to precise scale relative to each other.
+(2) Non-GAAP operating margin excludes stock-based compensation expense and certain non-recurring adjustments. See appendix for non-GAAP reconciliation.
+(3) Unlevered Free cash flow is GAAP net cash provided by operating activities lesscapital expenditures and excludes the impact of interest payments associated with our amended credit agreement, net of their associated tax benefit. See appendix for non-GAAP
+reconciliation.
+(4) Free cash flow in Q2’25, Q3’25, Q4’25, Q1’26, and Q2’26is inclusive of $18M, $21M, $26M,$33M, and $48M   for interest payments related to our December 2024 term loan transaction, respectively.
+(5) Q2’26 revenue includes an80basis  point headwind to year-over-year growth from the decision to significantly reduce investment in FormSwift.
+PAGE 30
+ANNUAL KEY METRICS
+
+
+
+
+
+                  Constant Currency ARR ($M)(1)(2)                                                                             Paying Users (M)(1)                                                                                      ARPU ($)(1)
+
+
+
+
+
+
+
+              $2,537                     $2,571
+                                                                     $2,526
+                                                                                                                                                                                                                $139.38                     $140.23                    $138.91
+                                                                                                                18.12                       18.22                       18.08
+
+
+
+
+
+
+
+
+
+
+
+
+
+               2023                        2024                        2025                                      2023                       2024                        2025                                      2023                        2024                        2025
+
+
+
+
+
+
+
+
+
+
+(1) Graphs presented in this illustration are not drawn to precise scale relative to each other.
+(2) Total ARR for 2022, 2023, and 2024 are revaluated using exchange rates set at the beginning of fiscal 2025.
+PAGE 31
+QUARTERLY KEY METRICS
+
+
+
+
+
+                 Constant Currency ARR ($M)(1)(2)                                                                       Paying Users (M)(1)                                                                               ARPU ($)(1)
+
+
+
+
+
+
+
+
+        $2,578                                                                                       18.13                                                         18.19                                                                     $141.14
+                       $2,572          $2,562                          $2,566                                        18.07          18.08           18.10                                                                     $139.68                        $139.68
+                                                       $2,560                                                                                                                                                 $139.07
+                                                                                                                                                                                              $138.32
+
+
+
+
+
+
+
+
+
+
+
+
+
+        Q2'25           Q3'25           Q4'25           Q1'26          Q2'26                         Q2'25          Q3'25           Q4'25          Q1'26           Q2'26                        Q2'25           Q3'25          Q4'25           Q1'26           Q2'26
+
+
+
+
+
+
+
+
+
+
+(1) Graphs presented in this illustration are not drawn to precise scale relative to each other.
+(2) Total ARR for 2025 are revaluated using exchange rates set at the beginning of fiscal 2026.
+PAGE 32
+DEBT MATURITIES
+
+
+
+
+                                                                                                                                                                                                                          Convertible Notes                              Maturity
+                                                                                                                                                                                                                          $693M                                          2028
+                             $1,114                                                                                                                               $1,978                                                  (0% Coupon)
+
+                                                                                                                                                                                                                          Term Loan                                      Maturity
+                                                                                                                                                                                                                          $1.978       billion                           2029
+                                                                                                                                                                                                                          (SOFR + 3.75%)
+                                                                                                                                                                                                                          $697      million                          2030
+                                                                                                                                                                                                                          (SOFR + 3.75%)
+
+                                                                                                                                             $693                                         $697                            Leverage Ratios
+
+                                                                                                                                                                                                                          Gross Debt(1)                                  $3.7     billion
+
+                                                                                                                                                                                                                          Net Debt(2)                                    $2.5     billion
+
+
+                                                                                                 2026                  2027                  2028                  2029               2030 Term                           TTM Gross Debt / Adj.                          3.2x
+          Q2'26 Cash and Investments                                                                                                                                                                                      EBITDA(3)
+                                                                                                                                         Convertible           Term Loan                  Loan
+                                                                                                                                            Notes                                                                         TTM Net Debt / Adj.                            2.2x
+
+Note: Amounts shown in USD in Millions ($M)                                                                                                                                                                               EBITDA
+(1) Includes total debt and finance leases
+(2) Includes total debt and finance leases less cash and cash equivalents and short terminvestments
+(3) Adjusted EBITDA is a Non-GAAP measures that includes certain adjustments to GAAP Net Income.See Appendix for Non-GAAP reconciliation.
+(4) Cash and Investments includes cash and cash equivalents and short terminvestments
+(5)Chartabove excludes the $400 million of undrawn capacity available under our senior secured revolving credit facility.
+PAGE 33
+SHARE REPURCHASE SUMMARY                                             Diluted WASO (M)                     Unlevered FCF(1)
+
+
+
+
+
+                                                                                                                                                                               $1,016
+                                                                                                                                                 $872                                                                     Share Repurchase Program
+                                                                                                                                                                                                                          •     The Company announced on June 1, 2026
+                                                                                    $764                           $759                                                                                                         that the Board of Directors authorized the
+                                                     $708                                                                                                                                                                       repurchase of an additional $900 million of
+                                                                                                                                                                                                                                Class A common stock
+                      $491                                                                                                                                                                                                •     As of June 30th, 2026          the  Company had
+           419                                                                                                                                                                                                                  approximately $1,385 million              available under
+                                          396                           363                            346                                                                                                                      the current     Boardauthorization
+                                                                                                                                      323                            273                                                  FY’26 Share Repurchase Activity
+
+                                                                                                                                                                                                                          •     In Q2’26,    the Company repurchased
+                                                                                                                                                                                                                                approximately        12.6Mshares for ~$315M
+
+
+
+
+                2020                           2021                           2022                          2023                           2024                           2025
+
+
+                                                       2020                2021                   2022                    2023                   2024                   2025
+
+           Share Repurchases ($M)                      $398                $1,059                 $795                    $545                   $1,249                 $1,714
+
+
+
+Note Amounts shown in USD in Millions ($M)
+WASO: Weighted Average Shares Outstanding, shown in millions (M)
+Included in the cost of treasury stock acquired pursuant to common share repurchases is the 1% excise tax imposed as part of theInflation Reduction Act for 2024 and 2025
+2025 repurchases included repurchase execution costs incurred in connection with the Company’s share repurchase program.
+(1) Unlevered Free cash flow is GAAP net cash provided by operating activities lesscapital expenditures and excludes the impact of interest payments associated with our amended credit agreement, net of their associated
+tax benefit. See appendix for non-GAAP reconciliation.
+PAGE 34
+FY 2026 GUIDANCE
+
+                                                                                                            Q3 2026                                          FISCAL 2026
+
+  GAAP Revenue                                                                                              $627     - $630                                  $2,513     - $2,523
+
+  Constant Currency Revenue                                                                                 $621     - $624                                  $2,482     - $2,492
+
+  Non-GAAP Gross Margin                                                                                                                                      ~ 81.5%
+
+  Non-GAAP Operating Margin                                                                                 ~38.5%                                           40.0% -     40.5%
+
+  Capital Expenditures                                                                                                                                       $20-$25
+
+                                            (1)
+  Unlevered Free Cash Flow                                                                                                                                   at or above $1,070
+
+  Diluted weighted average shares outstanding                                                               223M –       228M                                226M –      231M
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+(1) We define unlevered free cash flow as GAAP net cash provided by operating activities lesscapital expenditures, and excludes the impact of interest payments associated with our 2025 amended credit agreement, net of their associated tax benefit
+
+
+Note Amounts shown in USD in Millions ($M)
+PAGE 35
+Appendix
+PAGE 36
+Non-GAAP reconciliation
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Note: Amounts shown in USD ($) in Millions and % are rounded for presentation purposes
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                                                                                                                                                                                                                                                                          29
+PAGE 37
+Non-GAAP reconciliation
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Note: Amounts shown in USD ($) in Millions and % are rounded for presentation purposes
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                                                                                                                                                                                                                                                                          29
+PAGE 38
+Non-GAAP reconciliation
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Note: Amounts shown in USD ($) in Millions
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                                                                                                                                                                                                                29
+PAGE 39
+Non-GAAP reconciliation
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Note: Amounts shown in USD ($) in Millions
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                                                                                                                                                                                                                29
+PAGE 40
+Free cash flow & Unlevered free cash flow reconciliation
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    Note: Amounts shown in USD ($) in Millions
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                                                                                                                                                                             29
+PAGE 41
+Free cash flow & Unlevered free cash flow reconciliation
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    Note: Amounts shown in USD ($) in Millions
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                                                                                                                                                                             29
+PAGE 42
+Non-GAAP reconciliation
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Note: Amounts shown in USD ($) in Millions and % are rounded for presentation purposes
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                                                                                                                                                                                                                                                                          29
+PAGE 43
+Non-GAAP reconciliation
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Note: Amounts shown in USD ($) in Millions and % are rounded for presentation purposes
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                                                                                                                                                                                                                                                                          29
+PAGE 44
+Non-GAAP reconciliation
+
+
+
+
+                                                           TRAILING TWELVE MONTHS ENDED
+                                                                      June 30, 2026
+
+    Net Income -    GAAP                                                 $          442.8
+    Other (income) / expense, net                                                  (17.0)
+    Interest (income) / expense, net                                                132.1
+    Tax provision                                                                   116.6
+    Depreciation & Amortization                                                     155.8
+
+    EBITDA -   Non-GAAP                                                  $          830.3
+
+    Stock-based compensation                                                        304.4
+    Acquisition-related and other expenses                                             6.7
+    Net (gain) loss on real estate assets                                            (3.9)
+    Workforce reduction expense                                                        3.0
+    Adjusted EBITDA -      Non-GAAP                                      $        1,140.5
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Note: Amounts shown in USD in Millions ($M)
