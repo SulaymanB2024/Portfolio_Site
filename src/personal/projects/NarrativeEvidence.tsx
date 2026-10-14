@@ -6,7 +6,7 @@ function SourceRecord() {
   return (
     <figure className="narrative-specimen specimen-record">
       <figcaption className="specimen-caption mono">
-        <span>NVIDIA / public listing excerpt</span>
+        <span>NVIDIA / retained listing excerpt</span>
         <span>Historical check / September 11, 2026</span>
       </figcaption>
       <div className="record-spread">

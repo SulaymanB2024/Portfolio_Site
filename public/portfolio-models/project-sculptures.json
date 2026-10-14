@@ -1,0 +1,23 @@
+{
+  "generator": "tools/build-case-models.mjs",
+  "models": [
+    {
+      "id": "work-payrollpro",
+      "title": "Private payroll treasury",
+      "concept": "A fitted treasury door with two approval keyways, bound salary ledger, milled payout coins, and inspectable hardware. Decorative sculpture, not a product or transaction screenshot.",
+      "ownership": "Original procedural geometry; no external model or texture inputs",
+      "license": "LicenseRef-Site-Owner",
+      "path": "public/portfolio-models/work-payrollpro.glb",
+      "sha256": "b0a0708f5d9533bdfab373a4bcf2b9a135f615beca028602249adaec326fef2c"
+    },
+    {
+      "id": "work-viralbench",
+      "title": "Proof inspection instrument",
+      "concept": "Seven seated proof leaves, paired trace reels, a milled inspection lens, and a fitted indexing carriage. Decorative sculpture representing trace and review; not a deployed agent interface.",
+      "ownership": "Original procedural geometry; no external model or texture inputs",
+      "license": "LicenseRef-Site-Owner",
+      "path": "public/portfolio-models/work-viralbench.glb",
+      "sha256": "2641f99e61dec3fd34df4fea5bf64c5ac38bf3ff420b65a07d25d704d4425d8c"
+    }
+  ]
+}

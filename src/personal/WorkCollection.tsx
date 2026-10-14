@@ -15,12 +15,12 @@ import './work-curation.css'
 type StudyController = { identity: string; registerActivation(cancel: () => void): () => void; reset(slug: string): void; spin(slug: string, spinning: boolean): void; playing: boolean; reduced: boolean; toggle(): void; open(project: Project): void; explore(project: Project, event: MouseEvent<HTMLAnchorElement>): void }
 const StudyContext = createContext<StudyController | null>(null)
 
-function WorkStage({ children, dark, identity, className = '' }: { children: ReactNode; dark: boolean; identity: string; className?: string }) {
+function WorkStage({ children, dark, identity, className = '', decorative = false }: { children: ReactNode; dark: boolean; identity: string; className?: string; decorative?: boolean }) {
   const root = useRef<HTMLDivElement>(null)
   const canvas = useRef<HTMLCanvasElement>(null)
   const handle = useRef<WorkStudyHandle | null>(null)
   const queuedActivations = useRef(new Set<() => void>())
-  const [playing, setPlaying] = useState(() => readPortfolioRenderPolicy().autoplay)
+  const [playing, setPlaying] = useState(() => decorative || readPortfolioRenderPolicy().autoplay)
   const playingRef = useRef(playing)
   playingRef.current = playing
   const [reduced, setReduced] = useState(() => matchMedia('(prefers-reduced-motion: reduce)').matches)
@@ -280,3 +280,5 @@ export function WorkPage({ dark }: { dark: boolean }) {
 export function ProjectStudy({ project, dark }: { project: Project; dark: boolean }) {
   return <WorkStage dark={dark} identity={project.slug} className="work-studies-project"><WorkSculpture project={project} motionControl /></WorkStage>
 }
+
+export { ProjectArtwork } from './projects/ProjectArtwork'

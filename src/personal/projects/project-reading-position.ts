@@ -24,3 +24,11 @@ export function projectReaderSection(positions: ReaderPosition[], scroll: number
   for (const position of positions) if (position.top <= line) current = position.id
   return current
 }
+
+/** Reveal the current chapter without moving the page or resetting a user's swipe. */
+export function projectIndexScroll(current: number, width: number, linkLeft: number, linkWidth: number, total: number) {
+  const inset = 16
+  const next = linkLeft < current + inset ? linkLeft - inset
+    : linkLeft + linkWidth > current + width - inset ? linkLeft + linkWidth - width + inset : current
+  return Math.max(0, Math.min(Math.max(0, total - width), next))
+}

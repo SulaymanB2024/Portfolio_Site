@@ -13,6 +13,10 @@ import { createWorkStudyInk } from './work-study-ink'
 import { WORK_STUDY_VERTEX, WORK_STUDY_FRAGMENT } from './work-study-shader'
 import { createStudyFrameReview } from './work-study-frame-review'
 import { readPortfolioRenderPolicy } from './mobile-render-policy'
+import { projectGLBDistance, type ProjectShaftBounds } from './projects/project-glb-framing'
+import { projectPartAngle, projectPartMotion, type ProjectPartMotion } from './projects/project-articulation'
+import { projectArtworkSize } from './projects/project-artwork-quality'
+import { landingRenderBudget } from './landing/render-budget'
 
 export type WorkStudyFlight = { canvas: HTMLCanvasElement; handle: WorkStudyHandle; playing: boolean }
 
@@ -27,11 +31,14 @@ export interface WorkStudyHandle {
   dispose(): void
 }
 
-const STUDIES: Record<string, { yaw: number; pitch: number; phase: number }> = {
+const STUDIES: Record<string, { yaw: number; pitch: number; phase: number; asset?: string }> = {
   internshipdeadlines: { yaw: -.32, pitch: .12, phase: .3 },
   sapien: { yaw: -.32, pitch: -.05, phase: 1.8 },
   'investing-markets': { yaw: -.16, pitch: .09, phase: 3.1 },
   miscellaneous: { yaw: .3, pitch: .08, phase: 4.4 },
+  atlas: { yaw: -.16, pitch: .04, phase: 2.4, asset: 'globe' },
+  payrollpro: { yaw: -.24, pitch: .08, phase: 1.1 },
+  viralbench: { yaw: -.23, pitch: .07, phase: 3.6 },
 }
 
 type Study = {
@@ -55,18 +62,28 @@ type Study = {
   width: number
   height: number
   radius: number
+  heroPoints?: Float32Array
+  heroShafts?: ProjectShaftBounds[]
+  heroOrbitPoints?: Float32Array
+  heroOrbitShafts?: ProjectShaftBounds[]
+  heroOrbitKey?: string
+  heroOrbitDistance?: number
+  heroAspect?: number
+  heroDistance?: number
   spinning: boolean
   frames: number
   fadeStart: number
   hover: number
   hoverTarget: number
   hoverStart: number
-  parts: { node: THREE.Object3D; rotation: THREE.Euler; position: THREE.Vector3; axis: THREE.Vector3; phase: number }[]
+  parts: { node: THREE.Object3D; rotation: THREE.Euler; position: THREE.Vector3; axis: THREE.Vector3; phase: number; motion?: ProjectPartMotion }[]
   inputCleanups: (() => void)[]
 }
 
 /** One context, one target and one scheduler for every model in the collection. */
 export function mountWorkStudies(canvas: HTMLCanvasElement, root: HTMLElement): WorkStudyHandle {
+  const projectArtwork = root.classList.contains('project-artwork')
+  const observeStats = import.meta.env.DEV || root.classList.contains('project-artwork')
   let disposed = false
   let contextLost = false
   let playing = true
@@ -163,6 +180,7 @@ export function mountWorkStudies(canvas: HTMLCanvasElement, root: HTMLElement): 
   function renderSize() {
     const policy = readPortfolioRenderPolicy()
     const ratio = window.devicePixelRatio || 1
+    if (projectArtwork) return projectArtworkSize(cssWidth, cssHeight, ratio, policy.mobile, runtime.scale)
     const budgetRatio = policy.mobile ? Math.min(ratio, policy.maxRatio, Math.sqrt(policy.pixels / (cssWidth * cssHeight))) : ratio
     return workStudyRenderSize(cssWidth, cssHeight, budgetRatio, runtime.scale)
   }
@@ -173,9 +191,10 @@ export function mountWorkStudies(canvas: HTMLCanvasElement, root: HTMLElement): 
       const state = studies.some(study => study.painted) ? 'ready' : studies.length && studies.every(study => study.failed) ? 'error' : 'loading'
       if (canvas.dataset.state !== state) canvas.dataset.state = state
     }
-    if (!import.meta.env.DEV) return
+    // Retain cadence evidence on the new project stage, including built previews.
+    if (!observeStats) return
     if (force) canvas.dataset.liveMotion = String(live)
-    if (now - lastStats < 750) return
+    if (!force && now - lastStats < 750) return
     lastStats = now
     let loaded = 0
     let active = 0
@@ -185,6 +204,8 @@ export function mountWorkStudies(canvas: HTMLCanvasElement, root: HTMLElement): 
       study.element.dataset.renderFrames = String(study.frames)
       study.element.dataset.hover = study.hover.toFixed(3)
       study.element.dataset.idleYaw = study.pose.idleYaw.toFixed(4)
+      const movingPart = study.parts.find(part => part.motion)
+      if (movingPart) study.element.dataset.partQuaternion = movingPart.node.quaternion.toArray().map(value => value.toFixed(5)).join(',')
       inputStats(study)
     }
     canvas.dataset.frames = String(frames)
@@ -221,7 +242,22 @@ export function mountWorkStudies(canvas: HTMLCanvasElement, root: HTMLElement): 
       ? opening.phase === 'dock' ? studyFlightProgress(time - opening.start, STUDY_DOCK_MS) : 0
       : 1
     const framing = workStudyFraming(study.element.dataset.workFraming === 'detail', dockProgress)
-    const distance = workStudyCameraDistance(study.radius, study.camera.aspect, vertical, framing)
+    let distance = workStudyCameraDistance(study.radius, study.camera.aspect, vertical, framing)
+    if (study.element.dataset.workFraming === 'hero' && study.heroPoints) {
+      if (study.heroAspect !== study.camera.aspect) {
+        study.heroAspect = study.camera.aspect
+        study.heroDistance = projectGLBDistance(study.heroPoints, study.camera.aspect, vertical, study.definition.yaw, study.definition.pitch, study.heroShafts)
+      }
+      distance = study.heroDistance!
+      if (study.heroOrbitPoints && (Math.abs(study.controls.getAzimuthalAngle()) > .00001 || Math.abs(study.controls.getPolarAngle() - Math.atan2(1, .04)) > .00001)) {
+        const key = `${study.camera.aspect}:${study.camera.quaternion.toArray().join(',')}`
+        if (study.heroOrbitKey !== key) {
+          study.heroOrbitKey = key
+          study.heroOrbitDistance = projectGLBDistance(study.heroOrbitPoints, study.camera.aspect, vertical, study.definition.yaw, study.definition.pitch, study.heroOrbitShafts, study.camera.quaternion)
+        }
+        distance = Math.max(distance, study.heroOrbitDistance!)
+      }
+    }
     const fittedDistance = flight ? flight.distance + (distance - flight.distance) * resolve : distance
     fitStudyOrbit(study.controls, fittedDistance)
     study.camera.near = Math.max(.01, fittedDistance - study.radius * 2)
@@ -268,21 +304,55 @@ export function mountWorkStudies(canvas: HTMLCanvasElement, root: HTMLElement): 
     if (disposed || study.loading || study.object || study.failed) return
     study.loading = true
     try {
-      const gltf = await loader.load(portfolioAssetUrl(`work-${study.slug}`), controller.signal)
+      const gltf = await loader.load(portfolioAssetUrl(study.definition.asset ?? `work-${study.slug}`), controller.signal)
       if (disposed || !studies.includes(study)) { releaseObject(gltf.scene); return }
       const bounds = new THREE.Box3().setFromObject(gltf.scene)
       const center = bounds.getCenter(new THREE.Vector3())
-      // Box corners overestimate open sculptures and make them look tiny.
-      // Measure the actual vertices once; this sphere remains valid at every rotation.
+      // Measure the rest mesh for the render depth. The hero fit below also
+      // accounts for shafts' complete swept geometry.
       gltf.scene.updateMatrixWorld(true)
       const point = new THREE.Vector3()
       let radiusSquared = 0
+      const heroPoints: number[] | null = study.element.dataset.workFraming === 'hero' ? [] : null
+      const orbitPoints: number[] = []
+      const shafts = new Map<THREE.Object3D, { points: number[]; orbitPoints: number[]; pivot: [number, number, number]; axis: [number, number, number]; range?: number }>()
+      gltf.scene.traverse(node => {
+        if (!node.name.startsWith('hover-')) return
+        const declaredAxis = node.userData.articulationAxis
+        const axis = Array.isArray(declaredAxis) && declaredAxis.length === 3 && declaredAxis.every(Number.isFinite)
+          ? new THREE.Vector3(...declaredAxis as [number, number, number]) : new THREE.Vector3(0, 1, 0)
+        if (axis.lengthSq() < .001) axis.set(0, 1, 0)
+        axis.normalize()
+        const motion = heroPoints ? projectPartMotion(node.name, node.userData.articulationMotion) : undefined
+        study.parts.push({ node, rotation: node.rotation.clone(), position: node.position.clone(), axis, phase: study.parts.length * 1.4, motion })
+        if (motion) shafts.set(node, {
+          points: [], orbitPoints: [], pivot: node.getWorldPosition(new THREE.Vector3()).sub(center).toArray() as [number, number, number],
+          axis: axis.clone().transformDirection(node.matrixWorld).toArray() as [number, number, number],
+          ...(motion.kind === 'pendulum' ? { range: motion.amplitude } : {}),
+        })
+      })
       gltf.scene.traverse(node => {
         if (!(node instanceof THREE.Mesh)) return
+        let ancestor: THREE.Object3D | null = node
+        while (ancestor && !shafts.has(ancestor)) ancestor = ancestor.parent
+        const shaft = ancestor ? shafts.get(ancestor) : undefined
         const positions = node.geometry.getAttribute('position')
         for (let i = 0; i < positions.count; i++) {
           point.fromBufferAttribute(positions, i).applyMatrix4(node.matrixWorld).sub(center)
           radiusSquared = Math.max(radiusSquared, point.lengthSq())
+          heroPoints?.push(point.x, point.y, point.z)
+          shaft?.points.push(point.x, point.y, point.z)
+        }
+        if (heroPoints) {
+          // Eight transformed mesh-box corners bound every vertex, keeping
+          // direct orbit fitting inexpensive even for dense source geometry.
+          node.geometry.computeBoundingBox()
+          const box = node.geometry.boundingBox!
+          for (const x of [box.min.x, box.max.x]) for (const y of [box.min.y, box.max.y]) for (const z of [box.min.z, box.max.z]) {
+            point.set(x, y, z).applyMatrix4(node.matrixWorld).sub(center)
+            orbitPoints.push(point.x, point.y, point.z)
+            shaft?.orbitPoints.push(point.x, point.y, point.z)
+          }
         }
       })
       const radius = Math.sqrt(radiusSquared)
@@ -292,21 +362,13 @@ export function mountWorkStudies(canvas: HTMLCanvasElement, root: HTMLElement): 
       gltf.scene.traverse(node => {
         if (node instanceof THREE.Mesh) for (const material of Array.isArray(node.material) ? node.material : [node.material]) materials.add(material)
       })
-      gltf.scene.traverse(node => {
-        if (node.name.startsWith('hover-')) {
-          const declaredAxis = node.userData.articulationAxis
-          const axis = Array.isArray(declaredAxis) && declaredAxis.length === 3 && declaredAxis.every(Number.isFinite)
-            ? new THREE.Vector3(...declaredAxis as [number, number, number]) : new THREE.Vector3(0, 1, 0)
-          if (axis.lengthSq() < .001) axis.set(0, 1, 0)
-          study.parts.push({ node, rotation: node.rotation.clone(), position: node.position.clone(), axis: axis.normalize(), phase: study.parts.length * 1.4 })
-        }
-      })
       for (const material of materials) {
         study.materials.push({ material, opacity: material.opacity })
-        // Write straight color and coverage into the shared target, without a
-        // second blend or dither pass. Depth remains solid during the reveal.
+        // Associate project color with its alpha so multisample edges and the
+        // loading fade can be reconstructed without dark fringes in the resolve.
         material.transparent = true
         material.forceSinglePass = true
+        if (projectArtwork) material.premultipliedAlpha = true
         material.blending = THREE.NoBlending
         material.opacity = 0
       }
@@ -314,6 +376,11 @@ export function mountWorkStudies(canvas: HTMLCanvasElement, root: HTMLElement): 
       study.object = new THREE.Group()
       study.object.add(gltf.scene)
       study.radius = radius
+      if (heroPoints) study.heroPoints = new Float32Array(heroPoints)
+      if (heroPoints) study.heroOrbitPoints = new Float32Array(orbitPoints)
+      study.heroShafts = [...shafts.values()].map(({ orbitPoints: _, ...shaft }) => ({ ...shaft, points: new Float32Array(shaft.points) }))
+      study.heroOrbitShafts = [...shafts.values()].map(({ points: _, orbitPoints, ...shaft }) => ({ ...shaft, points: new Float32Array(orbitPoints) }))
+      if (heroPoints) study.element.dataset.movingParts = String(shafts.size)
       study.scene.add(study.object)
       fit(study)
       requestRender()
@@ -351,7 +418,7 @@ export function mountWorkStudies(canvas: HTMLCanvasElement, root: HTMLElement): 
     const motionSeconds = runtime.seconds
     let settling = false
     let fading = false
-    const started = import.meta.env.DEV ? performance.now() : 0
+    const started = observeStats ? performance.now() : 0
     renderer.info.reset()
     renderer.setRenderTarget(target)
     renderer.setScissorTest(false)
@@ -367,6 +434,7 @@ export function mountWorkStudies(canvas: HTMLCanvasElement, root: HTMLElement): 
     const inkStrength = studyFlightInkStrength(inkProgress)
     dither.uniforms.studyFlight.value.set(inkProgress, inkStrength)
     dither.uniforms.studyTime.value = motionSeconds
+    dither.uniforms.studyGrain.value = reducedMotion.matches ? 0 : .025
     for (const study of studies) {
       if ((!study.visible && opening?.study !== study) || !study.object || study.failed) continue
       if (study.fadeStart < 0) study.fadeStart = time
@@ -380,7 +448,8 @@ export function mountWorkStudies(canvas: HTMLCanvasElement, root: HTMLElement): 
       if (!opening) study.hover = (!playing || reducedMotion.matches) ? study.hoverTarget : settleWorkStudy(study.hover, study.hoverTarget, elapsed)
       if (study.hover !== study.hoverTarget) settling = true
       const hoverAge = clampStudy((motionSeconds - study.hoverStart) / 1.1, 0, 1)
-      const burst = reducedMotion.matches ? 0 : Math.sin(hoverAge * Math.PI) * study.hover
+      const hero = study.element.dataset.workFraming === 'hero'
+      const burst = reducedMotion.matches || hero ? 0 : Math.sin(hoverAge * Math.PI) * study.hover
       if (live && hoverAge < 1) settling = true
       for (const part of study.parts) {
         part.node.position.copy(part.position)
@@ -388,8 +457,11 @@ export function mountWorkStudies(canvas: HTMLCanvasElement, root: HTMLElement): 
         part.node.position.y += Math.cos(part.phase + .6) * burst * .07
         part.node.position.z += Math.sin(part.phase * .6) * burst * .04
         part.node.rotation.copy(part.rotation)
-        const articulationPhase = study.slug === 'sapien' ? study.definition.phase : part.phase
-        part.node.rotateOnAxis(part.axis, study.hover * .18 * Math.sin(motionSeconds * .65 + articulationPhase))
+        if (part.motion) part.node.rotateOnAxis(part.axis, projectPartAngle(part.motion, motionSeconds, !reducedMotion.matches))
+        else if (!hero) {
+          const articulationPhase = study.slug === 'sapien' ? study.definition.phase : part.phase
+          part.node.rotateOnAxis(part.axis, study.hover * .18 * Math.sin(motionSeconds * .65 + articulationPhase))
+        }
       }
       study.controls.autoRotate = live && study.spinning
       study.controls.update(elapsed)
@@ -445,7 +517,7 @@ export function mountWorkStudies(canvas: HTMLCanvasElement, root: HTMLElement): 
     }
     paintedSurface = hasModels
     frames++
-    if (import.meta.env.DEV) {
+    if (observeStats) {
       const duration = performance.now() - started
       averageMs = frames === 1 ? duration : averageMs * .94 + duration * .06
     }
@@ -492,6 +564,9 @@ export function mountWorkStudies(canvas: HTMLCanvasElement, root: HTMLElement): 
     target.setSize(size.width, size.height)
     dither?.uniforms.studyResolution.value.set(size.width, size.height, size.scaleX)
     dither?.uniforms.studyCssResolution.value.set(cssWidth, cssHeight)
+    const printRatio = landingRenderBudget(cssWidth, cssHeight, window.devicePixelRatio || 1, readPortfolioRenderPolicy().mobile).canvasRatio
+    dither?.uniforms.studyPrintResolution.value.set(Math.round(cssWidth * printRatio), Math.round(cssHeight * printRatio))
+    if (projectArtwork) canvas.dataset.printRatio = printRatio.toFixed(4)
     boundsDirty = true
     requestRender()
   }
@@ -500,6 +575,7 @@ export function mountWorkStudies(canvas: HTMLCanvasElement, root: HTMLElement): 
     if (disposed) return
     const value = getComputedStyle(root).getPropertyValue('--ink').trim() || '#191a17'
     ink.set(value)
+    if (dither) dither.uniforms.studyDark.value = Number(document.documentElement.dataset.appearance === 'dark')
     boundsDirty = true
     requestRender()
   }
@@ -570,6 +646,8 @@ export function mountWorkStudies(canvas: HTMLCanvasElement, root: HTMLElement): 
       }
       event.preventDefault()
       rotateStudyPointer(study.controls, dx, dy, element.clientHeight)
+      inputStats(study)
+      fit(study)
       drag.x = event.clientX
       drag.y = event.clientY
       requestRender()
@@ -592,6 +670,8 @@ export function mountWorkStudies(canvas: HTMLCanvasElement, root: HTMLElement): 
       event.preventDefault()
       study.spinning = false
       element.dataset.spinning = 'false'
+      inputStats(study)
+      fit(study)
       requestRender()
     })
   }
@@ -605,6 +685,7 @@ export function mountWorkStudies(canvas: HTMLCanvasElement, root: HTMLElement): 
     study.spinning = false
     study.element.dataset.spinning = 'false'
     resetStudyOrbit(study.controls)
+    inputStats(study)
     fit(study)
     requestRender()
   }
@@ -745,8 +826,17 @@ export function mountWorkStudies(canvas: HTMLCanvasElement, root: HTMLElement): 
     renderer.clear(true, true, false)
     renderer.toneMapping = THREE.ACESFilmicToneMapping
     renderer.toneMappingExposure = .95
-    target = new THREE.WebGLRenderTarget(size.width, size.height, { depthBuffer: true, stencilBuffer: false, minFilter: THREE.NearestFilter, magFilter: THREE.NearestFilter })
-    dither = new THREE.ShaderMaterial({ vertexShader: WORK_STUDY_VERTEX, fragmentShader: WORK_STUDY_FRAGMENT, uniforms: { studyColor: { value: target.texture }, studySurface: { value: null }, studyInk: { value: ink }, studyRegions: { value: regions }, studyHover: { value: hoverSignals }, studyBursts: { value: burstSignals }, studyTime: { value: 0 }, studyFlight: { value: new THREE.Vector2() }, studyResolution: { value: new THREE.Vector3(size.width, size.height, size.scaleX) }, studyCssResolution: { value: new THREE.Vector2(cssWidth, cssHeight) } }, depthTest: false, depthWrite: false, toneMapped: false, blending: THREE.NoBlending })
+    target = new THREE.WebGLRenderTarget(size.width, size.height, {
+      depthBuffer: true, stencilBuffer: false,
+      type: projectArtwork && renderer.extensions.has('EXT_color_buffer_float') ? THREE.HalfFloatType : THREE.UnsignedByteType,
+      samples: projectArtwork ? Math.min(4, renderer.capabilities.maxSamples) : 0,
+      minFilter: projectArtwork ? THREE.LinearFilter : THREE.NearestFilter,
+      magFilter: projectArtwork ? THREE.LinearFilter : THREE.NearestFilter,
+    })
+    canvas.dataset.surfaceType = target.texture.type === THREE.HalfFloatType ? 'half-float' : 'unsigned-byte'
+    canvas.dataset.surfaceSamples = String(target.samples)
+    canvas.dataset.ditherTreatment = projectArtwork ? 'helmet-engraved' : 'collection-binary'
+    dither = new THREE.ShaderMaterial({ vertexShader: WORK_STUDY_VERTEX, fragmentShader: WORK_STUDY_FRAGMENT, uniforms: { studyEngraved: { value: projectArtwork }, toneMappingExposure: { value: .95 }, studyPrintResolution: { value: new THREE.Vector2() }, studyGrain: { value: 0 }, studyDark: { value: Number(document.documentElement.dataset.appearance === 'dark') }, studyColor: { value: target.texture }, studySurface: { value: null }, studyInk: { value: ink }, studyRegions: { value: regions }, studyHover: { value: hoverSignals }, studyBursts: { value: burstSignals }, studyTime: { value: 0 }, studyFlight: { value: new THREE.Vector2() }, studyResolution: { value: new THREE.Vector3(size.width, size.height, size.scaleX) }, studyCssResolution: { value: new THREE.Vector2(cssWidth, cssHeight) } }, depthTest: false, depthWrite: false, toneMapped: false, blending: THREE.NoBlending })
     quad = new THREE.Mesh(new THREE.PlaneGeometry(2, 2), dither)
     quad.frustumCulled = false
     postScene.add(quad)

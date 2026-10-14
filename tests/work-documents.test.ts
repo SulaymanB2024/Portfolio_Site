@@ -49,17 +49,18 @@ test('sources resolve to retained artifacts or actual catalog routes, including 
   }
 })
 
-test('published figures stay assigned to their actual projects and rejected inserts remain absent', () => {
-  const evidence = Object.entries(documents).flatMap(([slug, document]) => document.chapters.filter((chapter) => chapter.artifact).map((chapter) => [slug, chapter.artifact]))
+test('data-backed comparisons remain beside their supporting accounts without detached widgets', () => {
+  const evidence = Object.entries(documents).flatMap(([slug, document]) => document.chapters.filter((chapter) => chapter.table).map((chapter) => [slug, chapter.id]))
   assert.deepEqual(evidence, [
-    ['internshipdeadlines', 'system'],
     ['sapien', 'system'],
-    ['investing-markets', 'system'],
-    ['miscellaneous', 'system'],
-    ['atlas', 'atlas'],
-    ['payrollpro', 'payroll'],
-    ['viralbench', 'viral']
+    ['miscellaneous', 'assets'],
+    ['atlas', 'study-section-3'],
+    ['payrollpro', 'study-section-2']
   ])
+  for (const [slug, document] of Object.entries(documents)) {
+    assert.ok(document.summary.trim() && !document.summary.includes('\n'), `${slug}: opening summary`)
+    assert.ok(document.chapters.every(chapter => !chapter.artifact), `${slug}: detached widget`)
+  }
   const serialized = JSON.stringify(documents)
   assert.doesNotMatch(serialized, /atlas-console\.jpg|internship-offer|\/tools\/offers|texas-toll-roads-stay-tolled-financial-model-2025\.xlsx/)
 })

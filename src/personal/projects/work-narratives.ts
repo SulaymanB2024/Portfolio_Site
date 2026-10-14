@@ -11,22 +11,10 @@ export const workNarratives: Record<string, WorkDocument> = {
       {
         id: 'question',
         label: 'Source pipeline',
-        title: 'Building the recruiting record',
-        artifact: 'system',
+        title: 'A record that keeps its sources',
         body: [
-          'A job can appear on an employer site, a job board, and a program page with different titles or dates. My pipeline validates the source, standardizes the company, role, and location, and merges duplicates only when the evidence identifies the same job. The original employer link remains attached.',
-          'The directory distinguishes historical coverage from verified availability. A recent check needs employer evidence and a valid application state; visiting a listing does not renew that check. First seen, program term, application deadline, and verification time are stored as separate facts.'
+          'My pipeline standardizes employer, role, and location, then merges duplicates only when the source identifies the same job. It keeps employer-posted dates, first detection, deadlines, and verification time separate. Historical coverage and recently verified availability remain different states.'
         ],
-        table: {
-          caption: 'Information retained with a recruiting record',
-          columns: ['Field', 'Treatment'],
-          rows: [
-            ['Identity', 'Match the employer and job before merging records from different sources.'],
-            ['Availability', 'Keep known closures, unconfirmed availability, and recently verified roles distinct.'],
-            ['Dates', 'Retain the employer’s stated deadline; leave it unknown when the source supplies none.'],
-            ['Provenance', 'Carry the source URL and check time through the listing and employer handoff.']
-          ]
-        },
         links: [
           {
             label: 'Listing methodology',
@@ -38,45 +26,33 @@ export const workNarratives: Record<string, WorkDocument> = {
       {
         id: 'system',
         label: 'Search',
-        title: 'From a query to an employer posting',
+        title: 'From search to the employer',
         body: [
-          'I use local language models for role classification and query understanding alongside search ranking. Role, employer, and location fields support discovery; the result sends applicants back to the employer’s requirements and application.',
-          'NVIDIA’s Spring 2027 Developer and Performance Technology listing shows how this information fits together: the program term and Santa Clara location are recorded, the employer link is retained, and the deadline remains unconfirmed. Its dated history is evidence of a past check, rather than a claim that it is open today.'
+          'I integrated local language models for role classification and query understanding alongside search ranking. Each result keeps its employer reference and verification time, so applicants can check the original posting before applying.'
         ],
         links: [
           {
-            label: 'Inspect the NVIDIA listing',
-            href: 'https://internshipdeadlines.com/internships/nvidia-e63b7085/nvidia-spring-2027-internships-developer-and-performance-technology-a24959af/',
-            description: 'A public record with program details, source link, check history, and preparation actions.'
+            label: 'How source checks work',
+            href: 'https://internshipdeadlines.com/methodology/',
+            description: 'The published rules for employer verification, missing deadlines, and availability changes.'
           }
         ]
       },
       {
         id: 'practice',
         label: 'Saved applications',
-        title: 'A separate record for the applicant',
+        title: 'The applicant’s own plan',
         body: [
-          'The student’s plan keeps a stage, next action, personal target date, and notes beside the saved role. A target date belongs to the applicant; it does not overwrite the employer’s deadline. A closed posting can still have a useful saved record.',
-          'Plans are stored in the browser with a backup and import path. Employer research and preparation stay connected to the application, so a shortlist can carry the work of applying rather than simply accumulating bookmarks.'
+          'A saved application keeps a stage, next action, personal target date, and notes beside the employer record. Those plans stay in the browser, with backup and import. A personal target never overwrites an employer deadline, and a closed listing does not erase the student’s work.'
         ],
-        table: {
-          caption: 'Two states that must remain independent',
-          columns: ['Employer record', 'Student plan'],
-          rows: [
-            ['Open, closed, or unconfirmed availability', 'The applicant’s own preparation or application stage'],
-            ['Published application deadline', 'A personal target and the next action'],
-            ['Source evidence and verification history', 'Private notes retained with the saved role']
-          ]
-        },
         links: [{ label: 'My plan', href: 'https://internshipdeadlines.com/saved/', description: 'The product’s saved-role and application-planning view.' }]
       },
       {
         id: 'preparation',
         label: 'Preparation',
-        title: 'A résumé guide with a worked exercise',
+        title: 'A guide with a worked exercise',
         body: [
-          'The first-internship résumé guide takes a posting’s tasks and maps them to evidence from coursework, employment, and projects. It covers choosing material for one page, writing a specific bullet, and checking the final file and its links.',
-          'A worked exercise gives four fictional experiences to choose from, then explains which evidence fits the role. The downloadable worksheet lets a student repeat the process with their own experience.'
+          'The first-internship résumé guide maps a posting’s tasks to evidence from coursework, jobs, and projects. Four fictional experiences form a worked selection exercise; a downloadable worksheet lets students repeat it with their own material. At the October 12, 2026 check, public guides and the planning page were available while listing search was temporarily unavailable.'
         ],
         links: [
           {
@@ -102,22 +78,10 @@ export const workNarratives: Record<string, WorkDocument> = {
       {
         id: 'question',
         label: 'Content function',
-        title: 'Articles, category pages, and sales material',
-        artifact: 'system',
-        note: 'Study: Sapien Team. Portfolio contribution: content, research review, and growth.',
+        title: 'Content organized around the buyer’s decision',
         body: [
-          'My work connects pricing, concept testing, messaging, and consumer-research use cases to the material a buyer needs to evaluate the product. I develop articles and category pages for search, then use the research in explainers, creative briefs, ad concepts, and sales material.',
-          'A services comparison needs to distinguish the research question, evidence source, delivery model, and deliverable. A pricing buyer needs tested offers and assumptions; a concept buyer needs comparative responses and a revision brief. Those distinctions give the content its structure.'
+          'As Growth Manager, I built the SEO and content function around research jobs: pricing, concept testing, messaging, and choosing a service. Articles and category pages became inputs for recorded explainers, creative briefs, ads, and sales material. The work connected the research question to evidence and a usable deliverable.'
         ],
-        table: {
-          caption: 'How a buyer’s question changes the material',
-          columns: ['Research job', 'Material to explain'],
-          rows: [
-            ['Pricing', 'The audience, offer variants, choice question, and modeled response at each price.'],
-            ['Concept testing', 'Comparable alternatives, segment reactions, and what to revise in the concept.'],
-            ['Selecting a research service', 'Evidence source, delivery process, outputs, and pricing basis.']
-          ]
-        },
         links: [
           {
             label: 'Market research services guide',
@@ -129,20 +93,26 @@ export const workNarratives: Record<string, WorkDocument> = {
       {
         id: 'system',
         label: 'Pricing example',
-        title: 'Two prices, with the audience held fixed',
+        title: 'A pricing result a buyer can inspect',
         body: [
-          'The published AI-tools guide includes a matched comparison of 256GB offers at $1,999 and $1,599. Within each cohort, the same assigned profiles considered both prices. Keeping the audience fixed makes the change in modeled qualification legible.',
-          'Qualification rises from 5.52% to 11.27% in the core cohort and from 6.18% to 12.50% in the expansion cohort. The lower offer also gives up $400 per sale. The result alone cannot select the better margin: that needs costs, realized demand, and the rest of the offer.'
-        ]
+          'The published AI-tools guide compares two 256GB offers using the same assigned profiles at both prices within each cohort. The lower price raises modeled qualification but gives up $400 per sale; selecting a better margin still requires costs and realized demand.'
+        ],
+        table: {
+          caption: 'Matched pricing example · modeled qualification',
+          columns: ['Cohort / profiles', '$1,999', '$1,599'],
+          rows: [
+            ['Core / 2,103', '5.52%', '11.27%'],
+            ['Expansion / 2,897', '6.18%', '12.50%']
+          ],
+          note: 'Same profiles at both prices within each cohort. Published Sapien Team study; modeled responses, not observed purchases.'
+        }
       },
       {
         id: 'practice',
         label: 'Research review',
-        title: 'Reviewing validation studies',
+        title: 'Reporting the useful misses',
         body: [
-          'I review academic work, validation studies, and competing methods before turning a result into an article or product explanation. The useful details are often the scenario, comparison group, and unit of measurement, rather than a single accuracy headline.',
-          'Sapien’s 14-study comparison includes a useful miss: without nearby fast charging, simulated EV choice in the used-car case was 53.1%, against approximately 34.7% reconstructed from the human choice model. The new-versus-used direction reverses. Reporting that scenario explains more than averaging it into a general success rate.',
-          'A match to qualitative findings also has a different meaning from matching population prevalence. I keep those distinctions in the explanation so a reader can assess where a method fits their own research question.'
+          'I review validation studies at the scenario and measurement level. In Sapien’s 14-study comparison, the used-car scenario without nearby fast charging gives 53.1% simulated EV choice against about 34.7% reconstructed from the human model, reversing the new-versus-used direction. That mismatch belongs in the explanation, rather than an average accuracy headline.'
         ],
         links: [
           {
@@ -155,10 +125,9 @@ export const workNarratives: Record<string, WorkDocument> = {
       {
         id: 'published',
         label: 'Published material',
-        title: 'Selected buyer guides',
+        title: 'Published work',
         body: [
-          'The buyer guides compare tools and providers by research job, evidence source, deliverables, and pricing. The services guide explains how to scope a purchase; the category guides help a reader build a shortlist for that scope.',
-          'Selected publications from the content function I built, published under the Sapien Team byline:'
+          'Selected buyer guides from the content function I built, published under the Sapien Team byline. They compare research jobs, evidence sources, delivery models, and what a buyer receives.'
         ],
         links: [
           {
@@ -189,18 +158,15 @@ export const workNarratives: Record<string, WorkDocument> = {
   'investing-markets': {
     role: 'Finance student · Texas Venture Labs · Independent research',
     deck: 'Infrastructure rights, software ownership, and AI power economics.',
-    summary:
-      'At UT Austin and Texas Venture Labs, I work with market research, pricing, financial models, and unit economics. My independent studies retain the documents, assumptions, and calculations behind each conclusion.',
+    summary: 'I build financial models and source-led research on infrastructure, software ownership, and AI power economics, alongside work at Texas Venture Labs.',
     chapters: [
       {
         id: 'question',
         label: 'Toll-road ownership',
-        title: 'Mapping the claims on a Texas toll road',
+        title: 'Who holds the rights to a road?',
         body: [
-          'My toll-road investigation separates public title, concession rights, equity, creditors, operating responsibilities, and billing. North Tarrant Express illustrates the distinction: sponsor percentages describe the concession business, while the highway land remains publicly owned. The concession’s revenue rights extend through 2061.',
-          'SH 288 provides a different event. When Texas terminated its private concession, the proceeds first repaid outstanding debt, including the federal TIFIA loan; the remainder was available to shareholders. The ownership table records nine facilities or systems with their operator, revenue claimant, term, and supporting sources.'
+          'My nine-record ownership table separates public title from concession rights, equity, creditors, operations, and billing. North Tarrant Express’s sponsor percentages describe the concession business; highway land remains public and revenue rights extend through 2061. SH 288’s termination proceeds repaid debt, including TIFIA, before the remainder became available to shareholders.'
         ],
-        artifact: 'system',
         links: [
           {
             label: 'Who owns Texas toll roads?',
@@ -218,21 +184,10 @@ export const workNarratives: Record<string, WorkDocument> = {
       {
         id: 'system',
         label: 'Cash-flow model',
-        title: 'Choosing a comparable revenue basis',
+        title: 'A comparable cash-flow denominator',
         body: [
-          'The follow-up model separates five questions: recovery of original cost, road debt, system debt, legal tolling authority, and private concession rights. Paying down one balance does not answer all five.',
-          'The system table retains seven systems, but the per-$100 comparison includes only CTTS and Grand Parkway on the same TxDOT FY2025 basis. Other systems have different revenue categories or reconciliation limits. Keeping those exclusions visible avoids a precise-looking comparison built from incompatible denominators.'
+          'The tolling model separates original-cost recovery, road debt, system debt, legal tolling authority, and private concession rights. Its seven-system table retains differing revenue definitions; the per-$100 comparison includes only CTTS and Grand Parkway on the same TxDOT FY2025 basis. The methodology records the exclusions at the September 2, 2026 cutoff.'
         ],
-        table: {
-          caption: 'The five tests in the tolling analysis',
-          columns: ['Question', 'Evidence required'],
-          rows: [
-            ['Original cost recovered?', 'Comparable capital cost and the relevant revenue period.'],
-            ['Road or system debt retired?', 'Debt balances and the facilities pledged to each obligation.'],
-            ['Tolls legally required or permitted?', 'Statutory authority, bond terms, and concession rights.']
-          ],
-          note: 'Research cutoff: September 2, 2026. Road and system debt are separate tests, as are public tolling authority and private rights.'
-        },
         links: [
           {
             label: 'System comparison · CSV',
@@ -251,10 +206,9 @@ export const workNarratives: Record<string, WorkDocument> = {
       {
         id: 'practice',
         label: 'Software buyouts',
-        title: 'Classifying liquidity and control separately',
+        title: 'Liquidity is different from a control exit',
         body: [
-          'I assembled 25 software transactions announced in 2020–2022, with $171.2 billion in mixed-definition headline deal values. Each record follows who still controls the company, rather than treating every IPO or financing event as a completed sponsor exit.',
-          'At the August 17, 2026 cutoff, 23 remained in continuing sponsor ownership, one had transferred to creditors, and one had partial liquidity. None met the stated clean control-exit definition. That classification is not an estimate of losses or returns: the public record does not support a cohort IRR, and most deals were only three to five years into ownership.'
+          'I assembled 25 software transactions announced in 2020–2022, totaling $171.2 billion in mixed-definition headline values. At the August 17, 2026 cutoff, 23 remained sponsor-owned, one had transferred to creditors, and one had partial liquidity. None met the stated clean control-exit definition; those classifications do not establish losses, returns, or a cohort IRR.'
         ],
         links: [
           {
@@ -279,10 +233,9 @@ export const workNarratives: Record<string, WorkDocument> = {
       {
         id: 'power',
         label: 'AI infrastructure',
-        title: 'Turning a gigawatt claim into a model',
+        title: 'What a gigawatt can support',
         body: [
-          'The AI-power model distinguishes a grid request, facility capacity, IT capacity, rack nameplate, installed fleet, and utilization. Each boundary changes what a “1 GW” announcement can support.',
-          'The workbook converts facility power through PUE and external IT overhead to 142 kW, 72-GPU rack equivalents. At PUE 1.145 and 10% overhead, one nominal facility gigawatt gives about 402,574 B300 GPU equivalents. Changing utilization changes annual equivalent compute hours; it does not establish a paid workload or a verified installed fleet.'
+          'The workbook converts facility power through PUE and external IT overhead into 142 kW, 72-GPU rack equivalents. At PUE 1.145 and 10% overhead, one nominal facility gigawatt gives about 402,574 B300 GPU equivalents. Utilization changes equivalent compute hours, while installed fleet and paid workload remain separate claims. The methodology retains the August 16, 2026 evidence cutoff.'
         ],
         links: [
           {
@@ -318,16 +271,14 @@ export const workNarratives: Record<string, WorkDocument> = {
   miscellaneous: {
     role: 'Geometry, shaders & interaction',
     deck: 'The construction and rendering of this site’s sculptures.',
-    summary:
-      'I built the work objects as GLB assets, developed their ink-and-paper shading, and connected their moving parts to a renderer that suspends work when it is out of view.',
+    summary: 'I modeled original project sculptures and built the GLB pipeline and ink-and-paper renderer used across this site.',
     chapters: [
       {
         id: 'question',
         label: 'Geometry',
-        title: 'Modeling a surface that survives halftone',
+        title: 'Geometry made for ink',
         body: [
-          'The sculptures are built offline from modeled relief, cut openings, rounded shoulders, bearings, and separate moving parts. Bevels give lighting a wide enough transition to survive a binary threshold; recessed channels keep details readable at phone scale.',
-          'The forms include an engraved calendar and an escapement, portrait busts arranged around prototypes, a relief globe within armillary rails, and five meshing gears under open shrouds. Geometry is merged by material and part, centered, and exported with named pivots. The browser loads these files rather than rebuilding them every frame.'
+          'I built the sculptures offline from relief, pierced frames, rounded shoulders, bearings, and separate parts. Bevels and recessed channels keep shape legible under a binary threshold. Geometry is centered and merged by material before export, so the browser loads the actual GLB instead of constructing a lookalike.'
         ],
         links: [
           {
@@ -341,39 +292,26 @@ export const workNarratives: Record<string, WorkDocument> = {
       {
         id: 'system',
         label: 'Dithering',
-        title: 'From lit surfaces to ink coverage',
+        title: 'One material language',
         body: [
-          'The portfolio shader converts the lit model to luminance, applies an ordered Bayer threshold, and maps coverage to ink and paper. Linear-light weights and display conversion keep material tone consistent; filtered transparent edges are handled before thresholding to avoid a dark fringe.',
-          'The dot pattern stays in a fixed grid. Subtle modulation changes the threshold continuously instead of assigning new random grain every frame. On Work, CSS-sized cells travel with the object’s viewport region, keeping grain and sculpture aligned while the page scrolls.'
+          'The project shader uses the same engraved dot screen as the opening helmet, with continuous highlights inside the pattern. Beveled edges and recessed channels remain visible as the object turns. Source geometry carries the form; shading supplies the shared print character.'
         ],
-        artifact: 'system',
         links: [{ label: 'Original shader study', href: './shader.html', description: 'The preserved independent study of lighting and ordered dithering.' }]
       },
       {
         id: 'practice',
         label: 'Articulation',
-        title: 'Motion from shafts and tooth counts',
+        title: 'Parts keep their own structure',
         body: [
-          'Moving nodes retain names, pivots, unit axes, and shaft metadata in their GLB extras. The five-gear mechanism uses a shared module and twenty-degree pressure angle. Its 36-tooth driver turns at 0.46 radians per second; neighboring ratios follow the tooth counts and reverse across each mesh.',
-          'The renderer advances shafts from accumulated visible playback time. Pause, a hidden tab, or an offscreen object stops that clock, preserving orientation on return. Direct interaction gets an immediate frame; automatic movement targets 30 fps, with settled paths for reduced motion.'
+          'Named parts retain local pivots, unit axes, and shaft metadata through export. The five-gear mechanism uses a shared module, twenty-degree pressure angle, and signed tooth ratios. The source model records a 36-tooth driver at 0.46 radians per second. These construction records remain inspectable in the downloadable GLB.'
         ],
-        table: {
-          caption: 'Motion data retained with the object',
-          columns: ['Exported data', 'Runtime use'],
-          rows: [
-            ['Local pivot and axis', 'Rotate the part around its modeled shaft, preserving the assembly.'],
-            ['Signed drive ratio', 'Angle = visible time × driver speed × ratio.'],
-            ['Interactive name and extras', 'Keep selected parts and animation behavior intact through compression.']
-          ]
-        }
       },
       {
         id: 'assets',
         label: 'Asset pipeline',
-        title: 'Smaller derivatives, retained geometry',
+        title: 'Retained detail, smaller delivery',
         body: [
-          'The helmet and Contact derivatives reduce texture dimensions while retaining their compressed geometry bytes. The globe uses its existing compressed variant. Work and About models use Draco attribute quantization at 18/14/16 bits for positions, normals, and UVs, without reducing triangle counts.',
-          'The optimizer records hashes, byte sizes, hierarchy, materials, texture dimensions, and validator results. It checks names and animation extras before and after decoding. Loading uses one local Draco worker per renderer, abortable fetches, and disposal of results that arrive after their view has been replaced.'
+          'Portfolio derivatives preserve model hierarchy and animation extras. The optimizer checks byte sizes, geometry, materials, texture dimensions, and validation results. The retained comparison shows the reductions without treating equal triangle counts as bit-identical geometry.'
         ],
         table: {
           caption: 'Portfolio derivatives · decimal MB',
@@ -390,10 +328,9 @@ export const workNarratives: Record<string, WorkDocument> = {
       {
         id: 'rendering',
         label: 'Frame budget',
-        title: 'Rendering work only when it is needed',
+        title: 'A bounded rendering clock',
         body: [
-          'Work caps its backing buffer at 1.35 million pixels and a DPR of 1.25. The runtime watches rendered-frame cadence separately from CPU submission time. After two two-second windows averaging over 40 ms, automatic motion reduces backing dimensions to 80%; eight seconds below 35 ms restores them.',
-          'Resolution changes wait during dragging and route handoffs. Offscreen suspension removes recurring frame work, while direct input can request a fresh frame. Development telemetry updates at most once per 750 ms so observing the renderer does not become another animation loop.'
+          'Detailed project views use a capped render target with smoother edges and retained highlight range. The renderer tracks visible frame cadence and suspends offscreen work. Drag a project sculpture or use the arrow keys to rotate it; double-click or press Home to reset. The artwork stays blank while its GLB loads. Reduced motion settles automatic animation while keeping direct rotation available.'
         ]
       }
     ],

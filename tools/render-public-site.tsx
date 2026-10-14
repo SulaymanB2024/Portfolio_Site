@@ -11,7 +11,8 @@ import { resumeProfile, resumeReview } from '../src/personal/profile-copy'
 import { personalObjects } from '../src/personal/about/about-content'
 import { workNarratives } from '../src/personal/projects/work-narratives'
 import { caseNarratives } from '../src/personal/projects/case-narratives'
-import { WorkMaterials, WorkSources } from '../src/personal/projects/WorkMaterials'
+import { ProjectAccount, ProjectSources } from '../src/personal/projects/ProjectAccount'
+import { ProjectEndNavigation } from '../src/personal/projects/ProjectEndNavigation'
 import type { WorkDocument } from '../src/personal/projects/work-document'
 import { searchMetadata, withSearchHead } from '../src/personal/search-metadata'
 import { PublicArticle } from './public-article'
@@ -25,7 +26,7 @@ import { searchSitemap } from './search-sitemap'
 import { featuredWorkSlugs } from '../src/personal/projects/work-curation'
 import { writingSelection } from '../src/personal/editorial/writing-selection'
 import { ReadingPaths, TopicBody } from '../src/personal/editorial/TopicPage'
-import { ProjectContribution, InternshipProductPath } from '../src/personal/projects/ProjectContribution'
+import projectDetailStyle from '../src/personal/projects/project-detail.css?raw'
 import researchDiagramStyle from '../src/personal/editorial/research-diagrams.css?raw'
 import researchComparisonStyle from '../src/personal/editorial/research-comparison.css?raw'
 import researchProcessStyle from '../src/personal/editorial/research-process.css?raw'
@@ -41,15 +42,13 @@ const machineDocuments: { url: string; text: string }[] = []
 
 function ProjectDocument({ document, slug, caseStudy = false }: { document: WorkDocument; slug: string; caseStudy?: boolean }) {
   const sectionId = (id: string) => caseStudy ? id : `${slug}-${id}`
-  return <>
-    <p>{document.deck}</p><p>{document.summary}</p><ProjectContribution slug={slug} />
-    {slug === 'internshipdeadlines' && <InternshipProductPath />}
+  return <div className="project-detail project-readable">
+    <p>{document.summary}</p>
     <nav aria-label="In this project">{document.chapters.map(chapter => <a key={chapter.id} href={`#${sectionId(chapter.id)}`}>{chapter.label}</a>)}</nav>
-    {document.chapters.map(chapter => <section id={sectionId(chapter.id)} key={chapter.id}>
-      <h2>{chapter.title}</h2>{paragraphs(chapter.body)}<WorkMaterials chapter={chapter} />
-    </section>)}
-    <WorkSources links={document.links} />
-  </>
+    <ProjectAccount document={document} sectionId={sectionId} />
+    <ProjectSources links={document.links} />
+    <ProjectEndNavigation slug={slug} />
+  </div>
 }
 
 function Body({ route }: { route: string }) {
@@ -79,6 +78,7 @@ function Body({ route }: { route: string }) {
 
 const fallbackStyle = `<style>.static-site{max-width:76rem;margin:0 auto;padding:2rem 5vw;font:1.05rem/1.65 Georgia,serif;overflow-wrap:anywhere}.static-site header{display:flex;flex-wrap:wrap;gap:1rem;justify-content:space-between;border-bottom:1px solid #b7b1a4;padding-bottom:1rem}.static-site nav{display:flex;flex-wrap:wrap;gap:1rem}.static-site main{max-width:52rem;margin:3rem auto}.static-site h1{font-size:clamp(2.5rem,7vw,5rem);line-height:1.08}.static-site h2{margin-top:2rem}.static-site a{color:inherit}.static-site table{border-collapse:collapse}.static-site td,.static-site th{padding:.5rem;border:1px solid #b7b1a4}.static-site img{max-width:100%;height:auto}.static-site pre{overflow:auto}.static-site li{margin:.6rem 0}.static-site footer{border-top:1px solid #b7b1a4;padding-top:1rem}</style>`
 const readingFallbackStyle = `<style>.static-site{--ink:#24221e;--muted:#68665e;--line:#b7b1a4;--editorial-sans:Arial,sans-serif;--editorial-mono:monospace}${readingGuideStyle}${publicCoverStyle}.static-site .reading-paths,.static-site .reader-guide-paths{display:grid}</style>`
+const projectFallbackStyle = `<style>${projectDetailStyle}.static-site{--paper:#f5f2ea;--type-display:Arial,sans-serif;--type-interface:Arial,sans-serif;--type-reading:Georgia,serif}.static-site .project-account-section h2{font:600 2rem/1.18 Arial,sans-serif;letter-spacing:-.03em;margin:0 0 23px}.static-site .project-source-list li{margin:0}.static-site .work-table-wrap{overflow:auto}.static-site .work-table :is(th,td){border:0;border-bottom:1px solid var(--line);text-align:left}.static-site .work-table{border-collapse:collapse}.static-site .work-table caption{text-align:left}</style>`
 
 // Keep the two responsive rulers mutually exclusive before the reader mounts,
 // and when JavaScript is unavailable. Scope these rules to the static document.
@@ -101,7 +101,7 @@ ${researchComparisonStyle.replaceAll('.article-page .reader-prose', '.static-sit
 </style>`
 
 for (const page of [...publicPages, { route: '404', path: '/404', title: 'Page not found — Sulayman Bowles', description: 'This address does not exist.' }]) {
-  const rendered = renderToStaticMarkup(<div className="static-site">{(page.route === 'writing' || page.route.startsWith('writing/')) && <ArtworkInkDefinitions />}<header><a href="/">Sulayman Bowles</a><nav aria-label="Main navigation">{publicPages.filter(p => !p.route.includes('/') && p.route).map(p => <a key={p.path} href={p.path}>{p.title.replace(' — Sulayman Bowles', '')}</a>)}</nav></header><main><h1>{page.route === '' ? siteCopy.home.title : page.title.replace(' — Sulayman Bowles', '')}</h1>{page.route !== '' && <p>{page.description}</p>}<Body route={page.route} /></main><footer><a href={`mailto:${contact.email}`}>{contact.email}</a> · <a href="/sitemap">All pages</a></footer></div>)
+  const rendered = renderToStaticMarkup(<div className="static-site">{(page.route === 'writing' || page.route.startsWith('writing/')) && <ArtworkInkDefinitions />}<header><a href="/">Sulayman Bowles</a><nav aria-label="Main navigation">{publicPages.filter(p => !p.route.includes('/') && p.route).map(p => <a key={p.path} href={p.path}>{p.title.replace(' — Sulayman Bowles', '')}</a>)}</nav></header><main><h1>{page.route === '' ? siteCopy.home.title : page.title.replace(' — Sulayman Bowles', '')}</h1>{page.route !== '' && !page.route.startsWith('work/') && <p>{page.description}</p>}<Body route={page.route} /></main><footer><a href={`mailto:${contact.email}`}>{contact.email}</a> · <a href="/sitemap">All pages</a></footer></div>)
   // React emits image resource hints before the rendered root. Keep the first
   // readable element in #root and place those hints in the document head.
   const imageHints = rendered.match(/^(?:<link rel="preload" as="image"[^>]*\/>)+/)?.[0] || ''
@@ -111,7 +111,7 @@ for (const page of [...publicPages, { route: '404', path: '/404', title: 'Page n
     text: documentText(body.match(/<main>([^]*?)<\/main>/)![1], `${siteOrigin}${page.path}`),
   })
   const html = withSearchHead(template, searchMetadata(page.route))
-    .replace('</head>', () => `${imageHints}${fallbackStyle}${readingFallbackStyle}${page.route.startsWith('writing/') ? studyFallbackStyle : ''}</head>`)
+    .replace('</head>', () => `${imageHints}${fallbackStyle}${readingFallbackStyle}${page.route.startsWith('writing/') ? studyFallbackStyle : ''}${page.route.startsWith('work/') ? projectFallbackStyle : ''}</head>`)
     .replace('<div id="root"></div>', () => `<div id="root"><!--public-page:start-->${body}<!--public-page:end--></div>`)
   const destination = page.path === '/' ? join(dist, 'index.html') : join(dist, page.path.slice(1), 'index.html')
   await mkdir(join(destination, '..'), { recursive: true }); await writeFile(destination, html)

@@ -30,6 +30,9 @@ export const definitions = [
   ...['internshipdeadlines', 'sapien', 'investing-markets', 'miscellaneous'].map(id => ({
     id: `work-${id}`, source: `public/work-studies/${id}.glb`, path: `public/portfolio-models/work-${id}.glb`, mode: 'draco-only',
   })),
+  ...['payrollpro', 'viralbench'].map(id => ({
+    id: `work-${id}`, source: `public/portfolio-models/work-${id}.glb`, path: `public/portfolio-models/work-${id}.glb`, mode: 'unchanged',
+  })),
   ...['bass', 'knight', 'score'].map(id => ({
     id: `about-${id}`, source: `public/about-objects/${id}.glb`, path: `public/portfolio-models/about-${id}.glb`, mode: 'draco-only',
   })),
