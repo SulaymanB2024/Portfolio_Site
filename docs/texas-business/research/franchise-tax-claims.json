@@ -1,0 +1,89 @@
+{
+  "article": "texas-franchise-tax-reporting-business-decisions",
+  "checkedAt": "2026-10-12",
+  "claims": [
+    {
+      "claim": "2026\u20132027 no-tax-due threshold $2.65M; ordinary and retail/wholesale rates 0.75% and 0.375%; EZ threshold $20M and rate0.331%",
+      "source": "https://comptroller.texas.gov/taxes/franchise/",
+      "locator": "Tax rates, thresholds and deduction limits table",
+      "status": "Current report-year guidance",
+      "recheck": "New report-year table or amendment"
+    },
+    {
+      "claim": "Below-threshold ordinary taxable entities generally still file PIR/OIR; listed entity-specific exceptions are separate",
+      "source": "https://comptroller.texas.gov/taxes/franchise/pir-oir-filing-req.php",
+      "locator": "Filing requirements, combined groups and entities not required",
+      "status": "Current guidance",
+      "recheck": "Entity, nexus, group or legal requirement changes"
+    },
+    {
+      "claim": "Annualized revenue is actual period revenue divided by days multiplied by365; threshold screen differs from actual tax base",
+      "source": "https://comptroller.texas.gov/forms/05-915.pdf",
+      "locator": "Printed page5, Annualized Total Revenue",
+      "status": "2026 instructions",
+      "recheck": "New instructions or accounting-period changes"
+    },
+    {
+      "claim": "Applicable 2026 extended deadline November16 subject to timely requests and payment conditions; non-EFT extension or mandatory-EFT second extension (firstAugust17)",
+      "source": "https://comptroller.texas.gov/forms/05-915.pdf",
+      "locator": "Printed page7, non-EFT and EFT extensions",
+      "status": "Conditional deadline; no entity-specific extension asserted",
+      "recheck": "Actual acceptance or updated official instructions"
+    },
+    {
+      "claim": "EZ excludes margin deductions and franchise-tax credits",
+      "source": "https://comptroller.texas.gov/taxes/franchise/filing-requirements.php",
+      "locator": "Option1: EZ Computation Report",
+      "status": "Current guidance",
+      "recheck": "Method election, credit or law changes"
+    },
+    {
+      "claim": "Margin alternatives and compensation exclusions differ from book expenses; unitary affiliated groups combine",
+      "source": "https://comptroller.texas.gov/taxes/publications/98-806.php",
+      "locator": "Calculation of Taxable Margin; Combined Reporting",
+      "status": "Current overview, fact-specific treatment unresolved",
+      "recheck": "Ownership, sourcing, deductions or rules change"
+    },
+    {
+      "claim": "SubchapterT effectiveJan1,2026; conditional refundable credit; federalForm6765 and prior research exemption use matter; EZ excluded",
+      "source": "https://comptroller.texas.gov/taxes/franchise/research-dev-credit.php",
+      "locator": "Overview and taxable entity that does not owe franchise tax",
+      "status": "Current guidance, no taxpayer eligibility asserted",
+      "recheck": "Amended guidance, underlying report period or deadline"
+    },
+    {
+      "claim": "Forfeiture can affect court participation and certain debt liability",
+      "source": "https://comptroller.texas.gov/taxes/franchise/current-2024.php",
+      "locator": "What Happens if My Account Is Not Current?",
+      "status": "General guidance; actual account/legal consequences unassessed",
+      "recheck": "Account notice or transaction"
+    },
+    {
+      "claim": "Hypothetical182-day revenue1.4M annualizes to2.807692M;12Mrevenue/9MTexas/7Mallowablecomp gives EZ29790, long28125; extra prep2200 and assumed credit5000 shown separately",
+      "source": null,
+      "locator": "annualization-and-scope; computation-choice",
+      "status": "Declared original hypothetical inputs and arithmetic",
+      "recheck": "Input, rate, method or example changes"
+    },
+    {
+      "claim": "Agency refundable-credit guidance specifies Forms05-183/05-184 and November15 cutoff; late05-183 not accepted; underlying-period old research salesexemption use excludes credit",
+      "source": "https://comptroller.texas.gov/taxes/franchise/research-dev-credit.php",
+      "locator": "Taxable entity that does not owe franchise tax; Due Date",
+      "status": "Agency stated cutoff; actual calendar-adjusted taxpayer deadline not independently determined",
+      "recheck": "Form, instructions, underlying period or calendar-date clarification"
+    },
+    {
+      "id": "deduction-choice-threshold",
+      "claim": "On the declared $12M/75%/0.75% assumptions, allowable compensation must exceed $6.704M for lower long-form tax, or $7.095111M including $2,200 extra preparation and no credit.",
+      "status": "calculated hypothetical",
+      "qualification": "All other assumptions fixed; deduction eligibility, other margin choices and credits remain separate. No taxpayer computation validated.",
+      "sources": [],
+      "recheck": "Governing provision, actual contract, input cohort or operating evidence changes."
+    }
+  ],
+  "revisionReview": {
+    "date": "2026-10-13",
+    "scope": "allowable-deduction sensitivity and explicit 2026 scope for the credit constraint",
+    "originalSourceDatesPreserved": true
+  }
+}

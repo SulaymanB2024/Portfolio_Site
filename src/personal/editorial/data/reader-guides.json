@@ -1036,5 +1036,647 @@
         "href": "https://investor.chegg.com/Press-Releases/press-release-details/2026/Chegg-Announces-Full-Repayment-of-Convertible-Notes/default.aspx"
       }
     ]
+  },
+  "texas-power-large-load-business-diligence": {
+    "question": "What makes a Texas power commitment financeable?",
+    "answer": "For an ERCOT site, obtain a documented allocation, phase dates, conditions, and operating restrictions; model fees, security, construction payments, and delay exposure separately. The standards effective October 8, 2026 and the conditional Batch Zero process change what a request or agreement establishes. A power price and a large request alone do not resolve the opening date. Price the minimum-billing commitment and staged collateral release separately from permanent construction payments. A material ramp or site change can require a new request. Verify the effective minimum-billing rule and tariff separately: the adopted connection acknowledgment does not establish the July proposal’s 20-year treatment.",
+    "paths": [
+      {
+        "label": "Verify the connection evidence",
+        "section": "connection-evidence",
+        "description": "Follow classification, verification, studies and approval."
+      },
+      {
+        "label": "Compare capital commitments",
+        "section": "capital-commitments",
+        "description": "Distinguish security from construction and electricity expense."
+      },
+      {
+        "label": "Make the investment decision",
+        "section": "investment-decision",
+        "description": "Tie commitments to capacity and operating evidence."
+      }
+    ],
+    "sources": [
+      {
+        "label": "Adopted 16 TAC §25.194: Large Load Interconnection Standards",
+        "href": "https://www.sos.texas.gov/texreg/archive/October22026/Adopted%20Rules/16.ECONOMIC%20REGULATION.html"
+      },
+      {
+        "label": "M-A080326-04: Batch Zero conditional classifications",
+        "href": "https://www.ercot.com/services/comm/mkt_notices/M-A080326-04"
+      },
+      {
+        "label": "M-B091426-01: Data Center State and Community Impact RFI",
+        "href": "https://www.ercot.com/services/comm/mkt_notices/M-B091426-01"
+      }
+    ]
+  },
+  "texas-ai-law-business-compliance": {
+    "question": "What should a Texas business resolve before deploying AI?",
+    "answer": "Identify the deployed use and operator, then determine which AI, privacy, and biometric duties attach. HB149 has distinct government and healthcare disclosure provisions; ordinary private businesses need a use-specific review of prohibited conduct and applicable data responsibilities. Record vendor terms, oversight, complaint handling, and change approvals. This edition uses enacted and current primary sources checked October 12, 2026. Employment-context privacy exclusions do not settle separate biometric or TRAIGA duties; approve the actual purpose and data flow.",
+    "paths": [
+      {
+        "label": "Identify the applicable duties",
+        "section": "duties-by-operator",
+        "description": "Separate private, government and healthcare requirements."
+      },
+      {
+        "label": "Trace personal and biometric data",
+        "section": "privacy-and-biometrics",
+        "description": "Check the actual processing relationship and statutory scope."
+      },
+      {
+        "label": "Review the procurement",
+        "section": "procurement",
+        "description": "Assign responsibilities and request usable evidence."
+      }
+    ],
+    "sources": [
+      {
+        "label": "HB149, enacted enrolled text",
+        "href": "https://capitol.texas.gov/tlodocs/89R/billtext/html/HB00149F.htm"
+      },
+      {
+        "label": "Business & Commerce Code Chapter 552: duties, prohibitions and enforcement",
+        "href": "https://tcss.legis.texas.gov/resources/BC/htm/BC.552.htm"
+      },
+      {
+        "label": "Business & Commerce Code Chapter 541: Texas Data Privacy and Security Act",
+        "href": "https://tcss.legis.texas.gov/resources/BC/htm/BC.541.htm"
+      }
+    ]
+  },
+  "texas-business-court-contract-decisions": {
+    "question": "What should change in a Texas business contract review?",
+    "answer": "Preserve material promises in the signed documents, separate transaction consideration from qualifying pleaded claims, and keep a dated dispute chronology. HB40 uses distinct monetary screens; September 2026 opinions show why counterclaims and reliance language matter. Ask counsel to map the actual agreement, venue, and dispute to the governing route. Select the statutory route and all definition limbs before monetary screens; keep business loss, legal claim and practical recovery distinct.",
+    "paths": [
+      {
+        "label": "Separate the monetary tests",
+        "section": "two-thresholds",
+        "description": "A contract value is different from the amount in dispute."
+      },
+      {
+        "label": "Preserve the economic bargain",
+        "section": "preserve-bargain",
+        "description": "Reconcile material commitments with the signed package."
+      },
+      {
+        "label": "Work the downside",
+        "section": "worked-dispute",
+        "description": "Compare a declared hypothetical against the commercial-action test."
+      }
+    ],
+    "sources": [
+      {
+        "label": "HB40 enrolled text, particularly sections 43, 45, 56, and 72",
+        "href": "https://capitol.texas.gov/tlodocs/89R/billtext/html/HB00040F.htm"
+      },
+      {
+        "label": "The Bakery v. Naterra International, 2026 Tex. Bus. 64",
+        "href": "https://www.txcourts.gov/media/1463334/26-bc03a-0027-the-bakery-v-naterra-intl-2026-tex-bus-64.pdf"
+      },
+      {
+        "label": "Beard v. Perot, 2026 Tex. Bus. 65",
+        "href": "https://www.txcourts.gov/media/1463368/26-bc01b-0018-beard-v-perot-2026-tex-bus-65.pdf"
+      }
+    ]
+  },
+  "texas-water-facility-site-diligence": {
+    "question": "What makes a Texas water commitment usable?",
+    "answer": "Trace the legal source, supplier contract and delivery system to the process that consumes the water. Annual sufficiency does not establish peak-day flow, recoverable storage, quality or drought obligations. The initial 2027 State Water Plan is adopted; its enhanced amendment remained proposed at the October 12, 2026 cutoff. Use planning projects to identify dependencies, then obtain local authority and operating evidence. Use the peak/refill sequence and compare lost-production exposure with the same-horizon supply-price saving.",
+    "paths": [
+      {
+        "label": "Trace source authority",
+        "section": "legal-source",
+        "description": "Match the water right or local well permit to the proposed use."
+      },
+      {
+        "label": "Compare peak delivery and storage",
+        "section": "peak-and-storage",
+        "description": "Work annual demand, peak limits and recovery separately."
+      },
+      {
+        "label": "Review treatment and disposal",
+        "section": "quality-reuse-disposal",
+        "description": "Complete the design through reuse and wastewater authority."
+      }
+    ],
+    "sources": [
+      {
+        "label": "2027 State Water Plan: adoption and proposed amendment",
+        "href": "https://www.twdb.texas.gov/waterplanning/swp/2027/index.asp"
+      },
+      {
+        "label": "Water supply contracts and underlying water rights",
+        "href": "https://www.tceq.texas.gov/permitting/water_rights/watersupplycontracts"
+      },
+      {
+        "label": "Groundwater regulation and private-well guidance",
+        "href": "https://www.twdb.texas.gov/groundwater/faq/faqgwm.asp"
+      }
+    ]
+  },
+  "texas-property-tax-business-underwriting": {
+    "question": "What can change a Texas business property-tax budget?",
+    "answer": "Reconstruct each asset and taxing unit, keeping market, appraised and taxable values separate. The reviewed non-homestead limitation expires after 2026, and the separate $125,000 personal-property exemption has location and aggregation conditions. Ownership, improvements, adopted rates and the lease allocation can change the cost. Compare the seller’s bill with the business’s durable operating expense. Temporary tax relief also changes debt-service headroom; model the ownership tax-year transition and statutory expiration separately.",
+    "paths": [
+      {
+        "label": "Reconstruct the tax stack",
+        "section": "reconstruct-the-bill",
+        "description": "Identify each account, value and taxing unit."
+      },
+      {
+        "label": "Model the temporary limitation",
+        "section": "worked-tax-sensitivity",
+        "description": "Price value and rate exposure using declared assumptions."
+      },
+      {
+        "label": "Review tenant exposure",
+        "section": "lease-exposure",
+        "description": "Connect the tax charge, lease allocation and conditional protest rights."
+      }
+    ],
+    "sources": [
+      {
+        "label": "Tax Code Chapter 23: appraisal methods and §23.231 circuit breaker",
+        "href": "https://tcss.legis.texas.gov/resources/TX/htm/TX.23.htm"
+      },
+      {
+        "label": "Tax Code §11.145: income-producing tangible personal property",
+        "href": "https://tcss.legis.texas.gov/resources/TX/htm/TX.11.htm"
+      },
+      {
+        "label": "Appraisal protests and appeals, including lessees",
+        "href": "https://comptroller.texas.gov/taxes/property-tax/protests/index.php"
+      }
+    ]
+  },
+  "texas-data-center-sales-tax-project-economics": {
+    "question": "Which Texas data-center tax benefit belongs in the project model?",
+    "answer": "Identify the certification route, registered purchaser, eligible items and timeline. The standard route exempts state tax while local tax remains; the large-project route covers state and local eligible purchases. Current large-project law starts the investment clock at the earlier application or certification date, unlike the agency summary. Resolve that discrepancy, separate investment from exempt purchases and price continuing commitments and revocation exposure. Exclude jobs moved between Texas counties, and keep investment-counting dates separate from the certification-dependent purchase exemption.",
+    "paths": [
+      {
+        "label": "Compare certification routes",
+        "section": "two-certification-routes",
+        "description": "Separate space, jobs, capital, transmission and tax treatment."
+      },
+      {
+        "label": "Resolve the investment clock",
+        "section": "investment-clock",
+        "description": "Compare the current statute with the agency form."
+      },
+      {
+        "label": "Work the purchase tax case",
+        "section": "worked-tax-case",
+        "description": "Retain local tax and contingent repayment exposure."
+      }
+    ],
+    "sources": [
+      {
+        "label": "Texas Tax Code Chapter151, §§151.359 and151.3595",
+        "href": "https://tcss.legis.texas.gov/resources/TX/htm/TX.151.htm"
+      },
+      {
+        "label": "AP-236: application for a qualifying large data-center project",
+        "href": "https://comptroller.texas.gov/forms/ap-236.pdf"
+      },
+      {
+        "label": "Form01-929: data-center exemption certificate",
+        "href": "https://comptroller.texas.gov/forms/01-929.pdf"
+      }
+    ]
+  },
+  "texas-jeti-incentives-project-underwriting": {
+    "question": "How should a business underwrite a Texas JETI incentive?",
+    "answer": "Place the benefit in the school M&O tax line for eligible property, rather than discount the whole tax bill. Retain genuine competing-site evidence, the signed construction and incentive timetable, and jobs, wages and reporting obligations. Model the benefit after program costs and the compliance tail. A proposed investment, signed agreement and operating output are different stages of evidence. A permitted start deferral can leave the end fixed and consume benefit years; price the post-benefit operating tail separately.",
+    "paths": [
+      {
+        "label": "Locate the actual tax benefit",
+        "section": "tax-stack",
+        "description": "Separate the M&O value limitation from the rest of the bill."
+      },
+      {
+        "label": "Keep competing-site evidence",
+        "section": "competitive-evidence",
+        "description": "Retain a current location decision with tangible alternatives."
+      },
+      {
+        "label": "Calculate the return",
+        "section": "worked-return",
+        "description": "Use declared values, rates, costs and downside assumptions."
+      }
+    ],
+    "sources": [
+      {
+        "label": "Government Code Chapter 403, Subchapter T: current JETI law",
+        "href": "https://tcss.legis.texas.gov/resources/GV/htm/GV.403.htm"
+      },
+      {
+        "label": "JETI FAQ: competing locations, jobs and eligible investment",
+        "href": "https://comptroller.texas.gov/economy/development/prop-tax/jeti/faq.php"
+      },
+      {
+        "label": "JETI process and timeline",
+        "href": "https://comptroller.texas.gov/economy/development/prop-tax/jeti/process.php"
+      }
+    ]
+  },
+  "texas-franchise-tax-reporting-business-decisions": {
+    "question": "What does no Texas franchise tax due still require?",
+    "answer": "For an ordinary taxable entity, the $2.65 million annualized-revenue threshold for 2026 does not generally remove the PIR or OIR obligation. Reconcile the actual accounting period, entity and group, then compare supported EZ or long-form treatment and credit eligibility. Keep extension, filing and payment acceptance evidence. A zero tax estimate and a complete reporting record answer different questions. Stress allowable deductions against the preparation-cost threshold rather than using book payroll as proof.",
+    "paths": [
+      {
+        "label": "Separate threshold and reporting",
+        "section": "threshold-and-report",
+        "description": "Identify the actual information-report requirement."
+      },
+      {
+        "label": "Compare computation methods",
+        "section": "computation-choice",
+        "description": "Model eligible deductions, credits and preparation cost."
+      },
+      {
+        "label": "Review the 2026 research credit",
+        "section": "research-credit-change",
+        "description": "Check current eligibility, federal evidence and filing procedure."
+      }
+    ],
+    "sources": [
+      {
+        "label": "Texas franchise-tax report forms for 2026",
+        "href": "https://comptroller.texas.gov/taxes/franchise/forms/2026-franchise.php"
+      },
+      {
+        "label": "Requirements for reporting and paying franchise tax",
+        "href": "https://comptroller.texas.gov/taxes/franchise/filing-requirements.php"
+      },
+      {
+        "label": "Subchapter T research-and-development franchise-tax credit guidance",
+        "href": "https://comptroller.texas.gov/taxes/franchise/research-dev-credit.php"
+      }
+    ]
+  },
+  "texas-hiring-labor-cost-planning": {
+    "question": "How should a Texas employer price a hiring plan?",
+    "answer": "Use the public data to frame a role-specific recruiting test. August 2026 employment observations and May 2025 wage estimates are different clocks; establishment jobs and unemployment do not count qualified applicants for a shift. Build the full compensation and training cost, measure actual offers and starts, and compare pay changes with the real capacity bottleneck and delay exposure. Compare a lasting wage premium over its actual horizon with a one-time launch loss, and measure qualified productive starters rather than applicants.",
+    "paths": [
+      {
+        "label": "Read the local job signal",
+        "section": "local-job-signals",
+        "description": "Keep geography, industry, units and adjustment basis aligned."
+      },
+      {
+        "label": "Check the wage baseline",
+        "section": "wage-baseline",
+        "description": "Distinguish published averages from current offers and full employer cost."
+      },
+      {
+        "label": "Price pay against delay",
+        "section": "pay-versus-delay",
+        "description": "Calculate the declared staffing scenario without assuming a recruiting response."
+      }
+    ],
+    "sources": [
+      {
+        "label": "Texas Labor Market Review, September 2026 edition",
+        "href": "https://texaslmi.com/api/GetHomeLinks/TLMR"
+      },
+      {
+        "label": "Occupational Employment and Wages in Dallas–Fort Worth–Arlington, May 2025",
+        "href": "https://www.bls.gov/regions/southwest/news-release/occupationalemploymentandwages_dallasfortworth.htm"
+      },
+      {
+        "label": "Technical Notes for May 2025 OEWS Estimates",
+        "href": "https://www.bls.gov/oes/current/oes_tec.htm"
+      }
+    ]
+  },
+  "texas-cross-border-logistics-business-planning": {
+    "question": "When does a Texas–Mexico route deliver better total cost?",
+    "answer": "Qualify the complete itinerary, customs basis and usable receiving window. Freight value and inbound truck counts have different populations and cannot establish shipment reliability. Verify actual commercial and inspection schedules, then compare freight, pipeline inventory, handling and failure cost using comparable shipment evidence. The route preference can reverse when a small assumed service advantage disappears. Define the avoided-incident target; keep a one-time pipeline capital release separate from annual carrying cost and safety-stock variability.",
+    "paths": [
+      {
+        "label": "Read the correct denominator",
+        "section": "value-and-movements",
+        "description": "Separate nominal value, truck entries, direction and mode."
+      },
+      {
+        "label": "Verify the schedule",
+        "section": "schedules",
+        "description": "Distinguish commercial traffic from published office hours."
+      },
+      {
+        "label": "Work the landed-cost comparison",
+        "section": "route-economics",
+        "description": "Price freight, inventory and missed-window assumptions together."
+      }
+    ],
+    "sources": [
+      {
+        "label": "North American transborder freight, July 2026",
+        "href": "https://www.bts.gov/newsroom/north-american-transborder-freight-valued-1576-billion-july-2026-188-july-2025"
+      },
+      {
+        "label": "Laredo International Bridge System official directory",
+        "href": "https://www.cityoflaredo.com/departments/bridge-system"
+      },
+      {
+        "label": "USMCA: official certification-of-origin guidance",
+        "href": "https://www.help.cbp.gov/s/article/Article-1736"
+      }
+    ]
+  },
+  "texas-manufacturing-capacity-procurement": {
+    "question": "When is new Texas manufacturing capacity usable by a buyer?",
+    "answer": "Match the exact product and approved manufacturing route to qualification, allocation and accepted receipt. TI’s production start, Samsung’s year-end expectation and GlobalWafers’ customer qualifications establish different stages. Public award dollars and impact estimates do not supply buyer-specific output. Work gross production through yields and allocation, then obtain a dated commercial commitment and an executable alternate. Conditional customer financing can support ramp and reserved access while leaving uncommitted capacity unknown; test allocation as well as yield.",
+    "paths": [
+      {
+        "label": "Compare the project stages",
+        "section": "project-evidence",
+        "description": "Separate production, a completed shell, an outlook and customer qualification."
+      },
+      {
+        "label": "Model buyer-allocated output",
+        "section": "allocated-output-model",
+        "description": "Convert declared gross output through yields and allocation."
+      },
+      {
+        "label": "Prepare the procurement evidence",
+        "section": "buyer-checklist",
+        "description": "Identify the part, route, volume, delivery and remaining conditions."
+      }
+    ],
+    "sources": [
+      {
+        "label": "TI announces the start of production at Sherman SM1",
+        "href": "https://www.ti.com/about-ti/newsroom/news-releases/2025/texas-instruments-begins-production-at-its-newest-300mm-semiconductor-manufacturing-facility-in-sherman-texas.html"
+      },
+      {
+        "label": "Samsung October 2026 Austin and Taylor update",
+        "href": "https://semiconductor.samsung.com/sas/local-news/samsung-austin-semiconductors-two-campuses-inject-10-9b-into-central-texas-economy-in-2025/"
+      },
+      {
+        "label": "GlobalWafers second-quarter 2026 results and expansion update",
+        "href": "https://www.sas-globalwafers.com/en/gwc_news_en_20260804/"
+      }
+    ]
+  },
+  "texas-commercial-property-insurance-diligence": {
+    "question": "What must a Texas commercial policy establish for a recovery plan?",
+    "answer": "Test the same loss against the issued policy’s insured property, covered cause, settlement basis, deductible, sublimits and business-income trigger. A zero TWIA rate-change filing does not establish an individual premium. Wind and flood differ; physical repair and suspended income differ. Price retained loss and restart liquidity, preserving the actual forms and endorsements rather than relying on a certificate. Repair, policy restoration and revenue recovery use different clocks; a post-repair operating loss is not automatically insured.",
+    "paths": [
+      {
+        "label": "Map peril and insured property",
+        "section": "hazard-and-policy",
+        "description": "Follow the event into the actual contract."
+      },
+      {
+        "label": "Compare dollar retention",
+        "section": "valuation-and-deductible",
+        "description": "Normalize deductible bases and settlement before premiums."
+      },
+      {
+        "label": "Read business-income terms",
+        "section": "business-income",
+        "description": "Check the suspension trigger, time deductible and separate limits."
+      }
+    ],
+    "sources": [
+      {
+        "label": "Commercial property insurance guide",
+        "href": "https://www.tdi.texas.gov/pubs/consumer/cb021.html"
+      },
+      {
+        "label": "TWIA-17 Business Income and Extra Expense endorsement",
+        "href": "https://www.twia.org/wp-content/uploads/Business_Income_and_Extra_Expense_Form_2011.11.pdf"
+      },
+      {
+        "label": "TDI TWIA submissions: commercial filing P-0826-02",
+        "href": "https://www.tdi.texas.gov/submissions/indextwia.html"
+      }
+    ]
+  },
+  "texas-robotaxi-business-service-map": {
+    "question": "Which Texas robotaxi service can support a business trip?",
+    "answer": "Start with the admitted rider, actual booking channel, supported endpoints and disclosed onboard role. Waymo access differs across its Texas markets; Zoox’s reviewed Austin invitation is a waitlist; Tesla and Avride have service-specific rules; the May Arlington evidence leaves current access unresolved. Compare usable trips and fallback costs rather than city announcements or unnormalized crash totals. Specific preliminary investigations and certification inquiries inform diligence without establishing a provider safety ranking.",
+    "paths": [
+      {
+        "label": "Compare rider access",
+        "section": "operating-evidence",
+        "description": "Read dated openings and current guidance within their scope."
+      },
+      {
+        "label": "Price eligible trips",
+        "section": "worked-trip-budget",
+        "description": "Keep fare cash and valued exception time separate."
+      },
+      {
+        "label": "Prepare the pilot",
+        "section": "buyer-checklist",
+        "description": "Verify booking, payment, support and the actual journey."
+      }
+    ],
+    "sources": [
+      {
+        "label": "Waymo service areas and rider admission",
+        "href": "https://support.google.com/waymo/answer/9059119?hl=en"
+      },
+      {
+        "label": "Avride on Uber: current Dallas rider guidance",
+        "href": "https://www.uber.com/us/en/r/autonomous/dallas-tx-us/"
+      },
+      {
+        "label": "Tesla Robotaxi rider support",
+        "href": "https://www.tesla.com/support/robotaxi"
+      }
+    ]
+  },
+  "texas-waymo-business-travel": {
+    "question": "When should a Texas business use Waymo for employee travel?",
+    "answer": "Approve the actual journey through the correct market and booking channel. Dallas and Houston have open-access announcements, Austin uses optional Uber matching and San Antonio guidance describes gradual admission. Check the airport leg and payment program separately. A lower fare can be outweighed by walking, waiting or fallback work; the declared scenario measures those boundaries without predicting failure frequency. Its assumed $5 fare saving and six extra minutes break even at $50 per employee-hour; review the bounded Austin oversight record separately.",
+    "paths": [
+      {
+        "label": "Verify Texas access",
+        "section": "texas-access",
+        "description": "Distinguish rider admission from a trip or vehicle guarantee."
+      },
+      {
+        "label": "Check the airport leg",
+        "section": "airport-and-route",
+        "description": "Use documented terminal and route evidence."
+      },
+      {
+        "label": "Compare fare and time",
+        "section": "fare-and-time",
+        "description": "Apply the declared comparison to the actual cohort."
+      }
+    ],
+    "sources": [
+      {
+        "label": "Current service areas and rider access",
+        "href": "https://support.google.com/waymo/answer/9059119?hl=en"
+      },
+      {
+        "label": "Austin and Atlanta: Waymo rides on Uber",
+        "href": "https://support.google.com/waymo/answer/16011725?hl=en"
+      },
+      {
+        "label": "Airport service and San Antonio rider eligibility",
+        "href": "https://support.google.com/waymo/answer/14298153?hl=en"
+      }
+    ]
+  },
+  "texas-zoox-market-entry-business": {
+    "question": "What can a business infer from Zoox’s arrival in Texas?",
+    "answer": "Match the commitment to the documented stage. Austin’s reviewed invitation remains coming soon; Dallas and Houston describe testing sequences. The federal grant binds lifetime operational control and limits transfer/licensing, while separate public Operational Authorizations govern operation. A hotel, supplier and depot owner need different commitments. The throughput example uses invented completed-trip hours; it estimates no fleet, fare or unit cost.",
+    "paths": [
+      {
+        "label": "Read the local stage",
+        "section": "texas-stages",
+        "description": "Keep testing, restricted access and public service distinct."
+      },
+      {
+        "label": "Scope the exemption",
+        "section": "commercial-path",
+        "description": "Separate introduction limits from operating authorizations."
+      },
+      {
+        "label": "Model completed trips",
+        "section": "depot-to-trip",
+        "description": "Work declared vehicle hours through availability and occupancy."
+      }
+    ],
+    "sources": [
+      {
+        "label": "Austin: current public rider invitation",
+        "href": "https://zoox.com/austin"
+      },
+      {
+        "label": "NHTSA grant: conditions for commercial deployment",
+        "href": "https://www.govinfo.gov/content/pkg/FR-2026-07-31/html/2026-15485.htm"
+      },
+      {
+        "label": "Houston and San Diego testing expansion",
+        "href": "https://zoox.com/journal/zoox-now-testing-houston-san-diego"
+      }
+    ]
+  },
+  "texas-autonomous-trucking-operators": {
+    "question": "Which Texas autonomous trucking program fits the freight job?",
+    "answer": "Shortlist by the documented job and operating role. Aurora, Gatik, Bot Auto and Kodiak’s industrial program report driverless work in different domains; other reviewed Texas programs retain onboard personnel or describe future launches. A dated load or driverless mile total does not reserve capacity. Confirm equipment, endpoints, current human roles, accepted loads and recovery responsibilities in a buyer-specific proposal.",
+    "paths": [
+      {
+        "label": "Compare current programs",
+        "section": "operating-comparison",
+        "description": "Read selected operator evidence with its dates and domain."
+      },
+      {
+        "label": "Separate Kodiak’s programs",
+        "section": "kodiak",
+        "description": "Distinguish industrial operation from highway launch preparation."
+      },
+      {
+        "label": "Qualify a service commitment",
+        "section": "maturity-gates",
+        "description": "Require the next evidence for the actual freight purchase."
+      }
+    ],
+    "sources": [
+      {
+        "label": "Aurora second-generation driverless launch: operating and purchase model",
+        "href": "https://aurora.tech/newsroom/your-questions-about-our-latest-driverless-launch-answered"
+      },
+      {
+        "label": "Kodiak and Charger Dallas–Laredo customer operation",
+        "href": "https://kodiak.ai/news/kodiak-charger-usa-autonomous-trucking-dallas-laredo"
+      },
+      {
+        "label": "Volvo and Waabi begin Warp customer operations in Texas",
+        "href": "https://www.waabi.ai/insights/volvo-and-waabi-kick-off-customer-operations-in-texas-starting-with-warp"
+      },
+      {
+        "label": "FMCSA final warning-device exemption and conditions",
+        "href": "https://www.govinfo.gov/content/pkg/FR-2026-10-09/html/2026-20734.htm"
+      }
+    ]
+  },
+  "texas-driverless-freight-route-economics": {
+    "question": "When does a driverless freight quote improve the complete route?",
+    "answer": "Compare a completed delivery on the same economic-cost boundary. Price direct and transfer designs separately; retain rejected loads, backup and setup. The hypothetical direct case saves $98,400 including allocated labor and lost contribution. Its 232 accepted-load break-even and $1,433 all-in variable ceiling are decision thresholds, not quotes. Check cargo, equipment and the applicable roadside-warning compliance route, then replace the assumptions with an actual proposal and trial. In the declared 800-load case, the $1,433 whole-route ceiling becomes a $1,273 ceiling for the provider’s road-service quote after subtracting the shipper’s $160 of retained work.",
+    "paths": [
+      {
+        "label": "Build the price stack",
+        "section": "quote-comparison",
+        "description": "Include loading, local moves and release work consistently."
+      },
+      {
+        "label": "Stress acceptance and recovery",
+        "section": "exception-economics",
+        "description": "Keep requested loads and incremental exceptions visible."
+      },
+      {
+        "label": "Set the buying threshold",
+        "section": "decision-thresholds",
+        "description": "Translate the scenario into load and price headroom."
+      }
+    ],
+    "sources": [
+      {
+        "label": "Aurora second-quarter 2026 shareholder letter",
+        "href": "https://ir.aurora.tech/sec-filings/all-sec-filings/content/0001828108-26-000075/aurora26q2shareholderlet.htm"
+      },
+      {
+        "label": "Volvo and Waabi begin Warp customer operations in Texas",
+        "href": "https://www.waabi.ai/insights/volvo-and-waabi-kick-off-customer-operations-in-texas-starting-with-warp"
+      },
+      {
+        "label": "FMCSA operating-authority insurance filing requirements",
+        "href": "https://www.fmcsa.dot.gov/registration/insurance-filing-requirements"
+      },
+      {
+        "label": "FMCSA final warning-device exemption and conditions",
+        "href": "https://www.govinfo.gov/content/pkg/FR-2026-10-09/html/2026-20734.htm"
+      }
+    ]
+  },
+  "texas-automated-vehicle-authorization": {
+    "question": "What does a Texas commercial driverless authorization establish?",
+    "answer": "The additional commercial driverless gate became enforceable May 28, 2026. General operating conditions and applicable federal obligations remain separate. Match holder, vehicle, route, responder plan and agreement. Nonexpiry preserves the 30-day material-information duty. A launch, a changed document and an unsafe-operation notice require distinct decisions. The hypothetical continuity example separates allocated staff time from paid reservation and replacement costs.",
+    "paths": [
+      {
+        "label": "Classify the operation",
+        "section": "commercial-scope",
+        "description": "Apply the statutory scope and human-driver definition."
+      },
+      {
+        "label": "Match the holder and vehicle",
+        "section": "holder-and-vehicle",
+        "description": "Reconcile current records and contracting roles."
+      },
+      {
+        "label": "Price continuity work",
+        "section": "worked-continuity-case",
+        "description": "Separate free application from commercial operating costs."
+      }
+    ],
+    "sources": [
+      {
+        "label": "Texas Transportation Code Chapter 545, Subchapter J",
+        "href": "https://tcss.legis.texas.gov/resources/TN/htm/TN.545.htm"
+      },
+      {
+        "label": "TxDMV Automated Vehicles Regulatory Program",
+        "href": "https://www.txdmv.gov/AVprogram"
+      },
+      {
+        "label": "Texas begins enforcement of commercial automated-vehicle requirements",
+        "href": "https://www.txdmv.gov/sites/default/files/body-files/2026-06-02_Automated_Vehicle_Enforcement_System.pdf"
+      },
+      {
+        "label": "FMCSA final warning-device exemption and conditions",
+        "href": "https://www.govinfo.gov/content/pkg/FR-2026-10-09/html/2026-20734.htm"
+      }
+    ]
   }
 }

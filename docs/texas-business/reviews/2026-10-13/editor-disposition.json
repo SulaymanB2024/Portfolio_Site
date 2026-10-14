@@ -1,0 +1,47 @@
+{
+  "date": "2026-10-13",
+  "scope": "Eighteen Texas business and AV articles; original baseline 0f6accf92d217b1509d5977423c3b3fafb88cd80",
+  "models": [
+    {
+      "model": "gpt-6-astra",
+      "role": "Independent six-article AV criticism and focused closure",
+      "reports": [
+        "astra-av-review",
+        "astra-av-rereview",
+        "astra-av-closure",
+        "astra-remaining-public-records",
+        "astra-style-av"
+      ]
+    },
+    {
+      "model": "gpt-6.1-sol",
+      "role": "Independent twelve-article core criticism and revision review",
+      "reports": [
+        "sol-core-review",
+        "sol-core-rereview",
+        "sol-minimum-billing-status",
+        "sol-style-core"
+      ]
+    }
+  ],
+  "editorDecision": "Adopt the consequential primary-record additions and decision mechanisms after reading actual controlling bodies; all reported material rereview defects resolved. Root remains responsible for source interpretation, integration and delivery.",
+  "reviewerCorrection": "Astra mislabeled the $2,400 paid continuity item as adviser cost. Root retained the actual backup-capacity reservation and the closure report supersedes that proposed label.",
+  "substantiveChanges": [
+    "FMCSA final warning-device conditions and interstate/intrastate boundary",
+    "Bounded NTSB Austin preliminary account and dated Cybercab certification inquiry",
+    "Binding Zoox lifetime operational control and public authorization docket; arbitrary dollar cost pool removed",
+    "Separate cash, allocated labor and lost contribution; reusable transport decision thresholds",
+    "Power minimum-billing, staged collateral return and material-change mechanism",
+    "Data-center job exclusions and two agency-summary conflicts",
+    "JETI fixed-end deferral and separately valued post-benefit tail",
+    "Hiring recurring-cost horizon and productive-starter denominator",
+    "Conditional named Micron financing/access mechanism and allocation headroom",
+    "TWIA restoration/revenue boundary; precise privacy and court scopes"
+  ],
+  "integrationChanges": "Reading estimates, catalog, reader guides, claim ledgers, guarded revision receipts and current source-download links synchronized; both prior downloads preserved.",
+  "sourceLimit": "Targeted primary bodies checked, with original individual dates retained. No full fresh acquisition of every source, private contract, fleet census, actual quote, current Texas Zoox Operational Authorization or later Cybercab inquiry disposition claimed.",
+  "calculationCompanion": "docs/texas-business/research/decision-models-2026-10-13.ipynb",
+  "calculationExecution": "Two code cells executed top-to-bottom after the final scalar additions;15 result tables rendered and inspected; kernel stopped.",
+  "releaseState": "Root accepted final local source and rendered delivery; see final acceptance for hashes, independent-review boundaries and remaining remote/publication gates.",
+  "finalAcceptance": "final-acceptance.json"
+}

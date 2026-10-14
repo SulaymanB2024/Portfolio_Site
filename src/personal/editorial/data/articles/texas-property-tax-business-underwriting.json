@@ -1,0 +1,297 @@
+{
+  "slug": "texas-property-tax-business-underwriting",
+  "path": "/research/texas/texas-property-tax-business-underwriting",
+  "aliases": [],
+  "title": "Underwrite the Tax Bill the Business Will Actually Bear",
+  "displayTitle": "The Tax Bill After the Deal",
+  "seoTitle": "Texas Commercial Property Tax: 2026 Business Underwriting",
+  "category": "TEXAS BUSINESS",
+  "subtitle": "Separate real estate, equipment, appraisal limits and lease obligations before relying on a seller’s bill or a headline about Texas tax relief.",
+  "seoDescription": "Underwrite Texas commercial property taxes: 2026 appraisal-cap expiration, the $125,000 equipment exemption, local rates, lease exposure and protest deadlines.",
+  "searchTerms": [
+    "Texas commercial property tax",
+    "2026 business personal property exemption",
+    "Texas appraisal cap expiration",
+    "commercial lease property taxes",
+    "Texas property tax underwriting"
+  ],
+  "date": "2026-10-12",
+  "dateModified": "2026-10-13",
+  "author": "Sulayman Bowles",
+  "kind": "research",
+  "readTime": "11 MIN",
+  "openingPresentation": "integrated",
+  "evidenceBoundary": "Primary statutes and Comptroller guidance verified October 12, 2026. No parcel’s value, exemption, adopted local rate, lease or appeal outcome was verified. All financial scenarios use declared assumptions and are not estimates of a particular transaction. Targeted October 13 revision: ownership tax-year provision and a declared debt-service sensitivity. Original source-check dates remain attached to the individual references.",
+  "content": [
+    "Underwrite the property-tax bill your business will bear after the transaction. The seller’s invoice reflects its owner, tax year, valuation and taxing units. A purchase, new equipment or a lease allocation can change that expense. Reconstruct the bill before using it to value the property or size the business’s debt service.",
+    "Two provisions make that work particularly timely in 2026. Texas’s $125,000 exemption for qualifying income-producing tangible personal property took effect January 1. Separately, the non-homestead real-property appraisal limitation is scheduled to expire December 31, 2026 under the law reviewed here. The equipment exemption and real-estate limitation operate differently; neither is a general promise that every business’s tax bill falls. [Personal-property exemption](#source-exemption-code); [appraisal limitation](#source-appraisal-code).",
+    "For a purchase, lease or expansion, build a model that identifies each taxable asset, the applicable value and rate, the party bearing the cost, and the dates when those inputs can change. That model is more useful than carrying the latest bill forward unchanged."
+  ],
+  "sections": [
+    {
+      "id": "reconstruct-the-bill",
+      "title": "Start with the parcel and each taxing unit",
+      "paragraphs": [
+        "Texas has no state property tax. Local taxing units set rates and collect revenue; the Comptroller does not set a business’s parcel value or intervene in its local appraisal. The relevant location is therefore the actual property and its taxing jurisdictions, not an assumed statewide commercial rate. [Property Tax Assistance](#source-local-system).",
+        "For each account, obtain the appraisal record, exemptions or limitations, adopted rates, tax bill and payment status. Reconcile the legal description and ownership with the transaction. A building, equipment account or neighboring parcel may appear separately. A single consolidated bill can still contain multiple taxing units with different taxable values or exemptions.",
+        "Calculate each unit’s tax as its taxable value multiplied by its rate per $100, divided by 100, then add the results. A combined rate is a convenient shortcut only when the relevant units apply to the same value. Retain the individual calculation when exemptions or other treatment differ. The Comptroller’s reported-rate directory is a starting point; use the actual adopted rates for the year being modeled. [Tax rates and levies](#source-rates).",
+        "Record whether a value is market, appraised or taxable, and whether a rate is proposed or adopted. An estimate assembled before rate adoption is useful for planning but needs a dated update. A lower rate can coexist with a larger bill when the taxable value rises."
+      ],
+      "table": {
+        "caption": "Inputs that belong in a commercial property-tax model",
+        "columns": [
+          "Input",
+          "Evidence to obtain",
+          "What can change after the deal"
+        ],
+        "rows": [
+          [
+            "Real-estate value",
+            "Parcel appraisal and limitation history",
+            "Ownership, market evidence and new improvements"
+          ],
+          [
+            "Personal-property value",
+            "Asset register, situs and rendition",
+            "Equipment, inventory and exemption aggregation"
+          ],
+          [
+            "Exemption or limitation",
+            "Actual qualification and governing provision",
+            "Owner, use, location or statutory expiration"
+          ],
+          [
+            "Tax rates",
+            "Each unit’s adopted rate for the modeled year",
+            "Local budgets, debt and rate adoption"
+          ],
+          [
+            "Lease allocation",
+            "Executed lease and reconciliation provisions",
+            "Share, expense definition and reimbursement timing"
+          ],
+          [
+            "Collections and appeals",
+            "Bills, payment records and protest status",
+            "Liens, deadlines, refunds and later adjustments"
+          ]
+        ],
+        "note": "Proposed diligence framework. Generic inputs do not establish a particular parcel’s legal treatment or liability."
+      }
+    },
+    {
+      "id": "appraisal-limitation",
+      "title": "The 20% rule limits a value, not the whole bill",
+      "paragraphs": [
+        "Section 23.231 limits qualifying non-homestead real-property appraised value to the lesser of market value or the preceding appraised value plus 20% and the market value of new improvements. It excludes specified special-appraisal property and is ownership-dependent. The Comptroller publishes a $5,320,000 maximum eligibility amount for 2026; the statute ties the threshold to the year of initial qualification. [Statutory conditions](#source-appraisal-code); [2026 threshold](#source-valuing-guidance).",
+        "Preserve the formula and the tax-year clock. New improvements can add value beyond the percentage increase. Under §23.231(f), the owner’s limitation expires January 1 of the tax year following the year ownership ceases; a transfer does not simply replace the existing bill at closing. The separate December 31, 2026 statutory expiration also remains relevant. Verify the actual qualification history, lien and closing allocation. [Ownership timing](#source-appraisal-code).",
+        "The reviewed statute expressly expires December 31, 2026. Treat continued relief in a later-year budget as a scenario requiring a new legal basis. This article does not predict whether legislators will renew or replace it. The immediate underwriting question is how much of the current bill depends on a temporary difference between market and limited appraised value. [§23.231(k)](#source-appraisal-code).",
+        "Ask the seller for both values and the limitation history. If an investment memo shows only the lower number, the buyer cannot see the exposure. For a development, ask when completed improvements enter the appraisal and which tax year carries them. Keeping an expense low during construction does not establish the stabilized operating cost."
+      ]
+    },
+    {
+      "id": "worked-tax-sensitivity",
+      "title": "Price the difference between a current bill and a durable expense",
+      "paragraphs": [
+        "Assume a hypothetical property qualifies for the 2026 limitation, has a preceding appraised value of $3 million, a current market value of $4.5 million, and no new improvements or exemptions. Assume every taxing unit applies the same value and their combined rate is $2.00 per $100. The limited appraised value is $3.6 million: $3 million × 1.20. Its modeled tax is $72,000.",
+        "At the same assumed market value and rate without the limitation, tax is $90,000. The $18,000 difference is a 25% increase over the $72,000 modeled bill, despite unchanged market value. The table isolates value and rate effects. These are scenarios, not actual bills or a forecast that this exact increase will occur in 2027.",
+        "Suppose the owner’s net operating income before this tax expense is $200,000. After the modeled tax, it is $128,000 in the limited case and $110,000 in the uncapped case. At an assumed 7.5% capitalization rate, a recurring $18,000 expense difference corresponds to a $240,000 value sensitivity. This arithmetic holds other revenue, expense and valuation assumptions constant; it is not an appraisal or an observed sale effect.",
+        "The tax difference also changes financing headroom. Assume $100,000 annual debt service and a lender requirement of 1.25 times debt-service coverage. The modeled $128,000 and $110,000 after-tax NOI produce ratios of 1.28 and 1.10. At that assumed requirement, maximum annual debt service is $102,400 versus $88,000. This is a financing-schedule sensitivity, not a loan offer, covenant finding or automatic change in principal value."
+      ],
+      "table": {
+        "caption": "Illustrative sensitivity: change one tax assumption at a time",
+        "columns": [
+          "Scenario",
+          "Value used for tax",
+          "Assumed rate per $100",
+          "Calculated annual tax"
+        ],
+        "rows": [
+          [
+            "Qualifying 2026 limitation; no new improvements",
+            "$3,600,000",
+            "$2.00",
+            "$72,000"
+          ],
+          [
+            "No limitation; same market value and rate",
+            "$4,500,000",
+            "$2.00",
+            "$90,000"
+          ],
+          [
+            "No limitation; rate 10% higher",
+            "$4,500,000",
+            "$2.20",
+            "$99,000"
+          ],
+          [
+            "Qualifying limited case plus $400,000 new improvements; market value high enough",
+            "$4,000,000",
+            "$2.00",
+            "$80,000"
+          ]
+        ],
+        "note": "All property values, rates, qualification and improvements are hypothetical. The last row applies the statutory formula assuming a market value at least $4 million and continued eligibility. No prediction of legislative change, rate adoption or a specific parcel’s valuation."
+      }
+    },
+    {
+      "id": "equipment-exemption",
+      "title": "Apply the equipment exemption at the right boundary",
+      "paragraphs": [
+        "Section 11.145 now provides $125,000 of appraised-value exemption for qualifying income-producing tangible personal property. Ordinary treatment applies by separate location in a taxing unit, with property at that location aggregated. The statute separately aggregates leased-out property and specified property placed at locations the owner does not own or lease. It also aggregates related entities in a unified business enterprise sharing a location. Read the applicable subsection before multiplying allowances. [§11.145](#source-exemption-code).",
+        "This is an exemption from value, not a $125,000 tax credit and not an exemption for the land or building. Under a simple hypothetical, qualifying equipment valued at $300,000 at one ordinary location leaves $175,000 after the exemption. At a uniform assumed 2% rate, modeled tax is $3,500 instead of $6,000. The $2,500 saving depends on qualification and the stated rate; no additional exemptions are assumed.",
+        "Reconcile ownership and situs for leased machinery, tenant assets, inventory and assets at customer sites. Tax classification and accounting labels need not answer the same question. Ask the adviser to identify which property belongs in each account and which aggregation rule applies. Related-company structuring does not by itself establish a separate allowance for every entity.",
+        "Also reconcile rendition obligations with the current exemption and property rules. The Comptroller’s April 8, 2026 reminder describes taxable inventory, furniture, fixtures, machinery and other business property owned or managed as of January 1. An asset register supporting the estimate is useful even where the applicable rule changes a filing requirement. Do not assume either that every asset is taxable or that an exemption eliminates all reporting questions. [2026 rendition reminder](#source-rendition-update)."
+      ]
+    },
+    {
+      "id": "lease-exposure",
+      "title": "A tenant needs both the bill and the allocation clause",
+      "paragraphs": [
+        "The legal property owner and the business bearing the expense can be different parties. A lease may make the tenant reimburse a share of real-estate taxes while the tenant also has its own equipment exposure. The actual agreement determines the commercial allocation. Labels such as gross or triple-net lease are insufficient substitutes for the expense definition, share and reconciliation mechanism.",
+        "Review which taxes are included, how the share is calculated, whether estimates are reconciled, how refunds and protest costs are allocated, and whether a sale or reassessment changes the expense. Ask who receives the bill and appraisal notice. A tenant needs access to the evidence early enough to test the charge before a reimbursement deadline.",
+        "The Comptroller explains that a lessee required by contract to pay the owner’s property taxes may protest value if the owner does not file. It also describes notice requests and representation. That possibility does not establish that a particular tenant has met the conditions or appointed an agent. Put the responsibility and supporting documents in the transaction checklist. [Lessee protest rights](#source-protests). For the qualifying lessee situation, the guidance says the owner must forward the appraisal notice and the lessee can request direct notice. Assign that access before a deadline depends on it.",
+        "For an illustrative allocation, assume a tenant owes 40% of the property’s $18,000 modeled tax increase. Its additional annual expense is $7,200. The landlord’s asset tax and tenant’s cost sensitivity therefore need separate schedules. Negotiating a tax-expense provision means assigning this economic exposure, not changing the appraisal district’s decision."
+      ]
+    },
+    {
+      "id": "transaction-evidence",
+      "title": "Carry the tax record through closing and improvements",
+      "paragraphs": [
+        "The Comptroller states that the January 1 owner is liable for that year’s tax and that a tax lien attaches to property on January 1. A sale does not erase a delinquent lien. The purchase agreement’s proration or reimbursement arrangement should therefore be reconciled with collection records and title review; a private allocation cannot substitute for evidence of payment. [Ownership and tax liens](#source-payment).",
+        "For an acquisition, obtain current and prior bills, receipts, appraisal records, outstanding protests, exemption information and the scheduled improvements. Ask the closing team how a final bill or later correction will be settled between the parties. If the deal divides a larger parcel, identify the account and lien treatment rather than assuming the acquired area has a separate paid record.",
+        "For an expansion, compare the existing assessment with the proposed finished asset. The income, cost and market-data methods in Chapter 23 require relevant appraisal evidence. A purchase price, construction budget or accounting carrying value can inform questions without automatically determining the assessor’s result. Assemble the documents that explain condition, use, income and comparable property. [Appraisal methods](#source-appraisal-code).",
+        "Keep an incentive announcement outside the base case until the specific executed agreement, approval and performance conditions support it. This investigation models ordinary property-tax exposure; it does not determine eligibility for a particular abatement, special appraisal or separate economic-development program."
+      ]
+    },
+    {
+      "id": "calendar-and-updates",
+      "title": "Assign the notices, payment dates and next review",
+      "paragraphs": [
+        "Most rendition deadlines are April 15, with a written extension to May 15 and further good-cause provisions; regulated property can have different deadlines. The ordinary protest deadline is May 15 or 30 days after the appraisal notice under the applicable delivery rule, whichever is later. An autumn review should preserve completed 2026 filings and identify the next required action, rather than present those spring dates as still open. [Rendition guidance](#source-valuing-guidance); [protest procedure](#source-protests).",
+        "Most tax payments have a January 31 deadline, with late-issued-bill rules and other exceptions. Section 1.06 makes an act timely on the next regular business day when the deadline falls on a weekend or legal holiday, and covers a collector-office closure for payments. January 31, 2027 falls on Sunday; confirm the resulting date with the actual bill and collector instead of blindly applying February 1 delinquency language. [Payment guidance](#source-payment); [current deadline rule](#source-deadline-code).",
+        "The process needs a named owner for each notice, filing, reconciliation and payment. Preserve proof of submission and payment, the account number and the tax year. A protest is an evidence exercise with a deadline and a possible outcome; a forecasted reduction should not silently become an achieved saving.",
+        "Recheck the model when a value notice arrives, a taxing unit adopts a rate, ownership or asset location changes, improvements complete, a lease reconciliation arrives, or the circuit-breaker statute changes or expires. Update the established operating assumption using the new document. The goal is a defensible cost for the business, not a recurring surprise explained by an old bill."
+      ],
+      "bullets": [
+        "Reconstruct each parcel and personal-property account by taxing unit.",
+        "Keep market, appraised and taxable values separate, with current qualification evidence.",
+        "Model expiration, ownership and new-improvement exposure independently of rate changes.",
+        "Apply the $125,000 personal-property exemption using the correct location and aggregation rules.",
+        "Read the lease’s tax allocation and assign any protest, refund and reconciliation responsibility.",
+        "Verify liens, closing adjustments, notices and the actual payment deadline; retain the evidence."
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "id": "local-system",
+      "label": "Texas Property Tax Assistance: local administration",
+      "href": "https://comptroller.texas.gov/taxes/property-tax/index.php",
+      "publisher": "Texas Comptroller of Public Accounts",
+      "date": "Undated current guidance",
+      "lastVerified": "2026-10-12",
+      "note": "No state property tax; local values, rates and collection. No specific parcel examined."
+    },
+    {
+      "id": "rates",
+      "label": "Property-tax rates and levies",
+      "href": "https://comptroller.texas.gov/taxes/property-tax/rates/",
+      "publisher": "Texas Comptroller of Public Accounts",
+      "date": "Current directory reviewed 2026-10-12",
+      "lastVerified": "2026-10-12",
+      "note": "Reported statewide rates are a discovery source, not a substitute for each relevant unit’s adopted 2026 rate."
+    },
+    {
+      "id": "appraisal-code",
+      "label": "Tax Code Chapter 23: appraisal methods and §23.231 circuit breaker",
+      "href": "https://tcss.legis.texas.gov/resources/TX/htm/TX.23.htm",
+      "publisher": "Texas Legislature",
+      "date": "Circuit breaker effective 2024-01-01; expires 2026-12-31 under reviewed text",
+      "lastVerified": "2026-10-13",
+      "note": "Formula, first-qualification threshold, ownership timing, special-appraisal exclusions, new improvements and statutory expiration. No renewal assumed."
+    },
+    {
+      "id": "exemption-code",
+      "label": "Tax Code §11.145: income-producing tangible personal property",
+      "href": "https://tcss.legis.texas.gov/resources/TX/htm/TX.11.htm",
+      "publisher": "Texas Legislature",
+      "date": "HB9 amendment effective 2026-01-01",
+      "lastVerified": "2026-10-12",
+      "note": "$125,000 appraised-value exemption; ordinary locations, leased-out/customer-site property and related-entity aggregation differ."
+    },
+    {
+      "id": "valuing-guidance",
+      "label": "Valuing property: 2026 threshold and rendition requirements",
+      "href": "https://comptroller.texas.gov/taxes/property-tax/valuing-property.php",
+      "publisher": "Texas Comptroller of Public Accounts",
+      "date": "Current guidance with 2026 eligibility table",
+      "lastVerified": "2026-10-12",
+      "note": "2026 circuit-breaker threshold $5,320,000; rendition deadlines and exceptions. The statute controls precise qualification."
+    },
+    {
+      "id": "rendition-update",
+      "label": "April 2026 business property-tax rendition reminder",
+      "href": "https://comptroller.texas.gov/about/media-center/news/20260408-texas-businesses-april-15-is-deadline-for-filing-property-tax-renditions-1775577720312",
+      "publisher": "Texas Comptroller of Public Accounts",
+      "date": "2026-04-08",
+      "lastVerified": "2026-10-12",
+      "note": "Dated 2026 filing reminder and January 1 asset snapshot; not a determination of a particular asset’s taxable status."
+    },
+    {
+      "id": "protests",
+      "label": "Appraisal protests and appeals, including lessees",
+      "href": "https://comptroller.texas.gov/taxes/property-tax/protests/index.php",
+      "publisher": "Texas Comptroller of Public Accounts",
+      "date": "Undated current guidance",
+      "lastVerified": "2026-10-12",
+      "note": "Ordinary deadlines, evidence and conditional lessee protest rights. No protest outcome or late-filing entitlement verified."
+    },
+    {
+      "id": "payment",
+      "label": "Paying property taxes: bills, deadlines, ownership and liens",
+      "href": "https://comptroller.texas.gov/taxes/property-tax/pay/index.php",
+      "publisher": "Texas Comptroller of Public Accounts",
+      "date": "Undated current guidance",
+      "lastVerified": "2026-10-12",
+      "note": "January 1 ownership/liens, ordinary January 31 timing and late-bill exceptions; read with §1.06 for weekend and closure rules."
+    },
+    {
+      "id": "deadline-code",
+      "label": "Tax Code §1.06: weekend, holiday and office closure",
+      "href": "https://tcss.legis.texas.gov/resources/TX/htm/TX.1.htm",
+      "publisher": "Texas Legislature",
+      "date": "HB1392 amendment effective 2026-01-01",
+      "lastVerified": "2026-10-12",
+      "note": "Next-regular-business-day rule; payments include specified collector-office closures. Actual bill and collector calendar remain relevant."
+    }
+  ],
+  "faqs": [
+    {
+      "question": "Does Texas’s 20% commercial appraisal limitation cap the entire tax bill?",
+      "answer": "No. The rule limits qualifying appraised value and includes new improvements; rates remain a separate input. Its reviewed statutory expiration is December 31, 2026. Verify the property’s qualification and model later-year exposure. [§23.231](#source-appraisal-code)."
+    },
+    {
+      "question": "Is the $125,000 business-property exemption a tax credit for the building?",
+      "answer": "No. It exempts qualifying tangible personal-property value under §11.145. Location, leased-property and related-entity rules govern aggregation. It does not provide a $125,000 cash credit or the same exemption for ordinary real estate. [Exemption statute](#source-exemption-code)."
+    },
+    {
+      "question": "Can a commercial tenant protest the landlord’s property value?",
+      "answer": "The Comptroller describes a right when the lease requires the tenant to pay the owner’s property taxes and the owner does not protest. Verify those conditions, notice access and representation before relying on it. [Lessee rights](#source-protests)."
+    },
+    {
+      "question": "Can a buyer rely on the seller’s paid bill as its future tax budget?",
+      "answer": "Use it as evidence for that year, then review ownership-dependent treatment, asset changes, actual values and adopted rates. Tax liens and closing adjustments need separate verification. [Appraisal conditions](#source-appraisal-code); [payment and ownership](#source-payment)."
+    }
+  ],
+  "image": "/images/social/texas-property-tax-business-underwriting.png",
+  "resources": [
+    {
+      "label": "Texas business source and decision ledger",
+      "href": "/research/texas-research-library-2026-10-13.json",
+      "description": "Primary evidence, declared assumptions and update triggers across the Texas business and autonomy library.",
+      "format": "JSON"
+    }
+  ]
+}

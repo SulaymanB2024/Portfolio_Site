@@ -1,0 +1,345 @@
+{
+  "slug": "texas-waymo-business-travel",
+  "path": "/research/texas/texas-waymo-business-travel",
+  "aliases": [],
+  "title": "Does Waymo Fit the Business Trip You Actually Need?",
+  "displayTitle": "Waymo for the Actual Trip",
+  "seoTitle": "Waymo in Texas 2026: Business Travel, Access and Airports",
+  "category": "TEXAS BUSINESS",
+  "subtitle": "Check the city, booking channel, airport leg and pickup time before putting a Texas Waymo trip into a business itinerary.",
+  "seoDescription": "A researched guide to Waymo business travel in Austin, Dallas, Houston and San Antonio: app access, airport limits, business profiles and total trip cost.",
+  "searchTerms": [
+    "Waymo Texas business travel",
+    "Waymo Austin Uber",
+    "Waymo Dallas airport",
+    "Waymo Houston availability",
+    "Waymo San Antonio airport",
+    "Waymo business profile",
+    "Texas robotaxi employee travel"
+  ],
+  "date": "2026-10-13",
+  "dateModified": "2026-10-13",
+  "author": "Sulayman Bowles",
+  "kind": "research",
+  "readTime": "11 MIN",
+  "openingPresentation": "integrated",
+  "evidenceBoundary": "Access and payment research checked October 12, 2026; NTSB Austin oversight record and economic thresholds reviewed October 13. Individual source dates remain visible. No live supply, corporate contract, quoted fare, first-hand ride or comparative safety result is claimed. Cost and fallback inputs are hypothetical.",
+  "content": [
+    "A sales visit has several transport decisions: the airport transfer, hotel-to-client trip and ride back after dinner. Approve each Waymo leg against the traveler’s account, supported route and pickup arrangement. Then leave enough time and a reachable alternative to protect the appointment if the request fails.",
+    "Waymo opened Dallas to all riders on August 4, 2026, and Houston on August 20. Austin uses a different arrangement: riders request an eligible Uber trip and may receive a Waymo match. Current Waymo Help still describes San Antonio as gradually adding riders. These are different access conditions, even though all four cities appear in Waymo’s Texas service story. [Dallas opening](#source-dallas-open), [Houston opening](#source-houston-open), [current access guidance](#source-service-areas).",
+    "The reviewed evidence supports considering Dallas/Houston direct-app local trips, eligible Austin Uber matches and SAT service for already admitted San Antonio riders. It does not establish that any visitor can complete an entire airport-to-client itinerary autonomously. Price the supported legs together with the transfers and fallback they require."
+  ],
+  "sections": [
+    {
+      "id": "texas-access",
+      "title": "Separate the four Texas access models",
+      "paragraphs": [
+        "Austin riders use Uber rather than booking a local ride in the Waymo app. Waymo’s instructions describe eligible Uber products, the AV preference setting and a ride offer that the traveler accepts when matched. Enabling the preference increases the chance of an offer; it does not reserve a specific autonomous vehicle. A travel policy should allow the human-driven result of the same booking flow when the trip has to happen. [Austin instructions](#source-austin-access).",
+        "The Dallas and Houston opening dates remove the invitation requirement described in their earlier rollout. They do not remove service-area boundaries or establish immediate supply at every address. Conversely, an employee with San Antonio access may be able to take a trip that a visiting colleague cannot yet request. Validate each traveler’s account before relying on a group’s shared experience.",
+        "Treat the following as a source-checked access summary, not a live dispatch board. A city name describes a market; the booking app is where the current route, rider eligibility and vehicle offer must be resolved."
+      ],
+      "table": {
+        "caption": "Waymo Texas access at the October 12 review",
+        "columns": [
+          "Market",
+          "Stated booking route",
+          "What the itinerary still needs"
+        ],
+        "rows": [
+          [
+            "Austin",
+            "Eligible Uber request and accepted Waymo match",
+            "Both endpoints in service area; vehicle offer"
+          ],
+          [
+            "Dallas",
+            "Waymo app; all-rider opening August 4",
+            "Current route and vehicle availability"
+          ],
+          [
+            "Houston",
+            "Waymo app; all-rider opening August 20",
+            "Current route and vehicle availability"
+          ],
+          [
+            "San Antonio",
+            "Waymo app; gradually adding riders",
+            "Traveler’s existing ride access before booking"
+          ]
+        ],
+        "note": "Primary operator guidance summarized above. No statewide coverage, reserved vehicle or current wait-time observation is implied."
+      }
+    },
+    {
+      "id": "airport-and-route",
+      "title": "Approve the airport leg on its own evidence",
+      "paragraphs": [
+        "Waymo’s current airport guidance identifies San Antonio International Airport pickup and dropoff at Terminal A and Terminal B Departures, plus the Arrivals outer curb near Rideshare Zone 2. It restricts access to people already able to ride in San Antonio. A terminal route therefore does not solve a traveler’s pending invitation. [SAT instructions](#source-airports).",
+        "The August Dallas opening notice described fully autonomous testing at Love Field terminals and future Dallas freeway testing. It was a development announcement, not proof of a public airport booking. This review did not establish current passenger service at Love Field, DFW, Houston’s airports or Austin-Bergstrom. Obtain route-specific confirmation rather than extending SAT access or a citywide announcement to another airport.",
+        "Freeway capability is a separate check. Waymo’s help page says access is limited and even eligible riders will not necessarily receive a freeway route. Preview the actual route and dropoff estimate before comparing a suburban meeting journey with a human-driven alternative. A route that works for one account or city cannot settle another employee’s booking. [Freeway guidance](#source-freeways).",
+        "Build the itinerary as distinct legs, including any transfer between services. Identify where luggage moves, which person makes each request, and the latest time to switch providers. A feasible downtown ride can still be useful when the airport leg uses a taxi or car service; record the additional handoff and time instead of promising one continuous autonomous journey."
+      ]
+    },
+    {
+      "id": "pickup-is-part-of-trip",
+      "title": "Measure the door-to-door journey",
+      "paragraphs": [
+        "Waymo explains that pickup and dropoff spots may differ from the requested doorway. Road closures, construction, traffic, obstructions and parking restrictions can require a walk. Its app can offer a minimize-walking setting, with a possible tradeoff in ride time. Those details belong in a business itinerary carrying a client presentation, equipment or a tight arrival window. [Pickup guidance](#source-pickup).",
+        "Measure from the employee leaving the building to being ready at the destination. Keep request-to-pickup time, walking, loading, vehicle travel and final access separate. An attractive vehicle ETA can hide a long walk around a conference venue; a slower arrival at the curb can still make a simpler trip. Preserve the complete elapsed time when comparing options.",
+        "For events, verify a usable meeting point and tell attendees which entrance it serves. Consider a guest with a mobility need, several bags or a discharged phone before distributing an app link as the transport plan. Waymo’s Austin guidance says an Uber WAV option is manually driven. The appropriate accessible trip may use a different vehicle or channel from the autonomous example. [Austin accessibility distinction](#source-austin-access).",
+        "Decide in advance who can authorize a fallback, how guests reach that person and which arrival deadlines matter. These are recommended operating controls, not conditions the operator has promised to manage for an event organizer."
+      ]
+    },
+    {
+      "id": "fare-and-time",
+      "title": "Put employee time beside the fare",
+      "paragraphs": [
+        "Uber’s July guidance says a traveler accepting a Waymo match pays the same price as the requested eligible Uber product would have charged for a driver match. That comparison is within the selected booking product. It does not establish that every Texas Waymo trip is cheaper than another service, or that prices remain fixed between requests. [Uber pricing explanation](#source-uber-price).",
+        "For direct Waymo bookings, the help page points travelers to a current in-app estimate and lists factors including route distance, duration, demand and applicable fees. Do not transplant its published Las Vegas pricing into a Dallas budget. Compare contemporaneous estimates for the same endpoints, time and passenger requirement. [Pricing guidance](#source-pricing).",
+        "Consider a hypothetical month with 200 eligible local trips, one employee on each. Assume a direct-booked autonomous option costs $24 a trip with eight minutes of paid waiting and walking, while an alternative costs $29 with two such minutes. Value employee time at $60 an hour, or $1 a minute. These are invented inputs for an operating decision, not Waymo fares or measured wait times.",
+        "The lower fare saves $1,000 in cash across the example month, but six additional minutes per trip consume 20 employee hours, valued here at $1,200. The autonomous option’s combined fare and time cost is $200 higher. This allocated time value is not automatically a payroll saving or loss; use it only where that time has a meaningful business cost.",
+        "The reusable threshold is $5 divided by six extra minutes: a break-even time value of $50 per employee-hour. Above $50, the autonomous option costs more on these inputs before any fallback; below it, remaining savings can absorb some exceptions. This is a decision rule from invented fares and times, not a Texas wage estimate. Changing either quoted fare or the time difference changes the threshold."
+      ],
+      "table": {
+        "caption": "Illustrative fare savings can be outweighed by extra time",
+        "columns": [
+          "Assumed or calculated item",
+          "Autonomous option",
+          "Alternative"
+        ],
+        "rows": [
+          [
+            "Eligible trips per month: assumption",
+            "200",
+            "200"
+          ],
+          [
+            "Fare per trip: assumption",
+            "$24",
+            "$29"
+          ],
+          [
+            "Waiting and walking: assumption",
+            "8 minutes",
+            "2 minutes"
+          ],
+          [
+            "Time value: assumption",
+            "$60 per employee-hour",
+            "$60 per employee-hour"
+          ],
+          [
+            "Fare total: 200 × fare",
+            "$4,800",
+            "$5,800"
+          ],
+          [
+            "Time value total: 200 × minutes × $1",
+            "$1,600",
+            "$400"
+          ],
+          [
+            "Combined monthly comparison",
+            "$6,400",
+            "$6,200"
+          ]
+        ],
+        "note": "Calculated hypothetical, not an operator quote. Same in-vehicle travel time is excluded from both sides; no productive-work benefit, cancellation fee or tax difference is assumed."
+      }
+    },
+    {
+      "id": "fallback-cost",
+      "title": "Cost the failed request without inventing its frequency",
+      "paragraphs": [
+        "Now suppose 40 of the 200 planned journeys require a conventional fallback after an unavailable or failed AV request. Assume each fallback journey incurs only a $38 conventional fare, with no AV charge, and 20 total paid minutes of waiting, walking and coordination across the failed request and fallback. At $60 an hour that journey costs $58. The 20 minutes replace the base case’s eight minutes; they are not additional to them. No observed failure rate or provider refund rule is estimated. The other 160 journeys retain the $32 combined cost. Total cost is 160 × $32 + 40 × $58 = $7,440, or $1,240 above the all-alternative comparison.",
+        "The fallback sensitivity still spends only $5,360 on fares, $440 below the alternative’s $5,800. But it uses 2,080 minutes of waiting, walking and coordination, valued at $2,080, versus $400 for the alternative. The $1,240 combined disadvantage is chiefly time exposure, not $1,240 of extra cash travel spending. The assumed 20% fallback share is not a measured Waymo failure rate; retain failed requests when measuring a real pilot.",
+        "Deadline exposure needs another decision. A missed customer appointment and a late return to the hotel have different consequences even if their fares match. Set a latest-switch time for critical journeys and test whether the fallback can still meet it. Keep any missed-meeting cost separate unless the business has evidence for its frequency and value."
+      ]
+    },
+    {
+      "id": "business-payment",
+      "title": "Verify the payment program separately from rider access",
+      "paragraphs": [
+        "An individual Waymo business profile can use a separate payment method and verified business email. Organization-sponsored discounts depend on an actual eligible program and the correct profile. The help page warns that a discount will not apply to a personal-profile booking. Having access to a car and having an employer pay for it are separate questions. [Business profiles](#source-business-profile).",
+        "Waymo for Business describes employer programs, budgets, members and event codes, but its current public named-market description does not include Texas. That omission does not prove every Texas arrangement is unavailable. It means this research has not established a Texas enterprise entitlement: confirm the actual offer, market, eligibility rules and billing terms before budgeting a subsidy. [Organizational program page](#source-business-program).",
+        "In Austin, establish the corresponding rules in the Uber account and the employer’s payment arrangement. Do not assume a Waymo-app profile controls an Uber booking. During a pilot, reconcile who booked, the selected profile, fare, receipt, reimbursement and any sponsor payment. Report a subsidy separately from the underlying trip cost so finance can see whether apparent savings depend on a program."
+      ]
+    },
+    {
+      "id": "itinerary-approval",
+      "title": "Give the traveler a usable departure plan",
+      "paragraphs": [
+        "Consider an illustrative employee staying at a hotel before a timed client meeting. Confirm the app and account first, then the supported pickup entrance and destination. Work backward from the appointment through walking, pickup, the offered route and the employer’s arrival buffer. Set the latest switch time from a usable alternative’s pickup and travel estimate. This is a suggested planning method; it assumes no particular provider’s availability.",
+        "Record the approved journey with the traveler’s booking channel, payment profile and receipt process. For Austin, that means the applicable Uber arrangement; for a direct Waymo-app journey, check the Waymo profile. An employer benefit belongs in the estimate only after eligibility is confirmed. [Business profiles](#source-business-profile).",
+        "Give the employee the alternate contact or booking method before departure. If the AV request fails, log the original request, the substitute trip and actual elapsed time. Finance can then distinguish a fare saving from a subsidy, extra employee time or a second transport charge.",
+        "A separate, hypothetical timetable shows how the switch deadline works. For a 10 a.m. meeting, allow an assumed 10 minutes for the alternative’s pickup, 25 minutes for travel and 10 minutes for final access and the arrival buffer. Those 45 minutes put the latest switch at 9:15 a.m. Replace them with the traveler’s current estimates; these are invented planning inputs, independent of the fare comparison above."
+      ]
+    },
+    {
+      "id": "travel-pilot",
+      "title": "Make a bounded travel decision",
+      "paragraphs": [
+        "Start with a defined class of journeys: for example, noncritical local trips between approved offices and hotels, with an available fallback. Evaluate actual trips in that class before applying the result to airport transfers, customer events or every employee. This preserves a useful experiment while keeping its conclusion tied to what was observed.",
+        "One specific public record belongs in that decision. NTSB’s preliminary January 12 Austin school-bus account describes an incorrect remote-assistance response followed by a Waymo vehicle passing the stopped bus; no crash occurred. The page remained ongoing on October 13. Ask what current corrective evidence and remote-support procedure apply to the purchased service. The account does not establish final probable cause, a present defect or comparative risk. [Preliminary investigation](#source-austin-school-bus)."
+      ],
+      "bullets": [
+        "Confirm both endpoints, the traveler’s ride access and the correct booking channel before departure.",
+        "Record the requested trip, offer, completed journey, fare, total elapsed time and any fallback; retain unsuccessful requests in the denominator.",
+        "Check party size, luggage, walking needs, boarding assistance and the usable pickup entrance.",
+        "Validate the payment profile and any employer program independently of vehicle availability.",
+        "Review material local oversight records, the applicable corrective evidence and remote-support role; distinguish preliminary findings from final conclusions.",
+        "Set a deadline for switching providers, with a responsible person and a reachable alternative.",
+        "Recheck published access, airport and route guidance when planning a trip; update the policy when those rules materially change."
+      ]
+    },
+    {
+      "id": "updates",
+      "title": "Update the policy when the usable service changes",
+      "paragraphs": [
+        "Revisit this article when San Antonio opens access more broadly, a Texas airport obtains confirmed public service, Austin’s booking arrangement changes, or a named Texas business program becomes available on documented terms. Changes in fare, pickup behavior, route access or support should trigger a fresh comparison using the same trip definition.",
+        "The business value of Waymo in Texas will differ by journey. Use the current service where it meets the requirement, retain a workable fallback and give finance a comparison that includes the whole trip. A useful transport decision is one a traveler can execute and a manager can check."
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "id": "dallas-open",
+      "label": "Dallas service opens to everyone",
+      "href": "https://blog.waymo.com/blog/shorts/dallas-open-to-all/",
+      "publisher": "Waymo",
+      "date": "2026-08-04",
+      "note": "Dated opening to all riders; Love Field terminals and Dallas freeways were testing/future public routes in this notice, not current trip guarantees.",
+      "lastVerified": "2026-10-12"
+    },
+    {
+      "id": "houston-open",
+      "label": "Houston service opens to everyone",
+      "href": "https://blog.waymo.com/blog/shorts/houston-open-to-all/",
+      "publisher": "Waymo",
+      "date": "2026-08-20",
+      "note": "Dated opening to all riders in the service area; no airport or statewide coverage inferred.",
+      "lastVerified": "2026-10-12"
+    },
+    {
+      "id": "service-areas",
+      "label": "Current service areas and rider access",
+      "href": "https://support.google.com/waymo/answer/9059119?hl=en",
+      "publisher": "Waymo Help",
+      "date": "Undated current guidance",
+      "note": "San Antonio marked Gradually adding riders; Austin only through Uber. Maps and app eligibility remain trip-specific.",
+      "lastVerified": "2026-10-12"
+    },
+    {
+      "id": "austin-access",
+      "label": "Austin and Atlanta: Waymo rides on Uber",
+      "href": "https://support.google.com/waymo/answer/16011725?hl=en",
+      "publisher": "Waymo Help",
+      "date": "Undated current guidance",
+      "note": "Eligible Uber request, optional AV preference and accepted match; vehicle supply and service area conditions apply. Austin WAV option is manually driven.",
+      "lastVerified": "2026-10-12"
+    },
+    {
+      "id": "uber-price",
+      "label": "Uber: eligible Waymo matches and same requested-product price",
+      "href": "https://www.uber.com/us/en/blog/waymo-on-uber/",
+      "publisher": "Uber",
+      "date": "2026-07-24",
+      "note": "Current page price parity applies to a Waymo match for the selected Uber product. It is not a fixed fare or a comparison with another provider.",
+      "lastVerified": "2026-10-12"
+    },
+    {
+      "id": "airports",
+      "label": "Airport service and San Antonio rider eligibility",
+      "href": "https://support.google.com/waymo/answer/14298153?hl=en",
+      "publisher": "Waymo Help",
+      "date": "Undated current guidance",
+      "note": "SAT Terminal A/B Departures and Arrivals outer curb near Rideshare Zone 2. Airport access is available to riders already able to ride in San Antonio.",
+      "lastVerified": "2026-10-12"
+    },
+    {
+      "id": "freeways",
+      "label": "Freeway access and route preview",
+      "href": "https://support.google.com/waymo/answer/16580405?hl=en",
+      "publisher": "Waymo Help",
+      "date": "Undated current guidance",
+      "note": "Access is limited and gradually rolled out; access does not mean every trip uses a freeway.",
+      "lastVerified": "2026-10-12"
+    },
+    {
+      "id": "pickup",
+      "label": "Pickup, walking distance and pullover locations",
+      "href": "https://support.google.com/waymo/answer/9696059?hl=en",
+      "publisher": "Waymo Help",
+      "date": "Undated current guidance",
+      "note": "Pickup/dropoff can require walking; selected spots, no-show and accessibility settings affect the door-to-door trip.",
+      "lastVerified": "2026-10-12"
+    },
+    {
+      "id": "pricing",
+      "label": "Trip pricing and current fare estimates",
+      "href": "https://support.google.com/waymo/answer/9059184?hl=en",
+      "publisher": "Waymo Help",
+      "date": "Undated current guidance",
+      "note": "Distance, duration, demand, booking, applicable fees and trip changes can affect price. Published Las Vegas rates are not used as Texas rates.",
+      "lastVerified": "2026-10-12"
+    },
+    {
+      "id": "business-profile",
+      "label": "Individual business profiles and sponsored-ride eligibility",
+      "href": "https://support.google.com/waymo/answer/15128101?hl=en",
+      "publisher": "Waymo Help",
+      "date": "Undated current guidance",
+      "note": "Separate payment method and verified business email; employer discounts require an actual eligible program and the correct profile.",
+      "lastVerified": "2026-10-12"
+    },
+    {
+      "id": "business-program",
+      "label": "Waymo for Business: organizational programs",
+      "href": "https://blog.waymo.com/business/",
+      "publisher": "Waymo",
+      "date": "Undated current program page",
+      "note": "Named markets in the public program description do not include Texas at review. An Other city inquiry option does not establish a contract or local program eligibility.",
+      "lastVerified": "2026-10-12"
+    },
+    {
+      "id": "austin-school-bus",
+      "label": "NTSB preliminary Austin school-bus investigation",
+      "href": "https://www.ntsb.gov/investigations/Pages/HWY26FH007.aspx",
+      "publisher": "National Transportation Safety Board",
+      "date": "Event 2026-01-12; preliminary release 2026-03-03",
+      "lastVerified": "2026-10-13",
+      "note": "HWY26FH007: preliminary narrative says no crash; remote-assistance response preceded passing. Status observed Ongoing October 13. No final probable cause, current defect persistence or comparative failure rate established."
+    }
+  ],
+  "faqs": [
+    {
+      "question": "Can anyone request Waymo in Dallas and Houston?",
+      "answer": "Waymo announced all-rider access in Dallas on August 4, 2026, and Houston on August 20. The trip still needs to fit the current service area and available booking offer. [Dallas](#source-dallas-open), [Houston](#source-houston-open)."
+    },
+    {
+      "question": "How do business travelers book Waymo in Austin?",
+      "answer": "Use an eligible Uber request and accept a Waymo offer if matched. The AV preference setting does not reserve a vehicle, and both endpoints must fit the service area. [Austin instructions](#source-austin-access)."
+    },
+    {
+      "question": "Does Waymo serve San Antonio International Airport for every visitor?",
+      "answer": "Current guidance identifies SAT terminal locations but limits airport access to people already able to ride in San Antonio. Confirm the traveler’s access before relying on it. [Airport guidance](#source-airports)."
+    },
+    {
+      "question": "Does a Waymo business profile establish a Texas corporate ride program?",
+      "answer": "No. The profile separates payment and enables an existing eligible organization offer. Confirm the employer’s program and market terms independently of rider access. [Business profile rules](#source-business-profile)."
+    },
+    {
+      "question": "Are the cost examples actual Waymo Texas prices?",
+      "answer": "No. They use declared hypothetical fares, waiting times and fallback shares. Waymo directs riders to a current in-app estimate. [Pricing guidance](#source-pricing)."
+    }
+  ],
+  "resources": [
+    {
+      "label": "Texas autonomous mobility source and decision ledger",
+      "href": "/research/texas-research-library-2026-10-13.json",
+      "description": "Primary evidence, declared assumptions and update triggers across the Texas business and autonomy library.",
+      "format": "JSON"
+    }
+  ],
+  "image": "/images/social/texas-waymo-business-travel.png"
+}

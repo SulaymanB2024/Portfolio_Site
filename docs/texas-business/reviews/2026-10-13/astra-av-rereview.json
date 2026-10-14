@@ -1,0 +1,297 @@
+{
+  "reviewer": "Independent Astra AV research-quality reviewer; root owns all source edits",
+  "reviewDate": "2026-10-13",
+  "branch": "codex/texas-research-quality-20261013",
+  "reviewedFiles": [
+    {
+      "path": "src/personal/editorial/data/articles/texas-robotaxi-business-service-map.json",
+      "sha256": "14964e89b53ed02893a34c28fcb7f00ec5f9610f4d7185d79425a89aaedeca0e"
+    },
+    {
+      "path": "docs/texas-business/research/robotaxi-map-claims.json",
+      "sha256": "396031d80072bd2400d47a867edd4531bc82d22c34911d2a393b115a15371284"
+    },
+    {
+      "path": "src/personal/editorial/data/articles/texas-waymo-business-travel.json",
+      "sha256": "84c43fd373bf35d6d2e19080d6adcb23044ef14eaa81fa33f00e42520be8fd32"
+    },
+    {
+      "path": "docs/texas-business/research/waymo-claims.json",
+      "sha256": "c1ba9176cb433c9c14a8b5d63d77ab25c044d5eaf4c5d275180dec00f38ba8b1"
+    },
+    {
+      "path": "src/personal/editorial/data/articles/texas-zoox-market-entry-business.json",
+      "sha256": "278f6fe3c00f8b51dc2d9edf5c2268301d7b11e4f9c083592f9afb8234a9f041"
+    },
+    {
+      "path": "docs/texas-business/research/zoox-claims.json",
+      "sha256": "f2299cae6b29d80204870c28c0119dcd0834ffc2290b076ae1db98820d4dd22e"
+    },
+    {
+      "path": "src/personal/editorial/data/articles/texas-autonomous-trucking-operators.json",
+      "sha256": "7ec13aa96722be17db82ba0f09513876c39111a5b57f796d1d0ab938440232b7"
+    },
+    {
+      "path": "docs/texas-business/research/autonomous-trucking-claims.json",
+      "sha256": "84387aacccd05cedaf7ff81a1914bb23010329f126de7190cfde839f29dd3da0"
+    },
+    {
+      "path": "src/personal/editorial/data/articles/texas-driverless-freight-route-economics.json",
+      "sha256": "d0efd8d31d57c03487bbb04ebc9beaba5ecdc748b01b8f56c10689a480f65e98"
+    },
+    {
+      "path": "docs/texas-business/research/driverless-freight-claims.json",
+      "sha256": "33862b0ff683ca21e54186913b5f459ba70b1a14f411524607e928fed17f2057"
+    },
+    {
+      "path": "src/personal/editorial/data/articles/texas-automated-vehicle-authorization.json",
+      "sha256": "04071ad4f53a10235bf907d78075d39ce2c384bd9f7ff7e0ad9bd2422f43ba0d"
+    },
+    {
+      "path": "docs/texas-business/research/av-authorization-claims.json",
+      "sha256": "98370606b8c692d1e085227ec9ec7f9ba10f5481c7e961cd328d4b356b33bcba"
+    }
+  ],
+  "verdict": "Principal evidence and analytical revisions accepted. All distinct quantitative models and modified thresholds recalculate correctly. Resolve two definite prose inconsistencies and two small evidence-boundary alignment items below before freezing the edition.",
+  "reviewedScope": "Read all six revised manuscripts, including tables, FAQs and source notes, and all six ledgers. Compared new assertions with actual source bodies acquired in the first review; independently reopened the final FMCSA body and its VI.D in this rereview. Did not repeat all prior acquisitions. Parsed all 12 JSON files and recalculated all distinct quantitative models using Python assertions.",
+  "acceptedOriginalFindingIds": [
+    "AVMAP-1",
+    "AVMAP-2",
+    "AVMAP-3",
+    "WAYMO-1",
+    "WAYMO-2",
+    "WAYMO-3",
+    "WAYMO-4",
+    "ZOOX-1",
+    "ZOOX-2",
+    "ZOOX-3",
+    "ZOOX-4",
+    "TRUCK-1",
+    "TRUCK-2",
+    "TRUCK-3",
+    "FREIGHT-1",
+    "FREIGHT-2",
+    "FREIGHT-3",
+    "FREIGHT-4",
+    "LAW-1",
+    "LAW-2",
+    "LAW-3",
+    "LAW-4"
+  ],
+  "acceptanceQualifications": {
+    "ZOOX-3": "Core resolution accepted: arbitrary dollar pool removed and role/commitment table added. Stale FAQ/update text remains REREVIEW-1.",
+    "TRUCK-2": "Freight-job shortlist improves purchasing use. Waabi wording in its new summary needs REREVIEW-2.",
+    "TRUCK-1/FREIGHT-1": "Grant properly narrowed to warning-device duties; publish the ledger intrastate qualification as REREVIEW-3.",
+    "LAW-4": "Prose now distinguishes $3,100 allocated time from $2,400 adviser invoices. Carry distinction into avlaw-06, REREVIEW-4."
+  },
+  "articleVerdicts": [
+    {
+      "slug": "texas-robotaxi-business-service-map",
+      "verdict": "Accept substantive revision",
+      "evidence": "New NTSB and NHTSA paragraphs preserve preliminary/inquiry status. Role table correctly leaves Tesla and May roles unestablished; Avride takeover role is supported. 20/120 denominator correct.",
+      "usefulDecision": "Selected local pilots are assessable; guaranteed all-AV group transfer is not supported by access records."
+    },
+    {
+      "slug": "texas-waymo-business-travel",
+      "verdict": "Accept substantive revision",
+      "evidence": "Official school-bus investigation bounded; $50/hour threshold and fallback cash/time split correct; itinerary-leg choice avoids blanket airport availability.",
+      "usefulDecision": "Reader can compare fare saving with extra time, subject to actual app eligibility and route."
+    },
+    {
+      "slug": "texas-zoox-market-entry-business",
+      "verdict": "Accept core revision; fix stale FAQ",
+      "evidence": "X.A public OA docket and unretrieved Texas instrument distinguished; X.G operational-control restriction is binding, not merely a voluntary business preference. Role/commitment table respects stage and ownership.",
+      "usefulDecision": "Prospective vendor or landlord can identify an appropriate staged commitment; the article supplies neither Texas allocation nor a fare, valuation or unit-cost estimate."
+    },
+    {
+      "slug": "texas-autonomous-trucking-operators",
+      "verdict": "Accept core revision; preserve Waabi role precision",
+      "evidence": "Program rows retain dates/domains and distinguish observer from rear-seat nondriving support; new opening briefly loses Waabi precision. Beacon dates, notice, validated domain, cargo/configuration and five-minute warning boundary supported.",
+      "usefulDecision": "Job-specific shortlist and equipment/compliance gate are concrete; buyer-specific capacity and tariffs remain unknown."
+    },
+    {
+      "slug": "texas-driverless-freight-route-economics",
+      "verdict": "Accept economics revision; add intrastate caveat",
+      "evidence": "Cash/allocated staff/lost-contribution distinction, incremental exceptions, fixed-cost volume threshold and unpriced headroom all reconcile with ledger.",
+      "usefulDecision": "A shipper can turn a quote into a go/no-go threshold, but invented prices and acceptance cannot establish actual savings."
+    },
+    {
+      "slug": "texas-automated-vehicle-authorization",
+      "verdict": "Accept legal sequence; align ledger cost boundary",
+      "evidence": "545.455(b) general conditions, (c) commercial driverless gate, federal compliance and 545.452(b) local AV-operation preemption are properly separated; no blanket private-property permission inferred.",
+      "usefulDecision": "Reader can classify a proposed operation before treating a Texas record as sufficient authority."
+    }
+  ],
+  "primaryEvidenceChecks": [
+    {
+      "url": "https://www.ntsb.gov/investigations/Pages/HWY26FH007.aspx",
+      "date": "Event 2026-01-12; preliminary release 2026-03-03; ongoing status observed 2026-10-13",
+      "pinpoint": "What Happened; Investigation Details; footnote 4",
+      "verdict": "Supports remote-assistance mistake and passing stopped bus; no crash. Does not prove final cause or present failure rate."
+    },
+    {
+      "url": "https://www.nhtsa.gov/press-releases/investigation-tesla-cybercab-self-certification",
+      "date": "2026-09-04",
+      "pinpoint": "Opening; How It Works; Additional Information",
+      "verdict": "Supports audit opening after Austin commercial deployment. No violation or current disposition inferred."
+    },
+    {
+      "url": "https://www.govinfo.gov/content/pkg/FR-2026-07-31/html/2026-15485.htm",
+      "date": "2026-07-31",
+      "pinpoint": "X.A; X.G; DATES; introduction limits",
+      "verdict": "Supports public OA docket and binding Zoox control/transfer conditions; annual introductions differ from simultaneous area fleet limits. No current Texas OA retrieved."
+    },
+    {
+      "url": "https://www.govinfo.gov/content/pkg/FR-2026-10-09/html/2026-20734.htm",
+      "date": "Published 2026-10-09; effective 2026-10-07 through 2031-10-07",
+      "pinpoint": "VI.A–C; VI.D, lines 660–668 of reread body",
+      "verdict": "Supports warning-device alternative under conditions. Interstate conflict preemption does not compel adoption for intrastate commerce."
+    },
+    {
+      "url": "https://tcss.legis.texas.gov/resources/TN/htm/TN.545.htm",
+      "date": "Current code read 2026-10-13",
+      "pinpoint": "545.451(7); 545.452(b); 545.455(b)–(c); 545.456(b)(2)(C)",
+      "verdict": "Supports legal sequence and local preemption boundaries; observation alone does not establish human driving."
+    }
+  ],
+  "remainingActionableDefects": [
+    {
+      "id": "REREVIEW-1",
+      "priority": "P2",
+      "kind": "definite internal inconsistency",
+      "files": [
+        "src/personal/editorial/data/articles/texas-zoox-market-entry-business.json",
+        "docs/texas-business/research/zoox-claims.json"
+      ],
+      "locations": [
+        "Final FAQ: Is the fleet cost table an estimate of Zoox’s unit economics?",
+        "update-triggers last paragraph",
+        "zoox-13.recheck",
+        "updateTriggers final item"
+      ],
+      "finding": "The FAQ still describes a fleet cost table and hypothetical costs after the cost pool and all dollar output were removed. Recheck/update text also treats costs as model inputs.",
+      "proposedEdit": "Ask: Does the throughput example estimate Zoox’s Texas fleet or unit economics? Answer: No. Its vehicle count, available hours, occupied share and duration are invented inputs illustrating completed vehicle trips. It estimates neither actual deployment, fares nor costs. Retain map-scope citation. Remove costs from the throughput-input refresh text; preserve separate commercial diligence on real contracts."
+    },
+    {
+      "id": "REREVIEW-2",
+      "priority": "P2",
+      "kind": "unsupported role generalization",
+      "files": [
+        "src/personal/editorial/data/articles/texas-autonomous-trucking-operators.json"
+      ],
+      "locations": [
+        "content[2]"
+      ],
+      "finding": "Waabi and PlusAI are grouped as supervised customer freight. The Waabi source establishes an observer in the driver’s seat; the manuscript and ledger elsewhere correctly refuse to infer that observer’s duties or intervention frequency.",
+      "evidence": {
+        "url": "https://www.waabi.ai/insights/volvo-and-waabi-kick-off-customer-operations-in-texas-starting-with-warp",
+        "date": "2026-10-05",
+        "pinpoint": "Current-operation paragraphs"
+      },
+      "proposedEdit": "Waabi reports customer freight with an observer in the driver’s seat; PlusAI’s disclosed trial uses a human safety driver. These are evidence-based screening categories, not available quotes or endorsements."
+    },
+    {
+      "id": "REREVIEW-3",
+      "priority": "P2",
+      "kind": "public prose omits relevant ledger qualification",
+      "files": [
+        "src/personal/editorial/data/articles/texas-autonomous-trucking-operators.json",
+        "src/personal/editorial/data/articles/texas-driverless-freight-route-economics.json",
+        "src/personal/editorial/data/articles/texas-automated-vehicle-authorization.json"
+      ],
+      "locations": [
+        "Each new FMCSA beacon discussion"
+      ],
+      "finding": "All three ledgers correctly reserve intrastate treatment, but public prose omits this boundary. Both endpoints of the freight example are in Texas; geography alone cannot determine whether the shipment is interstate commerce. The grant is not itself proof of an intrastate-only operation’s state exemption.",
+      "evidence": {
+        "url": "https://www.govinfo.gov/content/pkg/FR-2026-10-09/html/2026-20734.htm",
+        "date": "2026-10-09",
+        "pinpoint": "VI.D Preemption; lines 660–668"
+      },
+      "proposedEdit": "Add one concise sentence: Classify the actual shipment as interstate or intrastate commerce; the federal grant does not itself establish Texas treatment of an intrastate-only operation. Do not infer that every Dallas–Houston movement is intrastate."
+    },
+    {
+      "id": "REREVIEW-4",
+      "priority": "P3",
+      "kind": "ledger boundary alignment",
+      "files": [
+        "docs/texas-business/research/av-authorization-claims.json"
+      ],
+      "locations": [
+        "claims[id=avlaw-06].qualification"
+      ],
+      "finding": "The public preparedness example now clearly splits paid costs from allocated staff time, while its downloadable claim still summarizes $5,500/$12,700 without that split. Numbers are correct; add the distinction so standalone ledger readers do not treat all cost as invoices.",
+      "proposedEdit": "Record $3,100 allocated existing-staff time, $2,400 assumed paid adviser cost and $7,200 incremental paid replacement premium. $12,700 is combined incremental economic burden above common freight, not an all-cash total."
+    }
+  ],
+  "quantitativeAudit": {
+    "result": "All arithmetic assertions passed; no numerical corrections required.",
+    "robotaxiMap": {
+      "baseline": 5600,
+      "initialMix": 4640,
+      "tenExceptionsCash": 4920,
+      "tenExceptionsTime": 200,
+      "tenCombined": 5120,
+      "twentyCombined": 5600,
+      "breakEvenRate": 0.16666666666666666,
+      "boundary": "Original AV fare retained; replacement fare and time incremental; normal trip time equal/excluded."
+    },
+    "waymo": {
+      "baselineAlternative": 6200,
+      "autonomousBase": 6400,
+      "breakEvenTimeValuePerHour": 50,
+      "fallbackCash": 5360,
+      "fallbackAllocatedTime": 2080,
+      "fallbackCombined": 7440,
+      "differenceToAlternative": 1240,
+      "boundary": "Fallback 20 minutes is total, replacing the 8-minute ordinary wait; no duplicate AV fare on fallback."
+    },
+    "zoox": {
+      "scheduledHours": 640,
+      "availableHours": 512,
+      "occupiedHours": 281.6,
+      "baseTrips": 704,
+      "lowerOccupiedShareTrips": 512,
+      "difference": 192,
+      "boundary": "Same completed-trip population in hours and duration; no dollar model remains."
+    },
+    "freight": {
+      "directBeforeExceptions": 1388000,
+      "transferBeforeExceptions": 1444000,
+      "recoveryInvoices": 5600,
+      "lostContribution": 8000,
+      "directTotal": 1401600,
+      "transferTotal": 1457600,
+      "directSaving": 98400,
+      "transferSaving": 42400,
+      "downsideTotal": 1510800,
+      "higherAcceptanceTotal": 1367000,
+      "netPerAcceptedShipment": 173,
+      "continuousBreakEven": 231.21387283236993,
+      "firstWholeLoadBreakEven": 232,
+      "unpricedCostHeadroomPerLoad": 123,
+      "allInVariableCeiling": 1433,
+      "extra100000LossSaving": -1600,
+      "boundary": "Warehouse/release existing staff allocated; carrier/setup/recovery paid assumptions; lost contribution separate; 2% incremental relative to current transport."
+    },
+    "authorization": {
+      "allocatedStaff": 3100,
+      "paidAdviser": 2400,
+      "preparednessEconomicCost": 5500,
+      "incrementalReplacementCash": 7200,
+      "combinedEconomicStress": 12700,
+      "commonFreight": 324000
+    }
+  },
+  "dateAndConsistencyReview": "Prepared article dates October 13 retained; operating source checks October 12 and new official review October 13 distinguished in evidence boundaries/source dates. No publication-date drift or observed-current/announced-future conversion found. ReadTime/catalog/receipt/bundle synchronization intentionally excluded because root has not performed it yet.",
+  "scopeLimits": [
+    "No publication or release approval implied; parent release remains separately controlled.",
+    "No private tariffs, fleet census, permits or insurance census, rider booking or live supply observation obtained.",
+    "No new Zoox browser capture; complete October 12 private bodies reused.",
+    "No current Texas-specific Zoox OA or Cybercab inquiry disposition retrieved.",
+    "Underlying Einride approval instrument and empirical route reliability remain unverified and explicitly qualified.",
+    "No rendered layout, catalog, build, integration receipt or synchronized publication bundle review.",
+    "Research quality is improved by operative conditions and usable thresholds; source volume or passing checks does not establish world-class status."
+  ],
+  "completion": "Rereview complete. Only this report written; manuscripts and ledgers not modified by reviewer. Root should apply or explicitly reject remaining concrete items before final source freeze."
+}

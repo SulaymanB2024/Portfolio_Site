@@ -1,0 +1,120 @@
+{
+  "reviewer": "Independent Astra AV reviewer",
+  "reviewDate": "2026-10-13",
+  "reviewType": "Focused closure only",
+  "branch": "codex/texas-research-quality-20261013",
+  "reviewedFiles": [
+    {
+      "path": "src/personal/editorial/data/articles/texas-robotaxi-business-service-map.json",
+      "sha256": "14964e89b53ed02893a34c28fcb7f00ec5f9610f4d7185d79425a89aaedeca0e",
+      "changedSinceRereview": false
+    },
+    {
+      "path": "docs/texas-business/research/robotaxi-map-claims.json",
+      "sha256": "396031d80072bd2400d47a867edd4531bc82d22c34911d2a393b115a15371284",
+      "changedSinceRereview": false
+    },
+    {
+      "path": "src/personal/editorial/data/articles/texas-waymo-business-travel.json",
+      "sha256": "84c43fd373bf35d6d2e19080d6adcb23044ef14eaa81fa33f00e42520be8fd32",
+      "changedSinceRereview": false
+    },
+    {
+      "path": "docs/texas-business/research/waymo-claims.json",
+      "sha256": "c1ba9176cb433c9c14a8b5d63d77ab25c044d5eaf4c5d275180dec00f38ba8b1",
+      "changedSinceRereview": false
+    },
+    {
+      "path": "src/personal/editorial/data/articles/texas-zoox-market-entry-business.json",
+      "sha256": "484f3df08dc356294860f1b4053061546c8a8f7de14a06a6d60bdf714c8c499d",
+      "changedSinceRereview": true
+    },
+    {
+      "path": "docs/texas-business/research/zoox-claims.json",
+      "sha256": "066b84a64669a5962983e113e53065aa307cfaac6f6b2b76885c03ba1398cf07",
+      "changedSinceRereview": true
+    },
+    {
+      "path": "src/personal/editorial/data/articles/texas-autonomous-trucking-operators.json",
+      "sha256": "0ce073cb3f6dd9569c20ae1f252a0eb97502a5f906ae954dfd9c827abf599e43",
+      "changedSinceRereview": true
+    },
+    {
+      "path": "docs/texas-business/research/autonomous-trucking-claims.json",
+      "sha256": "84387aacccd05cedaf7ff81a1914bb23010329f126de7190cfde839f29dd3da0",
+      "changedSinceRereview": false
+    },
+    {
+      "path": "src/personal/editorial/data/articles/texas-driverless-freight-route-economics.json",
+      "sha256": "00160d1ab7f333a5038e70f8b3acbde5d77bcb39527acee8586b751a0dd0f6de",
+      "changedSinceRereview": true
+    },
+    {
+      "path": "docs/texas-business/research/driverless-freight-claims.json",
+      "sha256": "33862b0ff683ca21e54186913b5f459ba70b1a14f411524607e928fed17f2057",
+      "changedSinceRereview": false
+    },
+    {
+      "path": "src/personal/editorial/data/articles/texas-automated-vehicle-authorization.json",
+      "sha256": "e9c50d14508d30ef87d335b3a1d7037d5db8116c4846fe1d0e605b6d1a1174ae",
+      "changedSinceRereview": true
+    },
+    {
+      "path": "docs/texas-business/research/av-authorization-claims.json",
+      "sha256": "5558c60c1109fa61ac87a1c320c09c0f1c4b3ec95b9f723e4dd696bfd4509021",
+      "changedSinceRereview": true
+    }
+  ],
+  "verdict": "All four rereview items closed. No remaining material issue found within this focused scope.",
+  "closures": [
+    {
+      "id": "REREVIEW-1",
+      "status": "closed",
+      "evidence": "Zoox final FAQ now explicitly describes hypothetical throughput, not unit economics; article refresh text and ledger zoox-13/updateTriggers no longer treat costs as throughput inputs."
+    },
+    {
+      "id": "REREVIEW-2",
+      "status": "closed",
+      "evidence": "Trucking opening now distinguishes Waabi observer presence from PlusAI safety-driver trial, consistent with detailed table, source note and ledger."
+    },
+    {
+      "id": "REREVIEW-3",
+      "status": "closed",
+      "evidence": "All three public beacon discussions now reserve applicable Texas treatment for intrastate-only operation. Trucking article explicitly warns that two Texas endpoints do not settle commerce classification. Existing ledger qualification preserved."
+    },
+    {
+      "id": "REREVIEW-4",
+      "status": "closed",
+      "evidence": "avlaw-06 now matches manuscript: $3,100 allocated existing staff time, $2,400 paid backup-capacity reservation and $7,200 incremental replacement premium; $12,700 is economic burden, not all cash."
+    }
+  ],
+  "reviewerCorrection": {
+    "error": "Prior rereview incorrectly labeled the $2,400 item paid adviser cost/invoices.",
+    "correctBoundary": "It is six weeks of backup-capacity reservation at $400/week. The original and revised manuscript identified it correctly.",
+    "supersedes": [
+      "astra-av-rereview.json acceptanceQualifications.LAW-4",
+      "astra-av-rereview.json remainingActionableDefects REREVIEW-4 proposedEdit",
+      "astra-av-rereview.json quantitativeAudit.authorization.paidAdviser"
+    ],
+    "correctedAuthorizationModel": {
+      "allocatedExistingStaffUSD": 3100,
+      "paidBackupCapacityReservationUSD": 2400,
+      "preparednessEconomicUSD": 5500,
+      "incrementalPaidReplacementPremiumUSD": 7200,
+      "combinedEconomicUSD": 12700,
+      "commonFreightExcludedUSD": 324000
+    }
+  },
+  "checks": [
+    "Parsed all 12 current JSON files and recorded SHA-256 hashes.",
+    "Read corrected FAQ, opening, relevant public sections and ledger claims/update triggers.",
+    "Assertions verified stale wording absent, new boundaries present and reservation/staff/replacement arithmetic."
+  ],
+  "remainingMaterialIssues": [],
+  "scopeLimits": [
+    "Focused check of REREVIEW-1 through REREVIEW-4; no new source acquisition or full fresh research wave.",
+    "No renderer, catalog, readTime, receipt, bundle or release validation; these remain root responsibilities.",
+    "Prior substantive review limitations remain, including no live quotes, permit census or empirical provider ranking."
+  ],
+  "writes": "Only .cache/texas-quality-20261013/astra-av-closure.json; no source edits."
+}

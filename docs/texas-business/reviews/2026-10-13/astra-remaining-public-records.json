@@ -1,0 +1,84 @@
+{
+  "checkedAt": "2026-10-13",
+  "scope": "Focused primary-record follow-through only; no repeat of completed substantive review waves.",
+  "texasBeacon": {
+    "finding": "The actual current Texas incorporation and exceptions rules inspected do not adopt the October 2026 federal beacon exemption for intrastate commerce. The federal exemption itself expressly leaves state intrastate adoption optional. Thus the federal grant alone is not a demonstrated Texas intrastate legal basis. Separate applicable Texas relief or a compliant warning-device arrangement must be established; do not claim a verified carrier-specific Texas approval process or declare all intrastate beacon operation unlawful on this bounded record.",
+    "confidence": "High for text and scope of inspected rules; no exhaustive claim about every possible DPS instrument or carrier-specific legal basis.",
+    "sources": [
+      {
+        "url": "https://www.govinfo.gov/content/pkg/FR-2026-10-09/html/2026-20734.htm",
+        "pinpoint": "VI.D, 91 FR 64741; VI.A\u2013C",
+        "method": "Official GovInfo HTML read",
+        "evidence": "VI.D preempts conflicting state laws applicable to interstate commerce for persons operating under the exemption; states may, but need not, adopt the same exemption for intrastate operations. VI.A grants relief only from 49 CFR 392.22(b), 393.25(e), and 393.95(f).",
+        "implication": "Do not convert federal participation or two Texas endpoints into proof of intrastate state adoption."
+      },
+      {
+        "url": "https://texas-sos.appianportalsgov.com/rules-and-meetings?recordId=211918&queryAsDate=10%2F13%2F2026&interface=VIEW_TAC_SUMMARY&$locale=en_US",
+        "pinpoint": "37 TAC 4.11(a), (b)(3), (b)(6), (c)(1)(A), (c)(3); Source Note",
+        "method": "Rendered official SOS TAC, reached from official SOS TAC landing page using CUA in-app browser; current as-of-date URL and actual rule text inspected",
+        "evidence": {
+          "4.11(a)": "Incorporates 49 CFR Parts 40, 380, 382, 385\u2013387, 390\u2013393, and 395\u2013397 including interpretations as amended through September 1, 2022. All other CFR references in the subchapter also refer to amendments and interpretations issued through September 1, 2022.",
+          "4.11(b)(3)": "For the federal rules as adopted in (a), Interstate or foreign commerce means all motor-vehicle movements, interstate and intrastate, over Texas streets and highways.",
+          "4.11(b)(6)": "For intrastate vehicles, FMCSA means the DPS director.",
+          "4.11(c)(1)(A)": "Includes vehicles/combinations with actual gross weight or gross weight rating over 26,000 pounds operating intrastate.",
+          "4.11(c)(3)": "Adopts the listed Parts and interpretations pertaining to interstate drivers and vehicles except as otherwise excluded.",
+          "sourceNote": "Latest amendment shown effective January 8, 2023, 48 TexReg 51; chapter review date June 17, 2025."
+        },
+        "implication": "This is date-bounded incorporation, not automatic adoption of future federal exemption notices. The Texas substitution of terms extends adopted duties to intrastate work; it does not itself make a movement interstate for the federal VI.D preemption test."
+      },
+      {
+        "url": "https://texas-sos.appianportalsgov.com/rules-and-meetings?recordId=226974&queryAsDate=10%2F13%2F2026&interface=VIEW_TAC_SUMMARY&$locale=en_US",
+        "pinpoint": "37 TAC 4.12 entire rule, especially (a) and (b); Source Note",
+        "method": "Actual complete current official rendered TAC text inspected",
+        "evidence": "Rule lists state exemptions and exceptions under Transportation Code 644.052\u2013644.054. Exceptions concern specified oil/well machines, cranes, seed cotton, hours/duty records/ELDs, medical standards, agriculture, older rear-end protection, certain trailer brakes, emergency relief, entry-level training, utility service vehicles and registration. No warning-beacon exemption, 392.22(b)/393.25(e)/393.95(f) relief, or blanket prospective adoption of FMCSA exemption notices appears. Latest amendment effective December 11, 2025, 50 TexReg 7924.",
+        "implication": "No affirmative adoption of this federal beacon exemption in the current Texas exceptions rule. Search-result mirrors retaining the removed English-language exception are stale and were not used as current authority."
+      },
+      {
+        "url": "https://tcss.legis.texas.gov/resources/TN/htm/TN.545.htm",
+        "pinpoint": "Transportation Code 545.452(c); 545.455(b)(1)",
+        "method": "Official Texas Legislature HTML read with web tool",
+        "evidence": "Section 545.452(c) authorizes the Public Safety Commission by rule to exempt automated vehicles from a specific Texas traffic or motor-vehicle law if the exemption will not cause a public-safety risk. Section 545.455(b)(1) requires capability to comply with applicable Texas traffic and motor-vehicle laws, subject to the subchapter.",
+        "implication": "Statutory authority to make an exemption is not a granted exemption. The relevant public action would need to be identified; the ordinary TxDMV authorization cannot simply be treated as the beacon exemption."
+      },
+      {
+        "url": "https://texas-sos.appianportalsgov.com/rules-and-meetings?chapter=39&interface=VIEW_TAC&part=1&title=37",
+        "pinpoint": "Chapter 39 current index",
+        "method": "Official rendered SOS TAC index inspected",
+        "evidence": "Current Chapter 39 has only 39.1 Purpose and Scope, 39.2 Definitions, 39.3 Submission Requirements.",
+        "implication": "No separate beacon exemption entry in this AV chapter index."
+      },
+      {
+        "url": "https://texas-sos.appianportalsgov.com/rules-and-meetings?recordId=227144&queryAsDate=10%2F13%2F2026&interface=VIEW_TAC_SUMMARY&$locale=en_US",
+        "pinpoint": "37 TAC 39.3(a)\u2013(d), entire current text; Source Note",
+        "method": "Actual complete official rendered TAC text inspected",
+        "evidence": "Requires submission of a first responder interaction plan before seeking TxDMV authorization, electronic filing, prescribed preparers, fleet-support phone and QR marking, removal/towing and ADS-identification instructions, additional risk information, enforcement contact and updated plans for material changes or on request. Effective January 1, 2026, 50 TexReg 8623. No beacon or warning-device exemption.",
+        "implication": "First responder-plan filing does not establish intrastate beacon relief."
+      }
+    ],
+    "recommendedPublicWording": "The federal grant does not automatically cover intrastate-only work. Its preemption clause leaves intrastate adoption to each state. Texas\u2019s current incorporation rule still references federal amendments through September 1, 2022, and its listed exceptions do not adopt this beacon exemption. Before relying on beacons alone for genuinely intrastate service, obtain the applicable Texas legal basis or require another compliant warning-device arrangement.",
+    "avoid": [
+      "Texas automatically adopts every FMCSA exemption.",
+      "Every Dallas\u2013Houston shipment is intrastate commerce.",
+      "Texas has definitively denied the exemption.",
+      "Every intrastate operator must apply for a separately verified individual DPS beacon permit."
+    ],
+    "nextBoundary": "For a real proposed movement, document federal interstate/intrastate classification, then obtain the actual Texas relief instrument or DPS interpretation covering this exemption and that operation. No agency contact or external inquiry sent."
+  },
+  "zooxOperationalAuthorization": {
+    "status": "Bounded public retrieval did not produce a direct official Operational Authorization instrument.",
+    "attempts": [
+      {
+        "url": "https://www.regulations.gov/docket/NHTSA-2025-0523/document",
+        "method": "One direct official public docket open with web tool",
+        "result": "Internal Error; document list/instrument contents not retrieved."
+      },
+      {
+        "method": "Bounded official-domain discovery queries for docket and Operational Authorization",
+        "result": "No direct official instrument surfaced; agency speech and Federal Register grant describe the framework, not current Texas-specific authorization terms."
+      }
+    ],
+    "supportedImplication": "Retain the article\u2019s statement that applicable Texas-specific Operational Authorization terms have not been established. Retrieval failure is not evidence of absence, denial, noncompliance or lack of authorization.",
+    "nextBoundary": "Read the actual applicable and current Operational Authorization(s) in NHTSA-2025-0523 before stating fleet ceilings, operating areas, Texas allocation or expanded conditions. No login, CAPTCHA or restriction was bypassed."
+  },
+  "verification": "Source identity and current official rendered TAC content verified. JSON parsed after writing. No product tests appropriate for read-only research. No source article/ledger edits or publication."
+}

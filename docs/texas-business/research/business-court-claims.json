@@ -1,0 +1,75 @@
+{
+  "article": "texas-business-court-contract-decisions",
+  "checkedAt": "2026-10-12",
+  "claims": [
+    {
+      "claim": "HB40 effective September 1, 2025",
+      "source": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB40",
+      "locator": "Last action and June 20, 2025 history row",
+      "status": "Enacted/effective",
+      "recheck": "Amendment to Chapter 25A"
+    },
+    {
+      "claim": "Qualified-transaction aggregate consideration at least $5M; relevant commercial-action amount in controversy exceeds $5M with specified exclusions",
+      "source": "https://capitol.texas.gov/tlodocs/89R/billtext/html/HB00040F.htm",
+      "locator": "Sections 43 and 45",
+      "status": "Enacted/effective",
+      "recheck": "Amendment or authoritative construction of the applicable route"
+    },
+    {
+      "claim": "The Bakery: initial services claim $1,350,507; subsequent counterclaims more than $60M; removal held timely within 30 days after counterclaims changed monetary jurisdiction",
+      "source": "https://www.txcourts.gov/media/1463334/26-bc03a-0027-the-bakery-v-naterra-intl-2026-tex-bus-64.pdf",
+      "locator": "Opinion paragraphs 1\u201310, not staff syllabus",
+      "status": "Published September 15, 2026 trial-court decision",
+      "recheck": "Subsequent appellate treatment or procedural change"
+    },
+    {
+      "claim": "Beard: express reliance disclaimers and contractual context considered together; merger clause alone not held to defeat fraud",
+      "source": "https://www.txcourts.gov/media/1463368/26-bc01b-0018-beard-v-perot-2026-tex-bus-65.pdf",
+      "locator": "Paragraphs 138\u2013145; footnote 121; paragraph 177",
+      "status": "September 22, 2026 opinion explaining August 10 dismissal; no appeal status asserted",
+      "recheck": "Appeal, revised opinion, or subsequent governing decision"
+    },
+    {
+      "claim": "409 filings and 221 active pending April 30, 2026; eight trials and twelve months/one day average first appearance to trial",
+      "source": "https://txcourts.gov/media/1463213/bcot-mid-year-report-43026.pdf",
+      "locator": "Pages 6 and 8",
+      "status": "Historical reporting cutoff, not current docket or comparative performance",
+      "recheck": "New official reporting period; retain comparability limits"
+    },
+    {
+      "claim": "Worked example uses $12M commitment, $3.4M/$6.2M qualifying scenarios, $2M exemplary damages and $600K fees",
+      "source": null,
+      "locator": "worked-dispute",
+      "status": "Original hypothetical inputs; no observed company result",
+      "recheck": "If example assumptions or relevant statutory exclusions change"
+    },
+    {
+      "id": "qualified-transaction-limbs",
+      "claim": "The $5M consideration screen is one limb of the amended qualified-transaction definition; the money-or-credit limb and exclusions must also be satisfied for that route.",
+      "status": "enrolled statute; table/prose consistency correction",
+      "qualification": "No case-specific jurisdiction, claim or forum guarantee. Different statutory routes remain distinct.",
+      "sources": [
+        {
+          "url": "https://capitol.texas.gov/tlodocs/89R/billtext/html/HB00040F.htm",
+          "date": "Content reviewed 2026-10-13",
+          "pinpoint": "Sections 43 and 45"
+        }
+      ],
+      "recheck": "Governing provision, actual contract, input cohort or operating evidence changes."
+    },
+    {
+      "id": "loss-claim-recovery",
+      "claim": "A declared $6.2M business loss and assumed $2M contract cap require separate loss, legal claim and recovery cells.",
+      "status": "original editorial stress framework",
+      "qualification": "No automatic cap enforceability, pleaded amount, jurisdiction change or judicial recovery conclusion.",
+      "sources": [],
+      "recheck": "Governing provision, actual contract, input cohort or operating evidence changes."
+    }
+  ],
+  "revisionReview": {
+    "date": "2026-10-13",
+    "scope": "precise jurisdiction-screen labeling and a distinct contract-recovery approval boundary",
+    "originalSourceDatesPreserved": true
+  }
+}

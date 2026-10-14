@@ -1,0 +1,435 @@
+{
+  "schemaVersion": 1,
+  "reviewDate": "2026-10-13",
+  "reviewer": "Independent Sol research/editorial critic",
+  "branch": "codex/texas-research-quality-20261013",
+  "researchCutoff": "2026-10-12",
+  "firstReviewReport": ".cache/texas-quality-20261013/sol-core-review.json",
+  "verdict": "No material remaining source/prose, legal-condition, numerical or reader-conclusion defect found in the twelve revised core manuscripts and ledgers. The requested mechanisms are implemented with declared assumptions and useful decision boundaries. This is bounded editorial/source review, not external peer review, private eligibility verification or publication acceptance.",
+  "sourceReverification": {
+    "reusedContentAudits": "Same-turn earlier primary content audits of adopted §25.194, §403.613(c)–(d), §§151.359/.3595, the overview conflict, Micron July9conditions and TWIA-17C/D/H were reused; unrelated acquisition was not repeated.",
+    "newScopeAudit": [
+      {
+        "url": "https://tcss.legis.texas.gov/resources/BC/htm/BC.541.htm",
+        "pinpoint": "§541.001(7), compare definitions and scope",
+        "result": "Employment context excluded from consumer definition; does not resolve separate laws."
+      },
+      {
+        "url": "https://tcss.legis.texas.gov/resources/BC/htm/BC.503.htm",
+        "pinpoint": "§503.001(a),(b),(c),(e),(f)",
+        "result": "Commercial biometric capture duties, unique-identification boundary, purpose-specific exclusions and subsequent-use distinction support conditional new workflow."
+      }
+    ]
+  },
+  "articles": [
+    {
+      "slug": "texas-power-large-load-business-diligence",
+      "manuscript": "src/personal/editorial/data/articles/texas-power-large-load-business-diligence.json",
+      "manuscriptSha256": "7d7d1913774a38d0fcecde3142c0b3f70588510fd94fb9d5359fae393b0f7bc3",
+      "ledger": "docs/texas-business/research/power-claims.json",
+      "ledgerSha256": "bf2a20f7a68cda97cdf2d12b30fb3e9007d3cf049c634eaeb90fc68c80ba2bee",
+      "coverage": {
+        "fullManuscriptRegressionReview": "Previously read complete manuscript identity proved unchanged at HEAD by first-review SHA256; every actual revision and all untouched section/table/FAQ context reconciled against that reviewed text. Complete new claims and calculations inspected.",
+        "baselineMatchesFirstReviewHash": true,
+        "sections": [
+          "request-versus-availability",
+          "current-rules",
+          "connection-evidence",
+          "capital-commitments",
+          "compare-whole-project",
+          "audits-and-permits",
+          "interruption-and-generation",
+          "investment-decision"
+        ],
+        "faqsCount": 4,
+        "canonicalPathAndPublicationDatePreserved": true,
+        "priorLedgerClaimsPreserved": true
+      },
+      "readerConclusion": "Minimum-billing acknowledgment, possible additional security, staged collateral return and material-change/new-request mechanism correctly tracked. Financing example is a declared simple spread/hold sensitivity, with no legally predicted hold period.",
+      "newCalculations": {
+        "financingCarryUSD": 240000.0,
+        "simpleEqualCostHoldYears": 15.0,
+        "securityStages": "20% of remaining balance at energization; further 20% increments at specified billing milestones; no actual duration/tariff inferred"
+      },
+      "calculationResult": "Pass at published rounding precision",
+      "remainingActionableFindings": []
+    },
+    {
+      "slug": "texas-water-facility-site-diligence",
+      "manuscript": "src/personal/editorial/data/articles/texas-water-facility-site-diligence.json",
+      "manuscriptSha256": "7d9e4a419ba11f4e54060b87355b210451c0ea7ef205dc60ccf21fd9a0636f43",
+      "ledger": "docs/texas-business/research/water-claims.json",
+      "ledgerSha256": "e9d802be506a294e58086ad1b7bd7198ceec94c342b2104996067ab32973f03b",
+      "coverage": {
+        "fullManuscriptRegressionReview": "Previously read complete manuscript identity proved unchanged at HEAD by first-review SHA256; every actual revision and all untouched section/table/FAQ context reconciled against that reviewed text. Complete new claims and calculations inspected.",
+        "baselineMatchesFirstReviewHash": true,
+        "sections": [
+          "planning-and-delivery",
+          "legal-source",
+          "supplier-contract",
+          "peak-and-storage",
+          "drought-and-resilience",
+          "quality-reuse-disposal",
+          "reporting-and-investment"
+        ],
+        "faqsCount": 4,
+        "canonicalPathAndPublicationDatePreserved": true,
+        "priorLedgerClaimsPreserved": true
+      },
+      "readerConclusion": "Storage chronology correctly shows peak exhaustion and refill. Same-horizon cost boundary and absence of loss probability are explicit.",
+      "newCalculations": {
+        "annualPriceDifferenceUSD": 82125,
+        "equivalentProductionDays": 1.36875,
+        "thirdPeakDeficitGallons": 200000,
+        "normalDayRefillGallons": 100000,
+        "daysToRestoreOnePeakDeficit": 2.0,
+        "daysToRestoreFullReserve": 4.0
+      },
+      "calculationResult": "Pass at published rounding precision",
+      "remainingActionableFindings": []
+    },
+    {
+      "slug": "texas-property-tax-business-underwriting",
+      "manuscript": "src/personal/editorial/data/articles/texas-property-tax-business-underwriting.json",
+      "manuscriptSha256": "ec0cba783ca925d7ce42c98d2243ed7cc3d7865a8410c5da6fbf90dad6ab045e",
+      "ledger": "docs/texas-business/research/property-tax-claims.json",
+      "ledgerSha256": "3c4af77abdcd8ba9b5cd5e3c33dfdeca16a15abcf1be2db4e021511a1cf818e8",
+      "coverage": {
+        "fullManuscriptRegressionReview": "Previously read complete manuscript identity proved unchanged at HEAD by first-review SHA256; every actual revision and all untouched section/table/FAQ context reconciled against that reviewed text. Complete new claims and calculations inspected.",
+        "baselineMatchesFirstReviewHash": true,
+        "sections": [
+          "reconstruct-the-bill",
+          "appraisal-limitation",
+          "worked-tax-sensitivity",
+          "equipment-exemption",
+          "lease-exposure",
+          "transaction-evidence",
+          "calendar-and-updates"
+        ],
+        "faqsCount": 4,
+        "canonicalPathAndPublicationDatePreserved": true,
+        "priorLedgerClaimsPreserved": true
+      },
+      "readerConclusion": "Next-tax-year ownership transition and independent statutory expiry remain clear. Debt-service figures are declared financing sensitivities, not loan sizing promises.",
+      "newCalculations": {
+        "limitedDSCR": 1.28,
+        "uncappedDSCR": 1.1,
+        "limitedMaximumAnnualDebtServiceUSD": 102400.0,
+        "uncappedMaximumAnnualDebtServiceUSD": 88000.0
+      },
+      "calculationResult": "Pass at published rounding precision",
+      "remainingActionableFindings": []
+    },
+    {
+      "slug": "texas-data-center-sales-tax-project-economics",
+      "manuscript": "src/personal/editorial/data/articles/texas-data-center-sales-tax-project-economics.json",
+      "manuscriptSha256": "86fdb5964c2b8bf74e0269914e290f2f994437f34911711179df7ee6a876d58d",
+      "ledger": "docs/texas-business/research/data-center-tax-claims.json",
+      "ledgerSha256": "a3855751e95f3a2003d6b98c15ba2eec8b7f1c98528af78b3506414589f7b358",
+      "coverage": {
+        "fullManuscriptRegressionReview": "Previously read complete manuscript identity proved unchanged at HEAD by first-review SHA256; every actual revision and all untouched section/table/FAQ context reconciled against that reviewed text. Complete new claims and calculations inspected.",
+        "baselineMatchesFirstReviewHash": true,
+        "sections": [
+          "two-certification-routes",
+          "investment-clock",
+          "purchase-and-purchaser",
+          "worked-tax-case",
+          "operating-evidence",
+          "decision-checklist"
+        ],
+        "faqsCount": 4,
+        "canonicalPathAndPublicationDatePreserved": true,
+        "priorLedgerClaimsPreserved": true
+      },
+      "readerConclusion": "Both agency-summary conflicts are visible; controlling/certificate treatment preserved. Transfer exclusion and pre-certification cohort are applied conditionally without merging investment and purchase clocks.",
+      "newCalculations": {
+        "countablePositionsBeforeOtherConditions": 15,
+        "movedPurchaseCohortTaxDifferenceUSD": 1250000.0,
+        "remainingStateTaxSavingUSD": 8750000.0,
+        "eligibilityBoundaries": "Job exclusion, purchase exemption timing and investment-counting clocks remain separate"
+      },
+      "calculationResult": "Pass at published rounding precision",
+      "remainingActionableFindings": []
+    },
+    {
+      "slug": "texas-jeti-incentives-project-underwriting",
+      "manuscript": "src/personal/editorial/data/articles/texas-jeti-incentives-project-underwriting.json",
+      "manuscriptSha256": "e6e8130e0369f9a4c4de5cca4d1d1e048d66783b6205438a7012ae7f3e8bbb24",
+      "ledger": "docs/texas-business/research/jeti-claims.json",
+      "ledgerSha256": "0799bdb9554560799129571d9d7902101fa5a7c4e64603b3544e31381e30de9f",
+      "coverage": {
+        "fullManuscriptRegressionReview": "Previously read complete manuscript identity proved unchanged at HEAD by first-review SHA256; every actual revision and all untouched section/table/FAQ context reconciled against that reviewed text. Complete new claims and calculations inspected.",
+        "baselineMatchesFirstReviewHash": true,
+        "sections": [
+          "tax-stack",
+          "property-and-thresholds",
+          "competitive-evidence",
+          "public-record-stages",
+          "worked-return",
+          "continuing-obligations",
+          "decision-checklist"
+        ],
+        "faqsCount": 4,
+        "canonicalPathAndPublicationDatePreserved": true,
+        "priorLedgerClaimsPreserved": true
+      },
+      "readerConclusion": "Subsection(c) fixed-end deferral is distinguished from subsection(d) modification and its objections. Tail cost explicitly remains separate from deferral. Values and cash-flow timing agree with ledger.",
+      "newCalculations": {
+        "originalGrossPVUSD": 6039073.259047298,
+        "lostFirstBenefitPVUSD": 833333.3333333333,
+        "fixedEndDeferredGrossPVUSD": 5205739.925713965,
+        "originalNetPVUSD": 4782561.049206082,
+        "separateTailCostPVUSD": 179054.18139838136,
+        "separateTailAdjustedNetPVUSD": 4603506.8678077
+      },
+      "calculationResult": "Pass at published rounding precision",
+      "remainingActionableFindings": []
+    },
+    {
+      "slug": "texas-franchise-tax-reporting-business-decisions",
+      "manuscript": "src/personal/editorial/data/articles/texas-franchise-tax-reporting-business-decisions.json",
+      "manuscriptSha256": "6a2ff8d0aecb9f873b599e7f29a6a39b76b9d55030b26ec041f1ef9903087d54",
+      "ledger": "docs/texas-business/research/franchise-tax-claims.json",
+      "ledgerSha256": "65920759b328c50fbc50c69447e8bf2e972270b81704bac55877ff5e2988d4f8",
+      "coverage": {
+        "fullManuscriptRegressionReview": "Previously read complete manuscript identity proved unchanged at HEAD by first-review SHA256; every actual revision and all untouched section/table/FAQ context reconciled against that reviewed text. Complete new claims and calculations inspected.",
+        "baselineMatchesFirstReviewHash": true,
+        "sections": [
+          "threshold-and-report",
+          "annualization-and-scope",
+          "computation-choice",
+          "research-credit-change",
+          "account-control",
+          "decision-checklist"
+        ],
+        "faqsCount": 4,
+        "canonicalPathAndPublicationDatePreserved": true,
+        "priorLedgerClaimsPreserved": true
+      },
+      "readerConclusion": "Allowable-compensation sensitivity preserves other-method and valid-credit qualifications; 2026 old-research-exemption constraint is anchored to report year.",
+      "newCalculations": {
+        "compensationBreakEvenTaxOnlyUSD": 6704000.0,
+        "taxAt6650000CompensationUSD": 30093.75,
+        "compensationBreakEvenWithPreparationUSD": 7095111.111111111
+      },
+      "calculationResult": "Pass at published rounding precision",
+      "remainingActionableFindings": []
+    },
+    {
+      "slug": "texas-hiring-labor-cost-planning",
+      "manuscript": "src/personal/editorial/data/articles/texas-hiring-labor-cost-planning.json",
+      "manuscriptSha256": "0c388ce6daa7f24cf4095f798954af0556b824db1aa1d97e1638ac4b9ac31e6f",
+      "ledger": "docs/texas-business/research/hiring-claims.json",
+      "ledgerSha256": "a3351c7297d801f22eb4d8da3ad3348a972fc7d6c8956c8141cd4813668477ed",
+      "coverage": {
+        "fullManuscriptRegressionReview": "Previously read complete manuscript identity proved unchanged at HEAD by first-review SHA256; every actual revision and all untouched section/table/FAQ context reconciled against that reviewed text. Complete new claims and calculations inspected.",
+        "baselineMatchesFirstReviewHash": true,
+        "sections": [
+          "dates-and-units",
+          "local-job-signals",
+          "wage-baseline",
+          "recruiting-market",
+          "pay-versus-delay",
+          "approve-plan",
+          "updates"
+        ],
+        "faqsCount": 4,
+        "canonicalPathAndPublicationDatePreserved": true,
+        "priorLedgerClaimsPreserved": true
+      },
+      "readerConclusion": "Recurring premium is compared with immediate one-off delay using specified horizons and year-end cash flows. Funnel is explicitly expected volume with discrete/role qualifications, not staffing assurance.",
+      "newCalculations": {
+        "offersConversion": 0.54,
+        "productiveWorkersPer100Offers": 54.0,
+        "expectedOffersFor20ProductiveWorkers": 37.03703703703704,
+        "roundedWholeOffers": 38,
+        "oneYearEquivalentDays": 20.8,
+        "threeYearPremiumPVUSD": 268018.08667377935,
+        "threeYearEquivalentImmediateDelayDays": 53.603617334755874,
+        "fiveYearPremiumPVUSD": 415241.84385612083,
+        "fiveYearEquivalentImmediateDelayDays": 83.04836877122416
+      },
+      "calculationResult": "Pass at published rounding precision",
+      "remainingActionableFindings": []
+    },
+    {
+      "slug": "texas-cross-border-logistics-business-planning",
+      "manuscript": "src/personal/editorial/data/articles/texas-cross-border-logistics-business-planning.json",
+      "manuscriptSha256": "43f488038cab60c9422b51fad3a86eee69d53901901b0890c83ae1610cb7e289",
+      "ledger": "docs/texas-business/research/logistics-claims.json",
+      "ledgerSha256": "6683cb903c4fc287675aeea8f4fcc206b5e824358d2606da8e868697d0827f92",
+      "coverage": {
+        "fullManuscriptRegressionReview": "Previously read complete manuscript identity proved unchanged at HEAD by first-review SHA256; every actual revision and all untouched section/table/FAQ context reconciled against that reviewed text. Complete new claims and calculations inspected.",
+        "baselineMatchesFirstReviewHash": true,
+        "sections": [
+          "value-and-movements",
+          "texas-port-selection",
+          "schedules",
+          "customs-costs",
+          "route-economics",
+          "contract-and-release",
+          "updates"
+        ],
+        "faqsCount": 4,
+        "canonicalPathAndPublicationDatePreserved": true,
+        "priorLedgerClaimsPreserved": true
+      },
+      "readerConclusion": "Incident threshold, common-stop denominator, one-time pipeline capital and annual carrying cost are distinct. Safety-stock case is hypothetical.",
+      "newCalculations": {
+        "annualPreIncidentPremiumUSD": 16000,
+        "avoidedIncidentsForEquality": 3.2,
+        "oneTimePipelineCapitalReleaseUSD": 40000,
+        "annualAdditionalSafetyStockCostUSD": 4000.0,
+        "baseAdvantageAfterAdditionalStockUSD": 0.0
+      },
+      "calculationResult": "Pass at published rounding precision",
+      "remainingActionableFindings": []
+    },
+    {
+      "slug": "texas-manufacturing-capacity-procurement",
+      "manuscript": "src/personal/editorial/data/articles/texas-manufacturing-capacity-procurement.json",
+      "manuscriptSha256": "236f82ba621e169ab4e1fc9cb20fffbd15ed05a56435a86d82d1042f501f4002",
+      "ledger": "docs/texas-business/research/manufacturing-claims.json",
+      "ledgerSha256": "cb737a2979f89764efb738992d9d5d83d96d7864f87e8b3c437922505ba3ac99",
+      "coverage": {
+        "fullManuscriptRegressionReview": "Previously read complete manuscript identity proved unchanged at HEAD by first-review SHA256; every actual revision and all untouched section/table/FAQ context reconciled against that reviewed text. Complete new claims and calculations inspected.",
+        "baselineMatchesFirstReviewHash": true,
+        "sections": [
+          "project-evidence",
+          "product-and-process",
+          "qualification-evidence",
+          "funding-and-impact",
+          "allocated-output-model",
+          "model-decision",
+          "commercial-commitment",
+          "buyer-checklist",
+          "update-triggers"
+        ],
+        "faqsCount": 4,
+        "canonicalPathAndPublicationDatePreserved": true,
+        "priorLedgerClaimsPreserved": true
+      },
+      "readerConclusion": "July Micron proposal is conditional; August issuer account is not silently treated as audited closing or allocation. Thresholds preserve percent versus percentage-point meaning.",
+      "newCalculations": {
+        "requiredAssemblyTestYieldShare": 0.9411764705882353,
+        "requiredAllocationShare": 0.2476780185758514,
+        "allocationHeadroomPercentagePoints": 0.2321981424148606,
+        "conditionalFinancingUSD": 500000000,
+        "proposedSupplyYears": 10
+      },
+      "calculationResult": "Pass at published rounding precision",
+      "remainingActionableFindings": []
+    },
+    {
+      "slug": "texas-commercial-property-insurance-diligence",
+      "manuscript": "src/personal/editorial/data/articles/texas-commercial-property-insurance-diligence.json",
+      "manuscriptSha256": "c8912413f9eed1fbf1289eedf12489d2158ba0bab72d6e4595cff86420a43219",
+      "ledger": "docs/texas-business/research/insurance-claims.json",
+      "ledgerSha256": "ca4481d1a141eb533b6cb5131ec8d52e422f49b4175e8eef767d3b10f4ef4bbd",
+      "coverage": {
+        "fullManuscriptRegressionReview": "Previously read complete manuscript identity proved unchanged at HEAD by first-review SHA256; every actual revision and all untouched section/table/FAQ context reconciled against that reviewed text. Complete new claims and calculations inspected.",
+        "baselineMatchesFirstReviewHash": true,
+        "sections": [
+          "hazard-and-policy",
+          "wind-and-flood",
+          "valuation-and-deductible",
+          "liquidity-and-recovery",
+          "business-income",
+          "market-status-and-carrier",
+          "documents-and-update"
+        ],
+        "faqsCount": 4,
+        "canonicalPathAndPublicationDatePreserved": true,
+        "priorLedgerClaimsPreserved": true
+      },
+      "readerConclusion": "Retained-loss examples stay within declared same limits/conditions; TWIA repair/reasonable-speed and contract-tail boundaries are accurately conditional. Operating contribution remains separate from policy indemnity.",
+      "newCalculations": {
+        "postRestorationExposureUSD": 112000,
+        "lowLossARetentionUSD": 200000,
+        "lowLossBRetentionUSD": 100000,
+        "originalLossARetentionUSD": 360000,
+        "originalLossBRetentionUSD": 100000
+      },
+      "calculationResult": "Pass at published rounding precision",
+      "remainingActionableFindings": []
+    },
+    {
+      "slug": "texas-ai-law-business-compliance",
+      "manuscript": "src/personal/editorial/data/articles/texas-ai-law-business-compliance.json",
+      "manuscriptSha256": "e3608e278f7f541c895e8e01d2047480795fb8d36139e3b950e80805382017b0",
+      "ledger": "docs/texas-business/research/ai-law-claims.json",
+      "ledgerSha256": "fe3f3bc5cb89eba29e12cd36edb10a6e1c34708101aa5b113edf6c7709930c45",
+      "coverage": {
+        "fullManuscriptRegressionReview": "Previously read complete manuscript identity proved unchanged at HEAD by first-review SHA256; every actual revision and all untouched section/table/FAQ context reconciled against that reviewed text. Complete new claims and calculations inspected.",
+        "baselineMatchesFirstReviewHash": true,
+        "sections": [
+          "scope",
+          "duties-by-operator",
+          "prohibited-uses",
+          "privacy-and-biometrics",
+          "procurement",
+          "worked-example",
+          "enforcement",
+          "implementation",
+          "decisions"
+        ],
+        "faqsCount": 4,
+        "canonicalPathAndPublicationDatePreserved": true,
+        "priorLedgerClaimsPreserved": true
+      },
+      "readerConclusion": "New employee attendance example follows separate statute scopes and makes no blanket security, identification or employment exemption. Logging is a proportionate recommendation, not statutory universal duty.",
+      "newCalculations": {
+        "numericScenario": "None added",
+        "scopeConclusion": "Employee-context consumer exclusion does not determine separate biometric or TRAIGA application. Identifier, purpose, unique identification and security/fraud conditions remain fact-specific."
+      },
+      "calculationResult": "Pass at published rounding precision",
+      "remainingActionableFindings": []
+    },
+    {
+      "slug": "texas-business-court-contract-decisions",
+      "manuscript": "src/personal/editorial/data/articles/texas-business-court-contract-decisions.json",
+      "manuscriptSha256": "d7597b28c3d72050c7065f3fca62d34c220d776faab377da5e4b112ef1e7b4c4",
+      "ledger": "docs/texas-business/research/business-court-claims.json",
+      "ledgerSha256": "e7b81c93a5d611fbfffcb8d2e1cd3f9429992e743fa647003e69eb3e4211e62c",
+      "coverage": {
+        "fullManuscriptRegressionReview": "Previously read complete manuscript identity proved unchanged at HEAD by first-review SHA256; every actual revision and all untouched section/table/FAQ context reconciled against that reviewed text. Complete new claims and calculations inspected.",
+        "baselineMatchesFirstReviewHash": true,
+        "sections": [
+          "two-thresholds",
+          "counterclaims-clock",
+          "preserve-bargain",
+          "worked-dispute",
+          "court-evidence",
+          "decision-checklist"
+        ],
+        "faqsCount": 4,
+        "canonicalPathAndPublicationDatePreserved": true,
+        "priorLedgerClaimsPreserved": true
+      },
+      "readerConclusion": "Revised table names the consideration limb and selects the jurisdictional route first. Loss, cap, pleaded claim and practical recovery remain separate.",
+      "newCalculations": {
+        "businessLossUSD": 6200000,
+        "assumedContractCapUSD": 2000000,
+        "legalBoundary": "No automatic cap validity, claim recoverability or amount-in-controversy determination. Qualified-transaction consideration/money-credit limbs remain separate from controversy."
+      },
+      "calculationResult": "Pass at published rounding precision",
+      "remainingActionableFindings": []
+    }
+  ],
+  "nonMaterialPrecisionObservation": {
+    "location": "hiring-claims.json calculations.recurring-wage-horizon.results.premiumPVUSD[1] and equivalentDays[1]",
+    "ledgerPVUSD": 415241.8440558805,
+    "recalculatedPVUSD": 415241.84385612083,
+    "differenceUSD": 0.00019975967006757855,
+    "assessment": "About two hundredths of a cent; prose rounds correctly to415242and83.0days. No material finding or required reader-facing change."
+  },
+  "preservedConstraints": [
+    "All twelve original publication dates, canonical paths, aliases and author identities unchanged.",
+    "All prior ledger claims retained, including accepted clock/job/wage/BTS/TWIA/NFIP corrections.",
+    "Only actually targeted source lastVerified fields move toOctober13; original observation/publication periods remain.",
+    "New July9Micron source precedes stated cutoff and is described as conditional.",
+    "No hypothetical input, private contract, quote, allocation, actual loan, eligibility or paid/closed financing represented as observed."
+  ],
+  "remainingDeliveryBoundary": "Root acknowledged readTime/catalog/receipt/bundle synchronization pending. Those integration/publishing outputs were not accepted by this manuscript/ledger rereview. No new source edits performed.",
+  "writeBoundary": "Only sol-core-rereview.json written."
+}

@@ -1,0 +1,300 @@
+{
+  "schemaVersion": 1,
+  "article": "texas-waymo-business-travel",
+  "articleSlug": "texas-waymo-business-travel",
+  "checkedAt": "2026-10-13",
+  "researchCutoff": "2026-10-13",
+  "sourcePolicy": "Current operator/platform help and dated launch disclosures. Service claims remain issuer-stated; no ride was booked and no live supply, private contract, fare or reliability dataset was observed.",
+  "claims": [
+    {
+      "id": "waymo-01",
+      "claim": "Dallas opened to all riders on August 4, 2026.",
+      "status": "dated issuer announcement",
+      "qualification": "Invitation removal does not establish route or vehicle supply.",
+      "sources": [
+        {
+          "sourceId": "dallas-open",
+          "url": "https://blog.waymo.com/blog/shorts/dallas-open-to-all/",
+          "date": "2026-08-04",
+          "pinpoint": "Opening paragraph"
+        }
+      ],
+      "recheck": "Current all-rider access changes."
+    },
+    {
+      "id": "waymo-02",
+      "claim": "Houston opened to all riders on August 20, 2026.",
+      "status": "dated issuer announcement",
+      "qualification": "No airport or statewide coverage implied.",
+      "sources": [
+        {
+          "sourceId": "houston-open",
+          "url": "https://blog.waymo.com/blog/shorts/houston-open-to-all/",
+          "date": "2026-08-20",
+          "pinpoint": "Opening paragraph"
+        }
+      ],
+      "recheck": "Current all-rider access changes."
+    },
+    {
+      "id": "waymo-03",
+      "claim": "Current Waymo Help marks San Antonio as gradually adding riders and Austin as Uber-only.",
+      "status": "current undated issuer guidance",
+      "qualification": "Account access and local service area need confirmation.",
+      "sources": [
+        {
+          "sourceId": "service-areas",
+          "url": "https://support.google.com/waymo/answer/9059119?hl=en",
+          "date": "Undated current guidance",
+          "pinpoint": "San Antonio and opening service instructions"
+        }
+      ],
+      "recheck": "San Antonio admission or Austin channel changes."
+    },
+    {
+      "id": "waymo-04",
+      "claim": "Austin eligible Uber requests can receive an accepted Waymo match; preference is not reservation.",
+      "status": "current platform/issuer instructions",
+      "qualification": "Both endpoints and nearby vehicle conditions apply. Products can vary by region.",
+      "sources": [
+        {
+          "sourceId": "austin-access",
+          "url": "https://support.google.com/waymo/answer/16011725?hl=en",
+          "date": "Undated current guidance",
+          "pinpoint": "How can I ride; Austin service area"
+        }
+      ],
+      "recheck": "Eligibility, product, preference or distribution changes."
+    },
+    {
+      "id": "waymo-05",
+      "claim": "SAT airport guidance limits access to riders already able to ride in San Antonio.",
+      "status": "current undated issuer guidance",
+      "qualification": "Terminal locations do not create new rider eligibility.",
+      "sources": [
+        {
+          "sourceId": "airports",
+          "url": "https://support.google.com/waymo/answer/14298153?hl=en",
+          "date": "Undated current guidance",
+          "pinpoint": "San Antonio International Airport; A/B Departures and Arrivals outer curb Zone 2"
+        }
+      ],
+      "recheck": "Airport access, terminal instructions or San Antonio admissions change."
+    },
+    {
+      "id": "waymo-06",
+      "claim": "August 4 Dallas notice describes Love Field and freeway activity as testing/future public routes.",
+      "status": "historical stage description",
+      "qualification": "No current public Love Field, DFW, Houston-airport or AUS ride verified in this research.",
+      "sources": [
+        {
+          "sourceId": "dallas-open",
+          "url": "https://blog.waymo.com/blog/shorts/dallas-open-to-all/",
+          "date": "2026-08-04",
+          "pinpoint": "Second paragraph"
+        }
+      ],
+      "recheck": "A current public route/airport announcement supersedes testing."
+    },
+    {
+      "id": "waymo-07",
+      "claim": "Freeway access is limited; access does not guarantee a freeway route.",
+      "status": "current undated issuer guidance",
+      "qualification": "Preview each route; no particular Texas account's highway eligibility verified.",
+      "sources": [
+        {
+          "sourceId": "freeways",
+          "url": "https://support.google.com/waymo/answer/16580405?hl=en",
+          "date": "Undated current guidance",
+          "pinpoint": "How to get a freeway trip; Not all routes"
+        }
+      ],
+      "recheck": "Access or route instructions change."
+    },
+    {
+      "id": "waymo-08",
+      "claim": "Pickup/dropoff may require walking; minimize-walking can trade off against ride time.",
+      "status": "current undated issuer guidance",
+      "qualification": "No observed walking or wait distribution.",
+      "sources": [
+        {
+          "sourceId": "pickup",
+          "url": "https://support.google.com/waymo/answer/9696059?hl=en",
+          "date": "Undated current guidance",
+          "pinpoint": "You may need to walk a bit"
+        }
+      ],
+      "recheck": "Pickup rules or operating conditions materially change."
+    },
+    {
+      "id": "waymo-09",
+      "claim": "Austin WAV option described in the instructions is manually driven.",
+      "status": "current undated issuer guidance",
+      "qualification": "No statewide autonomous accessible-fleet inference.",
+      "sources": [
+        {
+          "sourceId": "austin-access",
+          "url": "https://support.google.com/waymo/answer/16011725?hl=en",
+          "date": "Undated current guidance",
+          "pinpoint": "Can I get a Wheelchair-accessible Vehicle through Uber?"
+        }
+      ],
+      "recheck": "Vehicle or accessible-service scope changes."
+    },
+    {
+      "id": "waymo-10",
+      "claim": "Accepted Waymo match has the price of the eligible Uber product requested.",
+      "status": "dated platform pricing explanation",
+      "qualification": "Within-product comparison; not a fixed fare, blanket cheapest-price result or direct-app Texas fare.",
+      "sources": [
+        {
+          "sourceId": "uber-price",
+          "url": "https://www.uber.com/us/en/blog/waymo-on-uber/",
+          "date": "2026-07-24",
+          "pinpoint": "Will there be a difference between the price..."
+        }
+      ],
+      "recheck": "Platform pricing or eligible products change."
+    },
+    {
+      "id": "waymo-11",
+      "claim": "Waymo directs travelers to in-app estimates; route, demand and applicable fees affect pricing.",
+      "status": "current undated issuer guidance",
+      "qualification": "No live quotation and no Las Vegas tariff applied to Texas.",
+      "sources": [
+        {
+          "sourceId": "pricing",
+          "url": "https://support.google.com/waymo/answer/9059184?hl=en",
+          "date": "Undated current guidance",
+          "pinpoint": "Trip pricing factors; Get an estimated price"
+        }
+      ],
+      "recheck": "Texas tariff, fees or fare guidance changes."
+    },
+    {
+      "id": "waymo-12",
+      "claim": "Business profile supports a separate payment method; sponsored discounts depend on an eligible employer program and correct profile.",
+      "status": "current undated issuer guidance",
+      "qualification": "Profile and rider access do not create an employer agreement.",
+      "sources": [
+        {
+          "sourceId": "business-profile",
+          "url": "https://support.google.com/waymo/answer/15128101?hl=en",
+          "date": "Undated current guidance",
+          "pinpoint": "Opening; Check if eligible; profile discount instructions"
+        }
+      ],
+      "recheck": "Program eligibility, payment workflow or refunds change."
+    },
+    {
+      "id": "waymo-13",
+      "claim": "Waymo for Business's public named-market description omits Texas at review.",
+      "status": "observed scope of undated program page",
+      "qualification": "Does not prove all Texas enterprise arrangements are unavailable. Other-city inquiry is not a contract.",
+      "sources": [
+        {
+          "sourceId": "business-program",
+          "url": "https://blog.waymo.com/business/",
+          "date": "Undated current program page",
+          "pinpoint": "Program opening description and City form"
+        }
+      ],
+      "recheck": "Documented Texas offer or named-market scope changes."
+    },
+    {
+      "id": "waymo-14",
+      "claim": "The declared 200-trip base case totals $6,400 versus $6,200, and the 40-fallback sensitivity totals $7,440.",
+      "status": "calculated hypothetical",
+      "qualification": "No company quote, observed failure frequency, safety comparison or predicted return. Time value is an allocated opportunity cost, not guaranteed payroll savings.",
+      "sources": [],
+      "recheck": "Actual fares, comparable door-to-door time, completed/failed requests or organizational payment evidence replaces any input."
+    },
+    {
+      "id": "waymo-15",
+      "claim": "NTSB\u2019s preliminary January 12 Austin account describes a Waymo vehicle passing a stopped school bus after an incorrect remote-assistance response; no crash occurred. The reviewed page lists the investigation as ongoing.",
+      "status": "preliminary official investigation; status observed 2026-10-13",
+      "qualification": "Not final probable cause, proof a defect persists today, a measured rate or a provider ranking. Remote assistance is advice/information, not automatically remote driving.",
+      "sources": [
+        {
+          "url": "https://www.ntsb.gov/investigations/Pages/HWY26FH007.aspx",
+          "date": "2026-03-03",
+          "pinpoint": "What Happened paragraphs 1\u20138; Investigation Details; footnote 4"
+        }
+      ],
+      "recheck": "Final findings, corrective evidence or applicable operating restrictions change."
+    },
+    {
+      "id": "itinerary-approval",
+      "claim": "Suggested illustrative buyer workflow: Give the traveler a usable departure plan. No private provider contract, actual site design, service entitlement or observed performance inferred. Separate invented timetable: 10-minute pickup + 25-minute travel + 10-minute access/buffer = 45 minutes; a 10 a.m. meeting gives a 9:15 a.m. latest switch.",
+      "status": "editorial recommendation and illustrative workflow",
+      "sources": [],
+      "qualification": "Suggested purchaser analysis; all original source dates, access restrictions, legal conditions and unresolved provider-specific facts remain in the article. Timetable inputs are independent of the fare-and-wait comparison and are not provider performance estimates.",
+      "recheckTrigger": "Change to the proposed itinerary, route, contract, fleet stage, accepted volume or stated model input."
+    }
+  ],
+  "calculations": [
+    {
+      "id": "business-trip-cost",
+      "status": "declared hypothetical",
+      "inputs": {
+        "monthlyTrips": 200,
+        "employeesPerTrip": 1,
+        "autonomousFareUSD": 24,
+        "alternativeFareUSD": 29,
+        "autonomousWaitWalkMinutes": 8,
+        "alternativeWaitWalkMinutes": 2,
+        "employeeHourlyValueUSD": 60,
+        "fallbackTrips": 40,
+        "fallbackFareUSD": 38,
+        "fallbackCoordinationWaitMinutes": 20
+      },
+      "formulas": [
+        "minuteValue = employeeHourlyValueUSD \u00f7 60",
+        "baseCost = monthlyTrips \u00d7 (fare + waitWalkMinutes \u00d7 minuteValue)",
+        "fallbackSensitivity = (monthlyTrips \u2212 fallbackTrips) \u00d7 autonomousTripCost + fallbackTrips \u00d7 (fallbackFareUSD + fallbackCoordinationWaitMinutes \u00d7 minuteValue)",
+        "breakEvenHourlyTimeValue = fareSaving \u00f7 (extraMinutes \u00f7 60)",
+        "fallbackFareCash = successfulJourneys \u00d7 autonomousFare + fallbackJourneys \u00d7 fallbackFare",
+        "fallbackTimeValue = (successfulJourneys \u00d7 baseWaitWalkMinutes + fallbackJourneys \u00d7 totalFallbackMinutes) \u00d7 minuteValue"
+      ],
+      "results": {
+        "minuteValueUSD": 1,
+        "autonomousFareTotalUSD": 4800,
+        "alternativeFareTotalUSD": 5800,
+        "autonomousTimeValueUSD": 1600,
+        "alternativeTimeValueUSD": 400,
+        "autonomousTotalUSD": 6400,
+        "alternativeTotalUSD": 6200,
+        "fareCashDifferenceUSD": -1000,
+        "timeValueDifferenceUSD": 1200,
+        "baseCombinedDifferenceUSD": 200,
+        "additionalEmployeeHours": 20,
+        "fallbackShare": 0.2,
+        "fallbackSensitivityTotalUSD": 7440,
+        "fallbackDifferenceToAlternativeUSD": 1240,
+        "breakEvenHourlyTimeValueUSD": 50,
+        "fallbackFareCashUSD": 5360,
+        "fallbackTimeMinutes": 2080,
+        "fallbackTimeValueUSD": 2080,
+        "fallbackFareSavingUSD": 440
+      },
+      "boundaries": [
+        "Same in-vehicle travel time excluded from both sides.",
+        "No productive-work benefit, price observation, cancellation fee, tax difference, comparative safety or real fallback rate assumed.",
+        "Only one employee per trip; actual group and assistance needs require a separate comparison.",
+        "Fallback share is sensitivity, not probability forecast; missed-deadline consequences remain separate."
+      ]
+    }
+  ],
+  "updateTriggers": [
+    "San Antonio expands all-rider admission; Austin changes booking channel or eligible products.",
+    "A Texas airport or freeway route obtains documented public booking availability.",
+    "A documented Texas employer program changes organizational payment eligibility or terms.",
+    "Current route, pickup, fare or support rules materially change the usable trip.",
+    "Observed pilot requests, complete door-to-door times and fallback outcomes warrant replacing declared assumptions."
+  ],
+  "revisionReview": {
+    "date": "2026-10-13",
+    "scope": "NTSB preliminary/status body and cash/time threshold reviewed; original access/payment checks remain October 12.",
+    "originalSourceDatesPreserved": true
+  }
+}

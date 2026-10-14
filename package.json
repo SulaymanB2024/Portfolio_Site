@@ -49,6 +49,11 @@
     "test:bot-observer": "node --import tsx --test packages/bot-observer/tests/*.test.ts",
     "verify:release": "node tools/verify-release.mjs",
     "verify:search": "node tools/verify-search.mjs",
+    "texas:queue": "node tools/texas-editorial.mjs queue",
+    "texas:check": "node tools/texas-editorial.mjs check",
+    "texas:bundle": "node tools/texas-editorial.mjs bundle --write",
+    "texas:receipt": "node tools/texas-editorial.mjs receipt",
+    "texas:initial": "node tools/texas-editorial.mjs initial",
     "optimize:portfolio": "node tools/optimize-portfolio-assets.mjs",
     "verify:portfolio": "node tools/optimize-portfolio-assets.mjs --verify-only"
   },
