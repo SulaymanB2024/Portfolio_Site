@@ -1,0 +1,44 @@
+name: Kalshi browser review
+on:
+  pull_request:
+    paths:
+      - 'src/personal/editorial/data/articles/kalshi-40-billion-question.json'
+      - 'public/research-assets/kalshi-valuation-2026/**'
+      - 'public/images/research/kalshi-valuation/**'
+      - 'public/images/social/kalshi-40-billion-question.png'
+      - 'tools/qa-kalshi-browser.py'
+      - '.github/workflows/kalshi-valuation-review.yml'
+permissions:
+  contents: read
+concurrency:
+  group: kalshi-browser-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  browser:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+      - name: Install isolated browser test tools
+        run: |
+          python3 -m venv /tmp/kalshi-browser
+          /tmp/kalshi-browser/bin/pip install playwright==1.55.0
+          /tmp/kalshi-browser/bin/python -m playwright install --with-deps chromium
+      - name: Inspect built article and model
+        run: /tmp/kalshi-browser/bin/python tools/qa-kalshi-browser.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: kalshi-browser-review
+          path: .cache/kalshi-review/
+          retention-days: 14
+          if-no-files-found: error
