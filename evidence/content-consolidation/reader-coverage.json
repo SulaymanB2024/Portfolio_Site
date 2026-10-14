@@ -1,0 +1,1169 @@
+{
+  "date": "2026-10-14",
+  "desktopViewport": [
+    1280,
+    900
+  ],
+  "phoneViewport": [
+    390,
+    844
+  ],
+  "scope": "33 changed native readers; final explicit opening/footer readbacks supplement full two-viewport figure/table inspections. Screenshot hashes identify local reproducible captures; selected proof images are committed here.",
+  "readers": [
+    {
+      "slug": "flock-safety-installed-cohort-cash",
+      "canonicalPath": "/research/financial-systems/flock-safety-installed-cohort-cash",
+      "articleSha256": "cb595666661f21d991571bbd289131391a3496e4a03d06bb596ccd1c75509e98",
+      "phone": {
+        "slug": "flock-safety-installed-cohort-cash",
+        "h1": "Flock: the renewal has to pay for the camera",
+        "scrollWidth": 390,
+        "scrollY": 0,
+        "sections": 10,
+        "sourceEntries": 6,
+        "tables": 2,
+        "viewport": 390
+      },
+      "desktop": {
+        "slug": "flock-safety-installed-cohort-cash",
+        "h1": "Flock: the renewal has to pay for the camera",
+        "height": 14864,
+        "nearBottom": true,
+        "scrollWidth": 1280,
+        "scrollY": 13964.5,
+        "sourceEntries": 6,
+        "tables": 2,
+        "viewport": 1280,
+        "viewportHeight": 900
+      },
+      "screenshots": {
+        "flock-safety-installed-cohort-cash-desktop-opening.jpg": "aebee98110a56f388f0d4d7af79c8ba8bdb7c7b20734431a3f8b781e0b5d5d77",
+        "flock-safety-installed-cohort-cash-desktop-full.jpg": "785fa10576adbb8374af37c988fad01feae1d3c809df59a11b2d144c43879d42",
+        "flock-safety-installed-cohort-cash-desktop-ending.jpg": "49f4de9d8daf23149bd8f6d4363afe6d57df9087e34659ae7ca917ad0f40230b",
+        "flock-safety-installed-cohort-cash-phone-opening.jpg": "43938505d7ae9fd2578a7bd60339628b026b8aef92d1d8da1f860bc6cb1502b6",
+        "flock-safety-installed-cohort-cash-phone-full.jpg": "2cf1b2e05497b2f8a41a3f58305b3f4e959517631a49c2c118a9edd2bb6a27c4",
+        "flock-safety-installed-cohort-cash-phone-ending.jpg": "1a70abd793c3e931c619126fd61c2e95e4c237e7a0b53f172216ff46de9cac23"
+      }
+    },
+    {
+      "slug": "elevenlabs-cost-of-accepted-work",
+      "canonicalPath": "/research/financial-systems/elevenlabs-cost-of-accepted-work",
+      "articleSha256": "ff3df622d5b265ee10567be4a4e08878727a1da892cc24c127c1ddf3b93102a1",
+      "phone": {
+        "slug": "elevenlabs-cost-of-accepted-work",
+        "h1": "ElevenLabs: what a finished minute is worth",
+        "scrollWidth": 390,
+        "scrollY": 0,
+        "sections": 10,
+        "sourceEntries": 9,
+        "tables": 3,
+        "viewport": 390
+      },
+      "desktop": {
+        "slug": "elevenlabs-cost-of-accepted-work",
+        "h1": "ElevenLabs: what a finished minute is worth",
+        "height": 16626,
+        "nearBottom": true,
+        "scrollWidth": 1280,
+        "scrollY": 15726,
+        "sourceEntries": 9,
+        "tables": 3,
+        "viewport": 1280,
+        "viewportHeight": 900
+      },
+      "screenshots": {
+        "elevenlabs-cost-of-accepted-work-desktop-opening.jpg": "ced302a5beb863fa461a14b69ce66521ba7db64a296ec3e2bd618c58b6dd00dd",
+        "elevenlabs-cost-of-accepted-work-desktop-full.jpg": "a4ce42b612d38ff6fdfc4df275f38468121046477c7261a8e4740edc2130c6ea",
+        "elevenlabs-cost-of-accepted-work-desktop-ending.jpg": "15972f67e6469783d562ce97e56050ce1ed7bd44e907feddf506a0863c911643",
+        "elevenlabs-cost-of-accepted-work-phone-opening.jpg": "3149aa1cfbfa71135005b20b071646f9c2b338556425f7e75d8cd6a3fee1eaa5",
+        "elevenlabs-cost-of-accepted-work-phone-full.jpg": "c73e5440d127e1ae8110cdfde1e4ca5f69eb6798053f4b8a96ca3c1470332a58",
+        "elevenlabs-cost-of-accepted-work-phone-ending.jpg": "491061fcd74234b7f4a90e4fa9ba13bd303e39ccf9622232e711ffbccf00f8ef"
+      }
+    },
+    {
+      "slug": "ramp-saving-money-and-retaining-contribution",
+      "canonicalPath": "/research/financial-systems/ramp-saving-money-and-retaining-contribution",
+      "articleSha256": "7864bc0b99adb4b968cc73c6399fda57e7f61e548baa011902650438756231e8",
+      "phone": {
+        "slug": "ramp-saving-money-and-retaining-contribution",
+        "h1": "Ramp and the economics of saving money",
+        "scrollWidth": 390,
+        "scrollY": 0,
+        "sections": 10,
+        "sourceEntries": 5,
+        "tables": 2,
+        "viewport": 390
+      },
+      "desktop": {
+        "slug": "ramp-saving-money-and-retaining-contribution",
+        "h1": "Ramp and the economics of saving money",
+        "height": 14796,
+        "nearBottom": true,
+        "scrollWidth": 1280,
+        "scrollY": 13896.5,
+        "sourceEntries": 5,
+        "tables": 2,
+        "viewport": 1280,
+        "viewportHeight": 900
+      },
+      "screenshots": {
+        "ramp-saving-money-and-retaining-contribution-desktop-opening.jpg": "45093ee4ac0dbc298275a294da447540a03015a27d86e0f74b6d5f29990685cd",
+        "ramp-saving-money-and-retaining-contribution-desktop-full.jpg": "37ef565edf50cc66737e5dc13dd76332f9e282ad15e25850b6f901afdcdba6ee",
+        "ramp-saving-money-and-retaining-contribution-desktop-ending.jpg": "d519421551a30892c358aefadfca8d732a493e8e0444472c822888d4772cf4ed",
+        "ramp-saving-money-and-retaining-contribution-phone-opening.jpg": "ec5a20da61cc125d8de016d5d6d13c4060ffd469963c7f6e78f9c2ae54388edc",
+        "ramp-saving-money-and-retaining-contribution-phone-full.jpg": "52076672426a601932f0d61697a1ff2f2cf77caf6d8cd8ae7e5e4b47bca95a9e",
+        "ramp-saving-money-and-retaining-contribution-phone-ending.jpg": "bbc11e375fe850c7b7969ee5bd2231cbd5d5aeab619c936592044df2055db48a"
+      }
+    },
+    {
+      "slug": "vanta-after-the-audit",
+      "canonicalPath": "/research/financial-systems/vanta-after-the-audit",
+      "articleSha256": "aa89e36097ba5701f66e003bafd1418973f75a6359d66969092575f511c38402",
+      "phone": {
+        "slug": "vanta-after-the-audit",
+        "h1": "Vanta after the audit",
+        "scrollWidth": 390,
+        "scrollY": 0,
+        "sections": 11,
+        "sourceEntries": 7,
+        "tables": 5,
+        "viewport": 390
+      },
+      "desktop": {
+        "slug": "vanta-after-the-audit",
+        "h1": "Vanta after the audit",
+        "height": 17525,
+        "nearBottom": true,
+        "scrollWidth": 1280,
+        "scrollY": 16625.5,
+        "sourceEntries": 7,
+        "tables": 5,
+        "viewport": 1280,
+        "viewportHeight": 900
+      },
+      "screenshots": {
+        "vanta-after-the-audit-desktop-opening.jpg": "f8984b43c432f2b6de03b7e432229331b07b059c88778fc93b70e8eb6a86bc44",
+        "vanta-after-the-audit-desktop-full.jpg": "d8b55a9bfd6485ade1d47c52590e90af6c35b299475c56933dcd072b3bdc5b2c",
+        "vanta-after-the-audit-desktop-ending.jpg": "7a8d6198377803b05eee838354155aa12958e3533837eef9efe4c112d2f5f518",
+        "vanta-after-the-audit-phone-opening.jpg": "8f54ae0f676fea1d87260d6eca47dcf22fd8beb55bafc9d333d1d46438dbb12f",
+        "vanta-after-the-audit-phone-full.jpg": "38d8dc1d2a3002df6fa91b556fee6c9c6f72b682cb7b2679d6bb189dbeb29980",
+        "vanta-after-the-audit-phone-ending.jpg": "d5bfcfd20a2ce82c45243fd36f395e9afe1f5a2c92b7887a46db9d9aebe5eb8f"
+      }
+    },
+    {
+      "slug": "harvey-who-keeps-the-value-of-legal-ai",
+      "canonicalPath": "/research/financial-systems/harvey-who-keeps-the-value-of-legal-ai",
+      "articleSha256": "bc1f0c83a63aba10d2bd7840790ba46fdb0b3ce49f7c1897c439574bb9fbbeff",
+      "phone": {
+        "slug": "harvey-who-keeps-the-value-of-legal-ai",
+        "h1": "Who keeps the value of legal AI?",
+        "scrollWidth": 390,
+        "scrollY": 0,
+        "sections": 10,
+        "sourceEntries": 7,
+        "tables": 5,
+        "viewport": 390
+      },
+      "desktop": {
+        "slug": "harvey-who-keeps-the-value-of-legal-ai",
+        "h1": "Who keeps the value of legal AI?",
+        "height": 16400,
+        "nearBottom": true,
+        "scrollWidth": 1280,
+        "scrollY": 15500.5,
+        "sourceEntries": 7,
+        "tables": 5,
+        "viewport": 1280,
+        "viewportHeight": 900
+      },
+      "screenshots": {
+        "harvey-who-keeps-the-value-of-legal-ai-desktop-opening.jpg": "1c987cb8f6ba9cbd68e6ca7df116a73675ace64898947f866a6f832a3c817167",
+        "harvey-who-keeps-the-value-of-legal-ai-desktop-full.jpg": "ba6976c4eff157d3a80e6e873476a0ec4d08be3e62837515425a7dfca234d85e",
+        "harvey-who-keeps-the-value-of-legal-ai-desktop-ending.jpg": "76587b0734e3b4cd67d8dc1ab5e1f141af7bb58d390c9aa244e7047be93efc24",
+        "harvey-who-keeps-the-value-of-legal-ai-phone-opening.jpg": "4486a22cbc1e217d788f396f014145f10ae8029a5c5266225886053fd583b0d8",
+        "harvey-who-keeps-the-value-of-legal-ai-phone-full.jpg": "5af50230356938b9bafa00431ac5984efc6d3ff7cc19860bcbf0fc9f94493c4c",
+        "harvey-who-keeps-the-value-of-legal-ai-phone-ending.jpg": "02ef9c0899f5a960d1178667f58919ff027971be231e06e58111b18a50463108"
+      }
+    },
+    {
+      "slug": "toast-gross-profit-engine",
+      "canonicalPath": "/research/financial-systems/toast-gross-profit-engine",
+      "articleSha256": "3ffb285244bce9d8ff8c39e48e38ad6ef2bdadac1d4bcce8692ce1169fb15aa9",
+      "phone": {
+        "slug": "toast-gross-profit-engine",
+        "h1": "Toast's gross-profit engine",
+        "scrollWidth": 390,
+        "scrollY": 0,
+        "sections": 9,
+        "sourceEntries": 5,
+        "tables": 3,
+        "viewport": 390
+      },
+      "desktop": {
+        "slug": "toast-gross-profit-engine",
+        "h1": "Toast's gross-profit engine",
+        "height": 14181,
+        "nearBottom": true,
+        "scrollWidth": 1280,
+        "scrollY": 13281,
+        "sourceEntries": 5,
+        "tables": 3,
+        "viewport": 1280,
+        "viewportHeight": 900
+      },
+      "screenshots": {
+        "toast-gross-profit-engine-desktop-opening.jpg": "a5cbca8909ad99028c6409bb4f958523147a4e10222b63363e6ec02c5818779f",
+        "toast-gross-profit-engine-desktop-full.jpg": "37cd84c328feb0a2bf9712bfcf26843b2a17afa522ddab87132859aab5822397",
+        "toast-gross-profit-engine-desktop-ending.jpg": "f72459c44fb8ed4619c1ee3e840eb8e07b043d6686c03c4ad0f5163bcfa0e266",
+        "toast-gross-profit-engine-phone-opening.jpg": "a601017313460281af2bb5ee08c41e7fe1660fb7a0fec240e5ee52d8718d2fc6",
+        "toast-gross-profit-engine-phone-full.jpg": "e2040522676b491fa1c23c5787fb1563ef49d209383a9a5005d7e87f79190493",
+        "toast-gross-profit-engine-phone-ending.jpg": "6cb5e6d359bcd72d9db4ed4ba5d041b7427582f30ad4eaaf47b6c96197e63e4a"
+      }
+    },
+    {
+      "slug": "choosing-a-growth-channel-under-a-capacity-limit",
+      "canonicalPath": "/research/strategy-systems/choosing-a-growth-channel-under-a-capacity-limit",
+      "articleSha256": "40e52cce0e818df12799b2d757cc5f893f6eea2d40d4f9a62dd3bb6aaa67393e",
+      "phone": {
+        "slug": "choosing-a-growth-channel-under-a-capacity-limit",
+        "h1": "Sell the review before you scale the app",
+        "scrollWidth": 390,
+        "scrollY": 0,
+        "sections": 10,
+        "sourceEntries": 7,
+        "tables": 4,
+        "viewport": 390
+      },
+      "desktop": {
+        "slug": "choosing-a-growth-channel-under-a-capacity-limit",
+        "h1": "Sell the review before you scale the app",
+        "height": 16658,
+        "nearBottom": true,
+        "scrollWidth": 1280,
+        "scrollY": 15758,
+        "sourceEntries": 7,
+        "tables": 4,
+        "viewport": 1280,
+        "viewportHeight": 900
+      },
+      "screenshots": {
+        "choosing-a-growth-channel-under-a-capacity-limit-desktop-opening.jpg": "821b2e632510f28e58955458d3a64b272b573ed63dc75bf97491936c993db57c",
+        "choosing-a-growth-channel-under-a-capacity-limit-desktop-full.jpg": "a35a7b7107fac03649415866fbef7cbf5387b719d028752bdb51eca3a7b747b2",
+        "choosing-a-growth-channel-under-a-capacity-limit-desktop-ending.jpg": "cd5c47888e3d3ec54968e5396bd48e5e27f7366b28928ccf9cffb1599798286d",
+        "choosing-a-growth-channel-under-a-capacity-limit-phone-opening.jpg": "b83d093a5c7ae2709ab9acb53bf283c762113cb7864291f71679867b6d6ee277",
+        "choosing-a-growth-channel-under-a-capacity-limit-phone-full.jpg": "2dbf1d660e49b102ba591afc991a8e86b94a338008c7d6c959c661de7dcd1fa5",
+        "choosing-a-growth-channel-under-a-capacity-limit-phone-ending.jpg": "d8f1de67781d7a16f693818e0342000bc037471be85d0e9ec2c9f40519939241"
+      }
+    },
+    {
+      "slug": "anduril-valuation-capital-productivity",
+      "canonicalPath": "/research/financial-systems/anduril-valuation-capital-productivity",
+      "articleSha256": "d2fd1dd21881f2b0961174c63e494eb0cfb6492f2150ec20d5d361efa3ea107a",
+      "phone": {
+        "slug": "anduril-valuation-capital-productivity",
+        "h1": "Anduril is building a prime. The price assumes a platform.",
+        "scrollWidth": 390,
+        "scrollY": 0,
+        "sections": 15,
+        "sourceEntries": 17,
+        "tables": 4,
+        "viewport": 390
+      },
+      "desktop": {
+        "slug": "anduril-valuation-capital-productivity",
+        "h1": "Anduril is building a prime. The price assumes a platform.",
+        "height": 26552,
+        "nearBottom": true,
+        "scrollWidth": 1280,
+        "scrollY": 25652,
+        "sourceEntries": 17,
+        "tables": 4,
+        "viewport": 1280,
+        "viewportHeight": 900
+      },
+      "screenshots": {
+        "anduril-valuation-capital-productivity-desktop-opening.jpg": "6a8923c6c6bfe51957133e5cd3923bc79561cdd1639d5871cfc0ce6c924c5b25",
+        "anduril-valuation-capital-productivity-desktop-full.jpg": "79813fcca732542918c7e69e6057967703d205544e3b85bcaf424f71d929a1a1",
+        "anduril-valuation-capital-productivity-desktop-ending.jpg": "8b1973af3337f74907c5e8445bb4a01c009164cd1d4fb31a334158d702d59818",
+        "anduril-valuation-capital-productivity-phone-opening.jpg": "e3a3d3b9fbd8edbb5fa3d3f261b781693a17f95d093213791aac3f84c960b29d",
+        "anduril-valuation-capital-productivity-phone-full.jpg": "d406f9967feb13434081801f013ef70aa4ef4a55ed880c1500ad9724fa39f229",
+        "anduril-valuation-capital-productivity-phone-ending.jpg": "f631e304dc99139c8da60d8b09cdc03a29b751f8692a067ea7500b68193bfe38"
+      }
+    },
+    {
+      "slug": "kalshi-40-billion-question",
+      "canonicalPath": "/research/financial-systems/kalshi-40-billion-question",
+      "articleSha256": "4fcb6c753bfea11f0dc4d258df9ddb7974c7c60ddca67f5cab2307d6e13d47d7",
+      "phone": {
+        "slug": "kalshi-40-billion-question",
+        "h1": "Kalshi\u2019s $40 billion question",
+        "scrollWidth": 390,
+        "scrollY": 0,
+        "sections": 14,
+        "sourceEntries": 17,
+        "tables": 5,
+        "viewport": 390
+      },
+      "desktop": {
+        "slug": "kalshi-40-billion-question",
+        "h1": "Kalshi\u2019s $40 billion question",
+        "height": 26746,
+        "nearBottom": true,
+        "scrollWidth": 1280,
+        "scrollY": 25846,
+        "sourceEntries": 17,
+        "tables": 5,
+        "viewport": 1280,
+        "viewportHeight": 900
+      },
+      "screenshots": {
+        "kalshi-40-billion-question-desktop-opening.jpg": "9a3668dd20ef6a69e4d1672d193db44b60e444a00b017d6d9b06bfa6925dfe91",
+        "kalshi-40-billion-question-desktop-full.jpg": "6f1dc9b82e54ba4c10455ab6199e0f58b238b2830709f6de106350b4aac308ca",
+        "kalshi-40-billion-question-desktop-ending.jpg": "963fd2a2f0ef9574edf39b8bbb52a10df01f9ff7f7f912dead0c5e60554dfe14",
+        "kalshi-40-billion-question-phone-opening.jpg": "8c6cf2c37514e336223dd36d06584a97de86e31ff143079555f53370d245fd61",
+        "kalshi-40-billion-question-phone-full.jpg": "7f0e0d58f22306132ba3f48e2fc45f6979f78d49d9fe8d99d0fe3c01d394b021",
+        "kalshi-40-billion-question-phone-ending.jpg": "a9bf2afc82cbdd9ef632517b25ff17e73300f9e1f14b7a2d11f8e0ddf02a79f4"
+      }
+    },
+    {
+      "slug": "hyperliquid-valuation",
+      "canonicalPath": "/research/financial-systems/hyperliquid-valuation",
+      "articleSha256": "c6a96109a23612e6cce323255400049c2a492844a9bead5c7f5ca6a280ba0d6b",
+      "phone": {
+        "slug": "hyperliquid-valuation",
+        "h1": "Hyperliquid can win without HYPE being cheap.",
+        "scrollWidth": 390,
+        "scrollY": 0,
+        "sections": 15,
+        "sourceEntries": 18,
+        "tables": 4,
+        "viewport": 390
+      },
+      "desktop": {
+        "slug": "hyperliquid-valuation",
+        "h1": "Hyperliquid can win without HYPE being cheap.",
+        "height": 27077,
+        "nearBottom": true,
+        "scrollWidth": 1280,
+        "scrollY": 26177,
+        "sourceEntries": 18,
+        "tables": 4,
+        "viewport": 1280,
+        "viewportHeight": 900
+      },
+      "screenshots": {
+        "hyperliquid-valuation-desktop-opening.jpg": "436dacfdc15de72ee6325ff3a28261b43a0e21fe9705a3d232af5855469a5093",
+        "hyperliquid-valuation-desktop-full.jpg": "4d7a1f3775d308312d4ba03da34357bdd604d65682aa2eb5e29c8096d8c90f99",
+        "hyperliquid-valuation-desktop-ending.jpg": "7abaed0e401798fdf106f972cab47d612d03483b95ff21e255f4dd56fdf1e123",
+        "hyperliquid-valuation-phone-opening.jpg": "8312b1d90ef49e3a4b6d69cbf3a9ac4ae9f6f2e809b65c591d7e3231d1c53e41",
+        "hyperliquid-valuation-phone-full.jpg": "d9a634161be6b071a6ec706062d211af03c48f0fafe5d36808f5422aaaeac75a",
+        "hyperliquid-valuation-phone-ending.jpg": "9c56afe489150fcacaa87eab120a075bb8a69afa8fedba1539eecda0303d7951"
+      }
+    },
+    {
+      "slug": "expedia-network-and-cash",
+      "canonicalPath": "/research/financial-systems/expedia-network-and-cash",
+      "articleSha256": "0b7a5ad0a109b869cd540ea4076a05e1e1d378e82c1a1566cd050c11c5816c80",
+      "phone": {
+        "slug": "expedia-network-and-cash",
+        "h1": "Expedia: the network beyond the booking.",
+        "scrollWidth": 390,
+        "scrollY": 0,
+        "sections": 12,
+        "sourceEntries": 4,
+        "tables": 5,
+        "viewport": 390
+      },
+      "desktop": {
+        "slug": "expedia-network-and-cash",
+        "h1": "Expedia: the network beyond the booking.",
+        "height": 17154,
+        "nearBottom": true,
+        "scrollWidth": 1280,
+        "scrollY": 16254,
+        "sourceEntries": 4,
+        "tables": 5,
+        "viewport": 1280,
+        "viewportHeight": 900
+      },
+      "screenshots": {
+        "expedia-network-and-cash-desktop-opening.jpg": "42add24a5f8500e06d3744d86952ff4fa7fe2a4125af5d037a5bf04a94b16c99",
+        "expedia-network-and-cash-desktop-full.jpg": "1e333057c99c256c43438e3b2f170282b3a54a8ce99dd760aa61b0de7f362951",
+        "expedia-network-and-cash-desktop-ending.jpg": "4b73a9426a586a342792b83cd7eb0bdf0b2ad4c569c4e74eaae86b9c5aa343b5",
+        "expedia-network-and-cash-phone-opening.jpg": "394e938fd8fb9f51367100bf7418bb6a354bd0498ea951c326edc5408e9da34e",
+        "expedia-network-and-cash-phone-full.jpg": "ed1883fb85194b7c3dc0b6ff756f437ef047a1c02743b49c1d62af5b91c0d386",
+        "expedia-network-and-cash-phone-ending.jpg": "189074dbcc40b7103838cc2f4e81c2ce74acdd9aa2c8693ebf9b2e6472c400e3"
+      }
+    },
+    {
+      "slug": "crocs-cash-and-brand-test",
+      "canonicalPath": "/research/financial-systems/crocs-cash-and-brand-test",
+      "articleSha256": "aa4d7ebe644d98d166c4aa901ff1ce7a8746d099d109a628b609514be2c14131",
+      "phone": {
+        "slug": "crocs-cash-and-brand-test",
+        "h1": "Crocs: a cash engine with a brand test.",
+        "scrollWidth": 390,
+        "scrollY": 0,
+        "sections": 12,
+        "sourceEntries": 4,
+        "tables": 6,
+        "viewport": 390
+      },
+      "desktop": {
+        "slug": "crocs-cash-and-brand-test",
+        "h1": "Crocs: a cash engine with a brand test.",
+        "height": 17956,
+        "nearBottom": true,
+        "scrollWidth": 1280,
+        "scrollY": 17056.5,
+        "sourceEntries": 4,
+        "tables": 6,
+        "viewport": 1280,
+        "viewportHeight": 900
+      },
+      "screenshots": {
+        "crocs-cash-and-brand-test-desktop-opening.jpg": "fc54679f251cc2f77cf755dcfb97b3a8fd63ee9aa91f8d6212588719560656e5",
+        "crocs-cash-and-brand-test-desktop-full.jpg": "74923af8fc479c1a5b59a6e8b5aa5b60cfb781617c3a3eb54b5257359126342a",
+        "crocs-cash-and-brand-test-desktop-ending.jpg": "5068fcb5d9d6f3649e0596d10c07ca39fee4aad1742c2c26ded498c30465216e",
+        "crocs-cash-and-brand-test-phone-opening.jpg": "5b2ad8407a7f0c252ec69d7a8dc07950ea44568c04e31ebcd6ac4735b02ce072",
+        "crocs-cash-and-brand-test-phone-full.jpg": "070244b93069e14d774743892b48bd774e6a3b382b42f061098cfde6790c3673",
+        "crocs-cash-and-brand-test-phone-ending.jpg": "427fd8cd186292f1e71bd6946133989c52b6295a27d7c06544158adfb1bedd1c"
+      }
+    },
+    {
+      "slug": "paypal-margin-dollar-recovery",
+      "canonicalPath": "/research/financial-systems/paypal-margin-dollar-recovery",
+      "articleSha256": "7903a14278f5bf9a8cc5fbeb0c609a50a34f533110cd36249adad948d28cb57b",
+      "phone": {
+        "slug": "paypal-margin-dollar-recovery",
+        "h1": "PayPal: a modest recovery at $56.",
+        "scrollWidth": 390,
+        "scrollY": 0,
+        "sections": 12,
+        "sourceEntries": 8,
+        "tables": 6,
+        "viewport": 390
+      },
+      "desktop": {
+        "slug": "paypal-margin-dollar-recovery",
+        "h1": "PayPal: a modest recovery at $56.",
+        "height": 18696,
+        "nearBottom": true,
+        "scrollWidth": 1280,
+        "scrollY": 17796,
+        "sourceEntries": 8,
+        "tables": 6,
+        "viewport": 1280,
+        "viewportHeight": 900
+      },
+      "screenshots": {
+        "paypal-margin-dollar-recovery-desktop-opening.jpg": "97f226a65d350bf4486fb9931623ce762e43ba54008be18fc59f282c9c600c8b",
+        "paypal-margin-dollar-recovery-desktop-full.jpg": "aa41f946b78d422096a3f2a34a9399db9b75f6107757d0e1c22184d2daccd91b",
+        "paypal-margin-dollar-recovery-desktop-ending.jpg": "80289304f815d0ed76b8fd176d787bfbd65e2d5b63ea6b8e2a8f0824ad9c31ff",
+        "paypal-margin-dollar-recovery-phone-opening.jpg": "8dc770af053a84d4bc00bbd81bf4a0373ceacf89176bc673bd6dd7348c952853",
+        "paypal-margin-dollar-recovery-phone-full.jpg": "d7717753cb3adae4d4b6a1126c5733aff7d3a02b3aef025a43525f32680f51e9",
+        "paypal-margin-dollar-recovery-phone-ending.jpg": "5a2e8a557f6a611691ed71f9ec0351ac3a8f39c66c4f2f720322bce61dc83ec5"
+      }
+    },
+    {
+      "slug": "adobe-paid-workflows",
+      "canonicalPath": "/research/financial-systems/adobe-paid-workflows",
+      "articleSha256": "b0cd261d81289bf27a9f41b072ccf2a1d84532e678247162c14959a0081ed128",
+      "phone": {
+        "slug": "adobe-paid-workflows",
+        "h1": "Adobe: paid workflows at a price I like.",
+        "scrollWidth": 390,
+        "scrollY": 0,
+        "sections": 12,
+        "sourceEntries": 8,
+        "tables": 6,
+        "viewport": 390
+      },
+      "desktop": {
+        "slug": "adobe-paid-workflows",
+        "h1": "Adobe: paid workflows at a price I like.",
+        "height": 17983,
+        "nearBottom": true,
+        "scrollWidth": 1280,
+        "scrollY": 17083,
+        "sourceEntries": 8,
+        "tables": 6,
+        "viewport": 1280,
+        "viewportHeight": 900
+      },
+      "screenshots": {
+        "adobe-paid-workflows-desktop-opening.jpg": "ec598382c88e361e382d06bcc6278e07a1c23c2ae4aa4870c7eb805768bc52dd",
+        "adobe-paid-workflows-desktop-full.jpg": "a8c4710272cd875fc27f02686921e134ef24b4aa3e47d159e4942b733fd06330",
+        "adobe-paid-workflows-desktop-ending.jpg": "96daab146843ba47912e94304135efcead03a45612e5a84b22f5f9db2b5d6de9",
+        "adobe-paid-workflows-phone-opening.jpg": "a513304724e61c1f810c46c5130e4d282f3b0869ddd6dcaa2ecc7edc162c963f",
+        "adobe-paid-workflows-phone-full.jpg": "8ffd9e8921c30d5f44d2d8e6705b39fe0213f1a7cc62c1c29c2875bda37f043e",
+        "adobe-paid-workflows-phone-ending.jpg": "8883c8fc7aa6ecc7f848623367f89d20fb0cead251afa52d57ffda08c8695d44"
+      }
+    },
+    {
+      "slug": "texas-robotaxi-business-service-map",
+      "canonicalPath": "/research/texas/texas-robotaxi-business-service-map",
+      "articleSha256": "b81737881f6775543ca3df378a6304924e78e8b76415a6f7fbb4e93c8457d9c3",
+      "phone": {
+        "slug": "texas-robotaxi-business-service-map",
+        "h1": "Texas Robotaxis: Who Can Ride?",
+        "scrollWidth": 390,
+        "scrollY": 0,
+        "sections": 14,
+        "sourceEntries": 17,
+        "tables": 2,
+        "viewport": 390
+      },
+      "desktop": {
+        "slug": "texas-robotaxi-business-service-map",
+        "h1": "Texas Robotaxis: Who Can Ride?",
+        "height": 18476,
+        "nearBottom": true,
+        "scrollWidth": 1280,
+        "scrollY": 17576.5,
+        "sourceEntries": 17,
+        "tables": 2,
+        "viewport": 1280,
+        "viewportHeight": 900
+      },
+      "screenshots": {
+        "texas-robotaxi-business-service-map-desktop-opening.jpg": "0039467ded800054475ab53132e07d162acb89e9ae12db72731b89a1c9b4e99a",
+        "texas-robotaxi-business-service-map-desktop-full.jpg": "0c81f179ee029b7374c2d495fc73f105eef7cbad4a4cd3d166b2adf86e0c73ab",
+        "texas-robotaxi-business-service-map-desktop-ending.jpg": "c1cfce5560fd69d5a9679ea05ebccfd9277d1550d3cc7e7ab3549d33983914d8",
+        "texas-robotaxi-business-service-map-phone-opening.jpg": "a8dd39a776d14eb7e42c3aa57f595d80e28e0e4987ad89dcd30f621ec4a78099",
+        "texas-robotaxi-business-service-map-phone-full.jpg": "28c6ddbf156b5d76e0352e66e208b4e8293e31b3c9f04240a5024a6f871a64b2",
+        "texas-robotaxi-business-service-map-phone-ending.jpg": "ec2899aa4cba149367304df76ad3daa652c14962922d4779405e0c030f9ffa62"
+      }
+    },
+    {
+      "slug": "texas-waymo-business-travel",
+      "canonicalPath": "/research/texas/texas-waymo-business-travel",
+      "articleSha256": "8f8f997a186342f22b765bc4c8d0aaf600a6f335476d549f96599a9b713018bc",
+      "phone": {
+        "slug": "texas-waymo-business-travel",
+        "h1": "Waymo for the Actual Trip",
+        "scrollWidth": 390,
+        "scrollY": 0,
+        "sections": 12,
+        "sourceEntries": 13,
+        "tables": 2,
+        "viewport": 390
+      },
+      "desktop": {
+        "slug": "texas-waymo-business-travel",
+        "h1": "Waymo for the Actual Trip",
+        "height": 16183,
+        "nearBottom": true,
+        "scrollWidth": 1280,
+        "scrollY": 15283,
+        "sourceEntries": 13,
+        "tables": 2,
+        "viewport": 1280,
+        "viewportHeight": 900
+      },
+      "screenshots": {
+        "texas-waymo-business-travel-desktop-opening.jpg": "6fb5d113e0b1aa0c4668178f8f822bf10fae897a94787ea3cd5549532eab0531",
+        "texas-waymo-business-travel-desktop-full.jpg": "dacfd0510f96581a59bbd8500fe0b9a9aed0ff1abde42f6cadcdb73f6a0c1edf",
+        "texas-waymo-business-travel-desktop-ending.jpg": "34f91e3ea2844ff1cb7e6552ffea9253b7a4246c7af355ae14e76cd019961819",
+        "texas-waymo-business-travel-phone-opening.jpg": "3f30a9785f6eda8d2cb2af2fe05306f1f5c1e2f1f6b9a58c4b542f5e4c7a2aa0",
+        "texas-waymo-business-travel-phone-full.jpg": "342ac3599f17e64211dd6263deb1ca2abdc7a0a433a3e57ef8df144bf8e008f6",
+        "texas-waymo-business-travel-phone-ending.jpg": "4d92d4786eb84a91070e59cac2bb606415118a1acf4bd9eb142793635abd98b6"
+      }
+    },
+    {
+      "slug": "texas-zoox-market-entry-business",
+      "canonicalPath": "/research/texas/texas-zoox-market-entry-business",
+      "articleSha256": "2e9c030b27cfe38a7fdb62f0e5f75c605442916e18cf1056f10f5ba85da202a6",
+      "phone": {
+        "slug": "texas-zoox-market-entry-business",
+        "h1": "Zoox: From Arrival to Service",
+        "scrollWidth": 390,
+        "scrollY": 0,
+        "sections": 13,
+        "sourceEntries": 10,
+        "tables": 3,
+        "viewport": 390
+      },
+      "desktop": {
+        "slug": "texas-zoox-market-entry-business",
+        "h1": "Zoox: From Arrival to Service",
+        "height": 16500,
+        "nearBottom": true,
+        "scrollWidth": 1280,
+        "scrollY": 15600.5,
+        "sourceEntries": 10,
+        "tables": 3,
+        "viewport": 1280,
+        "viewportHeight": 900
+      },
+      "screenshots": {
+        "texas-zoox-market-entry-business-desktop-opening.jpg": "2d53a05f9b68fd36f169e393764a36e83c06ca106c62e1c6bfde967d3668ff9f",
+        "texas-zoox-market-entry-business-desktop-full.jpg": "0f97602ad190d6d608c8172e94a89e79e948256f6e9b6855f82bb2c66d9c5b89",
+        "texas-zoox-market-entry-business-desktop-ending.jpg": "e50e5aa0c5ac1e32ffd01b174de02c4bda1abfa257e0fc1ff7ad819d041aa5a3",
+        "texas-zoox-market-entry-business-phone-opening.jpg": "f88873410043487d3ab4c8ea52f0de1bc984b616c27a95f1abc9976f08012241",
+        "texas-zoox-market-entry-business-phone-full.jpg": "cb2ffa87366b0a25aec1e566045bfc411511beafc00fbac80ffa15736b367cb6",
+        "texas-zoox-market-entry-business-phone-ending.jpg": "1e3dfa68fa9e018e3cb2c98680eee289a5893a97b042ce40e49e40a369d58558"
+      }
+    },
+    {
+      "slug": "texas-autonomous-trucking-operators",
+      "canonicalPath": "/research/texas/texas-autonomous-trucking-operators",
+      "articleSha256": "b7d1be4698865eaa5e432f3343916cde8caddb00c883d3b68010f4f70ee6eaa4",
+      "phone": {
+        "slug": "texas-autonomous-trucking-operators",
+        "h1": "Texas Freight: What Is Operating?",
+        "scrollWidth": 390,
+        "scrollY": 0,
+        "sections": 15,
+        "sourceEntries": 23,
+        "tables": 2,
+        "viewport": 390
+      },
+      "desktop": {
+        "slug": "texas-autonomous-trucking-operators",
+        "h1": "Texas Freight: What Is Operating?",
+        "height": 20025,
+        "nearBottom": true,
+        "scrollWidth": 1280,
+        "scrollY": 19125,
+        "sourceEntries": 23,
+        "tables": 2,
+        "viewport": 1280,
+        "viewportHeight": 900
+      },
+      "screenshots": {
+        "texas-autonomous-trucking-operators-desktop-opening.jpg": "b241fc931383368898b9de5585ab1721e5f9bca7e8c953857f03eac175f100c2",
+        "texas-autonomous-trucking-operators-desktop-full.jpg": "c01d3209e97938f0640cc08f0e5a2d6e4f61db9acd5fe3a2508dd6cfd1aeee7d",
+        "texas-autonomous-trucking-operators-desktop-ending.jpg": "23a349f3ca8a63041ac0d0b673236736bb054e0ccb014522a41127b7414e237c",
+        "texas-autonomous-trucking-operators-phone-opening.jpg": "659610f4ec8209f28d947e81b725f4eef2bac268ae151de97caeea2b55c2b8b5",
+        "texas-autonomous-trucking-operators-phone-full.jpg": "9a7f44fac5ccf388e98b2e3eb08ccef90504b3552b7f81aa1a567b6f47707b36",
+        "texas-autonomous-trucking-operators-phone-ending.jpg": "e7090b672354b38ab42acef2dff2480bb4ef83bf45d382f0a9ba124f79c84a9e"
+      }
+    },
+    {
+      "slug": "texas-driverless-freight-route-economics",
+      "canonicalPath": "/research/texas/texas-driverless-freight-route-economics",
+      "articleSha256": "1e4f6beb37a228b2e91a8c8d09db86c3a5a8d7ed49128e79567c95ac38df4c6b",
+      "phone": {
+        "slug": "texas-driverless-freight-route-economics",
+        "h1": "Price the Whole Freight Route",
+        "scrollWidth": 390,
+        "scrollY": 0,
+        "sections": 14,
+        "sourceEntries": 12,
+        "tables": 3,
+        "viewport": 390
+      },
+      "desktop": {
+        "slug": "texas-driverless-freight-route-economics",
+        "h1": "Price the Whole Freight Route",
+        "height": 18385,
+        "nearBottom": true,
+        "scrollWidth": 1280,
+        "scrollY": 17485,
+        "sourceEntries": 12,
+        "tables": 3,
+        "viewport": 1280,
+        "viewportHeight": 900
+      },
+      "screenshots": {
+        "texas-driverless-freight-route-economics-desktop-opening.jpg": "449664f8befe73ab853ef9cb5844306a5283a859413744c4e91a9ddde066d000",
+        "texas-driverless-freight-route-economics-desktop-full.jpg": "8d5579b743b69761c6a39f55289bda50ffabf570440e2debf2ef83843ce86233",
+        "texas-driverless-freight-route-economics-desktop-ending.jpg": "3cdd3bbba6f44ae21e44e5971b201b4b8ad9978046faf26386ca7aa08b783895",
+        "texas-driverless-freight-route-economics-phone-opening.jpg": "79b8ec90fa344b5207426b5c85af7b55d93519cc9fa308374b75680d46b44aff",
+        "texas-driverless-freight-route-economics-phone-full.jpg": "c7cc382fdc7663e0f1052174c45b4c1a0edef6fcb4ac3c1bfb43cd559fba3998",
+        "texas-driverless-freight-route-economics-phone-ending.jpg": "a3adc89884831f40f162616bf191e1f450130d3941b79a73711a0e8df2960c4c"
+      }
+    },
+    {
+      "slug": "texas-automated-vehicle-authorization",
+      "canonicalPath": "/research/texas/texas-automated-vehicle-authorization",
+      "articleSha256": "d9daefad9459336a34cf347e9d8aac225fe91ecb5a25a458f3237914a253a9db",
+      "phone": {
+        "slug": "texas-automated-vehicle-authorization",
+        "h1": "The Permit Behind the Ride",
+        "scrollWidth": 390,
+        "scrollY": 0,
+        "sections": 15,
+        "sourceEntries": 11,
+        "tables": 2,
+        "viewport": 390
+      },
+      "desktop": {
+        "slug": "texas-automated-vehicle-authorization",
+        "h1": "The Permit Behind the Ride",
+        "height": 18057,
+        "nearBottom": true,
+        "scrollWidth": 1280,
+        "scrollY": 17157,
+        "sourceEntries": 11,
+        "tables": 2,
+        "viewport": 1280,
+        "viewportHeight": 900
+      },
+      "screenshots": {
+        "texas-automated-vehicle-authorization-desktop-opening.jpg": "80438ff7d5fdc5a3493f797488dd62a35e645368da5575ce0de76ba4f4d83a62",
+        "texas-automated-vehicle-authorization-desktop-full.jpg": "58f11baa3df3be47bf57268a3555d6c4881709a97565b899d03c34d22565c5ca",
+        "texas-automated-vehicle-authorization-desktop-ending.jpg": "8bb2fbc0eeb808fde6c87fa7d55109f16363a985788a97497603526ac02d2c33",
+        "texas-automated-vehicle-authorization-phone-opening.jpg": "3d98e1acd38b850bbbad41c3bf50d26c04f076b7cc0ffa2d611d2f898646f3fa",
+        "texas-automated-vehicle-authorization-phone-full.jpg": "e100555aed295a5722db569b45abb3abbbd45de6aa202c63cd73f7bbb16da6b4",
+        "texas-automated-vehicle-authorization-phone-ending.jpg": "6a763ad19c82ca3f61886f1f1df6e4b8e482d8aced655625cc3a076f61d340f2"
+      }
+    },
+    {
+      "slug": "texas-power-large-load-business-diligence",
+      "canonicalPath": "/research/texas/texas-power-large-load-business-diligence",
+      "articleSha256": "484640bb283ff23b5874fdc64c68c6e7b3e95941e7efc579309d3630369200f3",
+      "phone": {
+        "slug": "texas-power-large-load-business-diligence",
+        "h1": "Power Before Property",
+        "scrollWidth": 390,
+        "scrollY": 0,
+        "sections": 11,
+        "sourceEntries": 13,
+        "tables": 2,
+        "viewport": 390
+      },
+      "desktop": {
+        "slug": "texas-power-large-load-business-diligence",
+        "h1": "Power Before Property",
+        "height": 17701,
+        "nearBottom": true,
+        "scrollWidth": 1280,
+        "scrollY": 16801.5,
+        "sourceEntries": 13,
+        "tables": 2,
+        "viewport": 1280,
+        "viewportHeight": 900
+      },
+      "screenshots": {
+        "texas-power-large-load-business-diligence-desktop-opening.jpg": "9dcdb71b01089f6dfbc82aba5b90fe837153a0f8d626690913c88fed084129f5",
+        "texas-power-large-load-business-diligence-desktop-full.jpg": "8c8d8c8ed6dd7679c1e8c35d0b3676f0523a5f3447dc53bc8781444c93b3ff39",
+        "texas-power-large-load-business-diligence-desktop-ending.jpg": "fc1a9d665ea9a70dff22570a62af8af4c5d369acf14c1ecca5c675de78703d59",
+        "texas-power-large-load-business-diligence-phone-opening.jpg": "fbd63590ea12b262ecc3fecc28823288f6ee41f8d0d1f67de2f1b39cc24da2fd",
+        "texas-power-large-load-business-diligence-phone-full.jpg": "da3102b0951db96eb147bc5e2b4a21894de2240529f1875ac145bad664329b1b",
+        "texas-power-large-load-business-diligence-phone-ending.jpg": "c25d8e6a8e3ff0ebe933aa929cb28bc2c284310b8ea48878eb7eead0dd78951c"
+      }
+    },
+    {
+      "slug": "texas-ai-law-business-compliance",
+      "canonicalPath": "/research/texas/texas-ai-law-business-compliance",
+      "articleSha256": "d9c203f0ee9e02ec975551847109fabe695cf8ac1bf5749baf2f022a882ce9a6",
+      "phone": {
+        "slug": "texas-ai-law-business-compliance",
+        "h1": "Texas\u2019s AI Law: Before Deployment",
+        "scrollWidth": 390,
+        "scrollY": 0,
+        "sections": 13,
+        "sourceEntries": 10,
+        "tables": 2,
+        "viewport": 390
+      },
+      "desktop": {
+        "slug": "texas-ai-law-business-compliance",
+        "h1": "Texas\u2019s AI Law: Before Deployment",
+        "height": 16429,
+        "nearBottom": true,
+        "scrollWidth": 1280,
+        "scrollY": 15529.5,
+        "sourceEntries": 10,
+        "tables": 2,
+        "viewport": 1280,
+        "viewportHeight": 900
+      },
+      "screenshots": {
+        "texas-ai-law-business-compliance-desktop-opening.jpg": "aceffe58e41195eaeb459dc260aec4803ec9dfc8635d54a9efd8b96306df50eb",
+        "texas-ai-law-business-compliance-desktop-full.jpg": "820d8330c05480a6f2c06cd091bcf04ceb867045e8fee6380eab4be55365351c",
+        "texas-ai-law-business-compliance-desktop-ending.jpg": "5355530c352866669890e7bd5cb269b511a76f2401c79ad66ce28e00e6f2a921",
+        "texas-ai-law-business-compliance-phone-opening.jpg": "4ec918c5bb703e1efb150e77720f4e16469f03da8bc8b5882bc439561e72a0f4",
+        "texas-ai-law-business-compliance-phone-full.jpg": "79e6eb6708368750a9ce581f0387b85783e15013c141779c92601ad7de084379",
+        "texas-ai-law-business-compliance-phone-ending.jpg": "6e9d9247e011789634a55ffbbc102b51135cf5336f6c1e856d9cbf6f1f68fc68"
+      }
+    },
+    {
+      "slug": "texas-business-court-contract-decisions",
+      "canonicalPath": "/research/texas/texas-business-court-contract-decisions",
+      "articleSha256": "7fd2629e8bb776689beeb26396d0ecdd0b65b5320c0514c8ddca8fbd5395b975",
+      "phone": {
+        "slug": "texas-business-court-contract-decisions",
+        "h1": "Texas business contracts need a litigation plan",
+        "scrollWidth": 390,
+        "scrollY": 0,
+        "sections": 10,
+        "sourceEntries": 6,
+        "tables": 2,
+        "viewport": 390
+      },
+      "desktop": {
+        "slug": "texas-business-court-contract-decisions",
+        "h1": "Texas business contracts need a litigation plan",
+        "height": 13583,
+        "nearBottom": true,
+        "scrollWidth": 1280,
+        "scrollY": 12683,
+        "sourceEntries": 6,
+        "tables": 2,
+        "viewport": 1280,
+        "viewportHeight": 900
+      },
+      "screenshots": {
+        "texas-business-court-contract-decisions-desktop-opening.jpg": "bac9096fe7c43cfe50b1276fed4985df08bcfe69ef3c92a96ce20523b891784d",
+        "texas-business-court-contract-decisions-desktop-full.jpg": "350f472a8f66f10c31b41ca2857ef1b7f3991ebb64ad0cddcbc5f8271e8a85f2",
+        "texas-business-court-contract-decisions-desktop-ending.jpg": "7d1256a3be99f903751a0fb09b329e5cb99a5a00b34b39ae254f248d49424f9b",
+        "texas-business-court-contract-decisions-phone-opening.jpg": "da9e1434dd76e84a2d14ed09d830ab1d8f109e6e6ebee7f5b6d6c153a7b4b369",
+        "texas-business-court-contract-decisions-phone-full.jpg": "44d991ff44c976a6c46e451f5b1abc4e2b7feabcc42fb3b70d191c702dcada1b",
+        "texas-business-court-contract-decisions-phone-ending.jpg": "c984ce9c6afc37ca02e2c30b796bfde86568fc322429ab1c0c8dccf3fa813794"
+      }
+    },
+    {
+      "slug": "texas-water-facility-site-diligence",
+      "canonicalPath": "/research/texas/texas-water-facility-site-diligence",
+      "articleSha256": "11c932a6c60ed5f575df13e0ba6d6a1822ed8627d90c423742a072f7089f7ebb",
+      "phone": {
+        "slug": "texas-water-facility-site-diligence",
+        "h1": "Water at the Point of Use",
+        "scrollWidth": 390,
+        "scrollY": 0,
+        "sections": 10,
+        "sourceEntries": 9,
+        "tables": 2,
+        "viewport": 390
+      },
+      "desktop": {
+        "slug": "texas-water-facility-site-diligence",
+        "h1": "Water at the Point of Use",
+        "height": 14706,
+        "nearBottom": true,
+        "scrollWidth": 1280,
+        "scrollY": 13806.5,
+        "sourceEntries": 9,
+        "tables": 2,
+        "viewport": 1280,
+        "viewportHeight": 900
+      },
+      "screenshots": {
+        "texas-water-facility-site-diligence-desktop-opening.jpg": "941dd2a60b954cf801b6a4a8ad2891009c8b0a101c970616001d715e0e4869e1",
+        "texas-water-facility-site-diligence-desktop-full.jpg": "70e0f408790beeeebc90385f8868b0a21ea67e5cdf91a4e65b4dafca5c6e198c",
+        "texas-water-facility-site-diligence-desktop-ending.jpg": "7ea6e98f3c8694e7baace38ce3a12ac0b1d328eff38f49a94616115fda05a35c",
+        "texas-water-facility-site-diligence-phone-opening.jpg": "8ed1f542bc1100cc59481f92a47bbcbf27215fb8ff6d3f6de1ef3307a461c33f",
+        "texas-water-facility-site-diligence-phone-full.jpg": "d769a8c9f6aa6f168097ad85978a43fa1fef2d5724dc0e7762d502f2b1b37510",
+        "texas-water-facility-site-diligence-phone-ending.jpg": "a0f9be5af5478c576a47ce842fa3459e531c139b4e020a979c0d587573d8eb8e"
+      }
+    },
+    {
+      "slug": "texas-property-tax-business-underwriting",
+      "canonicalPath": "/research/texas/texas-property-tax-business-underwriting",
+      "articleSha256": "9896c509d22bcea02d1312c3a6e02821d5d133aa6e32c7f20e86ea55d19c605c",
+      "phone": {
+        "slug": "texas-property-tax-business-underwriting",
+        "h1": "The Tax Bill After the Deal",
+        "scrollWidth": 390,
+        "scrollY": 0,
+        "sections": 10,
+        "sourceEntries": 9,
+        "tables": 2,
+        "viewport": 390
+      },
+      "desktop": {
+        "slug": "texas-property-tax-business-underwriting",
+        "h1": "The Tax Bill After the Deal",
+        "height": 15139,
+        "nearBottom": true,
+        "scrollWidth": 1280,
+        "scrollY": 14239.5,
+        "sourceEntries": 9,
+        "tables": 2,
+        "viewport": 1280,
+        "viewportHeight": 900
+      },
+      "screenshots": {
+        "texas-property-tax-business-underwriting-desktop-opening.jpg": "45452ae64c1f73e0f7c804f8e113eb9e964f9aec36da305473a8b1dba3606c43",
+        "texas-property-tax-business-underwriting-desktop-full.jpg": "3258570ce2732d4a9fc5af53f4882d87d84746f05e6a4a957dce7fbe0f0bc062",
+        "texas-property-tax-business-underwriting-desktop-ending.jpg": "64361d09a598cbac6f8daaf4c6c66add2d23e766f39f55a10d66588367d59167",
+        "texas-property-tax-business-underwriting-phone-opening.jpg": "6e36516e8bb65f4275fd17fddca6dbb2ed9dde344d5cd9ced8358c1f242152b7",
+        "texas-property-tax-business-underwriting-phone-full.jpg": "3ada193a09c63b7b3628084d1966a758b7cc88c9f18a4337595e5385740d43fe",
+        "texas-property-tax-business-underwriting-phone-ending.jpg": "bbe1a08baacc34581abf5b00e8bf9fabea769056961a79843e2455b961ab749e"
+      }
+    },
+    {
+      "slug": "texas-data-center-sales-tax-project-economics",
+      "canonicalPath": "/research/texas/texas-data-center-sales-tax-project-economics",
+      "articleSha256": "53e30ba53663c1958a8bae819a21c51bc98c5f18ec1eacd8ce0fbd7a8918792e",
+      "phone": {
+        "slug": "texas-data-center-sales-tax-project-economics",
+        "h1": "The data-center tax break is conditional",
+        "scrollWidth": 390,
+        "scrollY": 0,
+        "sections": 10,
+        "sourceEntries": 6,
+        "tables": 2,
+        "viewport": 390
+      },
+      "desktop": {
+        "slug": "texas-data-center-sales-tax-project-economics",
+        "h1": "The data-center tax break is conditional",
+        "height": 15153,
+        "nearBottom": true,
+        "scrollWidth": 1280,
+        "scrollY": 14253.5,
+        "sourceEntries": 6,
+        "tables": 2,
+        "viewport": 1280,
+        "viewportHeight": 900
+      },
+      "screenshots": {
+        "texas-data-center-sales-tax-project-economics-desktop-opening.jpg": "a82ccd401b550fb3bcf30dc8a0421be9e2c61b969d07d3ce2cc55d99b760b5c4",
+        "texas-data-center-sales-tax-project-economics-desktop-full.jpg": "6b8d1ee8d2dd31473224dc6fc5e50637019ca9ffcff8cf12e5ae9de848cbf811",
+        "texas-data-center-sales-tax-project-economics-desktop-ending.jpg": "5198dcf8eb04a04d1ebe8a8a04cce634697d0229c9d9c693905415f4614390ba",
+        "texas-data-center-sales-tax-project-economics-phone-opening.jpg": "a26ad34e01bb3cff1979c2aa67b6abdca16106c8e398aa623e17915811605a47",
+        "texas-data-center-sales-tax-project-economics-phone-full.jpg": "cc8aa74d6a1851c6e5bc9139f10287aee9bbca8a6dbd71ea1a6cce70bed09bb1",
+        "texas-data-center-sales-tax-project-economics-phone-ending.jpg": "8a39120e1232ff510861daba04aa87d0bcfab7d2072a48cb8e60b8bb160e30f1"
+      }
+    },
+    {
+      "slug": "texas-jeti-incentives-project-underwriting",
+      "canonicalPath": "/research/texas/texas-jeti-incentives-project-underwriting",
+      "articleSha256": "3da6cfc2cb175c0868251e9337c28ad4842ff63cbb2bbe393119f1e166811c5f",
+      "phone": {
+        "slug": "texas-jeti-incentives-project-underwriting",
+        "h1": "Price the incentive with its obligations",
+        "scrollWidth": 390,
+        "scrollY": 0,
+        "sections": 11,
+        "sourceEntries": 7,
+        "tables": 2,
+        "viewport": 390
+      },
+      "desktop": {
+        "slug": "texas-jeti-incentives-project-underwriting",
+        "h1": "Price the incentive with its obligations",
+        "height": 14572,
+        "nearBottom": true,
+        "scrollWidth": 1280,
+        "scrollY": 13672.5,
+        "sourceEntries": 7,
+        "tables": 2,
+        "viewport": 1280,
+        "viewportHeight": 900
+      },
+      "screenshots": {
+        "texas-jeti-incentives-project-underwriting-desktop-opening.jpg": "46da9e980d583a16895cce04f9a6229827db6720e7a44ba238d4abbc98a827e2",
+        "texas-jeti-incentives-project-underwriting-desktop-full.jpg": "6006dd18cf4485d074a4e129e4efdf65f59e4144daa8099674e727ce95333e3a",
+        "texas-jeti-incentives-project-underwriting-desktop-ending.jpg": "8d5fdafc895915d87348416a3a245c4bd3eef3744816f1b9d3ed672faca8648c",
+        "texas-jeti-incentives-project-underwriting-phone-opening.jpg": "c419b5ac8ff964628ceee538ae4837decf3199e208ddb6ff4d8ffa88fd837ab6",
+        "texas-jeti-incentives-project-underwriting-phone-full.jpg": "493e6155ecada7d7cc0bb3e23f187828d3279527527849cd4523f379cf66c422",
+        "texas-jeti-incentives-project-underwriting-phone-ending.jpg": "790344d9bb07a84fc8fccc6bbb22f200215c67e607589bc4158651d0f6a0542e"
+      }
+    },
+    {
+      "slug": "texas-franchise-tax-reporting-business-decisions",
+      "canonicalPath": "/research/texas/texas-franchise-tax-reporting-business-decisions",
+      "articleSha256": "7f8ecd95fde1e35efd7313b6744aea56b480bf2e0560ffdd424a660ddfac50f5",
+      "phone": {
+        "slug": "texas-franchise-tax-reporting-business-decisions",
+        "h1": "No tax due still needs an owner",
+        "scrollWidth": 390,
+        "scrollY": 0,
+        "sections": 10,
+        "sourceEntries": 10,
+        "tables": 2,
+        "viewport": 390
+      },
+      "desktop": {
+        "slug": "texas-franchise-tax-reporting-business-decisions",
+        "h1": "No tax due still needs an owner",
+        "height": 14156,
+        "nearBottom": true,
+        "scrollWidth": 1280,
+        "scrollY": 13256.5,
+        "sourceEntries": 10,
+        "tables": 2,
+        "viewport": 1280,
+        "viewportHeight": 900
+      },
+      "screenshots": {
+        "texas-franchise-tax-reporting-business-decisions-desktop-opening.jpg": "493646595db5588b85e35a46fad3abadb07427a1631f697110f270f6ddef808f",
+        "texas-franchise-tax-reporting-business-decisions-desktop-full.jpg": "18d6dbf350e23f9302c64a05e08d5d93103e08dfc77333f404532d035f3d6589",
+        "texas-franchise-tax-reporting-business-decisions-desktop-ending.jpg": "1a0a22736cd88712d06e9c444b07809155380ed1668519ad214007c8333b5fde",
+        "texas-franchise-tax-reporting-business-decisions-phone-opening.jpg": "e48b341af06b60bcf0dbcf670035e61c34cd85043025f56d45de87f663655574",
+        "texas-franchise-tax-reporting-business-decisions-phone-full.jpg": "c6bbc1792eb53b1d5c5f32cce1f5c8f7d69c0aabb79dd264f1c05b69de1d0be4",
+        "texas-franchise-tax-reporting-business-decisions-phone-ending.jpg": "6eeb83282b063afc1a23ac4764b36a6043c326018e441f49462999c5237fcfc4"
+      }
+    },
+    {
+      "slug": "texas-hiring-labor-cost-planning",
+      "canonicalPath": "/research/texas/texas-hiring-labor-cost-planning",
+      "articleSha256": "2c4e40b2bd7a25e14db2145a2c108550cb4d7a4abb62f56e042bde8a417c87ae",
+      "phone": {
+        "slug": "texas-hiring-labor-cost-planning",
+        "h1": "Texas Hiring: Price the Role and the Ramp",
+        "scrollWidth": 390,
+        "scrollY": 0,
+        "sections": 10,
+        "sourceEntries": 9,
+        "tables": 2,
+        "viewport": 390
+      },
+      "desktop": {
+        "slug": "texas-hiring-labor-cost-planning",
+        "h1": "Texas Hiring: Price the Role and the Ramp",
+        "height": 13784,
+        "nearBottom": true,
+        "scrollWidth": 1280,
+        "scrollY": 12884,
+        "sourceEntries": 9,
+        "tables": 2,
+        "viewport": 1280,
+        "viewportHeight": 900
+      },
+      "screenshots": {
+        "texas-hiring-labor-cost-planning-desktop-opening.jpg": "9861311506c96a09b4e1ba74681cbf1bdbfcaa6992147cff6e4a54022a3802b7",
+        "texas-hiring-labor-cost-planning-desktop-full.jpg": "19437b9d806112d480703e341ae6067e49cca55fac24fa61b939efc5fe060fb7",
+        "texas-hiring-labor-cost-planning-desktop-ending.jpg": "d10b1ca04b22189b38c9399f24d387120dd488e3acf1419c12b216e32029dc24",
+        "texas-hiring-labor-cost-planning-phone-opening.jpg": "763c70ae5b64446da160b9a87676dada8076047d5ac4de7d10411b49cabacfa0",
+        "texas-hiring-labor-cost-planning-phone-full.jpg": "1c51aac7b69575aa735071a1938c9fd964987c62e7236611654f58b921c81e23",
+        "texas-hiring-labor-cost-planning-phone-ending.jpg": "3b4788de428e2bc2e4848986d7cf816f89bca942c342682feb13f582c347f679"
+      }
+    },
+    {
+      "slug": "texas-cross-border-logistics-business-planning",
+      "canonicalPath": "/research/texas/texas-cross-border-logistics-business-planning",
+      "articleSha256": "3e16c4b62619da68ce4e59e81ec378d5d0b3dae4761c2b3bec6d061393c537ab",
+      "phone": {
+        "slug": "texas-cross-border-logistics-business-planning",
+        "h1": "Texas\u2013Mexico Logistics: Price the Whole Route",
+        "scrollWidth": 390,
+        "scrollY": 0,
+        "sections": 10,
+        "sourceEntries": 9,
+        "tables": 2,
+        "viewport": 390
+      },
+      "desktop": {
+        "slug": "texas-cross-border-logistics-business-planning",
+        "h1": "Texas\u2013Mexico Logistics: Price the Whole Route",
+        "height": 14036,
+        "nearBottom": true,
+        "scrollWidth": 1280,
+        "scrollY": 13136,
+        "sourceEntries": 9,
+        "tables": 2,
+        "viewport": 1280,
+        "viewportHeight": 900
+      },
+      "screenshots": {
+        "texas-cross-border-logistics-business-planning-desktop-opening.jpg": "8b8c4ba56b977066259fea7ce1574569b9221ffb89e952f0cc55cc909ce58773",
+        "texas-cross-border-logistics-business-planning-desktop-full.jpg": "f685b1ba6356bbac13779363f355bd7dfd4efc46285e52e9a2d47a146f969b01",
+        "texas-cross-border-logistics-business-planning-desktop-ending.jpg": "ef9c226ed827497cd54b49905ead7712fde58e8a9bea2210ac8e8a3718812287",
+        "texas-cross-border-logistics-business-planning-phone-opening.jpg": "b9bfbcf109931222e8e50ef4e3e4f55df159b75480b99ec62dde3af98064db9f",
+        "texas-cross-border-logistics-business-planning-phone-full.jpg": "896e597ff89481b9ce26d89de55b5ecaddce1698e3e0e472e3d0df149272bcc1",
+        "texas-cross-border-logistics-business-planning-phone-ending.jpg": "d2d60b607f4cb8af1f8303f7ead3fa12f20b3522813dc89c47dfbfa7530aa4d2"
+      }
+    },
+    {
+      "slug": "texas-manufacturing-capacity-procurement",
+      "canonicalPath": "/research/texas/texas-manufacturing-capacity-procurement",
+      "articleSha256": "aeca16e13635314bb54fb09cdad05b848546aea94c8b9bb1a3b22f1ea8741d36",
+      "phone": {
+        "slug": "texas-manufacturing-capacity-procurement",
+        "h1": "Texas Supply: Qualify the Capacity",
+        "scrollWidth": 390,
+        "scrollY": 0,
+        "sections": 12,
+        "sourceEntries": 9,
+        "tables": 2,
+        "viewport": 390
+      },
+      "desktop": {
+        "slug": "texas-manufacturing-capacity-procurement",
+        "h1": "Texas Supply: Qualify the Capacity",
+        "height": 14736,
+        "nearBottom": true,
+        "scrollWidth": 1280,
+        "scrollY": 13836.5,
+        "sourceEntries": 9,
+        "tables": 2,
+        "viewport": 1280,
+        "viewportHeight": 900
+      },
+      "screenshots": {
+        "texas-manufacturing-capacity-procurement-desktop-opening.jpg": "e29beb684f7690aa9cb279f481d8891122195ad2a434d46d889f6e6e416f203c",
+        "texas-manufacturing-capacity-procurement-desktop-full.jpg": "ce7dd079c6ee00b1437346874c1f7b403a62aee83fc1570bd137432e5d488c6d",
+        "texas-manufacturing-capacity-procurement-desktop-ending.jpg": "04271435f167b12c8a78a53621cdfff982b7876de36a655311f92f864daa8e93",
+        "texas-manufacturing-capacity-procurement-phone-opening.jpg": "c853176f44bf5214a5846c3e6717980257219672c18a6d184488f6777566590e",
+        "texas-manufacturing-capacity-procurement-phone-full.jpg": "372415e6f4a69b0945bd5f72b0cc113cba59001e080fd55ea094e71985c1e09e",
+        "texas-manufacturing-capacity-procurement-phone-ending.jpg": "260dc98348c05bb3b26d8167fcb05fab806010a3e4e6be66348aeb1d192d1f5c"
+      }
+    },
+    {
+      "slug": "texas-commercial-property-insurance-diligence",
+      "canonicalPath": "/research/texas/texas-commercial-property-insurance-diligence",
+      "articleSha256": "8a187646cbc3159acebf65bfd46ac4041270058901e75ccc93df4fd4434e6053",
+      "phone": {
+        "slug": "texas-commercial-property-insurance-diligence",
+        "h1": "The Business Behind the Policy",
+        "scrollWidth": 390,
+        "scrollY": 0,
+        "sections": 10,
+        "sourceEntries": 11,
+        "tables": 2,
+        "viewport": 390
+      },
+      "desktop": {
+        "slug": "texas-commercial-property-insurance-diligence",
+        "h1": "The Business Behind the Policy",
+        "height": 15911,
+        "nearBottom": true,
+        "scrollWidth": 1280,
+        "scrollY": 15011,
+        "sourceEntries": 11,
+        "tables": 2,
+        "viewport": 1280,
+        "viewportHeight": 900
+      },
+      "screenshots": {
+        "texas-commercial-property-insurance-diligence-desktop-opening.jpg": "9a3bae7cb4200d077c9138ff5c35e1511dce0862e82a49165b420790d53e2dfd",
+        "texas-commercial-property-insurance-diligence-desktop-full.jpg": "23e1855494da459398d3fe586fd5ea98b1ab7dea2fadccb63feb432a88bb9ade",
+        "texas-commercial-property-insurance-diligence-desktop-ending.jpg": "1a7a4815ec82c1721624ca58ba157b221c25776fc123621c4128840188962f57",
+        "texas-commercial-property-insurance-diligence-phone-opening.jpg": "91f47afb623e69ae5e1f5fd40e406e82ed2bbb213adfb74e95f694c190ff770a",
+        "texas-commercial-property-insurance-diligence-phone-full.jpg": "5b233848003207dd4e86a2fe5d109a8c019505f102ef534b236508441c0fdc8f",
+        "texas-commercial-property-insurance-diligence-phone-ending.jpg": "b3cb58c2b35d1b865c7db6528e945e21685db939f4e81c6628b9bf281b9214cf"
+      }
+    },
+    {
+      "slug": "chegg-cash-flow-turnaround",
+      "canonicalPath": "/research/financial-systems/chegg-cash-flow-turnaround",
+      "articleSha256": "7972b6da7f79736106f07d9b2bb903fe7faad63a1116579a2c8f00b48a7e3e8e",
+      "phone": {
+        "slug": "chegg-cash-flow-turnaround",
+        "h1": "Why I believe in Chegg\u2019s reinvention.",
+        "scrollWidth": 390,
+        "scrollY": 0,
+        "sections": 15,
+        "sourceEntries": 9,
+        "tables": 8,
+        "viewport": 390
+      },
+      "desktop": {
+        "slug": "chegg-cash-flow-turnaround",
+        "h1": "Why I believe in Chegg\u2019s reinvention.",
+        "height": 24960,
+        "nearBottom": true,
+        "scrollWidth": 1280,
+        "scrollY": 24060,
+        "sourceEntries": 9,
+        "tables": 8,
+        "viewport": 1280,
+        "viewportHeight": 900
+      },
+      "screenshots": {
+        "chegg-cash-flow-turnaround-desktop-opening.jpg": "cbd0523bf0b7b8c3a3834b8e9b7a0aa29c535f01630d33bbfbbc6d97fa2f6d39",
+        "chegg-cash-flow-turnaround-desktop-full.jpg": "3c53d6935ec8e68d512a05031bab6a79836b66c36d9dbca87df853bfb75712f8",
+        "chegg-cash-flow-turnaround-desktop-ending.jpg": "3445fd84a922643b080737c61c81aad7c31ce746af1912c41829b288e84ea669",
+        "chegg-cash-flow-turnaround-phone-opening.jpg": "0fe396c4d83fb0f4903d3f419fe7e07e3aee462477492646ddade280c35bb229",
+        "chegg-cash-flow-turnaround-phone-full.jpg": "50de17e98d48eeeb452cfdafcf118dd3b1cb1f69f8102d30a74b7c0c5a8b3b02",
+        "chegg-cash-flow-turnaround-phone-ending.jpg": "cb3aaef1eefa04743df32b6ec2631b0666dcd60b91c509df0309c72cfb99b9ff"
+      }
+    }
+  ]
+}

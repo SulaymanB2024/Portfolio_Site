@@ -392,5 +392,12 @@
       "note": "Three-year holding period, no dividends. The unrounded entry hurdle is used before display rounding. $31.29 is the dated October 12, 2026 reference quote, not a future live price."
     }
   ],
-  "readTime": "11 MIN"
+  "readTime": "11 MIN",
+  "resources": [
+    {
+      "label": "Download the seven-study models and source package",
+      "href": "/downloads/research/strategy-startup-models.zip",
+      "format": "ZIP"
+    }
+  ]
 }

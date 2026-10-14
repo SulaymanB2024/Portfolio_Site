@@ -26,7 +26,7 @@ CONFIG = {
         "tests": [["By Q2 2028", "Trailing TM dollars ex-customer interest above$16bn; strict distribution-cash measure above$5bn"], ["Consumer demand", "Two quarters of branded-checkout TPV growth at least4% currency-neutral; monthly active-account growth above2%"], ["Reconsider", "Two negative checkout-growth quarters, ex-interest TM below$14bn, or strict annual cash below$4bn"]]},
     "CROX": {"slug": "crocs-cash-and-brand-test", "title": "Crocs: A Cash Engine with a Brand Test", "displayTitle": "Crocs: a cash engine with a brand test.", "lines": ["Crocs: a cash engine", "with a brand test."], "sketch": "yuru-27", "prefix": "C", "figure_name": "crocs", "manuscript": "manuscript-crocs.md", "subtitle": "A long on the profitable footwear franchise, with cash-funded repurchases and an explicit tax-payment stress.",
         "source_specs": [("C1", "CROX-K25", "Crocs FY2025 Form 10-K", "Annual/earlier cash and revenue, geographic mix, impairment and uncertain tax positions."), ("C2", "CROX-Q226", "Crocs Q2 2026 Form 10-Q", "H1 cash, segments, price/volume bridge, share count, tax payable and subsequent tariff refund."), ("C3", "CROX-ER226", "Crocs Q2 2026 earnings release", "Adjusted profit and share bridge; GAAP/adjusted guidance excludes potential tariff refunds.")], "extra_sources": [], "slots": {},
-        "tests": [["By latest available 2028 trailing period", "Crocs brand revenue above$3.6bn; recurring cash around$645m; fewer than44m outstanding shares"], ["Operating margin", "Consolidated adjusted operating margin above21%; evidence that direct expansion retains profit"], ["Reconsider", "Both Crocs geographies contract twice, margin below20%, cash below$500m with debt-funded purchases, or a material tax payment crowds out repurchases"]]},
+        "tests": [["By latest available 2028 trailing period", "Crocs brand revenue above$3.6bn; recurring cash around$645m; fewer than 44m outstanding shares"], ["Operating margin", "Consolidated adjusted operating margin above21%; evidence that direct expansion retains profit"], ["Reconsider", "Both Crocs geographies contract twice, margin below20%, cash below$500m with debt-funded purchases, or a material tax payment crowds out repurchases"]]},
     "EXPE": {"slug": "expedia-network-and-cash", "title": "Expedia: The Network Beyond the Booking", "displayTitle": "Expedia: the network beyond the booking.", "lines": ["Expedia: the network", "beyond the booking."], "sketch": "yuru-28", "prefix": "E", "figure_name": "expedia", "manuscript": "manuscript-expedia.md", "subtitle": "A long on consumer efficiency and partner distribution, with advance travel cash removed from the valuation anchor.",
         "source_specs": [("E1", "expe-fy-2025", "Expedia FY2025 Form 10-K", "Annual cash, travel working capital, compensation and segment results."), ("E2", "expe-q2-2026", "Expedia Q2 2026 Form 10-Q", "Comparable H1 statements, dated shares, customer/supplier obligations, investment/tax effects and segment data."), ("E3", "expe-q2-2026-release", "Expedia Q2 2026 earnings release", "Q2 segment conversion, booking definitions, guidance and declared dividend.")], "extra_sources": [], "slots": {},
         "tests": [["By Q2 2028", "Trailing B2B revenue above$7bn; B2B adjusted EBITDA margin at least25%; B2C margin at least31%"], ["Shareholder cash", "Conservative travel-WC/compensation cash sensitivity above$3bn and shares below114m"], ["Reconsider", "B2B margin below23% twice, B2C margin below28%, or annual cash sensitivity below$2.2bn"]]},
@@ -135,6 +135,47 @@ def polish_visible(value, key=""):
     return value
 
 
+def crocs_scenario_section(company):
+    cases = company["scenarios"]
+    results = {case["name"]: case for case in output["companies"]["CROX"]["scenarios"]}
+    rows = [
+        ["Crocs brand growth / year", *[f(case["segment_growth"]["crocs_brand"][0] * 100, 0) + "%" for case in cases]],
+        ["HEYDUDE growth / year", *[f(case["segment_growth"]["heydude"][0] * 100, 0) + "%" for case in cases]],
+        ["Recurring cash margin", *[f(case["owner_cash_margin"][0] * 100, 0) + "%" for case in cases]],
+        ["Protected cash / year · $m", *[f(case["cash_commitments"][0], 0) for case in cases]],
+        ["Desired net share reduction / year", *[f(case["desired_net_share_retirement"][0] * 100, 0) + "%" for case in cases]],
+        ["Assumed purchase price · Year 1 / 2", *[" / ".join("$" + f(price, 0) for price in case["average_repurchase_price"]) for case in cases]],
+        ["Year 2 recurring cash · $m", *[f(results[case["name"]]["years"][-1]["owner_cash"], 1) for case in cases]],
+        ["Ending shares · millions", *[f(results[case["name"]]["years"][-1]["ending_shares_m"], 3) for case in cases]],
+        ["Terminal cash multiple", *[f(case["terminal_owner_cash_multiple"], 0) + "×" for case in cases]],
+        ["Model price", *["$" + f(results[case["name"]]["terminal_price"], 2) for case in cases]],
+        ["Price return", *[f(results[case["name"]]["price_return"] * 100, 1) + "%" for case in cases]],
+    ]
+    return {
+        "id": "the-operating-cases-explain-the-wider-price-range",
+        "title": "The operating cases explain the wider price range",
+        "paragraphs": ["The chart's wider range changes demand, cash conversion and valuation together. The bear case assumes contraction in both brands; the bull case requires growth in both. These operating cases differ from the earlier tax-payment stress, which changes the base cash budget while leaving funding costs and operating disruption outside the price calculation."],
+        "table": table(
+            "Assumptions behind the October 12, 2028 price cases",
+            ["Author assumption / output", *[case["name"] for case in cases]],
+            rows,
+            "Annual assumptions apply in both model years. Cash margins already charge economic compensation. Desired share reduction is capped by available cash after protected commitments; base and bull purchases fall short of those desired rates. The cases exclude the separate $600m tax-payment stress. No probability weights; the central forecast remains $165, rounding the base model to $5.",
+        ),
+    }
+
+
+def bind_crocs_scenario_section(article, company):
+    # Keep this exhibit separate: a section has one table, so the reverse table
+    # otherwise replaces the source manuscript's earlier scenario-table slot.
+    section = crocs_scenario_section(company)
+    sections = [existing for existing in article["sections"] if existing["id"] != section["id"]]
+    forecast = next(index for index, existing in enumerate(sections) if existing["id"] == "the-forecast-asks-for-modest-growth-and-a-modest-revaluation")
+    sections.insert(forecast + 1, section)
+    article["sections"] = sections
+    article["dateModified"] = "2026-10-14"
+    return article
+
+
 def build():
     manifest=[]; registry={"version":1,"authored_on":"2026-10-13","information_cutoff":"2026-10-12","evaluation_date":"2028-10-12","benchmark":inputs["benchmark"],"basis":"Price-return comparison, corporate actions reconciled; dividends reported separately without reinvestment when complete. Preserve original forecasts. No probabilities or portfolio weights.","predictions":[]}
     for company in inputs["companies"]:
@@ -156,6 +197,8 @@ def build():
                 if g:section["figures"]=[images[g]]
         data=output["companies"][company["symbol"]];base=next(x for x in data["scenarios"] if x["name"]=='Base')
         article={"slug":conf["slug"],"path":"/research/financial-systems/"+conf["slug"],"title":conf["title"],"displayTitle":conf["displayTitle"],"seoTitle":conf["title"]+" | Long Thesis and 2028 Forecast","seoDescription":conf["subtitle"]+f" Entry ${company['entry_close']:.2f}; author forecast ${base['rounded_price_forecast']:.0f} for October12,2028.","category":"FINANCIAL SYSTEMS","subtitle":conf["subtitle"],"searchTerms":[company["symbol"],company["company"],"long pitch","financial analysis","cash flow","valuation","2028 forecast"],"date":"2026-10-13","dateModified":"2026-10-13","readTime":"1 MIN","kind":"research","image":"/images/social/"+conf["slug"]+".png","author":"Sulayman Bowles","openingPresentation":"integrated","ledeMarkdown":"\n\n".join(intro),"thesis":f"Positive long thesis at the October12 close of ${company['entry_close']:.2f}; central price forecast ${base['rounded_price_forecast']:.0f} for October12,2028.","evidenceBoundary":f"Public-source equity pitch written October13,2026, with information/entry-price cutoff October12. Latest financial period: {company['ttm_period_end']}. Latest disclosed shares: {company['share_count_date']}; exact October shares/cash are not asserted. Author cash sensitivities, operating paths, purchase prices, valuation multiples and disconfirmation thresholds are labeled. Future accuracy is unobserved; no holdings or company work are implied.","assumptions":["USD millions and millions of shares unless stated; prices are USD per original share.","TTM = annual result + current comparable interim − prior interim. Forward cash margins include economic compensation and company-specific recurring reinvestment.","Net share reduction is cash-budget constrained. Retained/protected cash has no terminal bonus; gross buybacks are not added to price returns. Cases are not probabilities."],"sections":sections,"conclusion":conclusion,"sources":source_ledger,"resources":[{"label":"Reproduce all four long pitches","href":"/downloads/research/four-long-pitches-model.zip","description":"Frozen quotes, primary inputs, cash-budget models, scenario CSV, original figures and executed notebook.","format":"ZIP"},{"label":"Inspect the dated forecast registry","href":"/downloads/research/long-pitches-forecast-registry.json","description":"Original price and operating forecasts, entry dates, benchmark basis and model identity.","format":"JSON"}]}
+        if company["symbol"] == "CROX":
+            article=bind_crocs_scenario_section(article,company)
         article=polish_visible(article)
         p=SITE/'src/personal/editorial/data/articles'/(conf["slug"]+'.json');p.write_text(json.dumps(article,ensure_ascii=False,indent=2)+'\n')
         registry["predictions"].append({"symbol":company["symbol"],"slug":conf["slug"],"entry_close":company["entry_close"],"central_price_forecast":base["rounded_price_forecast"],"unrounded_base_model_price":base["terminal_price"],"price_return_forecast":base["rounded_price_forecast"]/company["entry_close"]-1,"assumed_cash_dividends_per_original_share":base["dividends_per_original_entry_share"],"latest_disclosed_share_date":company["share_count_date"],"operating_predictions":conf["tests"],"model_inputs_sha256":hashlib.sha256((ROOT/'inputs.json').read_bytes()).hexdigest(),"scenario_outputs_sha256":hashlib.sha256((ROOT/'outputs/model-results.json').read_bytes()).hexdigest()})

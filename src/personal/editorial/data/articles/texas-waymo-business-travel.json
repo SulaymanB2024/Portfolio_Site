@@ -18,16 +18,16 @@
     "Texas robotaxi employee travel"
   ],
   "date": "2026-10-13",
-  "dateModified": "2026-10-13",
+  "dateModified": "2026-10-14",
   "author": "Sulayman Bowles",
   "kind": "research",
   "readTime": "11 MIN",
   "openingPresentation": "integrated",
-  "evidenceBoundary": "Access and payment research checked October 12, 2026; NTSB Austin oversight record and economic thresholds reviewed October 13. Individual source dates remain visible. No live supply, corporate contract, quoted fare, first-hand ride or comparative safety result is claimed. Cost and fallback inputs are hypothetical.",
+  "evidenceBoundary": "San Antonio and SAT invitation access updated from Waymo’s October 14, 2026 announcement. Other access/payment research retains its October 12 check; NTSB Austin oversight and economic thresholds retain the October 13 review. Individual source dates remain visible. No live supply, corporate contract, quoted fare, first-hand ride or comparative safety result is claimed. Cost and fallback inputs are hypothetical.",
   "content": [
     "A sales visit has several transport decisions: the airport transfer, hotel-to-client trip and ride back after dinner. Approve each Waymo leg against the traveler’s account, supported route and pickup arrangement. Then leave enough time and a reachable alternative to protect the appointment if the request fails.",
-    "Waymo opened Dallas to all riders on August 4, 2026, and Houston on August 20. Austin uses a different arrangement: riders request an eligible Uber trip and may receive a Waymo match. Current Waymo Help still describes San Antonio as gradually adding riders. These are different access conditions, even though all four cities appear in Waymo’s Texas service story. [Dallas opening](#source-dallas-open), [Houston opening](#source-houston-open), [current access guidance](#source-service-areas).",
-    "The reviewed evidence supports considering Dallas/Houston direct-app local trips, eligible Austin Uber matches and SAT service for already admitted San Antonio riders. It does not establish that any visitor can complete an entire airport-to-client itinerary autonomously. Price the supported legs together with the transfers and fallback they require."
+    "Waymo opened Dallas to all riders on August 4, 2026, Houston on August 20 and San Antonio on October 14. The latest San Antonio notice also opens SAT airport to all riders without an invitation. Austin uses a different arrangement: an eligible Uber request may receive a Waymo match. These access policies do not guarantee a vehicle for a particular trip. [Dallas opening](#source-dallas-open), [Houston opening](#source-houston-open), [San Antonio/SAT update](#source-sa-open).",
+    "The reviewed evidence supports considering Dallas/Houston direct-app local trips, eligible Austin Uber matches and San Antonio/SAT requests under the October 14 opening. It does not establish that a traveler can complete an entire airport-to-client itinerary autonomously. Price the supported legs together with the transfers and fallback they require."
   ],
   "sections": [
     {
@@ -35,11 +35,11 @@
       "title": "Separate the four Texas access models",
       "paragraphs": [
         "Austin riders use Uber rather than booking a local ride in the Waymo app. Waymo’s instructions describe eligible Uber products, the AV preference setting and a ride offer that the traveler accepts when matched. Enabling the preference increases the chance of an offer; it does not reserve a specific autonomous vehicle. A travel policy should allow the human-driven result of the same booking flow when the trip has to happen. [Austin instructions](#source-austin-access).",
-        "The Dallas and Houston opening dates remove the invitation requirement described in their earlier rollout. They do not remove service-area boundaries or establish immediate supply at every address. Conversely, an employee with San Antonio access may be able to take a trip that a visiting colleague cannot yet request. Validate each traveler’s account before relying on a group’s shared experience.",
+        "Open admission does not establish immediate supply at every address, eligibility under every account rule or an organization’s payment arrangement. Validate the actual traveler, route and pickup instructions before relying on a group’s shared experience.",
         "Treat the following as a source-checked access summary, not a live dispatch board. A city name describes a market; the booking app is where the current route, rider eligibility and vehicle offer must be resolved."
       ],
       "table": {
-        "caption": "Waymo Texas access at the October 12 review",
+        "caption": "Texas access: San Antonio/SAT updated October 14; other market checks retain October 12",
         "columns": [
           "Market",
           "Stated booking route",
@@ -63,8 +63,8 @@
           ],
           [
             "San Antonio",
-            "Waymo app; gradually adding riders",
-            "Traveler’s existing ride access before booking"
+            "Waymo app; open to all riders from October 14",
+            "Invitation removed; verify the actual route and vehicle"
           ]
         ],
         "note": "Primary operator guidance summarized above. No statewide coverage, reserved vehicle or current wait-time observation is implied."
@@ -74,7 +74,7 @@
       "id": "airport-and-route",
       "title": "Approve the airport leg on its own evidence",
       "paragraphs": [
-        "Waymo’s current airport guidance identifies San Antonio International Airport pickup and dropoff at Terminal A and Terminal B Departures, plus the Arrivals outer curb near Rideshare Zone 2. It restricts access to people already able to ride in San Antonio. A terminal route therefore does not solve a traveler’s pending invitation. [SAT instructions](#source-airports).",
+        "Waymo’s October 14 notice opens San Antonio International Airport to all riders. The previously reviewed terminal guidance places pickups/dropoffs at Terminal A/B Departures and the Arrivals outer curb near Rideshare Zone 2. The invitation restriction described in the earlier airport guidance is superseded; check the app’s current pickup instructions and trip availability. [Opening announcement](#source-sa-open), [terminal guidance reviewed October 12](#source-airports).",
         "The August Dallas opening notice described fully autonomous testing at Love Field terminals and future Dallas freeway testing. It was a development announcement, not proof of a public airport booking. This review did not establish current passenger service at Love Field, DFW, Houston’s airports or Austin-Bergstrom. Obtain route-specific confirmation rather than extending SAT access or a citywide announcement to another airport.",
         "Freeway capability is a separate check. Waymo’s help page says access is limited and even eligible riders will not necessarily receive a freeway route. Preview the actual route and dropoff estimate before comparing a suburban meeting journey with a human-driven alternative. A route that works for one account or city cannot settle another employee’s booking. [Freeway guidance](#source-freeways).",
         "Build the itinerary as distinct legs, including any transfer between services. Identify where luggage moves, which person makes each request, and the latest time to switch providers. A feasible downtown ride can still be useful when the airport leg uses a taxi or car service; record the additional handoff and time instead of promising one continuous autonomous journey."
@@ -196,7 +196,7 @@
       "id": "updates",
       "title": "Update the policy when the usable service changes",
       "paragraphs": [
-        "Revisit this article when San Antonio opens access more broadly, a Texas airport obtains confirmed public service, Austin’s booking arrangement changes, or a named Texas business program becomes available on documented terms. Changes in fare, pickup behavior, route access or support should trigger a fresh comparison using the same trip definition.",
+        "Revisit this article when San Antonio/SAT access changes again, another Texas airport obtains confirmed public service, Austin’s booking arrangement changes, or a named Texas business program becomes available on documented terms. Changes in fare, pickup behavior, route access or support should trigger a fresh comparison using the same trip definition.",
         "The business value of Waymo in Texas will differ by journey. Use the current service where it meets the requirement, retain a workable fallback and give finance a comparison that includes the whole trip. A useful transport decision is one a traveler can execute and a manager can check."
       ]
     }
@@ -226,8 +226,8 @@
       "href": "https://support.google.com/waymo/answer/9059119?hl=en",
       "publisher": "Waymo Help",
       "date": "Undated current guidance",
-      "note": "San Antonio marked Gradually adding riders; Austin only through Uber. Maps and app eligibility remain trip-specific.",
-      "lastVerified": "2026-10-12"
+      "note": "Current service-area page rechecked October 14: Austin remains on Uber and San Antonio no longer carries the gradual-admission label. The separately dated opening announcement establishes the new admission policy; maps and available trips remain specific to the request.",
+      "lastVerified": "2026-10-14"
     },
     {
       "id": "austin-access",
@@ -253,7 +253,7 @@
       "href": "https://support.google.com/waymo/answer/14298153?hl=en",
       "publisher": "Waymo Help",
       "date": "Undated current guidance",
-      "note": "SAT Terminal A/B Departures and Arrivals outer curb near Rideshare Zone 2. Airport access is available to riders already able to ride in San Antonio.",
+      "note": "Terminal pickup guidance reviewed October 12: A/B Departures and Arrivals outer curb near Rideshare Zone 2. Its earlier invitation restriction is superseded by the October 14 opening announcement.",
       "lastVerified": "2026-10-12"
     },
     {
@@ -309,6 +309,16 @@
       "date": "Event 2026-01-12; preliminary release 2026-03-03",
       "lastVerified": "2026-10-13",
       "note": "HWY26FH007: preliminary narrative says no crash; remote-assistance response preceded passing. Status observed Ongoing October 13. No final probable cause, current defect persistence or comparative failure rate established."
+    },
+    {
+      "id": "sa-open",
+      "label": "San Antonio and SAT open to all riders",
+      "href": "https://support.google.com/waymo/answer/18765688",
+      "publisher": "Waymo Help",
+      "date": "2026-10-14",
+      "lastVerified": "2026-10-14",
+      "type": "Dated operator announcement",
+      "note": "October 14 notice removes the invitation requirement for San Antonio and opens SAT to all riders. A specific route, pickup and available vehicle still require the booking app."
     }
   ],
   "faqs": [
@@ -322,7 +332,7 @@
     },
     {
       "question": "Does Waymo serve San Antonio International Airport for every visitor?",
-      "answer": "Current guidance identifies SAT terminal locations but limits airport access to people already able to ride in San Antonio. Confirm the traveler’s access before relying on it. [Airport guidance](#source-airports)."
+      "answer": "Waymo’s October 14 announcement opens San Antonio and SAT to all riders without an invitation. Confirm the supported route, terminal pickup instructions and available service for the actual trip. This is an access-policy update, not a reserved vehicle. [Dated opening](#source-sa-open); [terminal guidance](#source-airports)."
     },
     {
       "question": "Does a Waymo business profile establish a Texas corporate ride program?",
@@ -336,7 +346,7 @@
   "resources": [
     {
       "label": "Texas autonomous mobility source and decision ledger",
-      "href": "/research/texas-research-library-2026-10-13.json",
+      "href": "/research/texas-research-library-2026-10-14.json",
       "description": "Primary evidence, declared assumptions and update triggers across the Texas business and autonomy library.",
       "format": "JSON"
     }

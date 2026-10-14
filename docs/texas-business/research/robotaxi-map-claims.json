@@ -1,11 +1,11 @@
 {
   "article": "texas-robotaxi-business-service-map",
-  "checkedAt": "2026-10-13",
+  "checkedAt": "2026-10-14",
   "claims": [
     {
       "id": "avmap-1",
-      "claim": "Waymo Dallas/Houston public-access openings were dated August 4/August 20, 2026; Austin channel and San Antonio admission need current guidance.",
-      "status": "current/dates preserved",
+      "claim": "Waymo Dallas/Houston public-access openings were dated August 4/August 20, 2026; San Antonio and SAT opened to all riders on October 14. Austin remains available through eligible Uber requests.",
+      "status": "dated operator update",
       "qualification": "A city-level opening is not an individual trip guarantee.",
       "sources": [
         {
@@ -21,15 +21,23 @@
         {
           "url": "https://support.google.com/waymo/answer/9059119?hl=en",
           "date": "Undated current support page",
-          "pinpoint": "Current guidance distinguishes Austin via Uber and gradual rider admission in San Antonio. Areas/access change; use the app for the actual request."
+          "pinpoint": "Rechecked October 14: Austin Uber channel; San Antonio no longer labeled gradually adding riders. The dated opening announcement establishes current admission; service maps remain trip-specific.",
+          "checkedAt": "2026-10-14"
         },
         {
           "url": "https://support.google.com/waymo/answer/16011725?hl=en",
           "date": "Undated current support page",
           "pinpoint": "Eligible Uber ride request, preference and matched offer differ from guaranteed vehicle selection."
+        },
+        {
+          "url": "https://support.google.com/waymo/answer/18765688",
+          "date": "2026-10-14",
+          "pinpoint": "Dated San Antonio/SAT all-rider opening; invitation requirement removed."
         }
       ],
-      "recheck": "Relevant provider access/role/domain change, official record change or actual pilot evidence"
+      "recheck": "Relevant provider access/role/domain change, official record change or actual pilot evidence",
+      "priorClaim": "Waymo Dallas/Houston public-access openings were dated August 4/August 20, 2026; Austin channel and San Antonio admission need current guidance.",
+      "sourceDate": "2026-10-14"
     },
     {
       "id": "avmap-2",
@@ -71,9 +79,9 @@
     },
     {
       "id": "avmap-4",
-      "claim": "Current Uber Dallas guidance identifies Avride service north of Trinity River, an onboard specialist able to take control and three rear-seat riders; May\u2019s reviewed Arlington evidence leaves public access unresolved.",
+      "claim": "Current Uber Dallas guidance identifies Avride service north of Trinity River, an onboard specialist able to take control and three rear-seat riders; May’s reviewed Arlington evidence leaves public access unresolved.",
       "status": "current issuer guidance plus unresolved May access",
-      "qualification": "Historical nine-square-mile launch area is separate. Qualifying request and match still need verification; omission from May\u2019s list does not prove no activity.",
+      "qualification": "Historical nine-square-mile launch area is separate. Qualifying request and match still need verification; omission from May’s list does not prove no activity.",
       "sources": [
         {
           "url": "https://www.uber.com/us/en/newsroom/avride-on-uber/",
@@ -127,14 +135,14 @@
     },
     {
       "id": "avmap-7",
-      "claim": "NTSB\u2019s preliminary January 12 Austin account describes a Waymo vehicle passing a stopped school bus after an incorrect remote-assistance response; no crash occurred. The reviewed page lists the investigation as ongoing.",
+      "claim": "NTSB’s preliminary January 12 Austin account describes a Waymo vehicle passing a stopped school bus after an incorrect remote-assistance response; no crash occurred. The reviewed page lists the investigation as ongoing.",
       "status": "preliminary official investigation; status observed 2026-10-13",
       "qualification": "Not final probable cause, proof a defect persists today, a measured rate or a provider ranking. Remote assistance is advice/information, not automatically remote driving.",
       "sources": [
         {
           "url": "https://www.ntsb.gov/investigations/Pages/HWY26FH007.aspx",
           "date": "2026-03-03",
-          "pinpoint": "What Happened paragraphs 1\u20138; Investigation Details; footnote 4"
+          "pinpoint": "What Happened paragraphs 1–8; Investigation Details; footnote 4"
         }
       ],
       "recheck": "Final findings, corrective evidence or applicable operating restrictions change."
@@ -155,7 +163,7 @@
     },
     {
       "id": "avmap-9",
-      "claim": "The declared model\u2019s combined saving reaches zero at 20 paid fallbacks out of 120 AV attempts, or 16.7%.",
+      "claim": "The declared model’s combined saving reaches zero at 20 paid fallbacks out of 120 AV attempts, or 16.7%.",
       "status": "calculated hypothetical",
       "qualification": "Original AV charge retained; rate is a break-even sensitivity, not observed provider performance.",
       "sources": [],
@@ -174,5 +182,7 @@
     "date": "2026-10-13",
     "scope": "Two official oversight bodies and the attempt denominator reviewed; established operator-source dates preserved.",
     "originalSourceDatesPreserved": true
-  }
+  },
+  "researchCutoff": "2026-10-14",
+  "updateScope": "Only San Antonio/SAT invitation access rechecked October 14 against the dated operator announcement. Earlier source checks and all scenarios retain their original scope."
 }

@@ -88,7 +88,7 @@ To show the sensitivity, I normalize an illustrative company at $400 million ARR
 
 $400m ARR is an illustrative normalization, not verified current Harvey ARR. Assumed $2,400 annual seat price, 65% active licenses and other delivery costs of 15% ARR. Selling, R&D and administration remain below gross profit. No actual Harvey margin or inference cost is inferred.
 
-The resulting hypothetical gross margins range from 78.2% to 36.3%. Selling, research, and administration still have to be funded below that line. The same ARR can therefore represent very different earnings potential. A lower-margin business might grow quickly and remain valuable, but it should not receive a software valuation merely because it sells subscriptions.
+The resulting hypothetical gross margins range from 78.2% to 36.2%. Selling, research, and administration still have to be funded below that line. The same ARR can therefore represent very different earnings potential. A lower-margin business might grow quickly and remain valuable, but it should not receive a software valuation merely because it sells subscriptions.
 
 There is an uncomfortable incentive inside seat pricing too. Low usage can make delivery margin look better in the short term because the purchased license generates revenue without much inference cost. It can weaken renewal later. I would examine adoption, customer value, and delivery cost together rather than choose the metric that looks best in isolation.
 

@@ -393,5 +393,12 @@
     }
   ],
   "seoDescription": "One annual fee bundles equipment and continuing service. I model the cash a deployment must recover and the renewal risk that can interrupt it.",
-  "readTime": "11 MIN"
+  "readTime": "12 MIN",
+  "resources": [
+    {
+      "label": "Download the seven-study models and source package",
+      "href": "/downloads/research/strategy-startup-models.zip",
+      "format": "ZIP"
+    }
+  ]
 }

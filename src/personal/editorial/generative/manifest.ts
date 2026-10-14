@@ -52,6 +52,13 @@ const SKETCH_DETAILS = [
 ] as const satisfies readonly [SketchId, string, string][];
 
 export const ARTICLE_GENERATIVE_ART_ASSIGNMENTS = {
+  '/research/strategy-systems/choosing-a-growth-channel-under-a-capacity-limit': 'yuru-30',
+  '/research/financial-systems/toast-gross-profit-engine': 'yuru-31',
+  '/research/financial-systems/harvey-who-keeps-the-value-of-legal-ai': 'yuru-32',
+  '/research/financial-systems/vanta-after-the-audit': 'yuru-33',
+  '/research/financial-systems/ramp-saving-money-and-retaining-contribution': 'yuru-34',
+  '/research/financial-systems/elevenlabs-cost-of-accepted-work': 'yuru-35',
+  '/research/financial-systems/flock-safety-installed-cohort-cash': 'yuru-36',
   '/research/financial-systems/expedia-network-and-cash': 'yuru-28',
   '/research/financial-systems/crocs-cash-and-brand-test': 'yuru-27',
   '/research/financial-systems/paypal-margin-dollar-recovery': 'yuru-26',

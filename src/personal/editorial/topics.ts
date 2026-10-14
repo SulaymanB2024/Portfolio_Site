@@ -16,16 +16,42 @@ export interface ReadingTopic {
 }
 
 export const readingTopics: ReadingTopic[] = [
+  {
+    slug: 'business-models', title: 'Who keeps the value?',
+    seoTitle: 'Startup Economics: Ramp, ElevenLabs, Flock, Harvey, Vanta & Toast',
+    questionsUpdated: '2026-10-14',
+    description: 'Connect customer value, retained contribution, delivery capacity and the price an investor pays.',
+    introduction: [
+      'A useful product can create more value than its owner retains. These seven studies trace the bridge from work completed or money saved to customer cash, company contribution and investment returns.',
+      'Begin with a small product’s pricing and delivery constraint, then compare the economic unit in payments, legal AI, compliance, restaurant software, voice and installed hardware. Reported company checkpoints retain their source dates. The worked operating and return cases use declared assumptions.',
+    ],
+    readings: [
+      { slug: 'choosing-a-growth-channel-under-a-capacity-limit', reason: 'Test price, delivery capacity and cash timing before choosing a growth channel.' },
+      { slug: 'ramp-saving-money-and-retaining-contribution', reason: 'Separate customer savings, card proceeds and retained platform contribution.' },
+      { slug: 'harvey-who-keeps-the-value-of-legal-ai', reason: 'Follow usable legal time through value capture, delivery cost and the financing hurdle.' },
+      { slug: 'vanta-after-the-audit', reason: 'Test recurring buyer value and retained-cohort growth after the audit ends.' },
+      { slug: 'toast-gross-profit-engine', reason: 'Translate gross profit and equity costs into a conditional per-share return.' },
+      { slug: 'elevenlabs-cost-of-accepted-work', reason: 'Price accepted audio and completed agent work after review, rework and fallback.' },
+      { slug: 'flock-safety-installed-cohort-cash', reason: 'Trace installation, service and renewal through the cash recovered from a cohort.' },
+    ],
+    questions: [
+      { question: 'Can saving customers money improve Ramp’s own economics?', slug: 'ramp-saving-money-and-retaining-contribution', section: 'a-dollar-of-volume-is-not-a-dollar-of-retained-economics' },
+      { question: 'Who keeps the value of faster legal work?', slug: 'harvey-who-keeps-the-value-of-legal-ai', section: 'put-a-value-bridge-under-the-renewal' },
+      { question: 'What does an accepted audio minute cost?', slug: 'elevenlabs-cost-of-accepted-work', section: 'put-review-effort-beside-the-software-bill' },
+    ],
+    relatedTopics: ['financial-systems', 'industrial-capacity'],
+    sourceDownload: { label: 'Download the seven-study models and source package (ZIP)', href: '/downloads/research/strategy-startup-models.zip' },
+  },
 {
   "slug": "texas-autonomy",
   "title": "Autonomy in Texas.",
   "seoTitle": "Texas Autonomous Vehicles: Robotaxis & Driverless Trucking",
-  "questionsUpdated": "2026-10-13",
+  "questionsUpdated": "2026-10-14",
   "description": "Waymo, Zoox and the wider Texas AV market, explained through usable rides, freight capacity, operating authority and complete-route costs.",
   "introduction": [
     "Start with the work the business needs done: an employee arriving on time, a guest reaching the hotel, a shipment accepted at the dock or a depot ready for service. These six investigations compare the documented operating stage with the evidence needed for that commitment.",
     "The passenger research separates rider access, booking channels, vehicle rules and paid exceptions. The freight research separates industrial driverless deliveries, public-road service, supervised customer work and future launches. Neither a city announcement nor an autonomous-mile total supplies a buyer-specific service promise.",
-    "Primary sources were checked October 12–13, 2026, with each article retaining its own cutoff and source dates. Operator performance is attributed; fleet, travel and freight calculations are declared hypotheticals. Follow the source links, replace the model inputs with actual evidence and use the update triggers when the operating conditions change."
+    "Primary sources were checked October 12–13, 2026, with a targeted October 14 update for San Antonio/SAT admission. Each article retains its own cutoff and source dates. Operator performance is attributed; fleet, travel and freight calculations are declared hypotheticals. Follow the source links, replace the model inputs with actual evidence and use the update triggers when the operating conditions change."
   ],
   "readings": [
     {
@@ -92,7 +118,7 @@ export const readingTopics: ReadingTopic[] = [
   ],
   "sourceDownload": {
     "label": "Download the eighteen-article source and decision ledger (JSON)",
-    "href": "/research/texas-research-library-2026-10-13.json"
+    "href": "/research/texas-research-library-2026-10-14.json"
   }
 },
   {
@@ -103,7 +129,7 @@ export const readingTopics: ReadingTopic[] = [
     introduction: [
       'Choose the decision closest to your next commitment: a facility site, tax budget, hiring plan, supplier route, technology purchase or commercial contract. These twelve core investigations connect Texas developments to operating costs, usable capacity, timing and cash at risk. Six additional investigations in the autonomy reading path cover robotaxis, driverless freight and commercial vehicle authorization.',
       'The research starts with primary legislation, agency records, official datasets, published decisions and company disclosures. Each article preserves its evidence cutoff, separates an announcement from completion and a forecast from an observation, and gives the reader a concrete comparison and decision checklist. Scenario inputs are labeled so they can be replaced with the business’s actual evidence.',
-      'The twelve core investigations were researched on October 12, 2026; the autonomy path retains its own October 12–13 source checks. For related Texas investigations, the financial-systems reading path also contains the original toll-road ownership and financing research, Austin home-service ownership, and West Campus housing. Those manuscripts retain their own evidence dates.',
+      'The twelve core investigations were researched on October 12, 2026; the autonomy path retains its own October 12–13 source checks and a targeted October 14 San Antonio/SAT admission update. For related Texas investigations, the financial-systems reading path also contains the original toll-road ownership and financing research, Austin home-service ownership, and West Campus housing. Those manuscripts retain their own evidence dates.',
     ],
     questions: [
       { question: 'What evidence makes a Texas power commitment financeable?', slug: 'texas-power-large-load-business-diligence', section: 'investment-decision' },
@@ -134,14 +160,14 @@ export const readingTopics: ReadingTopic[] = [
       { slug: 'texas-business-court-contract-decisions', reason: 'Use September court decisions to distinguish transaction value, pleaded claims, and the promises preserved in signed contracts.' },
     ],
     relatedTopics: ['texas-autonomy', 'financial-systems', 'industrial-capacity'],
-    sourceDownload: { label: 'Download the eighteen-article source and decision ledger (JSON)', href: '/research/texas-research-library-2026-10-13.json' },
+    sourceDownload: { label: 'Download the eighteen-article source and decision ledger (JSON)', href: '/research/texas-research-library-2026-10-14.json' },
     featuredPath: { slug: 'texas-autonomy', label: 'Explore robotaxis and driverless freight in Texas' },
   },
   {
     slug: 'financial-systems', title: 'Who owns the cash flow?',
-    seoTitle: 'Texas Toll-Road & Airline Loyalty Research',
-    questionsUpdated: '2026-10-13',
-    description: 'Toll roads, airline miles, software buyouts and other businesses where title, control and cash belong to different people.',
+    seoTitle: 'Company Valuation, Cash Flow & Ownership Research',
+    questionsUpdated: '2026-10-14',
+    description: 'Company and token valuations, dated public-equity pitches, toll roads, airline miles and the rights behind retained cash flow.',
     introduction: [
       'Start with the right being sold. Owning a road, collecting its tolls, lending to its operator and sending a bill are different positions. The same distinction appears in airline loyalty programs, hardware financing and private equity.',
       'These investigations trace contracts and payment obligations before drawing conclusions from an ownership label. Read the toll-road pair together, then follow the financing structure into a different industry. Each essay retains its source dates, disclosed figures and unresolved questions.',

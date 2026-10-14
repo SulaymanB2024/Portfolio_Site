@@ -1,0 +1,36 @@
+{
+  "status": "PASS",
+  "editionDate": "2026-10-14",
+  "bundlePath": "public/research/texas-research-library-2026-10-14.json",
+  "articles": 18,
+  "changedProjectionSlugs": [
+    "texas-robotaxi-business-service-map",
+    "texas-waymo-business-travel"
+  ],
+  "checks": [
+    {
+      "slug": "texas-robotaxi-business-service-map",
+      "headHash": "b81737881f6775543ca3df378a6304924e78e8b76415a6f7fbb4e93c8457d9c3",
+      "dateModified": "2026-10-14",
+      "receiptAppendOnly": true,
+      "untargetedSourceDatesUnchanged": true,
+      "scenarioUnchanged": true,
+      "sourceAnchorsResolve": true
+    },
+    {
+      "slug": "texas-waymo-business-travel",
+      "headHash": "8f8f997a186342f22b765bc4c8d0aaf600a6f335476d549f96599a9b713018bc",
+      "dateModified": "2026-10-14",
+      "receiptAppendOnly": true,
+      "untargetedSourceDatesUnchanged": true,
+      "scenarioUnchanged": true,
+      "sourceAnchorsResolve": true
+    }
+  ],
+  "austinInstructionsRestoredExactly": true,
+  "freewayGradualAccessAndParagraphPreserved": true,
+  "sixHistoricalOrCalculationFilesBytePreserved": true,
+  "zooxBriefCorrected": true,
+  "currentEditionDocsAndBothTexasHubLinksMatch": true,
+  "sourceReferences": 194
+}

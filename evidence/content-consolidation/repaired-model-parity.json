@@ -1,0 +1,18 @@
+{
+  "strategy": {
+    "direct_default_dictionary_parity": true,
+    "complete_serialized_output_parity": true,
+    "canonical_file_unchanged": true,
+    "serialized_sha256": "786a7051de29e117b36e916759381aab3cacae32f196695335e912f05e11999e",
+    "repaired_source_sha256": "2aca49197c3230889e5bde5d4bbcc230179eed2033972d668736f57893fa3cab"
+  },
+  "investment": {
+    "direct_default_dictionary_parity": true,
+    "complete_serialized_output_parity": true,
+    "canonical_file_unchanged": true,
+    "serialized_sha256": "b972e29e910cc2987f119a63debefe690e920656b4bb21296f7b1701f5d4e56a",
+    "repaired_source_sha256": "649fdc2c3336a25afb597bac72216b27399a71014718323fbd722a54deb54042"
+  },
+  "input_file_unchanged": true,
+  "inputs_sha256": "abc61904b6a4f98de9666337422ef4359928975c75e6ae9a6f377ce9d639f3bf"
+}

@@ -6,7 +6,7 @@ No pre-launch costs, taxes, refunds, or nonpayment are included.
 """
 
 from dataclasses import asdict, dataclass, replace
-from math import floor
+from math import floor, isfinite
 import json
 from pathlib import Path
 
@@ -55,6 +55,46 @@ BASE = {
 }
 
 
+def validate_motion(motion: Motion, collection_lag: int) -> None:
+    """Reject malformed scenarios before they can create impossible cohorts."""
+    def number(value, label, maximum=None, integer=False):
+        if isinstance(value, bool) or not isinstance(value, (int, float)):
+            raise ValueError(f"{label} must be a finite nonnegative number")
+        try:
+            finite = isfinite(value)
+        except OverflowError:
+            finite = False
+        if not finite or value < 0 or (maximum is not None and value > maximum):
+            raise ValueError(f"{label} is outside its allowed range")
+        if integer and not isinstance(value, int):
+            raise ValueError(f"{label} must be a whole number")
+
+    if not isinstance(motion, Motion):
+        raise ValueError("motion must be a Motion scenario")
+    number(collection_lag, "collection_lag", integer=True)
+    for field in ("price", "onboarding_hours", "support_hours", "cash_acquisition_cost", "sales_hours_per_new"):
+        number(getattr(motion, field), field)
+    for field in ("churn", "agency_share", "platform_share"):
+        number(getattr(motion, field), field, maximum=1)
+    if PROCESSING_RATE + motion.agency_share + motion.platform_share > 1:
+        raise ValueError("processing, agency and platform shares must not exceed gross billings")
+    for field in ("demand", "delivery_overhead", "commercial_overhead"):
+        values = getattr(motion, field)
+        if not isinstance(values, (tuple, list)) or len(values) != PERIODS:
+            raise ValueError(f"{field} must contain {PERIODS} values")
+        for value in values:
+            number(value, field, integer=field == "demand")
+
+
+def capacity_limit(available: float, hours_per_start: float, demand: int) -> int:
+    """Zero work admits demand only when existing overhead fits the budget."""
+    if available < 0:
+        return 0
+    if hours_per_start == 0 or demand * hours_per_start <= available:
+        return demand
+    return max(0, floor(available / hours_per_start))
+
+
 def simulate(motion: Motion, collection_lag: int = 1) -> dict:
     """Expected cohort balances; new starts are whole stores, survivors fractional.
 
@@ -65,10 +105,7 @@ def simulate(motion: Motion, collection_lag: int = 1) -> dict:
     acquisition and fixed costs are paid now. A channel commission is settled
     when revenue is received. Existing support takes priority over new starts.
     """
-    assert len(motion.demand) == PERIODS
-    assert len(motion.delivery_overhead) == PERIODS
-    assert len(motion.commercial_overhead) == PERIODS
-    assert collection_lag >= 0
+    validate_motion(motion, collection_lag)
     active = 0.0
     cash = float(STARTING_CASH)
     rows = []
@@ -76,10 +113,9 @@ def simulate(motion: Motion, collection_lag: int = 1) -> dict:
     for index, demand in enumerate(motion.demand):
         retained = active * (1 - motion.churn)
         available = DELIVERY_HOURS - motion.delivery_overhead[index] - retained * motion.support_hours
-        delivery_limit = max(0, floor(available / (motion.onboarding_hours + motion.support_hours)))
-        commercial_limit = (
-            max(0, floor((COMMERCIAL_HOURS - motion.commercial_overhead[index]) / motion.sales_hours_per_new))
-            if motion.sales_hours_per_new else demand
+        delivery_limit = capacity_limit(available, motion.onboarding_hours + motion.support_hours, demand)
+        commercial_limit = capacity_limit(
+            COMMERCIAL_HOURS - motion.commercial_overhead[index], motion.sales_hours_per_new, demand,
         )
         new = min(demand, delivery_limit, commercial_limit)
         active = retained + new

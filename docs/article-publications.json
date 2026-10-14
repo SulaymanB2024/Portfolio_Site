@@ -633,6 +633,17 @@
           "evidence": [
             "https://www.ntsb.gov/investigations/Pages/HWY26FH007.aspx"
           ]
+        },
+        {
+          "previousSha256": "89264fbeb74c30d96f5212a7b7b06acab0242dc6548680c128097d103cc8a7ee",
+          "articleSha256": "b81737881f6775543ca3df378a6304924e78e8b76415a6f7fbb4e93c8457d9c3",
+          "dateModified": "2026-10-14",
+          "reason": "Update San Antonio and SAT invitation access from the newly issued October 14 operator announcement; retain prior research dates, routes, assumptions and frozen downloads.",
+          "evidence": [
+            "https://support.google.com/waymo/answer/18765688",
+            "https://support.google.com/waymo/announcements/12766613?hl=en",
+            "https://support.google.com/waymo/answer/9059119?hl=en"
+          ]
         }
       ]
     },
@@ -678,6 +689,17 @@
           "reason": "Lead with the buyer decision and add a declared practical itinerary, depot, tender, route-quote or service-change example; preserve accepted provider and legal qualifications after independent writing review.",
           "evidence": [
             "https://www.ntsb.gov/investigations/Pages/HWY26FH007.aspx"
+          ]
+        },
+        {
+          "previousSha256": "2a8a2aff2951c597e11093f12b954db5d143fab2f28a003f8118f7c53c5e4a79",
+          "articleSha256": "8f8f997a186342f22b765bc4c8d0aaf600a6f335476d549f96599a9b713018bc",
+          "dateModified": "2026-10-14",
+          "reason": "Update San Antonio and SAT invitation access from the newly issued October 14 operator announcement; retain prior research dates, routes, assumptions and frozen downloads.",
+          "evidence": [
+            "https://support.google.com/waymo/answer/18765688",
+            "https://support.google.com/waymo/announcements/12766613?hl=en",
+            "https://support.google.com/waymo/answer/9059119?hl=en"
           ]
         }
       ]
@@ -920,7 +942,21 @@
       "articleSha256": "8c4ede78cd8704051e439a19548737299f0424414878d9f2bfc228207d317c9a",
       "proseWords": 1985,
       "readTime": "12 MIN",
-      "claimsPath": "docs/long-pitches-20261012/source-register.json"
+      "claimsPath": "docs/long-pitches-20261012/source-register.json",
+      "updates": [
+        {
+          "previousSha256": "8c4ede78cd8704051e439a19548737299f0424414878d9f2bfc228207d317c9a",
+          "articleSha256": "aa4d7ebe644d98d166c4aa901ff1ce7a8746d099d109a628b609514be2c14131",
+          "dateModified": "2026-10-14",
+          "reason": "Restore the omitted bear/base/bull assumptions and outputs in their own section; distinguish the unchanged operating forecast from the separate tax-payment stress. No model input or forecast is changed.",
+          "evidence": [
+            "https://www.sec.gov/Archives/edgar/data/1334036/000133403626000006/crox-20251231.htm",
+            "https://www.sec.gov/Archives/edgar/data/1334036/000133403626000052/crox-20260630.htm",
+            "https://www.sec.gov/Archives/edgar/data/1334036/000133403626000050/croxq22026-pressrelease.htm",
+            "https://docs.alpaca.markets/reference/stockbars"
+          ]
+        }
+      ]
     },
     {
       "slug": "expedia-network-and-cash",
@@ -932,6 +968,104 @@
       "proseWords": 2025,
       "readTime": "12 MIN",
       "claimsPath": "docs/long-pitches-20261012/source-register.json"
+    },
+    {
+      "slug": "choosing-a-growth-channel-under-a-capacity-limit",
+      "path": "src/personal/editorial/data/articles/choosing-a-growth-channel-under-a-capacity-limit.json",
+      "canonicalPath": "/research/strategy-systems/choosing-a-growth-channel-under-a-capacity-limit",
+      "datePublished": "2026-10-12",
+      "dateModified": "2026-10-12",
+      "articleSha256": "40e52cce0e818df12799b2d757cc5f893f6eea2d40d4f9a62dd3bb6aaa67393e",
+      "proseWords": 2175,
+      "readTime": "13 MIN",
+      "claimsPath": "docs/article-drafts/strategy-planning-20261012/SOURCES.md",
+      "sourceArticleSha256": "10f57181c5cf01b5b57189c63c7043aff1b614e7d39b097df45eda7357d18097",
+      "sourceRevision": "04831fefe4044d6cf82472cd77075d60cf40a75f",
+      "integrationNote": "Register the authored manuscript and evidence; align the reading estimate with the site policy. Models and source dates are retained."
+    },
+    {
+      "slug": "toast-gross-profit-engine",
+      "path": "src/personal/editorial/data/articles/toast-gross-profit-engine.json",
+      "canonicalPath": "/research/financial-systems/toast-gross-profit-engine",
+      "datePublished": "2026-10-12",
+      "dateModified": "2026-10-12",
+      "articleSha256": "3ffb285244bce9d8ff8c39e48e38ad6ef2bdadac1d4bcce8692ce1169fb15aa9",
+      "proseWords": 2039,
+      "readTime": "11 MIN",
+      "claimsPath": "docs/article-drafts/strategy-planning-20261012/pitches/toast/SOURCES.md",
+      "sourceArticleSha256": "969de40d41195fadece029bc0f5fded51157faa75abc6613d4499cc204edb9e1",
+      "sourceRevision": "04831fefe4044d6cf82472cd77075d60cf40a75f",
+      "integrationNote": "Register the authored manuscript and evidence; align the reading estimate with the site policy. Models and source dates are retained."
+    },
+    {
+      "slug": "harvey-who-keeps-the-value-of-legal-ai",
+      "path": "src/personal/editorial/data/articles/harvey-who-keeps-the-value-of-legal-ai.json",
+      "canonicalPath": "/research/financial-systems/harvey-who-keeps-the-value-of-legal-ai",
+      "datePublished": "2026-10-12",
+      "dateModified": "2026-10-12",
+      "articleSha256": "bc1f0c83a63aba10d2bd7840790ba46fdb0b3ce49f7c1897c439574bb9fbbeff",
+      "proseWords": 2185,
+      "readTime": "13 MIN",
+      "claimsPath": "docs/article-drafts/strategy-planning-20261012/pitches/harvey/SOURCES.md",
+      "sourceArticleSha256": "43d199ef81bf51369f9c99e4fc5d03c77e590ed4bafb5ca9095cf9757d3b9e94",
+      "sourceRevision": "04831fefe4044d6cf82472cd77075d60cf40a75f",
+      "integrationNote": "Register the authored manuscript and evidence; align the reading estimate with the site policy. Models and source dates are retained. Reconcile the 36.25% margin to the table’s one-decimal ties-to-even display (36.2%); underlying values unchanged."
+    },
+    {
+      "slug": "vanta-after-the-audit",
+      "path": "src/personal/editorial/data/articles/vanta-after-the-audit.json",
+      "canonicalPath": "/research/financial-systems/vanta-after-the-audit",
+      "datePublished": "2026-10-12",
+      "dateModified": "2026-10-12",
+      "articleSha256": "aa89e36097ba5701f66e003bafd1418973f75a6359d66969092575f511c38402",
+      "proseWords": 2378,
+      "readTime": "14 MIN",
+      "claimsPath": "docs/article-drafts/strategy-planning-20261012/pitches/vanta/SOURCES.md",
+      "sourceArticleSha256": "ff6def010c5d1182d0198c15f6860d9284cf0bf7a35424a4f482c4c7a1576655",
+      "sourceRevision": "04831fefe4044d6cf82472cd77075d60cf40a75f",
+      "integrationNote": "Register the authored manuscript and evidence; align the reading estimate with the site policy. Models and source dates are retained."
+    },
+    {
+      "slug": "ramp-saving-money-and-retaining-contribution",
+      "path": "src/personal/editorial/data/articles/ramp-saving-money-and-retaining-contribution.json",
+      "canonicalPath": "/research/financial-systems/ramp-saving-money-and-retaining-contribution",
+      "datePublished": "2026-10-13",
+      "dateModified": "2026-10-13",
+      "articleSha256": "7864bc0b99adb4b968cc73c6399fda57e7f61e548baa011902650438756231e8",
+      "proseWords": 2116,
+      "readTime": "11 MIN",
+      "claimsPath": "docs/article-drafts/strategy-planning-20261012/pitches/ramp/SOURCES.md",
+      "sourceArticleSha256": "543456413424ea03c9e1e2710bfb941a9e3697da89e5d45e3fef22806ebf6125",
+      "sourceRevision": "1a7a83775d54fdf784ae47904ac7453869b4a3f9",
+      "integrationNote": "Register the authored manuscript and evidence; align the reading estimate with the site policy. Models and source dates are retained."
+    },
+    {
+      "slug": "elevenlabs-cost-of-accepted-work",
+      "path": "src/personal/editorial/data/articles/elevenlabs-cost-of-accepted-work.json",
+      "canonicalPath": "/research/financial-systems/elevenlabs-cost-of-accepted-work",
+      "datePublished": "2026-10-13",
+      "dateModified": "2026-10-13",
+      "articleSha256": "ff3df622d5b265ee10567be4a4e08878727a1da892cc24c127c1ddf3b93102a1",
+      "proseWords": 2261,
+      "readTime": "12 MIN",
+      "claimsPath": "docs/article-drafts/strategy-planning-20261012/pitches/elevenlabs/SOURCES.md",
+      "sourceArticleSha256": "97ac085db05f947020045b8c7c4b6b0bde79b0b82143c6b7dd94411a1306eb39",
+      "sourceRevision": "1a7a83775d54fdf784ae47904ac7453869b4a3f9",
+      "integrationNote": "Register the authored manuscript and evidence; align the reading estimate with the site policy. Models and source dates are retained."
+    },
+    {
+      "slug": "flock-safety-installed-cohort-cash",
+      "path": "src/personal/editorial/data/articles/flock-safety-installed-cohort-cash.json",
+      "canonicalPath": "/research/financial-systems/flock-safety-installed-cohort-cash",
+      "datePublished": "2026-10-13",
+      "dateModified": "2026-10-13",
+      "articleSha256": "cb595666661f21d991571bbd289131391a3496e4a03d06bb596ccd1c75509e98",
+      "proseWords": 2232,
+      "readTime": "12 MIN",
+      "claimsPath": "docs/article-drafts/strategy-planning-20261012/pitches/flock-safety/SOURCES.md",
+      "sourceArticleSha256": "83a8d0d8b2454bd9eb8398e4e70c86dc8540104534ef7c357b5763c875e7106f",
+      "sourceRevision": "1a7a83775d54fdf784ae47904ac7453869b4a3f9",
+      "integrationNote": "Register the authored manuscript and evidence; align the reading estimate with the site policy. Models and source dates are retained."
     }
   ]
 }

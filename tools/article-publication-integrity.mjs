@@ -13,8 +13,13 @@ export function verifyInitialPublication(bytes, record) {
   assert.equal(article.dateModified, receipt.dateModified)
   assert.equal(article.readTime, `${qualityReadingMinutes(article)} MIN`)
   assert(article.author && article.seoTitle && article.seoDescription && article.evidenceBoundary)
-  const sections = article.sections || []
+  const sections = article.sections || article.markdownSections || []
   assert(sections.length && new Set(sections.map(section => section.id)).size === sections.length, `${record.slug}: missing or duplicate sections`)
+  const tables = new Set((article.tables || []).map(table => table.id))
+  assert.equal(tables.size, (article.tables || []).length, `${record.slug}: duplicate table identity`)
+  for (const section of sections) for (const block of section.blocks || []) {
+    if (block.kind === 'table') assert(tables.has(block.tableId), `${record.slug}: unresolved table ${block.tableId}`)
+  }
   const sources = article.sources || []
   assert(sources.length && sources.every(source => source.id && source.href && /^https:\/\//.test(source.href)), `${record.slug}: primary-source ledger required`)
   assert.equal(new Set(sources.map(source => source.id)).size, sources.length, `${record.slug}: duplicate evidence identity`)

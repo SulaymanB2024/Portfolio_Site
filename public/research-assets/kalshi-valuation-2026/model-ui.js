@@ -49,9 +49,15 @@ function reverseScale(target=40, options={}) {
 const form=document.querySelector('form');
 const byId=id=>document.getElementById(id);
 const money=v=>'$'+v.toFixed(2)+'bn';
+function invalid(message){
+  byId('error').textContent=message;
+  byId('results').hidden=true;
+  byId('annual-results').hidden=true;
+  byId('rows').replaceChildren();
+}
 function update(){
   const fields=['discount','growth','cash','shock'];
-  if(fields.some(id=>byId(id).value===''||!byId(id).checkValidity())){byId('error').textContent='Enter values within the displayed bounds.';return;}
+  if(fields.some(id=>byId(id).value===''||!byId(id).checkValidity())){invalid('Enter values within the displayed bounds.');return;}
   const options={discount:Number(byId('discount').value)/100,growth:Number(byId('growth').value)/100,cash:Number(byId('cash').value),shock:Number(byId('shock').value)/10000};
   try{
     const result=valuation(options), base=result.cases.find(c=>c.name==='Base');
@@ -71,11 +77,13 @@ function update(){
     const reverse=valueCase('Base',{...options,scale});
     byId('reverse').textContent=money(reverse.rows[4].revenue)+' in 2031';
     byId('reverse-note').textContent='Revenue in every forecast year scales by '+scale.toFixed(2)+'×; margins and growth shape stay fixed. Not a one-year revenue target.';
-  }catch(error){byId('error').textContent=error.message;}
+    byId('results').hidden=false;
+    byId('annual-results').hidden=false;
+  }catch(error){invalid(error.message);}
 }
 form.addEventListener('input',update);
 byId('scenario').addEventListener('change',update);
-byId('reset').addEventListener('click',()=>{form.reset();update();});
+byId('reset').addEventListener('click',()=>{HTMLFormElement.prototype.reset.call(form);update();});
 update();
 
 })();

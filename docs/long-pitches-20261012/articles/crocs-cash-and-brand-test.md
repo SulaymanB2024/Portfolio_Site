@@ -216,6 +216,50 @@ Bear, base and bull operating paths use affordable share reduction and explicit 
 
 
 
+## The operating cases explain the wider price range
+
+
+
+The chart's wider range changes demand, cash conversion and valuation together. The bear case assumes contraction in both brands; the bull case requires growth in both. These operating cases differ from the earlier tax-payment stress, which changes the base cash budget while leaving funding costs and operating disruption outside the price calculation.
+
+
+
+**Assumptions behind the October 12, 2028 price cases**
+
+
+
+| Author assumption / output | Bear | Base | Bull |
+
+| --- | --- | --- | --- |
+
+| Crocs brand growth / year | -5% | 4% | 6% |
+
+| HEYDUDE growth / year | -10% | -2% | 2% |
+
+| Recurring cash margin | 11% | 15% | 18% |
+
+| Protected cash / year · $m | 150 | 250 | 150 |
+
+| Desired net share reduction / year | 0% | 7% | 8% |
+
+| Assumed purchase price · Year 1 / 2 | $110 / $110 | $145 / $165 | $175 / $225 |
+
+| Year 2 recurring cash · $m | 395.6 | 645.5 | 809.9 |
+
+| Ending shares · millions | 47.945 | 42.952 | 41.477 |
+
+| Terminal cash multiple | 8× | 11× | 14× |
+
+| Model price | $66.01 | $165.30 | $273.36 |
+
+| Price return | -43.5% | 41.4% | 133.8% |
+
+
+
+Annual assumptions apply in both model years. Cash margins already charge economic compensation. Desired share reduction is capped by available cash after protected commitments; base and bull purchases fall short of those desired rates. The cases exclude the separate $600m tax-payment stress. No probability weights; the central forecast remains $165, rounding the base model to $5.
+
+
+
 ## What I expect to observe before the price target
 
 
@@ -236,7 +280,7 @@ I would reconsider the long if Crocs brand North America and international sales
 
 | --- | --- |
 
-| By latest available 2028 trailing period | Crocs brand revenue above $3.6bn; recurring cash around $645m; fewer than44m outstanding shares |
+| By latest available 2028 trailing period | Crocs brand revenue above $3.6bn; recurring cash around $645m; fewer than 44m outstanding shares |
 
 | Operating margin | Consolidated adjusted operating margin above 21%; evidence that direct expansion retains profit |
 

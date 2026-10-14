@@ -40,7 +40,7 @@ The original hash remains intact. Each revision points to the prior hash and car
 
 Generate the selected public projection and check that it matches the reviewed library:
 
-The manifest's `bundlePath` selects the current reviewed eighteen-article revision at `public/research/texas-research-library-2026-10-13.json`. The frozen twelve-article October 12 download and the initially approved eighteen-article October 13 download remain available at their established URLs. New edition paths must stay inside `public/research` and use JSON; choose a new edition rather than silently replacing a previously linked download. Update both hub and article-footer download links. Source checks retain their actual individual dates; a targeted revision does not imply every original source was refetched.
+The manifest's `bundlePath` selects the current reviewed eighteen-article revision at `public/research/texas-research-library-2026-10-14.json` (targeted San Antonio/SAT admission update; other source checks retain their individual dates). The frozen twelve-article October 12 download, initially approved eighteen-article October 13 download and reviewed October 13 revision remain available at their established URLs. New edition paths must stay inside `public/research` and use JSON; choose a new edition rather than silently replacing a previously linked download. Update both hub and article-footer download links. Source checks retain their actual individual dates; a targeted revision does not imply every original source was refetched.
 
 ```sh
 npm run texas:bundle

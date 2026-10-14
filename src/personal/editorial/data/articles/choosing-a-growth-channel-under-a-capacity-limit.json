@@ -486,5 +486,12 @@
       "note": "Authored operating gates, not validated thresholds. Replace assumed work and churn with paid-cohort evidence. Preserve support capacity for existing customers before admitting new starts."
     }
   ],
-  "readTime": "12 MIN"
+  "readTime": "13 MIN",
+  "resources": [
+    {
+      "label": "Download the seven-study models and source package",
+      "href": "/downloads/research/strategy-startup-models.zip",
+      "format": "ZIP"
+    }
+  ]
 }

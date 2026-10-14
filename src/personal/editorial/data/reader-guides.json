@@ -1459,7 +1459,7 @@
   },
   "texas-robotaxi-business-service-map": {
     "question": "Which Texas robotaxi service can support a business trip?",
-    "answer": "Start with the admitted rider, actual booking channel, supported endpoints and disclosed onboard role. Waymo access differs across its Texas markets; Zoox’s reviewed Austin invitation is a waitlist; Tesla and Avride have service-specific rules; the May Arlington evidence leaves current access unresolved. Compare usable trips and fallback costs rather than city announcements or unnormalized crash totals. Specific preliminary investigations and certification inquiries inform diligence without establishing a provider safety ranking.",
+    "answer": "Start with the admitted rider, actual booking channel, supported endpoints and disclosed onboard role. Waymo access differs across its Texas markets; Zoox’s reviewed Austin invitation is a waitlist; Tesla and Avride have service-specific rules; the May Arlington evidence leaves current access unresolved. Compare usable trips and fallback costs rather than city announcements or unnormalized crash totals. Specific preliminary investigations and certification inquiries inform diligence without establishing a provider safety ranking. San Antonio/SAT invitation access was updated October 14; confirm the actual trip in the app.",
     "paths": [
       {
         "label": "Compare rider access",
@@ -1479,6 +1479,10 @@
     ],
     "sources": [
       {
+        "label": "October 14 San Antonio/SAT opening",
+        "href": "https://support.google.com/waymo/answer/18765688"
+      },
+      {
         "label": "Waymo service areas and rider admission",
         "href": "https://support.google.com/waymo/answer/9059119?hl=en"
       },
@@ -1494,7 +1498,7 @@
   },
   "texas-waymo-business-travel": {
     "question": "When should a Texas business use Waymo for employee travel?",
-    "answer": "Approve the actual journey through the correct market and booking channel. Dallas and Houston have open-access announcements, Austin uses optional Uber matching and San Antonio guidance describes gradual admission. Check the airport leg and payment program separately. A lower fare can be outweighed by walking, waiting or fallback work; the declared scenario measures those boundaries without predicting failure frequency. Its assumed $5 fare saving and six extra minutes break even at $50 per employee-hour; review the bounded Austin oversight record separately.",
+    "answer": "Approve the actual journey through the correct market and booking channel. Dallas and Houston have open-access announcements, Austin uses optional Uber matching and San Antonio guidance describes gradual admission. Check the airport leg and payment program separately. A lower fare can be outweighed by walking, waiting or fallback work; the declared scenario measures those boundaries without predicting failure frequency. Its assumed $5 fare saving and six extra minutes break even at $50 per employee-hour; review the bounded Austin oversight record separately. San Antonio/SAT invitation access was updated October 14; confirm the actual trip in the app.",
     "paths": [
       {
         "label": "Verify Texas access",
@@ -1513,6 +1517,10 @@
       }
     ],
     "sources": [
+      {
+        "label": "October 14 San Antonio/SAT opening",
+        "href": "https://support.google.com/waymo/answer/18765688"
+      },
       {
         "label": "Current service areas and rider access",
         "href": "https://support.google.com/waymo/answer/9059119?hl=en"
@@ -1870,6 +1878,286 @@
       {
         "label": "Reproducible cash-flow model",
         "href": "/research/anduril-valuation/model.py"
+      }
+    ]
+  },
+  "choosing-a-growth-channel-under-a-capacity-limit": {
+    "question": "Which growth channel can this small product actually support?",
+    "answer": "The assisted launch wins this declared scenario because price, workload and cash timing fit the operating constraint. Hold price constant and test delivery capacity before treating the result as a channel advantage.",
+    "paths": [
+      {
+        "label": "Understand the economic bridge",
+        "section": "start-with-the-decision-the-merchant-already-makes",
+        "description": "Start with the decision the merchant already makes"
+      },
+      {
+        "label": "Test the condition",
+        "section": "hold-price-constant-before-calling-it-a-channel-advantage",
+        "description": "Hold price constant before calling it a channel advantage"
+      },
+      {
+        "label": "Make the next decision",
+        "section": "buy-the-next-answer-before-buying-more-growth",
+        "description": "Buy the next answer before buying more growth"
+      }
+    ],
+    "sources": [
+      {
+        "label": "Product analytics overview",
+        "href": "https://help.shopify.com/en/manual/products/analytics"
+      },
+      {
+        "label": "Inventory reports",
+        "href": "https://help.shopify.com/en/manual/reports-and-analytics/shopify-reports/report-types/default-reports/inventory-reports"
+      },
+      {
+        "label": "About app distribution",
+        "href": "https://shopify.dev/docs/apps/launch/distribution"
+      }
+    ]
+  },
+  "toast-gross-profit-engine": {
+    "question": "What entry price compensates me for Toast’s growth and equity costs?",
+    "answer": "Follow retained gross profit, acquisition spending and stock-based compensation before underwriting per-share returns. The operating case can work while the quoted entry price still leaves a modest return.",
+    "paths": [
+      {
+        "label": "Understand the economic bridge",
+        "section": "follow-the-dollar-that-stays-with-toast",
+        "description": "Follow the dollar that stays with Toast"
+      },
+      {
+        "label": "Test the condition",
+        "section": "what-i-am-paying-for-in-the-base-case",
+        "description": "What I am paying for in the base case"
+      },
+      {
+        "label": "Make the next decision",
+        "section": "the-evidence-that-would-move-my-entry-price",
+        "description": "The evidence that would move my entry price"
+      }
+    ],
+    "sources": [
+      {
+        "label": "Q2 2026 earnings release and reconciliations",
+        "href": "https://www.sec.gov/Archives/edgar/data/1650164/000165016426000162/tost-20260630xexhibit991.htm"
+      },
+      {
+        "label": "Q2 2026 Form 10-Q",
+        "href": "https://www.sec.gov/Archives/edgar/data/1650164/000165016426000164/tost-20260630.htm"
+      },
+      {
+        "label": "Full-year 2025 results and reconciliations",
+        "href": "https://www.sec.gov/Archives/edgar/data/1650164/000165016426000050/tost-20251231xexhibit991.htm"
+      }
+    ]
+  },
+  "harvey-who-keeps-the-value-of-legal-ai": {
+    "question": "Who captures the value of faster legal work?",
+    "answer": "The buyer needs usable time after adoption and review, then a way to monetize it. The company must retain enough contribution to support its financing benchmark; neither outcome follows from faster drafting alone.",
+    "paths": [
+      {
+        "label": "Understand the economic bridge",
+        "section": "put-a-value-bridge-under-the-renewal",
+        "description": "Put a value bridge under the renewal"
+      },
+      {
+        "label": "Test the condition",
+        "section": "more-capable-work-can-cost-more-to-deliver",
+        "description": "More capable work can cost more to deliver"
+      },
+      {
+        "label": "Make the next decision",
+        "section": "work-backward-from-15-5-billion",
+        "description": "Work backward from $15.5 billion"
+      }
+    ],
+    "sources": [
+      {
+        "label": "September 2026 financing",
+        "href": "https://www.harvey.ai/blog/harvey-raises-dollar550m-at-a-dollar155b-valuation-to-help-legal-teams-own-their-intelligence"
+      },
+      {
+        "label": "Three-year business update",
+        "href": "https://www.harvey.ai/blog/harveys-three-year-anniversary"
+      },
+      {
+        "label": "Law-firm ROI calculator",
+        "href": "https://www.harvey.ai/roi-calculator/law-firm"
+      }
+    ]
+  },
+  "vanta-after-the-audit": {
+    "question": "Does the buyer still receive value after audit season?",
+    "answer": "Separate avoided cash costs from time value and ongoing work from a temporary audit project. Retained-cohort growth and the buyer’s renewal economics determine whether the subscription compounds.",
+    "paths": [
+      {
+        "label": "Understand the economic bridge",
+        "section": "time-saved-has-to-reach-the-buyer-s-budget",
+        "description": "Time saved has to reach the buyer's budget"
+      },
+      {
+        "label": "Test the condition",
+        "section": "separate-retained-growth-from-new-sales",
+        "description": "Separate retained growth from new sales"
+      },
+      {
+        "label": "Make the next decision",
+        "section": "why-vanta-gets-the-next-diligence-slot",
+        "description": "Why Vanta gets the next diligence slot"
+      }
+    ],
+    "sources": [
+      {
+        "label": "Series D announcement",
+        "href": "https://www.vanta.com/resources/vanta-announces-series-d"
+      },
+      {
+        "label": "April 2026 ARR milestone",
+        "href": "https://www.vanta.com/resources/vanta-crosses-300m-in-arr-as-growth-accelerates"
+      },
+      {
+        "label": "Automated test evidence",
+        "href": "https://help.vanta.com/en/articles/11345529-automated-test-evidence"
+      }
+    ]
+  },
+  "ramp-saving-money-and-retaining-contribution": {
+    "question": "Can saving the customer money improve Ramp’s own economics?",
+    "answer": "Card spend opens the relationship, but retained card contribution and paid workflow value need separate bridges. The declared account model tests rewards, delivery costs and software expansion before inferring platform profit.",
+    "paths": [
+      {
+        "label": "Understand the economic bridge",
+        "section": "a-dollar-of-volume-is-not-a-dollar-of-retained-economics",
+        "description": "A dollar of volume is not a dollar of retained economics"
+      },
+      {
+        "label": "Test the condition",
+        "section": "the-paid-tier-has-to-earn-an-incremental-budget",
+        "description": "The paid tier has to earn an incremental budget"
+      },
+      {
+        "label": "Make the next decision",
+        "section": "the-financing-mark-raises-the-standard-for-evidence",
+        "description": "The financing mark raises the standard for evidence"
+      }
+    ],
+    "sources": [
+      {
+        "label": "June 2026 primary financing and company statistics",
+        "href": "https://www.gic.com.sg/uploads/2026/06/Ramp-Raises-Series-F-at-44-Billion-Valuation-3.pdf"
+      },
+      {
+        "label": "Contribution-profit terminology in November company post",
+        "href": "https://ramp.com/blog/ramp-november-2025-valuation"
+      },
+      {
+        "label": "Current free/Plus/Enterprise pricing",
+        "href": "https://ramp.com/pricing"
+      }
+    ]
+  },
+  "elevenlabs-cost-of-accepted-work": {
+    "question": "What does an accepted minute or completed task actually cost?",
+    "answer": "Count generation, review, rework, fallback and oversight against the accepted result. A lower software invoice creates cash savings only when the buyer actually avoids spending; hypothetical inputs are separate from company pricing.",
+    "paths": [
+      {
+        "label": "Understand the economic bridge",
+        "section": "put-review-effort-beside-the-software-bill",
+        "description": "Put review effort beside the software bill"
+      },
+      {
+        "label": "Test the condition",
+        "section": "agents-make-the-acceptance-problem-larger",
+        "description": "Agents make the acceptance problem larger"
+      },
+      {
+        "label": "Make the next decision",
+        "section": "customer-value-must-reach-company-contribution",
+        "description": "Customer value must reach company contribution"
+      }
+    ],
+    "sources": [
+      {
+        "label": "ElevenLabs crosses $500M ARR and welcomes new investors",
+        "href": "https://elevenlabs.io/blog/500m-arr-and-new-investors"
+      },
+      {
+        "label": "ElevenLabs reaches $22bn valuation after employee tender",
+        "href": "https://elevenlabs.io/blog/tender-22bn"
+      },
+      {
+        "label": "ElevenLabs pricing and billing mechanics",
+        "href": "https://elevenlabs.io/pricing"
+      }
+    ]
+  },
+  "flock-safety-installed-cohort-cash": {
+    "question": "Does the renewal pay back the installed camera?",
+    "answer": "Trace installation spending, recurring service and retention through a fixed cohort. Equal starting subscriptions can produce different cash recovery, and product or governance objections can become renewal costs.",
+    "paths": [
+      {
+        "label": "Understand the economic bridge",
+        "section": "a-cohort-that-starts-with-the-same-revenue",
+        "description": "A cohort that starts with the same revenue"
+      },
+      {
+        "label": "Test the condition",
+        "section": "retention-and-service-cost-move-different-parts-of-the-bridge",
+        "description": "Retention and service cost move different parts of the bridge"
+      },
+      {
+        "label": "Make the next decision",
+        "section": "guardrails-belong-in-the-product-economics",
+        "description": "Guardrails belong in the product economics"
+      }
+    ],
+    "sources": [
+      {
+        "label": "Annual service and pricing scope",
+        "href": "https://www.flocksafety.com/pricing"
+      },
+      {
+        "label": "Arden Hills proposed regional camera budget, pages 3–4",
+        "href": "https://www.cityofardenhills.org/AgendaCenter/ViewFile/Agenda/_05282025-1325?packet=true"
+      },
+      {
+        "label": "Ayer announces contract termination",
+        "href": "https://www.ayer.ma.us/m/newsflash/home/detail/73"
+      }
+    ]
+  },
+  "hyperliquid-valuation": {
+    "question": "What operating economics would make HYPE worth its price?",
+    "answer": "Trace retained trading and reserve flows separately, then divide the discounted token-directed cash by the economic claims that share it. In this conditional central case, strong exchange growth supports about $30 per token; dilution and the required return determine how that differs from the illustrative $80 reference.",
+    "paths": [
+      {
+        "label": "Trace the retained flow",
+        "section": "receipts-not-earnings",
+        "description": "A real fee engine, with an accounting trap"
+      },
+      {
+        "label": "Inspect the valuation",
+        "section": "valuation-model",
+        "description": "A model that lets the business keep growing"
+      },
+      {
+        "label": "Test the countercase",
+        "section": "duration-and-stress",
+        "description": "Three-quarters of the value arrives after 2031"
+      }
+    ],
+    "sources": [
+      {
+        "label": "Hyperliquid parent dashboard",
+        "href": "https://defillama.com/protocol/hyperliquid"
+      },
+      {
+        "label": "Hyperliquid perpetuals dashboard",
+        "href": "https://defillama.com/protocol/hyperliquid-perps"
+      },
+      {
+        "label": "Perpetuals adapter, pinned implementation",
+        "href": "https://github.com/DefiLlama/dimension-adapters/blob/e02384e92cbfb8c058e4de8440644aa8d8b0fc58/dexs/hyperliquid-perp/index.ts"
       }
     ]
   }

@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "editionDate": "2026-10-13",
+  "editionDate": "2026-10-14",
   "owner": "Sulayman Bowles",
   "purpose": "An evidence-led Texas business research library. Review dates are editorial reminders, not legal deadlines or scheduled jobs.",
   "articles": [
@@ -244,5 +244,5 @@
       ]
     }
   ],
-  "bundlePath": "public/research/texas-research-library-2026-10-13.json"
+  "bundlePath": "public/research/texas-research-library-2026-10-14.json"
 }

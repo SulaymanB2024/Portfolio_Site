@@ -448,5 +448,12 @@
     }
   ],
   "seoDescription": "A voice demo is the opening. I model the review, fallback and cash capture needed to turn generated usage into work a customer renews.",
-  "readTime": "11 MIN"
+  "readTime": "12 MIN",
+  "resources": [
+    {
+      "label": "Download the seven-study models and source package",
+      "href": "/downloads/research/strategy-startup-models.zip",
+      "format": "ZIP"
+    }
+  ]
 }

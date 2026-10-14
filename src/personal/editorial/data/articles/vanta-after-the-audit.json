@@ -531,5 +531,17 @@
       "note": "Declared five-year scenarios from $300m reported ARR; no actual cohort rates inferred. 20% future dilution; no fees, distributions, net-cash addition or preference waterfall. Entry benchmark $4.15bn. Retention, growth and financing requirements should be connected in real diligence."
     }
   ],
-  "readTime": "13 MIN"
+  "readTime": "14 MIN",
+  "resources": [
+    {
+      "label": "Explore the buyer-economics calculator",
+      "href": "/research/startup-economics/startup-models.html",
+      "format": "Interactive model"
+    },
+    {
+      "label": "Download the seven-study models and source package",
+      "href": "/downloads/research/strategy-startup-models.zip",
+      "format": "ZIP"
+    }
+  ]
 }

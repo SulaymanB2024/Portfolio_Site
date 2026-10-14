@@ -2,8 +2,8 @@
   "schemaVersion": 1,
   "article": "texas-waymo-business-travel",
   "articleSlug": "texas-waymo-business-travel",
-  "checkedAt": "2026-10-13",
-  "researchCutoff": "2026-10-13",
+  "checkedAt": "2026-10-14",
+  "researchCutoff": "2026-10-14",
   "sourcePolicy": "Current operator/platform help and dated launch disclosures. Service claims remain issuer-stated; no ride was booked and no live supply, private contract, fare or reliability dataset was observed.",
   "claims": [
     {
@@ -38,18 +38,26 @@
     },
     {
       "id": "waymo-03",
-      "claim": "Current Waymo Help marks San Antonio as gradually adding riders and Austin as Uber-only.",
-      "status": "current undated issuer guidance",
-      "qualification": "Account access and local service area need confirmation.",
+      "claim": "Waymo’s October 14 announcement removes the invitation requirement in San Antonio and opens SAT to all riders; Austin’s Uber channel is retained.",
+      "status": "dated operator update",
+      "qualification": "Admission policy does not guarantee route coverage, dispatch, availability or comparative safety.",
       "sources": [
         {
           "sourceId": "service-areas",
           "url": "https://support.google.com/waymo/answer/9059119?hl=en",
           "date": "Undated current guidance",
-          "pinpoint": "San Antonio and opening service instructions"
+          "pinpoint": "Rechecked October 14: Austin Uber channel; San Antonio no longer labeled gradually adding riders. The dated opening announcement establishes current admission; service maps remain trip-specific.",
+          "checkedAt": "2026-10-14"
+        },
+        {
+          "url": "https://support.google.com/waymo/answer/18765688",
+          "date": "2026-10-14",
+          "pinpoint": "San Antonio/SAT opening announcement, October 14"
         }
       ],
-      "recheck": "San Antonio admission or Austin channel changes."
+      "recheck": "San Antonio admission or Austin channel changes.",
+      "priorClaim": "Current Waymo Help marks San Antonio as gradually adding riders and Austin as Uber-only.",
+      "sourceDate": "2026-10-14"
     },
     {
       "id": "waymo-04",
@@ -68,18 +76,25 @@
     },
     {
       "id": "waymo-05",
-      "claim": "SAT airport guidance limits access to riders already able to ride in San Antonio.",
-      "status": "current undated issuer guidance",
-      "qualification": "Terminal locations do not create new rider eligibility.",
+      "claim": "Waymo’s October 14 notice opens SAT airport to all riders; terminal guidance and actual availability remain trip-specific.",
+      "status": "dated operator update",
+      "qualification": "Admission policy does not guarantee route coverage, dispatch, availability or comparative safety.",
       "sources": [
         {
           "sourceId": "airports",
           "url": "https://support.google.com/waymo/answer/14298153?hl=en",
           "date": "Undated current guidance",
           "pinpoint": "San Antonio International Airport; A/B Departures and Arrivals outer curb Zone 2"
+        },
+        {
+          "url": "https://support.google.com/waymo/answer/18765688",
+          "date": "2026-10-14",
+          "pinpoint": "San Antonio/SAT opening announcement, October 14"
         }
       ],
-      "recheck": "Airport access, terminal instructions or San Antonio admissions change."
+      "recheck": "Airport access, terminal instructions or San Antonio admissions change.",
+      "priorClaim": "SAT airport guidance limits access to riders already able to ride in San Antonio.",
+      "sourceDate": "2026-10-14"
     },
     {
       "id": "waymo-06",
@@ -211,14 +226,14 @@
     },
     {
       "id": "waymo-15",
-      "claim": "NTSB\u2019s preliminary January 12 Austin account describes a Waymo vehicle passing a stopped school bus after an incorrect remote-assistance response; no crash occurred. The reviewed page lists the investigation as ongoing.",
+      "claim": "NTSB’s preliminary January 12 Austin account describes a Waymo vehicle passing a stopped school bus after an incorrect remote-assistance response; no crash occurred. The reviewed page lists the investigation as ongoing.",
       "status": "preliminary official investigation; status observed 2026-10-13",
       "qualification": "Not final probable cause, proof a defect persists today, a measured rate or a provider ranking. Remote assistance is advice/information, not automatically remote driving.",
       "sources": [
         {
           "url": "https://www.ntsb.gov/investigations/Pages/HWY26FH007.aspx",
           "date": "2026-03-03",
-          "pinpoint": "What Happened paragraphs 1\u20138; Investigation Details; footnote 4"
+          "pinpoint": "What Happened paragraphs 1–8; Investigation Details; footnote 4"
         }
       ],
       "recheck": "Final findings, corrective evidence or applicable operating restrictions change."
@@ -249,12 +264,12 @@
         "fallbackCoordinationWaitMinutes": 20
       },
       "formulas": [
-        "minuteValue = employeeHourlyValueUSD \u00f7 60",
-        "baseCost = monthlyTrips \u00d7 (fare + waitWalkMinutes \u00d7 minuteValue)",
-        "fallbackSensitivity = (monthlyTrips \u2212 fallbackTrips) \u00d7 autonomousTripCost + fallbackTrips \u00d7 (fallbackFareUSD + fallbackCoordinationWaitMinutes \u00d7 minuteValue)",
-        "breakEvenHourlyTimeValue = fareSaving \u00f7 (extraMinutes \u00f7 60)",
-        "fallbackFareCash = successfulJourneys \u00d7 autonomousFare + fallbackJourneys \u00d7 fallbackFare",
-        "fallbackTimeValue = (successfulJourneys \u00d7 baseWaitWalkMinutes + fallbackJourneys \u00d7 totalFallbackMinutes) \u00d7 minuteValue"
+        "minuteValue = employeeHourlyValueUSD ÷ 60",
+        "baseCost = monthlyTrips × (fare + waitWalkMinutes × minuteValue)",
+        "fallbackSensitivity = (monthlyTrips − fallbackTrips) × autonomousTripCost + fallbackTrips × (fallbackFareUSD + fallbackCoordinationWaitMinutes × minuteValue)",
+        "breakEvenHourlyTimeValue = fareSaving ÷ (extraMinutes ÷ 60)",
+        "fallbackFareCash = successfulJourneys × autonomousFare + fallbackJourneys × fallbackFare",
+        "fallbackTimeValue = (successfulJourneys × baseWaitWalkMinutes + fallbackJourneys × totalFallbackMinutes) × minuteValue"
       ],
       "results": {
         "minuteValueUSD": 1,
@@ -286,7 +301,7 @@
     }
   ],
   "updateTriggers": [
-    "San Antonio expands all-rider admission; Austin changes booking channel or eligible products.",
+    "San Antonio/SAT admission or service-area conditions change; Austin changes booking channel or eligible products.",
     "A Texas airport or freeway route obtains documented public booking availability.",
     "A documented Texas employer program changes organizational payment eligibility or terms.",
     "Current route, pickup, fare or support rules materially change the usable trip.",
@@ -296,5 +311,6 @@
     "date": "2026-10-13",
     "scope": "NTSB preliminary/status body and cash/time threshold reviewed; original access/payment checks remain October 12.",
     "originalSourceDatesPreserved": true
-  }
+  },
+  "updateScope": "Only San Antonio/SAT invitation access rechecked October 14 against the dated operator announcement. Earlier source checks and all scenarios retain their original scope."
 }

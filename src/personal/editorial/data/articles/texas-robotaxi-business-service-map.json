@@ -17,12 +17,12 @@
     "Texas autonomous travel business"
   ],
   "date": "2026-10-13",
-  "dateModified": "2026-10-13",
+  "dateModified": "2026-10-14",
   "author": "Sulayman Bowles",
   "kind": "research",
   "readTime": "13 MIN",
   "openingPresentation": "integrated",
-  "evidenceBoundary": "Passenger access research checked October 12–13, 2026; additional NTSB and NHTSA oversight records reviewed October 13. Individual source dates remain visible. Public access rules are not live dispatch observations or reserved capacity. Models are hypothetical; investigations do not establish comparative safety.",
+  "evidenceBoundary": "Passenger access research checked October 12–13, 2026, with a dated October 14 update for San Antonio/SAT invitation access. Other operator and oversight sources retain their individual check dates. Public access rules are not live dispatch observations or reserved capacity. Models are hypothetical; investigations do not establish comparative safety.",
   "content": [
     "Build the Texas travel plan around bookable journeys. One employee’s downtown trip may have an open robotaxi option while another needs a conventional ride or a different account. For a travel manager, hotel or event organizer, the useful comparison is the journey that can be completed, its booking channel and the fallback that keeps the schedule intact.",
     "Waymo’s dated Dallas and Houston announcements establish open rider access in 2026. Zoox’s current Austin page still invites a waitlist. Tesla’s rider support describes limited Texas service areas. Avride’s Dallas launch and May Mobility’s Arlington plans carry their own operating and access qualifications. Keep these records separate before comparing a fare, changing an employee policy or promising guests a ride. [Dallas](#source-waymo-dallas); [Houston](#source-waymo-houston); [Zoox Austin](#source-zoox-austin); [Tesla support](#source-tesla-rider).",
@@ -33,12 +33,12 @@
       "id": "operating-evidence",
       "title": "Separate public service from the next deployment stage",
       "paragraphs": [
-        "Waymo opened Dallas to everyone on August 4 and Houston on August 20. Its current guidance distinguishes Austin’s Uber distribution from the Waymo-app markets and describes San Antonio as gradually adding riders. A dated public opening establishes access policy at that event; the current service area and request still decide whether a particular trip can happen. [Dated openings](#source-waymo-dallas); [Houston](#source-waymo-houston); [current areas](#source-waymo-areas).",
+        "Waymo opened Dallas to everyone on August 4, Houston on August 20 and San Antonio on October 14. The newest notice includes SAT airport without an invitation. Austin retains its Uber distribution arrangement. These dated openings establish rider-admission policy; the current service area and request still decide whether a particular trip can happen. [Dallas](#source-waymo-dallas); [Houston](#source-waymo-houston); [San Antonio/SAT](#source-waymo-sa-open); [current areas](#source-waymo-areas).",
         "Zoox’s Austin page says coming soon and directs prospective riders to a waitlist. Its September 1 Houston announcement describes initial manual mapping with retrofitted test vehicles, followed by autonomous testing and later purpose-built vehicles. That sequence is useful market-entry evidence for landlords, suppliers and transport planners. Preserve its stages when estimating passenger demand. [Austin](#source-zoox-austin); [Houston stages](#source-zoox-houston).",
         "The comparison below is a selected passenger-service view, not a complete Texas operator registry or a comparative safety verdict. A positive service statement, a dated launch condition and a remaining access question have different evidentiary strength. Each needs a different next step from the buyer."
       ],
       "table": {
-        "caption": "Texas passenger-AV evidence reviewed October 12–13, 2026",
+        "caption": "Texas passenger-AV evidence checked October 12–13; San Antonio/SAT access updated October 14",
         "columns": [
           "Market / program",
           "Public access / channel",
@@ -48,7 +48,7 @@
         "rows": [
           [
             "Waymo Texas",
-            "Dallas/Houston app openings; Austin eligible Uber match; San Antonio admission gradual",
+            "Dallas/Houston/San Antonio public app access; SAT open October 14; Austin eligible Uber match",
             "ADS drives; remote support remains an operating dependency",
             "Current endpoints, rider admission and offered vehicle"
           ],
@@ -213,7 +213,7 @@
   "faqs": [
     {
       "question": "Can everyone book a Texas Waymo ride through the same app?",
-      "answer": "Dallas and Houston have dated open-public announcements. Austin is distributed through Uber, while current guidance still describes gradual rider admission in San Antonio. Check the actual market/channel and trip. [Service areas](#source-waymo-areas); [Austin](#source-waymo-uber)."
+      "answer": "Dallas and Houston have dated public openings, and Waymo opened San Antonio and SAT to all riders on October 14. Austin is distributed through Uber. Check the market, booking channel and actual trip; open access does not reserve capacity. [San Antonio/SAT announcement](#source-waymo-sa-open); [Austin](#source-waymo-uber)."
     },
     {
       "question": "Does Zoox’s Austin page mean general public rides are available?",
@@ -253,8 +253,8 @@
       "href": "https://support.google.com/waymo/answer/9059119?hl=en",
       "publisher": "Waymo Help",
       "date": "Undated current support page",
-      "lastVerified": "2026-10-12",
-      "note": "Current guidance distinguishes Austin via Uber and gradual rider admission in San Antonio. Areas/access change; use the app for the actual request."
+      "lastVerified": "2026-10-14",
+      "note": "Current service-area page rechecked October 14: Austin remains on Uber and San Antonio no longer carries the gradual-admission label. The separately dated opening announcement establishes the new admission policy; maps and available trips remain specific to the request."
     },
     {
       "id": "waymo-uber",
@@ -372,13 +372,23 @@
       "date": "2026-09-04",
       "lastVerified": "2026-10-13",
       "note": "Announced audit of self-certification against applicable FMVSS. Establishes the inquiry opening, not noncompliance, suspension or its current disposition; future rulemaking does not itself change existing standards."
+    },
+    {
+      "id": "waymo-sa-open",
+      "label": "San Antonio and SAT open to all riders",
+      "href": "https://support.google.com/waymo/answer/18765688",
+      "publisher": "Waymo Help",
+      "date": "2026-10-14",
+      "lastVerified": "2026-10-14",
+      "type": "Dated operator announcement",
+      "note": "October 14 notice removes the invitation requirement for San Antonio and opens SAT to all riders. A specific route, pickup and available vehicle still require the booking app."
     }
   ],
   "image": "/images/social/texas-robotaxi-business-service-map.png",
   "resources": [
     {
       "label": "Texas autonomy source and decision ledger",
-      "href": "/research/texas-research-library-2026-10-13.json",
+      "href": "/research/texas-research-library-2026-10-14.json",
       "description": "Primary evidence, declared assumptions and update triggers across the Texas business and autonomy library.",
       "format": "JSON"
     }

@@ -1,0 +1,595 @@
+{
+  "status": "PASS",
+  "modelGroups": 15,
+  "numericScalarChecks": 117,
+  "supplementaryArticleChecks": 19,
+  "notebookCodeParity": true,
+  "persistedNotebookTables": 15,
+  "checks": [
+    {
+      "path": "power.agreementSecurityA_USD",
+      "actual": 6000000,
+      "independent": 6000000
+    },
+    {
+      "path": "power.agreementSecurityB_USD",
+      "actual": 4000000,
+      "independent": 4000000
+    },
+    {
+      "path": "power.extraCollateralThreeYearSimpleCarryUSD",
+      "actual": 240000.0,
+      "independent": 240000
+    },
+    {
+      "path": "power.simpleCarryEqualToExtraCIAC_Years",
+      "actual": 15.0,
+      "independent": 15
+    },
+    {
+      "path": "power.eighteenMonthDelayUSD",
+      "actual": 2700000,
+      "independent": 2700000
+    },
+    {
+      "path": "power.annualEnergyMWh",
+      "actual": 490560.0,
+      "independent": 490560
+    },
+    {
+      "path": "power.annualSupplyOnlyUSD",
+      "actual": 31886400.0,
+      "independent": 31886400
+    },
+    {
+      "path": "water.annualUseGallons",
+      "actual": 109500000,
+      "independent": 109500000
+    },
+    {
+      "path": "water.annualSupplyPriceSavingUSD",
+      "actual": 82125.0,
+      "independent": 82125
+    },
+    {
+      "path": "water.lostProductionDayEquivalent",
+      "actual": 1.36875,
+      "independent": 1.36875
+    },
+    {
+      "path": "water.peakDeficitGallons",
+      "actual": 200000,
+      "independent": 200000
+    },
+    {
+      "path": "water.consecutivePeakDaysCovered",
+      "actual": 2.0,
+      "independent": 2
+    },
+    {
+      "path": "water.normalDaysToRestoreOnePeakDeficit",
+      "actual": 2.0,
+      "independent": 2
+    },
+    {
+      "path": "water.normalDaysToRestoreFullStorage",
+      "actual": 4.0,
+      "independent": 4
+    },
+    {
+      "path": "property-tax.limitedTaxUSD",
+      "actual": 72000.0,
+      "independent": 72000
+    },
+    {
+      "path": "property-tax.uncappedTaxUSD",
+      "actual": 90000.0,
+      "independent": 90000
+    },
+    {
+      "path": "property-tax.capitalizationSensitivityUSD",
+      "actual": 240000.0,
+      "independent": 240000
+    },
+    {
+      "path": "property-tax.limitedDSCR",
+      "actual": 1.28,
+      "independent": 1.28
+    },
+    {
+      "path": "property-tax.uncappedDSCR",
+      "actual": 1.1,
+      "independent": 1.1
+    },
+    {
+      "path": "property-tax.limitedMaximumAnnualDebtServiceUSD",
+      "actual": 102400.0,
+      "independent": 102400
+    },
+    {
+      "path": "property-tax.uncappedMaximumAnnualDebtServiceUSD",
+      "actual": 88000.0,
+      "independent": 88000
+    },
+    {
+      "path": "data-center-tax.standardStatePurchaseSavingUSD",
+      "actual": 10000000.0,
+      "independent": 10000000
+    },
+    {
+      "path": "data-center-tax.retainedAssumedLocalTaxUSD",
+      "actual": 3200000.0,
+      "independent": 3200000
+    },
+    {
+      "path": "data-center-tax.annualStandardStateElectricitySavingUSD",
+      "actual": 1125000.0,
+      "independent": 1125000
+    },
+    {
+      "path": "data-center-tax.countableCreatedPositionsBeforeOtherScreens",
+      "actual": 15,
+      "independent": 15
+    },
+    {
+      "path": "data-center-tax.lostSavingOnPreCertificationCohortUSD",
+      "actual": 1250000.0,
+      "independent": 1250000
+    },
+    {
+      "path": "data-center-tax.remainingPurchaseSavingUSD",
+      "actual": 8750000.0,
+      "independent": 8750000
+    },
+    {
+      "path": "jeti.originalGrossPV_USD",
+      "actual": 6039073.259047298,
+      "independent": 6039073.259047303
+    },
+    {
+      "path": "jeti.lostYearOneBenefitPV_USD",
+      "actual": 833333.3333333333,
+      "independent": 833333.3333333334
+    },
+    {
+      "path": "jeti.fixedEndDeferredGrossPV_USD",
+      "actual": 5205739.925713965,
+      "independent": 5205739.92571397
+    },
+    {
+      "path": "jeti.originalNetPV_USD",
+      "actual": 4782561.049206082,
+      "independent": 4782561.0492060855
+    },
+    {
+      "path": "jeti.separateYears11to13CostPV_USD",
+      "actual": 179054.18139838136,
+      "independent": 179054.18139838148
+    },
+    {
+      "path": "jeti.separateTailAdjustedNetPV_USD",
+      "actual": 4603506.8678077,
+      "independent": 4603506.867807704
+    },
+    {
+      "path": "franchise-tax.EZ_USD",
+      "actual": 29790.0,
+      "independent": 29790
+    },
+    {
+      "path": "franchise-tax.longFormAt7MCompensationUSD",
+      "actual": 28125.0,
+      "independent": 28125
+    },
+    {
+      "path": "franchise-tax.taxOnlyAllowableCompensationBreakEvenUSD",
+      "actual": 6704000.0,
+      "independent": 6704000
+    },
+    {
+      "path": "franchise-tax.longFormAt6_65MCompensationUSD",
+      "actual": 30093.75,
+      "independent": 30093.75
+    },
+    {
+      "path": "franchise-tax.with2200PreparationCompensationBreakEvenUSD",
+      "actual": 7095111.111111111,
+      "independent": 7095111.111111111
+    },
+    {
+      "path": "hiring.annualLoadedWagePremiumUSD",
+      "actual": 104000.0,
+      "independent": 104000
+    },
+    {
+      "path": "hiring.oneAnnualPremiumDelayEquivalentDays",
+      "actual": 20.8,
+      "independent": 20.8
+    },
+    {
+      "path": "hiring.threeAndFiveYearPremiumPV_USD[0]",
+      "actual": 268018.0866737794,
+      "independent": 268018.08667377953
+    },
+    {
+      "path": "hiring.threeAndFiveYearPremiumPV_USD[1]",
+      "actual": 415241.84385612083,
+      "independent": 415241.84385612124
+    },
+    {
+      "path": "hiring.immediateDelayEquivalentDays[0]",
+      "actual": 53.60361733475588,
+      "independent": 53.6036173347559
+    },
+    {
+      "path": "hiring.immediateDelayEquivalentDays[1]",
+      "actual": 83.04836877122416,
+      "independent": 83.04836877122425
+    },
+    {
+      "path": "hiring.productiveWorkersPer100Offers",
+      "actual": 54.0,
+      "independent": 54
+    },
+    {
+      "path": "hiring.offersFor20ExpectedProductiveWorkers",
+      "actual": 38,
+      "independent": 38
+    },
+    {
+      "path": "logistics.routeA_AnnualEconomicUSD",
+      "actual": 410000.0,
+      "independent": 410000
+    },
+    {
+      "path": "logistics.routeB_AnnualEconomicUSD",
+      "actual": 406000.0,
+      "independent": 406000
+    },
+    {
+      "path": "logistics.netPremiumBeforeIncidentSavingUSD",
+      "actual": 16000.0,
+      "independent": 16000
+    },
+    {
+      "path": "logistics.avoidedIncidentsNeededAt5000USD",
+      "actual": 3.2,
+      "independent": 3.2
+    },
+    {
+      "path": "logistics.oneTimePipelineCapitalReleaseUSD",
+      "actual": 40000,
+      "independent": 40000
+    },
+    {
+      "path": "logistics.extraAverageSafetyStockErasingAdvantageUSD",
+      "actual": 20000.0,
+      "independent": 20000
+    },
+    {
+      "path": "manufacturing.buyerAllocatedComponents",
+      "actual": 40375.0,
+      "independent": 40375
+    },
+    {
+      "path": "manufacturing.componentsAt94PercentTestYield",
+      "actual": 39950.0,
+      "independent": 39950
+    },
+    {
+      "path": "manufacturing.requiredTestYieldAt25PercentAllocation",
+      "actual": 0.9411764705882353,
+      "independent": 0.9411764705882353
+    },
+    {
+      "path": "manufacturing.requiredAllocationAt95PercentTestYield",
+      "actual": 0.2476780185758514,
+      "independent": 0.2476780185758514
+    },
+    {
+      "path": "manufacturing.allocationHeadroomPercentagePoints",
+      "actual": 0.2321981424148606,
+      "independent": 0.2321981424148606
+    },
+    {
+      "path": "insurance.quoteA_DeductibleUSD",
+      "actual": 360000.0,
+      "independent": 360000
+    },
+    {
+      "path": "insurance.retainedDamageAt200k_AandB_USD[0]",
+      "actual": 200000,
+      "independent": 200000
+    },
+    {
+      "path": "insurance.retainedDamageAt200k_AandB_USD[1]",
+      "actual": 100000,
+      "independent": 100000
+    },
+    {
+      "path": "insurance.retainedDamageAt600k_AandB_USD[0]",
+      "actual": 360000.0,
+      "independent": 360000
+    },
+    {
+      "path": "insurance.retainedDamageAt600k_AandB_USD[1]",
+      "actual": 100000,
+      "independent": 100000
+    },
+    {
+      "path": "insurance.sevenDayContributionExposureUSD",
+      "actual": 56000,
+      "independent": 56000
+    },
+    {
+      "path": "insurance.fourteenAdditionalDayContributionExposureUSD",
+      "actual": 112000,
+      "independent": 112000
+    },
+    {
+      "path": "robotaxi-map.baselineFareUSD",
+      "actual": 5600,
+      "independent": 5600
+    },
+    {
+      "path": "robotaxi-map.initialMixFareUSD",
+      "actual": 4640,
+      "independent": 4640
+    },
+    {
+      "path": "robotaxi-map.tenExceptionsFareUSD",
+      "actual": 4920,
+      "independent": 4920
+    },
+    {
+      "path": "robotaxi-map.tenExceptionsAllocatedTimeUSD",
+      "actual": 200,
+      "independent": 200
+    },
+    {
+      "path": "robotaxi-map.twentyExceptionsEconomicUSD",
+      "actual": 5600,
+      "independent": 5600
+    },
+    {
+      "path": "robotaxi-map.breakEvenExceptionsPer120Attempts",
+      "actual": 0.16666666666666666,
+      "independent": 0.16666666666666666
+    },
+    {
+      "path": "waymo.autonomousBaseFareUSD",
+      "actual": 4800,
+      "independent": 4800
+    },
+    {
+      "path": "waymo.alternativeBaseFareUSD",
+      "actual": 5800,
+      "independent": 5800
+    },
+    {
+      "path": "waymo.autonomousBaseTimeValueUSD",
+      "actual": 1600,
+      "independent": 1600
+    },
+    {
+      "path": "waymo.alternativeBaseTimeValueUSD",
+      "actual": 400,
+      "independent": 400
+    },
+    {
+      "path": "waymo.timeValueBreakEvenPerHourUSD",
+      "actual": 50.0,
+      "independent": 50
+    },
+    {
+      "path": "waymo.fallbackFareCashUSD",
+      "actual": 5360,
+      "independent": 5360
+    },
+    {
+      "path": "waymo.fallbackAllocatedMinutesAt60USDperHour",
+      "actual": 2080,
+      "independent": 2080
+    },
+    {
+      "path": "waymo.fallbackEconomicTotalUSD",
+      "actual": 7440,
+      "independent": 7440
+    },
+    {
+      "path": "waymo.independentIllustrativeTimetableLeadMinutes",
+      "actual": 45,
+      "independent": 45
+    },
+    {
+      "path": "zoox.availableVehicleHours",
+      "actual": 512.0,
+      "independent": 512
+    },
+    {
+      "path": "zoox.completedTripsAt55PercentOccupied",
+      "actual": 704.0,
+      "independent": 704
+    },
+    {
+      "path": "zoox.completedTripsAt40PercentOccupied",
+      "actual": 512.0,
+      "independent": 512
+    },
+    {
+      "path": "freight.directEconomicTotalUSD",
+      "actual": 1401600.0,
+      "independent": 1401600
+    },
+    {
+      "path": "freight.transferEconomicTotalUSD",
+      "actual": 1457600.0,
+      "independent": 1457600
+    },
+    {
+      "path": "freight.directSavingUSD",
+      "actual": 98400.0,
+      "independent": 98400
+    },
+    {
+      "path": "freight.incrementalRecoveryInvoicesUSD",
+      "actual": 5600.0,
+      "independent": 5600
+    },
+    {
+      "path": "freight.incrementalLostContributionUSD",
+      "actual": 8000.0,
+      "independent": 8000
+    },
+    {
+      "path": "freight.netSavingPerAcceptedShipmentBeforeSetupUSD",
+      "actual": 173.0,
+      "independent": 173
+    },
+    {
+      "path": "freight.firstWholeLoadBreakEven",
+      "actual": 232,
+      "independent": 232
+    },
+    {
+      "path": "freight.unpricedEconomicHeadroomPerAcceptedLoadUSD",
+      "actual": 123.0,
+      "independent": 123
+    },
+    {
+      "path": "freight.allInVariableCostCeilingAt800AcceptedUSD",
+      "actual": 1433.0,
+      "independent": 1433
+    },
+    {
+      "path": "freight.providerRoadQuoteCeilingAt800AcceptedUSD",
+      "actual": 1273.0,
+      "independent": 1273
+    },
+    {
+      "path": "authorization.allocatedExistingStaffUSD",
+      "actual": 3100,
+      "independent": 3100
+    },
+    {
+      "path": "authorization.paidBackupReservationUSD",
+      "actual": 2400,
+      "independent": 2400
+    },
+    {
+      "path": "authorization.incrementalPaidReplacementUSD",
+      "actual": 7200,
+      "independent": 7200
+    },
+    {
+      "path": "authorization.preparednessEconomicUSD",
+      "actual": 5500,
+      "independent": 5500
+    },
+    {
+      "path": "authorization.combinedStressEconomicUSD",
+      "actual": 12700,
+      "independent": 12700
+    },
+    {
+      "path": "authorization.commonFreightExcludedUSD",
+      "actual": 324000,
+      "independent": 324000
+    },
+    {
+      "path": "article-extra.powerIntermediateA",
+      "actual": 5000000,
+      "independent": 5000000
+    },
+    {
+      "path": "article-extra.powerIntermediateB",
+      "actual": 4000000,
+      "independent": 4000000
+    },
+    {
+      "path": "article-extra.waterCostA",
+      "actual": 438000.0,
+      "independent": 438000
+    },
+    {
+      "path": "article-extra.waterCostB",
+      "actual": 520125.0,
+      "independent": 520125
+    },
+    {
+      "path": "article-extra.propertyImprovementTax",
+      "actual": 80000.0,
+      "independent": 80000
+    },
+    {
+      "path": "article-extra.propertyEquipmentTax",
+      "actual": 3500.0,
+      "independent": 3500
+    },
+    {
+      "path": "article-extra.jetiBaseTax",
+      "actual": 5850000.0,
+      "independent": 5850000
+    },
+    {
+      "path": "article-extra.jetiNormalTax",
+      "actual": 4950000.0,
+      "independent": 4950000
+    },
+    {
+      "path": "article-extra.jetiZoneTax",
+      "actual": 4500000.0,
+      "independent": 4500000
+    },
+    {
+      "path": "article-extra.franchiseAnnualizedRevenue",
+      "actual": 2807692.3076923075,
+      "independent": 2807692.3076923075
+    },
+    {
+      "path": "article-extra.franchisePreparationTotal",
+      "actual": 30325,
+      "independent": 30325
+    },
+    {
+      "path": "article-extra.franchiseCreditTotal",
+      "actual": 25325,
+      "independent": 25325
+    },
+    {
+      "path": "article-extra.manufacturingAssemblyShortfall",
+      "actual": 25,
+      "independent": 25
+    },
+    {
+      "path": "article-extra.manufacturingLostContribution",
+      "actual": 2500,
+      "independent": 2500
+    },
+    {
+      "path": "article-extra.insuranceRetentionPerExtraPremiumYears",
+      "actual": 8.666666666666666,
+      "independent": 8.666666666666666
+    },
+    {
+      "path": "article-extra.robotaxiTenEconomic",
+      "actual": 5120,
+      "independent": 5120
+    },
+    {
+      "path": "article-extra.freightDownsideTotal",
+      "actual": 1510800.0,
+      "independent": 1510800
+    },
+    {
+      "path": "article-extra.freightHighAcceptanceTotal",
+      "actual": 1367000.0,
+      "independent": 1367000
+    },
+    {
+      "path": "article-extra.freightExtraLossSaving",
+      "actual": -1600,
+      "independent": -1600
+    }
+  ]
+}

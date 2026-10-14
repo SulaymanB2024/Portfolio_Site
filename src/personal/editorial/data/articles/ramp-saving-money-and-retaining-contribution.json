@@ -384,5 +384,12 @@
     }
   ],
   "seoDescription": "I separate the card bridge from paid workflow value, then test whether the platform and its buyer keep enough of the benefit.",
-  "readTime": "11 MIN"
+  "readTime": "11 MIN",
+  "resources": [
+    {
+      "label": "Download the seven-study models and source package",
+      "href": "/downloads/research/strategy-startup-models.zip",
+      "format": "ZIP"
+    }
+  ]
 }
