@@ -1,0 +1,40 @@
+{
+  "integrationHead": "91e7dd594c0bb64c49ab935afa781514e3ee9b01",
+  "provider": "Codex Code Review / GitHub",
+  "pullRequest": "https://github.com/SulaymanB2024/Portfolio_Site/pull/101",
+  "checks": [
+    {
+      "name": "Generated output integrity / verify",
+      "jobId": 116160528650,
+      "runId": 38654371649,
+      "conclusion": "success"
+    },
+    {
+      "name": "Kalshi browser review / browser",
+      "jobId": 116160529687,
+      "runId": 38654371930,
+      "conclusion": "success"
+    },
+    {
+      "name": "Vercel",
+      "conclusion": "success"
+    },
+    {
+      "name": "Vercel Preview Comments",
+      "conclusion": "success"
+    }
+  ],
+  "readback": {
+    "tests": 721,
+    "botTests": 19,
+    "openingTests": 28,
+    "texasArticles": 18,
+    "texasSources": 194,
+    "canonicalPages": 82,
+    "legacyRedirects": 82,
+    "assets": 3014,
+    "feedEntries": 62,
+    "citations": 617
+  },
+  "limits": "Full CI log response was truncated; actual emitted ending confirms all listed test/publication/build/release outcomes. Vercel preview browser is sign-in protected; deployed UI inspection is not claimed."
+}
