@@ -29,7 +29,13 @@ Validation passes: **702 application tests**, plus the earlier scoped 29 account
 | Interaction / loading | Pass | Ready native GLBs, four-page continuation, chapter jump/focus, keyboard and pointer resets, reduced motion and sustained final rotor cadence. |
 | Content readiness | Pass | Public résumé authority; Atlas’s exact source dates/unknowns preserved; route, proof, schema and readable-document gates pass. |
 
-Durable visual delivery is docs/featured-work-preview-20261014/featured-projects.jpg and work-and-home.jpg. The overview positions unchanged native phone captures at their original pixel size; its README gives account/asset mapping, scope, validation and preview routes. The built preview lease owns only this task’s child process group on port4217 and expires one hour after its recorded start. Next boundary: publish this verified revision to the existing authorized PR #100 and confirm its final checks; no merge or production publication.
+Durable visual delivery is docs/featured-work-preview-20261014/featured-projects.jpg and work-and-home.jpg. The overview positions unchanged native phone captures at their original pixel size; its README gives account/asset mapping, scope, validation and preview routes. The built preview lease owns only this task’s child process group on port4217 and expires one hour after its recorded start.
+
+### MR delivery
+
+Published the curation, new accounts, presentation aliases, checks and native visual delivery as **9ae354833dd36599fd2ec3d4e202d2f604aa7be7** to the existing authorized [PR #100](https://github.com/SulaymanB2024/Portfolio_Site/pull/100). The remote branch had matched the starting 528d8bf revision; the normal push succeeded without force. This documentation follow-up records that verified delivery. The PR’s final-head CI and Vercel statuses are checked in the task’s closeout receipt. No merge or production publication occurred.
+
+Next boundary: human review of the four-project selection, then separately authorized merge/publication. Implementation, integration, rendered inspection/correction and MR delivery are complete; hosted visual inspection remains limited by the previously observed Vercel sign-in requirement.
 
 ## Revision-8 working brief — abstract sculpture collection (October 14)
 
