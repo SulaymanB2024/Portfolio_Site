@@ -12,6 +12,7 @@ export function outreachDocument(html: string, slug: string, name: string, openi
   const company = { slug, name, ...(opening ? { opening } : {}) }
   const selectedCopy = opening ? `<meta name="${personalizedOpeningIdMeta}" content="${opening.id}"><script type="application/json" id="${personalizedOpeningCopyElement}">${JSON.stringify({ id: opening.id, lines: opening.lines }).replace(/</g, '\\u003c').replace(/>/g, '\\u003e').replace(/&/g, '\\u0026')}</script>` : ''
   return withSearchHead(html, recruiterMetadata(company))
+    .replace(/<noscript>Enable JavaScript[^]*?<\/noscript>/, '')
     .replace(/<!--public-page:start-->([^]*?)<!--public-page:end-->/, (_, body: string) => `<!--public-page:start-->${renderRecruiterDocument(body, company)}<!--public-page:end-->`)
     .replace('</head>', () => `<meta name="${outreachMetaName}" content="${slug}"><meta name="${outreachNameMeta}" content="${escapeMetadata(name)}">${selectedCopy}</head>`)
 }

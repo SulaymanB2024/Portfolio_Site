@@ -66,7 +66,7 @@ export default function LandingSequence({ onActiveChange, opening }: { onActiveC
         <span ref={category} className="landing-category">{opening?.category}</span>
         <a ref={title} className="landing-title-target" tabIndex={-1}><h1 ref={headline} id="landing-title">{opening ? opening.lines.map((line, index) => <Fragment key={index}><span className="landing-title-line" data-quiet={index % 2 === 0 ? '' : undefined}>{line}</span>{index < 3 ? ' ' : ''}</Fragment>) : <><span className="landing-title-line" data-quiet>The</span>{' '}<span className="landing-title-line">frontier</span>{' '}<span className="landing-title-line" data-quiet>is all that</span>{' '}<span className="landing-title-line">matters.</span></>}</h1></a>
         <div ref={links} className="landing-story-links">
-          {!opening && <p className="landing-recruiter-intro">{recruiterCopy.opening}</p>}
+          {(!opening || opening.introduction) && <p className="landing-recruiter-intro" data-candidate={opening?.introduction ? '' : undefined}>{opening?.introduction || recruiterCopy.opening}</p>}
           <div className="landing-destinations">
           <a ref={project} className="destination-link" href={opening?.href || '#/work'}><span className="destination-link-label">{opening?.linkLabel || 'Work'}</span><LinkArrow /></a>
           <a ref={article} className="destination-link" href={opening?.article.href || '#/about'}><span className="destination-link-label">{opening?.article.label || 'About me'}</span><LinkArrow /></a>

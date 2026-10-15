@@ -3,7 +3,7 @@ type Arrival = { entry?: string; point?: Point }
 const ENTRY = '__portfolioScrollEntry'
 
 /** Retain history positions without writing history state on every scroll frame. */
-export function installRouteScroll(host: Window = window) {
+export function installRouteScroll(host: Window = window, { nativeRestoration = false } = {}) {
   const positions = new Map<string, Point>()
   const prefix = `${Date.now().toString(36)}-${Math.random().toString(36).slice(2)}`
   let serial = 0
@@ -27,7 +27,7 @@ export function installRouteScroll(host: Window = window) {
     try { host.history.replaceState({ ...state, [ENTRY]: entry }, '') } catch { return undefined }
     return entry
   }
-  let current = ensureEntry()
+  let current = nativeRestoration ? undefined : ensureEntry()
   const ownsRestoration = Boolean(current)
   if (ownsRestoration) host.history.scrollRestoration = 'manual'
 
@@ -57,7 +57,7 @@ export function installRouteScroll(host: Window = window) {
   return {
     begin(): Arrival {
       leaving()
-      const entry = ensureEntry()
+      const entry = nativeRestoration ? undefined : ensureEntry()
       return { entry, point: entry ? positions.get(entry) : undefined }
     },
     samePage(arrival: Arrival) {
