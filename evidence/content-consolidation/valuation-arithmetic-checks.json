@@ -1,0 +1,36 @@
+{
+  "Anduril": {
+    "enterpriseValuesB": {
+      "Downside": -0.12725855280738108,
+      "Base": 27.684556276993234,
+      "Upside": 67.36736892363491
+    },
+    "annualAccountingRowsChecked": 45,
+    "arsenal2ScheduleB": 3.7,
+    "softwareShareAt22Percent": 0.34285714285714286
+  },
+  "Kalshi": {
+    "enterpriseValuesB": {
+      "Restricted": 2.613160497892958,
+      "Base": 26.406006237067192,
+      "Breakout": 58.706539007331074
+    },
+    "annualForecastRowsChecked": 30,
+    "weightedEVB": 28.532927994839604,
+    "breakoutWeightFor40B": 0.5740526117512359
+  },
+  "Hyperliquid": {
+    "perToken": {
+      "bear": 4.2375728105857835,
+      "base": 29.96489402169383,
+      "bull": 126.35636456350355
+    },
+    "annualProductRowsChecked": 15,
+    "annualDiscountedRowsChecked": 30,
+    "post2031Share": 0.7567507066780109,
+    "oneTrillionAtOneBasisPointB": 0.1,
+    "annualizedParentReceiptsB": 0.8717416666666667,
+    "mixedReceiptRatioBps": 3.34088850766938,
+    "q3ReconciliationGapM": 4.840000000000003
+  }
+}

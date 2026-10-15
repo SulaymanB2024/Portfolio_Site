@@ -1007,8 +1007,8 @@
     ]
   },
   "chegg-cash-flow-turnaround": {
-    "question": "Can Chegg’s cash-flow improvement finance its skilling transition?",
-    "answer": "Debt retirement and lower investment buy time, but do not by themselves establish a durable recovery. H1 2026 free cash flow improved because a capex reduction exceeded the decline in operating cash flow. The case measures how much new revenue and contribution would need to replace the contracting academic business, then tests liquidity under declared assumptions. June pro forma cash after debt repayment is kept distinct from actual current cash.",
+    "question": "Why do I believe in Chegg’s reinvention?",
+    "answer": "I believe in Chegg because it has made tangible progress: retiring its remaining debt, generating operating cash through restructuring and building its skilling business. Those actions provide a foundation for a more focused company. The case explains that progress and the disciplined investment that can support the next stage, using reported results and clearly labeled assumptions.",
     "paths": [
       {
         "label": "Explain the cash improvement",
@@ -1034,6 +1034,1130 @@
       {
         "label": "Chegg announces full repayment of convertible notes",
         "href": "https://investor.chegg.com/Press-Releases/press-release-details/2026/Chegg-Announces-Full-Repayment-of-Convertible-Notes/default.aspx"
+      }
+    ]
+  },
+  "texas-power-large-load-business-diligence": {
+    "question": "What makes a Texas power commitment financeable?",
+    "answer": "For an ERCOT site, obtain a documented allocation, phase dates, conditions, and operating restrictions; model fees, security, construction payments, and delay exposure separately. The standards effective October 8, 2026 and the conditional Batch Zero process change what a request or agreement establishes. A power price and a large request alone do not resolve the opening date. Price the minimum-billing commitment and staged collateral release separately from permanent construction payments. A material ramp or site change can require a new request. Verify the effective minimum-billing rule and tariff separately: the adopted connection acknowledgment does not establish the July proposal’s 20-year treatment.",
+    "paths": [
+      {
+        "label": "Verify the connection evidence",
+        "section": "connection-evidence",
+        "description": "Follow classification, verification, studies and approval."
+      },
+      {
+        "label": "Compare capital commitments",
+        "section": "capital-commitments",
+        "description": "Distinguish security from construction and electricity expense."
+      },
+      {
+        "label": "Make the investment decision",
+        "section": "investment-decision",
+        "description": "Tie commitments to capacity and operating evidence."
+      }
+    ],
+    "sources": [
+      {
+        "label": "Adopted 16 TAC §25.194: Large Load Interconnection Standards",
+        "href": "https://www.sos.texas.gov/texreg/archive/October22026/Adopted%20Rules/16.ECONOMIC%20REGULATION.html"
+      },
+      {
+        "label": "M-A080326-04: Batch Zero conditional classifications",
+        "href": "https://www.ercot.com/services/comm/mkt_notices/M-A080326-04"
+      },
+      {
+        "label": "M-B091426-01: Data Center State and Community Impact RFI",
+        "href": "https://www.ercot.com/services/comm/mkt_notices/M-B091426-01"
+      }
+    ]
+  },
+  "texas-ai-law-business-compliance": {
+    "question": "What should a Texas business resolve before deploying AI?",
+    "answer": "Identify the deployed use and operator, then determine which AI, privacy, and biometric duties attach. HB149 has distinct government and healthcare disclosure provisions; ordinary private businesses need a use-specific review of prohibited conduct and applicable data responsibilities. Record vendor terms, oversight, complaint handling, and change approvals. This edition uses enacted and current primary sources checked October 12, 2026. Employment-context privacy exclusions do not settle separate biometric or TRAIGA duties; approve the actual purpose and data flow.",
+    "paths": [
+      {
+        "label": "Identify the applicable duties",
+        "section": "duties-by-operator",
+        "description": "Separate private, government and healthcare requirements."
+      },
+      {
+        "label": "Trace personal and biometric data",
+        "section": "privacy-and-biometrics",
+        "description": "Check the actual processing relationship and statutory scope."
+      },
+      {
+        "label": "Review the procurement",
+        "section": "procurement",
+        "description": "Assign responsibilities and request usable evidence."
+      }
+    ],
+    "sources": [
+      {
+        "label": "HB149, enacted enrolled text",
+        "href": "https://capitol.texas.gov/tlodocs/89R/billtext/html/HB00149F.htm"
+      },
+      {
+        "label": "Business & Commerce Code Chapter 552: duties, prohibitions and enforcement",
+        "href": "https://tcss.legis.texas.gov/resources/BC/htm/BC.552.htm"
+      },
+      {
+        "label": "Business & Commerce Code Chapter 541: Texas Data Privacy and Security Act",
+        "href": "https://tcss.legis.texas.gov/resources/BC/htm/BC.541.htm"
+      }
+    ]
+  },
+  "texas-business-court-contract-decisions": {
+    "question": "What should change in a Texas business contract review?",
+    "answer": "Preserve material promises in the signed documents, separate transaction consideration from qualifying pleaded claims, and keep a dated dispute chronology. HB40 uses distinct monetary screens; September 2026 opinions show why counterclaims and reliance language matter. Ask counsel to map the actual agreement, venue, and dispute to the governing route. Select the statutory route and all definition limbs before monetary screens; keep business loss, legal claim and practical recovery distinct.",
+    "paths": [
+      {
+        "label": "Separate the monetary tests",
+        "section": "two-thresholds",
+        "description": "A contract value is different from the amount in dispute."
+      },
+      {
+        "label": "Preserve the economic bargain",
+        "section": "preserve-bargain",
+        "description": "Reconcile material commitments with the signed package."
+      },
+      {
+        "label": "Work the downside",
+        "section": "worked-dispute",
+        "description": "Compare a declared hypothetical against the commercial-action test."
+      }
+    ],
+    "sources": [
+      {
+        "label": "HB40 enrolled text, particularly sections 43, 45, 56, and 72",
+        "href": "https://capitol.texas.gov/tlodocs/89R/billtext/html/HB00040F.htm"
+      },
+      {
+        "label": "The Bakery v. Naterra International, 2026 Tex. Bus. 64",
+        "href": "https://www.txcourts.gov/media/1463334/26-bc03a-0027-the-bakery-v-naterra-intl-2026-tex-bus-64.pdf"
+      },
+      {
+        "label": "Beard v. Perot, 2026 Tex. Bus. 65",
+        "href": "https://www.txcourts.gov/media/1463368/26-bc01b-0018-beard-v-perot-2026-tex-bus-65.pdf"
+      }
+    ]
+  },
+  "texas-water-facility-site-diligence": {
+    "question": "What makes a Texas water commitment usable?",
+    "answer": "Trace the legal source, supplier contract and delivery system to the process that consumes the water. Annual sufficiency does not establish peak-day flow, recoverable storage, quality or drought obligations. The initial 2027 State Water Plan is adopted; its enhanced amendment remained proposed at the October 12, 2026 cutoff. Use planning projects to identify dependencies, then obtain local authority and operating evidence. Use the peak/refill sequence and compare lost-production exposure with the same-horizon supply-price saving.",
+    "paths": [
+      {
+        "label": "Trace source authority",
+        "section": "legal-source",
+        "description": "Match the water right or local well permit to the proposed use."
+      },
+      {
+        "label": "Compare peak delivery and storage",
+        "section": "peak-and-storage",
+        "description": "Work annual demand, peak limits and recovery separately."
+      },
+      {
+        "label": "Review treatment and disposal",
+        "section": "quality-reuse-disposal",
+        "description": "Complete the design through reuse and wastewater authority."
+      }
+    ],
+    "sources": [
+      {
+        "label": "2027 State Water Plan: adoption and proposed amendment",
+        "href": "https://www.twdb.texas.gov/waterplanning/swp/2027/index.asp"
+      },
+      {
+        "label": "Water supply contracts and underlying water rights",
+        "href": "https://www.tceq.texas.gov/permitting/water_rights/watersupplycontracts"
+      },
+      {
+        "label": "Groundwater regulation and private-well guidance",
+        "href": "https://www.twdb.texas.gov/groundwater/faq/faqgwm.asp"
+      }
+    ]
+  },
+  "texas-property-tax-business-underwriting": {
+    "question": "What can change a Texas business property-tax budget?",
+    "answer": "Reconstruct each asset and taxing unit, keeping market, appraised and taxable values separate. The reviewed non-homestead limitation expires after 2026, and the separate $125,000 personal-property exemption has location and aggregation conditions. Ownership, improvements, adopted rates and the lease allocation can change the cost. Compare the seller’s bill with the business’s durable operating expense. Temporary tax relief also changes debt-service headroom; model the ownership tax-year transition and statutory expiration separately.",
+    "paths": [
+      {
+        "label": "Reconstruct the tax stack",
+        "section": "reconstruct-the-bill",
+        "description": "Identify each account, value and taxing unit."
+      },
+      {
+        "label": "Model the temporary limitation",
+        "section": "worked-tax-sensitivity",
+        "description": "Price value and rate exposure using declared assumptions."
+      },
+      {
+        "label": "Review tenant exposure",
+        "section": "lease-exposure",
+        "description": "Connect the tax charge, lease allocation and conditional protest rights."
+      }
+    ],
+    "sources": [
+      {
+        "label": "Tax Code Chapter 23: appraisal methods and §23.231 circuit breaker",
+        "href": "https://tcss.legis.texas.gov/resources/TX/htm/TX.23.htm"
+      },
+      {
+        "label": "Tax Code §11.145: income-producing tangible personal property",
+        "href": "https://tcss.legis.texas.gov/resources/TX/htm/TX.11.htm"
+      },
+      {
+        "label": "Appraisal protests and appeals, including lessees",
+        "href": "https://comptroller.texas.gov/taxes/property-tax/protests/index.php"
+      }
+    ]
+  },
+  "texas-data-center-sales-tax-project-economics": {
+    "question": "Which Texas data-center tax benefit belongs in the project model?",
+    "answer": "Identify the certification route, registered purchaser, eligible items and timeline. The standard route exempts state tax while local tax remains; the large-project route covers state and local eligible purchases. Current large-project law starts the investment clock at the earlier application or certification date, unlike the agency summary. Resolve that discrepancy, separate investment from exempt purchases and price continuing commitments and revocation exposure. Exclude jobs moved between Texas counties, and keep investment-counting dates separate from the certification-dependent purchase exemption.",
+    "paths": [
+      {
+        "label": "Compare certification routes",
+        "section": "two-certification-routes",
+        "description": "Separate space, jobs, capital, transmission and tax treatment."
+      },
+      {
+        "label": "Resolve the investment clock",
+        "section": "investment-clock",
+        "description": "Compare the current statute with the agency form."
+      },
+      {
+        "label": "Work the purchase tax case",
+        "section": "worked-tax-case",
+        "description": "Retain local tax and contingent repayment exposure."
+      }
+    ],
+    "sources": [
+      {
+        "label": "Texas Tax Code Chapter151, §§151.359 and151.3595",
+        "href": "https://tcss.legis.texas.gov/resources/TX/htm/TX.151.htm"
+      },
+      {
+        "label": "AP-236: application for a qualifying large data-center project",
+        "href": "https://comptroller.texas.gov/forms/ap-236.pdf"
+      },
+      {
+        "label": "Form01-929: data-center exemption certificate",
+        "href": "https://comptroller.texas.gov/forms/01-929.pdf"
+      }
+    ]
+  },
+  "texas-jeti-incentives-project-underwriting": {
+    "question": "How should a business underwrite a Texas JETI incentive?",
+    "answer": "Place the benefit in the school M&O tax line for eligible property, rather than discount the whole tax bill. Retain genuine competing-site evidence, the signed construction and incentive timetable, and jobs, wages and reporting obligations. Model the benefit after program costs and the compliance tail. A proposed investment, signed agreement and operating output are different stages of evidence. A permitted start deferral can leave the end fixed and consume benefit years; price the post-benefit operating tail separately.",
+    "paths": [
+      {
+        "label": "Locate the actual tax benefit",
+        "section": "tax-stack",
+        "description": "Separate the M&O value limitation from the rest of the bill."
+      },
+      {
+        "label": "Keep competing-site evidence",
+        "section": "competitive-evidence",
+        "description": "Retain a current location decision with tangible alternatives."
+      },
+      {
+        "label": "Calculate the return",
+        "section": "worked-return",
+        "description": "Use declared values, rates, costs and downside assumptions."
+      }
+    ],
+    "sources": [
+      {
+        "label": "Government Code Chapter 403, Subchapter T: current JETI law",
+        "href": "https://tcss.legis.texas.gov/resources/GV/htm/GV.403.htm"
+      },
+      {
+        "label": "JETI FAQ: competing locations, jobs and eligible investment",
+        "href": "https://comptroller.texas.gov/economy/development/prop-tax/jeti/faq.php"
+      },
+      {
+        "label": "JETI process and timeline",
+        "href": "https://comptroller.texas.gov/economy/development/prop-tax/jeti/process.php"
+      }
+    ]
+  },
+  "texas-franchise-tax-reporting-business-decisions": {
+    "question": "What does no Texas franchise tax due still require?",
+    "answer": "For an ordinary taxable entity, the $2.65 million annualized-revenue threshold for 2026 does not generally remove the PIR or OIR obligation. Reconcile the actual accounting period, entity and group, then compare supported EZ or long-form treatment and credit eligibility. Keep extension, filing and payment acceptance evidence. A zero tax estimate and a complete reporting record answer different questions. Stress allowable deductions against the preparation-cost threshold rather than using book payroll as proof.",
+    "paths": [
+      {
+        "label": "Separate threshold and reporting",
+        "section": "threshold-and-report",
+        "description": "Identify the actual information-report requirement."
+      },
+      {
+        "label": "Compare computation methods",
+        "section": "computation-choice",
+        "description": "Model eligible deductions, credits and preparation cost."
+      },
+      {
+        "label": "Review the 2026 research credit",
+        "section": "research-credit-change",
+        "description": "Check current eligibility, federal evidence and filing procedure."
+      }
+    ],
+    "sources": [
+      {
+        "label": "Texas franchise-tax report forms for 2026",
+        "href": "https://comptroller.texas.gov/taxes/franchise/forms/2026-franchise.php"
+      },
+      {
+        "label": "Requirements for reporting and paying franchise tax",
+        "href": "https://comptroller.texas.gov/taxes/franchise/filing-requirements.php"
+      },
+      {
+        "label": "Subchapter T research-and-development franchise-tax credit guidance",
+        "href": "https://comptroller.texas.gov/taxes/franchise/research-dev-credit.php"
+      }
+    ]
+  },
+  "texas-hiring-labor-cost-planning": {
+    "question": "How should a Texas employer price a hiring plan?",
+    "answer": "Use the public data to frame a role-specific recruiting test. August 2026 employment observations and May 2025 wage estimates are different clocks; establishment jobs and unemployment do not count qualified applicants for a shift. Build the full compensation and training cost, measure actual offers and starts, and compare pay changes with the real capacity bottleneck and delay exposure. Compare a lasting wage premium over its actual horizon with a one-time launch loss, and measure qualified productive starters rather than applicants.",
+    "paths": [
+      {
+        "label": "Read the local job signal",
+        "section": "local-job-signals",
+        "description": "Keep geography, industry, units and adjustment basis aligned."
+      },
+      {
+        "label": "Check the wage baseline",
+        "section": "wage-baseline",
+        "description": "Distinguish published averages from current offers and full employer cost."
+      },
+      {
+        "label": "Price pay against delay",
+        "section": "pay-versus-delay",
+        "description": "Calculate the declared staffing scenario without assuming a recruiting response."
+      }
+    ],
+    "sources": [
+      {
+        "label": "Texas Labor Market Review, September 2026 edition",
+        "href": "https://texaslmi.com/api/GetHomeLinks/TLMR"
+      },
+      {
+        "label": "Occupational Employment and Wages in Dallas–Fort Worth–Arlington, May 2025",
+        "href": "https://www.bls.gov/regions/southwest/news-release/occupationalemploymentandwages_dallasfortworth.htm"
+      },
+      {
+        "label": "Technical Notes for May 2025 OEWS Estimates",
+        "href": "https://www.bls.gov/oes/current/oes_tec.htm"
+      }
+    ]
+  },
+  "texas-cross-border-logistics-business-planning": {
+    "question": "When does a Texas–Mexico route deliver better total cost?",
+    "answer": "Qualify the complete itinerary, customs basis and usable receiving window. Freight value and inbound truck counts have different populations and cannot establish shipment reliability. Verify actual commercial and inspection schedules, then compare freight, pipeline inventory, handling and failure cost using comparable shipment evidence. The route preference can reverse when a small assumed service advantage disappears. Define the avoided-incident target; keep a one-time pipeline capital release separate from annual carrying cost and safety-stock variability.",
+    "paths": [
+      {
+        "label": "Read the correct denominator",
+        "section": "value-and-movements",
+        "description": "Separate nominal value, truck entries, direction and mode."
+      },
+      {
+        "label": "Verify the schedule",
+        "section": "schedules",
+        "description": "Distinguish commercial traffic from published office hours."
+      },
+      {
+        "label": "Work the landed-cost comparison",
+        "section": "route-economics",
+        "description": "Price freight, inventory and missed-window assumptions together."
+      }
+    ],
+    "sources": [
+      {
+        "label": "North American transborder freight, July 2026",
+        "href": "https://www.bts.gov/newsroom/north-american-transborder-freight-valued-1576-billion-july-2026-188-july-2025"
+      },
+      {
+        "label": "Laredo International Bridge System official directory",
+        "href": "https://www.cityoflaredo.com/departments/bridge-system"
+      },
+      {
+        "label": "USMCA: official certification-of-origin guidance",
+        "href": "https://www.help.cbp.gov/s/article/Article-1736"
+      }
+    ]
+  },
+  "texas-manufacturing-capacity-procurement": {
+    "question": "When is new Texas manufacturing capacity usable by a buyer?",
+    "answer": "Match the exact product and approved manufacturing route to qualification, allocation and accepted receipt. TI’s production start, Samsung’s year-end expectation and GlobalWafers’ customer qualifications establish different stages. Public award dollars and impact estimates do not supply buyer-specific output. Work gross production through yields and allocation, then obtain a dated commercial commitment and an executable alternate. Conditional customer financing can support ramp and reserved access while leaving uncommitted capacity unknown; test allocation as well as yield.",
+    "paths": [
+      {
+        "label": "Compare the project stages",
+        "section": "project-evidence",
+        "description": "Separate production, a completed shell, an outlook and customer qualification."
+      },
+      {
+        "label": "Model buyer-allocated output",
+        "section": "allocated-output-model",
+        "description": "Convert declared gross output through yields and allocation."
+      },
+      {
+        "label": "Prepare the procurement evidence",
+        "section": "buyer-checklist",
+        "description": "Identify the part, route, volume, delivery and remaining conditions."
+      }
+    ],
+    "sources": [
+      {
+        "label": "TI announces the start of production at Sherman SM1",
+        "href": "https://www.ti.com/about-ti/newsroom/news-releases/2025/texas-instruments-begins-production-at-its-newest-300mm-semiconductor-manufacturing-facility-in-sherman-texas.html"
+      },
+      {
+        "label": "Samsung October 2026 Austin and Taylor update",
+        "href": "https://semiconductor.samsung.com/sas/local-news/samsung-austin-semiconductors-two-campuses-inject-10-9b-into-central-texas-economy-in-2025/"
+      },
+      {
+        "label": "GlobalWafers second-quarter 2026 results and expansion update",
+        "href": "https://www.sas-globalwafers.com/en/gwc_news_en_20260804/"
+      }
+    ]
+  },
+  "texas-commercial-property-insurance-diligence": {
+    "question": "What must a Texas commercial policy establish for a recovery plan?",
+    "answer": "Test the same loss against the issued policy’s insured property, covered cause, settlement basis, deductible, sublimits and business-income trigger. A zero TWIA rate-change filing does not establish an individual premium. Wind and flood differ; physical repair and suspended income differ. Price retained loss and restart liquidity, preserving the actual forms and endorsements rather than relying on a certificate. Repair, policy restoration and revenue recovery use different clocks; a post-repair operating loss is not automatically insured.",
+    "paths": [
+      {
+        "label": "Map peril and insured property",
+        "section": "hazard-and-policy",
+        "description": "Follow the event into the actual contract."
+      },
+      {
+        "label": "Compare dollar retention",
+        "section": "valuation-and-deductible",
+        "description": "Normalize deductible bases and settlement before premiums."
+      },
+      {
+        "label": "Read business-income terms",
+        "section": "business-income",
+        "description": "Check the suspension trigger, time deductible and separate limits."
+      }
+    ],
+    "sources": [
+      {
+        "label": "Commercial property insurance guide",
+        "href": "https://www.tdi.texas.gov/pubs/consumer/cb021.html"
+      },
+      {
+        "label": "TWIA-17 Business Income and Extra Expense endorsement",
+        "href": "https://www.twia.org/wp-content/uploads/Business_Income_and_Extra_Expense_Form_2011.11.pdf"
+      },
+      {
+        "label": "TDI TWIA submissions: commercial filing P-0826-02",
+        "href": "https://www.tdi.texas.gov/submissions/indextwia.html"
+      }
+    ]
+  },
+  "texas-robotaxi-business-service-map": {
+    "question": "Which Texas robotaxi service can support a business trip?",
+    "answer": "Start with the admitted rider, actual booking channel, supported endpoints and disclosed onboard role. Waymo access differs across its Texas markets; Zoox’s reviewed Austin invitation is a waitlist; Tesla and Avride have service-specific rules; the May Arlington evidence leaves current access unresolved. Compare usable trips and fallback costs rather than city announcements or unnormalized crash totals. Specific preliminary investigations and certification inquiries inform diligence without establishing a provider safety ranking. San Antonio/SAT invitation access was updated October 14; confirm the actual trip in the app.",
+    "paths": [
+      {
+        "label": "Compare rider access",
+        "section": "operating-evidence",
+        "description": "Read dated openings and current guidance within their scope."
+      },
+      {
+        "label": "Price eligible trips",
+        "section": "worked-trip-budget",
+        "description": "Keep fare cash and valued exception time separate."
+      },
+      {
+        "label": "Prepare the pilot",
+        "section": "buyer-checklist",
+        "description": "Verify booking, payment, support and the actual journey."
+      }
+    ],
+    "sources": [
+      {
+        "label": "October 14 San Antonio/SAT opening",
+        "href": "https://support.google.com/waymo/answer/18765688"
+      },
+      {
+        "label": "Waymo service areas and rider admission",
+        "href": "https://support.google.com/waymo/answer/9059119?hl=en"
+      },
+      {
+        "label": "Avride on Uber: current Dallas rider guidance",
+        "href": "https://www.uber.com/us/en/r/autonomous/dallas-tx-us/"
+      },
+      {
+        "label": "Tesla Robotaxi rider support",
+        "href": "https://www.tesla.com/support/robotaxi"
+      }
+    ]
+  },
+  "texas-waymo-business-travel": {
+    "question": "When should a Texas business use Waymo for employee travel?",
+    "answer": "Approve the actual journey through the correct market and booking channel. Dallas and Houston have open-access announcements, Austin uses optional Uber matching and San Antonio guidance describes gradual admission. Check the airport leg and payment program separately. A lower fare can be outweighed by walking, waiting or fallback work; the declared scenario measures those boundaries without predicting failure frequency. Its assumed $5 fare saving and six extra minutes break even at $50 per employee-hour; review the bounded Austin oversight record separately. San Antonio/SAT invitation access was updated October 14; confirm the actual trip in the app.",
+    "paths": [
+      {
+        "label": "Verify Texas access",
+        "section": "texas-access",
+        "description": "Distinguish rider admission from a trip or vehicle guarantee."
+      },
+      {
+        "label": "Check the airport leg",
+        "section": "airport-and-route",
+        "description": "Use documented terminal and route evidence."
+      },
+      {
+        "label": "Compare fare and time",
+        "section": "fare-and-time",
+        "description": "Apply the declared comparison to the actual cohort."
+      }
+    ],
+    "sources": [
+      {
+        "label": "October 14 San Antonio/SAT opening",
+        "href": "https://support.google.com/waymo/answer/18765688"
+      },
+      {
+        "label": "Current service areas and rider access",
+        "href": "https://support.google.com/waymo/answer/9059119?hl=en"
+      },
+      {
+        "label": "Austin and Atlanta: Waymo rides on Uber",
+        "href": "https://support.google.com/waymo/answer/16011725?hl=en"
+      },
+      {
+        "label": "Airport service and San Antonio rider eligibility",
+        "href": "https://support.google.com/waymo/answer/14298153?hl=en"
+      }
+    ]
+  },
+  "texas-zoox-market-entry-business": {
+    "question": "What can a business infer from Zoox’s arrival in Texas?",
+    "answer": "Match the commitment to the documented stage. Austin’s reviewed invitation remains coming soon; Dallas and Houston describe testing sequences. The federal grant binds lifetime operational control and limits transfer/licensing, while separate public Operational Authorizations govern operation. A hotel, supplier and depot owner need different commitments. The throughput example uses invented completed-trip hours; it estimates no fleet, fare or unit cost.",
+    "paths": [
+      {
+        "label": "Read the local stage",
+        "section": "texas-stages",
+        "description": "Keep testing, restricted access and public service distinct."
+      },
+      {
+        "label": "Scope the exemption",
+        "section": "commercial-path",
+        "description": "Separate introduction limits from operating authorizations."
+      },
+      {
+        "label": "Model completed trips",
+        "section": "depot-to-trip",
+        "description": "Work declared vehicle hours through availability and occupancy."
+      }
+    ],
+    "sources": [
+      {
+        "label": "Austin: current public rider invitation",
+        "href": "https://zoox.com/austin"
+      },
+      {
+        "label": "NHTSA grant: conditions for commercial deployment",
+        "href": "https://www.govinfo.gov/content/pkg/FR-2026-07-31/html/2026-15485.htm"
+      },
+      {
+        "label": "Houston and San Diego testing expansion",
+        "href": "https://zoox.com/journal/zoox-now-testing-houston-san-diego"
+      }
+    ]
+  },
+  "texas-autonomous-trucking-operators": {
+    "question": "Which Texas autonomous trucking program fits the freight job?",
+    "answer": "Shortlist by the documented job and operating role. Aurora, Gatik, Bot Auto and Kodiak’s industrial program report driverless work in different domains; other reviewed Texas programs retain onboard personnel or describe future launches. A dated load or driverless mile total does not reserve capacity. Confirm equipment, endpoints, current human roles, accepted loads and recovery responsibilities in a buyer-specific proposal.",
+    "paths": [
+      {
+        "label": "Compare current programs",
+        "section": "operating-comparison",
+        "description": "Read selected operator evidence with its dates and domain."
+      },
+      {
+        "label": "Separate Kodiak’s programs",
+        "section": "kodiak",
+        "description": "Distinguish industrial operation from highway launch preparation."
+      },
+      {
+        "label": "Qualify a service commitment",
+        "section": "maturity-gates",
+        "description": "Require the next evidence for the actual freight purchase."
+      }
+    ],
+    "sources": [
+      {
+        "label": "Aurora second-generation driverless launch: operating and purchase model",
+        "href": "https://aurora.tech/newsroom/your-questions-about-our-latest-driverless-launch-answered"
+      },
+      {
+        "label": "Kodiak and Charger Dallas–Laredo customer operation",
+        "href": "https://kodiak.ai/news/kodiak-charger-usa-autonomous-trucking-dallas-laredo"
+      },
+      {
+        "label": "Volvo and Waabi begin Warp customer operations in Texas",
+        "href": "https://www.waabi.ai/insights/volvo-and-waabi-kick-off-customer-operations-in-texas-starting-with-warp"
+      },
+      {
+        "label": "FMCSA final warning-device exemption and conditions",
+        "href": "https://www.govinfo.gov/content/pkg/FR-2026-10-09/html/2026-20734.htm"
+      }
+    ]
+  },
+  "texas-driverless-freight-route-economics": {
+    "question": "When does a driverless freight quote improve the complete route?",
+    "answer": "Compare a completed delivery on the same economic-cost boundary. Price direct and transfer designs separately; retain rejected loads, backup and setup. The hypothetical direct case saves $98,400 including allocated labor and lost contribution. Its 232 accepted-load break-even and $1,433 all-in variable ceiling are decision thresholds, not quotes. Check cargo, equipment and the applicable roadside-warning compliance route, then replace the assumptions with an actual proposal and trial. In the declared 800-load case, the $1,433 whole-route ceiling becomes a $1,273 ceiling for the provider’s road-service quote after subtracting the shipper’s $160 of retained work.",
+    "paths": [
+      {
+        "label": "Build the price stack",
+        "section": "quote-comparison",
+        "description": "Include loading, local moves and release work consistently."
+      },
+      {
+        "label": "Stress acceptance and recovery",
+        "section": "exception-economics",
+        "description": "Keep requested loads and incremental exceptions visible."
+      },
+      {
+        "label": "Set the buying threshold",
+        "section": "decision-thresholds",
+        "description": "Translate the scenario into load and price headroom."
+      }
+    ],
+    "sources": [
+      {
+        "label": "Aurora second-quarter 2026 shareholder letter",
+        "href": "https://ir.aurora.tech/sec-filings/all-sec-filings/content/0001828108-26-000075/aurora26q2shareholderlet.htm"
+      },
+      {
+        "label": "Volvo and Waabi begin Warp customer operations in Texas",
+        "href": "https://www.waabi.ai/insights/volvo-and-waabi-kick-off-customer-operations-in-texas-starting-with-warp"
+      },
+      {
+        "label": "FMCSA operating-authority insurance filing requirements",
+        "href": "https://www.fmcsa.dot.gov/registration/insurance-filing-requirements"
+      },
+      {
+        "label": "FMCSA final warning-device exemption and conditions",
+        "href": "https://www.govinfo.gov/content/pkg/FR-2026-10-09/html/2026-20734.htm"
+      }
+    ]
+  },
+  "texas-automated-vehicle-authorization": {
+    "question": "What does a Texas commercial driverless authorization establish?",
+    "answer": "The additional commercial driverless gate became enforceable May 28, 2026. General operating conditions and applicable federal obligations remain separate. Match holder, vehicle, route, responder plan and agreement. Nonexpiry preserves the 30-day material-information duty. A launch, a changed document and an unsafe-operation notice require distinct decisions. The hypothetical continuity example separates allocated staff time from paid reservation and replacement costs.",
+    "paths": [
+      {
+        "label": "Classify the operation",
+        "section": "commercial-scope",
+        "description": "Apply the statutory scope and human-driver definition."
+      },
+      {
+        "label": "Match the holder and vehicle",
+        "section": "holder-and-vehicle",
+        "description": "Reconcile current records and contracting roles."
+      },
+      {
+        "label": "Price continuity work",
+        "section": "worked-continuity-case",
+        "description": "Separate free application from commercial operating costs."
+      }
+    ],
+    "sources": [
+      {
+        "label": "Texas Transportation Code Chapter 545, Subchapter J",
+        "href": "https://tcss.legis.texas.gov/resources/TN/htm/TN.545.htm"
+      },
+      {
+        "label": "TxDMV Automated Vehicles Regulatory Program",
+        "href": "https://www.txdmv.gov/AVprogram"
+      },
+      {
+        "label": "Texas begins enforcement of commercial automated-vehicle requirements",
+        "href": "https://www.txdmv.gov/sites/default/files/body-files/2026-06-02_Automated_Vehicle_Enforcement_System.pdf"
+      },
+      {
+        "label": "FMCSA final warning-device exemption and conditions",
+        "href": "https://www.govinfo.gov/content/pkg/FR-2026-10-09/html/2026-20734.htm"
+      }
+    ]
+  },
+  "adobe-paid-workflows": {
+    "question": "How much paid growth does this entry price need?",
+    "answer": "The base-case valuation and capital budget need about $7.38bn of annual cash at the horizon to support a 10% annual price return. That is below the $8.52bn trailing cash-after-compensation proxy, but it depends on durable paid demand, affordable share reduction and a higher cash multiple.",
+    "paths": [
+      {
+        "label": "Read the paid-demand evidence",
+        "section": "the-paid-business-is-still-growing",
+        "description": "Compare subscriptions, recurring revenue and contracted obligations."
+      },
+      {
+        "label": "Reconcile the cash anchor",
+        "section": "the-cash-bridge-makes-the-entry-attractive",
+        "description": "Charge employee equity before valuing distributable cash."
+      },
+      {
+        "label": "Separate growth from revaluation",
+        "section": "how-i-get-to-365",
+        "description": "Compare the forecast with a constant entry multiple."
+      }
+    ],
+    "sources": [
+      {
+        "label": "Adobe FY2025 Form 10-K",
+        "href": "https://www.sec.gov/Archives/edgar/data/796343/000079634326000003/adbe-20251128.htm"
+      },
+      {
+        "label": "Adobe Q3FY2026 Form 10-Q",
+        "href": "https://www.sec.gov/Archives/edgar/data/796343/000079634326000156/adbe-20260828.htm"
+      }
+    ]
+  },
+  "paypal-margin-dollar-recovery": {
+    "question": "Which measure would show the recovery is real?",
+    "answer": "Watch transaction-margin dollars excluding customer interest alongside the cost budget. In Q2, that contribution grew 2.6% in reported dollars while adjusted non-transaction costs grew 8.8%. The long needs better retained economics as well as affordable share reduction.",
+    "paths": [
+      {
+        "label": "Follow the transaction-margin bridge",
+        "section": "the-quarter-explains-why-the-valuation-stays-demanding",
+        "description": "See where additional revenue went after transaction costs and losses."
+      },
+      {
+        "label": "Value cash after credit reinvestment",
+        "section": "the-cash-i-am-willing-to-value",
+        "description": "Keep the loan-funding and equity-compensation charges visible."
+      },
+      {
+        "label": "Test the capital-return budget",
+        "section": "a-modest-recovery-can-fund-meaningful-net-retirement",
+        "description": "Fund fewer shares after dividends and liquidity needs."
+      }
+    ],
+    "sources": [
+      {
+        "label": "PayPal FY2025 Form 10-K",
+        "href": "https://www.sec.gov/Archives/edgar/data/1633917/000163391726000024/pypl-20251231.htm"
+      },
+      {
+        "label": "PayPal Q2 2026 Form 10-Q",
+        "href": "https://www.sec.gov/Archives/edgar/data/1633917/000163391726000082/pypl-20260630.htm"
+      }
+    ]
+  },
+  "crocs-cash-and-brand-test": {
+    "question": "Can Crocs fund growth without a HEYDUDE rebound?",
+    "answer": "The base case grows Crocs brand sales 4% annually while HEYDUDE falls 2%, and protects $250m annually for debt, tax or liquidity needs before net share purchases. A large early tax payment would interrupt those purchases and change the capital plan.",
+    "paths": [
+      {
+        "label": "Compare the two brands",
+        "section": "the-profitable-brand-is-larger-than-the-failed-acquisition-story",
+        "description": "Separate the profitable franchise from the smaller declining business."
+      },
+      {
+        "label": "Reconcile cash quality",
+        "section": "the-cash-exists-but-its-recent-increase-is-not-all-operating-progress",
+        "description": "Distinguish tax timing from recurring cash earning power."
+      },
+      {
+        "label": "Stress the tax cash claim",
+        "section": "the-tax-balance-is-the-strongest-reason-to-keep-a-reserve",
+        "description": "See why a cheap multiple still needs a protected cash budget."
+      }
+    ],
+    "sources": [
+      {
+        "label": "Crocs FY2025 Form 10-K",
+        "href": "https://www.sec.gov/Archives/edgar/data/1334036/000133403626000006/crox-20251231.htm"
+      },
+      {
+        "label": "Crocs Q2 2026 Form 10-Q",
+        "href": "https://www.sec.gov/Archives/edgar/data/1334036/000133403626000052/crox-20260630.htm"
+      }
+    ]
+  },
+  "expedia-network-and-cash": {
+    "question": "What cash remains after the travel-deposit cycle?",
+    "answer": "Trailing reported FCF of $4.459bn falls to a $2.648bn underwriting sensitivity after removing $1.399bn of net travel working-capital financing and $412m of compensation. Receivables are an imperfect proxy; the long must work from recurring economics after customer obligations.",
+    "paths": [
+      {
+        "label": "Compare consumer and partner conversion",
+        "section": "the-fastest-growing-business-is-not-producing-the-fastest-profit-growth",
+        "description": "Keep B2C and B2B margins distinct."
+      },
+      {
+        "label": "Remove the deposit financing",
+        "section": "remove-the-deposit-financing-before-deciding-what-to-pay",
+        "description": "Reconcile bookings, payables and receivables across a full year."
+      },
+      {
+        "label": "Read the price assumptions",
+        "section": "a-360-forecast-with-visible-valuation-dependence",
+        "description": "Compare operational upside with the part requiring revaluation."
+      }
+    ],
+    "sources": [
+      {
+        "label": "Expedia FY2025 Form 10-K",
+        "href": "https://www.sec.gov/Archives/edgar/data/1324424/000132442426000008/expe-20251231.htm"
+      },
+      {
+        "label": "Expedia Q2 2026 Form 10-Q",
+        "href": "https://www.sec.gov/Archives/edgar/data/1324424/000132442426000053/expe-20260630.htm"
+      }
+    ]
+  },
+  "kalshi-40-billion-question": {
+    "question": "What would justify a $40 billion valuation for Kalshi?",
+    "answer": "Value the fees Kalshi retains, not a single multiple of headline trading activity. The October 14, 2026 model produces $26.4 billion of base enterprise value and $29.5 billion of weighted aggregate equity with an assumed $1 billion of unrestricted net cash. Supporting $40 billion under the base margins and capital assumptions requires roughly 50% more revenue in every forecast year, reaching $13.25 billion in 2031. The financing benchmark is reported discussions, the revenue checkpoint is a third-party annualized estimate, and the forecast is not company guidance.",
+    "paths": [
+      {
+        "label": "Inspect the operating assumptions",
+        "section": "the-operating-model",
+        "description": "Separate event notional, perpetuals exposure and retained fees by business line."
+      },
+      {
+        "label": "Compare the three outcomes",
+        "section": "three-businesses-three-values",
+        "description": "See how sports access, pricing and operating leverage change enterprise and equity value."
+      },
+      {
+        "label": "Solve for the proposed price",
+        "section": "what-forty-billion-requires",
+        "description": "Reproduce the revenue path and fee sensitivities behind the $40 billion benchmark."
+      }
+    ],
+    "sources": [
+      {
+        "label": "Kalshi Series F announcement",
+        "href": "https://news.kalshi.com/p/kalshi-raises-1-billion-22-billion-valuation-institutional-demand-surges"
+      },
+      {
+        "label": "Kalshi July fee schedule",
+        "href": "https://kalshi.com/docs/kalshi-fee-schedule.pdf"
+      },
+      {
+        "label": "CFTC October event-contract proposal",
+        "href": "https://www.cftc.gov/PressRoom/PressReleases/9310-26"
+      }
+    ]
+  },
+  "anduril-valuation-capital-productivity": {
+    "question": "What operating outcome would justify Anduril’s $61 billion financing valuation?",
+    "answer": "The base cash-flow model values consolidated operations at about $28 billion despite assuming $51 billion of annual revenue and a 22% operating margin in 2036. At the same operating economics, supporting the $61 billion gross equity reference requires roughly $100 billion of 2036 sales. That comparison assumes $3 billion of net cash and precedes minority interests and senior claims. Contract ceilings are not revenue, and factory investment must be paid for before growth creates distributable cash. These are author scenarios, not audited private-company accounts.",
+    "paths": [
+      {
+        "label": "Inspect the cash-flow valuation",
+        "section": "value-not-label",
+        "description": "Compare enterprise value, the conditional equity bridge and required-return sensitivity."
+      },
+      {
+        "label": "Trace the financing need",
+        "section": "factories-and-cash",
+        "description": "Separate factory investment, customer payments and outside ownership claims."
+      },
+      {
+        "label": "Test the price in reverse",
+        "section": "reverse-price",
+        "description": "Solve for the revenue path required by the financing reference."
+      }
+    ],
+    "sources": [
+      {
+        "label": "Completed May financing reference",
+        "href": "https://www.reuters.com/legal/transactional/us-defense-firm-anduril-raises-5-billion-doubling-its-valuation-61-billion-2026-05-13/"
+      },
+      {
+        "label": "Arsenal-2 investment and Navy contract announcement",
+        "href": "https://www.anduril.com/news/anduril-u-s-navy-invest-usd6-6-billion-to-expand-america-s-submarine-industrial-base"
+      },
+      {
+        "label": "Reproducible cash-flow model",
+        "href": "/research/anduril-valuation/model.py"
+      }
+    ]
+  },
+  "choosing-a-growth-channel-under-a-capacity-limit": {
+    "question": "Which growth channel can this small product actually support?",
+    "answer": "The assisted launch wins this declared scenario because price, workload and cash timing fit the operating constraint. Hold price constant and test delivery capacity before treating the result as a channel advantage.",
+    "paths": [
+      {
+        "label": "Understand the economic bridge",
+        "section": "start-with-the-decision-the-merchant-already-makes",
+        "description": "Start with the decision the merchant already makes"
+      },
+      {
+        "label": "Test the condition",
+        "section": "hold-price-constant-before-calling-it-a-channel-advantage",
+        "description": "Hold price constant before calling it a channel advantage"
+      },
+      {
+        "label": "Make the next decision",
+        "section": "buy-the-next-answer-before-buying-more-growth",
+        "description": "Buy the next answer before buying more growth"
+      }
+    ],
+    "sources": [
+      {
+        "label": "Product analytics overview",
+        "href": "https://help.shopify.com/en/manual/products/analytics"
+      },
+      {
+        "label": "Inventory reports",
+        "href": "https://help.shopify.com/en/manual/reports-and-analytics/shopify-reports/report-types/default-reports/inventory-reports"
+      },
+      {
+        "label": "About app distribution",
+        "href": "https://shopify.dev/docs/apps/launch/distribution"
+      }
+    ]
+  },
+  "toast-gross-profit-engine": {
+    "question": "What entry price compensates me for Toast’s growth and equity costs?",
+    "answer": "Follow retained gross profit, acquisition spending and stock-based compensation before underwriting per-share returns. The operating case can work while the quoted entry price still leaves a modest return.",
+    "paths": [
+      {
+        "label": "Understand the economic bridge",
+        "section": "follow-the-dollar-that-stays-with-toast",
+        "description": "Follow the dollar that stays with Toast"
+      },
+      {
+        "label": "Test the condition",
+        "section": "what-i-am-paying-for-in-the-base-case",
+        "description": "What I am paying for in the base case"
+      },
+      {
+        "label": "Make the next decision",
+        "section": "the-evidence-that-would-move-my-entry-price",
+        "description": "The evidence that would move my entry price"
+      }
+    ],
+    "sources": [
+      {
+        "label": "Q2 2026 earnings release and reconciliations",
+        "href": "https://www.sec.gov/Archives/edgar/data/1650164/000165016426000162/tost-20260630xexhibit991.htm"
+      },
+      {
+        "label": "Q2 2026 Form 10-Q",
+        "href": "https://www.sec.gov/Archives/edgar/data/1650164/000165016426000164/tost-20260630.htm"
+      },
+      {
+        "label": "Full-year 2025 results and reconciliations",
+        "href": "https://www.sec.gov/Archives/edgar/data/1650164/000165016426000050/tost-20251231xexhibit991.htm"
+      }
+    ]
+  },
+  "harvey-who-keeps-the-value-of-legal-ai": {
+    "question": "Who captures the value of faster legal work?",
+    "answer": "The buyer needs usable time after adoption and review, then a way to monetize it. The company must retain enough contribution to support its financing benchmark; neither outcome follows from faster drafting alone.",
+    "paths": [
+      {
+        "label": "Understand the economic bridge",
+        "section": "put-a-value-bridge-under-the-renewal",
+        "description": "Put a value bridge under the renewal"
+      },
+      {
+        "label": "Test the condition",
+        "section": "more-capable-work-can-cost-more-to-deliver",
+        "description": "More capable work can cost more to deliver"
+      },
+      {
+        "label": "Make the next decision",
+        "section": "work-backward-from-15-5-billion",
+        "description": "Work backward from $15.5 billion"
+      }
+    ],
+    "sources": [
+      {
+        "label": "September 2026 financing",
+        "href": "https://www.harvey.ai/blog/harvey-raises-dollar550m-at-a-dollar155b-valuation-to-help-legal-teams-own-their-intelligence"
+      },
+      {
+        "label": "Three-year business update",
+        "href": "https://www.harvey.ai/blog/harveys-three-year-anniversary"
+      },
+      {
+        "label": "Law-firm ROI calculator",
+        "href": "https://www.harvey.ai/roi-calculator/law-firm"
+      }
+    ]
+  },
+  "vanta-after-the-audit": {
+    "question": "Does the buyer still receive value after audit season?",
+    "answer": "Separate avoided cash costs from time value and ongoing work from a temporary audit project. Retained-cohort growth and the buyer’s renewal economics determine whether the subscription compounds.",
+    "paths": [
+      {
+        "label": "Understand the economic bridge",
+        "section": "time-saved-has-to-reach-the-buyer-s-budget",
+        "description": "Time saved has to reach the buyer's budget"
+      },
+      {
+        "label": "Test the condition",
+        "section": "separate-retained-growth-from-new-sales",
+        "description": "Separate retained growth from new sales"
+      },
+      {
+        "label": "Make the next decision",
+        "section": "why-vanta-gets-the-next-diligence-slot",
+        "description": "Why Vanta gets the next diligence slot"
+      }
+    ],
+    "sources": [
+      {
+        "label": "Series D announcement",
+        "href": "https://www.vanta.com/resources/vanta-announces-series-d"
+      },
+      {
+        "label": "April 2026 ARR milestone",
+        "href": "https://www.vanta.com/resources/vanta-crosses-300m-in-arr-as-growth-accelerates"
+      },
+      {
+        "label": "Automated test evidence",
+        "href": "https://help.vanta.com/en/articles/11345529-automated-test-evidence"
+      }
+    ]
+  },
+  "ramp-saving-money-and-retaining-contribution": {
+    "question": "Can saving the customer money improve Ramp’s own economics?",
+    "answer": "Card spend opens the relationship, but retained card contribution and paid workflow value need separate bridges. The declared account model tests rewards, delivery costs and software expansion before inferring platform profit.",
+    "paths": [
+      {
+        "label": "Understand the economic bridge",
+        "section": "a-dollar-of-volume-is-not-a-dollar-of-retained-economics",
+        "description": "A dollar of volume is not a dollar of retained economics"
+      },
+      {
+        "label": "Test the condition",
+        "section": "the-paid-tier-has-to-earn-an-incremental-budget",
+        "description": "The paid tier has to earn an incremental budget"
+      },
+      {
+        "label": "Make the next decision",
+        "section": "the-financing-mark-raises-the-standard-for-evidence",
+        "description": "The financing mark raises the standard for evidence"
+      }
+    ],
+    "sources": [
+      {
+        "label": "June 2026 primary financing and company statistics",
+        "href": "https://www.gic.com.sg/uploads/2026/06/Ramp-Raises-Series-F-at-44-Billion-Valuation-3.pdf"
+      },
+      {
+        "label": "Contribution-profit terminology in November company post",
+        "href": "https://ramp.com/blog/ramp-november-2025-valuation"
+      },
+      {
+        "label": "Current free/Plus/Enterprise pricing",
+        "href": "https://ramp.com/pricing"
+      }
+    ]
+  },
+  "elevenlabs-cost-of-accepted-work": {
+    "question": "What does an accepted minute or completed task actually cost?",
+    "answer": "Count generation, review, rework, fallback and oversight against the accepted result. A lower software invoice creates cash savings only when the buyer actually avoids spending; hypothetical inputs are separate from company pricing.",
+    "paths": [
+      {
+        "label": "Understand the economic bridge",
+        "section": "put-review-effort-beside-the-software-bill",
+        "description": "Put review effort beside the software bill"
+      },
+      {
+        "label": "Test the condition",
+        "section": "agents-make-the-acceptance-problem-larger",
+        "description": "Agents make the acceptance problem larger"
+      },
+      {
+        "label": "Make the next decision",
+        "section": "customer-value-must-reach-company-contribution",
+        "description": "Customer value must reach company contribution"
+      }
+    ],
+    "sources": [
+      {
+        "label": "ElevenLabs crosses $500M ARR and welcomes new investors",
+        "href": "https://elevenlabs.io/blog/500m-arr-and-new-investors"
+      },
+      {
+        "label": "ElevenLabs reaches $22bn valuation after employee tender",
+        "href": "https://elevenlabs.io/blog/tender-22bn"
+      },
+      {
+        "label": "ElevenLabs pricing and billing mechanics",
+        "href": "https://elevenlabs.io/pricing"
+      }
+    ]
+  },
+  "flock-safety-installed-cohort-cash": {
+    "question": "Does the renewal pay back the installed camera?",
+    "answer": "Trace installation spending, recurring service and retention through a fixed cohort. Equal starting subscriptions can produce different cash recovery, and product or governance objections can become renewal costs.",
+    "paths": [
+      {
+        "label": "Understand the economic bridge",
+        "section": "a-cohort-that-starts-with-the-same-revenue",
+        "description": "A cohort that starts with the same revenue"
+      },
+      {
+        "label": "Test the condition",
+        "section": "retention-and-service-cost-move-different-parts-of-the-bridge",
+        "description": "Retention and service cost move different parts of the bridge"
+      },
+      {
+        "label": "Make the next decision",
+        "section": "guardrails-belong-in-the-product-economics",
+        "description": "Guardrails belong in the product economics"
+      }
+    ],
+    "sources": [
+      {
+        "label": "Annual service and pricing scope",
+        "href": "https://www.flocksafety.com/pricing"
+      },
+      {
+        "label": "Arden Hills proposed regional camera budget, pages 3–4",
+        "href": "https://www.cityofardenhills.org/AgendaCenter/ViewFile/Agenda/_05282025-1325?packet=true"
+      },
+      {
+        "label": "Ayer announces contract termination",
+        "href": "https://www.ayer.ma.us/m/newsflash/home/detail/73"
+      }
+    ]
+  },
+  "hyperliquid-valuation": {
+    "question": "What operating economics would make HYPE worth its price?",
+    "answer": "Trace retained trading and reserve flows separately, then divide the discounted token-directed cash by the economic claims that share it. In this conditional central case, strong exchange growth supports about $30 per token; dilution and the required return determine how that differs from the illustrative $80 reference.",
+    "paths": [
+      {
+        "label": "Trace the retained flow",
+        "section": "receipts-not-earnings",
+        "description": "A real fee engine, with an accounting trap"
+      },
+      {
+        "label": "Inspect the valuation",
+        "section": "valuation-model",
+        "description": "A model that lets the business keep growing"
+      },
+      {
+        "label": "Test the countercase",
+        "section": "duration-and-stress",
+        "description": "Three-quarters of the value arrives after 2031"
+      }
+    ],
+    "sources": [
+      {
+        "label": "Hyperliquid parent dashboard",
+        "href": "https://defillama.com/protocol/hyperliquid"
+      },
+      {
+        "label": "Hyperliquid perpetuals dashboard",
+        "href": "https://defillama.com/protocol/hyperliquid-perps"
+      },
+      {
+        "label": "Perpetuals adapter, pinned implementation",
+        "href": "https://github.com/DefiLlama/dimension-adapters/blob/e02384e92cbfb8c058e4de8440644aa8d8b0fc58/dexs/hyperliquid-perp/index.ts"
       }
     ]
   }

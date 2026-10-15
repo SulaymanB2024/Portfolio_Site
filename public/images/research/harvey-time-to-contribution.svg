@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="792pt" height="468pt" viewBox="0 0 792 468" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>Matplotlib v3.11.2, https://matplotlib.org/</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 468
+L 792 468
+L 792 0
+L 0 0
+z
+" style="fill: #ffffff"/>
+  </g>
+  <g id="axes_1">
+   <g id="patch_2">
+    <path d="M 102.96 332.28
+L 736.56 332.28
+L 736.56 102.96
+L 102.96 102.96
+z
+" style="fill: #ffffff"/>
+   </g>
+   <g id="patch_3">
+    <path d="M 131.76 301.009091
+L 241.363239 301.009091
+L 241.363239 306.229248
+L 131.76 306.229248
+z
+" clip-path="url(#pa0e0a6e4d0)" style="fill: #b0aca3; stroke: #24221e; stroke-width: 0.8; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_4">
+    <path d="M 364.958381 301.009091
+L 474.561619 301.009091
+L 474.561619 223.373847
+L 364.958381 223.373847
+z
+" clip-path="url(#pa0e0a6e4d0)" style="fill: #24221e; stroke: #24221e; stroke-width: 0.8; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_5">
+    <path d="M 598.156761 301.009091
+L 707.76 301.009091
+L 707.76 140.518447
+L 598.156761 140.518447
+z
+" clip-path="url(#pa0e0a6e4d0)" style="fill: #b0aca3; stroke: #24221e; stroke-width: 0.8; stroke-linejoin: miter"/>
+   </g>
+   <g id="matplotlib.axis_1">
+    <g id="xtick_1">
+     <g id="line2d_1"/>
+     <g id="text_1">
+      <text style="font-size: 15px; font-family: 'DejaVu Serif'; fill: #625f56" transform="translate(169.891698 357.177949)">10%</text>
+      <text style="font-size: 15px; font-family: 'DejaVu Serif'; fill: #625f56" transform="translate(147.060057 375.182051)">monetized</text>
+     </g>
+    </g>
+    <g id="xtick_2">
+     <g id="line2d_2"/>
+     <g id="text_2">
+      <text style="font-size: 15px; font-family: 'DejaVu Serif'; fill: #625f56" transform="translate(403.090078 357.177949)">25%</text>
+      <text style="font-size: 15px; font-family: 'DejaVu Serif'; fill: #625f56" transform="translate(380.258438 375.182051)">monetized</text>
+     </g>
+    </g>
+    <g id="xtick_3">
+     <g id="line2d_3"/>
+     <g id="text_3">
+      <text style="font-size: 15px; font-family: 'DejaVu Serif'; fill: #625f56" transform="translate(636.288459 357.177949)">40%</text>
+      <text style="font-size: 15px; font-family: 'DejaVu Serif'; fill: #625f56" transform="translate(613.456818 375.182051)">monetized</text>
+     </g>
+    </g>
+   </g>
+   <g id="matplotlib.axis_2">
+    <g id="ytick_1">
+     <g id="line2d_4">
+      <defs>
+       <path id="m77b4e3fc8d" d="M 0 0
+L -3.5 0
+" style="stroke: #24221e; stroke-width: 0.8"/>
+      </defs>
+      <g>
+       <use xlink:href="#m77b4e3fc8d" x="102.96" y="301.009091" style="fill: #24221e; stroke: #24221e; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_4">
+      <text style="font-size: 15px; font-family: 'DejaVu Serif'; text-anchor: end; fill: #24221e" x="95.96" y="306.707919" transform="rotate(-0 95.96 306.707919)">$0k</text>
+     </g>
+    </g>
+    <g id="ytick_2">
+     <g id="line2d_5">
+      <g>
+       <use xlink:href="#m77b4e3fc8d" x="102.96" y="259.314545" style="fill: #24221e; stroke: #24221e; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_5">
+      <text style="font-size: 15px; font-family: 'DejaVu Serif'; text-anchor: end; fill: #24221e" x="95.96" y="265.013374" transform="rotate(-0 95.96 265.013374)">$200k</text>
+     </g>
+    </g>
+    <g id="ytick_3">
+     <g id="line2d_6">
+      <g>
+       <use xlink:href="#m77b4e3fc8d" x="102.96" y="217.62" style="fill: #24221e; stroke: #24221e; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_6">
+      <text style="font-size: 15px; font-family: 'DejaVu Serif'; text-anchor: end; fill: #24221e" x="95.96" y="223.318828" transform="rotate(-0 95.96 223.318828)">$400k</text>
+     </g>
+    </g>
+    <g id="ytick_4">
+     <g id="line2d_7">
+      <g>
+       <use xlink:href="#m77b4e3fc8d" x="102.96" y="175.925455" style="fill: #24221e; stroke: #24221e; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_7">
+      <text style="font-size: 15px; font-family: 'DejaVu Serif'; text-anchor: end; fill: #24221e" x="95.96" y="181.624283" transform="rotate(-0 95.96 181.624283)">$600k</text>
+     </g>
+    </g>
+    <g id="ytick_5">
+     <g id="line2d_8">
+      <g>
+       <use xlink:href="#m77b4e3fc8d" x="102.96" y="134.230909" style="fill: #24221e; stroke: #24221e; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_8">
+      <text style="font-size: 15px; font-family: 'DejaVu Serif'; text-anchor: end; fill: #24221e" x="95.96" y="139.929737" transform="rotate(-0 95.96 139.929737)">$800k</text>
+     </g>
+    </g>
+   </g>
+   <g id="line2d_9">
+    <path d="M 102.96 301.009091
+L 736.56 301.009091
+" clip-path="url(#pa0e0a6e4d0)" style="fill: none; stroke: #24221e; stroke-width: 0.9; stroke-linecap: square"/>
+   </g>
+   <g id="patch_6">
+    <path d="M 102.96 332.28
+L 736.56 332.28
+" style="fill: none; stroke: #d9d4c9; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="text_9">
+    <text style="font-size: 16px; font-family: 'DejaVu Serif'; text-anchor: middle; fill: #24221e" x="186.561619" y="326.412948" transform="rotate(-0 186.561619 326.412948)">−$25,040</text>
+   </g>
+   <g id="text_10">
+    <text style="font-size: 16px; font-family: 'DejaVu Serif'; text-anchor: middle; fill: #24221e" x="419.76" y="211.503897" transform="rotate(-0 419.76 211.503897)">$372,400</text>
+   </g>
+   <g id="text_11">
+    <text style="font-size: 16px; font-family: 'DejaVu Serif'; text-anchor: middle; fill: #24221e" x="652.958381" y="128.648497" transform="rotate(-0 652.958381 128.648497)">$769,840</text>
+   </g>
+  </g>
+  <g id="text_12">
+   <text style="font-size: 24px; font-family: 'DejaVu Serif'; text-anchor: start; fill: #24221e" x="27.72" y="23.4" transform="rotate(-0 27.72 23.4)">Recovered time has to become contribution</text>
+  </g>
+  <g id="text_13">
+   <text style="font-size: 13px; font-family: 'DejaVu Serif'; text-anchor: start; fill: #625f56" x="27.72" y="48.672" transform="rotate(-0 27.72 48.672)">Hypothetical 100-seat deployment · first-year net benefit after $290,000 cost</text>
+  </g>
+  <g id="text_14">
+   <text style="font-size: 12px; font-family: 'DejaVu Serif'; text-anchor: start; fill: #24221e" x="27.72" y="411.84" transform="rotate(-0 27.72 411.84)">60% adoption; 6 eligible hours/week; 46 weeks; 20% extra review; $200 contribution/monetized hour.</text>
+  </g>
+  <g id="text_15">
+   <text style="font-size: 12px; font-family: 'DejaVu Serif'; text-anchor: start; fill: #625f56" x="27.72" y="437.58" transform="rotate(-0 27.72 437.58)">Assumed $2,400 annual license/seat + $50k implementation. Break-even: 10.9% of 13,248 net released hours.</text>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="pa0e0a6e4d0">
+   <rect x="102.96" y="102.96" width="633.6" height="229.32"/>
+  </clipPath>
+ </defs>
+</svg>

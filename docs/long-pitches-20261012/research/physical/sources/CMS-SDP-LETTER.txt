@@ -1,0 +1,259 @@
+PAGE 1
+ 
+DEPARTMENT OF HEALTH & HUMAN SERVICES  
+Centers for Medicare & Medicaid Services 
+7500 Security Boulevard, Mail Stop S2-26-12 
+Baltimore, Maryland 21244-1850 
+ 
+ 
+SUBJECT: Section 71116 of the Working Families Tax Cuts Legislation on State Directed 
+Payments 
+ 
+February 2, 2026 
+ 
+Dear Colleague: 
+ 
+Section 71116 of Public Law 119-21 (which CMS refers to as the “Working Families Tax Cuts” 
+(WFTC) legislation)1 became effective for Medicaid managed care rating periods2 beginning on 
+or after July 4, 2025. Section 71116 directed the Centers for Medicare & Medicaid Services 
+(CMS) to revise 42 CFR § 438.6(c)(2)(iii) to reduce the total payment rate limit for state directed 
+payments (SDP) for inpatient hospital services, outpatient hospital services, nursing facility 
+services, or qualified practitioner services at an academic medical center.3 Section 71116 also 
+included a provision temporarily grandfathering certain SDPs until the rating period beginning 
+on or after January 1, 2028.4 
+ 
+CMS is preparing a notice of proposed rulemaking to revise 42 CFR part 438 as required by 
+section 71116 and consistent with the Presidential directive outlined in the Presidential 
+Memorandum, dated June 6, 2025.5 As part of this rulemaking effort, CMS is considering 
+changes to the total payment rate limit for SDPs for other services beyond the four services 
+mandated by section 71116. 
+ 
+To aid state planning efforts until a final rule is promulgated, CMS is providing guidance on 
+section 71116. This information is preliminary in nature and final policies will depend on the 
+contents of the final rule. Certain SDPs will qualify for the temporary grandfathering period, 
+including SDPs with rating periods for calendar year (CY) 2024, state fiscal year (SFY)6 2025, 
+CY 2025, SFY 2026, and CY 2026 for which a completed preprint was submitted to CMS before 
+May 1, 2025, or, for some SDPs, before July 4, 2025. In addition, SDPs for these periods for 
+which we determine that the state made a good faith effort to obtain approval before the 
+applicable date (May 1, 2025 or July 4, 2025), as further explained in the “Grandfathering 
+Certain SDPs” section below, will qualify for the grandfathering period.  
+ 
+Background 
+ 
+SDPs permit states to implement contractual Medicaid managed care arrangements that direct a 
+managed care organization’s, prepaid ambulatory health plan’s, or prepaid inpatient health plan’s 
+expenditures under 42 CFR § 438.6(c). The use of SDPs has grown substantially since they were 
+ 
+1 Public Law 119-21. 
+2 Rating period is defined in 42 CFR § 438.2. 
+3 Inpatient hospital services, outpatient hospital services, nursing facility services, or qualified practitioner services 
+at an academic medical center are defined in 42 CFR § 438.6(a). 
+4 Section 71116 applies to all 50 states and the District of Columbia but does not apply to U.S. territories.  
+5 https://www.whitehouse.gov/presidential-actions/2025/06/eliminating-waste-fraud-and-abuse-in-medicaid/  
+6 The term “state fiscal year” is used for ease of reference and is assumed to be the same as a state’s annual rating 
+period that begins in a month other than January. A rating period is defined in 42 CFR § 438.2 as a 12-month period 
+and can begin in any month. 
+
+PAGE 2
+Page 2 – Section 71116 of the Working Families Tax Cuts Legislation on State Directed 
+Payments 
+ 
+first introduced in 2016; in CY 2024, CMS received more than 330 SDP preprint submissions 
+from 39 states and territories. For federal fiscal year (FFY) 2024, CMS’s Office of the Actuary 
+(OACT) projected that annual SDP spending exceeded $97.8 billion (total computable) and 
+projected that spending would increase to approximately $124.3 billion (total computable) for 
+FFY 2025 and $144.6 billion for FFY 2026, representing a significant proportion of Medicaid 
+managed care expenditures. 
+ 
+Section 71116  
+ 
+Section 71116(a) requires that the total payment rate for any SDP for inpatient hospital services, 
+outpatient hospital services, nursing facility services, or qualified practitioner services at an 
+academic medical center furnished during a rating period beginning on or after July 4, 2025, be 
+limited to: 
+1. 100 percent of the specified total published Medicare payment rate7 (or, in the absence of 
+a specified total published Medicare payment rate, the payment rate under the Medicaid 
+state plan (or under a waiver of such plan)) for an expansion state;8 or 
+2. 110 percent of the specified total published Medicare payment rate (or, in the absence of 
+a specified total published Medicare payment rate, the payment rate under the Medicaid 
+state plan (or under a waiver of such plan)) for a non-expansion state. 
+ 
+A limited exception to section 71116(a) is permitted for SDPs that qualify for the grandfathering 
+period in section 71116(b).  
+ 
+Grandfathering Certain SDPs 
+ 
+Applicable Rating Period Criteria 
+ 
+Section 71116(b) stipulates that SDPs meeting certain criteria are eligible for a temporary 
+grandfathering period. One such criterion is the rating period. More specifically, certain SDPs in 
+rating periods occurring within 180 days of the date of enactment of section 71116 are eligible 
+for the grandfathering period. CMS interprets this to mean that the grandfathering period would 
+apply to SDPs in rating periods occurring 180 business days before or 180 business days after 
+July 4, 2025. We believe 180 business days9 is an appropriate interpretation to acknowledge that 
+activity on SDP preprints, including CMS review and approval, occurs on business days and not 
+on weekends or Federal government holidays. In practice, this means the grandfathering period 
+applies to eligible SDPs in rating periods that include any days from October 11, 2024 through 
+ 
+7 Total published Medicare payment rate is defined in 42 CFR § 438.6(a). 
+8 Section 71116(a)(1) defines an expansion state as “a State that provides coverage to all individuals described in 
+section 1902(a)(10)(A)(i)(VIII) of the Social Security Act (42 U.S.C. 1396a(a)(10)(A)(i)(VIII)) that is equivalent to 
+minimum essential coverage (as described in section 5000A(f)(1)(A) of th e Internal Revenue Code of 1986 and 
+determined in accordance with standards prescribed by the Secretary in regulations) under the State plan (or waiver 
+of such plan) of such State under title XIX of such Act.”  
+9 For purposes of this guidance, CMS defines “business day” as Monday through Friday, excluding the Federal 
+holidays as determined under 5 U.S.C. § 6103. These holidays include the 12 Federal holidays, including 
+Inauguration Day, as recognized by the Office of Personnel Management (https://www.opm.gov/policy-data-
+oversight/pay-leave/federal-holidays). Federal government closures by Executive Order applicable to this timeframe 
+and known at the time of publication include December 24, 2024, January 9, 2025, December 24, 2025 and 
+December 26, 2025. 
+
+PAGE 3
+Page 3 – Section 71116 of the Working Families Tax Cuts Legislation on State Directed 
+Payments 
+ 
+July 3, 2025, or July 7, 2025 through March 27, 2026.10 For example, this could include eligible 
+SDPs, as described below, in rating periods occurring in CY 2024, SFY 2025, CY 2025, SFY 
+2026 and CY 2026; however, this would not include SDPs in other rating periods, such as those 
+occurring in SFY 2027 (i.e., rating periods beginning on or after March 30, 2026). 
+ 
+Preprint Status Criteria 
+ 
+Section 71116(b) specifies additional criteria SDPs must meet to qualify for the grandfathering 
+period. The criteria are: 
+(1) SDPs (other than for rural hospitals11) for which written prior approval12 was made by 
+CMS before May 1, 2025; 
+(2) SDPs (other than for rural hospitals) for which a good faith effort to receive CMS 
+approval was made before May 1, 2025; 
+(3) SDPs for rural hospitals for which written prior approval was made by CMS before July 
+4, 2025;  
+(4) SDPs for rural hospitals for which a good faith effort to receive CMS approval was made 
+before July 4, 2025; and 
+(5) SDPs for which a completed preprint was submitted to CMS prior to July 4, 2025. 
+ 
+Definitions of “Completed Preprint” and “Good Faith Effort” 
+ 
+CMS interprets the term “completed preprint” in criterion (5) above to be equivalent to the 
+definition of a completed preprint described on page 6 of the CMCS Informational Bulletin 
+(CIB) published on November 7, 2023,13 which states that “[a] complete State directed payment 
+preprint submission requires a State directed payments preprint form14 as well as the preprint 
+addendum tables in an Excel workbook,15 as necessary….The preprint must be completed in full, 
+and all information must be provided only in the fillable sections of the preprint and the 
+addendum tables.”   
+ 
+A state must submit a completed SDP preprint form to CMS as a good faith effort to receive 
+CMS approval. Therefore, the term “good faith effort” in criteria (2) and (4) above are 
+synonymous with a “completed preprint.” CMS also notes that there is no practical difference in 
+giving a broader meaning to “good faith effort” for criteria (2) and (4), because under any 
+reasonable interpretation of this phrase, we have ascertained that no additional SDPs beyond 
+those already included under criteria (1) and (5) would be included.  
+ 
+Limits for Grandfathered SDPs 
+ 
+The phase down for grandfathered SDPs is effective for rating periods beginning on or after 
+January 1, 2028. Until then, the total dollar amount of a grandfathered SDP (as specified in item 
+ 
+10 These calendar date examples are illustrative, based on the information known at the time of publication and the 
+definitions of Federal holidays in 5 U.S.C. § 6103. The specific dates reflected in this example assume no additional 
+Federal holidays or Federal government closures beyond those identified at the time of publication and may change 
+if additional non-business days are later recognized. 
+11 The definition of a rural hospital is specified in section 71116(d)(2). 
+12 Written prior approval has the meaning given to such term in 42 CFR § 438.6(c)(2)(i). 
+13 https://www.medicaid.gov/federal-policy-guidance/downloads/cib11072023.pdf  
+14 https://www.medicaid.gov/sites/default/files/2022-12/sdp-4386c-preprint-template-12192022.pdf  
+15 The preprint addendum is an Excel document, entitled “Section 438.6(c) Preprint Addendum Tables” which can 
+be downloaded from here.    
+
+PAGE 4
+Page 4 – Section 71116 of the Working Families Tax Cuts Legislation on State Directed 
+Payments 
+ 
+4 of the current SDP preprint form) cannot increase and a state cannot increase this amount under 
+any change or revision to the grandfathered SDP, including a revision to the preprint,16 
+amendment SDP,17 or renewal SDP.18 However, states may choose to decrease this amount at 
+any time.  
+ 
+If a state’s SDP qualifies for the grandfathering period under more than one rating period (e.g., 
+SFY 2025 and SFY 2026), CMS will permit the SDP with the higher total dollar amount to be 
+grandfathered.19 Grandfathered SDPs must comply with the total payment rate limit and must not 
+exceed 100 percent of the average commercial rate as specified in 42 CFR § 438.6(c)(2)(iii). 
+Further details on the phase down requirements will be proposed as part of rulemaking. 
+ 
+Next Steps 
+ 
+Every applicable SDP preprint for inpatient hospital services, outpatient hospital services, 
+nursing facility services, or qualified practitioner services at an academic medical center 
+submitted to CMS before July 4, 2025, that does not qualify for the grandfathering period must 
+comply with section 71116 for each rating period beginning on or after July 4, 2025. For these 
+SDPs, if applicable, the state must submit a revised preprint before CMS would continue its 
+review, as required at 42 CFR § 438.6(c)(2)(i). For example, if the state has submitted a new 
+SDP preprint20 for a SFY 2027 rating period that exceeds the applicable total payment rate limit 
+required in section 71116(a), the state must revise the preprint before CMS would continue 
+review. Additionally, any amendment or renewal SDP preprint that does not qualify for the 
+grandfathering period must be revised, if necessary, to comply with section 71116 requirements 
+before CMS would continue review.21 For example, states will be required to revise any 
+amendment or renewal SDP preprint that has a total dollar amount that is greater than the total 
+dollar amount included in an SDP that is determined to be eligible for the grandfathering period 
+(such as a SFY 2027 SDP renewal for a grandfathered SFY 2026 SDP).22 SDPs must meet all the 
+criteria outlined in previous sections (e.g., rating period, preprint status) to qualify as a SDP 
+eligible for the temporary grandfathering period under section 71116(b), and states cannot revise 
+SDP preprints in an effort to circumvent these criteria. For example, a state cannot revise the 
+rating period of a pending or approved preprint. 
+ 
+As previously outlined in this letter, certain SDPs including those for a CY 2024, SFY 2025, CY 
+2025, SFY 2026, and CY 2026 rating period for inpatient hospital services, outpatient hospital 
+services, nursing facility services, or qualified practitioner services at an academic medical 
+center that were approved by CMS before the date of this letter are preliminarily grandfathered. 
+ 
+16 A revision to a preprint refers to a state submitting a revised preprint for a pending SDP under review by CMS. 
+17 An amendment SDP is an SDP that specifies in Item 6(a) of the preprint form that it is an amendment. 
+18 A renewal SDP is an SDP that specifies in Item 6(b) of the preprint form that it is a renewal. 
+19 For example, if a state has an SDP preprint for a SFY 2025 rating period totaling $100 million (as specified in 
+item 4 of the preprint form) that qualifies for the grandfathering period, and an SDP preprint for a SFY 2026 rating 
+period totaling $105 million (as specified in item 4 of the preprint form) that qualifies for the grandfathering period, 
+CMS would permit the state to utilize the $105 million SDP as the grandfathered SDP. 
+20 A new SDP is an SDP that specifies “yes” in item 5 of the preprint form. 
+21 This example also applies to any future amendment or renewal of a grandfathered SDP.  
+22 For example, if a state has a pending SDP preprint for a SFY 2027 rating period totaling $55 million (as specified 
+in item 4 of the preprint form) that is pending with CMS, and an SDP preprint for a SFY 2026 rating period totaling 
+$50 million (as specified in item 4 of the preprint form) that qualifies for the grandfathering period, the state would 
+need to revise its SFY 2027 SDP to be no greater than $50 million before CMS would continue review of the 
+pending SFY 2027 SDP preprint. 
+
+PAGE 5
+Page 5 – Section 71116 of the Working Families Tax Cuts Legislation on State Directed 
+Payments 
+ 
+For applicable SDP preprints that are currently under review by CMS as required at 42 CFR § 
+438.6(c)(2)(i), CMS will include preliminary feedback in our adjudication letters on whether that 
+preprint is likely eligible for the grandfathering period. As a reminder, all approved SDP 
+preprints and adjudication letters are posted on Medicaid.gov23 on a routine basis. CMS will 
+enforce all federal requirements, including section 71116, and CMS’s assessment may be revised 
+if further information is identified that revises the initial assessment or as a result of regulatory 
+changes. 
+ 
+States must ensure that all SDPs comply with all federal requirements, including section 71116 
+and in 42 CFR part 438.  
+ 
+Closing 
+ 
+CMS is committed to working with states to address fraud, waste, and abuse and to improve the 
+program and fiscal integrity of the Medicaid program, and ensuring that SDPs comply with 
+federal requirements, including section 71116. As part of CMS’s standard process to review 
+pending SDP preprints, CMS will provide preliminary feedback on whether an SDP is likely 
+eligible for the grandfathering period as part of our standard adjudication letters. If you have any 
+questions about this guidance, please contact StateDirectedPayment@cms.hhs.gov. 
+ 
+ 
+Sincerely,  
+ 
+/s/ 
+ 
+Dan Brillman 
+Deputy Administrator, CMS 
+Director, Center for Medicaid and CHIP Services 
+ 
+ 
+ 
+23 https://www.medicaid.gov/medicaid/managed-care/guidance/state-directed-payments/approved-state-directed-
+payment-preprints  

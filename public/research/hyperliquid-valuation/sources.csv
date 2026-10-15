@@ -1,0 +1,19 @@
+id,publisher,url,verified
+S1,DeFiLlama,https://defillama.com/protocol/hyperliquid,2026-10-14
+S2,DeFiLlama,https://defillama.com/protocol/hyperliquid-perps,2026-10-14
+S3,DeFiLlama,https://github.com/DefiLlama/dimension-adapters/blob/e02384e92cbfb8c058e4de8440644aa8d8b0fc58/dexs/hyperliquid-perp/index.ts,2026-10-14
+S4,Hyperliquid,https://hyperliquid.gitbook.io/hyperliquid-docs/trading/fees,2026-10-14
+S5,Hyperliquid,https://hyperliquid.gitbook.io/hyperliquid-docs/hyperliquid-improvement-proposals-hips/hip-3-builder-deployed-perpetuals,2026-10-14
+S6,Hyperliquid,https://hyperliquid.gitbook.io/hyperliquid-docs/hypercore/aligned-quote-assets,2026-10-14
+S7,Coinbase,https://www.coinbase.com/en-gb/blog/coinbase-and-hyperliquid-aligning-markets-on-hyperliquid-to-usdc,2026-10-14
+S8,S&P Dow Jones Indices,https://www.spglobal.com/spdji/en/index-announcements/article/sp-dow-jones-indices-licenses-sp-500-to-trade-xyz-for-perpetual-contracts-on-hyperliquid/,2026-10-14
+S9,Hyperliquid,https://hyperliquid.gitbook.io/hyperliquid-docs/hyperliquid-improvement-proposals-hips/hip-4-outcome-markets,2026-10-14
+S10,Hyperliquid,https://hyperliquid.gitbook.io/hyperliquid-docs/hypercore/staking,2026-10-14
+S11,Hyperliquid,https://hyperliquid.gitbook.io/hyperliquid-docs/trading/auto-deleveraging,2026-10-14
+S12,CoinShares,https://coinshares.com/us/insights/research-data/hyperliquid-primer-and-5-year-valuation-framework/,2026-10-14
+S13,Multicoin Capital,https://assets.ctfassets.net/qtbqvna1l0yq/2Ww5QUmNhe8q0OhTlkRzjJ/7d82ee41b8c59e1e68c32813de8d757b/Hyperliquid__HYPE__Analysis_and_Valuation_English.pdf,2026-10-14
+S14,Artemis,https://about.artemis.ai/resources/hyperliquid-a-valuation-model-and-bull-case,2026-10-14
+S15,Aswath Damodaran,https://aswathdamodaran.blogspot.com/2025/01/deepseek-crashes-ai-party-story-break.html,2026-10-14
+S16,CME Group,https://www.cmegroup.com/media-room/press-releases/2026/7/22/cme_group_inc_reportsstrongfinancialresultsforq22026.html,2026-10-14
+S18,Hyperliquid,https://hyperliquid.gitbook.io/hyperliquid-docs/trading/builder-codes,2026-10-14
+S19,CoinGecko,https://www.coingecko.com/research/publications/2025-annual-crypto-report,2026-10-14

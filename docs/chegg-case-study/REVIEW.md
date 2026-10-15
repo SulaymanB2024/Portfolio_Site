@@ -35,4 +35,22 @@ Evidence: `evidence/desktop-opening.jpg`, `desktop-cash-bridge.jpg`, `desktop-li
 
 The initial-publication integrity helper, verifier and its tests were adopted from the reviewed source of existing PR #84 at `07ad3522dce06661167363cfaa62763c4e47e368`; this avoids a second provenance format. No Texas articles or unrelated content/design changes were adopted.
 
-Publication is still pending branch CI, Vercel preview and production readback. Passing local gates alone does not establish live delivery.
+GitHub CI and Vercel preview passed for `889665ad2c407ab5fac63949d46f4fd485ba32c9`. Authenticated preview readback returned HTTP 200, the correct canonical URL, all ten section IDs, all three figure references and the ZIP link. PR #89 is concrete and reviewable.
+
+Production merge was rejected before execution by automatic approval review because its policy requires approval while AskForApproval is Never. Human approval for the exact PR and publication is pending. No production publication or production readback has been established.
+
+## Positive revision requested by the author
+
+The human subsequently approved publication, then asked for a positive case and an explicit statement of belief in Chegg. The article now opens and concludes with “I believe in Chegg” and is titled *Why I believe in Chegg’s reinvention.* The body, reading guide, search copy, chart headings, share card and notebook now support that stance. It treats debt retirement, cash generation through restructuring and skilling as reasons for optimism, while retaining the stated financial boundaries.
+
+The native article is now 2,923 prose words / 17 minutes. All seven tables' columns and values, six source records and links, dates, model inputs and calculated outputs are unchanged. The literal revision guard passed eleven checks; a separate semantic comparison verified every table, figure identity and source record. Extracted model ZIP reproduced all outputs exactly. Six notebook code cells executed. Ten focused article-quality tests and 28 reader/figure tests passed after generated metadata was synchronized. Build and release gates passed. Desktop 1280×900 and phone 390×844 renderings were inspected; heading and belief statement match, citations resolve and page width stays within viewport.
+
+Evidence: `positive-desktop-opening.jpg`, `positive-belief-opening.jpg`, `positive-phone-opening.jpg`, `positive-readback.json`, `positive-revision-guard.json` under `evidence/`. Earlier captures document the superseded framing.
+
+PR #89 was merged outside this session's tool flow and deployed at `2e865c379a8b7bc14000484bfa38c6d8bf545951`. The positive revision requires a follow-up PR. The merge command remained blocked by automatic approval review after explicit human approval; no further identical merge retries are warranted.
+
+Follow-up PR #91 at `0d4373245942913e6a297faba6ee038bb912e18e` passed GitHub CI and Vercel checks. READY preview `dpl_6FbogZ2DMMqTFggov7MDCTJGyXHW` returned HTTP 200 with the positive heading, exact “I believe in Chegg.” statement, positive conclusion, correct canonical URL and model download link. Production publication of the positive revision remains pending a direct GitHub merge and post-merge readback.
+
+## October 13 deeper analysis
+
+Native article: 3,282 words, 19 minutes, eight tables, three unchanged figures, nine sources; SHA256 `7972b6da7f79736106f07d9b2bb903fe7faad63a1116579a2c8f00b48a7e3e8e`. Added commercial evidence and listing-cure context while preserving the positive stance and exact belief statement. Independent Chegg arithmetic still passes. Desktop/phone commercial-section and opening review passed; no body overflow or browser errors. Final site quality/provenance, 28 reader tests, build and release checks passed with the four new longs. PR91 remains OPEN and production publication remains unverified.

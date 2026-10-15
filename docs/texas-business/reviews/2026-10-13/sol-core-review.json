@@ -1,0 +1,796 @@
+{
+  "schemaVersion": 1,
+  "reviewer": "Independent Sol research/editorial critic",
+  "reviewDate": "2026-10-13",
+  "researchCutoffPreserved": "2026-10-12",
+  "ownerWorktree": "/Users/sulaymanbowles/Projects/CodexWork/sulayman-site-texas-library-20261012",
+  "baselineCommit": "0f6accf92d217b1509d5977423c3b3fafb88cd80",
+  "authorizationBoundary": "Review only. No manuscript,ledger,catalog,tool,publication or account changes. Only this report written.",
+  "verdict": "Primary distinctions and scenario arithmetic are generally disciplined. The material quality opportunity is to expose the decision mechanism and boundary: obligations after benefits end, reversible security versus permanent spending, recurring versus one-off cost, conditional customer financing and small allocation/service changes. Source counts, length and code tests do not establish research quality.",
+  "highestPriority": [
+    "Power minimum-billing commitment/staged release and redesign/restudy",
+    "JETI fixed-end deferral",
+    "Data-center second agency-summary inconsistency and transfers between Texas counties",
+    "Hiring multiyear wage premium comparison",
+    "Manufacturing named Micron funding/access conditional mechanism",
+    "TWIA post-restoration revenuegap"
+  ],
+  "crossLibraryEditorialNotes": [
+    "Preserve precise law/status/denominator caveats beside claims; they are useful evidence, not filler.",
+    "Replace one repeated obtain-documents/assign-owner/update-trigger paragraph in each article with its article-specific marginal decision boundary above. Retain the operationalchecklist but give it a concrete approvalobject: security release schedule, peak-water sequence, financeable debt schedule, spend/job cohorts, fixed-end benefitcalendar, allowable-deduction threshold, productive-starter funnel, route service target, allocation/yield thresholds, repair-vs-revenue timeline, versioned deployment chain or signed-promise loss model.",
+    "Do not market this model-assisted bounded review as external peer review or a world-class certification.",
+    "Fresh content checks occurred Oct13; preserve existing Oct12source check labels unless root records an actual edition revision. No later observation is silently backdated."
+  ],
+  "articles": [
+    {
+      "slug": "texas-power-large-load-business-diligence",
+      "readerDecision": "Commit capital against usable power and operating conditions",
+      "manuscript": "src/personal/editorial/data/articles/texas-power-large-load-business-diligence.json",
+      "manuscriptSha256": "54f54c7057e6308b0b6c142f21557397cd6f59cb046d5c054914664d8c921fcd",
+      "ledger": "docs/texas-business/research/power-claims.json",
+      "ledgerSha256": "15914f7751b6c82a3c40a16d4db218317db92c6b63ec94cc3bd16a4387426df1",
+      "coverage": {
+        "actualProseRead": true,
+        "allSectionsRead": [
+          "request-versus-availability",
+          "current-rules",
+          "connection-evidence",
+          "capital-commitments",
+          "compare-whole-project",
+          "audits-and-permits",
+          "interruption-and-generation",
+          "investment-decision"
+        ],
+        "tablesRead": 2,
+        "faqsRead": 4,
+        "ledgerClaimsRead": true,
+        "scope": "Full editorial and scenario review; targeted primary-source reverification, not every listed source independently refreshed."
+      },
+      "evidence": [
+        {
+          "url": "https://www.sos.texas.gov/texreg/archive/October22026/Adopted%20Rules/16.ECONOMIC%20REGULATION.html",
+          "sourceDate": "2026-10-02; effective 2026-10-08",
+          "pinpoint": "Adopted §25.194(d)(2), (e)(4), (f)(2)(B)–(D), (f)(3)",
+          "mode": "Fresh primary content read on 2026-10-13",
+          "result": "Financial formulas are supported. Additional minimum-billing security, staged release and material-change restudy are consequential omitted mechanisms."
+        }
+      ],
+      "findings": [
+        {
+          "kind": "material operating omission",
+          "priority": "high",
+          "articleLocation": "capital-commitments / compare-whole-project",
+          "issue": "The four-account framework omits the minimum-billing commitment and associated possible extra security. Security return does not happen wholly at energization. A facility ramp and an exit can therefore change both liquidity and nonrefundable exposure.",
+          "proposedEdit": "Add the minimum-billing obligation as a distinct contractual/tariff input. The rule requires an acknowledgment and permits additional related security; it releases 20% at energization and the remaining amounts against agreement milestones. Obtain the actual §25.193 treatment and SLLIA before pricing duration or withdrawal liability."
+        },
+        {
+          "kind": "deeper original analysis",
+          "priority": "high",
+          "articleLocation": "compare-whole-project",
+          "issue": "The article names liquidity but never converts the $2M difference in security into a comparable cost against $1.2M permanent CIAC. Readers may still compare nominal dollars of different economic character.",
+          "proposedEdit": "Declare an illustrative 4% annual net financing spread, after collateral interest, and three-year hold. The extra $2M collateral costs $240,000 on that simplified basis, versus $1.2M extra permanent CIAC at B. The 15-year simple break-even hold is an analytical boundary, not a projected release date. Then make delay, exit amounts and staged release separate sensitivities."
+        },
+        {
+          "kind": "material operating omission",
+          "priority": "medium",
+          "articleLocation": "investment-decision",
+          "issue": "Changing phase, load composition or requested demand can restart the request, rather than merely update an internal model.",
+          "proposedEdit": "Add the §25.194(e)(4) material-change mechanism beside the change-control recommendation; have the utility identify whether a cooling or ramp redesign requires a new request before committing to the revised plan."
+        }
+      ],
+      "calculationChecks": {
+        "existing": "100MW×50k=5M; 80MW×50k=4M; max(4M,6M)=6M; max(4M,3M)=4M; 18×150k=2.7M; 80×.7×8760=490560MWh; ×65=$31,886,400. All pass.",
+        "new": "2M×.04×3=$240,000; 1.2M/(2M×.04)=15 years; assumed simple net carrying cost, no tax or release path."
+      },
+      "limitations": [
+        "No effective §25.193 tariff amount/duration or project-specific SLLIA independently obtained. Do not invent minimum bills or final program participation.",
+        "Fresh audit targeted adopted rule; ERCOT notices and governor directive remain manuscript/ledger evidence and were not all refreshed."
+      ]
+    },
+    {
+      "slug": "texas-water-facility-site-diligence",
+      "readerDecision": "Choose supply and cooling arrangements that meet peak demand",
+      "manuscript": "src/personal/editorial/data/articles/texas-water-facility-site-diligence.json",
+      "manuscriptSha256": "2cc33ce8d2a21b3b3ce23a34e751450985aaf22300f5cce80e70224c6d7d62b6",
+      "ledger": "docs/texas-business/research/water-claims.json",
+      "ledgerSha256": "abdc015e5b64db8907d7a90c07f6b7e1fcce1a086df79d1f640102b1d2258437",
+      "coverage": {
+        "actualProseRead": true,
+        "allSectionsRead": [
+          "planning-and-delivery",
+          "legal-source",
+          "supplier-contract",
+          "peak-and-storage",
+          "drought-and-resilience",
+          "quality-reuse-disposal",
+          "reporting-and-investment"
+        ],
+        "tablesRead": 2,
+        "faqsRead": 4,
+        "ledgerClaimsRead": true,
+        "scope": "Full editorial and scenario review; targeted primary-source reverification, not every listed source independently refreshed."
+      },
+      "evidence": [
+        {
+          "url": "https://www.twdb.texas.gov/waterplanning/swp/2027/index.asp",
+          "sourceDate": "Phase I 2026-07-23; live status observed 2026-10-13",
+          "pinpoint": "Proposed Amendment / Supplemental Content",
+          "mode": "Fresh primary content read on 2026-10-13",
+          "result": "July adoption, closed Sept25 comment period, tentative December amendment and conceptual reservoir-location qualifications remain visible."
+        }
+      ],
+      "findings": [
+        {
+          "kind": "deeper original analysis",
+          "priority": "high",
+          "articleLocation": "peak-and-storage / drought-and-resilience",
+          "issue": "The tank example teaches consecutive days and full refill, but the price comparison never computes the actual reliability threshold the operator should investigate.",
+          "proposedEdit": "Use the same assumptions: $82,125 annual price saving buys only 1.36875 production days at $60,000/day. A third consecutive peak after the two-day storage draw creates a 200,000-gallon gap. After one normal day only 100,000 gallons has returned; two normal days are needed to cover one more such peak. Show that sequence, retaining fire reserve and instantaneous-flow exclusions."
+        },
+        {
+          "kind": "deeper original analysis",
+          "priority": "medium",
+          "articleLocation": "drought-and-resilience",
+          "issue": "The ten-day arbitrary interruption makes the consequence vivid but hides the marginal operating decision.",
+          "proposedEdit": "Replace one generic interruption paragraph with a conditional approval: choose the cheaper supply only if defensible lost contribution plus storage/treatment/capital cost stays below the price saving over the same horizon. No failure probability is supplied; a claimed expected saving must wait for supplier and operating evidence."
+        }
+      ],
+      "calculationChecks": {
+        "existing": "109.5M gallons; 200k/day peak deficit; 2 consecutive peak days; 4 full-refill days; $438000 vs $520125; $82125 difference; $600000 interruption scenario. Pass.",
+        "new": "82125/60000=1.36875 equivalent lost production days annually; third consecutive peak deficit200k; normal-day refill100k."
+      },
+      "limitations": [
+        "No local drought plan, firm-yield contract or storage design acquired. State-plan status corroboration does not verify legal/delivery authority for an actual site.",
+        "TCEQ authority and reuse claims read in manuscript/ledger but not every original guidance page refreshed in this review."
+      ]
+    },
+    {
+      "slug": "texas-property-tax-business-underwriting",
+      "readerDecision": "Budget ownership, improvements and lease tax exposure",
+      "manuscript": "src/personal/editorial/data/articles/texas-property-tax-business-underwriting.json",
+      "manuscriptSha256": "58928a9f723a1404386593f901fa1e76b024d3604f596ef5a16fea23241a1afb",
+      "ledger": "docs/texas-business/research/property-tax-claims.json",
+      "ledgerSha256": "e73bc444462310f966f0badf2c986839a05d4b2fd115cb28507920674d5a0a2a",
+      "coverage": {
+        "actualProseRead": true,
+        "allSectionsRead": [
+          "reconstruct-the-bill",
+          "appraisal-limitation",
+          "worked-tax-sensitivity",
+          "equipment-exemption",
+          "lease-exposure",
+          "transaction-evidence",
+          "calendar-and-updates"
+        ],
+        "tablesRead": 2,
+        "faqsRead": 4,
+        "ledgerClaimsRead": true,
+        "scope": "Full editorial and scenario review; targeted primary-source reverification, not every listed source independently refreshed."
+      },
+      "evidence": [
+        {
+          "url": "https://tcss.legis.texas.gov/resources/TX/htm/TX.23.htm",
+          "sourceDate": "Current law observed 2026-10-13",
+          "pinpoint": "§23.231(b),(d),(f),(k)",
+          "mode": "Fresh primary content read on 2026-10-13",
+          "result": "Initial-qualification, lesser-of formula, ownership timing and Dec31,2026 expiration support the existing analysis."
+        }
+      ],
+      "findings": [
+        {
+          "kind": "deeper original analysis",
+          "priority": "medium",
+          "articleLocation": "worked-tax-sensitivity",
+          "issue": "The $240k capitalization sensitivity is correct but the financing consequence remains abstract; the same article can connect the tax surprise to a lender covenant without inferring an appraisal.",
+          "proposedEdit": "Assume, explicitly, annual debt service of $100,000. The modeled after-tax NOI of $128,000 and $110,000 becomes DSCR1.28× and1.10×. Against an invented1.25× requirement, maximum annual debt service is $102,400 and $88,000. This changes the buyer’s financeable debt schedule even before anyone estimates the sale-value effect."
+        },
+        {
+          "kind": "precision",
+          "priority": "medium",
+          "articleLocation": "appraisal-limitation",
+          "issue": "Ownership-dependent language is less useful than the exact next-tax-year transition and could be read as an immediate reset at closing.",
+          "proposedEdit": "State the §23.231(f) next-January1 timing alongside the separate statutory expiration. Do not imply that an October transfer automatically substitutes a new value in the existing2026 bill; retain lien/proration treatment."
+        }
+      ],
+      "calculationChecks": {
+        "existing": "3M×1.2=3.6M; 2%=72k; 4.5M×2%=90k; ×2.2%=99k; +400k improvement=4M/80k; 18k/72k=25%; NOI128k/110k; 18k/.075=240k; equipment3500 vs6000; tenant7200. Pass.",
+        "new": "128000/100000=1.28;110000/100000=1.10;128000/1.25=102400;110000/1.25=88000."
+      },
+      "limitations": [
+        "No parcel or lender covenant examined; loan metrics are declared hypotheses.",
+        "Personal-property exemption was reviewed against ledger/copy, but Chapter11 was not independently refreshed here; preserve previously accepted aggregation correction."
+      ]
+    },
+    {
+      "slug": "texas-data-center-sales-tax-project-economics",
+      "readerDecision": "Underwrite route-specific tax savings and repayment exposure",
+      "manuscript": "src/personal/editorial/data/articles/texas-data-center-sales-tax-project-economics.json",
+      "manuscriptSha256": "fac0c56b5677cb8257d888201393fbfd1ad654b42426c5bf789b0d707f931f4b",
+      "ledger": "docs/texas-business/research/data-center-tax-claims.json",
+      "ledgerSha256": "a6bfdcbb7ca5816c96b835217a25325bb2dc158a259100b34b9c3eca191d7ea7",
+      "coverage": {
+        "actualProseRead": true,
+        "allSectionsRead": [
+          "two-certification-routes",
+          "investment-clock",
+          "purchase-and-purchaser",
+          "worked-tax-case",
+          "operating-evidence",
+          "decision-checklist"
+        ],
+        "tablesRead": 2,
+        "faqsRead": 4,
+        "ledgerClaimsRead": true,
+        "scope": "Full editorial and scenario review; targeted primary-source reverification, not every listed source independently refreshed."
+      },
+      "evidence": [
+        {
+          "url": "https://tcss.legis.texas.gov/resources/TX/htm/TX.151.htm",
+          "sourceDate": "Consolidated law; last amendment shown effective 2025-09-01",
+          "pinpoint": "§151.359(d)(2)(A); §151.3595(d)(2)(A)–(C),(f)–(h)",
+          "mode": "Fresh direct urllib content audit on2026-10-13; web renderer failed twice",
+          "result": "Earlier-application clock, jobs exclusion, replacement exclusion and revocation audited. Direct fresh raw fetch650444bytes SHA2560c78e7560e88c502c1e24a0fa4258d2c897b5be9e08b14ebee881e6452ff08b1 matches retained2026-10-12raw record."
+        },
+        {
+          "url": "https://comptroller.texas.gov/taxes/data-centers/",
+          "sourceDate": "Undated live guidance observed 2026-10-13",
+          "pinpoint": "Large-project Claiming the Exemption and Local Sales or Use Tax; Certification Requirements",
+          "mode": "Fresh primary content read on 2026-10-13",
+          "result": "In addition to clock conflict, large-project claiming paragraph says state-only/local collected; local-tax section says large qualifying purchases exempt. Manuscript’s state+local treatment remains correct."
+        }
+      ],
+      "findings": [
+        {
+          "kind": "material source conflict",
+          "priority": "high",
+          "articleLocation": "sources.overview / classify-the-purchase",
+          "issue": "The agency overview contains a second internal inconsistency in the large-project tax treatment. Without naming it, a reader following the citation can believe the article contradicts its own source.",
+          "proposedEdit": "Add a short source note identifying both the clock and the state/local summary inconsistency. Explain that the article uses the statute and route checkbox on certificate01-929 for large-route treatment. Preserve the statutory earlier-date clock."
+        },
+        {
+          "kind": "material eligibility omission",
+          "priority": "high",
+          "articleLocation": "certification-routes",
+          "issue": "The20/40job screens do not explain exclusion of jobs moved between Texas counties; a relocation-led staffing plan can overstate qualification.",
+          "proposedEdit": "Add: jobs moved from another Texas county do not count toward either route’s job-creation minimum. A declared25-position standard-route plan containing10such transferred jobs supplies only15countable jobs before other conditions, below20. Retain wage-at-creation and five-year job conditions."
+        },
+        {
+          "kind": "deeper original analysis",
+          "priority": "medium",
+          "articleLocation": "worked-tax-case",
+          "issue": "The local-benefit example compares thresholds but could better connect qualification to actual purchasing timing.",
+          "proposedEdit": "Present two spend cohorts: before certification and eligible after certification. A delayed certificate can remove savings from purchases even while later qualifying investment stays possible. Have the tax adviser map actual investment-counting and exemption dates separately; avoid treating spend eligibility as one cell."
+        }
+      ],
+      "calculationChecks": {
+        "existing": "160M×6.25%=10M; ×2%=3.2M;18M×6.25%=1.125M. Pass.",
+        "new": "25positions−10intra-Texas county transfers=15countable before other screens, below20."
+      },
+      "limitations": [
+        "AP236 fresh web rendering returned unsupported application/octet-stream; July2026 retained form text remains prior evidence, not a fresh PDF audit.",
+        "Fresh statute bytes matched original retained record, but no private certification, purchaser or audit outcome was verified."
+      ]
+    },
+    {
+      "slug": "texas-jeti-incentives-project-underwriting",
+      "readerDecision": "Price an incentive together with its continuing obligations",
+      "manuscript": "src/personal/editorial/data/articles/texas-jeti-incentives-project-underwriting.json",
+      "manuscriptSha256": "d53cae962d8eae965f7cfa86564f668f06092747c6459baa701d65032472b177",
+      "ledger": "docs/texas-business/research/jeti-claims.json",
+      "ledgerSha256": "0466c3aa4ec03bd70d8ad45f9e4b9fcb91f5f84e64253ff76514f7aab44f73dc",
+      "coverage": {
+        "actualProseRead": true,
+        "allSectionsRead": [
+          "tax-stack",
+          "property-and-thresholds",
+          "competitive-evidence",
+          "public-record-stages",
+          "worked-return",
+          "continuing-obligations",
+          "decision-checklist"
+        ],
+        "tablesRead": 2,
+        "faqsRead": 4,
+        "ledgerClaimsRead": true,
+        "scope": "Full editorial and scenario review; targeted primary-source reverification, not every listed source independently refreshed."
+      },
+      "evidence": [
+        {
+          "url": "https://tcss.legis.texas.gov/resources/GV/htm/GV.403.htm",
+          "sourceDate": "Current codified law observed 2026-10-13",
+          "pinpoint": "§403.602(10); .604; .612(b)(6); .613(c)–(d)",
+          "mode": "Fresh primary content read on 2026-10-13",
+          "result": "1600hours/construction exclusions, job thresholds and total-jobs wage cohort supported. A permitted start deferral leaves the end fixed; modifying both dates is separate."
+        }
+      ],
+      "findings": [
+        {
+          "kind": "material operating omission",
+          "priority": "high",
+          "articleLocation": "worked-return / continuing-obligations",
+          "issue": "Delay is mentioned generically, but the statute gives a specific path under which the delay consumes benefit years rather than moving a full ten-year annuity.",
+          "proposedEdit": "Explain §403.613(c) deferral for investment shortfall preserves the agreement’s end. Using the same hypothetical, losing year1 of $900000savings while retaining years2–10cuts gross PV from $6.039M to $5.206M at8%, a $833333loss. A §403.613(d) date modification has a separate notice/review/objection path; do not assume it restores value automatically."
+        },
+        {
+          "kind": "deeper original analysis",
+          "priority": "medium",
+          "articleLocation": "worked-return",
+          "issue": "The example excludes the three-year operating tail. Readers may retain the net PV while ignoring costs required after savings stop.",
+          "proposedEdit": "Declare an additional $150000annual incremental compliance/staffing cost in years11–13 only if it actually persists. At8% that hypothetical tail costs about$179054PV. Show it below the existing $4.783Mnet case, with separately supported cost assumptions, rather than automatically assigning zero after year10."
+        }
+      ],
+      "calculationChecks": {
+        "existing": "5.85Mbase;4.95Mnormal;4.5Mopportunityzone;900k/5.85M=15.3846%; PV900k×annuity(10,.08)=6039073.26; net750k×annuity−250k=4782561.05. Pass.",
+        "new": "Missing year1 benefitPV=900000/1.08=833333.33; gross years2–10PV=5205739.93; tail costPV=sum(150000/1.08**t for t in11..13)=calculated in final checks. ExacttailPV=179054.18; adjustednet PV=4603506.87."
+      },
+      "limitations": [
+        "No amendment, consent or actual project deferral obtained.",
+        "Preserve exact total-jobs wage cohort,1600hours and Texas transfer/backfill distinctions; the new calculation changes schedule only."
+      ]
+    },
+    {
+      "slug": "texas-franchise-tax-reporting-business-decisions",
+      "readerDecision": "Choose supported filing and computation treatment",
+      "manuscript": "src/personal/editorial/data/articles/texas-franchise-tax-reporting-business-decisions.json",
+      "manuscriptSha256": "7d6cd81f6e5914e253594827e5bddc78e6e60b2f1b10300f205b3a32f2ff4d59",
+      "ledger": "docs/texas-business/research/franchise-tax-claims.json",
+      "ledgerSha256": "f17d49fe5d2419943d87f5f789451b49f4c517fa8ccec1d7b0df7bf7e8fc6440",
+      "coverage": {
+        "actualProseRead": true,
+        "allSectionsRead": [
+          "threshold-and-report",
+          "annualization-and-scope",
+          "computation-choice",
+          "research-credit-change",
+          "account-control",
+          "decision-checklist"
+        ],
+        "tablesRead": 2,
+        "faqsRead": 4,
+        "ledgerClaimsRead": true,
+        "scope": "Full editorial and scenario review; targeted primary-source reverification, not every listed source independently refreshed."
+      },
+      "evidence": [
+        {
+          "url": "https://comptroller.texas.gov/taxes/franchise/research-dev-credit.php",
+          "sourceDate": "Guidance for effective 2026-01-01 change; observed 2026-10-13",
+          "pinpoint": "Taxable entity that does not owe franchise tax / Due Date",
+          "mode": "Fresh primary content read on 2026-10-13",
+          "result": "Refundable eligibility, EZ exclusion, old-exemption limitation for2026, federal6765, forms05-183/184and November15cutoff supported."
+        }
+      ],
+      "findings": [
+        {
+          "kind": "deeper original analysis",
+          "priority": "high",
+          "articleLocation": "computation-choice",
+          "issue": "The $1665 tax difference is small relative to the assumed compensation deduction. The model teaches method choice but not the sensitivity of that conclusion to allowable expenses.",
+          "proposedEdit": "With all other assumptions fixed and no extra preparation cost or credits, allowable compensation must exceed $6.704Mfor long-form tax to beat $29790EZ. At $6.65Mallowable compensation, long-form tax is $30093.75. With the assumed$2200incremental preparation charge and no credit, the compensation break-even rises to approximately$7.095M. This makes deduction support the decision variable rather than treating $7Mbook-like input as stable."
+        },
+        {
+          "kind": "precision",
+          "priority": "medium",
+          "articleLocation": "research-credit-change",
+          "issue": "The old-exemption disqualifier is summarized without its explicitly2026guidance scope. Later updating could copy this condition into another report year.",
+          "proposedEdit": "Anchor that guidance sentence to the2026report and underlying period, and keep the separate credit application cutoff distinct from ordinary extension status. Do not relabel the live source as freshly verified in the original edition."
+        }
+      ],
+      "calculationChecks": {
+        "existing": "1.4M/182×365=2807692.3077;5M×.75×.0075=28125;12M×.75×.00331=29790; +2200=30325;−5000=25325. Pass.",
+        "new": "Cbreak=12M−29790/(.75×.0075)=6704000; withprep Cbreak=12M−(29790−2200)/(.75×.0075)=7095111.11;6.65Mcomp gives30093.75."
+      },
+      "limitations": [
+        "No actual expense classification, apportionment or credit documentation obtained.",
+        "Rates/instructions read in manuscript and ledger; selected credit source refreshed, not all report-year forms."
+      ]
+    },
+    {
+      "slug": "texas-hiring-labor-cost-planning",
+      "readerDecision": "Price role-specific recruiting, compensation and delay",
+      "manuscript": "src/personal/editorial/data/articles/texas-hiring-labor-cost-planning.json",
+      "manuscriptSha256": "a9cfc72dca9c3a81684cdafb9efd2fb24a9cc4ff820984f5f471a91f2934767a",
+      "ledger": "docs/texas-business/research/hiring-claims.json",
+      "ledgerSha256": "0a956e583fd66b990114508e9e6d93dcd5f9eb7e2ec71b1038b206a33b760198",
+      "coverage": {
+        "actualProseRead": true,
+        "allSectionsRead": [
+          "dates-and-units",
+          "local-job-signals",
+          "wage-baseline",
+          "recruiting-market",
+          "pay-versus-delay",
+          "approve-plan",
+          "updates"
+        ],
+        "tablesRead": 2,
+        "faqsRead": 4,
+        "ledgerClaimsRead": true,
+        "scope": "Full editorial and scenario review; targeted primary-source reverification, not every listed source independently refreshed."
+      },
+      "evidence": [
+        {
+          "url": "https://texaslmi.com/api/GetHomeLinks/TLMR",
+          "sourceDate": "September2026edition; August2026observations",
+          "pinpoint": "PDFpp2and8",
+          "mode": "Fresh primary content read on 2026-10-13",
+          "result": "14469300jobs,5600change and8972maintenance advertisements supported; establishment jobs, unemployment and ad populations remain distinct."
+        },
+        {
+          "url": "https://texaslmi.com/api/GetHomeLinks/ReleaseSchedule",
+          "sourceDate": "Last modified2026-03-03",
+          "pinpoint": "PDFp1",
+          "mode": "Fresh primary content read on 2026-10-13",
+          "result": "Septemberreference month release scheduled October16."
+        },
+        {
+          "url": "https://www.bls.gov/regions/southwest/news-release/occupationalemploymentandwages_dallasfortworth.htm",
+          "sourceDate": "2026-08-13; May2025reference",
+          "pinpoint": "Table Aproduction/alloccupations",
+          "mode": "Fresh primary content read on 2026-10-13",
+          "result": "23.83production and33.96all occupations supported."
+        },
+        {
+          "url": "https://www.bls.gov/regions/southwest/news-release/OccupationalEmploymentandWages_Houston.htm",
+          "sourceDate": "2026-08-13; May2025reference",
+          "pinpoint": "Table Aproduction/alloccupations",
+          "mode": "Fresh primary content read on 2026-10-13",
+          "result": "25.52production and32.51all occupations supported."
+        }
+      ],
+      "findings": [
+        {
+          "kind": "decision-horizon correction",
+          "priority": "high",
+          "articleLocation": "pay-versus-delay",
+          "issue": "One-year $104krecurring wage premium is compared with a one-off launch delay. Existing caveats distinguish recurring cost but do not quantify the horizon that can reverse the choice.",
+          "proposedEdit": "Call20.8days a one-year equivalence only. If premium persists for three years, with invented8%discount and year-end wage cash flows, PV268018equals53.6days of immediate $5000lost contribution. Five years givesPV415242or83.0days. Contrast a lasting wage increase with an explicitly priced temporary sign-on or ramp arrangement, without asserting it has the same recruiting effect."
+        },
+        {
+          "kind": "deeper original analysis",
+          "priority": "medium",
+          "articleLocation": "recruiting-market",
+          "issue": "Recruiting evidence has a good funnel but launch authorization lacks a quantified survival denominator.",
+          "proposedEdit": "Tie the twenty-role requirement to qualified productive starters by launch. For a declared80%offer acceptance,90%start conversion and75%trainingcompletion, one hundredoffers yields54productive workers; twentyproductive workers requires about38offers before discrete/role constraints. This is a planning identity, not a measured market conversion. Actual local cohorts determine whether to fund recruitment or change the launch."
+        }
+      ],
+      "calculationChecks": {
+        "existing": "20×2080×30=1248000; ×1.25=1560000;32/hour loaded1664000; difference104000; /5000=20.8. Pass.",
+        "new": "3yearendPV=104000×(1−1.08**−3)/.08=268018.09; /5000=53.6036;5yearPV415241.84;/5000=83.0484; offerconversion.8×.9×.75=.54; ceil(20/.54)=38."
+      },
+      "limitations": [
+        "No causal response to higher pay established; premium duration and discount rate invented.",
+        "Metro manufacturing levels read and ledger compared; individual EAGseries were not all freshly re-opened here. Retain May2025wage reference and adjustment distinctions."
+      ]
+    },
+    {
+      "slug": "texas-cross-border-logistics-business-planning",
+      "readerDecision": "Qualify landed cost, customs and usable receipt",
+      "manuscript": "src/personal/editorial/data/articles/texas-cross-border-logistics-business-planning.json",
+      "manuscriptSha256": "7fa07a7c5ec9ed27f66e1496050348ec2e937bc51814894d952dd209a72fabf8",
+      "ledger": "docs/texas-business/research/logistics-claims.json",
+      "ledgerSha256": "e41a545ee14dac6101bf443e4c40c9762909adc9d4613cb8479c236e20c9dc16",
+      "coverage": {
+        "actualProseRead": true,
+        "allSectionsRead": [
+          "value-and-movements",
+          "texas-port-selection",
+          "schedules",
+          "customs-costs",
+          "route-economics",
+          "contract-and-release",
+          "updates"
+        ],
+        "tablesRead": 2,
+        "faqsRead": 4,
+        "ledgerClaimsRead": true,
+        "scope": "Full editorial and scenario review; targeted primary-source reverification, not every listed source independently refreshed."
+      },
+      "evidence": [
+        {
+          "url": "https://www.bts.gov/data-spotlight/mid-year-2026-border-crossing-data-release",
+          "sourceDate": "2026-09-14; July2026reference",
+          "pinpoint": "Intro and U.S.–Mexico Border monthly trucks table",
+          "mode": "Fresh primary content read on 2026-10-13",
+          "result": "650466inbound versus650521prior July corroborated; direction/scope correction sound."
+        }
+      ],
+      "findings": [
+        {
+          "kind": "deeper original analysis",
+          "priority": "high",
+          "articleLocation": "route-economics",
+          "issue": "The one-incident reversal is useful but the economics can give an operator an explicit service target before the trial.",
+          "proposedEdit": "RouteB’s extra freight net of carrying savings is $16000/year. At $5000per incident, it must avoid more than3.2incidents annually to beatA; fourfewer gives only$4000benefit. Price a trial against that boundary and define missed-window incidents consistently, including whether late shipments share one production stoppage. Do not double count stoppage loss for every truck in the same outage."
+        },
+        {
+          "kind": "deeper original analysis",
+          "priority": "medium",
+          "articleLocation": "route-economics",
+          "issue": "Mean pipeline inventory can hide tail delays and safety-stock requirements; the faster assumed mean is not automatically a smaller total inventory investment.",
+          "proposedEdit": "Keep the $40000pipeline release separate from annual$8000carrying savings. Add an explicitly assumed additional safety-stock requirement for Bif its variability is worse. $20000extraaverage safety stock at20%cost consumes the whole$4000route advantage. Actual service cohorts must justify this input."
+        }
+      ],
+      "calculationChecks": {
+        "existing": "Freight360k/384k;pipeline100k/60k;carry20k/12k;incidents30k/10k;totals410k/406k;oneadditional B incident411k. Pass.",
+        "new": "Netpre-incident premium24000−8000=16000; /5000=3.2avoidedincidents;4000/.2=20000safety stock."
+      },
+      "limitations": [
+        "No day-specific bridge schedule, tariff classification or carrier service observations obtained.",
+        "Fresh BTScontent supports crossing count, not shipmentperformance; no unmatched value/count ratio introduced."
+      ]
+    },
+    {
+      "slug": "texas-manufacturing-capacity-procurement",
+      "readerDecision": "Distinguish announcements from buyer-usable qualified output",
+      "manuscript": "src/personal/editorial/data/articles/texas-manufacturing-capacity-procurement.json",
+      "manuscriptSha256": "6a8c31874db9403fe120f18e445295f42ebdae133c8ef7ccb0f79bca9225e7a4",
+      "ledger": "docs/texas-business/research/manufacturing-claims.json",
+      "ledgerSha256": "ceefc98bbaa756dd8395299feac74c82392108e3e8ec7870c5e0dd3d4d6686f6",
+      "coverage": {
+        "actualProseRead": true,
+        "allSectionsRead": [
+          "project-evidence",
+          "product-and-process",
+          "qualification-evidence",
+          "funding-and-impact",
+          "allocated-output-model",
+          "model-decision",
+          "commercial-commitment",
+          "buyer-checklist",
+          "update-triggers"
+        ],
+        "tablesRead": 2,
+        "faqsRead": 4,
+        "ledgerClaimsRead": true,
+        "scope": "Full editorial and scenario review; targeted primary-source reverification, not every listed source independently refreshed."
+      },
+      "evidence": [
+        {
+          "url": "https://semiconductor.samsung.com/sas/local-news/samsung-austin-semiconductors-two-campuses-inject-10-9b-into-central-texas-economy-in-2025/",
+          "sourceDate": "2026-10-07",
+          "pinpoint": "Final manufacturing outlook paragraph",
+          "mode": "Fresh primary content read on 2026-10-13",
+          "result": "Taylor end2026operation remains company expectation, not observed output."
+        },
+        {
+          "url": "https://www.sas-globalwafers.com/en/gwc_news_en_20260804/",
+          "sourceDate": "2026-08-04",
+          "pinpoint": "Global expansion projects / productutilization paragraphs",
+          "mode": "Fresh primary content read on 2026-10-13",
+          "result": "Multiple Tier1qualifications and new-line exclusion supported. Also identifies named Micronfunding/supply relationship."
+        },
+        {
+          "url": "https://micron.gcs-web.com/news-releases/news-release-details/micron-announces-3-billion-strategic-investment-strengthen-us",
+          "sourceDate": "2026-07-09",
+          "pinpoint": "Financing,ten-yearsupply and proposed-transactionclosing paragraphs",
+          "mode": "Fresh primary content read on 2026-10-13",
+          "result": "Planned$500Mstrategicfinancing and plannedten-yearwaferaccess are expressly subject to definitiveagreements,approvalsandclosing."
+        }
+      ],
+      "findings": [
+        {
+          "kind": "deeper original primary-source analysis",
+          "priority": "high",
+          "articleLocation": "qualification-evidence / commercial-commitment",
+          "issue": "The article misses a named customer financing mechanism already in its source. This can make supply ramp causally intelligible instead of leaving every project at a genericstage.",
+          "proposedEdit": "Use the July9Micronplanned$500Mfinancing/ten-yearwaferaccess example and Aug4GWAaccount together. Explain that customer capital and reservedaccess can improve rampfunding and demandvisibility while leaving otherbuyers’ uncommittedcapacityunknown. Label Julytransactionconditional;Augissuerdescriptionalone is not an independently audited closing or paidcash receipt."
+        },
+        {
+          "kind": "deeper original analysis",
+          "priority": "high",
+          "articleLocation": "model-decision",
+          "issue": "Onepointyield sensitivity is correct but the threshold itself should be visible to procurement.",
+          "proposedEdit": "The given demand requires assembly/testyieldatleast94.1176%withotherinputsfixed, orallocationatleast24.7678%at95%yield. A25%allocation therefore tolerates only0.2322percentagepointsofallocationreduction. Show that a small negotiatedallocationchange can matter as much as factoryyield. Do not confusepercentwithpercentagepoints."
+        }
+      ],
+      "calculationChecks": {
+        "existing": "500×400=200000;×.85=170000;×.95=161500;×.25=40375;buffer375/40000=.9375%;.94case39950/2=19975;25short×100=2500. Pass.",
+        "new": "Requiredtestyield40000/(500×400×.85×.25)=.94117647; requiredallocation40000/(500×400×.85×.95)=.247678019;25−24.7678019=.2321981percentagepoints."
+      },
+      "limitations": [
+        "No Oct12closing record,actual Micronfundingtransfer orraw-siliconallocation reviewed. PDFcandidate MicronURL404; fullprimaryHTMLwasread.",
+        "TIproduction/capitalclaims readagainstmanuscriptandledger, not freshly reverified in thisboundedpass; preserve stage labels and material-vsdevice distinction."
+      ]
+    },
+    {
+      "slug": "texas-commercial-property-insurance-diligence",
+      "readerDecision": "Match insured perils and claims terms to cash-at-risk",
+      "manuscript": "src/personal/editorial/data/articles/texas-commercial-property-insurance-diligence.json",
+      "manuscriptSha256": "1bd7784305b91665778974fb7243d8f0f925230324d11eab17fe4900698a88b2",
+      "ledger": "docs/texas-business/research/insurance-claims.json",
+      "ledgerSha256": "10cc57e2428b890dbfa029d898d5b80e5ef644137cec048250367a7b7057236e",
+      "coverage": {
+        "actualProseRead": true,
+        "allSectionsRead": [
+          "hazard-and-policy",
+          "wind-and-flood",
+          "valuation-and-deductible",
+          "liquidity-and-recovery",
+          "business-income",
+          "market-status-and-carrier",
+          "documents-and-update"
+        ],
+        "tablesRead": 2,
+        "faqsRead": 4,
+        "ledgerClaimsRead": true,
+        "scope": "Full editorial and scenario review; targeted primary-source reverification, not every listed source independently refreshed."
+      },
+      "evidence": [
+        {
+          "url": "https://www.twia.org/wp-content/uploads/Business_Income_and_Extra_Expense_Form_2011.11.pdf",
+          "sourceDate": "Effective2011-11-27; currentlinkedform",
+          "pinpoint": "TWIA-17sectionsA,C,D,F,G,H; PDFpp1–3",
+          "mode": "Fresh primary content read on 2026-10-13",
+          "result": "Time deductible,repeatloss rule,10kextraexpense, restoration andincome definitions supported."
+        },
+        {
+          "url": "https://agents.floodsmart.gov/topics/selling-flood-insurance/coverage",
+          "sourceDate": "Undated liveguidanceobserved2026-10-13",
+          "pinpoint": "Coverage limits and notcoveredFAQ",
+          "mode": "Fresh primary content read on 2026-10-13",
+          "result": "Separatebuilding/contentdeductibles,500k/500klimits andBIexclusion supported."
+        }
+      ],
+      "findings": [
+        {
+          "kind": "material recovery-boundary omission",
+          "priority": "high",
+          "articleLocation": "business-income / liquidity-and-recovery",
+          "issue": "Restart is treated as an operatingtimeline, but the namedTWIAform does not promise to pay until customers orproduction recover. The repair/reasonable-speed boundary can end coverage earlier.",
+          "proposedEdit": "Add theTWIA-17D/Hrestoration boundary and Csuspension/lapse/cancellationexclusion forlossafteroperationscouldresume. A hypothetical fourteen additional days afterrepair at$8000dailycontribution adds$112000operatingexposure; do not assign that loss toTWIAincome coverage merely because revenuehasnotreturned."
+        },
+        {
+          "kind": "deeper original analysis",
+          "priority": "medium",
+          "articleLocation": "liquidity-and-recovery",
+          "issue": "8.7yearsofpremiumdifference is arithmetic, not an actualpremiumpayback period orcoverage decision.",
+          "proposedEdit": "Define retainedlossfunction for the sameagreement: min(coveredloss,deductible), subjectto limitsandotherconditions. For$200000coveredloss,Aretains200kandB100k; for600k,A360kandB100k. Useactual event/portfolio distribution andcashresources beforechoosing. KeepNFIPbuilding/contents compartments separate."
+        }
+      ],
+      "calculationChecks": {
+        "existing": "12M×.03=360k;600k−360k=240k;600k−100k=500k;260k/30k=8.6667years;168/24=7;7×8k=56k. Pass.",
+        "new": "14×8000=112000unassignedpost-restorationoperatingexposure;at200kcoveredloss retainedgap100k,at600kgap260k."
+      },
+      "limitations": [
+        "Noactualissuedpolicy orclaim; extra14daysdoesnotrepresentobservedrestart.",
+        "TWIA2027ratefiling andprivateeligibilitysourcesnot freshlyauditedhere. Preserve Fileand UseandpriorTWIA/NFIPcorrections."
+      ]
+    },
+    {
+      "slug": "texas-ai-law-business-compliance",
+      "readerDecision": "Identify applicable AI, privacy and biometric duties",
+      "manuscript": "src/personal/editorial/data/articles/texas-ai-law-business-compliance.json",
+      "manuscriptSha256": "b89e9e26bd5de3b53abed9b11b9ee721059e84b631b762a13db70313d5656193",
+      "ledger": "docs/texas-business/research/ai-law-claims.json",
+      "ledgerSha256": "0055229c9a29dab25c171a459496d13816e1ba8ab94083ccdef74d2683a89e9b",
+      "coverage": {
+        "actualProseRead": true,
+        "allSectionsRead": [
+          "scope",
+          "duties-by-operator",
+          "prohibited-uses",
+          "privacy-and-biometrics",
+          "procurement",
+          "worked-example",
+          "enforcement",
+          "implementation",
+          "decisions"
+        ],
+        "tablesRead": 2,
+        "faqsRead": 4,
+        "ledgerClaimsRead": true,
+        "scope": "Full editorial and scenario review; targeted primary-source reverification, not every listed source independently refreshed."
+      },
+      "evidence": [
+        {
+          "url": "https://tcss.legis.texas.gov/resources/BC/htm/BC.552.htm",
+          "sourceDate": "Effective2026-01-01; observed2026-10-13",
+          "pinpoint": "§552.051(b)–(f), .056, .103–.106",
+          "mode": "Fresh primary content read on 2026-10-13",
+          "result": "Government/healthcare distinctions,intent-basedrule,investigative/cure/penaltylogic support existingcopy. Readtheexactprovisions; nojudicialclassification inferred."
+        }
+      ],
+      "findings": [
+        {
+          "kind": "deeper original analysis",
+          "priority": "high",
+          "articleLocation": "worked-example / privacy-and-biometrics",
+          "issue": "Changed-purpose example is useful but employee-facing uses remain an abstract exclusion. A compactsame-vendor comparison would stop readers fromcarryingTDPSAconsumerexclusion intoallAIorbiometricduties.",
+          "proposedEdit": "Addtwoworkflowswith the same subscription: customer financing and employee attendance using face identification. Classify the employment context separately under the privacy act, then determine the biometric capture and unique-identification purpose and TRAIGA provision for attendance. Do not claim an employment privacy exclusion removes CUBI or TRAIGA. Retain actual data flow, notice, retention and human decision evidence as the approval record."
+        },
+        {
+          "kind": "editorial usefulness",
+          "priority": "medium",
+          "articleLocation": "enforcement",
+          "issue": "Densepenaltyparagraphs dominate the ending whileanoperatorstillneedstoreconcilethisdeployed version to facts under investigation.",
+          "proposedEdit": "Turn one generic decision paragraph into an evidence chain: complaint date→deployed version→prompt/input cohort→output→human action→safeguard→corrective change. Explain what each record establishes and where personal-data retention is limited. This is operational analysis, not a statutory mandatory logging list."
+        }
+      ],
+      "calculationChecks": {
+        "existing": "Noquantitativescenario requires recomputation. Cureperiodsandpenaltyunitsremain distinctandmustnotbeaddedintooneexpectedfine.",
+        "new": "No invented probability ofenforcementoruniversalassessmentrequirementproposed."
+      },
+      "limitations": [
+        "TDPSAandCUBIclaims read in actual manuscript/ledger,but Chapters541/503not freshlycontent-auditedhere; root should verify the proposed employment comparison against both before adoption.",
+        "Business sandbox intake and federal preemption/court docket remain unresolved; no October 13 assertion about all enforcement is made."
+      ]
+    },
+    {
+      "slug": "texas-business-court-contract-decisions",
+      "readerDecision": "Preserve the bargain and underwrite the dispute scenario",
+      "manuscript": "src/personal/editorial/data/articles/texas-business-court-contract-decisions.json",
+      "manuscriptSha256": "f47b40378d3982e466c0417b0bc905f9a3c560723b2141e224e31c0d093119c4",
+      "ledger": "docs/texas-business/research/business-court-claims.json",
+      "ledgerSha256": "ecd71fe95094fb5a4bc26d3cbb791931c7a48c2ffcb78d49f2851df7ed01ead2",
+      "coverage": {
+        "actualProseRead": true,
+        "allSectionsRead": [
+          "two-thresholds",
+          "counterclaims-clock",
+          "preserve-bargain",
+          "worked-dispute",
+          "court-evidence",
+          "decision-checklist"
+        ],
+        "tablesRead": 2,
+        "faqsRead": 4,
+        "ledgerClaimsRead": true,
+        "scope": "Full editorial and scenario review; targeted primary-source reverification, not every listed source independently refreshed."
+      },
+      "evidence": [
+        {
+          "url": "https://capitol.texas.gov/tlodocs/89R/billtext/html/HB00040F.htm",
+          "sourceDate": "Enrolled2025law; effective2025-09-01",
+          "pinpoint": "Sections43and45;§25A.004(d),(d-1)",
+          "mode": "Fresh primary content read on 2026-10-13",
+          "result": "Separatetransactionandcontroversyscreens supported;alternativecontractconsentandIP/arbitrationroutes are material."
+        },
+        {
+          "url": "https://www.txcourts.gov/media/1463334/26-bc03a-0027-the-bakery-v-naterra-intl-2026-tex-bus-64.pdf",
+          "sourceDate": "2026-09-15",
+          "pinpoint": "Opinion¶1–5,notstaffsyllabus",
+          "mode": "Fresh primary content read on 2026-10-13",
+          "result": "Pleadingsand Julyremovalchronology supportarticle."
+        },
+        {
+          "url": "https://www.txcourts.gov/media/1463368/26-bc01b-0018-beard-v-perot-2026-tex-bus-65.pdf",
+          "sourceDate": "2026-09-22",
+          "pinpoint": "¶138–145,fn121",
+          "mode": "Fresh primary content read on 2026-10-13",
+          "result": "Context/relianceanalysis andexpressno-standalonemergerholding supportarticle."
+        }
+      ],
+      "findings": [
+        {
+          "kind": "precision",
+          "priority": "high",
+          "articleLocation": "two-thresholds.table.rows.0",
+          "issue": "Tablelabelsatleast5Maggregate considerationas Is there a qualified transaction? despiteprose correctly identifyingmoney-or-credit limb and exclusions. This stronger shortcut can misleadtable-only readers.",
+          "proposedEdit": "Rename first row to Does the consideration limb meet the qualified-transaction definition? or include both limbs and exclusions inline. Keep the table explicitly about that route. Add another row for statutory route selection before both monetary rows; aconsent clause alone still does not create jurisdiction."
+        },
+        {
+          "kind": "deeper original analysis",
+          "priority": "medium",
+          "articleLocation": "preserve-bargain / worked-dispute",
+          "issue": "Theexecutedpromiseframework is good but never stress-testswhen an amendment or liability cap changes approved economic value.",
+          "proposedEdit": "Usea declared$6.2Mloss case with an assumed$2Mcontractualcap andseparate identifiedexclusions/carveouts. Counselmustassesswhat canbepleaded/recovered;finance mustnotkeep6.2Mintherecoverycell automatically. Linkthe promise-to-document scheduletoapprovalofthecap,acceptanceconditionsandpaymentstaging,notjusttheforumquestion."
+        }
+      ],
+      "calculationChecks": {
+        "existing": "3.4M+2Mexemplary+.6Mfees=6Mheadlinebutonly3.4Mqualifyingbefore other requirements;6.2Mscreenpassesonlydeclaredqualifyingcase. Pass.",
+        "new": "Ifavalidapplicable2Mcapcontrols,themodeledrecoverablecontractlossmaybesmallerthan6.2M;notanautomaticjurisdictiondetermination."
+      },
+      "limitations": [
+        "Noappellatedocketsearchorupdateddivision/courtreportaudit completed; keeptrial-court,historicalcutoffandcomparabilitycaveats.",
+        "Assumedliabilitycapnotactuallegaladviceorappliedholding."
+      ]
+    }
+  ],
+  "calculationSummary": {
+    "checkedAll12Scenarios": true,
+    "arithmeticErrorsFound": 0,
+    "methodOrBoundaryImprovementsRequired": true,
+    "JETItailPV": 179054.18139838136
+  },
+  "nextBoundary": "Root reads report and source pinpoints, adopts/rejects individual findings, checks any newly proposed legal workflow against its full controlling text, and edits only within current authorization. No private contracts, qualification reports, insurance quotations, eligibility or operationaloutcomes invented."
+}

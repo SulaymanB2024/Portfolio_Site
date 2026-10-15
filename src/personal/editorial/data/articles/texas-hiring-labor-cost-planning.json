@@ -1,0 +1,275 @@
+{
+  "slug": "texas-hiring-labor-cost-planning",
+  "path": "/research/texas/texas-hiring-labor-cost-planning",
+  "title": "A Texas Hiring Plan Needs More Than an Unemployment Rate",
+  "displayTitle": "Texas Hiring: Price the Role and the Ramp",
+  "seoTitle": "Texas Hiring and Labor Costs 2026: Jobs, Wages and Planning",
+  "category": "TEXAS BUSINESS",
+  "subtitle": "What the latest workforce releases can tell an employer about location, pay and the cost of an unfilled production role.",
+  "seoDescription": "Texas hiring research using August 2026 TWC and BLS job signals, May 2025 metro wages, role-specific recruiting and an auditable labor-cost scenario.",
+  "date": "2026-10-12",
+  "dateModified": "2026-10-13",
+  "author": "Sulayman Bowles",
+  "kind": "research",
+  "readTime": "9 MIN",
+  "openingPresentation": "integrated",
+  "evidenceBoundary": "Reviewed October 12, 2026. Employment and unemployment observations refer to August 2026; wage estimates refer to May 2025 and were released in August 2026. Official estimates can be revised. The payroll and delay example is hypothetical, with declared assumptions; no employer recruiting results or current wage offers are asserted. Targeted October 13 revision: recurring-versus-one-off cost horizon and a qualified productive-starter denominator. Original source-check dates remain attached to the individual references.",
+  "content": [
+    "The wage decision is also an opening-date decision. A Texas employer choosing a site needs a reachable recruiting market, a credible route from offer to productive employee, and enough budget to sustain the team. Price those steps together: a lower hourly rate has little value if the operation cannot staff its launch.",
+    "The latest Texas Labor Market Review available at this review reports 14,469,300 seasonally adjusted nonfarm jobs in August 2026, up 5,600 from revised July. The state unemployment rate was 4.4%. Those are different measures: establishment jobs and unemployed people as a share of the civilian labor force. Neither counts qualified applicants for your shift. [TWC August indicators](#source-twc-review).",
+    "For an operator, the useful conclusion is to combine the public baseline with a small, dated recruiting test. Use the data to choose the questions, then fund the plan against wages, acceptance, training and vacancy exposure that the actual role can support."
+  ],
+  "sections": [
+    {
+      "id": "dates-and-units",
+      "title": "Put the observation date beside the number",
+      "paragraphs": [
+        "TWC’s September edition describes August activity. Its release schedule lists September observations for October 16, after this article’s October 12 cutoff. Reading the page in October does not turn its numbers into an October labor-market observation. The schedule also warns that estimates can be revised and substate data can be delayed. [TWC release schedule](#source-release-schedule).",
+        "Keep three clocks in the hiring model: the month the employment measure describes, the wage survey’s reference period, and the dates of your own offers. The Dallas and Houston occupational wage releases were published August 13, 2026, but measure May 2025 wages. A recent publication can contain an older pay baseline. [Dallas wages](#source-dallas-wages); [Houston wages](#source-houston-wages).",
+        "The statewide unemployment rate is seasonally adjusted. TWC’s August metro unemployment comparisons are unadjusted: Austin–Round Rock–San Marcos 3.9%, Dallas–Fort Worth–Arlington 4.4%, and Houston–Pasadena–The Woodlands 5.0%. Compare those metros with each other on that basis; do not attribute a difference from the adjusted statewide rate wholly to local conditions. [TWC metro unemployment](#source-twc-review)."
+      ]
+    },
+    {
+      "id": "local-job-signals",
+      "title": "Read the industry inside the metro",
+      "paragraphs": [
+        "The BLS metro tables show a useful divergence in August manufacturing. Austin’s preliminary manufacturing job count was 87,800, up 2.9% over the year; Dallas–Fort Worth had 312,700, down 0.5%; Houston had 240,400, down 0.2%. These are jobs in establishments, not a count of unemployed manufacturing workers or people willing to change employers. [Austin](#source-austin-jobs); [Dallas–Fort Worth](#source-dallas-jobs); [Houston](#source-houston-jobs).",
+        "The larger employment base in Dallas does not establish a larger available applicant pool. Growth in Austin can signal expanding industrial activity, but it does not prove every trade is scarce. A declining industry count can reflect changes in employers or production mix while a particular maintenance skill remains difficult to recruit. These are questions for a role-level test, rather than conclusions supplied by the aggregate.",
+        "Use the industry cut to identify likely competing employers and nearby training relationships. Then narrow to the actual work: repairing equipment, running a machine, supervising production, or writing controls software. Firms in different industries can compete for the same occupation."
+      ],
+      "table": {
+        "caption": "August 2026 manufacturing employment: a location signal, not worker availability",
+        "columns": [
+          "Metro",
+          "Jobs",
+          "Year-over-year change",
+          "Measurement"
+        ],
+        "rows": [
+          [
+            "Austin–Round Rock–San Marcos",
+            "87,800",
+            "+2.9%",
+            "Preliminary; unadjusted"
+          ],
+          [
+            "Dallas–Fort Worth–Arlington",
+            "312,700",
+            "−0.5%",
+            "Preliminary; unadjusted"
+          ],
+          [
+            "Houston–Pasadena–The Woodlands",
+            "240,400",
+            "−0.2%",
+            "Preliminary; unadjusted"
+          ]
+        ],
+        "note": "BLS Economy at a Glance publishes jobs in thousands; values here are multiplied by 1,000. All rows describe August 2026, with the same industry and adjustment basis."
+      }
+    },
+    {
+      "id": "wage-baseline",
+      "title": "An occupational average is a starting point for pricing",
+      "paragraphs": [
+        "BLS reports May 2025 mean hourly pay of $23.83 for the Dallas production group and $25.52 for Houston production. The order reverses for the all-occupation averages: Dallas $33.96 and Houston $32.51. A citywide wage average can therefore point in the opposite direction from the broad occupational group relevant to a factory. [Dallas wage table A](#source-dallas-wages); [Houston wage table A](#source-houston-wages).",
+        "Even production is too broad to price a final offer. Its mix of occupations, employers and experience can differ between metros. Map the job description to an appropriate occupation, inspect available pay distributions, and compare the requirements with your own shift, certifications and supervisory responsibility. A mean is not a median, an entry-level wage, or the price required to recruit a particular person.",
+        "OEWS measures straight-time gross wages. Its definition excludes overtime premiums, shift differentials, employer supplementary benefit costs and certain bonuses. The estimates combine six survey panels over three years, with earlier wages adjusted to the reference date. Treat the published figure as a structured baseline; build the employer’s cash budget from the full compensation package. [OEWS technical notes](#source-wage-method).",
+        "For a night shift, the missing differential can matter more than a small difference between two published metro averages. For an expansion, retention incentives and training time can matter more than the nominal opening offer. Price those choices explicitly and check the offers candidates actually accept."
+      ]
+    },
+    {
+      "id": "recruiting-market",
+      "title": "Replace a statewide pool with a reachable recruiting funnel",
+      "paragraphs": [
+        "BLS unemployment concepts require people to be without a job, available for work, and actively seeking work, with specified temporary-layoff treatment. The measure does not screen for your equipment experience, license, commute, schedule or pay. It also does not include every employed person who might accept a better job. [BLS definitions](#source-unemployment-definition).",
+        "TWC’s report lists 8,972 August online advertisements for general maintenance and repair workers statewide. The figure describes reported advertisements for that occupation, not completed hires or locally available technicians. Likewise, the report’s statewide unemployed-to-advertised-vacancy relationship cannot be applied to one plant’s maintenance positions. [TWC online job-ad section](#source-twc-review).",
+        "A practical recruiting test starts with the worksite and shift. Record inquiries, candidates meeting essential requirements, interviews, offers, acceptances, starts, and survival through the initial training period. Keep denominators distinct: an acceptance rate needs offers as its denominator; a training-completion rate needs the defined starting cohort. Twenty applications cannot be reported as twenty qualified available workers.",
+        "Convert the funnel into the launch requirement. At invented rates of 80% offer acceptance, 90% conversion from accepted offer to start and 75% training completion, one hundred offers yield 54 productive workers. Twenty productive starters require approximately 38 offers on that planning identity. It is an expected-volume calculation, not a guarantee or a measured Texas conversion rate; role-specific cohorts, integer outcomes and rejection reasons determine the real staffing plan."
+      ]
+    },
+    {
+      "id": "pay-versus-delay",
+      "title": "Work the cost of waiting alongside the wage",
+      "paragraphs": [
+        "Consider a hypothetical operation recruiting twenty employees. Assume 2,080 paid hours per employee per year, base offers of either $30 or $32 per hour, and additional employer costs equal to 25% of base payroll. Those rates and the burden are scenario assumptions, not measured market offers or a statutory payroll-tax estimate.",
+        "At $30, base payroll is $1,248,000 and the assumed loaded annual cost is $1,560,000. At $32, the corresponding figures are $1,331,200 and $1,664,000. The extra annual cost is $104,000. The table keeps that recurring commitment separate from a delay cost.",
+        "If staffing is the binding launch constraint, assume each lost business day sacrifices $5,000 of contribution after avoidable costs. The $104,000 pay premium equals 20.8 lost days over one year only. It is recurring compensation compared with a one-off delay, not a durable break-even result or proof that higher pay fills the jobs.",
+        "If the premium persists for three years, an invented 8% discount rate and year-end wage payments produce $268,018 present value, equivalent to 53.6 days of immediate $5,000 losses. Five years produces $415,242, or 83.0 days. Keep the launch-delay loss at time zero for this sensitivity and exclude any recurring retention or productivity benefit not demonstrated. A temporary sign-on or ramp arrangement needs its own terms and evidence; it cannot be assumed to recruit as effectively as lasting pay.",
+        "Run the sensitivity against the actual constraint. If equipment delivery is already limiting the opening, faster recruiting may save no launch days. If several vacancies reduce output gradually, model the staffing curve rather than treating every vacancy as a full shutdown. If trained internal transfers can cover the bottleneck, their opportunity cost belongs in the comparison."
+      ],
+      "table": {
+        "caption": "Declared twenty-person payroll scenario, annual USD",
+        "columns": [
+          "Assumption or result",
+          "$30/hour plan",
+          "$32/hour plan"
+        ],
+        "rows": [
+          [
+            "People × paid hours",
+            "20 × 2,080",
+            "20 × 2,080"
+          ],
+          [
+            "Base payroll",
+            "$1,248,000",
+            "$1,331,200"
+          ],
+          [
+            "Assumed additional employer costs, 25%",
+            "$312,000",
+            "$332,800"
+          ],
+          [
+            "Loaded annual cost",
+            "$1,560,000",
+            "$1,664,000"
+          ],
+          [
+            "Incremental loaded cost",
+            "Baseline",
+            "+$104,000"
+          ]
+        ],
+        "note": "Hypothetical rates and burden. At assumed lost contribution of $5,000 per business day, $104,000 ÷ $5,000 = 20.8 days. No recruiting response or operational saving is asserted. The 20.8-day equivalence concerns one annual premium; multiyear comparisons require the declared horizon and payment timing."
+      }
+    },
+    {
+      "id": "approve-plan",
+      "title": "Approve capacity and the hiring sequence together",
+      "paragraphs": [
+        "The finance review should receive a staffing schedule alongside the annual labor budget. Identify which roles permit commissioning, which support steady production, and which provide resilience after the launch. Equal headcount does not produce equal capacity if a necessary skill or supervisor is missing.",
+        "Stage commitments around that schedule. A recruiter can test a narrow role and offer before the employer commits to a full staffing assumption. Operations can define what a new employee must demonstrate before working independently. Finance can separate one-time recruiting and training costs from recurring pay, benefits and overtime exposure.",
+        "Compare locations on the work the business can actually perform. The relevant geography may be a practical commuting area smaller than the metro. A workforce spread across a large statistical area does not mean people can reach the facility reliably at an early shift. Test those constraints with the recruiting evidence instead of assigning an entire metro’s employment count to the site.",
+        "For an acquisition, ask for the same record at the existing company: payroll by role and shift, vacancy duration, overtime, training completion and retention cohorts. Public data supplies context for those results; it cannot establish that the target’s workforce is stable. A company can have a competitive headline wage and still depend on a small number of people with difficult-to-replace knowledge."
+      ],
+      "bullets": [
+        "Name the occupation, essential skills, worksite, shift and recruiting geography.",
+        "Date every public wage and employment input; preserve adjustment basis and units.",
+        "Build compensation, benefits, overtime, recruiting and training as separate cost lines.",
+        "Test the offer using qualified candidates, acceptances, starts and completed training.",
+        "Identify the actual capacity bottleneck before valuing faster hiring.",
+        "Assign an owner and a review date to the staffing and vacancy assumptions."
+      ]
+    },
+    {
+      "id": "updates",
+      "title": "Change the plan when the evidence changes",
+      "paragraphs": [
+        "Recheck the baseline when TWC releases the next observation or revises a prior month, when BLS publishes a new occupational wage reference year, or when a relevant employer changes hiring materially. Recheck the operating assumption when your own acceptance, start-date or retention evidence diverges from the budget. A new headline alone need not trigger a wholesale change in pay.",
+        "Keep the old observation, revised observation, offer record and decision in the same dated model. That makes it possible to distinguish a statistical revision from a deterioration in your own recruiting. The practical advantage is a labor plan that can be corrected while there is still time to change the production ramp."
+      ]
+    }
+  ],
+  "faqs": [
+    {
+      "question": "Does Texas’s 4.4% unemployment rate mean skilled employees are readily available?",
+      "answer": "It does not identify available candidates for a specific role. The August 2026 statewide rate is adjusted and measures unemployment relative to the civilian labor force; qualifications, shift, commute and willingness to accept the offer need separate evidence. [TWC indicators](#source-twc-review); [BLS concepts](#source-unemployment-definition)."
+    },
+    {
+      "question": "Are wages published in August 2026 current hiring offers?",
+      "answer": "The Dallas and Houston releases published August 13, 2026 describe May 2025 OEWS estimates. They are a wage baseline, not evidence of what applicants will accept in October 2026. [Dallas release](#source-dallas-wages); [Houston release](#source-houston-wages)."
+    },
+    {
+      "question": "Can I budget the BLS hourly wage as the full cost of an employee?",
+      "answer": "OEWS wages exclude costs including overtime premiums, shift differentials and employer supplementary benefits. Model the actual compensation package and employer expenses separately. [OEWS wage definition](#source-wage-method)."
+    },
+    {
+      "question": "Does faster Austin manufacturing growth prove its hiring market is tighter?",
+      "answer": "The preliminary August job series shows growth in establishment employment, not role-specific applicant availability. Austin’s +2.9% annual manufacturing change can frame a recruiting investigation; it cannot establish a particular vacancy’s difficulty. [Austin manufacturing series](#source-austin-jobs)."
+    }
+  ],
+  "sources": [
+    {
+      "id": "twc-review",
+      "label": "Texas Labor Market Review, September 2026 edition",
+      "href": "https://texaslmi.com/api/GetHomeLinks/TLMR",
+      "publisher": "Texas Workforce Commission",
+      "date": "2026-09; August 2026 observations",
+      "lastVerified": "2026-10-12",
+      "note": "Pages 2, 5–6 and 8: statewide jobs, unemployment, metro comparisons and online advertisements. Current-document endpoint can change; the claim ledger preserves the reviewed observations. Job-ad figures are agency-reported third-party measures, not independently audited raw postings."
+    },
+    {
+      "id": "release-schedule",
+      "label": "TWC 2026 labor market release schedule",
+      "href": "https://texaslmi.com/api/GetHomeLinks/ReleaseSchedule",
+      "publisher": "Texas Workforce Commission",
+      "date": "Last modified 2026-03-03",
+      "lastVerified": "2026-10-12",
+      "note": "August reference month scheduled September 18; September reference month scheduled October 16. Schedule is a plan; it does not guarantee actual future release."
+    },
+    {
+      "id": "dallas-jobs",
+      "label": "Dallas–Fort Worth–Arlington Economy at a Glance",
+      "href": "https://www.bls.gov/eag/eag.tx_dallas_msa.htm",
+      "publisher": "U.S. Bureau of Labor Statistics",
+      "date": "August 2026 observations; extracted 2026-10-02",
+      "lastVerified": "2026-10-12",
+      "note": "Unadjusted establishment jobs, in thousands, with preliminary August estimates. Current table can be revised."
+    },
+    {
+      "id": "houston-jobs",
+      "label": "Houston metro Economy at a Glance",
+      "href": "https://www.bls.gov/eag/eag.tx_houston_msa.htm",
+      "publisher": "U.S. Bureau of Labor Statistics",
+      "date": "August 2026 observations",
+      "lastVerified": "2026-10-12",
+      "note": "Unadjusted establishment manufacturing jobs, in thousands; August marked preliminary. Metro naming varies in the page heading; article uses the current Houston–Pasadena–The Woodlands statistical-area name."
+    },
+    {
+      "id": "austin-jobs",
+      "label": "Austin–Round Rock–San Marcos Economy at a Glance",
+      "href": "https://www.bls.gov/eag/eag.tx_austin_msa.htm",
+      "publisher": "U.S. Bureau of Labor Statistics",
+      "date": "August 2026 observations",
+      "lastVerified": "2026-10-12",
+      "note": "Unadjusted establishment jobs, in thousands; August marked preliminary."
+    },
+    {
+      "id": "dallas-wages",
+      "label": "Occupational Employment and Wages in Dallas–Fort Worth–Arlington, May 2025",
+      "href": "https://www.bls.gov/regions/southwest/news-release/occupationalemploymentandwages_dallasfortworth.htm",
+      "publisher": "U.S. Bureau of Labor Statistics",
+      "date": "2026-08-13",
+      "lastVerified": "2026-10-12",
+      "note": "May 2025 reference period. Table A provides mean hourly wages for all occupations and major groups; these are not identical-role offers."
+    },
+    {
+      "id": "houston-wages",
+      "label": "Occupational Employment and Wages in Houston–Pasadena–The Woodlands, May 2025",
+      "href": "https://www.bls.gov/regions/southwest/news-release/OccupationalEmploymentandWages_Houston.htm",
+      "publisher": "U.S. Bureau of Labor Statistics",
+      "date": "2026-08-13",
+      "lastVerified": "2026-10-12",
+      "note": "May 2025 reference period. Table A: production mean $25.52/hour and all-occupation mean $32.51/hour."
+    },
+    {
+      "id": "wage-method",
+      "label": "Technical Notes for May 2025 OEWS Estimates",
+      "href": "https://www.bls.gov/oes/current/oes_tec.htm",
+      "publisher": "U.S. Bureau of Labor Statistics",
+      "date": "May 2025 reference-year technical notes",
+      "lastVerified": "2026-10-12",
+      "note": "Survey scope, six panels, reference-date adjustment, straight-time pay definition and exclusions. Current-document path may advance to another reference year."
+    },
+    {
+      "id": "unemployment-definition",
+      "label": "Current Population Survey concepts and definitions",
+      "href": "https://www.bls.gov/cps/definitions.htm",
+      "publisher": "U.S. Bureau of Labor Statistics",
+      "date": "Undated current definitions",
+      "lastVerified": "2026-10-12",
+      "note": "Unemployment and civilian-labor-force concepts; no role-specific recruiting or availability measure."
+    }
+  ],
+  "image": "/images/social/texas-hiring-labor-cost-planning.png",
+  "resources": [
+    {
+      "label": "Texas business source and decision ledger",
+      "href": "/research/texas-research-library-2026-10-13.json",
+      "description": "Primary evidence, declared assumptions and update triggers across the Texas business and autonomy library.",
+      "format": "JSON"
+    }
+  ]
+}

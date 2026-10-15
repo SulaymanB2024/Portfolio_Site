@@ -1,0 +1,448 @@
+{
+  "slug": "adobe-paid-workflows",
+  "path": "/research/financial-systems/adobe-paid-workflows",
+  "title": "Adobe: Paid Workflows at a Price I Like",
+  "displayTitle": "Adobe: paid workflows at a price I like.",
+  "seoTitle": "Adobe: Paid Workflows at a Price I Like | Long Thesis and 2028 Forecast",
+  "seoDescription": "A long on recurring creative and document demand, with a cash budget for AI, acquisitions and fewer shares. Entry $238.14; author forecast $365 for October 12, 2028.",
+  "category": "FINANCIAL SYSTEMS",
+  "subtitle": "A long on recurring creative and document demand, with a cash budget for AI, acquisitions and fewer shares.",
+  "searchTerms": [
+    "ADBE",
+    "Adobe Inc.",
+    "long pitch",
+    "financial analysis",
+    "cash flow",
+    "valuation",
+    "2028 forecast"
+  ],
+  "date": "2026-10-13",
+  "dateModified": "2026-10-13",
+  "readTime": "12 MIN",
+  "kind": "research",
+  "image": "/images/social/adobe-paid-workflows.png",
+  "author": "Sulayman Bowles",
+  "openingPresentation": "integrated",
+  "ledeMarkdown": "I would buy Adobe at $238.14. My central forecast is **$365 by October 12, 2028**, roughly 53% above the entry price. I believe the business can keep getting paid for the work surrounding an image, video or document as the cost of generating the first version falls.\n\nThat belief has to earn its place in the numbers. My base case assumes 8% annual revenue growth, a cash margin below the current trailing figure, and repurchases funded after an economic charge for employee equity and a separate capital budget. It does not require Adobe to win every contest between AI models. It requires customers to keep paying for useful creative and document workflows.\n\nThe largest risk is straightforward: those workflows could become cheaper and easier to replace, reducing both the number of paid users and the price Adobe can charge. I would buy at a valuation that gives that risk some room. I am not assuming it disappears.",
+  "thesis": "Positive long thesis at the October 12 close of $238.14; central price forecast $365 for October 12, 2028.",
+  "evidenceBoundary": "Public-source equity pitch written October 13, 2026, with information/entry-price cutoff October 12. Latest financial period: 2026-08-28. Latest disclosed shares: 2026-09-18; exact October shares/cash are not asserted. Author cash sensitivities, operating paths, purchase prices, valuation multiples and disconfirmation thresholds are labeled. Future accuracy is unobserved; no holdings or company work are implied.",
+  "assumptions": [
+    "USD millions and millions of shares unless stated; prices are USD per original share.",
+    "TTM = annual result + current comparable interim − prior interim. Forward cash margins include economic compensation and company-specific recurring reinvestment.",
+    "Net share reduction is cash-budget constrained. Retained/protected cash has no terminal bonus; gross buybacks are not added to price returns. Cases are not probabilities."
+  ],
+  "sections": [
+    {
+      "id": "where-i-think-adobe-can-keep-earning-its-money",
+      "title": "Where I think Adobe can keep earning its money",
+      "paragraphs": [
+        "An image that looks good in a chat window is an intermediate product. A commercial campaign may need editable source files, consistent characters, several aspect ratios, approved fonts, localized copy and dozens of versions that can be revised again. A video still needs a sequence someone can change. A document still has to be understood, shared and acted on.",
+        "My investment hypothesis is that cheaper generation increases the volume of this work enough to support spending on the software that finishes it. More output creates more production and review tasks. Adobe can earn money by making that process faster, even when the underlying model comes from another company.",
+        "This is a specific hypothesis about customer behavior. A designer becoming twice as productive could mean a larger campaign, or it could mean an employer buys half as many seats. The first outcome helps Adobe; the second threatens its revenue. I want paid growth and cash conversion to decide between them.",
+        "Adobe's own architecture permits both its Firefly models and partner models inside parts of its product suite. In June it announced AI assistants in public beta across Photoshop, Premiere, Illustrator, InDesign and Frame.io, with workflows such as reorganizing layers, assembling an initial edit and producing versions of a file. The unified Firefly studio remained a private-beta preview. Those product states matter: a launch establishes availability, not retention or profitable adoption. [Annual product description](#source-a1), [June creative-agent announcement](#source-a7)",
+        "I like the direction because it puts new capability inside work people already perform. The economic test is whether that capability protects paid demand, creates valuable additional usage or raises the cost of switching. An impressive demonstration alone cannot answer it."
+      ]
+    },
+    {
+      "id": "the-paid-business-is-still-growing",
+      "title": "The paid business is still growing",
+      "paragraphs": [
+        "The current evidence supports continued demand. It does not yet prove the full AI thesis.",
+        "Adobe's fiscal third quarter ended August 28. Revenue reached $6.760 billion, versus $5.988 billion a year earlier. Customer-group subscription revenue was $4.651 billion for Creative & Marketing Professionals and $1.905 billion for Business Professionals & Consumers, with reported growth of 13% and 16%. The latter group gives the thesis a second source of demand beyond professional creative applications. [Q3 financial results](#source-a3)",
+        "The trailing figures combine FY2025 with the first nine months of FY2026 and subtract the comparable FY2025 period. They preserve a full year of activity. The history also needs context: FY2024 included a $1 billion Figma termination payment. Its disappearance helped subsequent cash-flow and profit comparisons. [FY2025 filing](#source-a1), [latest quarterly filing](#source-a2)",
+        "Ending annualized recurring revenue was $27.50 billion, up 11.2% on Adobe's revalued comparison basis. Remaining performance obligations reached $22.16 billion, growing about 8%. ARR gives a view of the subscription book; contracted obligations provide another, slower-growing check on demand. Neither is cash already collected. The reported growth also includes Semrush, acquired in April, so I will not label the entire increase organic. [Investor datasheet](#source-a4)"
+      ],
+      "table": {
+        "caption": "Reported annual and reconstructed trailing scale",
+        "columns": [
+          "USD millions",
+          "FY2025",
+          "Latest TTM"
+        ],
+        "rows": [
+          [
+            "Revenue",
+            "23,769",
+            "25,970"
+          ],
+          [
+            "GAAP net income",
+            "7,130",
+            "7,284"
+          ],
+          [
+            "Operating cash",
+            "10,031",
+            "10,806"
+          ],
+          [
+            "Cash capex",
+            "179",
+            "214"
+          ]
+        ],
+        "note": "TTM ends August 28, 2026. Nine-month figures are matched; FY2024 included the $1bn Figma termination payment. [A1](#source-a1) [A2](#source-a2)"
+      },
+      "figures": [
+        {
+          "src": "/images/research/adobe-growth-quality.svg",
+          "label": "01 · Operating evidence",
+          "alt": "Revenue and EPS grew at different rates; fewer diluted shares amplified modest GAAP net-income growth. Matching first nine months of FY2025/FY2026, including acquisitions. [A2](#source-a2) [A3](#source-a3)",
+          "caption": "Revenue and EPS grew at different rates; fewer diluted shares amplified modest GAAP net-income growth. Matching first nine months of FY2025/FY2026, including acquisitions. [A2](#source-a2) [A3](#source-a3)",
+          "width": 2160,
+          "height": 1260
+        }
+      ]
+    },
+    {
+      "id": "i-will-not-let-an-ai-headline-carry-the-valuation",
+      "title": "I will not let an AI headline carry the valuation",
+      "paragraphs": [
+        "Adobe disclosed AI-first ARR above $650 million and growth above 150%. It also reported more than a billion monthly active users across creativity and productivity products. These are encouraging measures of reach and activity. They are different from the paid economics I am underwriting. [Management's prepared remarks](#source-a5)",
+        "The $650 million is a floor. Dividing it by total ARR produces a 2.36% lower-bound comparison, not an exact share of revenue or an upper bound on the AI business. Nor does that disclosure isolate how much AI revenue replaces an existing subscription, what serving it costs, or how much profit it creates. The billion users include free activity; they are not a billion paying Creative Cloud customers.",
+        "I give the company credit for building distribution. I give the valuation credit only when that distribution becomes paid demand and cash. This keeps the long useful even if the most exciting adoption statistic slows. It also prevents a successful free product from disguising weakness in the subscription business.",
+        "The base forecast consequently uses consolidated revenue growth below the latest reported pace. It does not extrapolate 150% growth, add an invented AI revenue stream, or assume that a new interface expands margins automatically.",
+        "I also expect the subscription book to give warning before every problem reaches earnings. Revenue recognized across an existing contract can remain healthy while the next renewal becomes harder. ARR and contracted obligations offer another view, although price, currency and acquisitions affect them too. If quarterly revenue keeps meeting guidance while these forward measures slow materially, I would examine the paid-demand thesis before celebrating EPS helped by repurchases. A useful forecast should make me change my interpretation early enough for that change to matter."
+      ]
+    },
+    {
+      "id": "the-cash-bridge-makes-the-entry-attractive",
+      "title": "The cash bridge makes the entry attractive",
+      "paragraphs": [
+        "The latest trailing year produced $10.806 billion of operating cash. Cash capital expenditure of $214 million leaves $10.592 billion of free cash flow. I then charge the $2.071 billion of stock compensation added back in operating cash flow, producing an **$8.521 billion cash-after-compensation proxy**.",
+        "Stock compensation is not an immediate cash payment. This deduction treats employee equity as an economic cost before I ask how much cash can support a smaller share count. It is a conservative sensitivity, not Adobe's reported metric or an exact estimate of the stock purchases required to replace dilution.",
+        "Using the 389.2 million shares disclosed for September 18, the entry price implies approximately $92.684 billion of equity value. The proxy represents a 9.19% yield, or 10.88 times annual cash. The share denominator is dated; the exact October 12 count is not public. I also cross-check earnings: the entry is about 13.1 times the midpoint of FY2026 GAAP EPS guidance, $18.145. [Share count and cash statements](#source-a2), [EPS guidance](#source-a3)",
+        "Those valuations appeal to me because they attach a manageable price to a large existing earnings base. The favorable outcome does not have to come from a distant product becoming dominant. It can come from established demand surviving better than the entry valuation allows."
+      ],
+      "table": {
+        "caption": "Trailing cash bridge · USD millions · ending 2026-08-28",
+        "columns": [
+          "Measure",
+          "Amount · $m"
+        ],
+        "rows": [
+          [
+            "Operating cash flow",
+            "10,806.000"
+          ],
+          [
+            "Cash capital expenditure",
+            "−214.000"
+          ],
+          [
+            "Reported free cash flow",
+            "10,592.000"
+          ],
+          [
+            "CFO-added stock compensation",
+            "−2,071.000"
+          ],
+          [
+            "Cash underwriting anchor",
+            "8,521.000"
+          ]
+        ],
+        "note": "FY2025 + current comparable interim − prior interim. Compensation/normalizations are author sensitivities, not additional reported cash expenses. [A1](#source-a1) [A2](#source-a2)"
+      },
+      "figures": [
+        {
+          "src": "/images/research/adobe-cash-underwriting.svg",
+          "label": "02 · Cash underwriting",
+          "alt": "Reported operating cash becomes a lower underwriting anchor after cash capex, compensation and labeled company-specific sensitivities. Matching trailing periods; USD billions. [A1](#source-a1) [A2](#source-a2)",
+          "caption": "Reported operating cash becomes a lower underwriting anchor after cash capex, compensation and labeled company-specific sensitivities. Matching trailing periods; USD billions. [A1](#source-a1) [A2](#source-a2)",
+          "width": 2160,
+          "height": 1260
+        }
+      ]
+    },
+    {
+      "id": "fewer-shares-need-a-cash-budget",
+      "title": "Fewer shares need a cash budget",
+      "paragraphs": [
+        "Repurchases strengthen this case only when they create affordable net retirement. In the first nine months, balance-sheet shares fell from 413 million to 391 million, a 5.33% reduction, while Adobe spent $6.821 billion on repurchases. That is evidence of a shrinking denominator. It is not a separate return to add to a target price already calculated with fewer shares.",
+        "My base case asks for 4% net retirement in each model year. At assumed average repurchase prices of $285 and $330, that requires $4.437 billion and $4.932 billion of net-purchase funding. Rising prices make later retirement more expensive; the model recognizes that.",
+        "The first-year budget includes $340 million for the announced Topaz transaction and $1 billion of additional capital flexibility; the second retains the $1 billion allowance. These are my budgets, not company guidance. Retained cash is left out of the terminal price, so it cannot quietly become an extra valuation benefit.",
+        "A company can also destroy value through acquisitions or poorly priced repurchases. This cash allocation leaves room to absorb mistakes without assuming debt finances a permanent reduction in shares."
+      ],
+      "table": {
+        "caption": "Base-case cash allocation and affordable net share reduction",
+        "columns": [
+          "Author model",
+          "Year 1",
+          "Year 2"
+        ],
+        "rows": [
+          [
+            "Revenue · $m",
+            "28,047.60",
+            "30,291.41"
+          ],
+          [
+            "Cash after compensation/reinvestment · $m",
+            "8,694.76",
+            "9,390.34"
+          ],
+          [
+            "Additional protected cash/debt budget · $m",
+            "1,340.00",
+            "1,000.00"
+          ],
+          [
+            "Dividend cash budget · $m",
+            "0.00",
+            "0.00"
+          ],
+          [
+            "Net share-purchase funding · $m",
+            "4,436.88",
+            "4,931.94"
+          ],
+          [
+            "Compensation-replacement proxy · $m",
+            "2,299.90",
+            "2,483.90"
+          ],
+          [
+            "Cash left after allocations · $m",
+            "2,917.88",
+            "3,458.39"
+          ],
+          [
+            "Ending shares · millions",
+            "373.63",
+            "358.69"
+          ]
+        ],
+        "note": "Forward cash margins already charge economic compensation and company-specific reinvestment. Net purchases do not receive a second return credit. Author budget: $1bn annual debt/capital flexibility plus $340m first-year acquisition budget, based on announced pending Topaz price. Cash retained receives no terminal bonus."
+      }
+    },
+    {
+      "id": "how-i-get-to-365",
+      "title": "How I get to $365",
+      "paragraphs": [
+        "My base case grows the $25.970 billion revenue anchor by 8% annually, reaching a $30.291 billion annual run rate near the evaluation date. Cash after compensation equals 31% of sales, below the observed trailing margin of roughly 32.8%. That produces $9.390 billion of annual cash rather than an assumption of expanding cash profitability.",
+        "With 358.687 million ending shares, the result is $26.18 per share. Fourteen times that cash produces **$366.52 in the model**, which I register as a rounded $365 central forecast. A separate 27% net-margin cross-check produces about $22.80 of earnings per share; the exact model price is roughly 16.1 times those earnings. The cross-check does not get added to the cash valuation.",
+        "The revaluation matters. Keeping the entry cash multiple would produce about $284.76, a 19.6% price gain. My central forecast requires buyers to pay 14 times cash rather than today's 10.88. I believe durable paid growth could justify that change. It is a judgment about future valuation, and it can be wrong even if the business performs reasonably well.",
+        "The reverse calculation shows the condition clearly. With the base share count and a 14-times multiple, Adobe needs about $7.383 billion of annual cash to support a 10% annualized price return from the entry. That is 13.4% below the observed proxy. This room exists because the calculation assumes both net retirement and a higher valuation multiple; it is not protection against every form of deterioration."
+      ],
+      "table": {
+        "caption": "The cash hurdle for a 10% annual price return",
+        "columns": [
+          "Conditional author diagnostic",
+          "Value"
+        ],
+        "rows": [
+          [
+            "Required horizon share price",
+            "$288.15"
+          ],
+          [
+            "Year 2 recurring cash required",
+            "$7,382.5m"
+          ],
+          [
+            "Cash change vs current underwriting anchor",
+            "-13.4%"
+          ],
+          [
+            "Recalculated ending shares",
+            "358.687m"
+          ]
+        ],
+        "note": "Scale both annual owner-cash margins; retain base revenue growth, repurchase prices, commitments, dividends and terminal multiple. Recalculate affordable net share reduction. This is an author diagnostic, not a market forecast. The 10% hurdle is a choice, not a forecast for SPY."
+      }
+    },
+    {
+      "id": "the-alternatives-are-meaningfully-different",
+      "title": "The alternatives are meaningfully different",
+      "paragraphs": [
+        "The bear case is severe enough to represent structural erosion: revenue falls in both years, the cash margin contracts, and net retirement stops. Its roughly $140 rounded outcome would be a substantial loss. Current cash generation cannot make that combination harmless.",
+        "The bull case needs paid expansion, sustained cash conversion and faster retirement despite higher purchase prices. Its roughly $530 outcome is possible within the model, but I do not give it a probability or let it substitute for the central case.",
+        "Holding base operating assumptions constant, 11 times cash gives approximately $288, while 17 times gives $445. This spread tells me that recognition by future buyers matters almost as much as modestly changing the growth forecast. It also tells me why excellent software can still produce a disappointing stock return when bought at the wrong price."
+      ],
+      "table": {
+        "caption": "Operating and valuation cases · October 12, 2028",
+        "columns": [
+          "Author case",
+          "Year 2 cash · $m",
+          "Cash multiple",
+          "Model price",
+          "Price return"
+        ],
+        "rows": [
+          [
+            "Bear",
+            "5,983.5",
+            "9×",
+            "$138.36",
+            "-41.9%"
+          ],
+          [
+            "Base",
+            "9,390.3",
+            "14×",
+            "$366.52",
+            "53.9%"
+          ],
+          [
+            "Bull",
+            "10,750.3",
+            "17×",
+            "$531.43",
+            "123.2%"
+          ]
+        ],
+        "note": "Scenarios have no probability weights. Central forecast rounds the base model to $5. Dividend estimates are separate from price returns."
+      },
+      "figures": [
+        {
+          "src": "/images/research/adobe-price-scenarios.svg",
+          "label": "03 · Prospective price cases",
+          "alt": "Bear, base and bull operating paths use affordable share reduction and explicit terminal cash multiples. Prices are author scenarios for October 12, 2028, without probabilities; dividends are separate.",
+          "caption": "Bear, base and bull operating paths use affordable share reduction and explicit terminal cash multiples. Prices are author scenarios for October 12, 2028, without probabilities; dividends are separate.",
+          "width": 2160,
+          "height": 1260
+        }
+      ]
+    },
+    {
+      "id": "what-i-will-judge-before-the-horizon",
+      "title": "What I will judge before the horizon",
+      "paragraphs": [
+        "I want the latest available FY2028 results to show an annual revenue run rate above $30 billion, cash after the same compensation charge above $9 billion, and comparable ARR growth of at least 7%. I also expect net retirement near the base case's 7.84% over two model years, achieved without relying on expanding debt. These are my prospective tests.",
+        "The clearest disconfirmation would be two successive reports with ARR growth below 5%, GAAP operating margin below 30%, or trailing cash after compensation below $7.5 billion. A growing free audience alongside those outcomes would strengthen the contrary case. So would repeated acquisitions that consume the cash budget without improving paid demand.",
+        "Quarterly results are the principal catalyst: the company has to show that useful paid workflows survive changing technology. The scheduled December 1 CEO transition to Anil Chakravarthy offers another point at which strategy and capital allocation may become clearer, but leadership change alone earns no additional value in my model. [Transition announcement](#source-a6)"
+      ],
+      "table": {
+        "caption": "Dated operating predictions and conditions that change the long",
+        "columns": [
+          "Observation",
+          "Author test"
+        ],
+        "rows": [
+          [
+            "By latest available 2028 trailing period",
+            "Revenue above $30bn; cash after CFO-SBC above $9bn; comparable ARR growth at least 7%"
+          ],
+          [
+            "Capital allocation",
+            "Net shares near 359m, with affordable purchases and no reliance on expanding debt"
+          ],
+          [
+            "Reconsider",
+            "Two successive ARR readings below 5%, GAAP operating margin below 30%, or trailing cash after SBC below $7.5bn"
+          ]
+        ],
+        "note": "Use full comparable periods and the same cash definitions. These thresholds are author forecasts, not company guidance. Preserve the original price forecast when revising the thesis."
+      }
+    }
+  ],
+  "conclusion": {
+    "title": "My long thesis and dated forecast",
+    "content": "I believe in Adobe's ability to adapt, and I like the price attached to that belief. The prediction remains concrete: $365 by October 12, 2028. I will compare the stock's price return with SPY over the same dates and retain this original forecast when the thesis changes. The business must keep getting paid; the investment must reward the price I am willing to pay today."
+  },
+  "sources": [
+    {
+      "id": "A1",
+      "label": "Adobe FY2025 Form 10-K",
+      "href": "https://www.sec.gov/Archives/edgar/data/796343/000079634326000003/adbe-20251128.htm",
+      "publisher": "Company / SEC EDGAR",
+      "date": "2026-01-15",
+      "type": "Annual filing",
+      "note": "Annual cash and earnings; Figma termination payment; product and competitive risks.",
+      "limitation": "Reported facts, management guidance and author projections have different status; current share/cash dates remain explicit.",
+      "lastVerified": "2026-10-13"
+    },
+    {
+      "id": "A2",
+      "label": "Adobe Q3FY2026 Form 10-Q",
+      "href": "https://www.sec.gov/Archives/edgar/data/796343/000079634326000156/adbe-20260828.htm",
+      "publisher": "Company / SEC EDGAR",
+      "date": "2026-09-22",
+      "type": "Primary company disclosure",
+      "note": "Comparable nine-month financial statements, share count, acquisition costs, ARR and obligations.",
+      "limitation": "Reported facts, management guidance and author projections have different status; current share/cash dates remain explicit.",
+      "lastVerified": "2026-10-13"
+    },
+    {
+      "id": "A3",
+      "label": "Adobe Q3FY2026 financial results",
+      "href": "https://www.adobe.com/cc-shared/assets/investor-relations/pdfs/01906202/au56y4ter.pdf",
+      "publisher": "Company Investor Relations",
+      "date": "2026-09-10",
+      "type": "Primary company disclosure",
+      "note": "Company results and FY2026 GAAP/non-GAAP guidance; guidance is not a reported result.",
+      "limitation": "Reported facts, management guidance and author projections have different status; current share/cash dates remain explicit.",
+      "lastVerified": "2026-10-13"
+    },
+    {
+      "id": "A4",
+      "label": "Adobe Q3FY2026 investor datasheet",
+      "href": "https://www.adobe.com/cc-shared/assets/investor-relations/pdfs/01906202/b75st5a4rwea.pdf",
+      "publisher": "Company Investor Relations",
+      "date": "2026-09-10",
+      "type": "Primary company disclosure",
+      "note": "Recurring-revenue measures and restated comparisons; acquisitions remain included.",
+      "limitation": "Reported facts, management guidance and author projections have different status; current share/cash dates remain explicit.",
+      "lastVerified": "2026-10-13"
+    },
+    {
+      "id": "A5",
+      "label": "Adobe Q3FY2026 prepared remarks",
+      "href": "https://www.adobe.com/cc-shared/assets/investor-relations/pdfs/01906202/c6yetrerew.pdf",
+      "publisher": "Company Investor Relations",
+      "date": "2026-09-10",
+      "type": "Primary company disclosure",
+      "note": "AI-first ARR greater than $650m is a floor; MAU does not mean paid customers.",
+      "limitation": "Reported facts, management guidance and author projections have different status; current share/cash dates remain explicit.",
+      "lastVerified": "2026-10-13"
+    },
+    {
+      "id": "A6",
+      "label": "Adobe announces its scheduled CEO transition",
+      "href": "https://news.adobe.com/news/2026/09/adobe-announces-anil-chakravarthy-to-become-president-and-ceo",
+      "publisher": "Company Investor Relations",
+      "date": "2026-09-03",
+      "type": "Primary company disclosure",
+      "note": "Anil Chakravarthy's transition is effective December 1, 2026; no value is added merely for the change.",
+      "limitation": "Reported facts, management guidance and author projections have different status; current share/cash dates remain explicit.",
+      "lastVerified": "2026-10-13"
+    },
+    {
+      "id": "A7",
+      "label": "Adobe expands its creative agent",
+      "href": "https://news.adobe.com/news/2026/06/adobe-unveils-major-expansion",
+      "publisher": "Adobe News",
+      "date": "2026-06-18",
+      "type": "Product announcement",
+      "note": "Public-beta assistants and private-beta unified studio; availability does not establish adoption or profitability.",
+      "limitation": "Company product description, not independent evidence of customer outcomes.",
+      "lastVerified": "2026-10-13"
+    },
+    {
+      "id": "A0",
+      "label": "Alpaca SIP daily close · October 12, 2026",
+      "href": "https://docs.alpaca.markets/reference/stockbars",
+      "publisher": "Alpaca Markets",
+      "date": "2026-10-12",
+      "type": "Connected market-data snapshot",
+      "note": "Actual SIP daily bars and request parameters are frozen in the downloadable model bundle. This documentation link explains the bar schema; it is not a public display of the quoted close.",
+      "limitation": "Daily close is the entry convention; no historical total-return adjustment is inferred. Corporate actions and distributions must be reconciled for evaluation.",
+      "lastVerified": "2026-10-13"
+    }
+  ],
+  "resources": [
+    {
+      "label": "Reproduce all four long pitches",
+      "href": "/downloads/research/four-long-pitches-model.zip",
+      "description": "Frozen quotes, primary inputs, cash-budget models, scenario CSV, original figures and executed notebook.",
+      "format": "ZIP"
+    },
+    {
+      "label": "Inspect the dated forecast registry",
+      "href": "/downloads/research/long-pitches-forecast-registry.json",
+      "description": "Original price and operating forecasts, entry dates, benchmark basis and model identity.",
+      "format": "JSON"
+    }
+  ]
+}

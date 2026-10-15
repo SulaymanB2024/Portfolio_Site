@@ -146,9 +146,11 @@ def toast(config=None):
             "terminal_after_tax_operating_earnings": after_tax,
             "terminal_enterprise_value": enterprise, "terminal_equity_value": equity,
             "terminal_shares": shares, "terminal_value_per_share": price,
-            "maximum_entry_for_15_percent": price / (1 + a["entry_return_hurdle"]) ** years,
+            "maximum_entry_for_15_percent": price / 1.15 ** years,
             "entry_return_hurdle": a["entry_return_hurdle"],
             "returns_at_entry": {str(entry): (price / entry) ** (1 / years) - 1 for entry in prices}}
+        if a["entry_return_hurdle"] != .15:
+            scenarios[name]["maximum_entry_at_selected_hurdle"] = price / (1 + a["entry_return_hurdle"]) ** years
     operating_bridge = r["FY2025_H12025_H12026_operating_income_m"]
     fcf_bridge = r["FY2025_H12025_H12026_FCF_m"]
     return {"quarter": "Q2 2026", "sub_gp_m": sub_gp, "fintech_gp_m": fintech_gp,
@@ -292,6 +294,11 @@ def main():
     parser.add_argument("--output", type=Path, help="Explicit JSON output; a custom scenario otherwise prints to stdout")
     args = parser.parse_args()
     try:
+        if args.output is not None and (
+            args.output.resolve() == args.inputs.resolve()
+            or (args.output.exists() and args.output.samefile(args.inputs))
+        ):
+            parser.error("output must not overwrite inputs")
         data = results(load_inputs(args.inputs))
     except (ValueError, OSError, json.JSONDecodeError) as error:
         parser.error(str(error))

@@ -1,0 +1,328 @@
+{
+  "slug": "texas-commercial-property-insurance-diligence",
+  "path": "/research/texas/texas-commercial-property-insurance-diligence",
+  "aliases": [],
+  "title": "What Will the Policy Pay When the Facility Stops?",
+  "displayTitle": "The Business Behind the Policy",
+  "seoTitle": "Texas Commercial Property Insurance: Coverage and Risk Diligence",
+  "category": "TEXAS BUSINESS",
+  "subtitle": "Compare the peril, valuation, deductible and interruption trigger before turning a Texas insurance quote into an operating assumption.",
+  "seoDescription": "Review Texas commercial property insurance: wind and flood coverage, TWIA’s 2026 filings, business income, deductibles, surplus lines and facility risk.",
+  "searchTerms": [
+    "Texas commercial property insurance",
+    "business interruption Texas",
+    "TWIA commercial insurance",
+    "commercial flood insurance Texas",
+    "named storm deductible",
+    "facility insurance diligence"
+  ],
+  "date": "2026-10-12",
+  "dateModified": "2026-10-13",
+  "author": "Sulayman Bowles",
+  "kind": "research",
+  "readTime": "11 MIN",
+  "openingPresentation": "integrated",
+  "evidenceBoundary": "Primary insurance guidance, public filing records and sample commercial forms verified October 12, 2026. No actual facility, insurer quotation or claim outcome was verified. Hypothetical prices and losses are not commercial market estimates; residential data is not used to infer commercial premiums. Targeted October 13 revision: actual repair-versus-revenue coverage boundary and declared retained-loss sensitivities. Original source-check dates remain attached to the individual references.",
+  "content": [
+    "Compare commercial-property policies through the loss the business has to survive. Identify the damaged property, cause, valuation, retained cost and funding while operations recover. Read the premium alongside that sequence so a cheaper quote does not conceal a larger demand on the company’s cash.",
+    "A current Texas development shows why the distinction matters. TWIA’s board voted August 4, 2026 to file no rate change for 2027, and TDI lists the commercial filing as File and Use. That is evidence about one wind-and-hail insurer’s filing, not a promise that a facility’s total premium stays flat or that its recovery needs are covered. [Board action](#source-rate-action); [commercial filing record](#source-rate-register).",
+    "For a purchase, lease or renewal, compare policies against the same asset inventory and loss scenarios. The stronger insurance decision connects coverage to the business’s ability to recover, with enough liquidity for the exposures it retains."
+  ],
+  "sections": [
+    {
+      "id": "hazard-and-policy",
+      "title": "Start with the event and the actual insured property",
+      "paragraphs": [
+        "TDI’s commercial guide distinguishes basic, broad and special forms, with special forms generally covering causes except listed exclusions. It identifies flood, earth movement and wear among common exclusions. A broad-sounding coverage label does not answer which events, property and conditions the issued contract covers. [Commercial-property guide](#source-commercial-guide).",
+        "Build an asset inventory by site: building, tenant improvements, production equipment, stock, property belonging to others, outdoor equipment and assets in transit. Reconcile it with the insured entity, locations and schedules. Ownership, possession and the obligation to repair can differ between landlord, tenant, equipment lessor and operating company.",
+        "Then test events relevant to the facility’s physical setting and operations: roof damage, rising water, freezing, fire, equipment failure, utility disruption and loss of access. These are suggested scenarios, not a measured ranking of Texas hazards. Use actual inspection, maintenance and site evidence to identify the pathways that could stop the business.",
+        "Keep the hazard and the insurance trigger distinct. A storm can cause both wind damage and flooding. The business needs to know which contract addresses each cause and whether a disputed or excluded cause leaves an important gap. A large overall limit cannot cure an excluded peril."
+      ],
+      "table": {
+        "caption": "Questions that turn a commercial quote into a recovery assessment",
+        "columns": [
+          "Loss question",
+          "Document or term to inspect",
+          "Business implication"
+        ],
+        "rows": [
+          [
+            "Is this cause covered?",
+            "Coverage form, exclusions and endorsements",
+            "Wind, flood and equipment failure may need different arrangements"
+          ],
+          [
+            "Is this asset insured here?",
+            "Named insured, property definitions and schedules",
+            "Tenant assets and outdoor or mobile equipment can differ"
+          ],
+          [
+            "How is damage valued?",
+            "Replacement-cost and actual-cash-value terms",
+            "Depreciation and conditions can change available cash"
+          ],
+          [
+            "How much does the business retain?",
+            "Deductible basis, sublimits and valuation conditions",
+            "A percentage deductible needs a stated denominator"
+          ],
+          [
+            "What pays during suspension?",
+            "Business-income trigger, daily/total limits and time deductible",
+            "Repair coverage does not establish revenue protection"
+          ],
+          [
+            "Who has rights under the contract?",
+            "Policy and issued endorsements",
+            "A certificate cannot create missing coverage"
+          ]
+        ],
+        "note": "Analytical framework, not a finding that any particular policy supplies these protections. Compare the actual wording against the same declared scenarios."
+      }
+    },
+    {
+      "id": "wind-and-flood",
+      "title": "Separate wind coverage from flood and the rest of the program",
+      "paragraphs": [
+        "TWIA describes its coverage as wind and hail only for eligible properties in the designated catastrophe area. Its application requirements include a private-market declination, building-code certification with limited exceptions, underwriting criteria and proof of flood coverage when required. Being on the coast does not itself establish eligibility or an issued policy. [TWIA eligibility](#source-wind-eligibility).",
+        "The published commercial policy expressly excludes flood, surface water, storm surge and specified related water causes, whether driven by wind or not. It also has an off-premises utility-failure exclusion with a stated on-premises equipment exception. Those provisions illustrate why the actual cause and location of damage matter. The sample is evidence of that form, not a determination of coverage under a business’s issued policy. [Commercial form, exclusions](#source-commercial-form).",
+        "NFIP guidance publishes maximum non-residential limits of $500,000 for the building and $500,000 for contents. It excludes financial losses from business interruption or loss of use. The building and contents limits are separate; a business should not treat them as a freely interchangeable $1 million recovery pool. [NFIP coverage](#source-flood-coverage). The guidance also treats building and contents deductibles separately; preserve each in the recovery model.",
+        "Compare the limits and valuation terms with the property’s actual replacement and contents requirements. Ask about private or excess flood options where needed, without assuming their availability or price. Confirm binding and effective dates before the transaction or exposure begins. Flood requirements for a lender, TWIA eligibility and a prudent recovery plan can ask different questions."
+      ]
+    },
+    {
+      "id": "valuation-and-deductible",
+      "title": "Normalize values and deductibles before comparing premiums",
+      "paragraphs": [
+        "Replacement cost and actual cash value differ. TDI describes actual cash value as replacement cost less depreciation. An issued policy can combine settlement bases or attach conditions and endorsements. TWIA’s catalogue, for example, lists both commercial replacement-cost coverage and replacement cost excluding roof coverings. A title on the quote does not settle treatment of every asset. [Valuation guidance](#source-commercial-guide); [published endorsements](#source-form-catalogue).",
+        "Have the broker identify the valuation date, insured values, settlement conditions and any coinsurance or reporting provisions in the actual contract. A property’s purchase price, tax appraisal and accounting value answer different questions from the cost and conditions of insured repair. Keep those amounts separate in the site model; see the related [property-tax underwriting investigation](/research/texas/texas-property-tax-business-underwriting).",
+        "Percentage deductibles need a denominator and an application rule. Ask whether the percentage applies to one building, the affected location’s scheduled value, another stated amount or a different basis, and whether it applies per occurrence or separately by item. Calculate the result in dollars for the facility. A familiar percentage is not enough to assess liquidity.",
+        "The two hypothetical quotes below insure the same $12 million scheduled value. Assume Quote A explicitly applies a 3% deductible to that full value for the modeled wind event, and Quote B applies a $100,000 deductible. Assume a $600,000 physical loss is covered and agreed, with adequate limits and no depreciation, coinsurance or other restrictions. Prices and terms are invented comparison inputs, not available market offers."
+      ],
+      "table": {
+        "caption": "Illustrative quote comparison: a lower premium retains more of the same loss",
+        "columns": [
+          "Assumed or calculated item",
+          "Quote A",
+          "Quote B"
+        ],
+        "rows": [
+          [
+            "Scheduled insured value: assumption",
+            "$12,000,000",
+            "$12,000,000"
+          ],
+          [
+            "Annual premium: assumption",
+            "$90,000",
+            "$120,000"
+          ],
+          [
+            "Deductible for the modeled event: assumption",
+            "3% of scheduled value",
+            "$100,000"
+          ],
+          [
+            "Deductible in dollars",
+            "$360,000",
+            "$100,000"
+          ],
+          [
+            "Covered agreed physical loss: assumption",
+            "$600,000",
+            "$600,000"
+          ],
+          [
+            "Retained loss in this simplified case",
+            "$360,000",
+            "$100,000"
+          ],
+          [
+            "Calculated insurer payment",
+            "$240,000",
+            "$500,000"
+          ]
+        ],
+        "note": "Declared hypothetical; not TWIA terms or actual quotations. Excludes taxes, fees, interruption losses, additional deductibles, exclusions, sublimits and settlement conditions. A real claim requires the issued policy and loss evidence."
+      }
+    },
+    {
+      "id": "liquidity-and-recovery",
+      "title": "Price retained loss without inventing an expected-loss estimate",
+      "paragraphs": [
+        "Quote A saves $30,000 annually while retaining $260,000 more in the modeled event. That additional retention equals about 8.7 years of the premium difference. It does not prove Quote B is better: no probability of loss, financing cost or alternate use of cash has been estimated. The comparison reveals the decision that a premium-only table hides.",
+        "For an otherwise covered loss within the same modeled limits, simple retained damage is the lesser of loss and deductible. At a $200,000 loss, A retains $200,000 and B $100,000; at the original $600,000 loss, A retains $360,000 and B $100,000. Exclusions, limits and other actual terms can change this function. The 8.7-year premium arithmetic is not a payback period or expected-loss decision; use the event distribution and available cash before choosing.",
+        "Risk reduction belongs in the comparison. A roof improvement, drainage work, fire protection or protected placement of critical equipment could change physical damage or interruption consequences. Obtain evidence about the measure and ask how the insurer treats it. Do not book a discount or a reduction in event probability solely because an improvement appears in a plan.",
+        "The insurance and operating decisions should meet at one recovery schedule. Identify equipment lead times, repair access, qualification testing, inventory replacement and customer restart requirements. Coverage needs to be assessed against that sequence, not merely the date when walls and a roof are repaired."
+      ]
+    },
+    {
+      "id": "business-income",
+      "title": "Read the suspension trigger and the time limit",
+      "paragraphs": [
+        "TDI describes business-interruption coverage as generally following direct physical loss or damage from a covered peril, with policy wording controlling. Contingent interruption and civil-authority extensions have their own conditions. A supplier delay, government order or undamaged facility without power does not by itself establish a covered business-income claim. [Interruption guidance](#source-business-income).",
+        "TWIA’s currently linked TWIA-17 endorsement gives a concrete commercial example. It connects suspension to covered wind or hail damage at specified property, uses scheduled daily and total limits, and includes a 168-hour time deductible. Its extra-expense maximum is $10,000. The form is effective November 27, 2011 and remains in the current catalogue; it is not a new 2026 rule or proof that any policy includes the endorsement. [TWIA-17](#source-income-endorsement). The form waives another time deductible for a subsequent covered loss while the prior restoration continues, but applies a new one after the earlier restoration ends. Match that rule to the actual event sequence.",
+        "A 168-hour waiting period is seven days. For an illustrative business operating every day and losing an assumed $8,000 daily contribution during that period, the exposure is $56,000. This is a cash-flow sensitivity, not a claim calculation: policy definitions, working days, limits, mitigation and actual financial evidence determine any payment. Compare temporary-operation costs with the separate extra-expense limit as well.",
+        "Repair and revenue recovery are separate clocks. TWIA-17’s restoration definition ends when property is repaired/replaced or should have been repaired with reasonable speed; section D also uses the earliest applicable cessation condition and limit. Its contract suspension/lapse/cancellation exclusion can cut off losses extending beyond when operations could resume. Fourteen assumed extra days of weak production or demand at $8,000 contribution per day adds $112,000 of operating exposure. Revenue remaining low alone does not establish payment for that tail. [Sections C, D and H](#source-income-endorsement).",
+        "Identify the income actually insured. The form defines business income through net income and continuing normal operating expenses, rather than sales alone. Reconcile payroll, saved expenses, working days, mitigation, limits and the repair timeline with the issued endorsement. The illustrative contribution figures are operating sensitivities, not that reconciliation. [Income definition](#source-income-endorsement).",
+        "For grid and water interruptions, connect the policy review with the facility’s own operating plan. Insurance can complement backup, alternate sourcing and safe shutdown, but coverage should not be assumed for a contractual curtailment. The [Texas power investigation](/research/texas/texas-power-large-load-business-diligence) explains why interruption restrictions need separate diligence."
+      ]
+    },
+    {
+      "id": "market-status-and-carrier",
+      "title": "Read the 2026 filing at its actual scope",
+      "paragraphs": [
+        "TWIA’s August announcement said its own 2026 analysis found commercial rates adequate by 4% and linked improved adequacy to lower catastrophe-funding and reinsurance costs following legislation. This is an insurer-specific actuarial assessment. It is not a measured 4% reduction in commercial premiums, a claim about every Texas insurer, or residential evidence applied to a business. [2026 board announcement](#source-rate-action).",
+        "TDI lists the commercial annual filing as P-0826-02, state tracking S739761, submitted August 4, 2026, with File and Use status. Preserve that status instead of calling the filing a project-specific quote or a separately dated approval order. A renewal can change when insured values, selected terms, property characteristics or other charges change even when the filed rate change is zero. [Filing register](#source-rate-register).",
+        "For difficult placements, distinguish a Texas-licensed carrier from eligible surplus-lines coverage. TDI explains that surplus-lines companies are not licensed by Texas but can be eligible to transact, while the selling agent needs the appropriate license. It also says these insurers do not participate in a guaranty association. Verify the actual carrier and placement; neither illegality nor protection should be inferred from a market label alone. [Surplus-lines guidance](#source-surplus-lines).",
+        "Ask for the insurer’s identity, financial evidence, claims contact and the complete form set. Consider insurer strength, terms and service alongside price. This review contains no commercial-premium dataset or loss-frequency analysis, so it makes no statewide price forecast or ranking of carriers."
+      ]
+    },
+    {
+      "id": "documents-and-update",
+      "title": "Preserve the contract that the recovery case depends on",
+      "paragraphs": [
+        "TDI’s certificate guidance states that a certificate cannot alter or extend policy coverage. Rights such as cancellation notice depend on the policy, endorsement or applicable law. A certificate holder should obtain the relevant underlying wording rather than treat the certificate as a substitute for the insurance contract. [Certificate guidance](#source-certificates).",
+        "Reconcile the purchase or lease requirements with actual insured interests and endorsements. Assign who insures the building, improvements, equipment and income, and who bears deductibles and uninsured repair. An agreement promising insurance does not itself show that the issued policy grants every promised right.",
+        "Maintain the complete declarations, forms, endorsements, schedules, effective dates and binding evidence. Retain asset and financial records off-site or in recoverable systems, with a practical loss-documentation process. Ask the broker and operations team to explain the same event from first damage through payment and restart, identifying any unresolved condition.",
+        "Recheck after a renewal or endorsement, changed carrier or insured value, acquisition or major alteration, new TWIA filing or eligibility requirement, revised flood terms, and any changed operating dependency. The decision checklist below is a proposed operating control, not a certification that the business is fully insured."
+      ],
+      "bullets": [
+        "Match insured entities, locations and property schedules to the actual operating structure.",
+        "Test wind, flood, equipment and utility events using the relevant policy and exclusions.",
+        "Normalize settlement values, deductible denominators, sublimits and any reporting conditions.",
+        "Model retained physical loss and interruption liquidity separately from premium savings.",
+        "Verify daily and total business-income limits, time deductibles and extra-expense terms.",
+        "Confirm carrier eligibility, issued endorsements, effective dates and a reproducible claims record."
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "id": "commercial-guide",
+      "label": "Commercial property insurance guide",
+      "href": "https://www.tdi.texas.gov/pubs/consumer/cb021.html",
+      "publisher": "Texas Department of Insurance",
+      "date": "Updated 2025-12-09",
+      "lastVerified": "2026-10-12",
+      "note": "Commercial form categories, valuation, exclusions and supplemental coverage; actual policy controls."
+    },
+    {
+      "id": "rate-action",
+      "label": "TWIA board directs no rate increase filing for 2027",
+      "href": "https://www.twia.org/twia-board-directs-filing-for-no-rate-increase-in-2027/",
+      "publisher": "Texas Windstorm Insurance Association",
+      "date": "2026-08-04",
+      "lastVerified": "2026-10-12",
+      "note": "Board action and TWIA’s own commercial adequacy analysis; not an individual premium or statewide commercial-price observation."
+    },
+    {
+      "id": "rate-register",
+      "label": "TDI TWIA submissions: commercial filing P-0826-02",
+      "href": "https://www.tdi.texas.gov/submissions/indextwia.html",
+      "publisher": "Texas Department of Insurance",
+      "date": "Filing submitted 2026-08-04; register reviewed 2026-10-12",
+      "lastVerified": "2026-10-12",
+      "note": "S739761 listed File and Use. No separately dated approval or individual policy premium inferred; cover letter confirms 0% commercial rate filing."
+    },
+    {
+      "id": "wind-eligibility",
+      "label": "TWIA windstorm coverage application and eligibility",
+      "href": "https://www.twia.org/property-owners/get-windstorm-insurance/",
+      "publisher": "Texas Windstorm Insurance Association",
+      "date": "Undated current guidance",
+      "lastVerified": "2026-10-12",
+      "note": "Designated area, private-market declination, certification, flood proof where required and underwriting; no site eligibility verified."
+    },
+    {
+      "id": "commercial-form",
+      "label": "TWIA commercial policy, form TWCP",
+      "href": "https://www.twia.org/wp-content/uploads/TWIA-Commercial-Policy-HB-3208.pdf",
+      "publisher": "Texas Windstorm Insurance Association",
+      "date": "Edition 2023-08-31",
+      "lastVerified": "2026-10-12",
+      "note": "Currently linked sample. Flood and off-premises utility exclusions and definitions; issued endorsements can change the actual contract."
+    },
+    {
+      "id": "flood-coverage",
+      "label": "NFIP non-residential limits and excluded losses",
+      "href": "https://agents.floodsmart.gov/topics/selling-flood-insurance/coverage",
+      "publisher": "FEMA / National Flood Insurance Program",
+      "date": "Undated current program guidance",
+      "lastVerified": "2026-10-12",
+      "note": "Up to $500,000 non-residential building and $500,000 contents; business interruption/loss of use excluded. No private flood terms inferred."
+    },
+    {
+      "id": "form-catalogue",
+      "label": "TWIA forms, commercial endorsements and sample policies",
+      "href": "https://www.twia.org/forms-sample-policies-endorsements-certificates/",
+      "publisher": "Texas Windstorm Insurance Association",
+      "date": "Current catalogue reviewed 2026-10-12",
+      "lastVerified": "2026-10-12",
+      "note": "Lists TWIA-17, commercial replacement cost and replacement cost excluding roof coverings; listing does not prove attachment to a policy."
+    },
+    {
+      "id": "business-income",
+      "label": "Business interruption and other business insurance",
+      "href": "https://www.tdi.texas.gov/general/business-insurance.html",
+      "publisher": "Texas Department of Insurance",
+      "date": "Updated 2026-06-25",
+      "lastVerified": "2026-10-12",
+      "note": "Physical-loss triggers, contingent interruption and conditional extensions; no specific event or claim outcome determined."
+    },
+    {
+      "id": "income-endorsement",
+      "label": "TWIA-17 Business Income and Extra Expense endorsement",
+      "href": "https://www.twia.org/wp-content/uploads/Business_Income_and_Extra_Expense_Form_2011.11.pdf",
+      "publisher": "Texas Windstorm Insurance Association / Texas Department of Insurance",
+      "date": "Effective 2011-11-27; currently linked",
+      "lastVerified": "2026-10-13",
+      "note": "Scheduled daily/total limits, 168-hour time deductible, $10,000 extra-expense maximum and income definition. A form-specific example, not universal Texas coverage."
+    },
+    {
+      "id": "surplus-lines",
+      "label": "Surplus lines insurance guide",
+      "href": "https://www.tdi.texas.gov/pubs/consumer/cb015.html",
+      "publisher": "Texas Department of Insurance",
+      "date": "Updated 2025-04-25",
+      "lastVerified": "2026-10-12",
+      "note": "Eligible insurers differ from Texas-licensed carriers; agents need licensing; no guaranty-association membership. Specific placement unverified."
+    },
+    {
+      "id": "certificates",
+      "label": "Certificates of insurance: policy and endorsement limits",
+      "href": "https://www.tdi.texas.gov/certificates/faq.html",
+      "publisher": "Texas Department of Insurance",
+      "date": "Updated 2022-10-31",
+      "lastVerified": "2026-10-12",
+      "note": "Certificate cannot expand coverage; notice rights depend on policy, endorsement or law. Guidance has specified statutory scope and exceptions."
+    }
+  ],
+  "faqs": [
+    {
+      "question": "Does commercial windstorm insurance also cover flood damage?",
+      "answer": "Do not assume it does. TWIA provides wind and hail coverage and its commercial form excludes specified flood and surge causes. Assess the separate flood contract and limits. [TWIA scope](#source-wind-eligibility); [commercial form](#source-commercial-form)."
+    },
+    {
+      "question": "Does NFIP commercial flood insurance pay business-interruption losses?",
+      "answer": "NFIP guidance excludes business interruption and loss of use. It separately publishes up to $500,000 building and $500,000 contents limits for non-residential coverage. Recovery income needs a separate review. [NFIP coverage](#source-flood-coverage)."
+    },
+    {
+      "question": "Does TWIA’s zero rate-change filing mean my business premium cannot increase?",
+      "answer": "No. The filing describes TWIA’s rate action, not the business’s selected insured values, terms or total renewal charge. Obtain the actual quote and reconcile its inputs. [2026 filing](#source-rate-register)."
+    },
+    {
+      "question": "Is a certificate enough to prove the insurance a lease requires?",
+      "answer": "A certificate cannot extend the policy. Inspect the applicable forms and issued endorsements for the insured interests and rights the agreement requires. [TDI certificate guidance](#source-certificates)."
+    }
+  ],
+  "image": "/images/social/texas-commercial-property-insurance-diligence.png",
+  "resources": [
+    {
+      "label": "Texas business source and decision ledger",
+      "href": "/research/texas-research-library-2026-10-13.json",
+      "description": "Primary evidence, declared assumptions and update triggers across the Texas business and autonomy library.",
+      "format": "JSON"
+    }
+  ]
+}

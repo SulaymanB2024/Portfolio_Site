@@ -1,0 +1,295 @@
+{
+  "slug": "texas-cross-border-logistics-business-planning",
+  "path": "/research/texas/texas-cross-border-logistics-business-planning",
+  "title": "A Texas–Mexico Supply Route Should Be Priced Through Receipt",
+  "displayTitle": "Texas–Mexico Logistics: Price the Whole Route",
+  "seoTitle": "Texas–Mexico Logistics 2026: Border Routes, USMCA and Costs",
+  "category": "TEXAS BUSINESS",
+  "subtitle": "Freight growth, border counts and bridge schedules answer different questions. A supplier decision needs the full delivery and landed-cost record.",
+  "seoDescription": "Texas–Mexico logistics research using July 2026 BTS freight and crossing data, Laredo commercial schedules, USMCA documentation and a declared routing-cost model.",
+  "date": "2026-10-12",
+  "dateModified": "2026-10-13",
+  "author": "Sulayman Bowles",
+  "kind": "research",
+  "readTime": "9 MIN",
+  "openingPresentation": "integrated",
+  "evidenceBoundary": "Primary sources reviewed October 12, 2026. Freight and crossing examples describe July 2026; Laredo traffic-share context describes 2025. Published bridge information is not a guarantee of day-of-dispatch inspection availability. The route costs and delivery failures are hypothetical. No product-specific tariff rate, carrier quote or measured door-to-door service level is asserted. Targeted October 13 revision: a route service target, inventory-capital boundary and variability sensitivity. Original source-check dates remain attached to the individual references.",
+  "content": [
+    "Price the shipment at the Texas receiving dock. The supplier’s invoice and linehaul quote do not capture the cost of inventory in transit, missed receiving windows or customs documentation. A useful sourcing comparison follows the goods through those handoffs and assigns the cost when one fails.",
+    "July 2026 illustrates the difference between scale and service. BTS reported $94.8 billion of U.S.–Mexico freight value, up 27.5% over July 2025. A separate crossing release reported 650,466 trucks entering the United States from Mexico, essentially unchanged over the year. Both observations can be true because they measure different things. [Freight release](#source-freight); [crossing release](#source-crossings).",
+    "The operating decision is to qualify a route, a customs process and a receiving plan together. Public evidence can identify corridors and expose assumptions; the commitment needs shipment-level records and terms that tell the business who owns each handoff."
+  ],
+  "sections": [
+    {
+      "id": "value-and-movements",
+      "title": "Read the denominator before using the headline",
+      "paragraphs": [
+        "The $94.8 billion freight measure covers imports and exports in both directions and all modes, in current dollars. The same July release reports $74.6 billion moved by truck between the United States and Mexico, also in both directions. A higher dollar total does not by itself establish more physical cargo, greater lane utilization, or a deterioration in transit reliability. [July freight units and modes](#source-freight).",
+        "The 650,466 truck figure counts inbound crossings across the entire U.S.–Mexico land border. It is not Texas-only, is not an outbound measure, and is not a count of unique vehicles or customer shipments. A truck can cross repeatedly. BTS distinguishes arriving trucks from loaded and unloaded truck-container counts. [Crossing scope](#source-crossings); [definitions](#source-crossing-method).",
+        "Dividing the all-mode, two-direction dollar value by the one-direction truck count would not produce a defensible cargo value per truck. The populations and modes do not match. For a capacity decision, retrieve comparable port, mode, direction and period cuts, then add actual operating evidence rather than using the national total as a shortcut."
+      ],
+      "table": {
+        "caption": "Three July observations, with different meanings",
+        "columns": [
+          "Observation",
+          "Value",
+          "Scope",
+          "What it cannot establish"
+        ],
+        "rows": [
+          [
+            "U.S.–Mexico freight value",
+            "$94.8B",
+            "July 2026; both directions; all modes",
+            "Shipment counts or transit reliability"
+          ],
+          [
+            "Truck freight value",
+            "$74.6B",
+            "July 2026; both directions; current USD",
+            "Truck entries or payload utilization"
+          ],
+          [
+            "Trucks entering from Mexico",
+            "650,466",
+            "July 2026; inbound; entire southern land border",
+            "Texas-only traffic or outbound volume"
+          ]
+        ],
+        "note": "BTS releases dated September 23 and September 14, 2026. Monetary growth is nominal; the crossing measure is a count. No ratio is calculated between unmatched populations."
+      }
+    },
+    {
+      "id": "texas-port-selection",
+      "title": "A port is not a single bridge or a complete route",
+      "paragraphs": [
+        "BTS identifies Laredo and El Paso among the principal truck gateways with Mexico. Its 2025 annual crossing release reports Laredo handled 38.8% of inbound trucks from Mexico. That establishes the port’s importance in a historical annual dataset. It does not establish the capacity, delay or commercial availability of one bridge today. [Gateway context](#source-freight); [2025 inbound share](#source-annual-crossings).",
+        "Federal crossing data use customs-port definitions. BTS explains that a port can contain several infrastructure facilities and its series does not separately describe each bridge. Its trade FAQ also warns that state trade totals need not equal the sum of ports located in that state: the customs geography and the origin or destination of the goods answer different questions. [Port definitions](#source-crossing-method); [state and port geography](#source-trade-method).",
+        "For a purchase order, specify the Mexican pickup point, crossing facility, direction, equipment, customs parties, any transload, U.S. linehaul and final dock. Compare the complete itinerary with the supplier’s production calendar. Laredo may be appropriate for one origin and destination; another gateway may be appropriate for a different supplier network. Aggregate port rank cannot settle that routing decision.",
+        "An alternate crossing also requires an alternate operating arrangement. Confirm whether the carrier, broker, documentation, authorized commodity handling and receiving appointment work on that path. A backup shown on a map is not usable redundancy until the required parties can execute the movement."
+      ]
+    },
+    {
+      "id": "schedules",
+      "title": "Separate commercial traffic hours from office hours",
+      "paragraphs": [
+        "The City of Laredo’s bridge directory lists Colombia Solidarity commercial traffic hours as 8 a.m.–10:30 p.m. Monday–Friday and 8 a.m.–4 p.m. Saturday, with no commercial traffic Sunday. The same directory separately labels office and noncommercial hours. Those categories should stay separate in a dispatch plan. [City bridge information](#source-bridges).",
+        "For World Trade Bridge, the directory identifies commercial-only use but labels the listed hours as office hours. They cannot be silently converted into a verified CBP inspection schedule. Confirm the actual crossing and customs window for the day, direction, commodity and carrier, together with the broker’s availability and the destination’s receiving cutoff. This review did not establish a complete day-specific inspection schedule. [World Trade listing](#source-bridges).",
+        "A truck reaching the border before a published closing time may still miss the downstream plan if documents need correction or the receiver cannot accept the load. Retain timestamps from pickup, border arrival, customs release, any transfer and usable receipt. They identify where a shipment lost time and which counterparty can change the process.",
+        "The city also lists a toll increase effective January 1, 2027. That is a future effective-date flag for quotes spanning the year boundary, not a rate to insert into an October 2026 invoice. Obtain the applicable current and future fee schedule for the actual equipment and crossing. [City ordinance listing](#source-bridges)."
+      ]
+    },
+    {
+      "id": "customs-costs",
+      "title": "Price the goods and validate the origin claim",
+      "paragraphs": [
+        "Mexican shipment origin is not itself proof that the goods qualify for USMCA preferential treatment. CBP’s February 27, 2026 guidance requires a certification of origin and permits any format containing the nine minimum data elements in Annex 5-A. The importer needs the underlying classification and origin basis, rather than a supplier’s unsupported statement that the shipment is tariff-free. [CBP USMCA guidance](#source-origin).",
+        "Keep the duty analysis specific to the product and date. Identify the tariff classification, country-of-origin determination, applicable preference claim and any additional measures that affect the goods. This article does not provide a universal Mexico tariff rate. A changed route cannot resolve an incorrect classification or an unsupported origin claim.",
+        "CBP separately requires a precise commodity description in advance manifest information. Its February 13 guidance says descriptions should allow CBP to identify the commodity’s characteristics and avoid irrelevant packaging or carrier-disclaimer language in that field. The shipment record, invoice and product description should agree. [Manifest guidance](#source-manifest).",
+        "Where a prospective transaction has a consequential classification or origin uncertainty, CBP provides a binding advance-ruling process. Discuss that route with the customs professional responsible for the import before turning an assumption into a supplier commitment. A public help-page answer does not determine the treatment of every item in a bill of materials. [CBP ruling guidance](#source-rulings)."
+      ]
+    },
+    {
+      "id": "route-economics",
+      "title": "Work a route premium against inventory and failure cost",
+      "paragraphs": [
+        "Consider a hypothetical buyer with 120 shipments per year and steady consumption of goods costing $20,000 per calendar day. Route A costs $3,000 per shipment and has an assumed five-day pipeline. Route B costs $3,200 per shipment and has an assumed three-day pipeline. Assume annual inventory carrying cost of 20%. These are scenario inputs, not observed carrier prices or border transit times.",
+        "Annual freight is $360,000 for A and $384,000 for B. At steady consumption, average pipeline inventory is $100,000 and $60,000 respectively. Applying the assumed annual carrying rate gives $20,000 and $12,000. The extra freight costs $24,000 a year, while the smaller pipeline saves $8,000 a year under the stated assumptions.",
+        "Now assume six missed receiving windows on A and two on B annually, with $5,000 of incremental cost per incident. The modeled failure costs are $30,000 and $10,000. The comparison totals $410,000 for A and $406,000 for B: B is $4,000 lower in this particular scenario. Nothing in the BTS crossing count supplies those missed-window assumptions.",
+        "Before incident savings, B costs $16,000 more annually: $24,000 extra freight less $8,000 carrying savings. At $5,000 per missed-window incident, it must avoid more than 3.2 incidents a year to win; four fewer leave only $4,000. Define comparable events and avoid assigning the same production stoppage to every delayed truck. One additional B incident reverses the modeled choice.",
+        "Both routes assume identical goods and unchanged duties and common handling costs, excluded from this incremental table. Those costs still belong in the full landed-cost model. Inventory carrying cost is applied to the average pipeline once per year; it is not charged again for each shipment. The $40,000 pipeline-inventory release is a one-time capital difference, not the $8,000 annual carrying saving. If B instead needs $20,000 more average safety stock because of worse variability, its 20% carrying cost consumes the whole $4,000 advantage. That extra stock is a sensitivity, not an observed feature of either route."
+      ],
+      "table": {
+        "caption": "Declared annual route comparison, USD unless noted",
+        "columns": [
+          "Input or modeled cost",
+          "Route A",
+          "Route B"
+        ],
+        "rows": [
+          [
+            "Shipments per year",
+            "120",
+            "120"
+          ],
+          [
+            "Freight per shipment",
+            "$3,000",
+            "$3,200"
+          ],
+          [
+            "Annual freight",
+            "$360,000",
+            "$384,000"
+          ],
+          [
+            "Assumed pipeline, calendar days",
+            "5",
+            "3"
+          ],
+          [
+            "Average pipeline inventory",
+            "$100,000",
+            "$60,000"
+          ],
+          [
+            "Annual carrying cost, 20%",
+            "$20,000",
+            "$12,000"
+          ],
+          [
+            "Assumed missed windows per year",
+            "6",
+            "2"
+          ],
+          [
+            "Incident cost, $5,000 each",
+            "$30,000",
+            "$10,000"
+          ],
+          [
+            "Annual compared cost",
+            "$410,000",
+            "$406,000"
+          ]
+        ],
+        "note": "Hypothetical steady-state comparison. No duties or common costs are assumed to be zero. Actual shipment timing, losses and carrying cost can differ. The $4,000 preference is sensitive to one additional incident."
+      }
+    },
+    {
+      "id": "contract-and-release",
+      "title": "Make the receiving record part of procurement",
+      "paragraphs": [
+        "The procurement team should approve the shipment specification and its evidence requirements together. State who maintains the origin support, files or coordinates the documentation, books the equipment, authorizes a route change, and resolves a rejected or damaged receipt. Align the commercial terms with that allocation.",
+        "Keep production delay separate from transport delay. A shipment released late by the supplier can consume the buffer before the carrier begins its work. A transport quote might cover a route while leaving a transfer or inspection cost outside its scope. Comparable records help the buyer assign the remedy to the actual cause.",
+        "Qualify a backup using the same product and documentary standards. An emergency route can add value when a missed receipt stops production, but paying for flexibility should buy an executable service: contact, equipment, broker coverage and receiving permission. The commercial decision is how much working capital and disruption exposure the buyer will accept for the offered price."
+      ],
+      "bullets": [
+        "Identify the exact commodity, origin basis, importer and customs classification owner.",
+        "Fix pickup, crossing, direction, transfers and destination receipt in the itinerary.",
+        "Verify commercial, inspection, broker and receiving schedules for the shipment date.",
+        "Separate freight, duties, handling, detention, carrying cost and incident losses.",
+        "Use shipment-level timestamps and comparable service cohorts to test the route.",
+        "Approve a workable alternate and define who can activate it."
+      ]
+    },
+    {
+      "id": "updates",
+      "title": "Update the same route model when a controlling input changes",
+      "paragraphs": [
+        "Review a new BTS observation or correction for the same geography, mode and direction. Recheck the operating plan after a bridge notice, commercial-hours change, fee effective date, carrier revision or material difference in observed receipt performance. Recheck the customs basis when the goods, production process or applicable rules change.",
+        "Date the change and retain the prior quote and assumption. That lets a finance reviewer distinguish a rate increase, a different route, a revised inventory policy and a genuine service deterioration. The goal is a supplier commitment whose total cost and usable delivery window remain explainable."
+      ]
+    }
+  ],
+  "faqs": [
+    {
+      "question": "Does higher U.S.–Mexico freight value mean more trucks are crossing?",
+      "answer": "Not necessarily. July 2026 freight value covers both directions and all modes in current dollars. The separate 650,466 truck measure counts inbound entries only. Their different populations do not establish utilization, congestion or dollars per truck. [BTS freight](#source-freight); [BTS crossings](#source-crossings)."
+    },
+    {
+      "question": "Does a Laredo port total describe World Trade Bridge capacity?",
+      "answer": "BTS customs-port data can include multiple facilities and do not separately provide every bridge’s traffic. Use bridge-specific operating evidence for a dispatch or capacity decision. [BTS port definitions](#source-crossing-method)."
+    },
+    {
+      "question": "Can commercial goods cross Colombia Solidarity on Sunday?",
+      "answer": "The City of Laredo directory reviewed here lists no Sunday commercial traffic, while publishing different noncommercial hours. Confirm shipment-date operations and customs availability before dispatch. [City commercial-hours listing](#source-bridges)."
+    },
+    {
+      "question": "Does purchasing from Mexico automatically make the goods USMCA eligible?",
+      "answer": "The preferential claim needs a supported origin basis. CBP requires certification containing nine minimum data elements; a shipment address alone does not establish product eligibility or the applicable tariff treatment. [CBP certification guidance](#source-origin)."
+    }
+  ],
+  "sources": [
+    {
+      "id": "freight",
+      "label": "North American transborder freight, July 2026",
+      "href": "https://www.bts.gov/newsroom/north-american-transborder-freight-valued-1576-billion-july-2026-188-july-2025",
+      "publisher": "Bureau of Transportation Statistics",
+      "date": "2026-09-23",
+      "lastVerified": "2026-10-12",
+      "note": "July 2026 imports and exports; current USD. US–Mexico all-mode $94.8B and truck $74.6B are both-direction values. Statistics can be revised; release does not measure delivery performance."
+    },
+    {
+      "id": "crossings",
+      "label": "Mid-Year 2026 Border Crossing Data Release",
+      "href": "https://www.bts.gov/data-spotlight/mid-year-2026-border-crossing-data-release",
+      "publisher": "Bureau of Transportation Statistics",
+      "date": "2026-09-14",
+      "lastVerified": "2026-10-12",
+      "note": "July 2026 inbound entries: 650,466 trucks from Mexico. Entire southern land border, not Texas-only; no comparable outbound federal series."
+    },
+    {
+      "id": "annual-crossings",
+      "label": "Border Crossing Data Annual Release: 2025",
+      "href": "https://www.bts.gov/newsroom/border-crossing-data-annual-release-2025",
+      "publisher": "Bureau of Transportation Statistics",
+      "date": "2026-02-20",
+      "lastVerified": "2026-10-12",
+      "note": "Historical 2025 port share: Laredo 38.8% of inbound trucks from Mexico. Not a current-month share or a bridge-capacity figure."
+    },
+    {
+      "id": "crossing-method",
+      "label": "Border Crossing/Entry Data FAQ",
+      "href": "https://www.bts.gov/browse-statistical-products-and-data/statistical-products/border-crossingentry-data-faq",
+      "publisher": "Bureau of Transportation Statistics",
+      "date": "2017-05-25; current documentation",
+      "lastVerified": "2026-10-12",
+      "note": "Arriving-truck and container definitions; Schedule D customs-port aggregation. Historical processing-lag prose is not treated as the current 2026 release timetable."
+    },
+    {
+      "id": "trade-method",
+      "label": "North American TransBorder Freight Data FAQs",
+      "href": "https://www.bts.gov/statistical-products/transborder-freight-data/north-american-transborder-freight-data-faqs",
+      "publisher": "Bureau of Transportation Statistics",
+      "date": "2018-11-28; current documentation",
+      "lastVerified": "2026-10-12",
+      "note": "Q19 ports; Q24–26 mode/intermodal scope; Q28 value; Q30 state-versus-port totals. No raw cross-dataset ratio is constructed."
+    },
+    {
+      "id": "bridges",
+      "label": "Laredo International Bridge System official directory",
+      "href": "https://www.cityoflaredo.com/departments/bridge-system",
+      "publisher": "City of Laredo",
+      "date": "Undated current directory",
+      "lastVerified": "2026-10-12",
+      "note": "Colombia commercial traffic hours are explicitly labeled; World Trade entries label office hours. Lists ordinance 2026-O-114 toll increase effective January 1, 2027. Day-specific inspection availability and fee amounts not verified."
+    },
+    {
+      "id": "origin",
+      "label": "USMCA: official certification-of-origin guidance",
+      "href": "https://www.help.cbp.gov/s/article/Article-1736",
+      "publisher": "U.S. Customs and Border Protection",
+      "date": "2026-02-27",
+      "lastVerified": "2026-10-12",
+      "note": "Nine minimum certification elements and flexible format. Primary indexed guidance was read; direct page rendering can return a CSS/loading error. Does not determine a particular product’s duty rate."
+    },
+    {
+      "id": "manifest",
+      "label": "CBP requires a precise description of cargo",
+      "href": "https://www.help.cbp.gov/s/article/Article-1898",
+      "publisher": "U.S. Customs and Border Protection",
+      "date": "2026-02-13",
+      "lastVerified": "2026-10-12",
+      "note": "Advance electronic-manifest commodity description; scope and acceptable detail. Does not establish complete filing requirements for all products."
+    },
+    {
+      "id": "rulings",
+      "label": "USMCA binding advance rulings",
+      "href": "https://www.help.cbp.gov/s/article/Article-1866",
+      "publisher": "U.S. Customs and Border Protection",
+      "date": "2026-02-27",
+      "lastVerified": "2026-10-12",
+      "note": "Official prospective ruling pathway and CROSS references; no application or communication initiated."
+    }
+  ],
+  "image": "/images/social/texas-cross-border-logistics-business-planning.png",
+  "resources": [
+    {
+      "label": "Texas business source and decision ledger",
+      "href": "/research/texas-research-library-2026-10-13.json",
+      "description": "Primary evidence, declared assumptions and update triggers across the Texas business and autonomy library.",
+      "format": "JSON"
+    }
+  ]
+}

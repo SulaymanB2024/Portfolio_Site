@@ -59,12 +59,12 @@ test('profile pages and articles share one author and website identity', () => {
 
 test('topic search titles describe the subject while schema preserves the visible collection heading', () => {
   const topic = searchMetadata('topics/financial-systems')
-  assert.equal(topic.title, 'Texas Toll-Road & Airline Loyalty Research — Sulayman Bowles')
+  assert.equal(topic.title, 'Company Valuation, Cash Flow & Ownership Research — Sulayman Bowles')
   const page = topic.schema!['@graph'].find(node => node['@id'] === `${topic.canonical}#webpage`)!
   assert.equal(page['@type'], 'CollectionPage')
   assert.equal(page.name, 'Who owns the cash flow? — Sulayman Bowles')
   assert.equal(page.datePublished, undefined)
-  assert.equal(page.dateModified, '2026-10-06')
+  assert.equal(page.dateModified, '2026-10-14')
   assert.equal(topic.article, undefined)
 })
 

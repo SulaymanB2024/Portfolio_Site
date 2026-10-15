@@ -1,0 +1,7 @@
+{
+  "model-results.json": true,
+  "pitches/model-results.json": true,
+  "pitches/ramp/model-results.json": true,
+  "pitches/flock-safety/model-results.json": true,
+  "pitches/elevenlabs/model-results.json": true
+}

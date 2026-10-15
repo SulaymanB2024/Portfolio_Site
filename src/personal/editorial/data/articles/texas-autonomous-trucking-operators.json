@@ -1,0 +1,481 @@
+{
+  "slug": "texas-autonomous-trucking-operators",
+  "path": "/research/texas/texas-autonomous-trucking-operators",
+  "title": "Texas Autonomous Trucking: Match the Operator to the Work",
+  "displayTitle": "Texas Freight: What Is Operating?",
+  "seoTitle": "Texas Autonomous Trucking Operators and Commercial Service 2026",
+  "category": "TEXAS BUSINESS",
+  "subtitle": "A buyer’s comparison of driverless service, supervised customer freight and future launches across Texas trucking operations.",
+  "seoDescription": "Compare Aurora, Kodiak, Torc, Waabi, Gatik, Bot Auto, PlusAI and Einride in Texas: current operating evidence, service boundaries and freight buyer questions.",
+  "date": "2026-10-13",
+  "dateModified": "2026-10-13",
+  "author": "Sulayman Bowles",
+  "kind": "research",
+  "readTime": "13 MIN",
+  "openingPresentation": "integrated",
+  "evidenceBoundary": "Operator stages checked October 12, 2026; FMCSA’s October 9 final exemption reviewed October 13. Issuer operating measures are attributed and are not independent safety, profitability or available-capacity findings. No carrier-specific exemption participation, current quote or complete Texas fleet census verified. Current official Texas carrier incorporation and exceptions were inspected October 13; no separate intrastate beacon relief or carrier-specific state instrument was established.",
+  "content": [
+    "Start an autonomous-trucking purchase with the freight job. A retailer replenishing Dallas–Fort Worth stores, a sand supplier serving Permian well sites and a carrier covering I-45 need different equipment, endpoints and support. Match the operator to that job, then establish the operating role and capacity the buyer can actually purchase.",
+    "At the October 12, 2026 cutoff, Aurora reports commercial driverless freight on public roads; Gatik identifies operating driverless regional networks; and Bot Auto has documented a paid Houston–Hutchins load with nobody in the cab. Other important programs retain onboard personnel or describe a future driver-out launch. The task is to match each statement to its route and operating role before assigning capacity. [Aurora October update](#source-aurora-october); [Gatik regional operations](#source-gatik-pepsico); [Bot Auto commercial load](#source-bot-commercial).",
+    "Screen by the freight job. The reviewed Gatik configuration addresses DFW regional replenishment; Atlas/Kodiak evidence addresses Permian industrial movement; Aurora and the documented Bot Auto load establish distinct public-road linehaul cases to investigate. Waabi reports customer freight with an observer in the driver’s seat; PlusAI’s disclosed trial uses a human safety driver. These are evidence-based screening categories, not available quotes or endorsements."
+  ],
+  "sections": [
+    {
+      "id": "operating-comparison",
+      "title": "Read the operating stage before the company name",
+      "paragraphs": [
+        "The table separates eight participants with concrete Texas evidence. It describes the reviewed program, not every vehicle an operator owns. Where a statement remains a target, keep that condition in the capacity plan. An announced commercial relationship is useful discovery evidence; it is not a reservation for your next outbound load.",
+        "The dates matter because a new platform can change the onboard role while other platforms remain in a different stage. Aurora’s second-generation explanation and Kodiak’s new Laredo customer announcement show why a generic statement about a company being driverless can be too broad. [Aurora platform explanation](#source-aurora-faq); [Kodiak Laredo operation](#source-kodiak-charger)."
+      ],
+      "table": {
+        "caption": "Selected Texas freight programs: evidence available October 12, 2026",
+        "columns": [
+          "Program",
+          "Reviewed operation",
+          "Procurement boundary"
+        ],
+        "rows": [
+          [
+            "Aurora",
+            "Commercial public-road driverless freight; second-generation International LT launch July 22; some trips may carry rear-seat support staff",
+            "Confirm platform, lane, endpoint and reserved capacity; support staff are not driving supervision"
+          ],
+          [
+            "Kodiak / Atlas",
+            "Customer-owned driverless Permian industrial deliveries; 35 trucks reported at June 30",
+            "Industrial domain differs from I-45 highway launch and proposed public-road expansion"
+          ],
+          [
+            "Kodiak highway / Charger",
+            "I-45 driver-out launch targeted by end 2026; October 8 Laredo service has a safety driver",
+            "Current highway freight and driverless highway availability are separate"
+          ],
+          [
+            "Gatik",
+            "Driverless DFW/regional retail networks; June 8 PepsiCo disclosure confirms existing Texas operation",
+            "Match box-truck capacity, stops, goods and store receiving requirements"
+          ],
+          [
+            "Bot Auto",
+            "April 30 issuer report of paid 230-mile Houston–Hutchins load without onboard driver or observer",
+            "Confirm current accepted endpoints, recurring slots, recovery and contracted terms"
+          ],
+          [
+            "Waabi / Volvo",
+            "October 5 Warp freight directly to third-party Dallas–Houston facilities; observer in driver’s seat",
+            "Customer freight is operating; the reviewed release does not establish driver-out operation"
+          ],
+          [
+            "PlusAI / International / Ryder",
+            "March 31 supervised Laredo–Temple live-freight pilot; daily 600-mile route",
+            "92% autonomous route coverage is supervised; September 3 issuer roadmap targets factory-built commercial launch in 2027"
+          ],
+          [
+            "Torc / Daimler",
+            "DFW testing and fleet hub; closed-track driver-out validation; 2027 market-entry roadmap",
+            "Testing and production intent do not establish an available driver-out freight slot"
+          ],
+          [
+            "Einride",
+            "March SH 130 testbed MoU and Austin R&D cabless demonstration",
+            "Company-reported approval and testbed are distinct from a contracted commercial Texas lane"
+          ]
+        ],
+        "note": "Issuer disclosures cited in the following sections control each row. No price, fleet-wide human-role assumption, open access or comparative safety conclusion is inferred. Kodiak has separate industrial and highway rows."
+      }
+    },
+    {
+      "id": "aurora",
+      "title": "Aurora: current driverless operation needs a platform and endpoint",
+      "paragraphs": [
+        "Aurora’s July 22 explanation says its second-generation International LT trucks operate with an empty driver’s seat. Some trips may carry roadside-assistance staff in a rear seat; Aurora expressly says that person neither drives nor supervises the driving. Record the role accurately. An empty driver seat establishes something different from a guarantee that every trip has an empty cab. [July launch explanation](#source-aurora-faq).",
+        "Its July 29 shareholder letter describes deployed driverless operations between Detmar’s Midland facility and Capital Sand’s Monahans mining site along I-20. The letter separately labels fueling and weigh-station work as supervised testing. That distinction matters when a proposed lane depends on those activities. Ask for the exact released configuration instead of extending one successful capability to every stop. [Customer endpoint and support-stage evidence, pages 7–8](#source-aurora-q2).",
+        "Aurora’s October 8 accumulated driverless-mile measure provides dated operating experience to investigate, not trucks available to a new customer. Its empty-seat configuration also needs a lawful way to meet roadside duties. The latest federal warning-device decision supplies a concrete equipment and route check below. [October disclosure](#source-aurora-october)."
+      ]
+    },
+    {
+      "id": "kodiak",
+      "title": "Kodiak: keep the industrial and highway files separate",
+      "paragraphs": [
+        "Kodiak’s September 25 release reports 35 Atlas-owned driverless trucks and more than 40,000 cumulative paid driverless hours as of June 30. Atlas’s July 31 announcement adds a second load-out point on its Dune Express system, while targeting public-road operation for early 2027 subject to operational and regulatory milestones. Those industrial deliveries should not populate the spreadsheet cell for current driverless I-45 capacity. [Industrial operating measures](#source-kodiak-highway); [Atlas expansion boundaries](#source-kodiak-atlas).",
+        "The same September release describes daily Dallas–Houston preparation deliveries with a safety observer and closed-course driverless validation. An observer not touching the wheel during a run is not evidence that the public-road service has removed that observer. Unsupervised highway launch remains targeted for the end of 2026. [Highway preparation](#source-kodiak-highway).",
+        "The October 8 Charger announcement is even more explicit: Dallas–Laredo customer loads have a safety driver behind the wheel. Its 96% Autonomy Readiness Measure at September-end describes materially completed safety-case claims and evidence. It does not mean 96% route availability, 96% autonomous miles or a 96% chance of a completed launch. [Current Charger operation and metric definition](#source-kodiak-charger)."
+      ]
+    },
+    {
+      "id": "regional-and-linehaul",
+      "title": "Gatik and Bot Auto answer different freight questions",
+      "paragraphs": [
+        "Gatik’s January disclosure identifies driverless Dallas–Fort Worth operations using 26- and 30-foot trucks between distribution facilities and stores. The June PepsiCo announcement identifies existing driverless operations across Texas, Arizona and Arkansas. This is a regional replenishment proposition: stop frequency, vehicle capacity, temperature needs and receiving access can matter more than a long-haul terminal map. [Vehicle and regional scope](#source-gatik-driverless); [PepsiCo operating statement](#source-gatik-pepsico).",
+        "Gatik’s August update reports recurring network activity; its aggregate on-time figure cannot become a Texas store’s service guarantee. Request the accepted-order denominator, period, cancellations and receiving-window record for the proposed route. Keep contracted revenue separate from recognized revenue or cash. [Network update and metric scope](#source-gatik-august).",
+        "Bot Auto’s April 30 company release documents a 230-mile commercial load from northeast Houston to Hutchins, booked through Ryan Transportation, without an onboard safety driver, observer or dependence on low-latency remote human feedback. That is a concrete completed shipment. The issuer’s cost and profitability language does not supply an independently reviewed cost ledger or a shipper tariff. Its current site provides a freight inquiry path; current recurring capacity still needs a proposal. [Dated commercial load](#source-bot-commercial); [Current company overview](#source-bot-current)."
+      ]
+    },
+    {
+      "id": "supervised-customer-freight",
+      "title": "Waabi and PlusAI: live freight with an onboard boundary",
+      "paragraphs": [
+        "Waabi and Volvo’s October 5 Warp launch brings the Volvo VNL Autonomous into Dallas–Houston customer operations, including direct deliveries to third-party facilities in an LTL network. The release says current hauls have an observer in the driver’s seat. Preserve that exact wording; it neither proves the observer never intervenes nor establishes driverless service. Direct facility access and the onboard role are separate buying attributes. [Warp release](#source-waabi-warp).",
+        "International and Ryder’s March 31 PlusAI trial places factory-integrated SuperDrive on a live Laredo–Temple lane. The release reports 92% autonomous route coverage supervised by a human safety driver and inspection below 30 minutes in the pilot. A coverage percentage cannot establish driver removal; an inspection KPI cannot set a universal allowance for a different truck, trailer or facility. [Pilot facts and qualifications](#source-international-ryder). PlusAI’s September 3 release continues to target a 2027 commercial launch of factory-built autonomous trucks; keep that target separate from the present trial. [Current commercialization roadmap](#source-plus-roadmap).",
+        "For a buyer evaluating these programs, ask what is being purchased today and what would change at driver-out transition: contract price, liability allocation, onboarding work, route restrictions, staffing and fallback service. Keep today’s freight option available for evaluation while excluding forecast labor removal from the current savings case."
+      ]
+    },
+    {
+      "id": "development-and-testbeds",
+      "title": "Torc and Einride: preparation is useful evidence with limits",
+      "paragraphs": [
+        "Torc’s February 2026 update describes established Dallas–Fort Worth testing and a fleet operations facility. Its production-platform article separates driver-out validation on a closed multi-lane track from Fort Worth operations and a 2027 market-entry roadmap. Closed-track validation is important technical work, but it does not demonstrate an unsupervised customer run on the buyer’s highway lane. [Current-year testing description](#source-torc-2026); [Platform and roadmap](#source-torc-roadmap).",
+        "Einride’s March 17 memorandum with SH 130 Concession Company describes a validation testbed on Segments 5 and 6 and plans for frontage-road connectivity. The March 24 release reports NHTSA approval and an Austin cabless demonstration explicitly belonging to an R&D project. The reviewed releases do not provide a bookable Texas commercial lane or the underlying approval instrument. [Testbed memorandum](#source-einride-testbed); [Austin research demonstration](#source-einride-austin).",
+        "These programs may justify technical diligence, facility discussions or a future option. Tie any capacity commitment to named release conditions and a delivery date the counterparty will actually support. A press-event vehicle, a future manufacturing program and a service slot should remain different entries."
+      ]
+    },
+    {
+      "id": "roadside-warning-gate",
+      "title": "Check the roadside duty behind an empty driver seat",
+      "paragraphs": [
+        "FMCSA’s October 9 final exemption, effective October 7, 2026–October 7, 2031, permits specified cab-mounted warning beacons instead of conventional roadside warning devices. Aurora is covered; other Level 4 carriers must give prior written notice. This is a particular compliance alternative, not a blanket driverless authorization or evidence that another named operator uses it. [Final exemption](#source-beacon-exemption).",
+        "The terms confine operation to the specific vehicle’s validated domain, exclude passenger and defined hazardous-material work, and limit longer combinations to two 28-foot trailers. Beacon specifications include redundant power and activation within five minutes of a qualifying highway stop. That deadline is not a recovery-arrival promise. Ask for the proposed load, configuration and compliance route before treating the driver’s roadside task as removed. Classify the actual shipment: the federal grant’s interstate preemption does not itself establish Texas treatment of an intrastate-only operation. Two Texas endpoints alone do not settle that classification.",
+        "For genuinely intrastate-only service, federal permission alone is not a demonstrated Texas legal basis. Texas’s current incorporation rule references federal amendments through September 1, 2022, and its inspected exception list does not adopt this beacon relief. Require the applicable Texas basis or another compliant warning-device arrangement before removing the roadside task from the purchase specification. This bounded review does not rule out every other instrument or establish an individual DPS permit process. [Incorporation, §4.11](#source-texas-carrier-incorporation); [exceptions, §4.12](#source-texas-carrier-exceptions)."
+      ]
+    },
+    {
+      "id": "retailer-tender-example",
+      "title": "Run one replenishment job through the shortlist",
+      "paragraphs": [
+        "Take an illustrative retailer replenishing stores from a DFW distribution center. Write the actual tender first: commodities, temperature requirements, trailer and dock compatibility, load release, store windows and return movements. The reviewed Gatik regional operation is a reason to investigate that type of service. Buyer-specific endpoints, equipment, volume and commercial availability still need confirmation. [Regional program](#source-gatik-pepsico).",
+        "Send the same job description to each candidate. Ask it to mark accepted and rejected movements, the vehicle and human roles at every segment, and who performs inspection, gate access, unloading and recovery. Keep rejected loads in the plan; they require capacity from another carrier and can alter the economics of the accepted portion.",
+        "Build the tender file around three usable outputs: an accepted-lane schedule, a responsibility sheet and a quote on that scope. Compare candidates after those outputs are complete. The issuer’s reported operating stage helps choose whom to investigate; the completed purchasing file determines whether this retailer can rely on the proposed service."
+      ]
+    },
+    {
+      "id": "maturity-gates",
+      "title": "Use an evidence ladder without turning it into a safety ranking",
+      "paragraphs": [
+        "Texas DPS publishes first-responder interaction plans for these and additional organizations, including Stack, Fountainhead Logistics and International Transport Engineering. That is a useful discovery route for responder information. Posting a plan alone does not establish a permit, passenger access, a commercial truck lane or a complete Texas operator census. [DPS plan directory](#source-dps-plans).",
+        "The following ladder is a purchasing framework. Movement requires evidence of the particular work, rather than a larger generic autonomous-mile total. A service can be commercially relevant at several stages; the buyer should know which stage it is paying for."
+      ],
+      "table": {
+        "caption": "Operating claims and the evidence needed for a freight commitment",
+        "columns": [
+          "Evidence stage",
+          "What it establishes",
+          "Next purchasing evidence"
+        ],
+        "rows": [
+          [
+            "Responder plan or local office",
+            "An identified contact/document or local presence",
+            "Actual operating role, route and applicable authorization"
+          ],
+          [
+            "Driver-out closed-course validation",
+            "Capability demonstrated in the stated controlled test",
+            "Released public-road domain and supported freight work"
+          ],
+          [
+            "Supervised customer freight",
+            "Real shipment with the disclosed onboard role",
+            "Role at every segment, measured service and current price"
+          ],
+          [
+            "Dated driverless customer load",
+            "Driver-out delivery within a documented job/domain",
+            "Recurring service slots, accepted endpoints and recovery terms"
+          ],
+          [
+            "Recurring driverless program",
+            "Issuer reports a continuing defined operation",
+            "Buyer-specific capacity, price and performance denominator"
+          ],
+          [
+            "Future fleet or launch target",
+            "Management’s stated plan",
+            "Completed release milestones and enforceable availability"
+          ]
+        ],
+        "note": "This framework describes evidence strength for purchasing decisions. It does not measure collision risk or declare one operator safer than another."
+      }
+    },
+    {
+      "id": "performance-evidence",
+      "title": "Ask for comparable service evidence",
+      "paragraphs": [
+        "NHTSA warns that crash-reporting data are not normalized for vehicle miles, fleet exposure or operating domain and can include incomplete information and duplicates. Raw report counts cannot support a safety league table. Different goods, roads, weather and supervision also complicate comparisons between operator disclosures. [NHTSA data limitations](#source-nhtsa-method).",
+        "For service performance, define accepted loads, completed loads, cancellations, arrival-window rules and recovery events before comparing percentages. Ask whether on-time reporting excludes rejected loads or stops outside the supported domain. Measure from ready freight at origin to accepted delivery, so a fast highway run cannot hide a missed dock window or terminal wait.",
+        "Also identify the contracting carrier, technology provider, truck owner and responder. Driver-as-a-Service and Transportation-as-a-Service describe different allocations of work; the label alone cannot settle inspection, maintenance, cargo custody or exception costs. A buyer needs an accountable operating arrangement, not only an autonomous-driving capability."
+      ]
+    },
+    {
+      "id": "buyer-checklist",
+      "title": "A buyer file that can support the first lane",
+      "paragraphs": [
+        "Build one file for the actual proposed operation. These recommendations follow from the stage comparison; they are not claims that each operator requires identical terminals or commercial terms."
+      ],
+      "bullets": [
+        "Name the origin, destination, gates, docks, intermediate stops, equipment, commodity and delivery windows; ask which are accepted today.",
+        "Record the exact truck platform and every onboard or remote role, including who can control driving and who provides roadside support.",
+        "Separate supervised freight, driverless customer work, closed-course testing and conditional launch dates in the capacity plan.",
+        "Obtain a price and responsibility schedule covering loading, inspection, release, maintenance, fuel, recovery, custody and backup capacity.",
+        "Request recent lane-specific accepted-load and exception records with definitions, and confirm the applicable authority and insurance evidence.",
+        "Approve expansion against completed deliveries and resolved operational conditions rather than fleet forecasts or unmatched safety totals."
+      ]
+    },
+    {
+      "id": "update-triggers",
+      "title": "Update the comparison when the operating boundary changes",
+      "paragraphs": [
+        "Revisit Kodiak’s highway rows when a dated release confirms driver-out customer operation, and revisit Waabi, PlusAI and Torc when their disclosed onboard role or commercial stage changes. Revisit Einride when Texas evidence moves from demonstration/testbed to a specified customer operation. Retain the prior stage so a forecast becoming an observation remains visible.",
+        "For an existing lane, a new endpoint, platform, trailer, weather restriction or support arrangement can matter more than another national milestone. Reconfirm availability and contractual responsibility before increasing volume. The most useful Texas trucking update is the one that tells the reader which freight job has become usable, and what evidence still stands between that development and a purchase."
+      ]
+    }
+  ],
+  "faqs": [
+    {
+      "question": "Which autonomous truck operators have documented driverless freight in Texas?",
+      "answer": "The reviewed evidence identifies Aurora public-road driverless freight, Gatik regional operations including Texas, and Bot Auto’s dated Houston–Hutchins commercial load. Kodiak also has Atlas-owned Permian industrial driverless deliveries. These different domains do not establish open service for every shipper or an exhaustive census. [Aurora](#source-aurora-october); [Gatik](#source-gatik-pepsico); [Bot Auto](#source-bot-commercial); [Atlas](#source-kodiak-atlas)."
+    },
+    {
+      "question": "Is Kodiak’s Dallas–Houston or Dallas–Laredo service driverless?",
+      "answer": "At the October 12 cutoff, the September 25 release still targets unsupervised Dallas–Houston highway service by year-end. The October 8 Charger Dallas–Laredo release explicitly has a safety driver behind the wheel. Industrial Permian driverless operation is a separate program. [Highway launch preparation](#source-kodiak-highway); [Charger operation](#source-kodiak-charger)."
+    },
+    {
+      "question": "Are Waabi’s new Volvo trucks running without an onboard observer?",
+      "answer": "The October 5 Warp release describes current Dallas–Houston autonomous customer hauls with an observer in the driver’s seat. Direct delivery to third-party facilities does not remove that qualification. [Volvo–Waabi customer-operation release](#source-waabi-warp)."
+    },
+    {
+      "question": "Can autonomous miles or NHTSA crash counts identify the safest freight provider?",
+      "answer": "The reviewed disclosures and raw crash counts do not support that ranking. NHTSA says incident totals are not normalized for fleet, mileage or domain, and reporting visibility varies. Request a safety case and relevant operating evidence, with comparable definitions and exposure. [NHTSA methodology](#source-nhtsa-method)."
+    }
+  ],
+  "sources": [
+    {
+      "id": "aurora-faq",
+      "label": "Aurora second-generation driverless launch: operating and purchase model",
+      "href": "https://aurora.tech/newsroom/your-questions-about-our-latest-driverless-launch-answered",
+      "publisher": "Aurora",
+      "lastVerified": "2026-10-12",
+      "note": "Issuer explanation: empty driver seat, possible rear-seat roadside-support staff, TaaS ownership and future customer-owned model. Support staff are expressly not driving or supervising driving.",
+      "date": "2026-07-22"
+    },
+    {
+      "id": "aurora-q2",
+      "label": "Aurora second-quarter 2026 shareholder letter",
+      "href": "https://ir.aurora.tech/sec-filings/all-sec-filings/content/0001828108-26-000075/aurora26q2shareholderlet.htm",
+      "publisher": "Aurora / SEC Form 8-K exhibit",
+      "lastVerified": "2026-10-12",
+      "note": "Pages 3–8 distinguish commercial agreements, Midland–Monahans driverless operations, customer endpoints and supervised fueling/weigh-station testing; page 15 revenue includes driverless and operator-supervised loads. Issuer-reported performance is not a comparative safety study.",
+      "date": "2026-07-29"
+    },
+    {
+      "id": "aurora-october",
+      "label": "Aurora October 2026 commercial update",
+      "href": "https://aurora.tech/newsroom/driving-the-inflection",
+      "publisher": "Aurora",
+      "lastVerified": "2026-10-12",
+      "note": "CEO statement reports more than 500,000 cumulative driverless miles since commercial launch. The 2030 fleet vision is forward-looking and is not counted as present capacity.",
+      "date": "2026-10-08"
+    },
+    {
+      "id": "kodiak-highway",
+      "label": "Kodiak Dallas–Houston driverless launch preparation",
+      "href": "https://kodiak.ai/news/kodiak-names-dallas-houston-driverless-launch-lane",
+      "publisher": "Kodiak AI",
+      "lastVerified": "2026-10-12",
+      "note": "Daily preparation deliveries retain a safety observer; driverless validation also occurs on closed courses. Unsupervised highway service remains a year-end 2026 target. June 30 Atlas fleet and paid-hours metrics describe the industrial domain.",
+      "date": "2026-09-25"
+    },
+    {
+      "id": "kodiak-charger",
+      "label": "Kodiak and Charger Dallas–Laredo customer operation",
+      "href": "https://kodiak.ai/news/kodiak-charger-usa-autonomous-trucking-dallas-laredo",
+      "publisher": "Kodiak AI / Charger USA",
+      "lastVerified": "2026-10-12",
+      "note": "First delivery September 8; current operation explicitly has a safety driver behind the wheel. Driverless transition depends on the safety case.96% ARM describes completion of safety-case claims/evidence at September-end, not autonomous mileage.",
+      "date": "2026-10-08"
+    },
+    {
+      "id": "kodiak-atlas",
+      "label": "Atlas expands its Kodiak-powered Permian delivery system",
+      "href": "https://kodiak.ai/news/atlas-driverless-permian-expansion",
+      "publisher": "Atlas Energy Solutions / Kodiak AI",
+      "lastVerified": "2026-10-12",
+      "note": "Second Dune Express load-out point is reported operating; 100-truck mid 2027 timetable and early 2027 public-road operation are forward-looking and conditional. Current industrial operation is not general highway-lane availability.",
+      "date": "2026-07-31"
+    },
+    {
+      "id": "gatik-driverless",
+      "label": "Gatik January 2026 driverless regional operations disclosure",
+      "href": "https://archive.gatik.ai/news/press-releases/gatik-becomes-first-us-company-to-operate-fully-driverless-trucks-at-scale-for-commercial-deliveries/",
+      "publisher": "Gatik",
+      "lastVerified": "2026-10-12",
+      "note": "DFW regional operations, 26-/30-foot trucks, highways and surface streets, and driver/safety-observer absence. Aggregated order, mile and contracted-revenue measures have distinct denominators.",
+      "date": "2026-01-27"
+    },
+    {
+      "id": "gatik-pepsico",
+      "label": "PepsiCo and Gatik regional freight agreement and existing operations",
+      "href": "https://archive.gatik.ai/news/coverage/pepsico-and-gatik-announce-multi-year-agreement-to-deploy-autonomous-freight-in-north-america/",
+      "publisher": "Gatik / PepsiCo",
+      "lastVerified": "2026-10-12",
+      "note": "Issuer page identifies existing driverless PepsiCo operations in Texas, Arizona and Arkansas, regional site-to-site scope and the future agreement. Does not publish an open-market lane tariff.",
+      "date": "2026-06-08"
+    },
+    {
+      "id": "gatik-august",
+      "label": "Gatik August 2026 financing and operating update",
+      "href": "https://archive.gatik.ai/news/coverage/gatik-raises-200-million-series-d-led-by-qia-and-kdt-as-demand-for-driverless-commercial-freight-accelerates/",
+      "publisher": "Gatik",
+      "lastVerified": "2026-10-12",
+      "note": "Reports 85,000 completed driverless orders and 99% on-time across its operations; neither is Texas-specific or matched to another operator’s denominator. More than $600 million is contracted revenue, not recognized cash receipts.",
+      "date": "2026-08-25"
+    },
+    {
+      "id": "bot-commercial",
+      "label": "Bot Auto reports its first commercial Houston–Hutchins driverless load",
+      "href": "https://www.prnewswire.com/news-releases/houston-we-dont-have-a-problem-bot-auto-delivers-americas-first-fully-humanless-commercial-truckload-302757935.html",
+      "publisher": "Bot Auto TX, Inc. / PR Newswire",
+      "lastVerified": "2026-10-12",
+      "note": "Company-issued release, including broker Ryan Transportation statement. Describes 230-mile route, no onboard driver/observer and no low-latency remote human feedback. A dated load and unverified cost claims do not establish current open capacity, profitability or comparative safety.",
+      "date": "2026-04-30"
+    },
+    {
+      "id": "bot-current",
+      "label": "Bot Auto current operating and freight-contact overview",
+      "href": "https://bot.auto/",
+      "publisher": "Bot Auto",
+      "lastVerified": "2026-10-12",
+      "note": "Current company page describes paid freight and its capacity model. It supplies no public lane tariff or buyer-specific service commitment; it is used only for the present inquiry route."
+    },
+    {
+      "id": "waabi-warp",
+      "label": "Volvo and Waabi begin Warp customer operations in Texas",
+      "href": "https://www.waabi.ai/insights/volvo-and-waabi-kick-off-customer-operations-in-texas-starting-with-warp",
+      "publisher": "Waabi / Volvo Autonomous Solutions",
+      "lastVerified": "2026-10-12",
+      "note": "Direct third-party-facility freight on Dallas–Houston; release explicitly says current hauls have an observer in the driver’s seat. LTL-network participation is separate from full driver-out operation.",
+      "date": "2026-10-05"
+    },
+    {
+      "id": "international-ryder",
+      "label": "International and Ryder live-freight PlusAI trial",
+      "href": "https://news.international.com/2026-03-31-International-Launches-Level-4-Autonomous-Fleet-Trial-on-Live-Freight-Lane",
+      "publisher": "International Motors / Ryder",
+      "lastVerified": "2026-10-12",
+      "note": "Laredo–Temple daily 600-mile route with factory-integrated SuperDrive.92% autonomous route coverage is explicitly supervised by a human safety driver; sub 30-minute inspection is a pilot KPI, not an industry standard.",
+      "date": "2026-03-31"
+    },
+    {
+      "id": "torc-2026",
+      "label": "Torc February 2026 public-road testing update",
+      "href": "https://torc.ai/michigan-public-roads-autonomous-truck-testing/",
+      "publisher": "Torc Robotics",
+      "lastVerified": "2026-10-12",
+      "note": "Current-year disclosure identifies established DFW testing and fleet operations; technology development is not asserted to be driver-out customer availability.",
+      "date": "2026-02-24"
+    },
+    {
+      "id": "torc-roadmap",
+      "label": "Torc production platform, Fort Worth operations and 2027 roadmap",
+      "href": "https://torc.ai/av-3-0-scaling-physical-ai-autonomous-trucking-embedded-hardware/",
+      "publisher": "Torc Robotics",
+      "lastVerified": "2026-10-12",
+      "note": "Dated company account separates October 2024 closed-track driverless acceptance testing, May 2025 hub opening, I-35 focus and planned 2027 market entry. Historical product milestones are not retroactively described as a commercial launch.",
+      "date": "2025-11-17"
+    },
+    {
+      "id": "einride-testbed",
+      "label": "Einride and SH 130 infrastructure testbed memorandum",
+      "href": "https://www.prnewswire.com/news-releases/einride-partners-with-texas-highway-operator-to-create-autonomous-freight-testbed-302715954.html",
+      "publisher": "Einride / PR Newswire",
+      "lastVerified": "2026-10-12",
+      "note": "Company-issued MoU announcement concerns validation on SH 130 Segments 5/6 and frontage-road integration. A testbed partnership does not establish a customer freight lane.",
+      "date": "2026-03-17"
+    },
+    {
+      "id": "einride-austin",
+      "label": "Einride reports Austin approval and research demonstration",
+      "href": "https://news.cision.com/einride/r/einride-secures-fifth-nhtsa-approval-to-operate-autonomous-vehicles-on-u-s--roads,c4341234",
+      "publisher": "Einride / Cision",
+      "lastVerified": "2026-10-12",
+      "note": "Issuer reports NHTSA approval and March 19 cabless demonstration, explicitly part of an R&D project. The underlying approval instrument and general Texas commercial eligibility are not independently established by this release.",
+      "date": "2026-03-24"
+    },
+    {
+      "id": "dps-plans",
+      "label": "Texas DPS public first-responder interaction plans",
+      "href": "https://www.dps.texas.gov/section/cav/connected-autonomous-vehicles",
+      "publisher": "Texas Department of Public Safety",
+      "lastVerified": "2026-10-12",
+      "note": "Page date is the displayed date; list read October 12. Published plans are responder documents, not permits, current route availability or a complete operator census.",
+      "date": "2026-02-27"
+    },
+    {
+      "id": "nhtsa-method",
+      "label": "NHTSA Standing General Order crash-data limitations",
+      "href": "https://www.nhtsa.gov/laws-regulations/standing-general-order-crash-reporting",
+      "publisher": "NHTSA",
+      "lastVerified": "2026-10-12",
+      "note": "Current official methodology: incomplete/unverified initial reports, possible duplicates, unequal reporting visibility, no normalization for miles/fleet/domain and different ADS/Level 2 reporting thresholds. No operator crash ranking is derived."
+    },
+    {
+      "id": "plus-roadmap",
+      "label": "PlusAI September 2026 Texas operations and commercialization roadmap",
+      "href": "https://www.plus.ai/news-and-insights/2026-09-03-texas-ventures-business-combination",
+      "publisher": "PlusAI",
+      "date": "2026-09-03",
+      "lastVerified": "2026-10-12",
+      "note": "Current issuer announcement separates Texas Ryder/International fleet trials from targeted 2027 commercial launch of factory-built SuperDrive trucks. No funding transaction completion, forecast revenue or open driverless service is inferred."
+    },
+    {
+      "id": "beacon-exemption",
+      "label": "FMCSA final warning-beacon exemption and operating conditions",
+      "href": "https://www.govinfo.gov/content/pkg/FR-2026-10-09/html/2026-20734.htm",
+      "publisher": "FMCSA / Federal Register",
+      "date": "2026-10-09; effective 2026-10-07–2031-10-07",
+      "lastVerified": "2026-10-13",
+      "note": "91 FR 64736–64741, VI.B–C: prior notice for other carriers, validated domain, excluded cargo/passenger work, equipment and activation conditions. This replaces specified warning-device requirements; it is not a general driverless approval or recovery-time guarantee."
+    },
+    {
+      "id": "texas-carrier-incorporation",
+      "label": "37 TAC §4.11: current commercial-vehicle incorporation rule",
+      "href": "https://texas-sos.appianportalsgov.com/rules-and-meetings?recordId=211918&queryAsDate=10%2F13%2F2026&interface=VIEW_TAC_SUMMARY&$locale=en_US",
+      "publisher": "Texas Secretary of State / Texas Department of Public Safety",
+      "date": "2023-01-08",
+      "lastVerified": "2026-10-13",
+      "note": "Official current rendered text: §4.11(a) incorporates federal amendments/interpretations through September 1, 2022; (b)(6) substitutes the DPS director for intrastate vehicles. That text does not automatically adopt a later federal exemption."
+    },
+    {
+      "id": "texas-carrier-exceptions",
+      "label": "37 TAC §4.12: current Texas exemptions and exceptions",
+      "href": "https://texas-sos.appianportalsgov.com/rules-and-meetings?recordId=226974&queryAsDate=10%2F13%2F2026&interface=VIEW_TAC_SUMMARY&$locale=en_US",
+      "publisher": "Texas Secretary of State / Texas Department of Public Safety",
+      "date": "2025-12-11",
+      "lastVerified": "2026-10-13",
+      "note": "Complete current exception list inspected, latest amendment effective December 11, 2025. The inspected rule contains no beacon relief or blanket prospective adoption of federal exemptions; this bounded reading does not rule out every other legal instrument."
+    }
+  ],
+  "searchTerms": [
+    "Texas autonomous trucking",
+    "Texas self-driving trucks",
+    "driverless freight operators",
+    "Aurora Texas",
+    "Kodiak Atlas Permian",
+    "Kodiak Dallas Houston",
+    "Gatik DFW",
+    "Bot Auto Houston Dallas",
+    "Waabi Volvo Warp",
+    "Torc Fort Worth",
+    "PlusAI Ryder",
+    "Einride SH 130"
+  ],
+  "image": "/images/social/texas-autonomous-trucking-operators.png",
+  "resources": [
+    {
+      "label": "Texas autonomy source and decision ledger",
+      "href": "/research/texas-research-library-2026-10-13.json",
+      "description": "Primary evidence, declared assumptions and update triggers across the Texas business and autonomy library.",
+      "format": "JSON"
+    }
+  ],
+  "aliases": []
+}

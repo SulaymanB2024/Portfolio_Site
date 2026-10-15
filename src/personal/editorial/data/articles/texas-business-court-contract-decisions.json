@@ -1,0 +1,243 @@
+{
+  "slug": "texas-business-court-contract-decisions",
+  "path": "/research/texas/texas-business-court-contract-decisions",
+  "title": "Texas business contracts need a litigation plan",
+  "displayTitle": "Texas business contracts need a litigation plan",
+  "seoTitle": "Texas Business Court 2026: HB40, Contracts & the $5M Test",
+  "subtitle": "Two September decisions show why deal value, pleaded claims, and the promises preserved in a signed agreement deserve separate reviews.",
+  "seoDescription": "Texas Business Court research for business leaders: HB40's $5 million thresholds, September 2026 decisions, contract diligence, and a worked dispute example.",
+  "category": "TEXAS BUSINESS",
+  "date": "2026-10-12",
+  "dateModified": "2026-10-13",
+  "readTime": "10 MIN",
+  "kind": "research",
+  "author": "Sulayman Bowles",
+  "openingPresentation": "integrated",
+  "evidenceBoundary": "Primary legislation, published trial-court opinions, and the court's April 2026 reporting cutoff were checked on October 12, 2026. The commercial example is hypothetical. The case discussion describes the published trial-court decisions; no subsequent appellate disposition is asserted. Contract drafting and case-specific jurisdiction require counsel's review. Targeted October 13 revision: precise jurisdiction-screen labeling and a distinct contract-recovery approval boundary. Original source-check dates remain attached to the individual references.",
+  "content": [
+    "Work through the failed-deal case before signing a large Texas contract: what could the business lose, what claim could it support and what recovery would the agreement permit? The size and kind of claim affect the forum question. The written bargain affects what the business can enforce. Address both while the commercial terms are still negotiable.",
+    "September 2026 supplied two useful examples. The Bakery v. Naterra examined when counterclaims put a dispute within the court's monetary jurisdiction. Beard v. Perot examined how releases and reliance language affected claims built around alleged oral promises. Read together, they suggest a practical agenda for executives: preserve the bargain, distinguish transaction size from recoverable claims, and keep a dated record of how a dispute develops. [The Bakery opinion](#source-bakery) · [Beard opinion](#source-beard)",
+    "The commercial opportunity is to make dispute planning part of deal underwriting. A contract's expected cash flow depends on what happens when performance breaks down, which obligations can be demonstrated, and how long cash remains tied up. The analysis below turns the statutory changes and recent decisions into questions a finance, procurement, or deal team can take to counsel."
+  ],
+  "sections": [
+    {
+      "id": "two-thresholds",
+      "title": "Separate the transaction from the claim",
+      "paragraphs": [
+        "HB40 became effective September 1, 2025. For a qualified transaction, the amended definition uses aggregate consideration of at least $5 million, including a series of related transactions, subject to the definition's exclusions. The relevant commercial-action route separately requires an amount in controversy exceeding $5 million. Several specified add-ons, including attorney's fees and exemplary damages, are excluded from that amount. The operative section and claim category still matter. [Bill history](#source-history) · [Enrolled HB40, sections 43 and 45](#source-hb40) The definition also includes a qualifying money-or-credit limb and excludes specified bank, credit-union, and savings-and-loan transactions; the consideration screen is not its entire definition.",
+        "HB40 generally applies its changes to actions commenced on or after September 1, 2024. It separately provides an agreed-motion, court-permission route for qualifying older actions under rules adopted for that purpose. For a legacy dispute, include the action’s commencement date in counsel’s threshold review. [HB40, sections 56 and 72](#source-hb40)",
+        "For a deal team, those are two spreadsheet columns. The first describes what the parties exchange or commit to exchange. The second describes the dispute presented to the court. An acquisition's purchase price, a software agreement's total commitment, or a development project's budget should never be copied automatically into the damages cell.",
+        "Ask counsel to identify the jurisdictional route before choosing the amount model. Corporate-governance matters, commercial contracts, intellectual-property disputes, and specified public-company matters do not all depend on the same statutory provisions. A clause agreeing to the business court can be commercially useful, but it is not a substitute for the court's statutory authority. [HB40, section 45](#source-hb40)",
+        "The useful deliverable is a short jurisdiction memo attached to the commercial approval. It should identify the contract, counterparties, transaction boundary, plausible dispute categories, geographic venue, and the evidence needed to support each. Treat it as a scenario analysis rather than a promise that every future dispute will land in the same forum."
+      ],
+      "table": {
+        "caption": "Two monetary questions that belong in different cells",
+        "columns": [
+          "Question",
+          "Measure",
+          "Diligence implication"
+        ],
+        "rows": [
+          [
+            "Which statutory jurisdictional route applies?",
+            "The actual claim category, parties, venue and exclusions",
+            "Have counsel select the route before applying monetary screens."
+          ],
+          [
+            "Does the consideration limb meet the qualified-transaction definition?",
+            "At least $5M aggregate consideration; the money-or-credit limb and exclusions also apply",
+            "Identify related transactions, qualifying consideration and excluded parties/transactions."
+          ],
+          [
+            "Does this commercial-action route meet the amount requirement?",
+            "More than $5M in controversy, after excluded categories",
+            "Build the pleaded-claims model; do not use contract face value as a shortcut."
+          ],
+          [
+            "Does the court have authority over this action?",
+            "Applicable statutory category, parties, venue, and exclusions",
+            "Have counsel map the actual dispute to a jurisdictional route."
+          ]
+        ],
+        "note": "A business screening table, not a complete jurisdiction test. HB40 sections 43 and 45 supply the statutory thresholds."
+      }
+    },
+    {
+      "id": "counterclaims-clock",
+      "title": "A counterclaim can change the forum question",
+      "paragraphs": [
+        "In The Bakery v. Naterra, plaintiffs initially sought $1,350,507 for services. The defendant later pleaded counterclaims seeking more than $60 million. The September 15 opinion held removal timely because it occurred within 30 days after those counterclaims first put the total amount in controversy above $5 million. Earlier threats to assert large counterclaims did not themselves establish jurisdiction. [Opinion, paragraphs 1–10](#source-bakery)",
+        "The operating lesson is to make counsel's forum review a recurring step when pleadings change. A dispute that began as collections work may become a material counterparty-risk event. That can affect reserves, document preservation, management attention, settlement authority, and the finance team's estimate of when the receivable can be recovered.",
+        "Retain the actual pleading and filing chronology, rather than a sales team's summary of what the other side threatened. The distinction changes the evidence available for a jurisdictional decision. A dated counterclaim is a different object from an email saying that a counterparty intends to sue.",
+        "Assign the escalation owner before a disagreement becomes litigation. The account manager can report a commercial warning; counsel evaluates the procedural consequences; finance updates the cash and downside scenarios. A shared timeline lets those functions work from the same events without treating every threat as a filed claim."
+      ]
+    },
+    {
+      "id": "preserve-bargain",
+      "title": "Preserve the promises that made the deal worth signing",
+      "paragraphs": [
+        "Beard v. Perot's September 22 opinion explains a dismissal involving releases, merger language, and express reliance disclaimers. The court evaluated the agreements and contradictory alleged promises together; it expressly declined to say that a merger clause or disclaimer of representations alone defeated the fraud claims. Its analysis is specific to the pleaded facts and contractual language. [Opinion, paragraphs 138–145 and footnote 121](#source-beard)",
+        "For an executive, the question is whether the final agreement preserves the economics approved by the business. Procurement may have negotiated implementation support, finance may have priced an earnout, or a founder may have relied on a promised future payment. If that commitment matters to value, the approval process needs to locate it in the executed documents and identify the party responsible for delivering it.",
+        "Build a promise-to-document schedule before signature. For each material commitment, record the business assumption, corresponding clause or exhibit, measurable performance standard, remedy, and approving owner. Where the business cannot find a commitment in the final package, resolve the gap before closing rather than assuming negotiation history will supply it later.",
+        "This is particularly valuable when a transaction contains several agreements signed at different times. Compare amendments, releases, settlement terms, and integration clauses with the original economic approval. A later document can change the relationship the finance team thinks it is still valuing. Keep one executed-document index and record what each new signature changes."
+      ],
+      "table": {
+        "caption": "A business approval should reconcile the bargain with the signed documents",
+        "columns": [
+          "Economic dependency",
+          "Evidence to locate",
+          "Owner's decision"
+        ],
+        "rows": [
+          [
+            "A payment depends on a future milestone",
+            "Signed formula, milestone definition, timing, and dispute mechanism",
+            "Can finance independently reproduce the payment calculation?"
+          ],
+          [
+            "A vendor promises implementation or capacity",
+            "Service obligation, acceptance test, deadline, exclusions, and remedy",
+            "Does the agreement protect the operating assumption behind approval?"
+          ],
+          [
+            "A later release or amendment is requested",
+            "Comparison with earlier surviving rights and obligations",
+            "Which part of the originally approved economics changes?"
+          ],
+          [
+            "The team expects a particular forum",
+            "Counsel's review of the clause and applicable statutory authority",
+            "What happens if the anticipated dispute falls outside that forum?"
+          ]
+        ],
+        "note": "Original editorial diligence framework. The table is not proposed contract language and does not predict a court's interpretation."
+      }
+    },
+    {
+      "id": "worked-dispute",
+      "title": "Work the downside before the contract is signed",
+      "paragraphs": [
+        "Consider a hypothetical manufacturer buying a five-year technology service for $12 million. The business case depends on deployment by an agreed production date. A commercial-action analysis under the qualified-transaction route must separate the $12 million commitment from the claims arising if deployment fails.",
+        "Scenario A models $3.4 million of qualifying claims. The finance team also lists $2 million in exemplary damages and $600,000 in attorney's fees. Adding those lines produces a $6 million headline, but it does not turn $3.4 million into an amount exceeding $5 million under the exclusions in the commercial-action provision. Scenario B instead models $6.2 million of qualifying claims. It clears that monetary screen, but counsel must still assess the category, venue, facts, and exclusions. [HB40, section 45](#source-hb40)",
+        "Separate modeled loss, a supportable claim and practical recovery. If scenario B’s $6.2 million loss meets an assumed $2 million contract cap, counsel must assess the cap’s validity, scope and carveouts before finance records a recovery. The arithmetic cannot determine what may be pleaded, jurisdiction or what a court will award. Tie the approval to the executed cap, acceptance conditions and payment staging rather than carrying the whole loss automatically into a recovery cell.",
+        "A sensible business decision might be to protect the launch milestone with clearer acceptance terms, stage payments against delivery, and retain an executable transition plan. Those steps improve the operating downside case whether the eventual forum is the business court or another court. The forum decision sits alongside that work rather than carrying the entire risk-management burden.",
+        "Compare the two contract structures on cash at risk and practical recovery, not just nominal damages. A lower upfront commitment with independently testable milestones may be more useful than a large theoretical damages figure available only after a prolonged dispute. That is an underwriting judgment to discuss with counsel and the operating team."
+      ]
+    },
+    {
+      "id": "court-evidence",
+      "title": "Use the court's operating record carefully",
+      "paragraphs": [
+        "The court's mid-year report covers September 2024 through April 2026. It reports 409 filings and 221 active pending cases as of April 30, and describes energy, real estate, and technology as the predominant industries. Eight trials had occurred by that cutoff; the reported average from defendants' first appearance to trial was twelve months and one day. Those are historical observations, not an October docket total. [Mid-year report, pages 6 and 8](#source-report)",
+        "That sample does not establish a reliable speed advantage over district courts. A finance team comparing forums would need comparable cases, a common start point, the full distribution of time to disposition, case complexity, and the costs incurred along the way. A single average from eight trials cannot price a future dispute.",
+        "The same care applies to geographic availability. Check the current official operating divisions and the actual county of proper venue. A historical map or a statutory plan to fund a division is insufficient to show that the desired case can be heard there today. [Court information](#source-court)",
+        "Use the public opinions as a growing diligence library. Read the holdings that bear on your transaction's actual structure, then identify the contractual or recordkeeping choice they expose. The value comes from improving the next deal's documents and operating plan; a collection of case headlines alone does not do that work."
+      ]
+    },
+    {
+      "id": "decision-checklist",
+      "title": "Give the deal team five decisions to resolve",
+      "paragraphs": [
+        "Before signing a material Texas agreement, prepare a one-page commercial handoff with links to the executed-document package and the downside model. The team should be able to answer each question below without searching through negotiation email to reconstruct the deal.",
+        "When a dispute appears, keep that same package and add the current pleading chronology, claims model, preservation instructions, and counsel's forum assessment. Revisit the assessment after a new counterclaim or amendment. The two September opinions make chronology and contractual language useful places to start; neither replaces case-specific advice.",
+        "An owner should also set the review trigger. New appellate treatment, amended procedural rules, a revised contract, or a changed operating division can alter the analysis. Date the handoff and link the underlying authority so the next reviewer can see which assumptions need to be revisited."
+      ],
+      "bullets": [
+        "Which commitments explain the investment's return, and where do the signed documents preserve each one?",
+        "Which loss scenarios are commercially material, and which amounts would qualify for the relevant jurisdictional calculation?",
+        "What would a release, amendment, liability limit, or transition failure change in the approved economics?",
+        "Which court or arbitration route does counsel expect for each dispute category, and what is the fallback?",
+        "Who maintains the dated claims chronology, updates the cash forecast, and authorizes escalation or settlement?"
+      ]
+    }
+  ],
+  "conclusion": {
+    "title": "Make the bargain and the downside inspectable",
+    "content": "Texas's business-court framework gives executives another reason to connect contract review with financial underwriting. Preserve material promises, separate transaction consideration from pleaded claims, and retain the chronology needed to revisit the forum decision. The payoff is a contract the business can understand and an operating plan that survives a dispute, with the legal analysis grounded in the actual agreement and current authority."
+  },
+  "faqs": [
+    {
+      "question": "Does a $5 million Texas contract automatically qualify for the Business Court?",
+      "answer": "No. Under the qualified-transaction route, at least $5 million of aggregate consideration and more than $5 million in qualifying amount in controversy are separate screens. The action must also meet the applicable statutory category, venue, and exclusions. [HB40, sections 43 and 45](#source-hb40)"
+    },
+    {
+      "question": "Can counterclaims change Texas Business Court jurisdiction?",
+      "answer": "They can affect the amount and timing analysis. In The Bakery, the court held removal timely after pleaded counterclaims first raised the total amount in controversy above $5 million; threats before pleading were insufficient. This is the published September 15, 2026 trial-court decision. [The Bakery](#source-bakery)"
+    },
+    {
+      "question": "Does a merger clause alone eliminate a Texas fraud claim?",
+      "answer": "That is not what Beard v. Perot held. The court considered express reliance disclaimers, releases, and the agreements' terms together, and expressly rejected that standalone characterization in footnote 121. Have counsel assess the actual documents. [Beard](#source-beard)"
+    },
+    {
+      "question": "Is the Texas Business Court demonstrably faster than other courts?",
+      "answer": "The reviewed report does not establish that comparison. It records eight trials by April 30, 2026 and an average of twelve months and one day from defendants' first appearance to trial. A comparative claim needs comparable cases, time definitions, and a larger evidence base. [Court mid-year report](#source-report)"
+    }
+  ],
+  "sources": [
+    {
+      "id": "hb40",
+      "label": "HB40 enrolled text, particularly sections 43, 45, 56, and 72",
+      "href": "https://capitol.texas.gov/tlodocs/89R/billtext/html/HB00040F.htm",
+      "publisher": "Texas Legislature",
+      "date": "2025 legislative session; effective September 1, 2025",
+      "lastVerified": "2026-10-12",
+      "note": "The enacted text supplies the jurisdictional changes; deleted bracketed text is prior law."
+    },
+    {
+      "id": "history",
+      "label": "HB40 official legislative history and effective date",
+      "href": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB40",
+      "publisher": "Texas Legislature Online",
+      "date": "Governor signed June 20, 2025; effective September 1, 2025",
+      "lastVerified": "2026-10-12"
+    },
+    {
+      "id": "bakery",
+      "label": "The Bakery v. Naterra International, 2026 Tex. Bus. 64",
+      "href": "https://www.txcourts.gov/media/1463334/26-bc03a-0027-the-bakery-v-naterra-intl-2026-tex-bus-64.pdf",
+      "publisher": "Texas Business Court, Third Division",
+      "date": "September 15, 2026",
+      "lastVerified": "2026-10-12",
+      "note": "Opinion and order denying remand, paragraphs 1–10; the staff syllabus is not legal authority."
+    },
+    {
+      "id": "beard",
+      "label": "Beard v. Perot, 2026 Tex. Bus. 65",
+      "href": "https://www.txcourts.gov/media/1463368/26-bc01b-0018-beard-v-perot-2026-tex-bus-65.pdf",
+      "publisher": "Texas Business Court, First Division",
+      "date": "September 22, 2026 opinion explaining August 10 dismissal",
+      "lastVerified": "2026-10-12",
+      "note": "Paragraphs 138–145, footnote 121, and paragraph 177. Describes this trial-court decision, not a subsequent appellate outcome."
+    },
+    {
+      "id": "report",
+      "label": "Business Court of Texas mid-year report, September 2024–April 2026",
+      "href": "https://txcourts.gov/media/1463213/bcot-mid-year-report-43026.pdf",
+      "publisher": "Texas Office of Court Administration",
+      "date": "Reporting cutoff April 30, 2026",
+      "lastVerified": "2026-10-12",
+      "note": "Pages 6 and 8 provide the cited filing, pending-case, and trial measures. These are not current October totals or a comparative performance study."
+    },
+    {
+      "id": "court",
+      "label": "Texas Business Court official court and operating-division information",
+      "href": "https://txcourts.gov/businesscourt/",
+      "publisher": "Texas Judicial Branch",
+      "date": "Current official directory",
+      "lastVerified": "2026-10-12",
+      "note": "Verify operating territory and current procedural resources for the actual county and dispute."
+    }
+  ],
+  "image": "/images/social/texas-business-court-contract-decisions.png",
+  "resources": [
+    {
+      "label": "Texas business source and decision ledger",
+      "href": "/research/texas-research-library-2026-10-13.json",
+      "description": "Primary evidence, declared assumptions and update triggers across the Texas business and autonomy library.",
+      "format": "JSON"
+    }
+  ],
+  "searchTerms": [
+    "Texas Business Court HB40 five million jurisdiction contracts counterclaims Beard Perot Naterra"
+  ]
+}

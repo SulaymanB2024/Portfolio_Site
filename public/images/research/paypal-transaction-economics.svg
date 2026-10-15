@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="2160" height="1260" viewBox="0 0 864 504" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>Sulayman Bowles · four equity long pitches</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 504 
+L 864 504 
+L 864 0 
+L 0 0 
+L 0 504 
+z
+" style="fill: none"/>
+  </g>
+  <g id="axes_1">
+   <g id="patch_2">
+    <path d="M 90.72 393.12 
+L 829.44 393.12 
+L 829.44 110.88 
+L 90.72 110.88 
+L 90.72 393.12 
+z
+" style="fill: none"/>
+   </g>
+   <g id="matplotlib.axis_1">
+    <g id="xtick_1">
+     <g id="line2d_1"/>
+     <g id="text_1">
+      <text style="font-size: 16px; font-family: Arial, sans-serif; fill: #625f56" transform="translate(140.495387 415.877813)">Payment</text>
+      <text style="font-size: 16px; font-family: Arial, sans-serif; fill: #625f56" transform="translate(145.881637 435.082188)">volume</text>
+     </g>
+    </g>
+    <g id="xtick_2">
+     <g id="line2d_2"/>
+     <g id="text_2">
+      <text style="font-size: 16px; font-family: Arial, sans-serif; fill: #625f56" transform="translate(351.182629 415.877813)">Net</text>
+      <text style="font-size: 16px; font-family: Arial, sans-serif; fill: #625f56" transform="translate(332.471379 435.080938)">revenue</text>
+     </g>
+    </g>
+    <g id="xtick_3">
+     <g id="line2d_3"/>
+     <g id="text_3">
+      <text style="font-size: 16px; font-family: Arial, sans-serif; fill: #625f56" transform="translate(478.412371 415.879063)">Transaction margin</text>
+      <text style="font-size: 16px; font-family: Arial, sans-serif; fill: #625f56" transform="translate(471.626121 435.083438)">ex-customer interest</text>
+     </g>
+    </g>
+    <g id="xtick_4">
+     <g id="line2d_4"/>
+     <g id="text_4">
+      <text style="font-size: 16px; font-family: Arial, sans-serif; fill: #625f56" transform="translate(680.614613 415.879063)">Non-transaction</text>
+      <text style="font-size: 16px; font-family: Arial, sans-serif; fill: #625f56" transform="translate(682.943363 435.083438)">opex · adjusted</text>
+     </g>
+    </g>
+   </g>
+   <g id="matplotlib.axis_2">
+    <g id="ytick_1">
+     <g id="line2d_5">
+      <path d="M 90.72 345.751299 
+L 829.44 345.751299 
+" clip-path="url(#p3e2964692a)" style="fill: none; stroke: #d9d4c9; stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_6"/>
+     <g id="text_5">
+      <text style="font-size: 16px; font-family: Arial, sans-serif; text-anchor: end; fill: #625f56" x="81.72" y="351.829424" transform="rotate(-0 81.72 351.829424)">0%</text>
+     </g>
+    </g>
+    <g id="ytick_2">
+     <g id="line2d_7">
+      <path d="M 90.72 275.31353 
+L 829.44 275.31353 
+" clip-path="url(#p3e2964692a)" style="fill: none; stroke: #d9d4c9; stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_8"/>
+     <g id="text_6">
+      <text style="font-size: 16px; font-family: Arial, sans-serif; text-anchor: end; fill: #625f56" x="81.72" y="281.391655" transform="rotate(-0 81.72 281.391655)">5%</text>
+     </g>
+    </g>
+    <g id="ytick_3">
+     <g id="line2d_9">
+      <path d="M 90.72 204.875761 
+L 829.44 204.875761 
+" clip-path="url(#p3e2964692a)" style="fill: none; stroke: #d9d4c9; stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_10"/>
+     <g id="text_7">
+      <text style="font-size: 16px; font-family: Arial, sans-serif; text-anchor: end; fill: #625f56" x="81.72" y="210.953886" transform="rotate(-0 81.72 210.953886)">10%</text>
+     </g>
+    </g>
+    <g id="ytick_4">
+     <g id="line2d_11">
+      <path d="M 90.72 134.437992 
+L 829.44 134.437992 
+" clip-path="url(#p3e2964692a)" style="fill: none; stroke: #d9d4c9; stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_12"/>
+     <g id="text_8">
+      <text style="font-size: 16px; font-family: Arial, sans-serif; text-anchor: end; fill: #625f56" x="81.72" y="140.516117" transform="rotate(-0 81.72 140.516117)">15%</text>
+     </g>
+    </g>
+    <g id="text_9">
+     <text style="font-size: 16px; font-family: Arial, sans-serif; text-anchor: middle; fill: #24221e" x="27.31375" y="252" transform="rotate(-90 27.31375 252)">Year-over-year change</text>
+    </g>
+   </g>
+   <g id="patch_3">
+    <path d="M 124.298182 345.751299 
+L 226.740092 345.751299 
+L 226.740092 209.492877 
+L 124.298182 209.492877 
+z
+" clip-path="url(#p3e2964692a)" style="fill: #24221e; stroke: #24221e; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_4">
+    <path d="M 314.005424 345.751299 
+L 416.447334 345.751299 
+L 416.447334 278.781027 
+L 314.005424 278.781027 
+z
+" clip-path="url(#p3e2964692a)" style="fill: #24221e; stroke: #24221e; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_5">
+    <path d="M 503.712666 345.751299 
+L 606.154576 345.751299 
+L 606.154576 308.594677 
+L 503.712666 308.594677 
+z
+" clip-path="url(#p3e2964692a)" style="fill: #24221e; stroke: #24221e; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_6">
+    <path d="M 693.419908 345.751299 
+L 795.861818 345.751299 
+L 795.861818 222.165032 
+L 693.419908 222.165032 
+z
+" clip-path="url(#p3e2964692a)" style="fill: #24221e; stroke: #24221e; stroke-linejoin: miter"/>
+   </g>
+   <g id="line2d_13">
+    <path d="M 90.72 345.751299 
+L 829.44 345.751299 
+" clip-path="url(#p3e2964692a)" style="fill: none; stroke: #24221e; stroke-width: 0.8; stroke-linecap: square"/>
+   </g>
+   <g id="patch_7">
+    <path d="M 90.72 393.12 
+L 829.44 393.12 
+" style="fill: none; stroke: #d9d4c9; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="text_10">
+    <text style="font-size: 19px; font-family: Arial, sans-serif; text-anchor: middle; fill: #24221e" x="175.519137" y="190.84087" transform="rotate(-0 175.519137 190.84087)">+9.7%</text>
+   </g>
+   <g id="text_11">
+    <text style="font-size: 19px; font-family: Arial, sans-serif; text-anchor: middle; fill: #24221e" x="365.226379" y="260.12902" transform="rotate(-0 365.226379 260.12902)">+4.8%</text>
+   </g>
+   <g id="text_12">
+    <text style="font-size: 19px; font-family: Arial, sans-serif; text-anchor: middle; fill: #24221e" x="554.933621" y="289.94267" transform="rotate(-0 554.933621 289.94267)">+2.6%</text>
+   </g>
+   <g id="text_13">
+    <text style="font-size: 19px; font-family: Arial, sans-serif; text-anchor: middle; fill: #24221e" x="744.640863" y="203.513025" transform="rotate(-0 744.640863 203.513025)">+8.8%</text>
+   </g>
+  </g>
+  <g id="text_14">
+   <text style="font-size: 23px; font-family: Georgia, serif; text-anchor: start; fill: #24221e" x="90.72" y="47.716406" transform="rotate(-0 90.72 47.716406)">Payment volume is growing faster than margin dollars</text>
+  </g>
+  <g id="text_15">
+   <text style="font-size: 15px; font-family: Arial, sans-serif; text-anchor: start; fill: #625f56" x="90.72" y="79.437656" transform="rotate(-0 90.72 79.437656)">PayPal · reported Q2 2026 vs Q2 2025 · matching USD measures</text>
+  </g>
+  <g id="text_16">
+   <text style="font-size: 13px; font-family: Arial, sans-serif; fill: #625f56" transform="translate(90.72 474.859238)">All changes use reported dollars; transaction margin and adjusted opex are non-GAAP.</text>
+   <text style="font-size: 13px; font-family: Arial, sans-serif; fill: #625f56" transform="translate(90.72 490.462793)">Source: PayPal Q2 2026 earnings release. Growth rates are not currency-neutral rates.</text>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="p3e2964692a">
+   <rect x="90.72" y="110.88" width="738.72" height="282.24"/>
+  </clipPath>
+ </defs>
+</svg>

@@ -1,0 +1,396 @@
+{
+  "slug": "texas-robotaxi-business-service-map",
+  "path": "/research/texas/texas-robotaxi-business-service-map",
+  "aliases": [],
+  "title": "Which Texas Robotaxi Service Can a Business Actually Use?",
+  "displayTitle": "Texas Robotaxis: Who Can Ride?",
+  "seoTitle": "Texas Robotaxis 2026: Waymo, Zoox, Tesla and Business Access",
+  "category": "TEXAS BUSINESS",
+  "subtitle": "Compare actual rider access, operating roles and trip fit before building robotaxis into an employee or guest transport plan.",
+  "seoDescription": "Compare Texas robotaxi services: Waymo, Zoox, Tesla, Avride and May Mobility. Verify geography, access, booking roles and full-trip business costs.",
+  "searchTerms": [
+    "Texas robotaxi services 2026",
+    "Waymo versus Zoox Texas",
+    "Tesla Robotaxi Austin Dallas Houston",
+    "Avride Dallas Uber",
+    "May Mobility Arlington",
+    "Texas autonomous travel business"
+  ],
+  "date": "2026-10-13",
+  "dateModified": "2026-10-14",
+  "author": "Sulayman Bowles",
+  "kind": "research",
+  "readTime": "13 MIN",
+  "openingPresentation": "integrated",
+  "evidenceBoundary": "Passenger access research checked October 12–13, 2026, with a dated October 14 update for San Antonio/SAT invitation access. Other operator and oversight sources retain their individual check dates. Public access rules are not live dispatch observations or reserved capacity. Models are hypothetical; investigations do not establish comparative safety.",
+  "content": [
+    "Build the Texas travel plan around bookable journeys. One employee’s downtown trip may have an open robotaxi option while another needs a conventional ride or a different account. For a travel manager, hotel or event organizer, the useful comparison is the journey that can be completed, its booking channel and the fallback that keeps the schedule intact.",
+    "Waymo’s dated Dallas and Houston announcements establish open rider access in 2026. Zoox’s current Austin page still invites a waitlist. Tesla’s rider support describes limited Texas service areas. Avride’s Dallas launch and May Mobility’s Arlington plans carry their own operating and access qualifications. Keep these records separate before comparing a fare, changing an employee policy or promising guests a ride. [Dallas](#source-waymo-dallas); [Houston](#source-waymo-houston); [Zoox Austin](#source-zoox-austin); [Tesla support](#source-tesla-rider).",
+    "The reviewed records support considering a local, on-demand pilot in selected markets. They do not establish guaranteed all-AV transport for a conference group. The useful unit is an eligible trip: an admitted rider, supported endpoints, suitable vehicle and passenger requirements, usable hours and an available booking channel. Qualify that unit before pricing it."
+  ],
+  "sections": [
+    {
+      "id": "operating-evidence",
+      "title": "Separate public service from the next deployment stage",
+      "paragraphs": [
+        "Waymo opened Dallas to everyone on August 4, Houston on August 20 and San Antonio on October 14. The newest notice includes SAT airport without an invitation. Austin retains its Uber distribution arrangement. These dated openings establish rider-admission policy; the current service area and request still decide whether a particular trip can happen. [Dallas](#source-waymo-dallas); [Houston](#source-waymo-houston); [San Antonio/SAT](#source-waymo-sa-open); [current areas](#source-waymo-areas).",
+        "Zoox’s Austin page says coming soon and directs prospective riders to a waitlist. Its September 1 Houston announcement describes initial manual mapping with retrofitted test vehicles, followed by autonomous testing and later purpose-built vehicles. That sequence is useful market-entry evidence for landlords, suppliers and transport planners. Preserve its stages when estimating passenger demand. [Austin](#source-zoox-austin); [Houston stages](#source-zoox-houston).",
+        "The comparison below is a selected passenger-service view, not a complete Texas operator registry or a comparative safety verdict. A positive service statement, a dated launch condition and a remaining access question have different evidentiary strength. Each needs a different next step from the buyer."
+      ],
+      "table": {
+        "caption": "Texas passenger-AV evidence checked October 12–13; San Antonio/SAT access updated October 14",
+        "columns": [
+          "Market / program",
+          "Public access / channel",
+          "Onboard driving role",
+          "Unresolved trip condition"
+        ],
+        "rows": [
+          [
+            "Waymo Texas",
+            "Dallas/Houston/San Antonio public app access; SAT open October 14; Austin eligible Uber match",
+            "ADS drives; remote support remains an operating dependency",
+            "Current endpoints, rider admission and offered vehicle"
+          ],
+          [
+            "Zoox Texas",
+            "Austin waitlist; Houston mapping/testing sequence",
+            "Testing fleet and purpose-built rollout have different roles",
+            "No general Texas public booking established by this review"
+          ],
+          [
+            "Tesla Robotaxi",
+            "Limited Austin/Dallas/Houston areas through its app",
+            "Current onboard role not established by reviewed rider guidance",
+            "Assigned platform, self-booking, age rules and route"
+          ],
+          [
+            "Avride Dallas",
+            "Eligible Uber request / AV offer in Central Dallas north of Trinity River",
+            "Onboard specialist can take control",
+            "Three rear-seat riders; boarding window and actual match"
+          ],
+          [
+            "May Mobility Arlington",
+            "Dated Uber plan; active-page list lacks Arlington booking entry",
+            "Current local role not established by reviewed access records",
+            "Confirm the specific program and current rider admission"
+          ]
+        ],
+        "note": "Dated and current records are identified in the prose/source list. Omission from a page does not independently prove absence of operations; historical launch coverage is not a current citywide map."
+      }
+    },
+    {
+      "id": "tesla-product-and-rider",
+      "title": "Treat Tesla’s ride service as its own product",
+      "paragraphs": [
+        "Tesla’s current Robotaxi support lists limited service in Austin, Dallas and Houston, with app geography and locally varying hours. It describes Model Y and Cybercab vehicles and booking for oneself. For a business, self-booking matters: a concierge workflow that arranges someone else’s ride needs its own supported channel. Confirm the actual account and request rather than assume a consumer app supports every corporate dispatch arrangement. [Rider support](#source-tesla-rider).",
+        "The rider restrictions depend on the assigned vehicle. Tesla permits accompanied riders aged 8–17 in Model Y and 13–17 in Cybercab; children below those respective minimum ages are excluded. The service does not support adding stops. Its wheelchair-accessible-vehicle links point to city providers rather than establishing an accessible Tesla fleet. These conditions affect guest and group transport; check the actual assignment and current rules. The model below assumes single-adult employee trips. [Vehicle, age, stop and accessibility rules](#source-tesla-rider).",
+        "Keep fleet Robotaxi service separate from Full Self-Driving (Supervised) in an employee’s own Tesla. Tesla’s official support describes active driver supervision for that consumer feature. A company cannot infer a freed driver, autonomous fleet capability or a driverless transport workflow from the package name. Classify the service and the vehicle use the business actually purchases. [Supervised feature](#source-tesla-fsd).",
+        "Booking access also differs from vehicle compliance. On September 4 NHTSA announced an audit of Cybercab’s self-certification after Austin commercial deployment. The release establishes an inquiry, not a violation or service suspension; this review did not establish its later disposition. Check applicable restrictions and the compliance record alongside the rider rules. [Certification inquiry](#source-cybercab-audit)."
+      ]
+    },
+    {
+      "id": "avride-and-may",
+      "title": "Read the operating role and the current evidence date",
+      "paragraphs": [
+        "Uber’s December 3, 2025 launch described an initial nine-square-mile Dallas area. Its current Dallas guidance now describes service across Central Dallas north of the Trinity River, with an onboard specialist behind the wheel who can take control. Up to three passengers ride in the back seats. Eligible UberX, Comfort and Comfort Electric requests can receive an AV match after opt-in; preference does not reserve a particular vehicle. [Dated launch](#source-avride-launch); [current Dallas guidance](#source-avride-current).",
+        "The current guidance gives riders seven minutes to board. That detail belongs in guest instructions and an event pickup plan. Check the actual request, passenger count and pickup point before relying on the service; a service-area description cannot guarantee an available match at a particular time. [Boarding and pickup guidance](#source-avride-current).",
+        "For May Mobility, the May 20, 2026 technology release described the Arlington Uber deployment as upcoming. Its current active-locations page does not provide an Arlington public-booking entry. Together those records leave a current access question to resolve before a company promises an Arlington ride. They do not establish that May has no Texas activity or that an earlier forecast became an observed launch. [Arlington plan](#source-may-arlington); [current active list](#source-may-locations).",
+        "Ask for a dated operating description: which platform, which human role, which domain, which customers and which booking route? An onboard person may drive, supervise, observe or support recovery, depending on the service. Remote assistance also needs a role description. The buyer’s policy should be based on those responsibilities and the intended trip, rather than a photograph or a generic autonomous label."
+      ]
+    },
+    {
+      "id": "booking-and-trip-fit",
+      "title": "Qualify the whole journey",
+      "paragraphs": [
+        "Austin Waymo rides start as eligible Uber requests and a matched offer. A preference can improve the chance of a match; it is not a fleet reservation. That matters for a business whose proposal is to guarantee a specific AV experience at a scheduled event. Use the actual distribution product and obtain additional commercial commitments if the event depends on them. [Austin matching](#source-waymo-uber).",
+        "List the pickup and destination at the granularity the booking product uses. Include the airport terminal or campus entrance, operating window, group size, baggage, accessibility needs and who will make the request. A hotel address in a served city does not resolve a guest’s airport transfer or a pickup inside a restricted site. Verify those parts before pricing the complete journey.",
+        "Build an approved alternative into the itinerary. The fallback might be a conventional ride, a reserved shuttle or another supported trip, depending on the use case. Give the traveler a clear action when the request is unavailable or the pickup changes. A good transport pilot measures arrival at the required destination, not merely whether an autonomous vehicle was successfully dispatched."
+      ]
+    },
+    {
+      "id": "workflows-and-evidence",
+      "title": "Make an employee or guest pilot observable",
+      "paragraphs": [
+        "Start with a bounded journey category: consenting adult employee trips between supported locations, for example. A conference guest-transfer program, a campus shuttle and a general employee reimbursement policy need different rider and dispatch arrangements. Use the smallest useful cohort for which the business can document eligibility and actual service outcomes.",
+        "Record requested trips, eligible trips, accepted requests, completed arrivals, exceptions, actual charges and any refunds against the same period. Keep locations and rider constraints in the eligibility file so excluded trips have an explanation. Use the resulting cohort to refine operating instructions and costs; a publicity ride or one successful journey cannot supply a broad service guarantee.",
+        "For accounts and receipts, distinguish individual expense documentation from an organization-wide managed product. Establish who can enroll, book, pay, retrieve records and handle a disputed charge in the actual market and channel. Ask the provider for evidence of any special corporate arrangement instead of assuming it from a general business-product page. The business needs a usable workflow as well as an available vehicle."
+      ]
+    },
+    {
+      "id": "itinerary-example",
+      "title": "Build a conference plan one journey at a time",
+      "paragraphs": [
+        "For an illustrative Austin conference, divide transport into airport arrivals, hotel-to-venue trips and evening returns. Put the rider, booking account, entrance, departure window and alternate service on each line. Confirm the local AV option for that line before describing it in guest instructions. Airport coverage and an employer’s payment arrangement need their own confirmation.",
+        "Give the organizer a clear promise it can keep: instructions and a funded alternative for each required journey. A guest who cannot obtain the app, lacks rider admission or needs a different vehicle should have a usable plan before arrival. For a service that requires self-booking, such as the reviewed Tesla product, design instructions around the traveler’s own request. [Booking restriction](#source-tesla-rider).",
+        "After the event, count the original requests through to completed arrivals. Record a cancelled AV request and its replacement against the same journey; retain both charges and any refund. This makes the event useful evidence for the next purchasing decision, including the guests whose trips never qualified for an AV."
+      ]
+    },
+    {
+      "id": "worked-trip-budget",
+      "title": "Budget eligible trips and paid exceptions",
+      "paragraphs": [
+        "Consider a hypothetical employee-travel pilot with 200 monthly trip requests. Assume geography permits 160; rider/account constraints leave 140; supported pickup points and operating hours leave 120 usable AV trips. Those are sequential filters on the same requests, not independent percentages to add. The remaining 80 trips use a conventional alternative. No operator’s actual availability is estimated by this example.",
+        "Assume an AV trip costs $20 and a conventional trip costs $28, inclusive of the modeled normal fare/fees. The all-conventional baseline is 200 × $28 = $5,600. The eligible mix is 120 × $20 plus 80 × $28 = $4,640, an apparent $960 fare-cash saving. These are hypothetical fares for teaching the decision; retrieve actual estimates and applicable charges before using the model.",
+        "Now assume an eligible AV request needs an additional paid fallback. Each exception adds an assumed $28 replacement fare and 20 minutes of staff time valued at $60 an hour, or $48 combined. The model conservatively retains the original AV charge; actual refunds are entered separately. Ten exceptions leave $680 of fare-cash saving, less $200 of allocated staff time: $480 combined saving. Twenty leave $400 of fare-cash saving and $400 of staff time: zero combined saving. Normal waiting and in-vehicle time are excluded or held equal; only additional exception time is valued. Allocated time value does not automatically become a cash payroll expense."
+      ],
+      "table": {
+        "caption": "Declared monthly travel scenario: eligibility and exception cost",
+        "columns": [
+          "Case",
+          "Calculation",
+          "Fare cash plus valued exception time"
+        ],
+        "rows": [
+          [
+            "All-conventional baseline",
+            "200 × $28",
+            "$5,600"
+          ],
+          [
+            "Eligible AV/conventional mix",
+            "120 × $20 + 80 × $28",
+            "$4,640"
+          ],
+          [
+            "Mix plus 10 exceptions",
+            "$4,640 + 10 × $48",
+            "$5,120"
+          ],
+          [
+            "Mix plus 20 exceptions",
+            "$4,640 + 20 × $48",
+            "$5,600"
+          ]
+        ],
+        "note": "All trip counts, fares, staff time and exception quantities are assumed. Exception costs are additional to retained base charges; actual refunds/credits are separate. Twenty exceptions is a break-even sensitivity, not an observed or predicted failure rate. Totals combine fares and allocated exception time; they are not all cash expenses. Normal trip-time differences are outside this scenario."
+      }
+    },
+    {
+      "id": "decision-from-the-model",
+      "title": "Use the threshold to ask a better commercial question",
+      "paragraphs": [
+        "Under the declared prices, 20 additional paid fallbacks among the 120 attempted AV journeys exhaust the combined fare-and-time saving: one in six attempts, or 16.7%. Dividing by all 200 requests would hide that exposure. The model retains the original AV charge, so an actual refund would increase the remaining headroom. This is a threshold to test, not a forecast of any provider’s failures.",
+        "Replace the assumptions with comparable observations. Include the denominator of every rate: completed trips out of eligible requests, for instance, rather than completions out of all employees. Keep refunds and lost time attached to the event that produced them. A provider’s large ride count across multiple markets cannot populate the exception-rate cell for this Texas pilot.",
+        "If the business values something besides direct savings, name it separately. Reduced parking demand, a supported mobility option or an employee’s preferred experience may matter, but each needs evidence appropriate to that outcome. Avoid burying such benefits in an invented fare discount or presenting rider interest as realized business value."
+      ]
+    },
+    {
+      "id": "safety-and-other-vehicles",
+      "title": "Keep safety evidence comparable and the wider market scoped",
+      "paragraphs": [
+        "NHTSA’s Standing General Order collects reported incidents under different ADS and Level 2 ADAS conditions. The agency warns that information can be incomplete and that counts are not normalized for miles, fleet exposure or operating domains. A simple raw-count league table would therefore answer the wrong question. Ask for comparable measures and investigate the circumstances of material events. [Reporting limitations](#source-crash-method).",
+        "Specific oversight records still matter without a league table. NTSB’s preliminary account of a January 12 Austin incident describes a Waymo vehicle passing a stopped school bus after an incorrect remote-assistance response; no crash occurred. The investigation page remained ongoing at the October 13 check. Review relevant corrective evidence and support roles, without treating preliminary facts as final probable cause or a current failure rate. [Austin investigation](#source-austin-school-bus).",
+        "The broader Texas AV landscape includes platforms beyond this passenger comparison. DPS publishes responder plans for Nuro, MOIA and numerous freight operators as well as the brands discussed here. The catalog is useful for identifying platforms and recovery instructions. It is not an exhaustive census, evidence of open passenger access or a substitute for current authorization. [Responder catalog](#source-dps-catalog).",
+        "Use the freight investigations for goods transport and the authorization investigation for the state operating gate. Passenger trips, regional middle-mile delivery and long-haul freight have different customers, costs and service boundaries. Keeping those questions distinct lets a business follow a development into a concrete decision without confusing one impressive deployment with every possible transport use."
+      ]
+    },
+    {
+      "id": "buyer-checklist",
+      "title": "An operating decision the business can defend",
+      "paragraphs": [
+        "Before changing the transport plan, collect a dated trip/service record and give each unresolved condition an owner. The following are operating recommendations derived from the comparison and model, not claims of universal provider terms."
+      ],
+      "bullets": [
+        "Identify the actual legal/service counterparties, platform and operating role; keep dated launch conditions separate from current evidence.",
+        "Verify admitted rider, app/account, geography, pickup point, hours, party and accessibility requirements.",
+        "Confirm the supported booking, payment, receipt and exception workflow for this business use.",
+        "Budget eligible requests, normal fares, backup trips, staff time and actual refunds using common denominators.",
+        "Measure completed arrival and paid exceptions for the actual cohort before scaling.",
+        "Use comparable safety evidence and current authorization/responder records rather than raw crash totals or a city logo."
+      ]
+    },
+    {
+      "id": "update-triggers",
+      "title": "Refresh access when the source changes",
+      "paragraphs": [
+        "Recheck the operating comparison when a provider opens a city to all riders, changes an admission or booking policy, expands the public domain, removes an onboard driving role or supplies a new enterprise arrangement. Preserve the prior date and stage so that a forecast becomes an observation only when the new record supports it.",
+        "For an ongoing business purchase, recheck the actual trip conditions and support procedure when the itinerary or fleet changes. Update the budget from accepted requests, actual completions, charges, credits and staff time. The enduring article question is which service the business can use for a defined journey; changing evidence should improve that answer at its established URL."
+      ]
+    }
+  ],
+  "faqs": [
+    {
+      "question": "Can everyone book a Texas Waymo ride through the same app?",
+      "answer": "Dallas and Houston have dated public openings, and Waymo opened San Antonio and SAT to all riders on October 14. Austin is distributed through Uber. Check the market, booking channel and actual trip; open access does not reserve capacity. [San Antonio/SAT announcement](#source-waymo-sa-open); [Austin](#source-waymo-uber)."
+    },
+    {
+      "question": "Does Zoox’s Austin page mean general public rides are available?",
+      "answer": "The current rendered city page says coming soon and invites waitlist entry. Houston’s September announcement describes mapping/testing stages. Confirm the actual rider-access release separately. [Austin page](#source-zoox-austin); [Houston announcement](#source-zoox-houston)."
+    },
+    {
+      "question": "Is Tesla Robotaxi the same as an employee using FSD (Supervised)?",
+      "answer": "They are different products and operating roles. Robotaxi support describes a ride service with its own areas and rider rules; Tesla’s FSD (Supervised) support requires active driver supervision. [Robotaxi](#source-tesla-rider); [supervised feature](#source-tesla-fsd)."
+    },
+    {
+      "question": "Can raw federal crash counts identify the safest Texas AV provider?",
+      "answer": "NHTSA says reporting requirements differ and incident counts are not normalized for exposure or operating domain. Use the reporting context and comparable measures before making a safety ranking. [NHTSA limitations](#source-crash-method)."
+    }
+  ],
+  "sources": [
+    {
+      "id": "waymo-dallas",
+      "label": "Waymo Dallas opens to all riders",
+      "href": "https://blog.waymo.com/blog/shorts/dallas-open-to-all/",
+      "publisher": "Waymo",
+      "date": "2026-08-04",
+      "lastVerified": "2026-10-12",
+      "note": "Dated public-access announcement. Love Field and freeway statements were testing/future plans at that date; do not silently treat them as current passenger availability."
+    },
+    {
+      "id": "waymo-houston",
+      "label": "Waymo Houston opens to all riders",
+      "href": "https://blog.waymo.com/blog/shorts/houston-open-to-all/",
+      "publisher": "Waymo",
+      "date": "2026-08-20",
+      "lastVerified": "2026-10-12",
+      "note": "Dated open-public-access announcement; not a guarantee of any address or individual trip."
+    },
+    {
+      "id": "waymo-areas",
+      "label": "Waymo service areas and rider admission",
+      "href": "https://support.google.com/waymo/answer/9059119?hl=en",
+      "publisher": "Waymo Help",
+      "date": "Undated current support page",
+      "lastVerified": "2026-10-14",
+      "note": "Current service-area page rechecked October 14: Austin remains on Uber and San Antonio no longer carries the gradual-admission label. The separately dated opening announcement establishes the new admission policy; maps and available trips remain specific to the request."
+    },
+    {
+      "id": "waymo-uber",
+      "label": "Ride with Waymo in Austin on Uber",
+      "href": "https://support.google.com/waymo/answer/16011725?hl=en",
+      "publisher": "Waymo Help",
+      "date": "Undated current support page",
+      "lastVerified": "2026-10-12",
+      "note": "Eligible Uber ride request, preference and matched offer differ from guaranteed vehicle selection."
+    },
+    {
+      "id": "zoox-austin",
+      "label": "Zoox Austin current rider page",
+      "href": "https://zoox.com/austin",
+      "publisher": "Zoox",
+      "date": "Undated current city page",
+      "lastVerified": "2026-10-12",
+      "note": "Full rendered body says coming soon and invites app waitlist entry. A city name/menu entry alone does not establish bookable public rides."
+    },
+    {
+      "id": "zoox-houston",
+      "label": "Zoox Houston and San Diego testing announcement",
+      "href": "https://zoox.com/journal/zoox-now-testing-houston-san-diego",
+      "publisher": "Zoox",
+      "date": "2026-09-01",
+      "lastVerified": "2026-10-12",
+      "note": "Retrofitted test fleet/manual mapping first; autonomous testing and purpose-built vehicles are later stages. Twelve-location presence is not twelve open ride-hail markets."
+    },
+    {
+      "id": "tesla-rider",
+      "label": "Tesla Robotaxi rider support",
+      "href": "https://www.tesla.com/support/robotaxi",
+      "publisher": "Tesla",
+      "date": "Undated current support page",
+      "lastVerified": "2026-10-12",
+      "note": "Lists limited Austin, Dallas, Houston service areas, self-booking, vehicle-specific rules and app fare estimates. Does not establish a citywide service guarantee or trip-level vehicle assignment."
+    },
+    {
+      "id": "tesla-fsd",
+      "label": "Tesla Full Self-Driving (Supervised) support",
+      "href": "https://www.tesla.com/support/fsd",
+      "publisher": "Tesla",
+      "date": "Undated current support page; official indexed body checked2026-10-12",
+      "lastVerified": "2026-10-12",
+      "note": "Official support states active driver supervision and that the feature does not make the vehicle autonomous. Direct retrieval encountered protection/timeout; indexed official text supplies this narrow distinction, not comparative collision-rate evidence."
+    },
+    {
+      "id": "avride-launch",
+      "label": "Uber and Avride Dallas launch",
+      "href": "https://www.uber.com/us/en/newsroom/avride-on-uber/",
+      "publisher": "Uber",
+      "date": "2025-12-03",
+      "lastVerified": "2026-10-12",
+      "note": "Launch described nine square miles and an onboard specialist behind the wheel, with future driverless operation. Those are dated launch conditions, not an assertion of unchanged October coverage or onboard mode."
+    },
+    {
+      "id": "may-arlington",
+      "label": "May Mobility fifth-generation update and Arlington plan",
+      "href": "https://maymobility.com/posts/may-mobility-launches-new-av-architecture/",
+      "publisher": "May Mobility",
+      "date": "2026-05-20",
+      "lastVerified": "2026-10-12",
+      "note": "Release describes Arlington Uber deployment as upcoming. Issuer-wide rides/miles are not used as Texas-only or driverless-only metrics."
+    },
+    {
+      "id": "may-locations",
+      "label": "May Mobility active deployments",
+      "href": "https://maymobility.com/locations/",
+      "publisher": "May Mobility",
+      "date": "Undated current locations page",
+      "lastVerified": "2026-10-12",
+      "note": "Current active list read at review includes Atlanta, Grand Rapids and Eden Prairie, without an Arlington public-booking listing. That absence warrants confirmation; it does not independently prove no Texas operations."
+    },
+    {
+      "id": "dps-catalog",
+      "label": "DPS platform-specific responder-plan catalog",
+      "href": "https://www.dps.texas.gov/section/cav/connected-autonomous-vehicles",
+      "publisher": "Texas Department of Public Safety",
+      "date": "Page labeled2026-02-27; current catalog checked2026-10-12",
+      "lastVerified": "2026-10-12",
+      "note": "Includes multiple passenger/freight platforms. Posting is not an operator census, authorization finding or commercial-booking map."
+    },
+    {
+      "id": "crash-method",
+      "label": "NHTSA crash-reporting limitations",
+      "href": "https://www.nhtsa.gov/laws-regulations/standing-general-order-crash-reporting",
+      "publisher": "National Highway Traffic Safety Administration",
+      "date": "2025 amendment effective2025-06-16; current data through2026-08-17",
+      "lastVerified": "2026-10-12",
+      "note": "Different reporting conditions and exposure denominators prevent a valid simple ranking from raw counts; information can be incomplete and updated."
+    },
+    {
+      "id": "avride-current",
+      "label": "Avride on Uber: current Dallas rider guidance",
+      "href": "https://www.uber.com/us/en/r/autonomous/dallas-tx-us/",
+      "publisher": "Uber",
+      "date": "Undated current service page",
+      "lastVerified": "2026-10-13",
+      "note": "Central Dallas north of Trinity River; optional matching for eligible requests; onboard specialist can take control; three rear-seat riders and seven-minute boarding window. Trip-level availability is not independently booked."
+    },
+    {
+      "id": "austin-school-bus",
+      "label": "NTSB preliminary Austin school-bus investigation",
+      "href": "https://www.ntsb.gov/investigations/Pages/HWY26FH007.aspx",
+      "publisher": "National Transportation Safety Board",
+      "date": "Event 2026-01-12; preliminary release 2026-03-03",
+      "lastVerified": "2026-10-13",
+      "note": "HWY26FH007: preliminary narrative says no crash; remote-assistance response preceded passing. Status observed Ongoing October 13. No final probable cause, current defect persistence or comparative failure rate established."
+    },
+    {
+      "id": "cybercab-audit",
+      "label": "NHTSA announces Cybercab certification audit after Austin deployment",
+      "href": "https://www.nhtsa.gov/press-releases/investigation-tesla-cybercab-self-certification",
+      "publisher": "National Highway Traffic Safety Administration",
+      "date": "2026-09-04",
+      "lastVerified": "2026-10-13",
+      "note": "Announced audit of self-certification against applicable FMVSS. Establishes the inquiry opening, not noncompliance, suspension or its current disposition; future rulemaking does not itself change existing standards."
+    },
+    {
+      "id": "waymo-sa-open",
+      "label": "San Antonio and SAT open to all riders",
+      "href": "https://support.google.com/waymo/answer/18765688",
+      "publisher": "Waymo Help",
+      "date": "2026-10-14",
+      "lastVerified": "2026-10-14",
+      "type": "Dated operator announcement",
+      "note": "October 14 notice removes the invitation requirement for San Antonio and opens SAT to all riders. A specific route, pickup and available vehicle still require the booking app."
+    }
+  ],
+  "image": "/images/social/texas-robotaxi-business-service-map.png",
+  "resources": [
+    {
+      "label": "Texas autonomy source and decision ledger",
+      "href": "/research/texas-research-library-2026-10-14.json",
+      "description": "Primary evidence, declared assumptions and update triggers across the Texas business and autonomy library.",
+      "format": "JSON"
+    }
+  ]
+}

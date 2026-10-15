@@ -1,0 +1,270 @@
+{
+  "slug": "texas-franchise-tax-reporting-business-decisions",
+  "path": "/research/texas/texas-franchise-tax-reporting-business-decisions",
+  "title": "No tax due still needs an owner",
+  "displayTitle": "No tax due still needs an owner",
+  "seoTitle": "Texas Franchise Tax 2026: Threshold, Filing & Business Decisions",
+  "subtitle": "The $2.65 million threshold changes the return. It does not generally remove the annual information report or the need to choose a computation method carefully.",
+  "seoDescription": "Research for Texas founders and finance teams on 2026 franchise tax filing, the $2.65M threshold, annualization, EZ versus long form, and current R&D credits.",
+  "category": "TEXAS BUSINESS",
+  "date": "2026-10-12",
+  "dateModified": "2026-10-13",
+  "readTime": "10 MIN",
+  "kind": "research",
+  "author": "Sulayman Bowles",
+  "openingPresentation": "integrated",
+  "evidenceBoundary": "Official Comptroller instructions and guidance checked October 12, 2026. The worked figures are declared hypothetical inputs, not a filed return or company result. Entity, nexus, combined-group, sourcing, deduction and credit treatment require the taxpayer's actual facts and professional review. This article concerns Texas franchise-tax decisions, not a complete federal or multistate tax analysis. Targeted October 13 revision: allowable-deduction sensitivity and explicit 2026 scope for the credit constraint. Original source-check dates remain attached to the individual references.",
+  "content": [
+    "Close the annual filing even when the Texas company owes no franchise tax. For the 2026 report, the no-tax-due threshold is $2.65 million of annualized total revenue. Ordinary taxable entities at or below it no longer file a No Tax Due Report, but generally still file a Public Information Report or Ownership Information Report. Finance needs a completed reporting record as well as a tax estimate. [2026 forms and filing requirements](#source-forms)",
+    "The Comptroller's July and August 2026 notices make the issue current. Its notice guidance directs below-threshold businesses with a 2026 notice of intent to forfeit to complete their information report. A valid extension is a separate status: the 2026 instructions identify November 16, 2026 for the applicable extended filing deadline, subject to timely requests and payment conditions. Non-EFT filers can have that extension; mandatory EFT filers needed a second extension, because their first extended date was August 17, 2026. A business should establish which status it actually has before putting a date on the finance calendar. [Current notices](#source-rates) · [2026 instructions, page 7](#source-instructions)",
+    "The useful management task is to connect three decisions: who must report, what computation produces the defensible tax amount, and who retains the evidence that the filing was accepted. The answer belongs in the company's entity register, acquisition diligence and recurring close process. A remembered threshold is insufficient when the accounting period, ownership or business model changes."
+  ],
+  "sections": [
+    {
+      "id": "threshold-and-report",
+      "title": "Separate the tax amount from the filing obligation",
+      "paragraphs": [
+        "The threshold applies to annualized total revenue from the entire business, rather than Texas sales alone or net profit. Report year also matters: the Comptroller lists $2.65 million for 2026 and 2027, compared with $2.47 million for 2024 and 2025. An old return is useful evidence of the previous filing; its threshold should not silently become the new year's rule. [Rates and thresholds](#source-rates)",
+        "Corporations, LLCs, limited partnerships, professional associations and financial institutions generally use the PIR; other legally formed taxable entities use the OIR. The official guidance identifies exceptions, including exempt entities, qualifying passive entities and qualifying new veteran-owned businesses during their initial five-year period. An ordinary LLC should not borrow one of those exceptions merely because it has little revenue. [PIR and OIR guidance](#source-information)",
+        "Make the entity register show the legal name, taxpayer identifier, report year, accounting period, group membership, required forms, responsible preparer and acceptance receipt. Keep private identifiers out of a public research file. The owner should be able to demonstrate that the relevant report was filed, rather than produce an email saying that the company expected to owe zero.",
+        "The annual report date is ordinarily May 15, with the next-business-day rule for weekends and holidays. A below-threshold information report can have an extension, but the request still must satisfy the applicable requirements. For an October 2026 review, obtain the actual extension evidence or resolve a missed original filing; do not assume every business has until November. [Filing dates](#source-rates) · [Extension guidance](#source-extension)"
+      ],
+      "table": {
+        "caption": "A tax estimate and a filing record answer different questions",
+        "columns": [
+          "Evidence",
+          "What it establishes",
+          "What finance should still resolve"
+        ],
+        "rows": [
+          [
+            "Revenue below the year's threshold",
+            "Potential no-tax-due treatment under the applicable rules",
+            "Information-report requirement, exceptions, period and group treatment"
+          ],
+          [
+            "A zero-payment extension request",
+            "A submitted request",
+            "Timeliness, eligibility, acceptance and the resulting deadline"
+          ],
+          [
+            "A preparer's completed return",
+            "Prepared calculations and forms",
+            "Successful submission, payment and account status"
+          ],
+          [
+            "Current public account status",
+            "The status shown when checked",
+            "Supporting receipts and other entity or transaction requirements"
+          ]
+        ],
+        "note": "Original operating-control framework. The taxpayer's official account and accepted filings determine its actual status."
+      }
+    },
+    {
+      "id": "annualization-and-scope",
+      "title": "A short accounting period can change the threshold answer",
+      "paragraphs": [
+        "The 2026 instructions annualize revenue for a period shorter or longer than twelve months by dividing total revenue by the number of days in the period and multiplying by 365. That annualized amount is used for threshold eligibility; it does not replace actual revenue in the tax calculation. A new entity, merger or accounting-period change deserves a fresh check. [Instructions, annualized total revenue](#source-instructions) · [Reports and payments FAQ](#source-reports)",
+        "Suppose a hypothetical entity reports $1.4 million of total revenue over 182 days. The annualized amount is approximately $2.808 million: $1.4 million divided by 182, multiplied by 365. It exceeds the 2026 threshold even though the actual period's receipts are below $2.65 million. The example demonstrates a screening error; it does not compute the entity's tax or decide its reporting category.",
+        "Entity labels also need care. The Comptroller's overview distinguishes entities subject to the tax from exclusions and explains that an affiliated group engaged in a unitary business files a combined report. Members use the same margin method. A collection of subsidiaries cannot be screened responsibly by looking only at each one's bank deposits or an LLC's federal tax label. [Franchise-tax overview](#source-overview)",
+        "For a buyer, request the legal-entity chart, actual accounting periods, submitted returns, affiliate schedules and current status before treating a business as administratively clean. Reconcile that package with the acquisition perimeter. A new holding company or an entity left behind by the seller can change who owns the remaining filing task, even when the purchase-price model shows little tax expense."
+      ]
+    },
+    {
+      "id": "computation-choice",
+      "title": "Choose the computation on the actual economics",
+      "paragraphs": [
+        "For 2026, the EZ revenue threshold is $20 million and its rate is 0.331 percent. The ordinary long-form rates are 0.75 percent, or 0.375 percent for qualifying retail or wholesale activity. Those numbers do not make EZ the cheapest return automatically. The forms use different bases and preserve different options. [Rates and thresholds](#source-rates)",
+        "The long-form margin alternatives include 70 percent of total revenue, revenue less allowable cost of goods sold, revenue less allowable compensation, and revenue less $1 million. Margin is then apportioned using Texas gross receipts under the relevant sourcing rules. Book expense classifications do not prove that a deduction is allowable. The overview, for example, says compensation excludes 1099 labor and employer payroll taxes. [Margin, deductions and apportionment](#source-overview)",
+        "EZ is available to an eligible entity or combined group with annualized total revenue of $20 million or less, but the method gives up margin deductions and franchise-tax credits. Have the preparer show a defensible comparison before electing it. The relevant question is total cost and supported eligibility, rather than which form looks shorter. [Computation and filing requirements](#source-filing)",
+        "Use a declared hypothetical service company with $12 million total revenue, $9 million of properly sourced Texas receipts and $7 million of assumed allowable compensation after all applicable limits. Assume ordinary 0.75 percent long-form treatment, no credits, no combined-group complications and a twelve-month period. These assumptions are chosen to explain the mechanics; they are not evidence that this deduction is available to a real service company.",
+        "The compensation method produces $5 million of margin, compared with $8.4 million under the 70 percent method and $11 million under revenue less $1 million. With assumed 75 percent Texas apportionment, the compensation scenario's taxable margin is $3.75 million and modeled tax is $28,125. EZ produces $12 million × 75 percent × 0.331 percent, or $29,790. The long-form tax is $1,665 lower before preparation costs or credits.",
+        "If the incremental preparation cost for the long form were an assumed $2,200, that comparison would reverse on combined tax and preparation cost. A supported $5,000 credit would reverse it again. Neither is a forecast of a taxpayer's bill. The exercise shows why finance should retain the computation, eligible-credit analysis and compliance cost in the same approval package.",
+        "Deduction support is the decision variable. Holding revenue, apportionment and all other assumptions fixed, long-form tax beats $29,790 EZ only when allowable compensation exceeds $6.704 million. At $6.65 million it is $30,093.75. With the assumed $2,200 incremental preparation cost and no credit, break-even compensation rises to approximately $7.095 million. These thresholds test documented allowable compensation, not a book-payroll total; another margin method or valid credit can change the choice."
+      ],
+      "table": {
+        "caption": "Worked computation choice with declared inputs",
+        "columns": [
+          "Scenario",
+          "Modeled tax",
+          "Interpretation"
+        ],
+        "rows": [
+          [
+            "EZ, $12M revenue and 75% Texas apportionment",
+            "$29,790",
+            "No margin deduction or franchise-tax credit assumed"
+          ],
+          [
+            "Long form, $5M margin and 75% apportionment",
+            "$28,125",
+            "$1,665 lower tax before incremental preparation cost"
+          ],
+          [
+            "Long form plus $2,200 extra preparation cost",
+            "$30,325 combined cost",
+            "$535 above the EZ tax in this simplified comparison"
+          ],
+          [
+            "Same long form with an assumed valid $5,000 credit",
+            "$25,325 combined cost",
+            "Credit eligibility and limits must be demonstrated separately"
+          ]
+        ],
+        "note": "Original hypothetical arithmetic, with no taxpayer eligibility, real pricing or filed return inferred. The table omits many fact-specific adjustments."
+      }
+    },
+    {
+      "id": "research-credit-change",
+      "title": "The 2026 research-credit change deserves its own review",
+      "paragraphs": [
+        "The Comptroller's current guidance says Subchapter T took effect January 1, 2026, replacing the prior Subchapter M research credit and the research sales-tax exemption. It describes a refundable franchise-tax credit for certain entities that owe no franchise tax and links that treatment to qualified Texas research expenses reported on IRS Form 6765. Zero franchise tax does not establish that research has no potential tax value. [Current R&D credit guidance](#source-research)",
+        "The guidance identifies important constraints for the 2026 report. An entity using EZ is ineligible for the refundable credit, and an entity or combined-group member's receipt of the old research sales-tax exemption during the report's underlying period excludes the credit under the cited guidance. The required forms and deadlines differ from an ordinary information-report task. A finance team should commission a specific credit review with the preparer, rather than infer a refund from an engineering payroll total. [R&D eligibility and filing procedures](#source-research)",
+        "For the refundable route, the agency identifies Form 05-183 and, for a combined group, Form 05-184. Its guidance states a November 15 cutoff for the applicable report year or following accounting-period year and says late Form 05-183 applications are not accepted. Verify the actual calendar-adjusted due date and underlying period with the preparer; an ordinary franchise-report extension should not be treated as an extension of this separate application. [Refundable-credit forms and Due Date](#source-research)",
+        "Retain a separate workpaper linking the research activity, Texas location, federal filing and proposed Texas claim. Confirm the applicable report year, due date and any carryforward before recording a receivable. A reusable workbook should preserve the old-credit history alongside the new-credit analysis so a software change does not erase the evidence needed for a later examination."
+      ]
+    },
+    {
+      "id": "account-control",
+      "title": "Account status belongs in commercial diligence",
+      "paragraphs": [
+        "Failure to keep an account current can lead to forfeiture. The Comptroller describes consequences including generally losing the right to sue or defend in Texas court and liability for certain debts; that is more specific than saying every owner becomes liable for everything. Counsel should assess actual status, timing and the applicable law before a transaction or dispute depends on the entity. [Account-current guidance](#source-current)",
+        "For acquisition or lending diligence, obtain an observed status check and the supporting report and payment receipts. Compare the legal entity on those records with the borrower, seller or contracting party. A similarly named affiliate's clean status is not evidence for the entity taking the obligation. Keep the check date with the closing package.",
+        "The operational control is inexpensive: assign one accountable finance owner, give the preparer the correct entity and period data, and verify acceptance after submission. Escalate a notice promptly to that owner and the adviser who can resolve it. A filing plan becomes useful when another person can inspect what was required, what was sent and what the state accepted."
+      ]
+    },
+    {
+      "id": "decision-checklist",
+      "title": "Close the filing decision with an evidence package",
+      "paragraphs": [
+        "Before the next finance review, reconcile the entity register with submitted reports and the actual account. The work should leave an owner, a supported computation and a dated acceptance record. Reopen it when the report year, accounting period, group structure, Texas receipts, eligible deductions or credit regime changes.",
+        "This article's rates and instructions were checked October 12, 2026. A later threshold announcement, amended credit guidance, account notice or transaction can change the answer. Update the specific workpaper and source, retaining what changed, instead of copying a prior year's zero-tax conclusion into a new approval."
+      ],
+      "bullets": [
+        "Which legal entities and accounting periods does the filing cover, including combined-group membership?",
+        "Was the threshold checked against correctly annualized total revenue for the actual report year?",
+        "Which information report, computation method and eligible credit analysis are required?",
+        "What evidence establishes a valid extension or resolves an outstanding notice?",
+        "Who verifies submission, payment, acceptance and current status, and retains the receipts?"
+      ]
+    }
+  ],
+  "conclusion": {
+    "title": "Own the return and the record",
+    "content": "Texas franchise-tax compliance is a small recurring decision with links to financing, contract enforcement and acquisition diligence. Keep the threshold, method choice, credit analysis and filing evidence together. That gives finance a supported amount to budget and an entity whose reporting status can be demonstrated when a commercial decision depends on it."
+  },
+  "faqs": [
+    {
+      "question": "What is the Texas franchise-tax no-tax-due threshold for 2026?",
+      "answer": "The Comptroller lists $2.65 million of annualized total revenue for 2026 and 2027. Total revenue and Texas receipts are different measures; a short accounting period needs annualization for the threshold screen. [Official thresholds](#source-rates) · [2026 instructions](#source-instructions)"
+    },
+    {
+      "question": "Does a below-threshold Texas LLC still file an annual report?",
+      "answer": "An ordinary taxable LLC generally must file its PIR even when it owes no franchise tax and no longer files a No Tax Due Report. The official guidance identifies separate exceptions; small revenue alone does not establish one. [PIR and OIR requirements](#source-information)"
+    },
+    {
+      "question": "Is the EZ computation always cheaper?",
+      "answer": "No. EZ uses a 0.331 percent rate on its apportioned revenue base and gives up margin deductions and franchise-tax credits. Compare supported long-form treatment, preparation cost and credit eligibility using the actual taxpayer's facts. [Computation options](#source-filing) · [Rates](#source-rates)"
+    },
+    {
+      "question": "Can a business owing no Texas franchise tax qualify for an R&D refund?",
+      "answer": "Certain entities can qualify under the current Subchapter T guidance, but no-tax-due status alone is insufficient. Federal Form 6765, Texas research attribution, method choice, prior sales-tax-exemption use, forms and deadlines matter. [Current R&D credit guidance](#source-research)"
+    }
+  ],
+  "sources": [
+    {
+      "id": "rates",
+      "label": "Franchise tax: 2026 notices, rates, thresholds and due dates",
+      "href": "https://comptroller.texas.gov/taxes/franchise/",
+      "publisher": "Texas Comptroller of Public Accounts",
+      "date": "Current guidance; 2026–2027 rate table",
+      "lastVerified": "2026-10-12"
+    },
+    {
+      "id": "forms",
+      "label": "Texas franchise-tax report forms for 2026",
+      "href": "https://comptroller.texas.gov/taxes/franchise/forms/2026-franchise.php",
+      "publisher": "Texas Comptroller of Public Accounts",
+      "date": "2026 report year",
+      "lastVerified": "2026-10-12"
+    },
+    {
+      "id": "instructions",
+      "label": "2026 franchise-tax instructions, Form 05-915",
+      "href": "https://comptroller.texas.gov/forms/05-915.pdf",
+      "publisher": "Texas Comptroller of Public Accounts",
+      "date": "2026 instructions",
+      "lastVerified": "2026-10-12",
+      "note": "Printed pages 5 and 7: annualization and the November 16, 2026 extension date. Extension eligibility is conditional."
+    },
+    {
+      "id": "information",
+      "label": "Public Information Report and Ownership Information Report requirements",
+      "href": "https://comptroller.texas.gov/taxes/franchise/pir-oir-filing-req.php",
+      "publisher": "Texas Comptroller of Public Accounts",
+      "date": "Current guidance",
+      "lastVerified": "2026-10-12"
+    },
+    {
+      "id": "filing",
+      "label": "Requirements for reporting and paying franchise tax",
+      "href": "https://comptroller.texas.gov/taxes/franchise/filing-requirements.php",
+      "publisher": "Texas Comptroller of Public Accounts",
+      "date": "Current guidance",
+      "lastVerified": "2026-10-12"
+    },
+    {
+      "id": "overview",
+      "label": "Franchise-tax overview: scope, margin and combined reporting",
+      "href": "https://comptroller.texas.gov/taxes/publications/98-806.php",
+      "publisher": "Texas Comptroller of Public Accounts",
+      "date": "Current overview",
+      "lastVerified": "2026-10-12"
+    },
+    {
+      "id": "reports",
+      "label": "Franchise-tax reports and payments FAQ",
+      "href": "https://comptroller.texas.gov/taxes/franchise/faq/reports-payments.php",
+      "publisher": "Texas Comptroller of Public Accounts",
+      "date": "Current guidance",
+      "lastVerified": "2026-10-12"
+    },
+    {
+      "id": "extension",
+      "label": "Franchise-tax extensions of time to file",
+      "href": "https://comptroller.texas.gov/taxes/franchise/filing-extensions.php",
+      "publisher": "Texas Comptroller of Public Accounts",
+      "date": "Current guidance; consult report-year instructions for calendar dates",
+      "lastVerified": "2026-10-12"
+    },
+    {
+      "id": "research",
+      "label": "Subchapter T research-and-development franchise-tax credit guidance",
+      "href": "https://comptroller.texas.gov/taxes/franchise/research-dev-credit.php",
+      "publisher": "Texas Comptroller of Public Accounts",
+      "date": "Current guidance for the January 1, 2026 change",
+      "lastVerified": "2026-10-12"
+    },
+    {
+      "id": "current",
+      "label": "Making a franchise-tax account current, 2024 and later",
+      "href": "https://comptroller.texas.gov/taxes/franchise/current-2024.php",
+      "publisher": "Texas Comptroller of Public Accounts",
+      "date": "Current guidance",
+      "lastVerified": "2026-10-12"
+    }
+  ],
+  "image": "/images/social/texas-franchise-tax-reporting-business-decisions.png",
+  "resources": [
+    {
+      "label": "Texas business source and decision ledger",
+      "href": "/research/texas-research-library-2026-10-13.json",
+      "description": "Primary evidence, declared assumptions and update triggers across the Texas business and autonomy library.",
+      "format": "JSON"
+    }
+  ],
+  "searchTerms": [
+    "Texas franchise tax 2026 2027 $2.65 million threshold PIR OIR no tax due EZ long form research development refundable credit November 16 annualized revenue"
+  ]
+}

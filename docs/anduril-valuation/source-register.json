@@ -1,0 +1,52 @@
+{
+  "asOf": "2026-10-14",
+  "articlePath": "src/personal/editorial/data/articles/anduril-valuation-capital-productivity.json",
+  "sourceLedger": "The article sources array carries S1-S17, exact URLs, publishers, dates, verification dates and claim-specific limitations.",
+  "claims": [
+    {"sources":["S1"],"claim":"Completed $5bn financing at $61bn and company-reported $2.2bn 2025 sales.","status":"Reported transaction and unaudited company disclosure"},
+    {"sources":["S2"],"claim":"Financing discussions near $100bn.","status":"Reported negotiations, not a completed transaction"},
+    {"sources":["S3","S4"],"claim":"March planning anchors of $4.3bn 2026 sales and $1.2bn operating loss.","status":"Reported projections; underlying investor materials not inspected; S4 repeats S3 rather than independently confirming it"},
+    {"sources":["S5","S11"],"claim":"Army enterprise framework and NGC2 fielding expansion.","status":"Contract scope and ceilings, not summed funded backlog, recognized revenue or software ARR"},
+    {"sources":["S6","S7"],"claim":"Arsenal-2 private investment, Navy outcome-linked purchase contract and announced taxpayer project stake.","status":"Announcements; final cash schedule, financing terms and minority rights unresolved"},
+    {"sources":["S8","S9","S16"],"claim":"Fury first output, Steelfin development status and Barracuda production framework.","status":"Different evidence classes; first output, testing plans and announced unit framework are not equivalent to accepted full-rate deliveries"},
+    {"sources":["S10","S17"],"claim":"Open architecture, separately procured autonomy, ongoing competition and performance-linked licensing payments.","status":"Official Army analysis and Air Force acquisition announcement; no final summer-2027 provider selection claimed"},
+    {"sources":["S12"],"claim":"First-half 2026 Lockheed Martin MFC segment operating margin of 14.1%.","status":"Reported segment metric, not directly comparable with consolidated Anduril EBIT"},
+    {"sources":["S13","S14","S15"],"claim":"Mission-autonomy integration, NATO platform selection and proposed international joint venture.","status":"Company announcements; no standalone recurring revenue, margin or wholly attributable joint-venture sales inferred"}
+  ],
+  "editorialReferences": [
+    {"url":"https://research.contrary.com/company/kalshi","purpose":"Structure and mechanism analysis; dated memo, not current financial evidence"},
+    {"url":"https://sacra.com/c/kalshi/","purpose":"Separate activity, monetization and distribution; not an Anduril comparable"},
+    {"url":"https://www.notboring.co/p/ramp-at-1-billion","purpose":"Product-to-economics writing reference, not a defense valuation multiple"},
+    {"path":"src/personal/editorial/data/articles/chegg-cash-flow-turnaround.json","purpose":"Cash-flow explanation and source boundaries"},
+    {"path":"src/personal/editorial/data/articles/hidden-financing-hardware-startups.json","purpose":"Funding obligations and ownership attribution"}
+  ],
+  "additionalPrimaryCapture": {
+    "source":"S17",
+    "captureId":"94b523f47e6c4ecdb353984d363b0782",
+    "capturedAt":"2026-10-14T17:06:27Z",
+    "url":"https://www.usafe.af.mil/News/Article-Display/Article/4520575/air-force-advances-future-of-air-superiority-with-cca-contracts/",
+    "htmlSha256":"dfeee05e8ecf8e52b30ecb250b870249e97cba57d99b0df4b252d23cf2bf2628",
+    "markdownSha256":"fd072a36357fc5304abd7635a7503895ef6342f547ed0476284c05daf4893151",
+    "scope":"Full text inspected on an official Air Force mirror; canonical af.mil retrieval had been blocked. The capture is retained in the connected research service, not bundled as a copyrighted full-text republication."
+  },
+  "authorAssumptions": [
+    "All forecast revenue growth, margins, contribution shares and capital ratios",
+    "Arsenal-2 investment timing; overrun stress does not claim a new depreciation schedule",
+    "Tax, required return, maturity fade, terminal growth and return on new capital",
+    "$3bn net cash and separate $3bn available liquidity; zero outside deduction means an unadjusted bridge",
+    "Two-year margin delay leaves revenue and investment schedules unchanged",
+    "Extra collection days create incremental receivables beginning in 2027 and require capital beyond 2041",
+    "Noncash compensation addbacks of 2% or 4% of sales are cash-timing illustrations only; economic valuation is unchanged",
+    "Scenario outcomes and one-at-a-time stresses have no assigned probabilities"
+  ],
+  "corrections": [
+    "Removed the implication that the economic FCF deficit determines actual external financing needs",
+    "Translated margin shares into separately paid software revenue requirements",
+    "Added explicit operating stresses and an outside-claim-aware reverse solver",
+    "Replaced an unrelated Ramp editorial citation in the article with the inspected CCA primary source",
+    "Corrected the earlier PR's description of the user's named writing reference: Kalshi, not Ramp"
+  ],
+  "unresolved": ["Current unrestricted cash and debt", "Funded backlog and segment profitability", "Actual stock compensation and share-class rights", "Final project minority-interest terms and fair value", "Opening invested capital and a complete tax-loss schedule"],
+  "modelPath":"public/research/anduril-valuation/model.py",
+  "stressModelPath":"public/research/anduril-valuation/stress.py"
+}

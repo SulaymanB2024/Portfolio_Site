@@ -1,0 +1,22 @@
+{
+  "TEST_FIXTURE_ONLY": true,
+  "trading_date": "2028-10-12",
+  "corporate_actions_reconciled": true,
+  "prices": {
+    "TEST_SPLIT": {
+      "close": 60,
+      "shares_per_entry_share": 2,
+      "cash_distributions_per_entry_share": 3
+    },
+    "TEST_DELIST": {
+      "close": 0,
+      "shares_per_entry_share": 1,
+      "cash_distributions_per_entry_share": 0
+    },
+    "SPY": {
+      "close": 11,
+      "shares_per_entry_share": 1,
+      "cash_distributions_per_entry_share": 0.2
+    }
+  }
+}

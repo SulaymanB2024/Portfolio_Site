@@ -1,0 +1,260 @@
+{
+  "slug": "texas-data-center-sales-tax-project-economics",
+  "path": "/research/texas/texas-data-center-sales-tax-project-economics",
+  "title": "The data-center tax break is conditional",
+  "displayTitle": "The data-center tax break is conditional",
+  "seoTitle": "Texas Data Center Tax Exemptions 2026: Eligibility & Project Economics",
+  "subtitle": "Two certification routes have different local-tax treatment, investment clocks and operating commitments. Model the eligible purchases and the risk of losing the benefit.",
+  "seoDescription": "Texas data-center tax research: standard versus large-project eligibility, state and local sales tax, certification timing, qualifying purchases and repayment risk.",
+  "category": "TEXAS BUSINESS",
+  "date": "2026-10-12",
+  "dateModified": "2026-10-13",
+  "readTime": "11 MIN",
+  "kind": "research",
+  "author": "Sulayman Bowles",
+  "openingPresentation": "integrated",
+  "evidenceBoundary": "Current Tax Code §§151.359 and 151.3595, official agency guidance, July 2026 application forms and the certification list checked October 12, 2026. A material investment-clock discrepancy between the statute and agency summary is identified explicitly. Scenarios are original hypothetical inputs, not certified projects or tax advice. No site-specific power, water, permit, job or compliance outcome is asserted. Targeted October 13 revision: controlling job exclusions, two agency-summary conflicts and separate purchase cohorts. Original source-check dates remain attached to the individual references.",
+  "content": [
+    "Identify the exemption route before putting Texas tax savings into a data-center equipment budget. The standard qualifying-data-center route exempts eligible purchases from the 6.25 percent state tax while local tax remains due. The qualifying-large-project route covers state and local sales and use tax on eligible purchases. Qualification of the facility, purchase and purchaser determines which benefit belongs in the model. [Official program overview](#source-overview) · [Exemption certificate](#source-certificate)",
+    "The current public register includes new 2026 certifications, so the program is more than a proposed incentive. Its LBB01 row, for example, lists a July 10, 2026 effective date and separately identifies the owner, occupant and operator. That is evidence of the listed certification roles and date. It is not evidence that a prospective customer's rack is ready, that every capital commitment has been fulfilled or that an unregistered purchaser can claim the exemption. [Official certification list](#source-list)",
+    "For finance, the decision has three parts: establish the exact certification route and timeline, determine which purchases and parties are eligible, and retain an operating plan that meets the commitments behind the benefit. Treat the power connection, water supply and permits as separate conditions. A tax registration number cannot substitute for the evidence needed to energize a facility."
+  ],
+  "sections": [
+    {
+      "id": "two-certification-routes",
+      "title": "The two routes produce different tax and capital cases",
+      "paragraphs": [
+        "The standard application describes at least 100,000 square feet in a single building or part of one, a single qualifying occupant, at least 20 qualifying jobs, and at least $200 million of capital investment over five years beginning at certification. The exemption lasts ten years for investment below $250 million but at least $200 million, or fifteen years when the required investment reaches $250 million. All other conditions still apply. [Standard application](#source-standard) · [Duration guidance](#source-overview)",
+        "The large-project application describes at least 250,000 square feet in one or more qualifying buildings, at least 40 qualifying jobs, $500 million of investment and a commitment to contract for at least 20 megawatts of transmission capacity. The application accepts a contract or proposed contract; certification does not establish an executed power commitment. The statutory investment definition excludes replacing personal property previously placed in service in that large project. A large procurement budget or a proposed 20MW load does not alone establish eligibility. [Large-project application, pages 1–2](#source-large) · [§151.3595(d)](#source-code)",
+        "Both routes involve a single qualifying occupant and operating safeguards such as backup power, fire protection and physical security. The applications prohibit that occupant from subleasing the qualifying space or property. A multi-tenant leasing strategy therefore deserves a specific eligibility review before the tax benefit enters the investment case. Floor area cannot resolve the business-model question by itself. [Applications, first pages](#source-standard) · [Large-project application](#source-large)",
+        "Jobs must be qualifying full-time permanent positions, with pay at least 120 percent of the applicable county average weekly wage and a five-year duration. The statute defines the wage reference when the qualifying job is created. Retain the actual benchmark, role, employer and evidence, including the required permanent assignment for third-party-employer jobs. A construction-headcount announcement is a different measure. [§151.359(a); §151.3595(a)](#source-code)",
+        "Both routes exclude jobs moved from another Texas county from their job-creation minimum. A hypothetical 25-position standard-route plan containing ten such transfers supplies only fifteen countable positions before the other conditions, below the required twenty. A headcount plan must classify created jobs, moved jobs, wage benchmarks and duration separately. [§151.359(d)(2)(A); §151.3595(d)(2)(A)](#source-code)."
+      ],
+      "table": {
+        "caption": "Certification routes should occupy separate underwriting columns",
+        "columns": [
+          "Feature",
+          "Qualifying data center",
+          "Qualifying large project"
+        ],
+        "rows": [
+          [
+            "Minimum space",
+            "100,000 sq ft in a building or part",
+            "250,000 sq ft across qualifying buildings/parcels"
+          ],
+          [
+            "Qualifying jobs",
+            "20",
+            "40"
+          ],
+          [
+            "Minimum capital investment",
+            "$200M",
+            "$500M, with the statutory replacement exclusion"
+          ],
+          [
+            "Transmission-capacity condition",
+            "Check the complete route requirements",
+            "Commitment to contract for at least 20MW"
+          ],
+          [
+            "Eligible-purchase tax treatment",
+            "State 6.25% exemption; local tax remains",
+            "State and local exemption"
+          ],
+          [
+            "Exemption duration",
+            "10 or 15 years according to investment",
+            "20 years, subject to the requirements"
+          ],
+          [
+            "Investment clock",
+            "Five years from certification",
+            "Statute: five years from earlier application or certification"
+          ]
+        ],
+        "note": "Official applications and §§151.359/.3595 provide the screens, not a complete eligibility determination. The large-project investment-clock difference from the agency summary is discussed below."
+      }
+    },
+    {
+      "id": "investment-clock",
+      "title": "Resolve the investment clock before filing",
+      "paragraphs": [
+        "A material source discrepancy deserves attention. Current §151.3595(d)(2)(B) starts the large project's five-year investment period on the earlier of the application-submission date or certification date. The agency overview and July 2026 AP-236 application summary describe a period beginning at certification. These are different dates when an application precedes approval. The statutory text is the basis of this article's timing screen. [Current statute](#source-code) · [Agency summary](#source-overview) · [AP-236, page 1](#source-large)",
+        "Consider a declared hypothetical application submitted July 1 and certification issued October 1 in the same year. A model using certification as the large-project investment start would leave three more months than one using the statute's earlier application date. The difference can affect procurement, delivery and commissioning commitments near the five-year boundary. Have counsel and the Comptroller resolve the actual project's timeline in writing before relying on it.",
+        "The investment clock and the exemption start are also different questions. Under the large-project statute, the exemption starts on certification and runs for the specified twenty-year term, subject to satisfying the requirements. Early application does not make all early purchases tax-free. The agency's refund guidance says purchases before certification are ineligible for the data-center refund. [§151.3595(f)](#source-code) · [Refund guidance](#source-overview)",
+        "Keep a dated schedule showing application, certification, registration of each qualifying purchaser, procurement commitments, item delivery and claimed investment. Distinguish order date, invoice date, payment date and the event that satisfies the relevant rule. The tax adviser should determine treatment for actual transaction terms; an investment spreadsheet's generic capital-spend date is insufficient evidence."
+      ]
+    },
+    {
+      "id": "purchase-and-purchaser",
+      "title": "Classify the purchase and the party making it",
+      "paragraphs": [
+        "The official exemption certificate lists eligible operating equipment and systems, including servers, cooling, electricity, emergency generation, network equipment and software, subject to the necessary-and-essential requirement. It separately lists exclusions such as office supplies, short-term rentals and specified services. A construction budget therefore cannot be multiplied by a tax rate wholesale to produce an exemption estimate. [Form 01-929, front and back](#source-certificate)",
+        "Use one procurement register with the item, purpose, facility, contracting party, purchase timing, claimed route, state and local treatment, and evidence reference. The standard route leaves local sales or use tax on eligible purchases; the large route's certificate is different. Set the tax code at line-item level and preserve the eligibility review when the purchasing party or use changes. The overview repeats state-only/local-collected language inside its large-project claiming subsection, while its separate local-tax subsection says qualifying large-project purchases are exempt. This article uses the statute and Form 01-929’s route-specific checkbox, rather than that inconsistent summary. [Overview conflict](#source-overview); [certificate](#source-certificate).",
+        "The seller's certificate needs the qualifying facility registration and the qualifying purchaser's registration. The owner, operator and occupant are distinct roles even when one company fills more than one. A tenant should obtain its own applicable registration evidence; an owner's press release or unrelated affiliate's number does not establish the buyer's status. [Certificate](#source-certificate) · [Registration guidance](#source-overview)",
+        "Electricity also deserves a metering review. The agency guidance distinguishes a standalone facility with a sole qualifying occupant from mixed use on one meter, for which a predominant-use study can be required. Keep the use study, metering plan and utility documents with the tax workpaper. Tax treatment and operational curtailment exposure are separate parts of the power decision. [Electricity guidance](#source-overview)",
+        "The applications and statute exclude facilities subject to the specified old Chapter313 property-value-limitation agreements. Do not infer that every tax incentive stacks because it concerns a different tax. Build a benefit map naming the exact authority, property, party, period and compatibility condition, then have the advisers reconcile it with the executed agreements. [Applications](#source-standard) · [Large-project application](#source-large)"
+      ]
+    },
+    {
+      "id": "worked-tax-case",
+      "title": "Model qualified purchases, retained tax and repayment exposure",
+      "paragraphs": [
+        "Assume a hypothetical standard-route facility with $280 million of qualifying investment and $160 million of purchases that separately meet the exemption's item, purchaser and timing rules. Assume a 2 percent applicable local rate for the example. Those are declared inputs, not evidence for a certified project or proof that every investment dollar is an exempt purchase.",
+        "The state tax avoided on the assumed $160 million is $10 million at 6.25 percent. The assumed local tax remains $3.2 million. A model claiming an 8.25 percent exemption would overstate the saving by $3.2 million. Because assumed qualifying investment reaches $250 million, the duration screen would be fifteen years if the complete requirements were met; duration and the initial purchase saving are separate calculations.",
+        "Now assume $1.5 million of monthly qualifying electricity purchases for a full year after the exemption begins. Annual spend is $18 million, giving a simplified $1.125 million state-tax saving under the standard route. This requires supported electricity eligibility and does not assume the facility runs at a particular utilization, power price or profit margin. Budget local tax and the actual contract separately.",
+        "For a project genuinely qualifying under the large route, the same assumed eligible-purchase amount and local rate would avoid another $3.2 million of local tax. That does not justify spending an additional $220 million solely to move this $280 million example above the $500 million large-project threshold. Commercial demand, construction cost, wage commitments, power and the other eligibility conditions determine whether the larger operating project makes sense.",
+        "Run a loss-of-certification case alongside the benefit case. If the standard example's entire assumed $160 million purchase cohort lost its exemption, the associated state tax alone would be $10 million before applicable penalty and interest. Do not give that contingent exposure a probability based only on a public certification list. Ask what record demonstrates each continuing commitment and what remedy exists if a counterparty fails to perform. [Revocation guidance](#source-overview)",
+        "Map purchase cohorts to certification rather than treating eligible investment and exempt spending as one event. If an assumed $20 million of this standard example’s $160 million purchase cohort instead occurs before certification and is ineligible for the exemption, state tax avoided falls by $1.25 million to $8.75 million. Whether that spending counts toward qualifying investment is a separate timing question. The sensitivity does not alter a statutory investment clock or establish actual transaction taxability. [Exemption start and refund boundary](#source-code); [agency guidance](#source-overview)."
+      ],
+      "table": {
+        "caption": "Worked standard-route purchase and operating case",
+        "columns": [
+          "Declared input",
+          "Arithmetic",
+          "Modeled cash implication"
+        ],
+        "rows": [
+          [
+            "$160M eligible purchases",
+            "$160M×6.25%",
+            "$10M state tax avoided"
+          ],
+          [
+            "Assumed 2% local rate",
+            "$160M×2%",
+            "$3.2M local tax still due"
+          ],
+          [
+            "$1.5M monthly qualifying electricity for 12 months",
+            "$18M×6.25%",
+            "$1.125M annual state tax avoided"
+          ],
+          [
+            "Assumed revocation of the purchase-cohort exemption",
+            "$160M×6.25%",
+            "$10M state-tax exposure before penalty/interest"
+          ]
+        ],
+        "note": "Original hypothetical; eligible investment and exempt purchases are separate measures. No actual site, local rate, eligibility, refund, utility price or audit outcome inferred."
+      }
+    },
+    {
+      "id": "operating-evidence",
+      "title": "A certificate starts a continuing evidence obligation",
+      "paragraphs": [
+        "The agency says it audits qualifying investment and jobs at the five-year anniversary and reviews job retention. Revocation can make the registered parties liable for taxes, penalty and interest on earlier purchases claimed exempt. The statute's large-project revocation clause explicitly reaches claims made before revocation. A certification letter belongs at the start of the control register, rather than close the file. [Audit and revocation guidance](#source-overview) · [§151.3595(h)](#source-code)",
+        "Retain purchase records and the matching exemption certificates, capital evidence, qualifying-job documentation, wage benchmarks and local-tax payments. Reconcile the qualifying owner, operator and occupant as leases, ownership or service arrangements change. The agency guidance requires records through certification expiry and, after revocation, through resolution of assessments. [Recordkeeping guidance](#source-overview)",
+        "A contract between project parties should allocate who supplies evidence, who maintains qualifying jobs, who notifies a change and who bears an attributable tax loss. That allocation needs counsel's review and a counterparty capable of performing it. A contractual indemnity does not itself preserve state certification or ensure recoverability when the party owing it lacks cash.",
+        "Maintain parallel readiness files for the power connection, water and cooling design, air and other permits, construction completion and customer acceptance. Certification can affect tax cost while an independent operating constraint still delays revenue. The useful investment memo explains which dates are confirmed, which are conditional and which cash is committed before the conditions clear."
+      ]
+    },
+    {
+      "id": "decision-checklist",
+      "title": "Approve the tax case with the operating case",
+      "paragraphs": [
+        "Before approval, reconcile the route, purchaser, items, dates and continuing obligations in one auditable tax model. Resolve the large-project timing discrepancy using the controlling authority and written project-specific advice. Use the certification list to verify the recorded parties and date, while retaining the actual certificate and agreement package.",
+        "This research should be rechecked after a statutory amendment, revised application or rule, new certification, purchaser change, altered project schedule or audit result. Keep the established article's question and URL when updating its answer; date the actual new evidence. A proposed legislative change should remain a scenario until it is enacted and its effective provisions are verified."
+      ],
+      "bullets": [
+        "Which route and actual facility/occupant configuration qualify, and what starts the investment clock?",
+        "Which purchases, dates and registered parties can claim the exemption?",
+        "What state or local tax remains due, and which projected savings depend on future operating spend?",
+        "Who maintains investment, qualifying-job, wage, tax and certificate evidence?",
+        "What does delay, changed ownership or revoked certification do to cash and counterparty exposure?"
+      ]
+    }
+  ],
+  "conclusion": {
+    "title": "A precise tax model is part of a financeable site",
+    "content": "The data-center exemption creates value when the facility, purchaser, purchases and commitments meet the actual route. Separate eligible investment from exempt spending, state tax from local tax, and the investment clock from the exemption start. Price the continuing evidence work and repayment downside alongside the operating plan before the business commits capital."
+  },
+  "faqs": [
+    {
+      "question": "Does Texas's data-center exemption remove local sales tax?",
+      "answer": "The standard qualifying-data-center route exempts eligible purchases from state tax while local tax remains. The qualifying-large-project route covers state and local tax on eligible purchases. The facility and purchaser must meet their route's requirements. [Official certificate](#source-certificate)"
+    },
+    {
+      "question": "What is the large data-center project's investment clock?",
+      "answer": "Current §151.3595(d)(2)(B) uses five years from the earlier of application submission or certification. The agency summary and AP-236 first page describe certification, a discrepancy to resolve before relying on a project schedule. [Statute](#source-code) · [AP-236](#source-large)"
+    },
+    {
+      "question": "Can every data-center construction purchase be exempt?",
+      "answer": "No. The item must qualify, be necessary and essential, and be bought by an eligible registered party for the qualifying facility under the applicable timing rules. The certificate separately lists excluded items and services. [Form 01-929](#source-certificate)"
+    },
+    {
+      "question": "What happens if a Texas data center loses certification?",
+      "answer": "Revocation can create liability for tax, penalty and interest on earlier purchases claimed exempt. Preserve the complete investment, job, wage, purchase and certificate evidence rather than treat initial certification as a final audit. [Agency revocation guidance](#source-overview) · [§151.3595(h)](#source-code)"
+    }
+  ],
+  "sources": [
+    {
+      "id": "code",
+      "label": "Texas Tax Code Chapter 151, §§151.359 and 151.3595",
+      "href": "https://tcss.legis.texas.gov/resources/TX/htm/TX.151.htm",
+      "publisher": "Texas Legislature",
+      "date": "Current consolidated law checked October 12, 2026",
+      "lastVerified": "2026-10-13",
+      "note": "The large-project investment period begins at the earlier application/certification date under151.3595(d)(2)(B); the exemption begins on certification under(f)."
+    },
+    {
+      "id": "overview",
+      "label": "State sales-tax exemption for qualifying data centers and large projects",
+      "href": "https://comptroller.texas.gov/taxes/data-centers/",
+      "publisher": "Texas Comptroller of Public Accounts",
+      "date": "Current agency guidance",
+      "lastVerified": "2026-10-13",
+      "note": "Overview has both an earlier-application investment-clock discrepancy and inconsistent large-route state/local claiming language. Use controlling §§151.359/.3595 and route-specific Form 01-929; no private eligibility determination."
+    },
+    {
+      "id": "standard",
+      "label": "AP-233: application for a qualifying data center",
+      "href": "https://comptroller.texas.gov/forms/ap-233.pdf",
+      "publisher": "Texas Comptroller of Public Accounts",
+      "date": "Revision 7-26/7",
+      "lastVerified": "2026-10-12",
+      "note": "First page supplies standard-route eligibility and state-versus-local treatment."
+    },
+    {
+      "id": "large",
+      "label": "AP-236: application for a qualifying large data-center project",
+      "href": "https://comptroller.texas.gov/forms/ap-236.pdf",
+      "publisher": "Texas Comptroller of Public Accounts",
+      "date": "Revision 7-26/5",
+      "lastVerified": "2026-10-12",
+      "note": "Pages 1–2 supply route screens and accept a contract or proposed transmission contract. The first-page clock summary differs from §151.3595(d)(2)(B)."
+    },
+    {
+      "id": "certificate",
+      "label": "Form 01-929: data-center exemption certificate",
+      "href": "https://comptroller.texas.gov/forms/01-929.pdf",
+      "publisher": "Texas Comptroller of Public Accounts",
+      "date": "Revision 2-17/3; current linked form",
+      "lastVerified": "2026-10-12",
+      "note": "Front distinguishes standard versus large tax treatment and purchaser/facility registrations; back lists eligible and excluded items."
+    },
+    {
+      "id": "list",
+      "label": "Official data centers in Texas certification register",
+      "href": "https://comptroller.texas.gov/taxes/data-centers/data-center-lists.php",
+      "publisher": "Texas Comptroller of Public Accounts",
+      "date": "Register observed October 12, 2026",
+      "lastVerified": "2026-10-12",
+      "note": "LBB01 row effectiveJuly10,2026; owner, occupant and operator separately recorded. No operating or audit outcome inferred."
+    }
+  ],
+  "image": "/images/social/texas-data-center-sales-tax-project-economics.png",
+  "resources": [
+    {
+      "label": "Texas business source and decision ledger",
+      "href": "/research/texas-research-library-2026-10-13.json",
+      "description": "Primary evidence, declared assumptions and update triggers across the Texas business and autonomy library.",
+      "format": "JSON"
+    }
+  ],
+  "searchTerms": [
+    "Texas data center tax exemption 2026 151.359 151.3595 100000 250000 square feet $200M $500M state local tax AP233 AP236 certification investment clock 20 megawatts"
+  ]
+}

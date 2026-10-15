@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="noindex,follow">
+  <title>Who keeps the savings? — Sulayman Bowles</title>
+  <link rel="stylesheet" href="./startup-models.css">
+  <script type="module" src="./startup-models.mjs"></script>
+</head>
+<body>
+  <a class="skip" href="#harvey">Explore the models</a>
+  <header class="page-header"><a href="/">Sulayman Bowles</a><nav aria-label="Model chapters"><a href="/research/financial-systems/harvey-who-keeps-the-value-of-legal-ai">Read Harvey</a><a href="/research/financial-systems/vanta-after-the-audit">Read Vanta</a><a href="#harvey">Harvey</a><a href="#vanta">Vanta</a></nav></header>
+  <main id="top">
+    <section class="opening">
+      <p class="eyebrow">Financial systems · buyer economics</p>
+      <h1>Who keeps<br>the savings?</h1>
+      <p class="intro">Faster work creates capacity. A recurring software bill needs value the buyer can actually keep. Change the assumptions behind two startup pitches and see where the payback breaks.</p>
+      <p class="scope">Worked scenarios, in USD. Workload, adoption, pricing and value capture are assumptions. Vanta’s contract normalization uses its dated company disclosure.</p>
+      <noscript><p>This companion needs JavaScript for its calculations. The article manuscripts and Python models provide the reviewed baseline.</p></noscript>
+    </section>
+    <section id="harvey" class="model" aria-labelledby="harvey-title">
+      <div class="model-copy">
+        <p class="eyebrow">01 / Harvey</p><h2 id="harvey-title">Recovered hours have to become contribution.</h2>
+        <p id="harvey-setup">Fewer active users or more review leaves less work to monetize.</p>
+        <div class="presets" role="group" aria-label="Harvey scenarios"><button data-model="harvey" data-preset="article">Article case</button><button data-model="harvey" data-preset="adoption">30% active</button><button data-model="harvey" data-preset="review">60% review</button><button data-model="harvey" data-preset="zero">No adoption</button></div>
+        <form id="harvey-controls" aria-label="Harvey assumptions">
+          <label for="h-adoption">Active share of purchased seats <output id="h-adoption-value" for="h-adoption"></output></label><input id="h-adoption" type="range" min="0" max="100" step="5" value="60" data-key="adoption">
+          <label for="h-review">Time consumed by added review <output id="h-review-value" for="h-review"></output></label><input id="h-review" type="range" min="0" max="100" step="5" value="20" data-key="review">
+          <label for="h-capture">Released time earning contribution <output id="h-capture-value" for="h-capture"></output></label><input id="h-capture" type="range" min="0" max="100" step="5" value="25" data-key="capture">
+        </form>
+        <p class="model-context-note" id="harvey-contract"></p>
+        <details><summary>What stays fixed</summary><p id="harvey-fixed"></p><p>Credit only additional contribution from work the firm actually completes. Removed collectible hourly fees are excluded.</p><p>These are hypothetical deployment terms, not disclosed Harvey pricing. <a id="harvey-source">Harvey’s illustrative ROI framework ↗</a></p></details>
+      </div>
+      <div class="model-result" id="harvey-result"></div>
+      <p class="sr-only" id="harvey-status" role="status" aria-live="polite" aria-atomic="true"></p>
+    </section>
+    <section id="vanta" class="model" aria-labelledby="vanta-title">
+      <div class="model-copy">
+        <p class="eyebrow">02 / Vanta</p><h2 id="vanta-title">A recurring budget needs a recurring job.</h2>
+        <p>Test whether evidence work continues after audit season. Keep questionnaire time separate, then ask how much labor spending is actually avoided.</p>
+        <div class="presets" role="group" aria-label="Vanta scenarios"><button data-model="vanta" data-preset="article">Article case</button><button data-model="vanta" data-preset="audit">Audit window</button><button data-model="vanta" data-preset="capture">Full cash capture</button><button data-model="vanta" data-preset="zero">No ongoing work</button></div>
+        <form id="vanta-controls" aria-label="Vanta assumptions">
+          <label for="v-weeks">Weeks of evidence-work savings <output id="v-weeks-value" for="v-weeks"></output></label><input id="v-weeks" type="range" min="0" max="52" step="1" value="46" data-key="weeks">
+          <label for="v-questionnaires">Questionnaires handled per month <output id="v-questionnaires-value" for="v-questionnaires"></output></label><input id="v-questionnaires" type="range" min="0" max="20" step="1" value="10" data-key="questionnaires">
+          <label for="v-capture">Labor value captured as avoided cash <output id="v-capture-value" for="v-capture"></output></label><input id="v-capture" type="range" min="0" max="100" step="5" value="50" data-key="capture">
+        </form>
+        <p class="model-context-note" id="vanta-normalization"></p>
+        <details><summary>What stays fixed</summary><p id="vanta-fixed"></p><p>Salaried time freed for other work does not reduce payroll. Audit fees continue and are excluded from both alternatives. <a id="vanta-source">Company ARR checkpoint ↗</a></p></details>
+      </div>
+      <div class="model-result" id="vanta-result"></div>
+      <p class="sr-only" id="vanta-status" role="status" aria-live="polite" aria-atomic="true"></p>
+    </section>
+    <section class="ending"><p class="eyebrow">The next piece of evidence</p><h2>Measure the fraction<br>the buyer keeps.</h2><p>I would compare accepted work, active seats and actual spending with the prior process. A strong average time saving can hide unused licenses. A successful audit can hide a product that loses its job afterward. The renewal decision should follow the buyer’s recorded economics.</p></section>
+  </main>
+  <footer><span>Declared assumptions · observed Vanta anchor dated April 29, 2026</span><span>Source review <time id="cutoff"></time></span></footer>
+</body>
+</html>

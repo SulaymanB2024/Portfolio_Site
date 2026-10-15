@@ -1,0 +1,302 @@
+{
+  "schemaVersion": 1,
+  "articleSlug": "texas-manufacturing-capacity-procurement",
+  "researchCutoff": "2026-10-12",
+  "status": "released to root after scoped checks",
+  "sourcePolicy": "Primary issuer disclosures and official Commerce/NIST project and award evidence. Public company claims remain issuer-reported. No independent plant throughput, private allocation or delivery-performance data was supplied.",
+  "observations": {
+    "tiSM1": {
+      "productionAnnouncementDate": "2025-12-17",
+      "currentOverview": "SM1 in production; four-fab investment potential",
+      "capitalPresentationDate": "2026-02-24",
+      "presentationStage": "SM1 cleanroom and pilot line complete; demand-led ramp",
+      "processRangeNanometers": [
+        28,
+        130
+      ]
+    },
+    "tiSM2": {
+      "sourceDate": "2026-02-24",
+      "stage": "shell complete; not an assertion of equipped/qualified output"
+    },
+    "samsungTaylor": {
+      "sourceDate": "2026-10-07",
+      "stage": "expected operational by end of 2026",
+      "plannedProcessNanometers": 2,
+      "euv": true,
+      "impactReferencePeriod": "2025",
+      "combinedAustinTaylorEconomicImpactUSD": 10900000000,
+      "impactScope": "Austin two-fab operations plus Taylor construction and office/campus activity; not Taylor semiconductor sales"
+    },
+    "globalWafersTexas": {
+      "q1Publication": "2026-05-05",
+      "q1ReferencePeriod": "quarter ended 2026-03-31",
+      "q1Stage": "equipment installation/line setup plus leading-customer qualifications",
+      "q2Publication": "2026-08-04",
+      "q2ReferencePeriod": "quarter ended 2026-06-30",
+      "q2Stage": "multiple Tier-1 customer qualifications at Sherman GWA",
+      "utilizationBoundary": "existing 12-inch capacity statement excludes newly expanded lines; no Texas utilization inferred"
+    },
+    "historicalAwardScope": {
+      "tiNoticeDate": "2024-12-20",
+      "tiStates": [
+        "Texas",
+        "Utah"
+      ],
+      "globalWafersNoticeDate": "2024-12-17",
+      "globalWafersStates": [
+        "Texas",
+        "Missouri"
+      ],
+      "disbursement": "project milestones; historical terms, not a current payout statement"
+    }
+  },
+  "claims": [
+    {
+      "id": "manufacturing-01",
+      "claim": "TI announced SM1 production start; ramp and eventual output remain distinct",
+      "sourceId": "ti-production",
+      "primaryUrl": "https://www.ti.com/about-ti/newsroom/news-releases/2025/texas-instruments-begins-production-at-its-newest-300mm-semiconductor-manufacturing-facility-in-sherman-texas.html",
+      "sourceDate": "2025-12-17",
+      "observedOn": "2026-10-12",
+      "pinpoint": "What is new; TI in Sherman",
+      "status": "issuer-reported production start",
+      "qualification": "No buyer-specific volume or current maximum throughput disclosed."
+    },
+    {
+      "id": "manufacturing-02",
+      "claim": "Current TI overview identifies SM1 in production and describes the four-fab $40B investment as potential",
+      "sourceId": "ti-sherman",
+      "primaryUrl": "https://www.ti.com/about-ti/manufacturing/sherman.html",
+      "sourceDate": null,
+      "observedOn": "2026-10-12",
+      "pinpoint": "Manufacturing in Sherman opening paragraph",
+      "status": "current undated issuer page",
+      "qualification": "Other headline site metrics are not treated as current operating output; redirect confirmed through original URL."
+    },
+    {
+      "id": "manufacturing-03",
+      "claim": "SM1 cleanroom/pilot line complete with demand-led ramp; SM2 shell complete",
+      "sourceId": "ti-capital",
+      "primaryUrl": "https://investor.ti.com/static-files/8c327c57-cd94-439d-a276-ef7cffcdc438",
+      "sourceDate": "2026-02-24",
+      "observedOn": "2026-10-12",
+      "pinpoint": "Printed page 20; PDF page index 19",
+      "status": "completed stages with forward-looking ramp",
+      "qualification": "Shell completion is not proof of equipment or qualification; no complete four-fab buildout inferred."
+    },
+    {
+      "id": "manufacturing-04",
+      "claim": "TI 28nm\u2013130nm processes serve analog and embedded products",
+      "sourceId": "ti-capital",
+      "primaryUrl": "https://investor.ti.com/static-files/8c327c57-cd94-439d-a276-ef7cffcdc438",
+      "sourceDate": "2026-02-24",
+      "observedOn": "2026-10-12",
+      "pinpoint": "Printed pages 16 and 20",
+      "status": "issuer process scope",
+      "qualification": "Does not make TI product capacity interchangeable with Samsung advanced logic or materials wafers."
+    },
+    {
+      "id": "manufacturing-05",
+      "claim": "Samsung October 7 statement expects Taylor operational by end of 2026, with 2nm EUV plan",
+      "sourceId": "samsung-october",
+      "primaryUrl": "https://semiconductor.samsung.com/sas/local-news/samsung-austin-semiconductors-two-campuses-inject-10-9b-into-central-texas-economy-in-2025/",
+      "sourceDate": "2026-10-07",
+      "observedOn": "2026-10-12",
+      "pinpoint": "Final manufacturing-outlook paragraph",
+      "status": "forward-looking issuer expectation",
+      "qualification": "No actual Taylor qualified shipment or private delivery commitment verified."
+    },
+    {
+      "id": "manufacturing-06",
+      "claim": "Samsung $10.9B 2025 regional impact combines Austin operation and Taylor construction/office activity",
+      "sourceId": "samsung-october",
+      "primaryUrl": "https://semiconductor.samsung.com/sas/local-news/samsung-austin-semiconductors-two-campuses-inject-10-9b-into-central-texas-economy-in-2025/",
+      "sourceDate": "2026-10-07",
+      "observedOn": "2026-10-12",
+      "pinpoint": "Opening and economic-impact report scope paragraphs",
+      "status": "issuer report of third-party historical estimate",
+      "qualification": "Not Taylor device revenue/output; employment figures in source internally conflict and are excluded."
+    },
+    {
+      "id": "manufacturing-07",
+      "claim": "Texas GlobalWafers continued equipment/line setup with customer qualifications in Q1 disclosure",
+      "sourceId": "globalwafers-q1",
+      "primaryUrl": "https://www.sas-globalwafers.com/en/gwc_news_en_20260505/",
+      "sourceDate": "2026-05-05",
+      "observedOn": "2026-10-12",
+      "pinpoint": "Global expansion and localization paragraph",
+      "status": "issuer-reported quarter-end update",
+      "qualification": "Missouri SOI mass-production description is not assigned to Texas."
+    },
+    {
+      "id": "manufacturing-08",
+      "claim": "Sherman GWA received qualifications from multiple Tier-1 customers",
+      "sourceId": "globalwafers-q2",
+      "primaryUrl": "https://www.sas-globalwafers.com/en/gwc_news_en_20260804/",
+      "sourceDate": "2026-08-04",
+      "observedOn": "2026-10-12",
+      "pinpoint": "Global expansion projects paragraph",
+      "status": "issuer-reported qualification",
+      "qualification": "No reader specification, approved volume, lead time or allocation established."
+    },
+    {
+      "id": "manufacturing-09",
+      "claim": "GlobalWafers existing 12-inch utilization statement excludes newly expanded lines",
+      "sourceId": "globalwafers-q2",
+      "primaryUrl": "https://www.sas-globalwafers.com/en/gwc_news_en_20260804/",
+      "sourceDate": "2026-08-04",
+      "observedOn": "2026-10-12",
+      "pinpoint": "Product portfolio/utilization paragraph",
+      "status": "issuer global capacity statement",
+      "qualification": "Cannot infer utilization of new Texas plant from existing-base denominator."
+    },
+    {
+      "id": "manufacturing-10",
+      "claim": "Texas silicon wafers are device-manufacturing inputs; Missouri SOI is a separate project",
+      "sourceId": "nist-globalwafers",
+      "primaryUrl": "https://www.nist.gov/news-events/news/2024/12/biden-harris-administration-announces-chips-incentives-awards-globalwafers",
+      "sourceDate": "2024-12-17",
+      "observedOn": "2026-10-12",
+      "pinpoint": "Project product descriptions following award scope",
+      "status": "historical official project description",
+      "qualification": "Inputs are not packaged devices; some existing Texas epitaxy conversion is a separate award element not counted as new 300mm output."
+    },
+    {
+      "id": "manufacturing-11",
+      "claim": "GlobalWafers award disbursement follows construction, technology, production and commercial milestones across Texas/Missouri",
+      "sourceId": "nist-globalwafers",
+      "primaryUrl": "https://www.nist.gov/news-events/news/2024/12/biden-harris-administration-announces-chips-incentives-awards-globalwafers",
+      "sourceDate": "2024-12-17",
+      "observedOn": "2026-10-12",
+      "pinpoint": "Disbursement and milestone paragraphs; updated 2025-10-06",
+      "status": "archived historical final award notice",
+      "qualification": "No current payment amount or current award amendment asserted."
+    },
+    {
+      "id": "manufacturing-12",
+      "claim": "TI award covers Texas/Utah and funding disbursement follows project milestones",
+      "sourceId": "nist-ti",
+      "primaryUrl": "https://www.nist.gov/news-events/news/2024/12/biden-harris-administration-announces-chips-incentives-award-texas",
+      "sourceDate": "2024-12-20",
+      "observedOn": "2026-10-12",
+      "pinpoint": "Award scope and disbursement paragraphs; updated 2025-10-06",
+      "status": "archived historical final award notice",
+      "qualification": "Not a current funding balance, procurement allocation or proof of delivered output."
+    },
+    {
+      "id": "customer-financing-access",
+      "claim": "Micron\u2019s July 9 proposal links planned $500M Sherman financing to a ten-year raw-wafer supply relationship, expressly conditional on definitive agreements, approvals and closing.",
+      "status": "dated issuer proposal; targeted primary content review",
+      "qualification": "August issuer account does not establish paid/closed cash, uncommitted capacity or another buyer\u2019s allocation.",
+      "sources": [
+        {
+          "url": "https://micron.gcs-web.com/news-releases/news-release-details/micron-announces-3-billion-strategic-investment-strengthen-us",
+          "date": "Content reviewed 2026-10-13",
+          "pinpoint": "Financing and ten-year supply paragraphs; proposed-transaction conditions"
+        }
+      ],
+      "recheck": "Governing provision, actual contract, input cohort or operating evidence changes."
+    },
+    {
+      "id": "supply-allocation-threshold",
+      "claim": "Declared demand requires 94.1176% assembly/test yield at 25% allocation, or 24.7678% allocation at 95% yield, leaving 0.2322 percentage points allocation headroom.",
+      "status": "calculated hypothetical",
+      "qualification": "Same demand and other inputs held fixed; percentages and percentage-point differences kept separate. No actual factory yield or allocation inferred.",
+      "sources": [],
+      "recheck": "Governing provision, actual contract, input cohort or operating evidence changes."
+    }
+  ],
+  "calculations": [
+    {
+      "id": "buyer-output-scenario",
+      "status": "declared hypothetical; no company production estimates",
+      "inputs": {
+        "monthlyCompletedWafers": 500,
+        "grossDiePerWafer": 400,
+        "functionalYield": 0.85,
+        "assemblyTestYield": 0.95,
+        "assemblyTestSensitivity": 0.94,
+        "buyerAllocation": 0.25,
+        "monthlyFinishedAssemblyDemand": 20000,
+        "componentsPerAssembly": 2,
+        "assumedLostContributionPerAssemblyUSD": 100
+      },
+      "formulas": [
+        "grossDie = monthlyCompletedWafers \u00d7 grossDiePerWafer",
+        "functionalDie = grossDie \u00d7 functionalYield",
+        "testedComponents = functionalDie \u00d7 assemblyTestYield",
+        "buyerComponents = testedComponents \u00d7 buyerAllocation",
+        "requiredComponents = monthlyFinishedAssemblyDemand \u00d7 componentsPerAssembly",
+        "bufferPercent = (buyerComponents \u2212 requiredComponents) \u00f7 requiredComponents \u00d7 100",
+        "completeAssemblies = floor(buyerComponents \u00f7 componentsPerAssembly)",
+        "lostContribution = (monthlyFinishedAssemblyDemand \u2212 sensitivityCompleteAssemblies) \u00d7 assumedLostContributionPerAssemblyUSD"
+      ],
+      "results": {
+        "grossDie": 200000,
+        "functionalDie": 170000,
+        "testedComponents": 161500,
+        "buyerComponents": 40375,
+        "requiredComponents": 40000,
+        "componentBuffer": 375,
+        "bufferPercent": 0.9375,
+        "sensitivityTestedComponents": 159800,
+        "sensitivityBuyerComponents": 39950,
+        "sensitivityComponentShortfall": 50,
+        "sensitivityCompleteAssemblies": 19975,
+        "sensitivityAssemblyShortfall": 25,
+        "sensitivityLostContributionUSD": 2500,
+        "requiredAssemblyTestYield": 0.9411764705882353,
+        "requiredAllocationShare": 0.2476780185758514,
+        "allocationReductionHeadroomPercentagePoints": 0.23219814241486
+      },
+      "boundaries": [
+        "Completed wafers, not starts; steady monthly flow after cycle time; expected quantities rather than a production guarantee.",
+        "Qualified route assumed before volume counted.",
+        "No additional buyer acceptance loss; all other components available.",
+        "Allocation is assumed committed; no observed supplier allocation.",
+        "Only assembly/test yield changes in sensitivity, by one percentage point.",
+        "Delivery timing, maintenance, product mix and alternate-route dependencies omitted and identified for separate checks."
+      ]
+    }
+  ],
+  "analysisAndRecommendations": [
+    {
+      "id": "procurement-stage-gates",
+      "type": "author procurement interpretation",
+      "basisClaimIds": [
+        "manufacturing-01",
+        "manufacturing-03",
+        "manufacturing-05",
+        "manufacturing-08",
+        "manufacturing-10"
+      ],
+      "recommendation": "Keep public project stage separate from customer qualification and the actual commercial allocation; define owners and exit evidence for sourcing commitments."
+    },
+    {
+      "id": "buyer-contract-evidence",
+      "type": "author operating recommendation",
+      "basis": "Evidence-stage comparison and declared output scenario",
+      "recommendation": "Specify product, approved route, period quantities, delivery event, change process, allocation and dependency-aware alternate supply before relying on a ramp."
+    }
+  ],
+  "updateTriggers": [
+    "A dated Samsung disclosure establishes actual Taylor operation/qualified output or changes its year-end expectation.",
+    "Subsequent TI/GlobalWafers primary reporting establishes new equipped/qualified output, a completed ramp or changed process/site scope.",
+    "Buyer qualification, approved route, accepted shipments, allocation or commercial delivery commitment changes.",
+    "Measured yields, packaging/test constraint, demand mix or transport/receiving timing changes the declared purchasing model.",
+    "A material CHIPS award amendment matters to the funding interpretation; retain historical announcement dates and verify current terms separately."
+  ],
+  "remainingUncertainty": [
+    "No private specifications, customer qualification reports, purchase commitments, plant yield/throughput, accepted shipments or allocations supplied.",
+    "Issuer stage descriptions have not been independently verified by a site visit or customer audit.",
+    "Samsung October release has inconsistent employment totals; no employment figure is used.",
+    "Some Samsung direct-open attempts timed out; the primary indexed October 7 statement and its full report-scope/outlook text were read. The linked full economic-impact PDF was not needed or used.",
+    "Historical NIST award notices are archived and do not establish current cash receipts or amendment status."
+  ],
+  "revisionReview": {
+    "date": "2026-10-13",
+    "scope": "conditional named customer-financing mechanism and yield/allocation thresholds",
+    "originalSourceDatesPreserved": true
+  }
+}

@@ -1,0 +1,96 @@
+{
+  "acceptedAt": "2026-10-14",
+  "researchEdition": "2026-10-13",
+  "scope": "All eighteen commissioned Texas investigations; original immutable baseline 0f6accf92d217b1509d5977423c3b3fafb88cd80",
+  "owner": "Root editor",
+  "decision": "Prepared research and writing revision accepted for a concrete reviewable release. Actual production publication remains unverified.",
+  "researchEvidence": "Root read consequential controlling public bodies, actual bounded model reports and material revisions. Sources retain individual original/check dates. Dated proposals, issuer statements, preliminary investigations, public permissions and actual private service entitlement remain distinct.",
+  "models": [
+    "gpt-6-astra",
+    "gpt-6.1-sol"
+  ],
+  "afterIndependentReview": [
+    "Root rejected the adviser-cost mislabel and retained the actual $2,400 backup reservation.",
+    "Root restored JETI normal 50% versus qualifying-zone 25% taxable-value treatment after checking the captured controlling clause.",
+    "Root adopted the three AV style suggestions, including a separate invented 45-minute timetable, and recomputed the added result.",
+    "Root synchronized hashes, reading estimates, guides, links and the public projection. These final metadata/copy repairs are root acceptance, not an assertion that critics reviewed the eventual commit."
+  ],
+  "calculations": {
+    "models": 15,
+    "executedCodeCells": 2,
+    "kernelStopped": true,
+    "notebookHTML": "Fifteen rendered result tables verified; newline escaping defect repaired and rerun; freight/authorization result view inspected.",
+    "limits": "Declared hypothetical inputs, not quotes, observed performance, provider risk ranking, legal eligibility or coverage outcomes."
+  },
+  "renderedAcceptance": {
+    "articles": 18,
+    "desktop": {
+      "width": 1280,
+      "height": 900
+    },
+    "phone": {
+      "width": 390,
+      "height": 844
+    },
+    "fullPageCaptures": 36,
+    "missingSourceTargets": 0,
+    "pageOverflow": 0,
+    "interactiveAnswers": "First answer opened on every article at both widths; unchanged shared FAQ component and source-linked data also covered by checks.",
+    "visualReview": "Root inspected opening/table galleries for all eighteen articles, the six added business examples and the full freight quote example. Wide-table keyboard scrolling verified at phone width.",
+    "repairs": "Current download links corrected; three-task reader-guide contract restored before final capture."
+  },
+  "preservation": "Both earlier bundle bytes and all initial receipt fields preserved. Canonicals, authors, original publication dates and empty-equivalent alias lists retained. Latest eighteen hashes verified.",
+  "localVerification": {
+    "affectedTests": "49/49 passed after the final guide correction",
+    "library": "18 articles;192 dated reference occurrences; current allowlisted projection and receipt chains",
+    "quality": "Structural quality/initial-edition preservation passed; not source-truth certification",
+    "build": "Type checks, client/SSR build and66 readable canonical pages passed",
+    "release": "66 canonical documents,82 direct redirects,2164 asset references, worker CSP,404, discovery and lockfile passed",
+    "search": "47 dated feed entries,484 source citations, identity/social/schema and complete generated HTML passed"
+  },
+  "sourceLimit": "No blanket fresh acquisition of every source on October14. No current Texas-specific Zoox Operational Authorization, later Cybercab disposition, implemented final minimum-billing tariff, private service agreement, actual quote or fleet census claimed.",
+  "remainingReleaseBoundary": "Commit/push, exact-head CI/READY preview and production publication are separate delivery evidence; initial parent approvals retained and prior merge-policy rejection must not be bypassed.",
+  "finalSourceSHA256": {
+    "src/personal/editorial/data/articles/texas-power-large-load-business-diligence.json": "484640bb283ff23b5874fdc64c68c6e7b3e95941e7efc579309d3630369200f3",
+    "docs/texas-business/research/power-claims.json": "8ab517c436eb69023d19ab7ea8ba3aa6ecbafd4aec6bff40daba0bfe51b803e0",
+    "src/personal/editorial/data/articles/texas-ai-law-business-compliance.json": "d9c203f0ee9e02ec975551847109fabe695cf8ac1bf5749baf2f022a882ce9a6",
+    "docs/texas-business/research/ai-law-claims.json": "f5463c489346d56239d73653c0b22b59d83ff4e73aedbbcb0217be812bda948f",
+    "src/personal/editorial/data/articles/texas-business-court-contract-decisions.json": "7fd2629e8bb776689beeb26396d0ecdd0b65b5320c0514c8ddca8fbd5395b975",
+    "docs/texas-business/research/business-court-claims.json": "9d6295e80c79b3655a4f123a5997a3241ffa77667def34296dc80ebe207b4319",
+    "src/personal/editorial/data/articles/texas-water-facility-site-diligence.json": "11c932a6c60ed5f575df13e0ba6d6a1822ed8627d90c423742a072f7089f7ebb",
+    "docs/texas-business/research/water-claims.json": "5d14acf9f3afc47d907fdef3d111bea3850498cf3219f501870c452b1745d3a3",
+    "src/personal/editorial/data/articles/texas-property-tax-business-underwriting.json": "9896c509d22bcea02d1312c3a6e02821d5d133aa6e32c7f20e86ea55d19c605c",
+    "docs/texas-business/research/property-tax-claims.json": "dec8e8b91ab81909830205a178a0820583d7946f8820296996fabd202686662e",
+    "src/personal/editorial/data/articles/texas-data-center-sales-tax-project-economics.json": "53e30ba53663c1958a8bae819a21c51bc98c5f18ec1eacd8ce0fbd7a8918792e",
+    "docs/texas-business/research/data-center-tax-claims.json": "3e605b247d22c883df4a240fc4596d3fa623aa1e00bb7c0cdc1b5a8714892381",
+    "src/personal/editorial/data/articles/texas-jeti-incentives-project-underwriting.json": "3da6cfc2cb175c0868251e9337c28ad4842ff63cbb2bbe393119f1e166811c5f",
+    "docs/texas-business/research/jeti-claims.json": "d4df970e30e8d87624ddad3fecd360b2af78d65c3e5cecb1eb8f237abf1ab713",
+    "src/personal/editorial/data/articles/texas-franchise-tax-reporting-business-decisions.json": "7f8ecd95fde1e35efd7313b6744aea56b480bf2e0560ffdd424a660ddfac50f5",
+    "docs/texas-business/research/franchise-tax-claims.json": "8fea7ff95f9e2a31bfafaca5aae6c2fb4f4bd66a7da32d51017ece1d6668056e",
+    "src/personal/editorial/data/articles/texas-hiring-labor-cost-planning.json": "2c4e40b2bd7a25e14db2145a2c108550cb4d7a4abb62f56e042bde8a417c87ae",
+    "docs/texas-business/research/hiring-claims.json": "6d44cfcfdad3e15e1dc8fd77fe1fceadb4d8ec59e9679528a1f95cc4953e872b",
+    "src/personal/editorial/data/articles/texas-cross-border-logistics-business-planning.json": "3e16c4b62619da68ce4e59e81ec378d5d0b3dae4761c2b3bec6d061393c537ab",
+    "docs/texas-business/research/logistics-claims.json": "4f8eef65f08d12bc13a7323e83e35dd62d723831a97464af0a8b545cbfdb14db",
+    "src/personal/editorial/data/articles/texas-manufacturing-capacity-procurement.json": "aeca16e13635314bb54fb09cdad05b848546aea94c8b9bb1a3b22f1ea8741d36",
+    "docs/texas-business/research/manufacturing-claims.json": "62fea91a1c836b78a51f21198de02e8011ca7820b2f090f717d88a1955c1a11d",
+    "src/personal/editorial/data/articles/texas-commercial-property-insurance-diligence.json": "8a187646cbc3159acebf65bfd46ac4041270058901e75ccc93df4fd4434e6053",
+    "docs/texas-business/research/insurance-claims.json": "ad4ff0d1ed310b348d933890ac32ae991470a7fe4bbc75ac22ee33947c1f5001",
+    "src/personal/editorial/data/articles/texas-robotaxi-business-service-map.json": "89264fbeb74c30d96f5212a7b7b06acab0242dc6548680c128097d103cc8a7ee",
+    "docs/texas-business/research/robotaxi-map-claims.json": "7aa75ca227d8262d61b4fbb4d1422933799dd758ecfa5240ae947941ba7b7cfb",
+    "src/personal/editorial/data/articles/texas-waymo-business-travel.json": "2a8a2aff2951c597e11093f12b954db5d143fab2f28a003f8118f7c53c5e4a79",
+    "docs/texas-business/research/waymo-claims.json": "bbbcc447af78cf2a156b82e27be79250fb7b98c6b06162aeea73d024e23d02e8",
+    "src/personal/editorial/data/articles/texas-zoox-market-entry-business.json": "2e9c030b27cfe38a7fdb62f0e5f75c605442916e18cf1056f10f5ba85da202a6",
+    "docs/texas-business/research/zoox-claims.json": "7c10956093c5593603eba809818be38869d1dbe329ccdb786d9f056227159bfe",
+    "src/personal/editorial/data/articles/texas-autonomous-trucking-operators.json": "b7d1be4698865eaa5e432f3343916cde8caddb00c883d3b68010f4f70ee6eaa4",
+    "docs/texas-business/research/autonomous-trucking-claims.json": "29350ff2fdad41bfaa7b0b9401741888da68fb85289243a3a26522b9abea9862",
+    "src/personal/editorial/data/articles/texas-driverless-freight-route-economics.json": "1e4f6beb37a228b2e91a8c8d09db86c3a5a8d7ed49128e79567c95ac38df4c6b",
+    "docs/texas-business/research/driverless-freight-claims.json": "6c2bdf84227842dfc70b9845cbe22bccf852c6a5a9959ebabb95465f8efa0c43",
+    "src/personal/editorial/data/articles/texas-automated-vehicle-authorization.json": "d9daefad9459336a34cf347e9d8aac225fe91ecb5a25a458f3237914a253a9db",
+    "docs/texas-business/research/av-authorization-claims.json": "9748f9875cc02b8133964e748c4d29cd9f26248fff520c52be09b6189d22bf1b",
+    "docs/texas-business/research/decision-models.py": "607a1d6b74c838dd307ff6e07cec8944554c278cd2163d2fa49637f90eb8694e",
+    "docs/texas-business/research/decision-models-2026-10-13.ipynb": "8995c40d03767d7ee7b71ecf6f77cfd6bac77f6acf1972d150a17590a189c36a",
+    "public/research/texas-research-library-2026-10-13.json": "8ba80b14be4e98e26a85616997e85223021e2434883c7fca004c0828e369882c",
+    "src/personal/editorial/data/catalog.json": "c27bb0e5947d77e1aeabaac8efca14df2c5dada98acee3214d31bce7e00e6e2d",
+    "src/personal/editorial/data/reader-guides.json": "0d26d9fbc509b05f41b4c3536a790eb824fdee40fe61ee2fd20b1814968eec17"
+  }
+}

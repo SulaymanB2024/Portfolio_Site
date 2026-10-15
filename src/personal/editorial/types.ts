@@ -125,6 +125,7 @@ export function displayReadTime(value: string) {
 }
 
 const writingTopicLabels: Record<string, string> = {
+  'TEXAS BUSINESS': 'Texas business',
   All: 'All topics', 'PRODUCT & SYSTEMS': 'Product & systems',
   'ALGORITHMS / VERIFICATION': 'Algorithms & verification', 'FINANCIAL SYSTEMS': 'Financial systems',
   'PRIVATE EQUITY': 'Private equity', 'INDUSTRIAL SYSTEMS': 'Industrial systems', 'AI INFRASTRUCTURE': 'AI infrastructure',

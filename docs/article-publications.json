@@ -3,15 +3,1069 @@
   "purpose": "Bind newly researched initial editions without inventing historical restoration or revision provenance.",
   "records": [
     {
+      "slug": "anduril-valuation-capital-productivity",
+      "path": "src/personal/editorial/data/articles/anduril-valuation-capital-productivity.json",
+      "canonicalPath": "/research/financial-systems/anduril-valuation-capital-productivity",
+      "datePublished": "2026-10-14",
+      "dateModified": "2026-10-14",
+      "articleSha256": "d2fd1dd21881f2b0961174c63e494eb0cfb6492f2150ec20d5d361efa3ea107a",
+      "proseWords": 3218,
+      "readTime": "18 MIN",
+      "claimsPath": "docs/anduril-valuation/source-register.json"
+    },
+    {
+      "slug": "kalshi-40-billion-question",
+      "path": "src/personal/editorial/data/articles/kalshi-40-billion-question.json",
+      "canonicalPath": "/research/financial-systems/kalshi-40-billion-question",
+      "datePublished": "2026-10-14",
+      "dateModified": "2026-10-14",
+      "articleSha256": "4fcb6c753bfea11f0dc4d258df9ddb7974c7c60ddca67f5cab2307d6e13d47d7",
+      "proseWords": 3728,
+      "readTime": "20 MIN",
+      "claimsPath": "docs/kalshi-valuation-2026/source-register.json"
+    },
+    {
+      "slug": "hyperliquid-valuation",
+      "path": "src/personal/editorial/data/articles/hyperliquid-valuation.json",
+      "canonicalPath": "/research/financial-systems/hyperliquid-valuation",
+      "datePublished": "2026-10-14",
+      "dateModified": "2026-10-14",
+      "articleSha256": "c6a96109a23612e6cce323255400049c2a492844a9bead5c7f5ca6a280ba0d6b",
+      "proseWords": 3485,
+      "readTime": "19 MIN",
+      "claimsPath": "public/research/hyperliquid-valuation/sources.csv"
+    },
+    {
+      "slug": "texas-power-large-load-business-diligence",
+      "path": "src/personal/editorial/data/articles/texas-power-large-load-business-diligence.json",
+      "canonicalPath": "/research/texas/texas-power-large-load-business-diligence",
+      "datePublished": "2026-10-12",
+      "dateModified": "2026-10-12",
+      "articleSha256": "54f54c7057e6308b0b6c142f21557397cd6f59cb046d5c054914664d8c921fcd",
+      "proseWords": 2089,
+      "readTime": "11 MIN",
+      "claimsPath": "docs/texas-business/research/power-claims.json",
+      "updates": [
+        {
+          "previousSha256": "54f54c7057e6308b0b6c142f21557397cd6f59cb046d5c054914664d8c921fcd",
+          "articleSha256": "65464507ea038f7f03c68c9dbae2743de225c14d7abddec9560d3b37a7c306a7",
+          "dateModified": "2026-10-13",
+          "reason": "Add adopted minimum-billing, staged collateral release and material-change mechanisms; compare refundable collateral with permanent CIAC on declared financing inputs.",
+          "evidence": [
+            "https://www.sos.texas.gov/texreg/archive/October22026/Adopted%20Rules/16.ECONOMIC%20REGULATION.html"
+          ]
+        },
+        {
+          "previousSha256": "65464507ea038f7f03c68c9dbae2743de225c14d7abddec9560d3b37a7c306a7",
+          "articleSha256": "4ada425162a5d7b933cc9741fea19e486bac82e655a1ad7c1a0583682a50e2ad",
+          "dateModified": "2026-10-13",
+          "reason": "Distinguish adopted minimum-billing acknowledgment from the separately proposed twenty-year billing treatment; preserve unresolved final implementation and correct the current source download.",
+          "evidence": [
+            "https://www.sos.texas.gov/texreg/archive/October22026/Adopted%20Rules/16.ECONOMIC%20REGULATION.html",
+            "https://www.sos.texas.gov/texreg/archive/July242026/Proposed%20Rules/16.ECONOMIC%20REGULATION.html"
+          ]
+        },
+        {
+          "previousSha256": "4ada425162a5d7b933cc9741fea19e486bac82e655a1ad7c1a0583682a50e2ad",
+          "articleSha256": "484640bb283ff23b5874fdc64c68c6e7b3e95941e7efc579309d3630369200f3",
+          "dateModified": "2026-10-13",
+          "reason": "Lead with the concrete business decision and simplify the opening while preserving sourced requirements, timing and scope after independent writing review.",
+          "evidence": [
+            "https://www.sos.texas.gov/texreg/archive/October22026/Adopted%20Rules/16.ECONOMIC%20REGULATION.html",
+            "https://www.sos.texas.gov/texreg/archive/July242026/Proposed%20Rules/16.ECONOMIC%20REGULATION.html"
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "texas-ai-law-business-compliance",
+      "path": "src/personal/editorial/data/articles/texas-ai-law-business-compliance.json",
+      "canonicalPath": "/research/texas/texas-ai-law-business-compliance",
+      "datePublished": "2026-10-12",
+      "dateModified": "2026-10-12",
+      "articleSha256": "b89e9e26bd5de3b53abed9b11b9ee721059e84b631b762a13db70313d5656193",
+      "proseWords": 1971,
+      "readTime": "11 MIN",
+      "claimsPath": "docs/texas-business/research/ai-law-claims.json",
+      "updates": [
+        {
+          "previousSha256": "b89e9e26bd5de3b53abed9b11b9ee721059e84b631b762a13db70313d5656193",
+          "articleSha256": "e3608e278f7f541c895e8e01d2047480795fb8d36139e3b950e80805382017b0",
+          "dateModified": "2026-10-13",
+          "reason": "Apply separate privacy, biometric and TRAIGA scope to a hypothetical employee attendance use and define proportionate deployment evidence without a universal logging mandate.",
+          "evidence": [
+            "https://tcss.legis.texas.gov/resources/BC/htm/BC.503.htm"
+          ]
+        },
+        {
+          "previousSha256": "e3608e278f7f541c895e8e01d2047480795fb8d36139e3b950e80805382017b0",
+          "articleSha256": "17891ee4fcc2722ee044225cfa95c40d96e43f16271952829c28cfd1e48cde04",
+          "dateModified": "2026-10-13",
+          "reason": "Correct the rendered supporting-material link to the current eighteen-article research projection while preserving the two frozen earlier downloads and original evidence dates.",
+          "evidence": [
+            "https://tcss.legis.texas.gov/resources/BC/htm/BC.503.htm"
+          ]
+        },
+        {
+          "previousSha256": "17891ee4fcc2722ee044225cfa95c40d96e43f16271952829c28cfd1e48cde04",
+          "articleSha256": "d9c203f0ee9e02ec975551847109fabe695cf8ac1bf5749baf2f022a882ce9a6",
+          "dateModified": "2026-10-13",
+          "reason": "Lead with the concrete business decision and simplify the opening while preserving sourced requirements, timing and scope after independent writing review.",
+          "evidence": [
+            "https://tcss.legis.texas.gov/resources/BC/htm/BC.503.htm"
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "texas-business-court-contract-decisions",
+      "path": "src/personal/editorial/data/articles/texas-business-court-contract-decisions.json",
+      "canonicalPath": "/research/texas/texas-business-court-contract-decisions",
+      "datePublished": "2026-10-12",
+      "dateModified": "2026-10-12",
+      "articleSha256": "f47b40378d3982e466c0417b0bc905f9a3c560723b2141e224e31c0d093119c4",
+      "proseWords": 1753,
+      "readTime": "10 MIN",
+      "claimsPath": "docs/texas-business/research/business-court-claims.json",
+      "updates": [
+        {
+          "previousSha256": "f47b40378d3982e466c0417b0bc905f9a3c560723b2141e224e31c0d093119c4",
+          "articleSha256": "d7597b28c3d72050c7065f3fca62d34c220d776faab377da5e4b112ef1e7b4c4",
+          "dateModified": "2026-10-13",
+          "reason": "Correct the table to identify all qualified-transaction definition limbs and separate modeled business loss, supportable claim and practical contract recovery.",
+          "evidence": [
+            "https://capitol.texas.gov/tlodocs/89R/billtext/html/HB00040F.htm"
+          ]
+        },
+        {
+          "previousSha256": "d7597b28c3d72050c7065f3fca62d34c220d776faab377da5e4b112ef1e7b4c4",
+          "articleSha256": "33747cde088c1819984d1ee40787b95e70f01243132423e677990dbd4e1e9163",
+          "dateModified": "2026-10-13",
+          "reason": "Correct the rendered supporting-material link to the current eighteen-article research projection while preserving the two frozen earlier downloads and original evidence dates.",
+          "evidence": [
+            "https://capitol.texas.gov/tlodocs/89R/billtext/html/HB00040F.htm"
+          ]
+        },
+        {
+          "previousSha256": "33747cde088c1819984d1ee40787b95e70f01243132423e677990dbd4e1e9163",
+          "articleSha256": "7fd2629e8bb776689beeb26396d0ecdd0b65b5320c0514c8ddca8fbd5395b975",
+          "dateModified": "2026-10-13",
+          "reason": "Lead with the concrete business decision and simplify the opening while preserving sourced requirements, timing and scope after independent writing review.",
+          "evidence": [
+            "https://capitol.texas.gov/tlodocs/89R/billtext/html/HB00040F.htm"
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "texas-water-facility-site-diligence",
+      "path": "src/personal/editorial/data/articles/texas-water-facility-site-diligence.json",
+      "canonicalPath": "/research/texas/texas-water-facility-site-diligence",
+      "datePublished": "2026-10-12",
+      "dateModified": "2026-10-12",
+      "articleSha256": "2cc33ce8d2a21b3b3ce23a34e751450985aaf22300f5cce80e70224c6d7d62b6",
+      "proseWords": 1746,
+      "readTime": "10 MIN",
+      "claimsPath": "docs/texas-business/research/water-claims.json",
+      "initialReview": {
+        "reason": "Root reviewed the complete manuscript, controlling source boundaries, declared calculations and concrete independent-review corrections.",
+        "evidence": [
+          "https://www.twdb.texas.gov/waterplanning/swp/2027/index.asp"
+        ]
+      },
+      "updates": [
+        {
+          "previousSha256": "2cc33ce8d2a21b3b3ce23a34e751450985aaf22300f5cce80e70224c6d7d62b6",
+          "articleSha256": "7d9e4a419ba11f4e54060b87355b210451c0ea7ef205dc60ccf21fd9a0636f43",
+          "dateModified": "2026-10-13",
+          "reason": "Recompute consecutive peak and refill sequence and compare the annual supply saving with a marginal interruption-loss threshold; no new local supply measurement.",
+          "evidence": [
+            "https://www.twdb.texas.gov/drought/planning/index.asp"
+          ]
+        },
+        {
+          "previousSha256": "7d9e4a419ba11f4e54060b87355b210451c0ea7ef205dc60ccf21fd9a0636f43",
+          "articleSha256": "6b907d8df9282c78d754546efdde760ec9a1c437af33fdc0df5bdd7e70b6b53f",
+          "dateModified": "2026-10-13",
+          "reason": "Correct the rendered supporting-material link to the current eighteen-article research projection while preserving the two frozen earlier downloads and original evidence dates.",
+          "evidence": [
+            "https://www.twdb.texas.gov/drought/planning/index.asp"
+          ]
+        },
+        {
+          "previousSha256": "6b907d8df9282c78d754546efdde760ec9a1c437af33fdc0df5bdd7e70b6b53f",
+          "articleSha256": "11c932a6c60ed5f575df13e0ba6d6a1822ed8627d90c423742a072f7089f7ebb",
+          "dateModified": "2026-10-13",
+          "reason": "Lead with the concrete business decision and simplify the opening while preserving sourced requirements, timing and scope after independent writing review.",
+          "evidence": [
+            "https://www.twdb.texas.gov/drought/planning/index.asp"
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "texas-property-tax-business-underwriting",
+      "path": "src/personal/editorial/data/articles/texas-property-tax-business-underwriting.json",
+      "canonicalPath": "/research/texas/texas-property-tax-business-underwriting",
+      "datePublished": "2026-10-12",
+      "dateModified": "2026-10-12",
+      "articleSha256": "58928a9f723a1404386593f901fa1e76b024d3604f596ef5a16fea23241a1afb",
+      "proseWords": 1897,
+      "readTime": "10 MIN",
+      "claimsPath": "docs/texas-business/research/property-tax-claims.json",
+      "initialReview": {
+        "reason": "Root reviewed the complete manuscript, controlling source boundaries, declared calculations and concrete independent-review corrections.",
+        "evidence": [
+          "https://comptroller.texas.gov/taxes/property-tax/index.php"
+        ]
+      },
+      "updates": [
+        {
+          "previousSha256": "58928a9f723a1404386593f901fa1e76b024d3604f596ef5a16fea23241a1afb",
+          "articleSha256": "67b45d0e461b5bbdbcd0238a671099316e6ff07b8e7b25023cd4d054553ef60c",
+          "dateModified": "2026-10-13",
+          "reason": "Clarify statutory ownership tax-year timing and add a declared debt-service sensitivity while preserving temporary-expiration and equipment-exemption distinctions.",
+          "evidence": [
+            "https://tcss.legis.texas.gov/resources/TX/htm/TX.23.htm"
+          ]
+        },
+        {
+          "previousSha256": "67b45d0e461b5bbdbcd0238a671099316e6ff07b8e7b25023cd4d054553ef60c",
+          "articleSha256": "3cb56704f4509b844e4900d1ed7bd6aedb934b20b27d185be86d8f52568575ff",
+          "dateModified": "2026-10-13",
+          "reason": "Correct the rendered supporting-material link to the current eighteen-article research projection while preserving the two frozen earlier downloads and original evidence dates.",
+          "evidence": [
+            "https://tcss.legis.texas.gov/resources/TX/htm/TX.23.htm"
+          ]
+        },
+        {
+          "previousSha256": "3cb56704f4509b844e4900d1ed7bd6aedb934b20b27d185be86d8f52568575ff",
+          "articleSha256": "9896c509d22bcea02d1312c3a6e02821d5d133aa6e32c7f20e86ea55d19c605c",
+          "dateModified": "2026-10-13",
+          "reason": "Lead with the concrete business decision and simplify the opening while preserving sourced requirements, timing and scope after independent writing review.",
+          "evidence": [
+            "https://tcss.legis.texas.gov/resources/TX/htm/TX.23.htm"
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "texas-data-center-sales-tax-project-economics",
+      "path": "src/personal/editorial/data/articles/texas-data-center-sales-tax-project-economics.json",
+      "canonicalPath": "/research/texas/texas-data-center-sales-tax-project-economics",
+      "datePublished": "2026-10-12",
+      "dateModified": "2026-10-12",
+      "articleSha256": "15bb478d47071ebc6b54a73b46f1678f66058e9d5b0cb891540c86250209fadd",
+      "proseWords": 1899,
+      "readTime": "10 MIN",
+      "claimsPath": "docs/texas-business/research/data-center-tax-claims.json",
+      "initialReview": {
+        "reason": "Root reviewed the complete manuscript, controlling source boundaries, declared calculations and concrete independent-review corrections.",
+        "evidence": [
+          "https://tcss.legis.texas.gov/resources/TX/htm/TX.151.htm"
+        ]
+      },
+      "updates": [
+        {
+          "previousSha256": "15bb478d47071ebc6b54a73b46f1678f66058e9d5b0cb891540c86250209fadd",
+          "articleSha256": "fac0c56b5677cb8257d888201393fbfd1ad654b42426c5bf789b0d707f931f4b",
+          "dateModified": "2026-10-12",
+          "reason": "Improve readable spacing in rendered tax-table labels and unit references after phone inspection; preserve all verified numbers, qualifications and evidence.",
+          "evidence": [
+            "https://comptroller.texas.gov/forms/ap-236.pdf"
+          ]
+        },
+        {
+          "previousSha256": "fac0c56b5677cb8257d888201393fbfd1ad654b42426c5bf789b0d707f931f4b",
+          "articleSha256": "b1159a3684fb724407c7dd49430404ea1c18a5b71098c420408e70bc69d73794",
+          "dateModified": "2026-10-13",
+          "reason": "Expose both agency-summary inconsistencies, preserve controlling route treatment, exclude jobs moved between Texas counties and separate purchase cohorts from qualifying investment.",
+          "evidence": [
+            "https://tcss.legis.texas.gov/resources/TX/htm/TX.151.htm"
+          ]
+        },
+        {
+          "previousSha256": "b1159a3684fb724407c7dd49430404ea1c18a5b71098c420408e70bc69d73794",
+          "articleSha256": "d68ab9427c9148e582bcc00e643b1602b574f31ca42f42de9c6d9c5c4f584a3a",
+          "dateModified": "2026-10-13",
+          "reason": "Correct the rendered supporting-material link to the current eighteen-article research projection while preserving the two frozen earlier downloads and original evidence dates.",
+          "evidence": [
+            "https://tcss.legis.texas.gov/resources/TX/htm/TX.151.htm"
+          ]
+        },
+        {
+          "previousSha256": "d68ab9427c9148e582bcc00e643b1602b574f31ca42f42de9c6d9c5c4f584a3a",
+          "articleSha256": "53e30ba53663c1958a8bae819a21c51bc98c5f18ec1eacd8ce0fbd7a8918792e",
+          "dateModified": "2026-10-13",
+          "reason": "Lead with the concrete business decision and simplify the opening while preserving sourced requirements, timing and scope after independent writing review.",
+          "evidence": [
+            "https://tcss.legis.texas.gov/resources/TX/htm/TX.151.htm"
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "texas-jeti-incentives-project-underwriting",
+      "path": "src/personal/editorial/data/articles/texas-jeti-incentives-project-underwriting.json",
+      "canonicalPath": "/research/texas/texas-jeti-incentives-project-underwriting",
+      "datePublished": "2026-10-12",
+      "dateModified": "2026-10-12",
+      "articleSha256": "d53cae962d8eae965f7cfa86564f668f06092747c6459baa701d65032472b177",
+      "proseWords": 1930,
+      "readTime": "10 MIN",
+      "claimsPath": "docs/texas-business/research/jeti-claims.json",
+      "initialReview": {
+        "reason": "Root reviewed the complete manuscript, controlling source boundaries, declared calculations and concrete independent-review corrections.",
+        "evidence": [
+          "https://tcss.legis.texas.gov/resources/GV/htm/GV.403.htm"
+        ]
+      },
+      "updates": [
+        {
+          "previousSha256": "d53cae962d8eae965f7cfa86564f668f06092747c6459baa701d65032472b177",
+          "articleSha256": "2542765584e5e2f3af74321845c9e5d7e8d452172047e689a082fcb66e02ea0a",
+          "dateModified": "2026-10-13",
+          "reason": "Add the actual fixed-end deferral mechanism and separately recompute lost-year benefit and post-incentive cost sensitivities without inventing an agreement outcome.",
+          "evidence": [
+            "https://tcss.legis.texas.gov/resources/GV/htm/GV.403.htm"
+          ]
+        },
+        {
+          "previousSha256": "2542765584e5e2f3af74321845c9e5d7e8d452172047e689a082fcb66e02ea0a",
+          "articleSha256": "27b848400c4c88fea20f1732fe7bd715d325cae9c3d43d7b75f70f79aacb44fc",
+          "dateModified": "2026-10-13",
+          "reason": "Correct the rendered supporting-material link to the current eighteen-article research projection while preserving the two frozen earlier downloads and original evidence dates.",
+          "evidence": [
+            "https://tcss.legis.texas.gov/resources/GV/htm/GV.403.htm"
+          ]
+        },
+        {
+          "previousSha256": "27b848400c4c88fea20f1732fe7bd715d325cae9c3d43d7b75f70f79aacb44fc",
+          "articleSha256": "3da6cfc2cb175c0868251e9337c28ad4842ff63cbb2bbe393119f1e166811c5f",
+          "dateModified": "2026-10-13",
+          "reason": "Lead with the concrete business decision and simplify the opening while preserving sourced requirements, timing and scope after independent writing review.",
+          "evidence": [
+            "https://tcss.legis.texas.gov/resources/GV/htm/GV.403.htm"
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "texas-franchise-tax-reporting-business-decisions",
+      "path": "src/personal/editorial/data/articles/texas-franchise-tax-reporting-business-decisions.json",
+      "canonicalPath": "/research/texas/texas-franchise-tax-reporting-business-decisions",
+      "datePublished": "2026-10-12",
+      "dateModified": "2026-10-12",
+      "articleSha256": "7d6cd81f6e5914e253594827e5bddc78e6e60b2f1b10300f205b3a32f2ff4d59",
+      "proseWords": 1818,
+      "readTime": "10 MIN",
+      "claimsPath": "docs/texas-business/research/franchise-tax-claims.json",
+      "initialReview": {
+        "reason": "Root reviewed the complete manuscript, controlling source boundaries, declared calculations and concrete independent-review corrections.",
+        "evidence": [
+          "https://comptroller.texas.gov/taxes/franchise/"
+        ]
+      },
+      "updates": [
+        {
+          "previousSha256": "7d6cd81f6e5914e253594827e5bddc78e6e60b2f1b10300f205b3a32f2ff4d59",
+          "articleSha256": "6a2ff8d0aecb9f873b599e7f29a6a39b76b9d55030b26ec041f1ef9903087d54",
+          "dateModified": "2026-10-13",
+          "reason": "Recompute allowable-compensation decision thresholds including preparation costs and anchor the research-credit constraint to the 2026 report.",
+          "evidence": [
+            "https://comptroller.texas.gov/taxes/franchise/research-dev-credit.php"
+          ]
+        },
+        {
+          "previousSha256": "6a2ff8d0aecb9f873b599e7f29a6a39b76b9d55030b26ec041f1ef9903087d54",
+          "articleSha256": "5e98e1e4010ebd53ff59e19bf499435851be61087bca875f87ed602fe997ac7d",
+          "dateModified": "2026-10-13",
+          "reason": "Correct the rendered supporting-material link to the current eighteen-article research projection while preserving the two frozen earlier downloads and original evidence dates.",
+          "evidence": [
+            "https://comptroller.texas.gov/taxes/franchise/research-dev-credit.php"
+          ]
+        },
+        {
+          "previousSha256": "5e98e1e4010ebd53ff59e19bf499435851be61087bca875f87ed602fe997ac7d",
+          "articleSha256": "7f8ecd95fde1e35efd7313b6744aea56b480bf2e0560ffdd424a660ddfac50f5",
+          "dateModified": "2026-10-13",
+          "reason": "Lead with the concrete business decision and simplify the opening while preserving sourced requirements, timing and scope after independent writing review.",
+          "evidence": [
+            "https://comptroller.texas.gov/taxes/franchise/research-dev-credit.php"
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "texas-hiring-labor-cost-planning",
+      "path": "src/personal/editorial/data/articles/texas-hiring-labor-cost-planning.json",
+      "canonicalPath": "/research/texas/texas-hiring-labor-cost-planning",
+      "datePublished": "2026-10-12",
+      "dateModified": "2026-10-12",
+      "articleSha256": "a9cfc72dca9c3a81684cdafb9efd2fb24a9cc4ff820984f5f471a91f2934767a",
+      "proseWords": 1566,
+      "readTime": "9 MIN",
+      "claimsPath": "docs/texas-business/research/hiring-claims.json",
+      "initialReview": {
+        "reason": "Root reviewed the complete manuscript, controlling source boundaries, declared calculations and concrete independent-review corrections.",
+        "evidence": [
+          "https://texaslmi.com/api/GetHomeLinks/TLMR"
+        ]
+      },
+      "updates": [
+        {
+          "previousSha256": "a9cfc72dca9c3a81684cdafb9efd2fb24a9cc4ff820984f5f471a91f2934767a",
+          "articleSha256": "0c388ce6daa7f24cf4095f798954af0556b824db1aa1d97e1638ac4b9ac31e6f",
+          "dateModified": "2026-10-13",
+          "reason": "Correct the decision horizon by comparing recurring pay premiums with immediate one-off launch loss and clarify the expected productive-starter funnel.",
+          "evidence": [
+            "https://www.bls.gov/oes/current/oes_tec.htm"
+          ]
+        },
+        {
+          "previousSha256": "0c388ce6daa7f24cf4095f798954af0556b824db1aa1d97e1638ac4b9ac31e6f",
+          "articleSha256": "7e99a89ea661340ab6ee3602c2f72b7abb05f97268f66b6cee68807ab7576333",
+          "dateModified": "2026-10-13",
+          "reason": "Correct the rendered supporting-material link to the current eighteen-article research projection while preserving the two frozen earlier downloads and original evidence dates.",
+          "evidence": [
+            "https://www.bls.gov/oes/current/oes_tec.htm"
+          ]
+        },
+        {
+          "previousSha256": "7e99a89ea661340ab6ee3602c2f72b7abb05f97268f66b6cee68807ab7576333",
+          "articleSha256": "2c4e40b2bd7a25e14db2145a2c108550cb4d7a4abb62f56e042bde8a417c87ae",
+          "dateModified": "2026-10-13",
+          "reason": "Lead with the concrete business decision and simplify the opening while preserving sourced requirements, timing and scope after independent writing review.",
+          "evidence": [
+            "https://www.bls.gov/oes/current/oes_tec.htm"
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "texas-cross-border-logistics-business-planning",
+      "path": "src/personal/editorial/data/articles/texas-cross-border-logistics-business-planning.json",
+      "canonicalPath": "/research/texas/texas-cross-border-logistics-business-planning",
+      "datePublished": "2026-10-12",
+      "dateModified": "2026-10-12",
+      "articleSha256": "7fa07a7c5ec9ed27f66e1496050348ec2e937bc51814894d952dd209a72fabf8",
+      "proseWords": 1609,
+      "readTime": "9 MIN",
+      "claimsPath": "docs/texas-business/research/logistics-claims.json",
+      "initialReview": {
+        "reason": "Root reviewed the complete manuscript, controlling source boundaries, declared calculations and concrete independent-review corrections.",
+        "evidence": [
+          "https://www.bts.gov/newsroom/north-american-transborder-freight-valued-1576-billion-july-2026-188-july-2025"
+        ]
+      },
+      "updates": [
+        {
+          "previousSha256": "7fa07a7c5ec9ed27f66e1496050348ec2e937bc51814894d952dd209a72fabf8",
+          "articleSha256": "43f488038cab60c9422b51fad3a86eee69d53901901b0890c83ae1610cb7e289",
+          "dateModified": "2026-10-13",
+          "reason": "Derive a route-service target and distinguish pipeline capital release, annual carrying savings and a separate safety-stock sensitivity.",
+          "evidence": [
+            "https://www.bts.gov/browse-statistical-products-and-data/statistical-products/border-crossingentry-data-faq"
+          ]
+        },
+        {
+          "previousSha256": "43f488038cab60c9422b51fad3a86eee69d53901901b0890c83ae1610cb7e289",
+          "articleSha256": "b236de8bcfa24044fc06163beb358b7ba87d8e4e4732dff11f5210205374a5d8",
+          "dateModified": "2026-10-13",
+          "reason": "Correct the rendered supporting-material link to the current eighteen-article research projection while preserving the two frozen earlier downloads and original evidence dates.",
+          "evidence": [
+            "https://www.bts.gov/browse-statistical-products-and-data/statistical-products/border-crossingentry-data-faq"
+          ]
+        },
+        {
+          "previousSha256": "b236de8bcfa24044fc06163beb358b7ba87d8e4e4732dff11f5210205374a5d8",
+          "articleSha256": "3e16c4b62619da68ce4e59e81ec378d5d0b3dae4761c2b3bec6d061393c537ab",
+          "dateModified": "2026-10-13",
+          "reason": "Lead with the concrete business decision and simplify the opening while preserving sourced requirements, timing and scope after independent writing review.",
+          "evidence": [
+            "https://www.bts.gov/browse-statistical-products-and-data/statistical-products/border-crossingentry-data-faq"
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "texas-manufacturing-capacity-procurement",
+      "path": "src/personal/editorial/data/articles/texas-manufacturing-capacity-procurement.json",
+      "canonicalPath": "/research/texas/texas-manufacturing-capacity-procurement",
+      "datePublished": "2026-10-12",
+      "dateModified": "2026-10-12",
+      "articleSha256": "c252ccdd2c04031ea7535ac0a873c70338917bdd327440111cafad6dc40169fc",
+      "proseWords": 1669,
+      "readTime": "9 MIN",
+      "claimsPath": "docs/texas-business/research/manufacturing-claims.json",
+      "initialReview": {
+        "reason": "Root reviewed the complete manuscript, controlling source boundaries, declared calculations and concrete independent-review corrections.",
+        "evidence": [
+          "https://www.ti.com/about-ti/newsroom/news-releases/2025/texas-instruments-begins-production-at-its-newest-300mm-semiconductor-manufacturing-facility-in-sherman-texas.html"
+        ]
+      },
+      "updates": [
+        {
+          "previousSha256": "c252ccdd2c04031ea7535ac0a873c70338917bdd327440111cafad6dc40169fc",
+          "articleSha256": "6a8c31874db9403fe120f18e445295f42ebdae133c8ef7ccb0f79bca9225e7a4",
+          "dateModified": "2026-10-12",
+          "reason": "Shorten the visible headline after desktop inspection exposed four lines; retain the precise semiconductor search title and all source-backed supply analysis.",
+          "evidence": [
+            "https://www.ti.com/about-ti/newsroom/news-releases/2025/texas-instruments-begins-production-at-its-newest-300mm-semiconductor-manufacturing-facility-in-sherman-texas.html"
+          ]
+        },
+        {
+          "previousSha256": "6a8c31874db9403fe120f18e445295f42ebdae133c8ef7ccb0f79bca9225e7a4",
+          "articleSha256": "ebee26ad095a748e22625b6aba074806f7db876ffac8756c8427203113bfd8df",
+          "dateModified": "2026-10-13",
+          "reason": "Add the conditional named Micron financing/supply mechanism and recompute yield/allocation headroom while preserving issuer attribution and closing uncertainty.",
+          "evidence": [
+            "https://micron.gcs-web.com/news-releases/news-release-details/micron-announces-3-billion-strategic-investment-strengthen-us"
+          ]
+        },
+        {
+          "previousSha256": "ebee26ad095a748e22625b6aba074806f7db876ffac8756c8427203113bfd8df",
+          "articleSha256": "e6a98efbce241039b11b488518f3e43c14fd162f7c650ea50c3cd18311ea2b7f",
+          "dateModified": "2026-10-13",
+          "reason": "Correct the rendered supporting-material link to the current eighteen-article research projection while preserving the two frozen earlier downloads and original evidence dates.",
+          "evidence": [
+            "https://micron.gcs-web.com/news-releases/news-release-details/micron-announces-3-billion-strategic-investment-strengthen-us"
+          ]
+        },
+        {
+          "previousSha256": "e6a98efbce241039b11b488518f3e43c14fd162f7c650ea50c3cd18311ea2b7f",
+          "articleSha256": "aeca16e13635314bb54fb09cdad05b848546aea94c8b9bb1a3b22f1ea8741d36",
+          "dateModified": "2026-10-13",
+          "reason": "Lead with the concrete business decision and simplify the opening while preserving sourced requirements, timing and scope after independent writing review.",
+          "evidence": [
+            "https://micron.gcs-web.com/news-releases/news-release-details/micron-announces-3-billion-strategic-investment-strengthen-us"
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "texas-commercial-property-insurance-diligence",
+      "path": "src/personal/editorial/data/articles/texas-commercial-property-insurance-diligence.json",
+      "canonicalPath": "/research/texas/texas-commercial-property-insurance-diligence",
+      "datePublished": "2026-10-12",
+      "dateModified": "2026-10-12",
+      "articleSha256": "1bd7784305b91665778974fb7243d8f0f925230324d11eab17fe4900698a88b2",
+      "proseWords": 1881,
+      "readTime": "10 MIN",
+      "claimsPath": "docs/texas-business/research/insurance-claims.json",
+      "initialReview": {
+        "reason": "Root reviewed the complete manuscript, controlling source boundaries, declared calculations and concrete independent-review corrections.",
+        "evidence": [
+          "https://www.tdi.texas.gov/pubs/consumer/cb021.html"
+        ]
+      },
+      "updates": [
+        {
+          "previousSha256": "1bd7784305b91665778974fb7243d8f0f925230324d11eab17fe4900698a88b2",
+          "articleSha256": "92c755eec82320438de00cd995db0303c15d1d5b23849ee44f239e4f75eaa728",
+          "dateModified": "2026-10-13",
+          "reason": "Read the actual TWIA restoration and contract-tail boundaries; distinguish post-repair operating exposure from policy payment and add loss-dependent retention sensitivity.",
+          "evidence": [
+            "https://www.twia.org/wp-content/uploads/Business_Income_and_Extra_Expense_Form_2011.11.pdf"
+          ]
+        },
+        {
+          "previousSha256": "92c755eec82320438de00cd995db0303c15d1d5b23849ee44f239e4f75eaa728",
+          "articleSha256": "d9659725eb89a15c85b2543a80043925fabb55583536dc263e2facfa2d73e2e9",
+          "dateModified": "2026-10-13",
+          "reason": "Correct the rendered supporting-material link to the current eighteen-article research projection while preserving the two frozen earlier downloads and original evidence dates.",
+          "evidence": [
+            "https://www.twia.org/wp-content/uploads/Business_Income_and_Extra_Expense_Form_2011.11.pdf"
+          ]
+        },
+        {
+          "previousSha256": "d9659725eb89a15c85b2543a80043925fabb55583536dc263e2facfa2d73e2e9",
+          "articleSha256": "8a187646cbc3159acebf65bfd46ac4041270058901e75ccc93df4fd4434e6053",
+          "dateModified": "2026-10-13",
+          "reason": "Lead with the concrete business decision and simplify the opening while preserving sourced requirements, timing and scope after independent writing review.",
+          "evidence": [
+            "https://www.twia.org/wp-content/uploads/Business_Income_and_Extra_Expense_Form_2011.11.pdf"
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "texas-robotaxi-business-service-map",
+      "path": "src/personal/editorial/data/articles/texas-robotaxi-business-service-map.json",
+      "canonicalPath": "/research/texas/texas-robotaxi-business-service-map",
+      "datePublished": "2026-10-13",
+      "dateModified": "2026-10-13",
+      "articleSha256": "861c81680a0afa63f7a924e6cb8da34f996f42145f48e595cc1ed582588db77f",
+      "proseWords": 2002,
+      "readTime": "11 MIN",
+      "claimsPath": "docs/texas-business/research/robotaxi-map-claims.json",
+      "initialReview": {
+        "reason": "Reviewed current primary access and human-role evidence; added current Avride guidance, explicit Tesla rider constraints, and reconciled fare cash versus allocated exception time.",
+        "evidence": [
+          "https://blog.waymo.com/blog/shorts/dallas-open-to-all/",
+          "https://www.uber.com/us/en/r/autonomous/dallas-tx-us/"
+        ]
+      },
+      "updates": [
+        {
+          "previousSha256": "861c81680a0afa63f7a924e6cb8da34f996f42145f48e595cc1ed582588db77f",
+          "articleSha256": "928b0b5011a315d3cbd052277274a72b0f8f1b5ab29ef89a22207af4f24714dc",
+          "dateModified": "2026-10-13",
+          "reason": "Add bounded official Austin school-bus and Cybercab oversight records, separate access and onboard roles, and use the attempted-journey denominator for the hypothetical fallback threshold.",
+          "evidence": [
+            "https://www.ntsb.gov/investigations/Pages/HWY26FH007.aspx"
+          ]
+        },
+        {
+          "previousSha256": "928b0b5011a315d3cbd052277274a72b0f8f1b5ab29ef89a22207af4f24714dc",
+          "articleSha256": "790cd6de3078bd4d26e9235f325ea111002624db6737c120ac41a77b1403d64a",
+          "dateModified": "2026-10-13",
+          "reason": "Correct the rendered supporting-material link to the current eighteen-article research projection while preserving the two frozen earlier downloads and original evidence dates.",
+          "evidence": [
+            "https://www.ntsb.gov/investigations/Pages/HWY26FH007.aspx"
+          ]
+        },
+        {
+          "previousSha256": "790cd6de3078bd4d26e9235f325ea111002624db6737c120ac41a77b1403d64a",
+          "articleSha256": "89264fbeb74c30d96f5212a7b7b06acab0242dc6548680c128097d103cc8a7ee",
+          "dateModified": "2026-10-13",
+          "reason": "Lead with the buyer decision and add a declared practical itinerary, depot, tender, route-quote or service-change example; preserve accepted provider and legal qualifications after independent writing review.",
+          "evidence": [
+            "https://www.ntsb.gov/investigations/Pages/HWY26FH007.aspx"
+          ]
+        },
+        {
+          "previousSha256": "89264fbeb74c30d96f5212a7b7b06acab0242dc6548680c128097d103cc8a7ee",
+          "articleSha256": "b81737881f6775543ca3df378a6304924e78e8b76415a6f7fbb4e93c8457d9c3",
+          "dateModified": "2026-10-14",
+          "reason": "Update San Antonio and SAT invitation access from the newly issued October 14 operator announcement; retain prior research dates, routes, assumptions and frozen downloads.",
+          "evidence": [
+            "https://support.google.com/waymo/answer/18765688",
+            "https://support.google.com/waymo/announcements/12766613?hl=en",
+            "https://support.google.com/waymo/answer/9059119?hl=en"
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "texas-waymo-business-travel",
+      "path": "src/personal/editorial/data/articles/texas-waymo-business-travel.json",
+      "canonicalPath": "/research/texas/texas-waymo-business-travel",
+      "datePublished": "2026-10-13",
+      "dateModified": "2026-10-13",
+      "articleSha256": "f29c53668d4af9dc43c30585d89ed11ed6aec257faa37ecd0861f762c8e9defc",
+      "proseWords": 1709,
+      "readTime": "9 MIN",
+      "claimsPath": "docs/texas-business/research/waymo-claims.json",
+      "initialReview": {
+        "reason": "Reviewed Texas rider and airport guidance, payment-program boundaries and the independently recalculated complete-journey and fallback scenarios.",
+        "evidence": [
+          "https://blog.waymo.com/blog/shorts/dallas-open-to-all/"
+        ]
+      },
+      "updates": [
+        {
+          "previousSha256": "f29c53668d4af9dc43c30585d89ed11ed6aec257faa37ecd0861f762c8e9defc",
+          "articleSha256": "1e07313ba30e42c79869fcee041aae99d3834aeb61b3cc7ef9361e8e362d5b4e",
+          "dateModified": "2026-10-13",
+          "reason": "Add the preliminary Austin oversight record, approve itinerary legs separately and recompute the fare/time break-even threshold and fallback cash/time split.",
+          "evidence": [
+            "https://www.ntsb.gov/investigations/Pages/HWY26FH007.aspx"
+          ]
+        },
+        {
+          "previousSha256": "1e07313ba30e42c79869fcee041aae99d3834aeb61b3cc7ef9361e8e362d5b4e",
+          "articleSha256": "6282290cd3a1dab7ae96fb32a25e1fe940357aa683090232c1f7eb39beba04e3",
+          "dateModified": "2026-10-13",
+          "reason": "Correct the rendered supporting-material link to the current eighteen-article research projection while preserving the two frozen earlier downloads and original evidence dates.",
+          "evidence": [
+            "https://www.ntsb.gov/investigations/Pages/HWY26FH007.aspx"
+          ]
+        },
+        {
+          "previousSha256": "6282290cd3a1dab7ae96fb32a25e1fe940357aa683090232c1f7eb39beba04e3",
+          "articleSha256": "2a8a2aff2951c597e11093f12b954db5d143fab2f28a003f8118f7c53c5e4a79",
+          "dateModified": "2026-10-13",
+          "reason": "Lead with the buyer decision and add a declared practical itinerary, depot, tender, route-quote or service-change example; preserve accepted provider and legal qualifications after independent writing review.",
+          "evidence": [
+            "https://www.ntsb.gov/investigations/Pages/HWY26FH007.aspx"
+          ]
+        },
+        {
+          "previousSha256": "2a8a2aff2951c597e11093f12b954db5d143fab2f28a003f8118f7c53c5e4a79",
+          "articleSha256": "8f8f997a186342f22b765bc4c8d0aaf600a6f335476d549f96599a9b713018bc",
+          "dateModified": "2026-10-14",
+          "reason": "Update San Antonio and SAT invitation access from the newly issued October 14 operator announcement; retain prior research dates, routes, assumptions and frozen downloads.",
+          "evidence": [
+            "https://support.google.com/waymo/answer/18765688",
+            "https://support.google.com/waymo/announcements/12766613?hl=en",
+            "https://support.google.com/waymo/answer/9059119?hl=en"
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "texas-zoox-market-entry-business",
+      "path": "src/personal/editorial/data/articles/texas-zoox-market-entry-business.json",
+      "canonicalPath": "/research/texas/texas-zoox-market-entry-business",
+      "datePublished": "2026-10-13",
+      "dateModified": "2026-10-13",
+      "articleSha256": "cb7bc70059e62b9c7d558ad5df007ae273a2b321cf8ecf80c19cc9a7716e2174",
+      "proseWords": 1733,
+      "readTime": "10 MIN",
+      "claimsPath": "docs/texas-business/research/zoox-claims.json",
+      "initialReview": {
+        "reason": "Reviewed rendered city and testing disclosures against the federal grant; independently checked vehicle-hour throughput, utilization and conditional commercial scope.",
+        "evidence": [
+          "https://zoox.com/austin"
+        ]
+      },
+      "updates": [
+        {
+          "previousSha256": "cb7bc70059e62b9c7d558ad5df007ae273a2b321cf8ecf80c19cc9a7716e2174",
+          "articleSha256": "484f3df08dc356294860f1b4053061546c8a8f7de14a06a6d60bdf714c8c499d",
+          "dateModified": "2026-10-13",
+          "reason": "Use binding lifetime operational-control and transfer conditions, identify the public authorization docket, remove arbitrary dollar costs and match commitments to the actual fleet stage.",
+          "evidence": [
+            "https://www.govinfo.gov/content/pkg/FR-2026-07-31/html/2026-15485.htm"
+          ]
+        },
+        {
+          "previousSha256": "484f3df08dc356294860f1b4053061546c8a8f7de14a06a6d60bdf714c8c499d",
+          "articleSha256": "8888bc3efe2ee6f65acfa98e7377e6cfb08e6d5dbff85d3671371db4026dc923",
+          "dateModified": "2026-10-13",
+          "reason": "Correct the rendered supporting-material link to the current eighteen-article research projection while preserving the two frozen earlier downloads and original evidence dates.",
+          "evidence": [
+            "https://www.govinfo.gov/content/pkg/FR-2026-07-31/html/2026-15485.htm"
+          ]
+        },
+        {
+          "previousSha256": "8888bc3efe2ee6f65acfa98e7377e6cfb08e6d5dbff85d3671371db4026dc923",
+          "articleSha256": "2e9c030b27cfe38a7fdb62f0e5f75c605442916e18cf1056f10f5ba85da202a6",
+          "dateModified": "2026-10-13",
+          "reason": "Lead with the buyer decision and add a declared practical itinerary, depot, tender, route-quote or service-change example; preserve accepted provider and legal qualifications after independent writing review.",
+          "evidence": [
+            "https://www.govinfo.gov/content/pkg/FR-2026-07-31/html/2026-15485.htm"
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "texas-autonomous-trucking-operators",
+      "path": "src/personal/editorial/data/articles/texas-autonomous-trucking-operators.json",
+      "canonicalPath": "/research/texas/texas-autonomous-trucking-operators",
+      "datePublished": "2026-10-13",
+      "dateModified": "2026-10-13",
+      "articleSha256": "ac75c452c75bd6062d3f0ee0d440a60c726da4f79453a8f70ac066db3ed7bbde",
+      "proseWords": 1761,
+      "readTime": "11 MIN",
+      "claimsPath": "docs/texas-business/research/autonomous-trucking-claims.json",
+      "initialReview": {
+        "reason": "Read the actual operator comparison and current primary disclosures, preserving industrial versus highway domains, onboard roles, targets and noncomparable metric denominators.",
+        "evidence": [
+          "https://aurora.tech/newsroom/your-questions-about-our-latest-driverless-launch-answered"
+        ]
+      },
+      "updates": [
+        {
+          "previousSha256": "ac75c452c75bd6062d3f0ee0d440a60c726da4f79453a8f70ac066db3ed7bbde",
+          "articleSha256": "0ce073cb3f6dd9569c20ae1f252a0eb97502a5f906ae954dfd9c827abf599e43",
+          "dateModified": "2026-10-13",
+          "reason": "Add the final FMCSA roadside-warning exemption with cargo, configuration, domain and intrastate boundaries; preserve observer versus safety-driver roles in a job-specific shortlist.",
+          "evidence": [
+            "https://www.govinfo.gov/content/pkg/FR-2026-10-09/html/2026-20734.htm"
+          ]
+        },
+        {
+          "previousSha256": "0ce073cb3f6dd9569c20ae1f252a0eb97502a5f906ae954dfd9c827abf599e43",
+          "articleSha256": "48b25c4f634043b42affd9b31d15c2b105eba640450cab4477affe3d054ce056",
+          "dateModified": "2026-10-13",
+          "reason": "Add actual current official Texas incorporation and exception rules to bound intrastate beacon reliance; do not invent a state permit process or exhaustive absence claim; synchronize the source download.",
+          "evidence": [
+            "https://www.govinfo.gov/content/pkg/FR-2026-10-09/html/2026-20734.htm",
+            "https://texas-sos.appianportalsgov.com/rules-and-meetings?recordId=211918&queryAsDate=10%2F13%2F2026&interface=VIEW_TAC_SUMMARY&$locale=en_US",
+            "https://texas-sos.appianportalsgov.com/rules-and-meetings?recordId=226974&queryAsDate=10%2F13%2F2026&interface=VIEW_TAC_SUMMARY&$locale=en_US"
+          ]
+        },
+        {
+          "previousSha256": "48b25c4f634043b42affd9b31d15c2b105eba640450cab4477affe3d054ce056",
+          "articleSha256": "b7d1be4698865eaa5e432f3343916cde8caddb00c883d3b68010f4f70ee6eaa4",
+          "dateModified": "2026-10-13",
+          "reason": "Lead with the buyer decision and add a declared practical itinerary, depot, tender, route-quote or service-change example; preserve accepted provider and legal qualifications after independent writing review.",
+          "evidence": [
+            "https://www.govinfo.gov/content/pkg/FR-2026-10-09/html/2026-20734.htm",
+            "https://texas-sos.appianportalsgov.com/rules-and-meetings?recordId=211918&queryAsDate=10%2F13%2F2026&interface=VIEW_TAC_SUMMARY&$locale=en_US",
+            "https://texas-sos.appianportalsgov.com/rules-and-meetings?recordId=226974&queryAsDate=10%2F13%2F2026&interface=VIEW_TAC_SUMMARY&$locale=en_US"
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "texas-driverless-freight-route-economics",
+      "path": "src/personal/editorial/data/articles/texas-driverless-freight-route-economics.json",
+      "canonicalPath": "/research/texas/texas-driverless-freight-route-economics",
+      "datePublished": "2026-10-13",
+      "dateModified": "2026-10-13",
+      "articleSha256": "d4c925669d4daaeac1f3485420d031524de054a4f529191ddc88fbca068e0409",
+      "proseWords": 1901,
+      "readTime": "11 MIN",
+      "claimsPath": "docs/texas-business/research/driverless-freight-claims.json",
+      "initialReview": {
+        "reason": "Reviewed the full route-cost boundaries and federal insurance/record-system evidence; independently recalculated all acceptance, transfer, exception and break-even scenarios.",
+        "evidence": [
+          "https://aurora.tech/newsroom/your-questions-about-our-latest-driverless-launch-answered"
+        ]
+      },
+      "updates": [
+        {
+          "previousSha256": "d4c925669d4daaeac1f3485420d031524de054a4f529191ddc88fbca068e0409",
+          "articleSha256": "00160d1ab7f333a5038e70f8b3acbde5d77bcb39527acee8586b751a0dd0f6de",
+          "dateModified": "2026-10-13",
+          "reason": "Apply the final roadside-warning scope gate and separate paid invoices, allocated labor and lost contribution in the reusable accepted-load and price thresholds.",
+          "evidence": [
+            "https://www.govinfo.gov/content/pkg/FR-2026-10-09/html/2026-20734.htm"
+          ]
+        },
+        {
+          "previousSha256": "00160d1ab7f333a5038e70f8b3acbde5d77bcb39527acee8586b751a0dd0f6de",
+          "articleSha256": "c8fc5d8d1f3ee7e2dd776071e38eb928fafb6f1edbdb9d1fae53127d2b4d78a1",
+          "dateModified": "2026-10-13",
+          "reason": "Add actual current official Texas incorporation and exception rules to bound intrastate beacon reliance; do not invent a state permit process or exhaustive absence claim; synchronize the source download.",
+          "evidence": [
+            "https://www.govinfo.gov/content/pkg/FR-2026-10-09/html/2026-20734.htm",
+            "https://texas-sos.appianportalsgov.com/rules-and-meetings?recordId=211918&queryAsDate=10%2F13%2F2026&interface=VIEW_TAC_SUMMARY&$locale=en_US",
+            "https://texas-sos.appianportalsgov.com/rules-and-meetings?recordId=226974&queryAsDate=10%2F13%2F2026&interface=VIEW_TAC_SUMMARY&$locale=en_US"
+          ]
+        },
+        {
+          "previousSha256": "c8fc5d8d1f3ee7e2dd776071e38eb928fafb6f1edbdb9d1fae53127d2b4d78a1",
+          "articleSha256": "1e4f6beb37a228b2e91a8c8d09db86c3a5a8d7ed49128e79567c95ac38df4c6b",
+          "dateModified": "2026-10-13",
+          "reason": "Lead with the buyer decision and add a declared practical itinerary, depot, tender, route-quote or service-change example; preserve accepted provider and legal qualifications after independent writing review.",
+          "evidence": [
+            "https://www.govinfo.gov/content/pkg/FR-2026-10-09/html/2026-20734.htm",
+            "https://texas-sos.appianportalsgov.com/rules-and-meetings?recordId=211918&queryAsDate=10%2F13%2F2026&interface=VIEW_TAC_SUMMARY&$locale=en_US",
+            "https://texas-sos.appianportalsgov.com/rules-and-meetings?recordId=226974&queryAsDate=10%2F13%2F2026&interface=VIEW_TAC_SUMMARY&$locale=en_US"
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "texas-automated-vehicle-authorization",
+      "path": "src/personal/editorial/data/articles/texas-automated-vehicle-authorization.json",
+      "canonicalPath": "/research/texas/texas-automated-vehicle-authorization",
+      "datePublished": "2026-10-13",
+      "dateModified": "2026-10-13",
+      "articleSha256": "27cc746959c3d868f684fb409dcbcabb83acee7b147a79b78f28001a6ebd1a2a",
+      "proseWords": 1867,
+      "readTime": "10 MIN",
+      "claimsPath": "docs/texas-business/research/av-authorization-claims.json",
+      "initialReview": {
+        "reason": "Reviewed implemented agency guidance against governing statute, added the exact human-driver distinction, preserved enforcement clocks and recalculated continuity costs.",
+        "evidence": [
+          "https://tcss.legis.texas.gov/resources/TN/htm/TN.545.htm"
+        ]
+      },
+      "updates": [
+        {
+          "previousSha256": "27cc746959c3d868f684fb409dcbcabb83acee7b147a79b78f28001a6ebd1a2a",
+          "articleSha256": "05dc58cff791120517ea96bb03dca3deec420338e29c6ee78289408ce825b9af",
+          "dateModified": "2026-10-13",
+          "reason": "Separate general operating conditions, the commercial driverless gate and selected federal records; distinguish launch, update and unsafe-operation decisions and clarify continuity cost boundaries.",
+          "evidence": [
+            "https://tcss.legis.texas.gov/resources/TN/htm/TN.545.htm"
+          ]
+        },
+        {
+          "previousSha256": "05dc58cff791120517ea96bb03dca3deec420338e29c6ee78289408ce825b9af",
+          "articleSha256": "afff12c3491bf52953173c2b02d798cf7f224c1cba7cd82717bd60245ef63b61",
+          "dateModified": "2026-10-13",
+          "reason": "Add actual current official Texas incorporation and exception rules to bound intrastate beacon reliance; do not invent a state permit process or exhaustive absence claim; synchronize the source download.",
+          "evidence": [
+            "https://www.govinfo.gov/content/pkg/FR-2026-10-09/html/2026-20734.htm",
+            "https://texas-sos.appianportalsgov.com/rules-and-meetings?recordId=211918&queryAsDate=10%2F13%2F2026&interface=VIEW_TAC_SUMMARY&$locale=en_US",
+            "https://texas-sos.appianportalsgov.com/rules-and-meetings?recordId=226974&queryAsDate=10%2F13%2F2026&interface=VIEW_TAC_SUMMARY&$locale=en_US"
+          ]
+        },
+        {
+          "previousSha256": "afff12c3491bf52953173c2b02d798cf7f224c1cba7cd82717bd60245ef63b61",
+          "articleSha256": "d9daefad9459336a34cf347e9d8aac225fe91ecb5a25a458f3237914a253a9db",
+          "dateModified": "2026-10-13",
+          "reason": "Lead with the buyer decision and add a declared practical itinerary, depot, tender, route-quote or service-change example; preserve accepted provider and legal qualifications after independent writing review.",
+          "evidence": [
+            "https://www.govinfo.gov/content/pkg/FR-2026-10-09/html/2026-20734.htm",
+            "https://texas-sos.appianportalsgov.com/rules-and-meetings?recordId=211918&queryAsDate=10%2F13%2F2026&interface=VIEW_TAC_SUMMARY&$locale=en_US",
+            "https://texas-sos.appianportalsgov.com/rules-and-meetings?recordId=226974&queryAsDate=10%2F13%2F2026&interface=VIEW_TAC_SUMMARY&$locale=en_US"
+          ]
+        }
+      ]
+    },
+    {
       "slug": "chegg-cash-flow-turnaround",
       "path": "src/personal/editorial/data/articles/chegg-cash-flow-turnaround.json",
       "canonicalPath": "/research/financial-systems/chegg-cash-flow-turnaround",
       "datePublished": "2026-10-12",
-      "dateModified": "2026-10-12",
-      "articleSha256": "8cd8b4999f2ca631835c8c57943d6c2132721f9cfbc343bfc5373a711857fa00",
-      "proseWords": 2789,
-      "readTime": "16 MIN",
+      "dateModified": "2026-10-13",
+      "articleSha256": "7972b6da7f79736106f07d9b2bb903fe7faad63a1116579a2c8f00b48a7e3e8e",
+      "proseWords": 3282,
+      "readTime": "19 MIN",
       "claimsPath": "docs/chegg-case-study/source-register.json"
+    },
+    {
+      "slug": "adobe-paid-workflows",
+      "path": "src/personal/editorial/data/articles/adobe-paid-workflows.json",
+      "canonicalPath": "/research/financial-systems/adobe-paid-workflows",
+      "datePublished": "2026-10-13",
+      "dateModified": "2026-10-13",
+      "articleSha256": "b0cd261d81289bf27a9f41b072ccf2a1d84532e678247162c14959a0081ed128",
+      "proseWords": 1957,
+      "readTime": "12 MIN",
+      "claimsPath": "docs/long-pitches-20261012/source-register.json"
+    },
+    {
+      "slug": "paypal-margin-dollar-recovery",
+      "path": "src/personal/editorial/data/articles/paypal-margin-dollar-recovery.json",
+      "canonicalPath": "/research/financial-systems/paypal-margin-dollar-recovery",
+      "datePublished": "2026-10-13",
+      "dateModified": "2026-10-13",
+      "articleSha256": "7903a14278f5bf9a8cc5fbeb0c609a50a34f533110cd36249adad948d28cb57b",
+      "proseWords": 1953,
+      "readTime": "12 MIN",
+      "claimsPath": "docs/long-pitches-20261012/source-register.json"
+    },
+    {
+      "slug": "crocs-cash-and-brand-test",
+      "path": "src/personal/editorial/data/articles/crocs-cash-and-brand-test.json",
+      "canonicalPath": "/research/financial-systems/crocs-cash-and-brand-test",
+      "datePublished": "2026-10-13",
+      "dateModified": "2026-10-13",
+      "articleSha256": "8c4ede78cd8704051e439a19548737299f0424414878d9f2bfc228207d317c9a",
+      "proseWords": 1985,
+      "readTime": "12 MIN",
+      "claimsPath": "docs/long-pitches-20261012/source-register.json",
+      "updates": [
+        {
+          "previousSha256": "8c4ede78cd8704051e439a19548737299f0424414878d9f2bfc228207d317c9a",
+          "articleSha256": "aa4d7ebe644d98d166c4aa901ff1ce7a8746d099d109a628b609514be2c14131",
+          "dateModified": "2026-10-14",
+          "reason": "Restore the omitted bear/base/bull assumptions and outputs in their own section; distinguish the unchanged operating forecast from the separate tax-payment stress. No model input or forecast is changed.",
+          "evidence": [
+            "https://www.sec.gov/Archives/edgar/data/1334036/000133403626000006/crox-20251231.htm",
+            "https://www.sec.gov/Archives/edgar/data/1334036/000133403626000052/crox-20260630.htm",
+            "https://www.sec.gov/Archives/edgar/data/1334036/000133403626000050/croxq22026-pressrelease.htm",
+            "https://docs.alpaca.markets/reference/stockbars"
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "expedia-network-and-cash",
+      "path": "src/personal/editorial/data/articles/expedia-network-and-cash.json",
+      "canonicalPath": "/research/financial-systems/expedia-network-and-cash",
+      "datePublished": "2026-10-13",
+      "dateModified": "2026-10-13",
+      "articleSha256": "0b7a5ad0a109b869cd540ea4076a05e1e1d378e82c1a1566cd050c11c5816c80",
+      "proseWords": 2025,
+      "readTime": "12 MIN",
+      "claimsPath": "docs/long-pitches-20261012/source-register.json"
+    },
+    {
+      "slug": "choosing-a-growth-channel-under-a-capacity-limit",
+      "path": "src/personal/editorial/data/articles/choosing-a-growth-channel-under-a-capacity-limit.json",
+      "canonicalPath": "/research/strategy-systems/choosing-a-growth-channel-under-a-capacity-limit",
+      "datePublished": "2026-10-12",
+      "dateModified": "2026-10-12",
+      "articleSha256": "40e52cce0e818df12799b2d757cc5f893f6eea2d40d4f9a62dd3bb6aaa67393e",
+      "proseWords": 2175,
+      "readTime": "13 MIN",
+      "claimsPath": "docs/article-drafts/strategy-planning-20261012/SOURCES.md",
+      "sourceArticleSha256": "10f57181c5cf01b5b57189c63c7043aff1b614e7d39b097df45eda7357d18097",
+      "sourceRevision": "04831fefe4044d6cf82472cd77075d60cf40a75f",
+      "integrationNote": "Register the authored manuscript and evidence; align the reading estimate with the site policy. Models and source dates are retained."
+    },
+    {
+      "slug": "toast-gross-profit-engine",
+      "path": "src/personal/editorial/data/articles/toast-gross-profit-engine.json",
+      "canonicalPath": "/research/financial-systems/toast-gross-profit-engine",
+      "datePublished": "2026-10-12",
+      "dateModified": "2026-10-12",
+      "articleSha256": "3ffb285244bce9d8ff8c39e48e38ad6ef2bdadac1d4bcce8692ce1169fb15aa9",
+      "proseWords": 2039,
+      "readTime": "11 MIN",
+      "claimsPath": "docs/article-drafts/strategy-planning-20261012/pitches/toast/SOURCES.md",
+      "sourceArticleSha256": "969de40d41195fadece029bc0f5fded51157faa75abc6613d4499cc204edb9e1",
+      "sourceRevision": "04831fefe4044d6cf82472cd77075d60cf40a75f",
+      "integrationNote": "Register the authored manuscript and evidence; align the reading estimate with the site policy. Models and source dates are retained."
+    },
+    {
+      "slug": "harvey-who-keeps-the-value-of-legal-ai",
+      "path": "src/personal/editorial/data/articles/harvey-who-keeps-the-value-of-legal-ai.json",
+      "canonicalPath": "/research/financial-systems/harvey-who-keeps-the-value-of-legal-ai",
+      "datePublished": "2026-10-12",
+      "dateModified": "2026-10-12",
+      "articleSha256": "bc1f0c83a63aba10d2bd7840790ba46fdb0b3ce49f7c1897c439574bb9fbbeff",
+      "proseWords": 2185,
+      "readTime": "13 MIN",
+      "claimsPath": "docs/article-drafts/strategy-planning-20261012/pitches/harvey/SOURCES.md",
+      "sourceArticleSha256": "43d199ef81bf51369f9c99e4fc5d03c77e590ed4bafb5ca9095cf9757d3b9e94",
+      "sourceRevision": "04831fefe4044d6cf82472cd77075d60cf40a75f",
+      "integrationNote": "Register the authored manuscript and evidence; align the reading estimate with the site policy. Models and source dates are retained. Reconcile the 36.25% margin to the table’s one-decimal ties-to-even display (36.2%); underlying values unchanged."
+    },
+    {
+      "slug": "vanta-after-the-audit",
+      "path": "src/personal/editorial/data/articles/vanta-after-the-audit.json",
+      "canonicalPath": "/research/financial-systems/vanta-after-the-audit",
+      "datePublished": "2026-10-12",
+      "dateModified": "2026-10-12",
+      "articleSha256": "aa89e36097ba5701f66e003bafd1418973f75a6359d66969092575f511c38402",
+      "proseWords": 2378,
+      "readTime": "14 MIN",
+      "claimsPath": "docs/article-drafts/strategy-planning-20261012/pitches/vanta/SOURCES.md",
+      "sourceArticleSha256": "ff6def010c5d1182d0198c15f6860d9284cf0bf7a35424a4f482c4c7a1576655",
+      "sourceRevision": "04831fefe4044d6cf82472cd77075d60cf40a75f",
+      "integrationNote": "Register the authored manuscript and evidence; align the reading estimate with the site policy. Models and source dates are retained."
+    },
+    {
+      "slug": "ramp-saving-money-and-retaining-contribution",
+      "path": "src/personal/editorial/data/articles/ramp-saving-money-and-retaining-contribution.json",
+      "canonicalPath": "/research/financial-systems/ramp-saving-money-and-retaining-contribution",
+      "datePublished": "2026-10-13",
+      "dateModified": "2026-10-13",
+      "articleSha256": "7864bc0b99adb4b968cc73c6399fda57e7f61e548baa011902650438756231e8",
+      "proseWords": 2116,
+      "readTime": "11 MIN",
+      "claimsPath": "docs/article-drafts/strategy-planning-20261012/pitches/ramp/SOURCES.md",
+      "sourceArticleSha256": "543456413424ea03c9e1e2710bfb941a9e3697da89e5d45e3fef22806ebf6125",
+      "sourceRevision": "1a7a83775d54fdf784ae47904ac7453869b4a3f9",
+      "integrationNote": "Register the authored manuscript and evidence; align the reading estimate with the site policy. Models and source dates are retained."
+    },
+    {
+      "slug": "elevenlabs-cost-of-accepted-work",
+      "path": "src/personal/editorial/data/articles/elevenlabs-cost-of-accepted-work.json",
+      "canonicalPath": "/research/financial-systems/elevenlabs-cost-of-accepted-work",
+      "datePublished": "2026-10-13",
+      "dateModified": "2026-10-13",
+      "articleSha256": "ff3df622d5b265ee10567be4a4e08878727a1da892cc24c127c1ddf3b93102a1",
+      "proseWords": 2261,
+      "readTime": "12 MIN",
+      "claimsPath": "docs/article-drafts/strategy-planning-20261012/pitches/elevenlabs/SOURCES.md",
+      "sourceArticleSha256": "97ac085db05f947020045b8c7c4b6b0bde79b0b82143c6b7dd94411a1306eb39",
+      "sourceRevision": "1a7a83775d54fdf784ae47904ac7453869b4a3f9",
+      "integrationNote": "Register the authored manuscript and evidence; align the reading estimate with the site policy. Models and source dates are retained."
+    },
+    {
+      "slug": "flock-safety-installed-cohort-cash",
+      "path": "src/personal/editorial/data/articles/flock-safety-installed-cohort-cash.json",
+      "canonicalPath": "/research/financial-systems/flock-safety-installed-cohort-cash",
+      "datePublished": "2026-10-13",
+      "dateModified": "2026-10-13",
+      "articleSha256": "cb595666661f21d991571bbd289131391a3496e4a03d06bb596ccd1c75509e98",
+      "proseWords": 2232,
+      "readTime": "12 MIN",
+      "claimsPath": "docs/article-drafts/strategy-planning-20261012/pitches/flock-safety/SOURCES.md",
+      "sourceArticleSha256": "83a8d0d8b2454bd9eb8398e4e70c86dc8540104534ef7c357b5763c875e7106f",
+      "sourceRevision": "1a7a83775d54fdf784ae47904ac7453869b4a3f9",
+      "integrationNote": "Register the authored manuscript and evidence; align the reading estimate with the site policy. Models and source dates are retained."
     }
   ]
 }

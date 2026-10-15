@@ -1,0 +1,32 @@
+{
+  "status": "passed",
+  "independent_review": "93 primary input checks;552 financial checks;17 synthetic evaluator cases; all12 financial scenarios and4 coupled reverse hurdles.36 growth/multiple sensitivity cells not independently recomputed in that review.",
+  "post_review_change": "Only deterministic sorting of TTM field serialization; parsed outputs exactly equal independently reviewed snapshots.",
+  "forecast_accuracy": "Future results unobserved. No synthetic fixture is performance evidence.",
+  "articles": [
+    {
+      "symbol": "ADBE",
+      "article_sha256": "b0cd261d81289bf27a9f41b072ccf2a1d84532e678247162c14959a0081ed128",
+      "tables": 6,
+      "figures": 3
+    },
+    {
+      "symbol": "PYPL",
+      "article_sha256": "7903a14278f5bf9a8cc5fbeb0c609a50a34f533110cd36249adad948d28cb57b",
+      "tables": 6,
+      "figures": 3
+    },
+    {
+      "symbol": "CROX",
+      "article_sha256": "8c4ede78cd8704051e439a19548737299f0424414878d9f2bfc228207d317c9a",
+      "tables": 5,
+      "figures": 3
+    },
+    {
+      "symbol": "EXPE",
+      "article_sha256": "0b7a5ad0a109b869cd540ea4076a05e1e1d378e82c1a1566cd050c11c5816c80",
+      "tables": 5,
+      "figures": 3
+    }
+  ]
+}

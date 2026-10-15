@@ -1,0 +1,905 @@
+{
+  "title": "Texas business research: October 12, 2026 edition",
+  "author": "Sulayman Bowles",
+  "scope": "Source-backed decision research; illustrative cases are labeled in each manuscript. Claim notes describe evidence and limits, not new official data.",
+  "editions": [
+    {
+      "slug": "texas-power-large-load-business-diligence",
+      "title": "Power Before Property",
+      "url": "https://sulayman-bowles.dev/research/texas/texas-power-large-load-business-diligence",
+      "researchCutoff": "2026-10-12",
+      "sources": [
+        {
+          "id": "sb6-history",
+          "label": "SB6 legislative history, 89th Regular Session",
+          "href": "https://capitol.texas.gov/billlookup/History.aspx?Bill=SB6&LegSess=89R",
+          "publisher": "Texas Legislature Online",
+          "date": "2025-06-20",
+          "lastVerified": "2026-10-12",
+          "note": "Records the governor’s signature and immediate effective date."
+        },
+        {
+          "id": "sb6-text",
+          "label": "SB6 enrolled text",
+          "href": "https://capitol.texas.gov/tlodocs/89R/billtext/html/SB00006F.HTM",
+          "publisher": "Texas Legislature Online",
+          "date": "2025-05-30",
+          "lastVerified": "2026-10-12",
+          "note": "Final enrolled text, not an earlier committee substitute. Sections 2, 4 and 6 establish the statutory scope, interruption mechanisms, co-location provisions and cost-recovery review."
+        },
+        {
+          "id": "interconnection-rule",
+          "label": "Adopted 16 TAC §25.194: Large Load Interconnection Standards",
+          "href": "https://www.sos.texas.gov/texreg/archive/October22026/Adopted%20Rules/16.ECONOMIC%20REGULATION.html",
+          "publisher": "Texas Secretary of State / Public Utility Commission of Texas",
+          "date": "2026-10-02",
+          "lastVerified": "2026-10-12",
+          "note": "Filed September 18; effective October 8, 2026. Applicability and transitional treatment must be read against the specific project and its prior agreements."
+        },
+        {
+          "id": "grid-assessment",
+          "label": "ERCOT Senate grid assessment",
+          "href": "https://www.ercot.com/files/docs/2026/07/29/ERCOT-Senate-July-29-Panel-1-Assessing-The-Grid.pdf",
+          "publisher": "ERCOT",
+          "date": "2026-07-29",
+          "lastVerified": "2026-10-12",
+          "note": "Page 6 reports June 2026 large-load requests; page 2 illustrates existing-generation co-location. Request capacity is not operating demand."
+        },
+        {
+          "id": "preliminary-forecast",
+          "label": "Preliminary Long-Term Load Forecast, 2026–2032",
+          "href": "https://www.ercot.com/news/release/04152026-ercot-releases-preliminary",
+          "publisher": "ERCOT",
+          "date": "2026-04-15",
+          "lastVerified": "2026-10-12",
+          "note": "A dated preliminary planning snapshot. ERCOT expressly distinguished it from a prediction of what would be built; it is not presented here as the latest forecast."
+        },
+        {
+          "id": "audit-process",
+          "label": "Batch Zero verification and audit presentation",
+          "href": "https://www.ercot.com/files/docs/2026/08/20/Batch-Zero-Verification-and-Audit-PUCT-Presentation.pdf",
+          "publisher": "ERCOT",
+          "date": "2026-08-20",
+          "lastVerified": "2026-10-12",
+          "note": "Pages 2 and 10 describe the August pause and planned eligibility-verification report. Subsequent September notices establish classifications and actual RFI issuance."
+        },
+        {
+          "id": "conditional-classification",
+          "label": "M-A080326-04: Batch Zero conditional classifications",
+          "href": "https://www.ercot.com/services/comm/mkt_notices/M-A080326-04",
+          "publisher": "ERCOT",
+          "date": "2026-09-03",
+          "lastVerified": "2026-10-12",
+          "note": "Provisional classifications subject to verification, model-data cures or specified exceptions; this notice is not an energization approval."
+        },
+        {
+          "id": "verification-rfi",
+          "label": "M-A090926-01: Batch Zero verification RFI",
+          "href": "https://www.ercot.com/services/comm/mkt_notices/M-A090926-01",
+          "publisher": "ERCOT",
+          "date": "2026-09-09",
+          "lastVerified": "2026-10-12",
+          "note": "Separate eligibility RFI; response timing runs from issuance to each recipient."
+        },
+        {
+          "id": "community-rfi",
+          "label": "M-B091426-01: Data Center State and Community Impact RFI",
+          "href": "https://www.ercot.com/services/comm/mkt_notices/M-B091426-01",
+          "publisher": "ERCOT",
+          "date": "2026-09-14",
+          "lastVerified": "2026-10-12",
+          "note": "Defines covered projects, October 12 response deadline, TWDB water-question partnership and expected December 10 report. Separate from eligibility verification."
+        },
+        {
+          "id": "permit-directive",
+          "label": "Governor’s directive to halt TCEQ data-center permits",
+          "href": "https://gov.texas.gov/news/post/governor-abbott-directs-tceq-to-halt-data-center-permits",
+          "publisher": "Office of the Texas Governor",
+          "date": "2026-09-21",
+          "lastVerified": "2026-10-12",
+          "note": "Evidence of the directive and requested October 19 update; not evidence of a project-specific permit outcome or the audit’s completion."
+        },
+        {
+          "id": "demand-service-proposal",
+          "label": "Proposed 16 TAC §25.521: Large Load Demand Management Service",
+          "href": "https://www.sos.texas.gov/texreg/archive/August142026/Proposed%20Rules/16.ECONOMIC%20REGULATION.html",
+          "publisher": "Texas Secretary of State / Public Utility Commission of Texas",
+          "date": "2026-08-14",
+          "lastVerified": "2026-10-12",
+          "note": "Proposal filed July 30, 2026. Proposed program parameters are not modeled as effective commercial terms."
+        },
+        {
+          "id": "implementation-status",
+          "label": "89th Legislative Session: ERCOT implementation status, September 2026",
+          "href": "https://www.ercot.com/files/docs/2025/09/15/89th-Legislative-Session-PPTX-ERCOT-Status-September-2026.pdf",
+          "publisher": "ERCOT",
+          "date": "2026-09-15",
+          "lastVerified": "2026-10-12",
+          "note": "The cover and current index identify September 2026 despite the URL directory. Pages 10–12 record demand-management implementation in progress; this dated status does not establish later final adoption."
+        }
+      ],
+      "decisionChecklist": [
+        "Confirm the power region and the exact delivery and transmission counterparties.",
+        "Request the project’s current classification, verification conditions and phase-specific capacity evidence.",
+        "Reconcile power, water, generation and permitting assumptions across the project’s submissions.",
+        "Model fees, security, construction payments, recurring charges and delay exposure separately.",
+        "Test interruption, backup and restart against the customer promise.",
+        "Record the conditions that justify each irreversible commitment, and the next source update that could change them."
+      ],
+      "claimLedger": {
+        "claims": [
+          {
+            "id": "enactment",
+            "claim": "SB6 was signed and became effective June 20, 2025.",
+            "sources": [
+              {
+                "url": "https://capitol.texas.gov/billlookup/History.aspx?Bill=SB6&LegSess=89R",
+                "date": "2025-06-20",
+                "status": "enacted; effective immediately"
+              }
+            ],
+            "recheckTrigger": "Amending legislation or a change in the operative statutory provisions."
+          },
+          {
+            "id": "interconnection-rule-status-and-scope",
+            "claim": "Adopted §25.194 was filed September 18, published October 2 and effective October 8, 2026. Applicability covers specified non-energized single-site new loads, expansions and co-location; incremental additions are the relevant expansion scope.",
+            "sources": [
+              {
+                "url": "https://www.sos.texas.gov/texreg/archive/October22026/Adopted%20Rules/16.ECONOMIC%20REGULATION.html",
+                "date": "2026-10-02",
+                "status": "adopted; effective 2026-10-08",
+                "locator": "§25.194(b), (h), and effective-date notice"
+              }
+            ],
+            "recheckTrigger": "Amendment, litigation affecting applicability, or transaction-specific grandfathering claim. Do not reuse March 2026 proposal thresholds or fee structure."
+          },
+          {
+            "id": "financial-commitments",
+            "claim": "Intermediate study fee $100,000; intermediate security $50,000/MW requested or incremental demand. SLLIA security is greater of $50,000/MW contracted demand or allocated system-upgrade costs. Direct-interconnection costs use cash CIAC; prior security may be credited under the rule.",
+            "sources": [
+              {
+                "url": "https://www.sos.texas.gov/texreg/archive/October22026/Adopted%20Rules/16.ECONOMIC%20REGULATION.html",
+                "date": "2026-10-02",
+                "status": "effective rule",
+                "locator": "§25.194(d)(2), (d)(3), (f)(2), (h)"
+              }
+            ],
+            "recheckTrigger": "Rule inflation adjustments, subsequent tariff/cost-allocation rules, SLLIA adoption, or actual project agreements and credit instruments."
+          },
+          {
+            "id": "large-load-request-total",
+            "claim": "ERCOT reported approximately 474 GW of large-load interconnection requests using June 2026 information; about 90% data centers. These are requests, not operational power or guaranteed construction.",
+            "sources": [
+              {
+                "url": "https://www.ercot.com/files/docs/2026/07/29/ERCOT-Senate-July-29-Panel-1-Assessing-The-Grid.pdf",
+                "date": "2026-07-29",
+                "status": "dated reported request snapshot",
+                "locator": "Page 6"
+              }
+            ],
+            "units": "GW requested; percent of large-load request capacity by project type",
+            "recheckTrigger": "New ERCOT request, verification, allocation or realized-load report. Do not label this October 2026 operating demand."
+          },
+          {
+            "id": "preliminary-forecast-boundary",
+            "claim": "April 15 preliminary forecast reported approximately 367,790 MW demand by 2032. ERCOT described it as higher than expected future growth and not a prediction of what would be built.",
+            "sources": [
+              {
+                "url": "https://www.ercot.com/news/release/04152026-ercot-releases-preliminary",
+                "date": "2026-04-15",
+                "status": "preliminary planning snapshot; expressly not latest forecast in article"
+              }
+            ],
+            "units": "MW demand in the ERCOT region by forecast year 2032",
+            "recheckTrigger": "Verified revised long-term forecast. Do not subtract a queue snapshot from forecast demand to estimate spare capacity."
+          },
+          {
+            "id": "audit-and-classification-sequence",
+            "claim": "ERCOT described an August 3 Batch Zero pause and delayed final classification, then issued conditional classifications September 3 subject to verification/model cures/possible exceptions. December 10 was the August presentation’s planned eligibility-report date.",
+            "sources": [
+              {
+                "url": "https://www.ercot.com/files/docs/2026/08/20/Batch-Zero-Verification-and-Audit-PUCT-Presentation.pdf",
+                "date": "2026-08-20",
+                "status": "agency process update; future dates are planned",
+                "locator": "Pages 2 and 10"
+              },
+              {
+                "url": "https://www.ercot.com/services/comm/mkt_notices/M-A080326-04",
+                "date": "2026-09-03",
+                "status": "conditional classifications issued; not energization approval"
+              }
+            ],
+            "recheckTrigger": "Final eligibility report, project condition resolution, new exception or energization notice."
+          },
+          {
+            "id": "eligibility-rfi",
+            "claim": "September 9 eligibility RFI required complete responses within 10 business days of individual issuance; extension request no more than 5 business days. Failed or incomplete verification can exclude a load from Batch Zero.",
+            "sources": [
+              {
+                "url": "https://www.ercot.com/services/comm/mkt_notices/M-A090926-01",
+                "date": "2026-09-09",
+                "status": "RFI issued; recipient-specific response deadlines"
+              }
+            ],
+            "recheckTrigger": "Supplemental RFIs, extension confirmation, verification outcome or a new notice changing the deadline."
+          },
+          {
+            "id": "community-rfi",
+            "claim": "Separate September 14 RFI covered specified conditional Batch Zero data centers and specified substantiated 25-to-under-75-MW facilities. Responses due October 12 at 5 p.m. CPT; report expected no later than December 10. Section C water questions issued for TWDB may carry Water Code consequences for incomplete responses.",
+            "sources": [
+              {
+                "url": "https://www.ercot.com/services/comm/mkt_notices/M-B091426-01",
+                "date": "2026-09-14",
+                "status": "RFI issued; deadline stated; report planned"
+              }
+            ],
+            "recheckTrigger": "Deadline extension or subsequent notice, new classifications, December report or agency Water Code interpretation. Do not turn expected report publication into a connection approval."
+          },
+          {
+            "id": "tceq-directive",
+            "claim": "Governor directed TCEQ September 21 to halt data-center permits until ERCOT audit completion and requested a compliance update by October 19.",
+            "sources": [
+              {
+                "url": "https://gov.texas.gov/news/post/governor-abbott-directs-tceq-to-halt-data-center-permits",
+                "date": "2026-09-21",
+                "status": "governmental directive; no project outcome established"
+              }
+            ],
+            "recheckTrigger": "October 19 compliance update, audit completion, directive amendment, TCEQ implementation or a specific permit decision."
+          },
+          {
+            "id": "curtailment-and-program-state",
+            "claim": "SB6 distinguishes post-December-31-2025 transmission-voltage firm-load-shed protocols with critical-load exceptions from a >=75-MW demand-management service with a 24-hour notice provision. §25.521 published August 14 was proposed; September ERCOT report described implementation as in progress. No service revenue is assumed.",
+            "sources": [
+              {
+                "url": "https://capitol.texas.gov/tlodocs/89R/billtext/html/SB00006F.HTM",
+                "date": "2025-05-30",
+                "status": "enrolled statutory requirements",
+                "locator": "§39.170"
+              },
+              {
+                "url": "https://www.sos.texas.gov/texreg/archive/August142026/Proposed%20Rules/16.ECONOMIC%20REGULATION.html",
+                "date": "2026-08-14",
+                "status": "proposed §25.521; not treated as effective terms"
+              },
+              {
+                "url": "https://www.ercot.com/files/docs/2025/09/15/89th-Legislative-Session-PPTX-ERCOT-Status-September-2026.pdf",
+                "date": "2026-09-15",
+                "status": "dated implementation-in-progress report",
+                "locator": "Pages 10–12"
+              }
+            ],
+            "recheckTrigger": "Final adoption and effective date, implemented ERCOT protocols and actual program participation/procurement notices. Public retrieval of the PUCT project page failed; do not claim final adoption was exhaustively ruled out."
+          },
+          {
+            "id": "generation-and-cost-recovery",
+            "claim": "SB6 addresses new co-located loads at specified existing stand-alone generators; ERCOT’s July example distinguishes existing from new co-located generation. SB6 section 6 required transmission-cost-recovery review and rules by December 31, 2026; this deadline does not determine a buyer’s tariff.",
+            "sources": [
+              {
+                "url": "https://capitol.texas.gov/tlodocs/89R/billtext/html/SB00006F.HTM",
+                "date": "2025-05-30",
+                "status": "enrolled statutory provisions",
+                "locator": "§39.169 and section 6"
+              },
+              {
+                "url": "https://www.ercot.com/files/docs/2026/07/29/ERCOT-Senate-July-29-Panel-1-Assessing-The-Grid.pdf",
+                "date": "2026-07-29",
+                "status": "agency example",
+                "locator": "Page 2"
+              }
+            ],
+            "recheckTrigger": "Co-location decision for the actual project, amended rules, December cost-recovery rules, current utility tariffs."
+          },
+          {
+            "id": "illustrative-calculations",
+            "claim": "Two hypothetical 80-MW allocations: Site A requests 100 MW, gives $5m intermediate security and $6m SLLIA security on assumed $6m upgrades; Site B requests 80 MW, gives $4m intermediate and SLLIA security on assumed $3m upgrades. Assumed CIAC $3m/$4.2m. 18 months × $150k = $2.7m delay sensitivity. 80 MW × 70% × 8,760 h = 490,560 MWh; × assumed $65/MWh = $31,886,400 supply expense.",
+            "sources": [
+              {
+                "url": "https://www.sos.texas.gov/texreg/archive/October22026/Adopted%20Rules/16.ECONOMIC%20REGULATION.html",
+                "date": "2026-10-02",
+                "status": "formula source only; every project and price input explicitly illustrative",
+                "locator": "§25.194(d), (f)"
+              }
+            ],
+            "status": "calculated illustration, not observed project data or tariff forecast",
+            "recheckTrigger": "Any changed rule formula or input. Preserve explicit assumptions, do not add intermediate and SLLIA security, and do not label supply-only calculation total delivered cost."
+          }
+        ],
+        "researchCutoff": "2026-10-12"
+      },
+      "evidenceBoundary": "ERCOT-region legislation, adopted standards, and published agency notices checked October 12, 2026. Queue and forecast figures retain their own observation dates. Site comparisons, energy prices, and delay costs are declared illustrative assumptions; actual allocation, energization, tariffs, and permits require project documents."
+    },
+    {
+      "slug": "texas-ai-law-business-compliance",
+      "title": "Texas’s AI Law: Before Deployment",
+      "url": "https://sulayman-bowles.dev/research/texas/texas-ai-law-business-compliance",
+      "researchCutoff": "2026-10-12",
+      "sources": [
+        {
+          "id": "hb149",
+          "label": "HB149, enacted enrolled text",
+          "href": "https://capitol.texas.gov/tlodocs/89R/billtext/html/HB00149F.htm",
+          "publisher": "Texas Legislature",
+          "date": "2025-06-22",
+          "lastVerified": "2026-10-12",
+          "note": "Enacted text; §10 sets January 1, 2026 effectiveness. Sections 2–3 amend biometric and processor-security provisions. Earlier introduced and committee versions are not the enacted authority."
+        },
+        {
+          "id": "scope",
+          "label": "Business & Commerce Code Chapter 551: definitions and applicability",
+          "href": "https://tcss.legis.texas.gov/resources/BC/htm/BC.551.htm",
+          "publisher": "Texas Legislature",
+          "date": "Effective 2026-01-01",
+          "lastVerified": "2026-10-12",
+          "note": "Current codified text of §§551.001–.003. Source date denotes effectiveness, not the date this live code page was published."
+        },
+        {
+          "id": "ai-protection",
+          "label": "Business & Commerce Code Chapter 552: duties, prohibitions and enforcement",
+          "href": "https://tcss.legis.texas.gov/resources/BC/htm/BC.552.htm",
+          "publisher": "Texas Legislature",
+          "date": "Effective 2026-01-01",
+          "lastVerified": "2026-10-12",
+          "note": "Statutory thresholds, operator distinctions, disclosure timing, investigative powers, cure, penalties and liability provisions. Does not establish a judicial interpretation of contested terms."
+        },
+        {
+          "id": "privacy",
+          "label": "Business & Commerce Code Chapter 541: Texas Data Privacy and Security Act",
+          "href": "https://tcss.legis.texas.gov/resources/BC/htm/BC.541.htm",
+          "publisher": "Texas Legislature",
+          "date": "Effective 2024-07-01; AI amendment effective 2026-01-01",
+          "lastVerified": "2026-10-12",
+          "note": "Current codified scope, definitions, rights, controller and processor duties, contract terms, assessments, exemptions and enforcement. HB149 amended §541.104(a)."
+        },
+        {
+          "id": "biometrics",
+          "label": "Business & Commerce Code §503.001: biometric identifiers",
+          "href": "https://tcss.legis.texas.gov/resources/BC/htm/BC.503.htm",
+          "publisher": "Texas Legislature",
+          "date": "AI amendments effective 2026-01-01",
+          "lastVerified": "2026-10-12",
+          "note": "Commercial capture, notice and consent, retention, penalties, AI training and security exclusions, and subsequent non-exempt commercial use. Biometric identifier differs from the biometric data definition in Chapters 541 and 552."
+        },
+        {
+          "id": "sandbox",
+          "label": "Business & Commerce Code Chapter 553: AI regulatory sandbox",
+          "href": "https://tcss.legis.texas.gov/resources/BC/htm/BC.553.htm",
+          "publisher": "Texas Legislature",
+          "date": "Effective 2026-01-01",
+          "lastVerified": "2026-10-12",
+          "note": "Statutory program framework, agency approvals, duration, reporting and limits on waivers. An enacted framework does not establish that intake is currently available."
+        },
+        {
+          "id": "ag-ai",
+          "label": "Consumer AI Rights: official TRAIGA overview",
+          "href": "https://www.texasattorneygeneral.gov/consumer-protection/file-consumer-complaint/consumer-ai-rights",
+          "publisher": "Texas Office of the Attorney General",
+          "date": "Undated current guidance",
+          "lastVerified": "2026-10-12",
+          "note": "Current public guidance and complaint route, including explicit healthcare-provider disclosure and government-only social-scoring and biometric provisions. Statutory text controls precise thresholds."
+        },
+        {
+          "id": "dir-implementation",
+          "label": "AI in Texas: implementation of the 89th Legislature’s laws",
+          "href": "https://dir.texas.gov/news/ai-texas-dir-implementation-laws-89th-legislature",
+          "publisher": "Texas Department of Information Resources",
+          "date": "2026-08-14",
+          "lastVerified": "2026-10-12",
+          "note": "Official implementation update distinguishing HB149, SB1964, HB2818 and HB3512; reports Chapter 219 adoption and government governance resources."
+        },
+        {
+          "id": "dir-public-sandbox",
+          "label": "Public Sector AI Sandbox Program: current participation notice",
+          "href": "https://dir.texas.gov/ai-and-innovation/public-sector-ai-sandbox-program",
+          "publisher": "Texas Department of Information Resources",
+          "date": "Undated current program page",
+          "lastVerified": "2026-10-12",
+          "note": "SB1964 public-sector program. At review, the page states participation and submission details will be published when available. This observation does not establish HB149 business-sandbox intake status."
+        },
+        {
+          "id": "federal-framework",
+          "label": "National AI legislative framework announcement",
+          "href": "https://www.whitehouse.gov/releases/2026/03/president-donald-j-trump-unveils-national-ai-legislative-framework/",
+          "publisher": "The White House",
+          "date": "2026-03-20",
+          "lastVerified": "2026-10-12",
+          "note": "Primary announcement of recommendations to Congress. The announcement itself is not an enacted preemption statute, final rule or Texas-specific court order."
+        }
+      ],
+      "decisionChecklist": [
+        "Identify the deployed use, developer and deployer, Texas connection, and government or healthcare involvement.",
+        "Determine the applicable privacy and biometric provisions from the actual data and processing relationship.",
+        "Resolve required disclosures, consent, rights handling, assessments and processing terms where applicable.",
+        "Assign responsibility for complaints, investigation support, corrective changes and deployment upgrades.",
+        "Record assumptions and revisit them when the use, data, vendor terms, or governing requirements change."
+      ],
+      "claimLedger": {
+        "claims": [
+          {
+            "id": "ai-01",
+            "claim": "HB149/TRAIGA is enacted and took effect January 1, 2026; introduced bills and committee substitutes are historical proposals rather than the enacted text.",
+            "articleLocations": [
+              "content",
+              "sources.hb149"
+            ],
+            "status": "enacted and effective",
+            "sourceId": "hb149",
+            "primaryUrl": "https://capitol.texas.gov/tlodocs/89R/billtext/html/HB00149F.htm",
+            "pinpoint": "Sections 1, 2, 3, 4 and 10",
+            "sourceDate": "2025-06-22",
+            "dateType": "Enactment; signed date verified against Texas Legislature Online history",
+            "effectiveDate": "2026-01-01",
+            "verificationUrl": "https://capitol.texas.gov/billlookup/History.aspx?Bill=HB149&LegSess=89R",
+            "qualification": "The article does not import risk classifications or assessment duties from earlier bill versions.",
+            "updateTriggers": [
+              "Amendment or repeal of the relevant code provisions",
+              "Applicable final court order changing enforceability"
+            ]
+          },
+          {
+            "id": "ai-02",
+            "claim": "The AI definition includes machine-based inference generating content, decisions, predictions or recommendations. Texas applicability has three alternative connections; consumer excludes commercial or employment context. Developer and deployer roles are defined separately.",
+            "articleLocations": [
+              "scope",
+              "faqs.1"
+            ],
+            "status": "enacted and effective",
+            "sourceId": "scope",
+            "primaryUrl": "https://tcss.legis.texas.gov/resources/BC/htm/BC.551.htm",
+            "pinpoint": "Sections 551.001 and 551.002",
+            "sourceDate": "2026-01-01",
+            "dateType": "Effective date; live code page has no distinct publication date",
+            "additionalAuthorities": [
+              {
+                "primaryUrl": "https://tcss.legis.texas.gov/resources/BC/htm/BC.552.htm",
+                "pinpoint": "Section 552.001(1)–(2)",
+                "effectiveDate": "2026-01-01"
+              }
+            ],
+            "qualification": "Consumer exclusions do not establish an exemption from provisions addressed to a person. Out-of-state headquarters alone does not resolve scope.",
+            "updateTriggers": [
+              "Definition or scope amendments",
+              "Authoritative interpretation of develops or deploys in this state"
+            ]
+          },
+          {
+            "id": "ai-03",
+            "claim": "Governmental agencies offering AI intended to interact with consumers must disclose the AI interaction before or at interaction; disclosure must be clear, conspicuous, plain-language and free of dark patterns, may use a hyperlink, and is required even if AI is obvious.",
+            "articleLocations": [
+              "duties-by-operator",
+              "faqs.0"
+            ],
+            "status": "enacted and effective",
+            "sourceId": "ai-protection",
+            "primaryUrl": "https://tcss.legis.texas.gov/resources/BC/htm/BC.552.htm",
+            "pinpoint": "Section 552.051(b)–(e)",
+            "sourceDate": "2026-01-01",
+            "dateType": "Effective date",
+            "qualification": "This is not a blanket disclosure duty for every ordinary private-business chatbot. The chapter uses governmental agency in §552.051 and defines governmental entity in §552.001; a specific institution's classification requires attention to the exact text.",
+            "updateTriggers": [
+              "Disclosure amendments",
+              "Official interpretation of agency scope or disclosure implementation"
+            ]
+          },
+          {
+            "id": "ai-04",
+            "claim": "An AI system used in relation to healthcare service or treatment triggers provider disclosure to the recipient or personal representative by the first service/treatment date, with disclosure as soon as reasonably possible in an emergency. The AG's current overview expressly identifies this provider duty.",
+            "articleLocations": [
+              "duties-by-operator",
+              "faqs.0"
+            ],
+            "status": "enacted and effective; supported by current official guidance",
+            "sourceId": "ag-ai",
+            "primaryUrl": "https://www.texasattorneygeneral.gov/consumer-protection/file-consumer-complaint/consumer-ai-rights",
+            "pinpoint": "Requirements Under The Act Include: Disclosure to Consumers",
+            "sourceDate": null,
+            "dateType": "Undated current guidance; observed 2026-10-12",
+            "additionalAuthorities": [
+              {
+                "primaryUrl": "https://tcss.legis.texas.gov/resources/BC/htm/BC.552.htm",
+                "pinpoint": "Section 552.051(a), (f)",
+                "effectiveDate": "2026-01-01"
+              },
+              {
+                "primaryUrl": "https://tcss.legis.texas.gov/resources/BC/htm/BC.541.htm",
+                "pinpoint": "Section 541.002(b)(3): separate HIPAA entity exclusion",
+                "effectiveDate": "2024-07-01"
+              }
+            ],
+            "qualification": "Healthcare disclosure is not extinguished merely because a provider has a HIPAA-based TDPSA exclusion. Exact deployment scope and recipient notice require interpretation; no claim that every healthcare administrative tool has been judicially classified.",
+            "updateTriggers": [
+              "AG guidance revisions",
+              "Interpretation of AI used in relation to service or treatment",
+              "Disclosure amendments"
+            ]
+          },
+          {
+            "id": "ai-05",
+            "claim": "TRAIGA contains distinct intent-based harmful-use and constitutional-rights prohibitions, governmental social-scoring and biometric provisions, and specified illegal sexual-material/minor-impersonation provisions.",
+            "articleLocations": [
+              "prohibited-uses",
+              "duties-by-operator.table"
+            ],
+            "status": "enacted and effective",
+            "sourceId": "ai-protection",
+            "primaryUrl": "https://tcss.legis.texas.gov/resources/BC/htm/BC.552.htm",
+            "pinpoint": "Sections 552.052–.055 and 552.057",
+            "sourceDate": "2026-01-01",
+            "dateType": "Effective date",
+            "qualification": "Preserve intentionally aims in §552.052, sole intent in §552.055 and §552.057(1), intentional development/distribution in §552.057(2), and governmental entity in §§552.053–.054(b). §552.054(c)'s link to §503.001 is separately mapped in ai-10. No claim that every persuasion, scoring, scraping or content-generation use is banned.",
+            "updateTriggers": [
+              "Amendments to intent thresholds or referenced Penal Code provisions",
+              "Judicial interpretation of these prohibitions"
+            ]
+          },
+          {
+            "id": "ai-06",
+            "claim": "Section 552.056 prohibits intentional unlawful discrimination against a protected class; disparate impact alone is insufficient to prove intent under that section. The section contains insurance treatment and a federally insured banking compliance provision, while TDPSA duties separately address unlawful discrimination and risky profiling.",
+            "articleLocations": [
+              "prohibited-uses"
+            ],
+            "status": "enacted and effective",
+            "sourceId": "ai-protection",
+            "primaryUrl": "https://tcss.legis.texas.gov/resources/BC/htm/BC.552.htm",
+            "pinpoint": "Section 552.056(b)–(e)",
+            "sourceDate": "2026-01-01",
+            "dateType": "Effective date",
+            "additionalAuthorities": [
+              {
+                "primaryUrl": "https://tcss.legis.texas.gov/resources/BC/htm/BC.541.htm",
+                "pinpoint": "Sections 541.101(b)(2) and 541.105(a)(3)(A)",
+                "effectiveDate": "2024-07-01"
+              }
+            ],
+            "qualification": "The disparate-impact rule is section-specific; no claim that outcomes are lawful under other laws. Insurance exception and banking compliance rule do not exempt those entities from all TRAIGA provisions.",
+            "updateTriggers": [
+              "Sector-specific guidance or enforcement",
+              "Changes to underlying civil-rights obligations",
+              "Relevant judicial interpretation"
+            ]
+          },
+          {
+            "id": "ai-07",
+            "claim": "TDPSA scope requires the statutory Texas connection, personal-data processing/sale, and generally a business outside SBA's small-business definition. Small businesses must obtain prior consent to sell sensitive data. Entity and data exclusions must be evaluated separately, including employment-context exclusions.",
+            "articleLocations": [
+              "privacy-and-biometrics",
+              "faqs.1"
+            ],
+            "status": "enacted and effective",
+            "sourceId": "privacy",
+            "primaryUrl": "https://tcss.legis.texas.gov/resources/BC/htm/BC.541.htm",
+            "pinpoint": "Sections 541.001(7), 541.002, 541.003 and 541.107",
+            "sourceDate": "2024-07-01",
+            "dateType": "Effective date",
+            "qualification": "The statute includes specified government, GLBA, HIPAA, nonprofit, higher-education and utility exclusions; the article is a scope summary, not a determination of a particular entity's SBA or sector status. TRAIGA has no analogous SBA threshold.",
+            "updateTriggers": [
+              "Changes to scope or exemptions",
+              "Applicable SBA size-standard changes",
+              "Guidance affecting role/context classification"
+            ]
+          },
+          {
+            "id": "ai-08",
+            "claim": "Covered controllers have data minimization, security, disclosed-purpose, consent, notice and consumer-rights duties; significant-decision profiling opt-out and specified processing-risk assessments can be relevant to AI workflows. Profiling is defined as solely automated personal-data processing evaluating or predicting personal aspects.",
+            "articleLocations": [
+              "privacy-and-biometrics",
+              "worked-example"
+            ],
+            "status": "enacted and effective",
+            "sourceId": "privacy",
+            "primaryUrl": "https://tcss.legis.texas.gov/resources/BC/htm/BC.541.htm",
+            "pinpoint": "Sections 541.001(11), (24), 541.051(b)(5), 541.101–.103 and 541.105",
+            "sourceDate": "2024-07-01",
+            "dateType": "Effective date of the cited provisions",
+            "qualification": "Assessment duties depend on processing activities and risk, rather than all AI purchases. The financing example is hypothetical and conditional; no claim that all staff-approved recommendations constitute solely automated profiling.",
+            "updateTriggers": [
+              "Changes to profiling definitions or rights",
+              "Assessment guidance or enforcement",
+              "Actual workflow changes affecting automation and significant decisions"
+            ]
+          },
+          {
+            "id": "ai-09",
+            "claim": "HB149 expressly adds AI-system personal-data security to a processor's assistance duty. TDPSA processing contracts have specified terms, and controller/processor role is fact-based; neither role's liability is transferred away by the relationship.",
+            "articleLocations": [
+              "privacy-and-biometrics",
+              "procurement",
+              "faqs.3"
+            ],
+            "status": "enacted and effective; HB149 amendment effective 2026-01-01",
+            "sourceId": "privacy",
+            "primaryUrl": "https://tcss.legis.texas.gov/resources/BC/htm/BC.541.htm",
+            "pinpoint": "Section 541.104(a)(2), (b)–(e)",
+            "sourceDate": "2026-01-01",
+            "dateType": "Effective date of HB149 amendment; contract provisions originally effective 2024-07-01",
+            "additionalAuthorities": [
+              {
+                "primaryUrl": "https://capitol.texas.gov/tlodocs/89R/billtext/html/HB00149F.htm",
+                "pinpoint": "Section 3",
+                "effectiveDate": "2026-01-01"
+              }
+            ],
+            "qualification": "Procurement table is a recommended ownership allocation. The statute does not universally require all listed vendor materials to be filed before every AI purchase. Training for a vendor's independent purposes prompts role review rather than an automatic classification.",
+            "updateTriggers": [
+              "Processor/contract amendments",
+              "Vendor terms or data-use changes",
+              "Guidance on controller versus processor classification"
+            ]
+          },
+          {
+            "id": "ai-10",
+            "claim": "Amended biometric law contains specified AI training/development and security exclusions, a unique-identification limit, a public-media consent clause with an individual-publication exception, and consequences for subsequent non-exempt commercial use. A §503.001 violation also violates TRAIGA §552.054(c).",
+            "articleLocations": [
+              "privacy-and-biometrics"
+            ],
+            "status": "enacted and effective",
+            "sourceId": "biometrics",
+            "primaryUrl": "https://tcss.legis.texas.gov/resources/BC/htm/BC.503.htm",
+            "pinpoint": "Section 503.001(a), (b), (b-1), (c), (d), (e) and (f)",
+            "sourceDate": "2026-01-01",
+            "dateType": "Effective date of HB149 amendments",
+            "additionalAuthorities": [
+              {
+                "primaryUrl": "https://tcss.legis.texas.gov/resources/BC/htm/BC.552.htm",
+                "pinpoint": "Section 552.054(c)",
+                "effectiveDate": "2026-01-01"
+              }
+            ],
+            "qualification": "Biometric identifier in §503.001 differs from biometric data in Chapters 541/552. The individual-publication exception is not described as unconditional permission for any biometric processing. Subsequent-use clause specifically mentions possession, destruction and penalties.",
+            "updateTriggers": [
+              "Biometric amendments",
+              "AG or court interpretation of unique identification or subsequent use",
+              "Deployment repurposing biometric data"
+            ]
+          },
+          {
+            "id": "ai-11",
+            "claim": "The AG has principal/exclusive Chapter 552 enforcement subject to the licensing-agency provision; there is no private right of action under the chapter. A qualifying online complaint can lead to a civil investigative demand for the categories of information listed in §552.103.",
+            "articleLocations": [
+              "enforcement"
+            ],
+            "status": "enacted and effective; official complaint link observed",
+            "sourceId": "ai-protection",
+            "primaryUrl": "https://tcss.legis.texas.gov/resources/BC/htm/BC.552.htm",
+            "pinpoint": "Sections 552.101–.103 and 552.106",
+            "sourceDate": "2026-01-01",
+            "dateType": "Effective date",
+            "additionalAuthorities": [
+              {
+                "primaryUrl": "https://www.texasattorneygeneral.gov/consumer-protection/file-consumer-complaint/consumer-ai-rights",
+                "pinpoint": "File An AI Complaint Online",
+                "sourceDate": null,
+                "observedOn": "2026-10-12"
+              }
+            ],
+            "qualification": "The article describes authorized investigative categories, not routine public filings. It makes no assertion that no investigations or enforcement actions exist, and does not exclude causes of action independently arising under other law.",
+            "updateTriggers": [
+              "Public enforcement action or authoritative investigation guidance",
+              "Complaint-process changes",
+              "Judicial interpretation of investigative powers"
+            ]
+          },
+          {
+            "id": "ai-12",
+            "claim": "TRAIGA has a 60-day notice/cure framework and statutory penalties of $10,000–$12,000 for each court-determined curable violation or statement breach, $80,000–$200,000 for each uncurable violation, and $2,000–$40,000 per continued-violation day. Licensing sanctions require a violation finding and AG recommendation and may include up to $100,000. TDPSA uses a separate 30-day cure and up to $7,500 per violation.",
+            "articleLocations": [
+              "enforcement"
+            ],
+            "status": "enacted and effective",
+            "sourceId": "ai-protection",
+            "primaryUrl": "https://tcss.legis.texas.gov/resources/BC/htm/BC.552.htm",
+            "pinpoint": "Sections 552.104, 552.105(a)–(b) and 552.106",
+            "sourceDate": "2026-01-01",
+            "dateType": "Effective date",
+            "additionalAuthorities": [
+              {
+                "primaryUrl": "https://tcss.legis.texas.gov/resources/BC/htm/BC.541.htm",
+                "pinpoint": "Sections 541.154–.155",
+                "effectiveDate": "2024-07-01"
+              }
+            ],
+            "qualification": "The TRAIGA cure requires correction, written statement, supporting documentation and necessary internal policy changes before the 60th day. TDPSA's statement also includes notifying the consumer where contact information is available. Do not collapse daily penalties, per-violation penalties or the two statutes' cure periods.",
+            "updateTriggers": [
+              "Penalty or cure amendments",
+              "Court findings defining violation units or curability",
+              "Licensing-agency sanctions"
+            ]
+          },
+          {
+            "id": "ai-13",
+            "claim": "TRAIGA's liability provisions address another person's prohibited use, discovery through specified processes, a rebuttable reasonable-care presumption, and no civil-penalty action under §552.105 for a system not deployed. Framework compliance alone does not establish the statutory discovery condition.",
+            "articleLocations": [
+              "enforcement",
+              "faqs.2"
+            ],
+            "status": "enacted and effective; framework conclusion is textual interpretation",
+            "sourceId": "ai-protection",
+            "primaryUrl": "https://tcss.legis.texas.gov/resources/BC/htm/BC.552.htm",
+            "pinpoint": "Section 552.105(c)–(f)",
+            "sourceDate": "2026-01-01",
+            "dateType": "Effective date",
+            "qualification": "Section 552.105(e)(2)(D) ties substantial recognized-framework compliance to an internal review process discovering a violation. No blanket NIST immunity claim, no assertion that adopting an untested policy establishes substantial compliance, and no claim of a judicial ruling on these defenses.",
+            "updateTriggers": [
+              "Judicial interpretation of defenses",
+              "Changes to statute or referenced recognized frameworks",
+              "Official guidance about discovery/review evidence"
+            ]
+          },
+          {
+            "id": "ai-14",
+            "claim": "Chapter 553 requires DIR and applicable-agency approval, provides up to 36 months of testing/deployment with possible good-cause extension and quarterly reporting, preserves Chapter 552 Subchapter B requirements, and does not waive federal law. DIR separately reports government Chapter 219 adoption; its current SB1964 public-sector sandbox page says participation details will be published when available.",
+            "articleLocations": [
+              "implementation"
+            ],
+            "status": "Statutory framework enacted/effective; implementation observations verified 2026-10-12; HB149 business intake unresolved",
+            "sourceId": "sandbox",
+            "primaryUrl": "https://tcss.legis.texas.gov/resources/BC/htm/BC.553.htm",
+            "pinpoint": "Sections 553.051(e), 553.052, 553.053, 553.101 and 553.102",
+            "sourceDate": "2026-01-01",
+            "dateType": "Effective date",
+            "additionalAuthorities": [
+              {
+                "primaryUrl": "https://dir.texas.gov/news/ai-texas-dir-implementation-laws-89th-legislature",
+                "pinpoint": "AI Bills and DIR Implementation Highlights",
+                "sourceDate": "2026-08-14",
+                "status": "Official implementation update"
+              },
+              {
+                "primaryUrl": "https://dir.texas.gov/ai-and-innovation/public-sector-ai-sandbox-program",
+                "pinpoint": "Application Process",
+                "sourceDate": null,
+                "observedOn": "2026-10-12",
+                "status": "Undated live program page observation"
+              }
+            ],
+            "qualification": "Public-sector SB1964 and HB149 business regulatory sandboxes are not interchangeable. Observed future-publication language is not proof of the status of every DIR initiative or private-business intake channel. Actual approval and waiver scope must precede reliance.",
+            "updateTriggers": [
+              "DIR publishes HB149 intake rules or application",
+              "Public-sector participation page changes",
+              "Program admission or waiver issued",
+              "Sandbox statute amendments"
+            ]
+          },
+          {
+            "id": "ai-15",
+            "claim": "The March 20, 2026 White House announcement describes national AI legislative recommendations and work with Congress to turn the framework into legislation; the announcement itself does not establish an enacted Texas-specific exemption.",
+            "articleLocations": [
+              "implementation"
+            ],
+            "status": "Official legislative proposal/announcement, not enacted statute",
+            "sourceId": "federal-framework",
+            "primaryUrl": "https://www.whitehouse.gov/releases/2026/03/president-donald-j-trump-unveils-national-ai-legislative-framework/",
+            "pinpoint": "Announcement of comprehensive national legislative framework and concluding paragraph about Congress",
+            "sourceDate": "2026-03-20",
+            "dateType": "Publication date",
+            "qualification": "The article does not assert that there is no federal preemption, no litigation, or no later relevant federal action. It avoids converting this announcement into a determination of enforceability. A comprehensive preemption/court-docket analysis was outside this article's verified scope.",
+            "updateTriggers": [
+              "Congress enacts an applicable preemption provision",
+              "Applicable final federal rule",
+              "Texas-relevant final court order",
+              "Material federal policy or litigation development"
+            ]
+          }
+        ],
+        "researchCutoff": "2026-10-12"
+      },
+      "evidenceBoundary": "Enacted and current codified Texas law and official implementation guidance checked October 12, 2026. The retailer example is hypothetical. HB149 business-sandbox intake was not verified; the federal-policy discussion is not a comprehensive preemption or litigation review."
+    },
+    {
+      "slug": "texas-business-court-contract-decisions",
+      "title": "Texas business contracts need a litigation plan",
+      "url": "https://sulayman-bowles.dev/research/texas/texas-business-court-contract-decisions",
+      "researchCutoff": "2026-10-12",
+      "sources": [
+        {
+          "id": "hb40",
+          "label": "HB40 enrolled text, particularly sections 43, 45, 56, and 72",
+          "href": "https://capitol.texas.gov/tlodocs/89R/billtext/html/HB00040F.htm",
+          "publisher": "Texas Legislature",
+          "date": "2025 legislative session; effective September 1, 2025",
+          "lastVerified": "2026-10-12",
+          "note": "The enacted text supplies the jurisdictional changes; deleted bracketed text is prior law."
+        },
+        {
+          "id": "history",
+          "label": "HB40 official legislative history and effective date",
+          "href": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB40",
+          "publisher": "Texas Legislature Online",
+          "date": "Governor signed June 20, 2025; effective September 1, 2025",
+          "lastVerified": "2026-10-12"
+        },
+        {
+          "id": "bakery",
+          "label": "The Bakery v. Naterra International, 2026 Tex. Bus. 64",
+          "href": "https://www.txcourts.gov/media/1463334/26-bc03a-0027-the-bakery-v-naterra-intl-2026-tex-bus-64.pdf",
+          "publisher": "Texas Business Court, Third Division",
+          "date": "September 15, 2026",
+          "lastVerified": "2026-10-12",
+          "note": "Opinion and order denying remand, paragraphs 1–10; the staff syllabus is not legal authority."
+        },
+        {
+          "id": "beard",
+          "label": "Beard v. Perot, 2026 Tex. Bus. 65",
+          "href": "https://www.txcourts.gov/media/1463368/26-bc01b-0018-beard-v-perot-2026-tex-bus-65.pdf",
+          "publisher": "Texas Business Court, First Division",
+          "date": "September 22, 2026 opinion explaining August 10 dismissal",
+          "lastVerified": "2026-10-12",
+          "note": "Paragraphs 138–145, footnote 121, and paragraph 177. Describes this trial-court decision, not a subsequent appellate outcome."
+        },
+        {
+          "id": "report",
+          "label": "Business Court of Texas mid-year report, September 2024–April 2026",
+          "href": "https://txcourts.gov/media/1463213/bcot-mid-year-report-43026.pdf",
+          "publisher": "Texas Office of Court Administration",
+          "date": "Reporting cutoff April 30, 2026",
+          "lastVerified": "2026-10-12",
+          "note": "Pages 6 and 8 provide the cited filing, pending-case, and trial measures. These are not current October totals or a comparative performance study."
+        },
+        {
+          "id": "court",
+          "label": "Texas Business Court official court and operating-division information",
+          "href": "https://txcourts.gov/businesscourt/",
+          "publisher": "Texas Judicial Branch",
+          "date": "Current official directory",
+          "lastVerified": "2026-10-12",
+          "note": "Verify operating territory and current procedural resources for the actual county and dispute."
+        }
+      ],
+      "decisionChecklist": [
+        "Which commitments explain the investment's return, and where do the signed documents preserve each one?",
+        "Which loss scenarios are commercially material, and which amounts would qualify for the relevant jurisdictional calculation?",
+        "What would a release, amendment, liability limit, or transition failure change in the approved economics?",
+        "Which court or arbitration route does counsel expect for each dispute category, and what is the fallback?",
+        "Who maintains the dated claims chronology, updates the cash forecast, and authorizes escalation or settlement?"
+      ],
+      "claimLedger": {
+        "claims": [
+          {
+            "claim": "HB40 effective September 1, 2025",
+            "source": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB40",
+            "locator": "Last action and June 20, 2025 history row",
+            "status": "Enacted/effective",
+            "recheck": "Amendment to Chapter 25A"
+          },
+          {
+            "claim": "Qualified-transaction aggregate consideration at least $5M; relevant commercial-action amount in controversy exceeds $5M with specified exclusions",
+            "source": "https://capitol.texas.gov/tlodocs/89R/billtext/html/HB00040F.htm",
+            "locator": "Sections 43 and 45",
+            "status": "Enacted/effective",
+            "recheck": "Amendment or authoritative construction of the applicable route"
+          },
+          {
+            "claim": "The Bakery: initial services claim $1,350,507; subsequent counterclaims more than $60M; removal held timely within 30 days after counterclaims changed monetary jurisdiction",
+            "source": "https://www.txcourts.gov/media/1463334/26-bc03a-0027-the-bakery-v-naterra-intl-2026-tex-bus-64.pdf",
+            "locator": "Opinion paragraphs 1–10, not staff syllabus",
+            "status": "Published September 15, 2026 trial-court decision",
+            "recheck": "Subsequent appellate treatment or procedural change"
+          },
+          {
+            "claim": "Beard: express reliance disclaimers and contractual context considered together; merger clause alone not held to defeat fraud",
+            "source": "https://www.txcourts.gov/media/1463368/26-bc01b-0018-beard-v-perot-2026-tex-bus-65.pdf",
+            "locator": "Paragraphs 138–145; footnote 121; paragraph 177",
+            "status": "September 22, 2026 opinion explaining August 10 dismissal; no appeal status asserted",
+            "recheck": "Appeal, revised opinion, or subsequent governing decision"
+          },
+          {
+            "claim": "409 filings and 221 active pending April 30, 2026; eight trials and twelve months/one day average first appearance to trial",
+            "source": "https://txcourts.gov/media/1463213/bcot-mid-year-report-43026.pdf",
+            "locator": "Pages 6 and 8",
+            "status": "Historical reporting cutoff, not current docket or comparative performance",
+            "recheck": "New official reporting period; retain comparability limits"
+          },
+          {
+            "claim": "Worked example uses $12M commitment, $3.4M/$6.2M qualifying scenarios, $2M exemplary damages and $600K fees",
+            "source": null,
+            "locator": "worked-dispute",
+            "status": "Original hypothetical inputs; no observed company result",
+            "recheck": "If example assumptions or relevant statutory exclusions change"
+          }
+        ],
+        "researchCutoff": "2026-10-12"
+      },
+      "evidenceBoundary": "Primary legislation, published trial-court opinions, and the court's April 2026 reporting cutoff were checked on October 12, 2026. The commercial example is hypothetical. The case discussion describes the published trial-court decisions; no subsequent appellate disposition is asserted. Contract drafting and case-specific jurisdiction require counsel's review."
+    }
+  ]
+}

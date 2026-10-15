@@ -1,0 +1,293 @@
+{
+  "slug": "texas-manufacturing-capacity-procurement",
+  "path": "/research/texas/texas-manufacturing-capacity-procurement",
+  "title": "Texas Semiconductor Expansion: Build a Defensible Supply Plan",
+  "displayTitle": "Texas Supply: Qualify the Capacity",
+  "seoTitle": "Texas Semiconductor Manufacturing Capacity and Procurement 2026",
+  "category": "TEXAS BUSINESS",
+  "subtitle": "How to turn semiconductor announcements, production starts and customer qualifications into a defensible purchasing plan.",
+  "seoDescription": "Texas semiconductor procurement research comparing TI Sherman, Samsung Taylor and GlobalWafers evidence, with qualification, allocation and yield planning.",
+  "date": "2026-10-12",
+  "dateModified": "2026-10-13",
+  "author": "Sulayman Bowles",
+  "kind": "research",
+  "readTime": "10 MIN",
+  "openingPresentation": "integrated",
+  "evidenceBoundary": "Reviewed October 12, 2026. This is a comparison of public company and Commerce evidence, not a census of Texas manufacturing capacity. Production and qualification claims are attributed to their issuers. Company plans, economic-impact estimates and historical funding awards do not establish buyer-specific availability. The output model is a declared hypothetical; no company yield, utilization, allocation or delivery performance is estimated. Targeted October 13 revision: conditional named customer-financing mechanism and yield/allocation thresholds. Original source-check dates remain attached to the individual references.",
+  "content": [
+    "A procurement team needs a qualified product, an allocated quantity and a delivery date it can defend. Texas factory announcements help identify suppliers to investigate; the purchasing decision depends on how much accepted output reaches the buyer. Follow the project from construction and production to product approval, allocation and delivery.",
+    "As of October 12, 2026, three prominent projects illustrate different stages. Texas Instruments has announced production at Sherman SM1. Samsung’s October update still describes Taylor operation by year-end as an expectation. GlobalWafers reports customer qualifications at its new Sherman facility. These developments deserve different treatment in a sourcing model. [TI production start](#source-ti-production); [Samsung update](#source-samsung-october); [GlobalWafers qualifications](#source-globalwafers-q2).",
+    "The practical response is to maintain two records: the public evidence about the facility, and the supplier evidence supporting the buyer’s actual order. Advance a project through the purchasing plan when the second record improves. This preserves the value of Texas expansion without turning future capacity into an unsupported delivery commitment."
+  ],
+  "sections": [
+    {
+      "id": "project-evidence",
+      "title": "Start with the facility’s demonstrated stage",
+      "paragraphs": [
+        "TI’s December 17, 2025 announcement establishes a company-reported start of production at SM1. Its current Sherman overview also says the first fab is producing. The same overview describes the four-fab, $40 billion development as potential. Treat the operating first fab and the larger planned site as separate entries. [TI start](#source-ti-production); [Sherman overview](#source-ti-sherman).",
+        "The February 24, 2026 capital presentation adds useful detail: SM1’s cleanroom and pilot line are complete, with ramp according to demand; SM2’s shell is complete. A completed shell removes a construction step. It does not establish an equipped line or a deliverable part for the buyer. [TI presentation, page 20](#source-ti-capital).",
+        "Use the following comparison as a diligence starting point. Its final column is procurement interpretation, not an assertion about undisclosed customer contracts."
+      ],
+      "table": {
+        "caption": "Public project evidence available at the October 12, 2026 cutoff",
+        "columns": [
+          "Facility",
+          "Dated evidence",
+          "What to verify before relying on supply"
+        ],
+        "rows": [
+          [
+            "TI Sherman SM1",
+            "Production start: December 17, 2025; cleanroom/pilot completion and demand-led ramp: February 24, 2026",
+            "Your part, approved manufacturing route, allocated monthly quantity and delivery schedule"
+          ],
+          [
+            "TI Sherman SM2",
+            "Shell complete in February 24, 2026 presentation",
+            "Equipment, process/customer qualification and production timing for the relevant product"
+          ],
+          [
+            "Samsung Taylor",
+            "October 7, 2026 statement expects operation by end of 2026",
+            "Actual operation and qualified product output, followed by an enforceable supply arrangement"
+          ],
+          [
+            "GlobalWafers Sherman GWA",
+            "August 4, 2026 statement reports multiple Tier-1 customer qualifications",
+            "Applicable wafer specification, customer/site approval, volume and allocation"
+          ]
+        ],
+        "note": "Issuer statements support the stage descriptions. None of these sources publishes the reader’s allocation or committed receipt date. Samsung’s expectation is forward-looking; GlobalWafers produces semiconductor wafer inputs."
+      }
+    },
+    {
+      "id": "product-and-process",
+      "title": "Compare the product and manufacturing route",
+      "paragraphs": [
+        "These projects add different kinds of supply. TI makes analog and embedded processing chips; its capital presentation describes 28nm to 130nm processes for those products. Samsung’s Taylor statement describes a planned 2nm EUV capability. A 300mm wafer specification and a 2nm process label describe different characteristics, and neither makes the resulting products interchangeable. [TI process range](#source-ti-capital); [Samsung technology plan](#source-samsung-october).",
+        "GlobalWafers’ Texas facility makes silicon wafers used as inputs in device manufacturing. Commerce’s project description separates those materials from the chips made using them, and separates the Texas project from Missouri silicon-on-insulator production. A completed materials plant adds a supply-chain link; it cannot directly substitute for a packaged controller on an equipment maker’s bill of materials. [Commerce project description](#source-nist-globalwafers).",
+        "Start diligence with the purchase specification. Identify the part number or wafer grade, dimensions and tolerances, approved site, process, package, test requirements and application. Then ask which of those attributes the new Texas facility can actually provide. Counting generic “chip capacity” across these projects would conceal the product mismatch the buyer needs to resolve."
+      ]
+    },
+    {
+      "id": "qualification-evidence",
+      "title": "Read qualification as a defined approval",
+      "paragraphs": [
+        "GlobalWafers’ May 5 first-quarter release described continuing equipment installation and line setup at the Texas fab alongside qualifications from leading customers. The August 4 second-quarter release reported qualifications from multiple Tier-1 customers. That is stronger evidence of customer acceptance than a construction announcement, while still leaving the relevant specification and allocated volume to commercial diligence. [First-quarter update](#source-globalwafers-q1); [Second-quarter update](#source-globalwafers-q2).",
+        "The August statement also says existing 12-inch capacity is fully utilized, expressly excluding newly expanded lines. That denominator prevents using the statement as a utilization measure for the new Texas plant. Public global capacity language can be accurate and still answer a different question from the one on the procurement desk. [Utilization scope](#source-globalwafers-q2).",
+        "For the buyer, qualification should be attached to a defined product, manufacturing route and acceptance record. Ask which tests were completed, who approved the results, what remains open, and what changes would require another approval. A qualification for one customer or product does not establish approval for your application. A materials qualification also does not establish downstream device or package qualification.",
+        "Use those answers to stage commitments. Samples can justify engineering work. Accepted qualification lots can justify controlled production trials. Recurring accepted deliveries and an agreed allocation can support a broader sourcing change. The stages need owners and exit criteria so a promising project does not remain indefinitely described as almost ready."
+      ]
+    },
+    {
+      "id": "funding-and-impact",
+      "title": "Keep funding and economic impact in their own ledgers",
+      "paragraphs": [
+        "Commerce’s December 2024 final award notices for TI and GlobalWafers are historical funding evidence. They describe disbursement following project milestones; the GlobalWafers notice distinguishes construction, technology, production and commercial milestones. The notices cover projects across more than one state. They are not current statements of cash paid, completed Texas output or supply reserved for an individual customer. [TI award notice](#source-nist-ti); [GlobalWafers award notice](#source-nist-globalwafers).",
+        "Samsung’s October 7 release reports a $10.9 billion estimate of combined Austin and Taylor economic impact in 2025. The stated scope includes Austin fab operations and Taylor construction, with Taylor office activity beginning in the fourth quarter. That is a regional economic-impact measure, not Taylor semiconductor revenue or an observed quantity of qualified chips. [Samsung’s stated report scope](#source-samsung-october).",
+        "A named customer relationship offers a more specific mechanism. Micron’s July 9 release proposes $500 million of financing for GlobalWafers America in Sherman and a ten-year raw-wafer supply agreement, subject to definitive agreements, approvals and closing. GlobalWafers’ August update describes strategic funding and a long-term Micron relationship, without allocating supply to other readers. Customer capital plus reserved access can support a ramp and demand visibility while leaving uncommitted capacity unknown. That is a procurement inference, not proof of paid financing, a completed closing or wafers available to your factory. [Conditional Micron proposal](#source-micron-financing); [GlobalWafers account](#source-globalwafers-q2)."
+      ]
+    },
+    {
+      "id": "allocated-output-model",
+      "title": "Work the conversion from gross output to usable supply",
+      "paragraphs": [
+        "Consider a hypothetical electronics manufacturer planning 20,000 finished assemblies per month, each requiring two identical components. All other inputs are assumed available. The model assumes an already qualified route, 500 completed wafers per month, 400 gross die per wafer, 85% functional yield, 95% assembly/test yield and a committed 25% allocation to this buyer. These are invented scenario inputs, not estimates for TI, Samsung or GlobalWafers.",
+        "The model starts with completed wafers, rather than wafer starts. It represents a steady monthly flow after the production cycle has elapsed, with no additional loss at buyer acceptance. Multiplying a new month’s starts by yields would not establish deliveries in that same month. The allocated units must also arrive before the buyer’s production window.",
+        "Under the declared assumptions, 200,000 gross die become 170,000 functional die and 161,500 tested packaged components. The buyer’s allocation is 40,375 components against a 40,000-component requirement. The nominal buffer is only 375 components, or about 0.94% of demand."
+      ],
+      "table": {
+        "caption": "Declared monthly output scenario: components after each stage",
+        "columns": [
+          "Stage",
+          "95% assembly/test yield",
+          "94% sensitivity"
+        ],
+        "rows": [
+          [
+            "Completed wafers × gross die",
+            "500 × 400 = 200,000",
+            "500 × 400 = 200,000"
+          ],
+          [
+            "After 85% functional yield",
+            "170,000",
+            "170,000"
+          ],
+          [
+            "After assembly/test",
+            "161,500",
+            "159,800"
+          ],
+          [
+            "Buyer allocation: 25%",
+            "40,375",
+            "39,950"
+          ],
+          [
+            "Required: 20,000 assemblies × 2",
+            "40,000",
+            "40,000"
+          ],
+          [
+            "Surplus or shortage",
+            "375 components",
+            "50 components short"
+          ]
+        ],
+        "note": "All inputs are assumptions. The sensitivity changes only assembly/test yield by one percentage point. Quantities describe expected steady-state output, not a guarantee or a factory forecast."
+      }
+    },
+    {
+      "id": "model-decision",
+      "title": "A thin buffer changes the purchasing decision",
+      "paragraphs": [
+        "At 94% assembly/test yield, the allocation falls to 39,950 components, enough for 19,975 complete assemblies. The shortage is twenty-five assemblies. The exercise demonstrates why a large gross number can coexist with a small purchasing margin: losses occur before the buyer receives its share. It does not predict a particular supplier’s yield.",
+        "If the business assumes $100 of lost contribution per undelivered assembly, the twenty-five-assembly shortfall creates $2,500 of monthly exposure before any customer penalty. That additional assumption gives finance a starting point for comparing a buffer, an alternate qualified source, or an expedite quote. It is not a recommendation to pay $2,500 for any solution; compare the actual probability, timing and recoverable loss.",
+        "The demand threshold is also an allocation question. Holding the other inputs fixed, assembly/test yield must reach 94.1176% at 25% allocation, or allocation must reach 24.7678% at 95% yield. The assumed 25% allocation therefore tolerates only a 0.2322 percentage-point reduction before missing demand. A small contract allocation change can matter as much as factory yield. Product qualification, transport and timing still need separate evidence; these are not actual supplier thresholds."
+      ]
+    },
+    {
+      "id": "commercial-commitment",
+      "title": "Make the supply commitment specific enough to use",
+      "paragraphs": [
+        "Ask the supplier to connect technical approval with commercial terms. The useful schedule names the approved product and route, quantity by period, delivery point, change-notification process and treatment of a missed commitment. Confirm whether a quoted lead time starts at order acceptance, wafer release, or another event. An attractive number without a defined starting event is difficult to compare.",
+        "For a ramp, distinguish an engineering reservation from a recurring production allocation. Identify who can approve volume increases, what demand notice is required, and whether unused reservations expire. A long-term agreement can improve visibility while leaving important product, timing and remedy details to its schedules. Review the actual arrangement rather than borrowing confidence from another customer’s announced agreement.",
+        "A Texas location can be valuable even when the whole manufacturing route extends elsewhere. Ask where assembly, testing, critical materials and recovery capacity sit. Assess the failure modes shared by the primary and alternate route: the same package line or test resource can constrain both. Geographic diversification becomes useful when the business understands which dependencies it changes."
+      ]
+    },
+    {
+      "id": "buyer-checklist",
+      "title": "A procurement file that can survive a ramp change",
+      "paragraphs": [
+        "Before transferring a critical order, assemble a short evidence file with a responsible owner for every remaining condition. These are operating recommendations derived from the evidence comparison and the declared model."
+      ],
+      "bullets": [
+        "Record the exact product, specification, approved site and manufacturing route; preserve the dated qualification and acceptance evidence.",
+        "Separate announced site capacity, equipped capacity, qualified product output and the buyer’s committed allocation.",
+        "Define demand by period and units, including components per finished assembly and a justified buffer.",
+        "Verify the time from order acceptance to accepted receipt, including packaging, testing, transport and any receiving window.",
+        "Document the commercial allocation, changes allowed during a ramp, notification obligations and response to missed delivery.",
+        "Price an alternate route or inventory bridge against measured interruption exposure; assign the qualification work needed to make it usable.",
+        "Keep award dollars, regional impact and future project phases outside the current deliverable-quantity calculation."
+      ]
+    },
+    {
+      "id": "update-triggers",
+      "title": "Update when the evidence changes stage",
+      "paragraphs": [
+        "Revisit the Samsung entry when the year-end expectation becomes a dated operating disclosure, or when the timetable changes. Revisit TI and GlobalWafers as subsequent reporting identifies additional qualified output or completed ramp steps. A new statement should change the relevant evidence field; it should not silently convert an earlier forecast into an observed result.",
+        "For the buyer, the stronger update trigger is a changed qualification, accepted shipment, allocated quantity or delivery commitment. Recompute the model when demand, mix, yield evidence or route dependencies change. Keep the public project history intact so the purchasing team can see which assumptions improved and which remain unresolved."
+      ]
+    }
+  ],
+  "faqs": [
+    {
+      "question": "Is TI’s Sherman factory producing semiconductors?",
+      "answer": "TI announced production at SM1 on December 17, 2025, and its current site page says SM1 is in production. Its February 2026 presentation describes a demand-led ramp. That establishes the reported facility stage; a buyer still needs confirmation for its part and allocation. [TI announcement](#source-ti-production); [current overview](#source-ti-sherman)."
+    },
+    {
+      "question": "Was Samsung Taylor operating by October 12, 2026?",
+      "answer": "The reviewed October 7 company statement says the site is expected to be operational by the end of 2026. This article retains that forward-looking status rather than treating the target as a completed event. [Samsung October update](#source-samsung-october)."
+    },
+    {
+      "question": "Does GlobalWafers’ Texas qualification mean every buyer can order chips?",
+      "answer": "The August release reports multiple Tier-1 customer qualifications at the Sherman wafer facility. Those silicon wafers are inputs to chip manufacturing. Qualification does not establish approval, allocation or a packaged chip for every buyer. [Company update](#source-globalwafers-q2); [Commerce product scope](#source-nist-globalwafers)."
+    },
+    {
+      "question": "Can a CHIPS award prove that Texas supply is available?",
+      "answer": "The historical final TI award notice makes funding disbursement contingent on project milestones. Award status and available product are separate evidence. Use current qualification and commercial supply records to support a purchase commitment. [Commerce award terms](#source-nist-ti)."
+    }
+  ],
+  "sources": [
+    {
+      "id": "ti-production",
+      "label": "TI announces the start of production at Sherman SM1",
+      "href": "https://www.ti.com/about-ti/newsroom/news-releases/2025/texas-instruments-begins-production-at-its-newest-300mm-semiconductor-manufacturing-facility-in-sherman-texas.html",
+      "publisher": "Texas Instruments",
+      "date": "2025-12-17",
+      "lastVerified": "2026-10-12",
+      "note": "Company production-start statement. Describes a demand-led ramp and future plans for up to four fabs; does not disclose buyer allocations."
+    },
+    {
+      "id": "ti-capital",
+      "label": "TI capital management presentation, February 2026",
+      "href": "https://investor.ti.com/static-files/8c327c57-cd94-439d-a276-ef7cffcdc438",
+      "publisher": "Texas Instruments",
+      "date": "2026-02-24",
+      "lastVerified": "2026-10-12",
+      "note": "Printed pages 16 and 18–21. Separates cleanroom/pilot completion, shell completion, qualification and modular ramp. Forward-looking strategy is identified in the presentation."
+    },
+    {
+      "id": "ti-sherman",
+      "label": "TI Sherman manufacturing site overview",
+      "href": "https://www.ti.com/about-ti/manufacturing/sherman.html",
+      "publisher": "Texas Instruments",
+      "lastVerified": "2026-10-12",
+      "note": "Undated current company page; redirects to worldwide-manufacturing/sherman.html. States SM1 is in production and describes the four-fab investment as potential."
+    },
+    {
+      "id": "samsung-october",
+      "label": "Samsung October 2026 Austin and Taylor update",
+      "href": "https://semiconductor.samsung.com/sas/local-news/samsung-austin-semiconductors-two-campuses-inject-10-9b-into-central-texas-economy-in-2025/",
+      "publisher": "Samsung Austin Semiconductor",
+      "date": "2026-10-07",
+      "lastVerified": "2026-10-12",
+      "note": "Company report of a third-party 2025 economic-impact analysis; Austin operations and Taylor construction/office activity have distinct scopes. Taylor year-end operation remains a stated expectation."
+    },
+    {
+      "id": "globalwafers-q1",
+      "label": "GlobalWafers first-quarter 2026 results and expansion update",
+      "href": "https://www.sas-globalwafers.com/en/gwc_news_en_20260505/",
+      "publisher": "GlobalWafers",
+      "date": "2026-05-05",
+      "lastVerified": "2026-10-12",
+      "note": "Quarter ended March 31. Texas equipment/line setup and customer qualifications are distinguished from Missouri SOI production."
+    },
+    {
+      "id": "globalwafers-q2",
+      "label": "GlobalWafers second-quarter 2026 results and expansion update",
+      "href": "https://www.sas-globalwafers.com/en/gwc_news_en_20260804/",
+      "publisher": "GlobalWafers",
+      "date": "2026-08-04",
+      "lastVerified": "2026-10-12",
+      "note": "Quarter ended June 30. Reports multiple Tier-1 customer qualifications in Sherman. Existing 12-inch utilization statement explicitly excludes newly expanded lines."
+    },
+    {
+      "id": "nist-globalwafers",
+      "label": "Commerce final GlobalWafers award announcement, December 2024",
+      "href": "https://www.nist.gov/news-events/news/2024/12/biden-harris-administration-announces-chips-incentives-awards-globalwafers",
+      "publisher": "U.S. Department of Commerce / NIST",
+      "date": "2024-12-17",
+      "lastVerified": "2026-10-12",
+      "note": "Archived historical award notice, updated October 6, 2025. Describes silicon wafers as chip-manufacturing inputs and milestone-based funding across Texas and Missouri; not a current disbursement statement."
+    },
+    {
+      "id": "nist-ti",
+      "label": "Commerce final TI award announcement, December 2024",
+      "href": "https://www.nist.gov/news-events/news/2024/12/biden-harris-administration-announces-chips-incentives-award-texas",
+      "publisher": "U.S. Department of Commerce / NIST",
+      "date": "2024-12-20",
+      "lastVerified": "2026-10-12",
+      "note": "Archived historical award notice, updated October 6, 2025. Award covers Texas and Utah projects; disbursement follows project milestones. No current award balance or cash receipt is inferred."
+    },
+    {
+      "id": "micron-financing",
+      "label": "Micron’s conditional Sherman financing and ten-year wafer-access proposal",
+      "href": "https://micron.gcs-web.com/news-releases/news-release-details/micron-announces-3-billion-strategic-investment-strengthen-us",
+      "publisher": "Micron Technology",
+      "date": "2026-07-09",
+      "lastVerified": "2026-10-13",
+      "note": "Proposed $500M support and ten-year supply relationship expressly subject to definitive agreements, approvals and closing. No cash payment, closing or reader allocation independently verified."
+    }
+  ],
+  "image": "/images/social/texas-manufacturing-capacity-procurement.png",
+  "resources": [
+    {
+      "label": "Texas business source and decision ledger",
+      "href": "/research/texas-research-library-2026-10-13.json",
+      "description": "Primary evidence, declared assumptions and update triggers across the Texas business and autonomy library.",
+      "format": "JSON"
+    }
+  ]
+}

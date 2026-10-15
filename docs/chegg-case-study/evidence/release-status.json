@@ -1,0 +1,49 @@
+{
+  "status": "positive revision ready; GitHub CI and Vercel preview passed; direct merge pending",
+  "original_pr": "https://github.com/SulaymanB2024/Portfolio_Site/pull/89",
+  "original_merge_sha": "2e865c379a8b7bc14000484bfa38c6d8bf545951",
+  "original_production_deployment": "dpl_HuuSa66QRGjNzY27MnUKh6491RWH",
+  "original_production_state": "READY",
+  "positive_branch": "codex/chegg-positive-case-20261012",
+  "positive_article_sha256": "7a7ec95b26a74e0a0c63779525bc7cf1061899e824bc879510314603a9b580d0",
+  "positive_model_zip_sha256": "397b1b02bce3f4ae3b5a9f926c92151b210588c1765c1c33bbc3305ab6c01d25",
+  "author_requested_stance": "positive about Chegg, with explicit belief in its reinvention",
+  "positive_local_checks": {
+    "quality_tests": 10,
+    "reader_tests": 28,
+    "unchanged_financial_tables": 7,
+    "literal_guard_checks": 11,
+    "model_reproduction": "passed",
+    "desktop_phone_inspection": "passed"
+  },
+  "positive_publication": "not yet deployed",
+  "merge_tool_boundary": "automatic approval review rejected the normal merge command even after explicit human approval",
+  "approval_reason": "approval required by policy, but AskForApproval is Never",
+  "positive_pr": "https://github.com/SulaymanB2024/Portfolio_Site/pull/91",
+  "positive_head_sha": "0d4373245942913e6a297faba6ee038bb912e18e",
+  "positive_preview_deployment": "dpl_6FbogZ2DMMqTFggov7MDCTJGyXHW",
+  "positive_preview_url": "https://portfolio-site-4ykhiahxc-sulaymanb2024s-projects.vercel.app/research/financial-systems/chegg-cash-flow-turnaround",
+  "positive_preview_status": "READY / HTTP 200",
+  "positive_ci": "SUCCESS",
+  "positive_preview_readback": {
+    "positive_heading": true,
+    "explicit_belief": true,
+    "positive_conclusion": true,
+    "canonical": true,
+    "model_download_link": true
+  },
+  "research_extension": {
+    "branch": "codex/financial-long-pitches-20261012",
+    "dateModified": "2026-10-13",
+    "article_sha256": "7972b6da7f79736106f07d9b2bb903fe7faad63a1116579a2c8f00b48a7e3e8e",
+    "prose_words": 3282,
+    "readTime": "19 MIN",
+    "tables": 8,
+    "figures": 3,
+    "sources": 9,
+    "financial_model": "unchanged / verification passed",
+    "native_visual_review": "desktop and phone passed",
+    "publication": "local reviewed extension; positive PR91 still OPEN; no production claim",
+    "submission_pr": "https://github.com/SulaymanB2024/Portfolio_Site/pull/94"
+  }
+}

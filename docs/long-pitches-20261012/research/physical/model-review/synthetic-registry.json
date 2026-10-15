@@ -1,0 +1,21 @@
+{
+  "TEST_FIXTURE_ONLY": true,
+  "version": 1,
+  "evaluation_date": "2028-10-12",
+  "benchmark": {
+    "symbol": "SPY",
+    "entry_close": 10
+  },
+  "predictions": [
+    {
+      "symbol": "TEST_SPLIT",
+      "entry_close": 100,
+      "central_price_forecast": 150
+    },
+    {
+      "symbol": "TEST_DELIST",
+      "entry_close": 200,
+      "central_price_forecast": 240
+    }
+  ]
+}

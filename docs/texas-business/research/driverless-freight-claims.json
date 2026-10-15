@@ -1,0 +1,256 @@
+{
+  "article": "texas-driverless-freight-route-economics",
+  "checkedAt": "2026-10-13",
+  "claims": [
+    {
+      "id": "freight-endpoints",
+      "claim": "Reviewed Texas programs can serve customer endpoints, but supported facilities, platforms and onboard roles differ.",
+      "status": "issuer-reported selected capabilities",
+      "qualification": "Aurora specific driverless endpoint work; Waabi observer-supported direct facility work; no universal two-terminal requirement or unrestricted yard acceptance.",
+      "sources": [
+        {
+          "url": "https://ir.aurora.tech/sec-filings/all-sec-filings/content/0001828108-26-000075/aurora26q2shareholderlet.htm",
+          "date": "2026-07-29",
+          "pinpoint": "Aurora pages 7\u20138; Warp current-operation paragraphs; Ryder pilot"
+        },
+        {
+          "url": "https://www.waabi.ai/insights/volvo-and-waabi-kick-off-customer-operations-in-texas-starting-with-warp",
+          "date": "2026-10-05",
+          "pinpoint": "Aurora pages 7\u20138; Warp current-operation paragraphs; Ryder pilot"
+        },
+        {
+          "url": "https://news.international.com/2026-03-31-International-Launches-Level-4-Autonomous-Fleet-Trial-on-Live-Freight-Lane",
+          "date": "2026-03-31",
+          "pinpoint": "Aurora pages 7\u20138; Warp current-operation paragraphs; Ryder pilot"
+        }
+      ],
+      "recheck": "Endpoint, platform or operating-role change"
+    },
+    {
+      "id": "freight-ownership",
+      "claim": "Aurora July model owns/operates trucks under TaaS; Kodiak October describes customer-owned/operated DaaS trucks.",
+      "status": "issuer-reported business models",
+      "qualification": "Labels do not establish full cost inclusions, availability or a completed driver-out transition.",
+      "sources": [
+        {
+          "url": "https://aurora.tech/newsroom/your-questions-about-our-latest-driverless-launch-answered",
+          "date": "2026-07-22",
+          "pinpoint": "How can I get one?; DaaS paragraph"
+        },
+        {
+          "url": "https://kodiak.ai/news/kodiak-charger-usa-autonomous-trucking-dallas-laredo",
+          "date": "2026-10-08",
+          "pinpoint": "How can I get one?; DaaS paragraph"
+        }
+      ],
+      "recheck": "Commercial model and responsibility schedule"
+    },
+    {
+      "id": "freight-inspection",
+      "claim": "International/Ryder supervised pilot reports pre-trip inspection below 30 minutes.",
+      "status": "issuer-reported pilot KPI",
+      "qualification": "Not guaranteed for another configuration and not an industry or legal standard.",
+      "sources": [
+        {
+          "url": "https://news.international.com/2026-03-31-International-Launches-Level-4-Autonomous-Fleet-Trial-on-Live-Freight-Lane",
+          "date": "2026-03-31",
+          "pinpoint": "Early findings and KPIs"
+        }
+      ],
+      "recheck": "Truck/trailer/inspection process change"
+    },
+    {
+      "id": "freight-weather",
+      "claim": "Aurora February 2026 letter reports expanded validation for rain, fog and heavy wind.",
+      "status": "issuer-reported domain expansion",
+      "qualification": "Does not establish unrestricted all-weather service; historical 2025 constraints not extrapolated to current availability.",
+      "sources": [
+        {
+          "url": "https://ir.aurora.tech/sec-filings/all-sec-filings/content/0001828108-26-000014/finalaurora25q4sharehold.htm",
+          "date": "2026-02-11",
+          "pinpoint": "Page 3"
+        }
+      ],
+      "recheck": "Released operating thresholds and dispatch process"
+    },
+    {
+      "id": "freight-cargo-insurance",
+      "claim": "FMCSA chart distinguishes liability filings from cargo; nonhazardous for-hire property has $0 cargo filing requirement.",
+      "status": "official filing scope",
+      "qualification": "Actual cargo protection needs relevant policy/contract; no operator insurance adequacy assessed.",
+      "sources": [
+        {
+          "url": "https://www.fmcsa.dot.gov/registration/insurance-filing-requirements",
+          "date": "2026-03-26",
+          "pinpoint": "Insurance Filing Requirements Chart"
+        }
+      ],
+      "recheck": "Agency chart/legal change and actual policy/contract"
+    },
+    {
+      "id": "freight-authority-records",
+      "claim": "May 21, 2026 FMCSA FAQ says legacy L&I historical-only from May 14 and excludes Motus filings, beside older FAQs that still point there.",
+      "status": "official current-record coverage warning",
+      "qualification": "Resolve source coverage rather than rely on old generic lookup instructions; no carrier authorization verified.",
+      "sources": [
+        {
+          "url": "https://www.fmcsa.dot.gov/registration/ask-fmcsa?topic=23021",
+          "date": "2026-05-21",
+          "pinpoint": "What can I do in L&I?; adjacent May 2023 lookup FAQ"
+        }
+      ],
+      "recheck": "Registration system coverage/current authority evidence"
+    },
+    {
+      "id": "freight-performance-comparison",
+      "claim": "NHTSA raw crash counts cannot establish comparative operator risk without exposure and compatible data.",
+      "status": "official methodological limitation",
+      "qualification": "Accepted-load performance also requires matching definitions/periods; no provider safety or savings ranking.",
+      "sources": [
+        {
+          "url": "https://www.nhtsa.gov/laws-regulations/standing-general-order-crash-reporting",
+          "date": null,
+          "pinpoint": "Data and Limitations"
+        }
+      ],
+      "recheck": "Method or material service-data change"
+    },
+    {
+      "id": "freight-warning-exemption",
+      "claim": "FMCSA grants a limited cab-mounted warning-beacon exemption effective October 7, 2026\u2013October 7, 2031; other Level 4 carriers must give prior written notice.",
+      "status": "official final exemption",
+      "qualification": "Specific warning-device alternative only. Other federal rules continue; no competitor participation or fleet compliance verified. Intrastate treatment must be resolved separately from federal interstate preemption.",
+      "sources": [
+        {
+          "url": "https://www.govinfo.gov/content/pkg/FR-2026-10-09/html/2026-20734.htm",
+          "date": "2026-10-09",
+          "pinpoint": "DATES; VI.A\u2013C.1\u20135; VI.D"
+        }
+      ],
+      "recheck": "Current exemption, participating carrier evidence, cargo, configuration, domain or state intrastate treatment changes."
+    },
+    {
+      "id": "texas-intrastate-beacon-basis",
+      "claim": "Official current \u00a74.11 incorporates federal amendments through September 1, 2022; the complete inspected \u00a74.12 exception list does not adopt the October 2026 beacon relief. Federal permission alone does not establish a Texas intrastate legal basis.",
+      "status": "current official rendered rule text checked 2026-10-13; bounded interpretation",
+      "sources": [
+        {
+          "url": "https://texas-sos.appianportalsgov.com/rules-and-meetings?recordId=211918&queryAsDate=10%2F13%2F2026&interface=VIEW_TAC_SUMMARY&$locale=en_US",
+          "date": "2023-01-08",
+          "lastVerified": "2026-10-13",
+          "locator": "37 TAC \u00a74.11(a), (b)(3), (b)(6), (c)",
+          "pinpoint": "37 TAC \u00a74.11(a), (b)(3), (b)(6), (c)"
+        },
+        {
+          "url": "https://texas-sos.appianportalsgov.com/rules-and-meetings?recordId=226974&queryAsDate=10%2F13%2F2026&interface=VIEW_TAC_SUMMARY&$locale=en_US",
+          "date": "2025-12-11",
+          "lastVerified": "2026-10-13",
+          "locator": "37 TAC \u00a74.12 entire exception list and source note",
+          "pinpoint": "37 TAC \u00a74.12 entire exception list and source note"
+        }
+      ],
+      "qualification": "No exhaustive absence finding about other DPS instruments, no individual state permit process inferred, and no real shipment classification determined. Two Texas endpoints alone do not establish intrastate commerce.",
+      "recheckTrigger": "Current Texas rule amendment, actual applicable relief instrument/interpretation, changed shipment classification or proposed warning-device arrangement."
+    },
+    {
+      "id": "road-quote-ceiling",
+      "claim": "At 800 accepted loads, the declared $1,433 whole-route variable-cost ceiling less $100 common warehouse and $60 added release work gives a $1,273 maximum provider road quote; $1,150 base quote leaves $123 headroom. Setup and incremental expected exceptions were already deducted in deriving the ceiling.",
+      "status": "calculated hypothetical using existing inputs",
+      "sources": [],
+      "qualification": "Suggested purchaser analysis; all original source dates, access restrictions, legal conditions and unresolved provider-specific facts remain in the article.",
+      "recheckTrigger": "Change to the proposed itinerary, route, contract, fleet stage, accepted volume or stated model input."
+    }
+  ],
+  "scenario": {
+    "classification": "declared hypothetical, not quote or forecast",
+    "unit": "one loaded shipment from Dallas origin to accepted Houston receipt; one-year comparison; 250 loaded road miles assumed",
+    "inputs": {
+      "totalShipments": 1000,
+      "currentCarrierRate": 1400,
+      "commonLoadingReceivingCost": 100,
+      "directCarrierRate": 1150,
+      "directExtraInspectionReleaseCost": 60,
+      "transferLinehaulRate": 950,
+      "drayageMoves": 2,
+      "drayageRatePerMove": 120,
+      "transferProcessingCost": 40,
+      "transferExtraInspectionReleaseCost": 50,
+      "fixedSetupCost": 40000,
+      "baseAcceptedCompletedShipments": 800,
+      "baseHumanBackupShipments": 200,
+      "incrementalExceptionRate": 0.02,
+      "additionalRecoveryCostPerException": 350,
+      "lostContributionPerException": 500
+    },
+    "costBoundary": "Carrier price includes equipment, fuel, tolls, maintenance, normal roadside/remote support and repositioning. Common warehouse work included every option. Additional recovery expense above normal included support is modeled separately. No taxes, ordinary charges or minimum commitments differing between options assumed; obtain/reconcile these in actual quotes. No service credits/insurance recoveries counted.",
+    "formulas": {
+      "currentVariable": "1400 + 100 = 1500",
+      "directVariable": "1150 + 60 + 100 = 1310",
+      "transferVariable": "950 + 2*120 + 40 + 50 + 100 = 1380",
+      "baseline": "1000*1500 = 1500000",
+      "directBeforeExceptions": "800*1310 + 200*1500 + 40000 = 1388000",
+      "transferBeforeExceptions": "800*1380 + 200*1500 + 40000 = 1444000",
+      "baseIncrementalExceptions": "800*0.02 = 16",
+      "baseExceptionAllowance": "16*(350 + 500) = 13600",
+      "directTotal": "1388000 + 13600 = 1401600",
+      "directSaving": "1500000-1401600 = 98400",
+      "transferTotal": "1444000 + 13600 = 1457600",
+      "transferSaving": "1500000-1457600 = 42400",
+      "contributionPerAcceptedShipment": "1500-1310-0.02*850 = 173",
+      "breakEvenAcceptedShipments": "40000/173 = 231.21387283236993; ceil = 232",
+      "baseUnpricedCostHeadroomPerShipment": "98400/800 = 123",
+      "baseAllInVariablePriceCeiling": "1500-40000/800-0.02*850 = 1433",
+      "additional100000LossSensitivity": "98400-100000 = -1600"
+    },
+    "scenarios": [
+      {
+        "name": "downside",
+        "acceptedCompleted": 400,
+        "directVariableCost": 1410,
+        "humanBackup": 600,
+        "fixedSetup": 40000,
+        "exceptionAllowance": 6800,
+        "total": 1510800,
+        "saving": -10800
+      },
+      {
+        "name": "base",
+        "acceptedCompleted": 800,
+        "directVariableCost": 1310,
+        "humanBackup": 200,
+        "fixedSetup": 40000,
+        "exceptionAllowance": 13600,
+        "total": 1401600,
+        "saving": 98400
+      },
+      {
+        "name": "higher acceptance",
+        "acceptedCompleted": 1000,
+        "directVariableCost": 1310,
+        "humanBackup": 0,
+        "fixedSetup": 40000,
+        "exceptionAllowance": 17000,
+        "total": 1367000,
+        "saving": 133000
+      }
+    ],
+    "qualifications": [
+      "Demand and receiving capacity are assumed available.",
+      "Accepted shipments complete including modeled recoveries; incompatible/unsupported loads use human backup.",
+      "2% is assumed incremental exceptions relative to current arrangement, not an observed operator failure rate.",
+      "Lost contribution is separate from extra transport cost; no probability distribution or realized ROI asserted.",
+      "The comparison is first-year shipper cost; it does not estimate vehicle hours, fleet utilization, manufacturer unit economics or gross margin."
+    ],
+    "recheck": "Replace assumptions with actual endpoint-approved quotes, requested/accepted/completed shipment records, invoices, extra staff time and measured exceptions after a bounded trial.",
+    "economicCostBoundary": "Consistent comparison includes allocated existing warehouse/release labor, assumed paid carrier/recovery/setup costs and incremental lost contribution. It is not a cash invoice total. The 2% is incremental to conventional service, not an AV-only failure rate.",
+    "exceptionSplitUSD": {
+      "recoveryInvoices": 5600,
+      "lostContribution": 8000
+    }
+  },
+  "revisionReview": {
+    "date": "2026-10-13",
+    "scope": "Final exemption and cash/allocated-labor/lost-contribution boundaries reviewed; source-specific dates preserved.",
+    "originalSourceDatesPreserved": true
+  }
+}

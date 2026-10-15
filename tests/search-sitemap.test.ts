@@ -6,7 +6,7 @@ import { publicPages } from '../src/personal/public-pages.ts'
 test('sitemap dates describe significant recorded edits and omit unrecorded page dates', () => {
   assert.equal(documentModifiedDate('writing/why-texas-toll-roads-stay-tolled'), '2026-10-06')
   assert.equal(documentModifiedDate('writing/the-first-ai-managers'), '2026-10-05')
-  assert.equal(documentModifiedDate('topics/financial-systems'), '2026-10-06')
+  assert.equal(documentModifiedDate('topics/financial-systems'), '2026-10-14')
   assert.equal(documentModifiedDate('resume'), undefined)
   assert.equal(documentModifiedDate('unknown'), undefined)
   const xml = searchSitemap()

@@ -18,6 +18,19 @@ class ScenarioTests(unittest.TestCase):
         data = results(self.inputs)
         self.assertEqual(data['toast']['ttm_gp_anchor'], 2_082_000_000)
         self.assertAlmostEqual(data['toast']['scenarios']['base']['terminal_value_per_share'], 37.00467916706717)
+        self.assertNotIn('maximum_entry_at_selected_hurdle', data['toast']['scenarios']['base'])
+
+    def test_default_serialized_results_preserve_the_reviewed_baseline(self):
+        canonical = Path(__file__).with_name('model-results.json').read_text()
+        self.assertEqual(json.dumps(results(self.inputs), indent=2, allow_nan=False) + '\n', canonical)
+
+    def test_selected_toast_hurdle_keeps_the_15_percent_field_truthful(self):
+        self.inputs['toast']['assumed']['entry_return_hurdle'] = .20
+        for row in results(self.inputs)['toast']['scenarios'].values():
+            terminal = row['terminal_value_per_share']
+            self.assertAlmostEqual(row['maximum_entry_for_15_percent'], terminal / 1.15 ** 3)
+            self.assertAlmostEqual(row['maximum_entry_at_selected_hurdle'], terminal / 1.20 ** 3)
+            self.assertEqual(row['entry_return_hurdle'], .20)
 
     def test_validation_receipt_keeps_company_units_distinct(self):
         from verify import independent_math
@@ -96,6 +109,26 @@ class ScenarioTests(unittest.TestCase):
             subprocess.run([*command, '--output', str(output)], text=True, capture_output=True, check=True)
             self.assertEqual(json.loads(output.read_text())['harvey']['customer_value']['net_freed_hours'], 6624)
         self.assertEqual(hashlib.sha256(canonical.read_bytes()).hexdigest(), before)
+
+    def test_cli_rejects_input_output_equality_and_file_aliases(self):
+        here = Path(__file__).resolve().parent
+        cache = here.parent / '.cache'
+        cache.mkdir(exist_ok=True)
+        with tempfile.TemporaryDirectory(dir=cache) as folder:
+            source = Path(folder) / 'scenario.json'
+            source.write_text(json.dumps(self.inputs))
+            symlink = Path(folder) / 'symlink.json'
+            symlink.symlink_to(source)
+            hardlink = Path(folder) / 'hardlink.json'
+            hardlink.hardlink_to(source)
+            before = source.read_bytes()
+            for input_path, output_path in [(source, source), (source, symlink), (symlink, source), (source, hardlink), (hardlink, source)]:
+                with self.subTest(input=input_path.name, output=output_path.name):
+                    command = [sys.executable, str(here/'models.py'), '--inputs', str(input_path), '--output', str(output_path)]
+                    run = subprocess.run(command, text=True, capture_output=True)
+                    self.assertEqual(run.returncode, 2, run.stdout + run.stderr)
+                    self.assertIn('output must not overwrite inputs', run.stderr)
+                    self.assertEqual(source.read_bytes(), before)
 
 
 if __name__ == '__main__':
