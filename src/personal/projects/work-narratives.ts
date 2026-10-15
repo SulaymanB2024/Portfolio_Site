@@ -1,8 +1,85 @@
 import type { WorkDocument } from './work-document'
 import { workContributions } from './work-curation.ts'
+import { caseNarratives } from './case-narratives.ts'
 
 /** Sources and editorial decisions: .cache/work-material-20261004/source-products.md and source-engineering.md. */
 export const workNarratives: Record<string, WorkDocument> = {
+  chegg: {
+    role: workContributions.chegg.role,
+    deck: 'Student research, recruiting data and AI product work at Internships.com.',
+    summary: workContributions.chegg.summary,
+    chapters: [
+      {
+        id: 'question',
+        label: 'Student journey',
+        title: 'From finding a role to preparing for it',
+        body: [
+          'My product work at Internships.com connects student research with internship-search workflows and AI tools. The work spans the search itself and the preparation that follows: helping a student find a relevant role and practice for the conversation ahead.'
+        ]
+      },
+      {
+        id: 'system',
+        label: 'Recruiting data',
+        title: 'The data behind the search',
+        body: [
+          'I build and validate recruiting-data pipelines with product, engineering, data science and marketing teams. This work connects the data a search experience depends on with the people designing, building and evaluating the product.'
+        ]
+      },
+      {
+        id: 'practice',
+        label: 'AI interviewer',
+        title: 'Practice that carries the conversation forward',
+        body: [
+          'I built an AI mock interviewer with adaptive follow-ups, conversation memory, failure recovery and feedback. These parts support a continuing exchange: the interviewer can follow an answer, retain context and give the student feedback on their practice.'
+        ]
+      },
+      {
+        id: 'growth',
+        label: 'Growth research',
+        title: 'Learning from public conversations',
+        body: [
+          'I analyze public social posts with embeddings and machine learning to inform student-focused growth experiments. That research sits alongside product development and student research in my Product Intern, Growth role at Chegg.'
+        ]
+      }
+    ],
+    links: [
+      { label: 'Role & contributions', href: '#/resume', description: 'My public résumé records the Chegg role and the contributions described here.' },
+      { label: 'Internships.com', href: 'https://www.internships.com/', description: 'The public product associated with this work; internal implementation is not published here.' },
+      { label: 'Chegg', href: 'https://www.chegg.com/', description: 'The company and its public student products.' }
+    ]
+  },
+  void: {
+    role: workContributions.void.role,
+    deck: 'Growth strategy, financial analysis, AI workflows and web systems.',
+    summary: workContributions.void.summary,
+    chapters: [
+      {
+        id: 'question',
+        label: 'The consultancy',
+        title: 'A business question, then a working system',
+        body: [
+          'Through VOID, I develop operating plans and software tools for small businesses and technology clients. The work brings together growth strategy, financial analysis, AI workflows and web systems. Atlas gives a concrete view of the engineering: a website audit workflow whose findings stay connected to the evidence behind them.'
+        ]
+      },
+      {
+        id: 'system',
+        label: 'Atlas engineering',
+        title: 'Atlas: a local evidence console',
+        body: [
+          ...caseNarratives.atlas.chapters[0].body,
+          ...caseNarratives.atlas.chapters[1].body
+        ],
+        links: caseNarratives.atlas.chapters[1].links
+      },
+      { ...caseNarratives.atlas.chapters[2], id: 'practice' },
+      { ...caseNarratives.atlas.chapters[3], id: 'gaps' },
+      { ...caseNarratives.atlas.chapters[4], id: 'sources' }
+    ],
+    links: [
+      { label: 'VOID', href: 'https://www.void-agency.com/', description: 'The consultancy’s public site.' },
+      { label: 'Role & contributions', href: '#/resume', description: 'My public résumé records VOID’s scope and the Atlas build.' }
+    ]
+  },
   internshipdeadlines: {
     role: 'Founder & product lead',
     deck: 'AI-assisted internship search and application planning.',

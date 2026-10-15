@@ -16,6 +16,8 @@ test('recruiter positioning reaches search and social previews without replacing
 
 test('project search titles describe demonstrated skills while page identity retains the project name', () => {
   const cases = [
+    ['chegg', /Product & AI Tools at Internships.com/, 'Chegg'],
+    ['void', /Strategy, AI Workflows & Atlas Engineering/, 'VOID'],
     ['internshipdeadlines', /AI Product & Search/, 'InternshipDeadlines'],
     ['sapien', /Growth & AI Market Research/, 'Sapien'],
     ['atlas', /Python & SQLite/, 'Atlas'],
@@ -29,8 +31,15 @@ test('project search titles describe demonstrated skills while page identity ret
     assert.equal(metadata.article, undefined)
     titles.push(metadata.title)
   }
-  assert.equal(new Set(titles).size, 3)
+  assert.equal(new Set(titles).size, cases.length)
   assert.match(searchMetadata('work/atlas').description, /local Python and SQLite/)
+})
+
+test('Work structured data describes the four visible featured accounts in reading order', () => {
+  const list = searchMetadata('work').schema!['@graph'].find(node => node['@type'] === 'ItemList')!
+  assert.deepEqual((list.itemListElement as { url: string }[]).map(item => new URL(item.url).pathname), [
+    '/work/chegg', '/work/sapien', '/work/void', '/work/miscellaneous'
+  ])
 })
 
 test('homepage search identity is descriptive while the published headline stays separate', () => {

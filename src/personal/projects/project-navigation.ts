@@ -1,15 +1,9 @@
-/** A reading journey through the seven existing project accounts. */
-const projectJourney = [
-  { slug: 'internshipdeadlines', name: 'InternshipDeadlines' },
-  { slug: 'atlas', name: 'Atlas' },
-  { slug: 'sapien', name: 'Sapien' },
-  { slug: 'investing-markets', name: 'Investing & Markets' },
-  { slug: 'miscellaneous', name: 'Experiments' },
-  { slug: 'payrollpro', name: 'PayrollPro' },
-  { slug: 'viralbench', name: 'ViralBench + Codex' },
-] as const
+import { featuredProjects, projects } from '../content.ts'
+import { caseStudies } from './case-studies.ts'
 
+/** Legacy accounts remain readable and lead back into the featured journey. */
 export function nextProject(slug: string) {
-  const index = projectJourney.findIndex(project => project.slug === slug)
-  return index < 0 ? undefined : projectJourney[(index + 1) % projectJourney.length]
+  const index = featuredProjects.findIndex(project => project.slug === slug)
+  if (index >= 0) return featuredProjects[(index + 1) % featuredProjects.length]
+  return [...projects, ...caseStudies].some(project => project.slug === slug) ? featuredProjects[0] : undefined
 }

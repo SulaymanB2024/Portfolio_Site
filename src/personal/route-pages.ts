@@ -25,6 +25,6 @@ export function prepareRoutePage(route: string): Promise<unknown> {
   if (route === 'contact') return contactPage.load()
   if (route.startsWith('writing/')) return articlePage.load()
   if (['work/atlas', 'work/payrollpro', 'work/viralbench'].includes(route)) return caseStudyPage.load()
-  if (['work/internshipdeadlines', 'work/sapien', 'work/investing-markets', 'work/miscellaneous'].includes(route)) return projectPage.load()
+  if (['work/chegg', 'work/void', 'work/internshipdeadlines', 'work/sapien', 'work/investing-markets', 'work/miscellaneous'].includes(route)) return projectPage.load()
   return Promise.resolve()
 }

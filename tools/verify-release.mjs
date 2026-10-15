@@ -1,6 +1,7 @@
 import { readFile, readdir, stat } from 'node:fs/promises'
 import { join } from 'node:path'
 import assert from 'node:assert/strict'
+import { publicPages } from '../src/personal/public-pages.ts'
 
 const read = file => readFile(file, 'utf8')
 const config = JSON.parse(await read('vercel.json'))
@@ -8,7 +9,7 @@ const sitemap = await read('dist/sitemap.xml')
 const urls = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map(match => new URL(match[1]))
 const catalog = JSON.parse(await read('src/personal/editorial/data/catalog.json'))
 const topics = (await import('../src/personal/editorial/topics.ts')).readingTopics
-assert.equal(urls.length, 13 + catalog.length + topics.length, 'Every published article and reading path has a canonical document')
+assert.deepEqual(urls.map(url => url.pathname).sort(), publicPages.map(page => page.path).sort(), 'Every current and retained public route has one canonical document')
 for (const article of catalog) assert(urls.some(url => url.pathname === article.path), `Missing original article URL: ${article.path}`)
 for (const topic of topics) assert(urls.some(url => url.pathname === `/topics/${topic.slug}`), `Missing reading path: ${topic.slug}`)
 assert.equal(new Set(urls.map(url => url.href)).size, urls.length)

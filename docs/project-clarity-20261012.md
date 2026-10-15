@@ -1,5 +1,36 @@
 # Project-page redesign — October 12, 2026
 
+## Revision-9 working brief — four featured projects (October 14)
+
+The user explicitly confirmed **Chegg → Sapien → VOID → Experiments** as the four featured projects, with Atlas folded into VOID. Preserve the accepted Markets, Experiments, PayrollPro, ViralBench and InternshipDeadlines sculptures and their existing URLs. Chegg uses the current Markets asset; VOID uses the current Atlas asset, with presentation refinement if the rendered result warrants it. No GLB regeneration or shader change is authorized by this curation correction.
+
+The actual owner remains this clean MR checkout, branch codex/project-pages-20261014, starting at 528d8bf6a1ae4d12d26e7fc7a2375bd19a0af1a5. PR #100 remains the authorized delivery. The public September 30 résumé in profile-copy.ts establishes Chegg's Internships.com role, recruiting pipelines, student research, public-post analysis and AI interviewer; it establishes VOID's consultancy scope and Atlas implementation. Retained Atlas source/capture qualifications remain authoritative. No employment claim is inferred from the independent Chegg financial article.
+
+Completion means the actual Work page, homepage selection, landing chapters and project continuation share the four-project order; Chegg and VOID have complete source-backed accounts and readable direct routes; old project pages, accepted assets and engraving remain intact. Inspect and correct the actual desktop/phone result, verify routes/evidence and appropriate release checks, show the delivered visuals, update this record and the existing PR. No merge or production publication. Existing browser binding is the task's in-app preview tab; restart only a bounded task-owned preview on a verified free port.
+
+Context, validation, browser policies, SULLY-DESIGN and route-web-apps references were read. Root owns this curation pass; no additional helpers or top-level chats are needed. The current manifest and all sixteen registered asset bytes at the starting commit are the preservation baseline.
+
+### Integrated result and inspection
+
+The Work collection, homepage chapters/fallback links, readable initial HTML, Work ItemList and project continuation now share **Chegg → Sapien → VOID → Experiments**. New /work/chegg and /work/void documents bring the public catalog to nine project routes and 49 canonical pages. All seven earlier accounts and their bookmarks remain readable; their endings return to the primary journey. Chegg covers the résumé-established Internships.com work. VOID introduces the consultancy, then reuses Atlas’s engineering account, exact retained table and pinned evidence. The opening was tightened after native inspection; VOID’s presentation yaw .32 / pitch .10 makes the strata and opening readable beside Chegg’s different curved form. Central presentation definitions drive the renderer and actual-geometry framing checks.
+
+All sixteen source GLBs, built GLBs, registry/URL files and the engraving shader match the starting commit exactly. No approved model was regenerated. The actual decoded geometry passes portrait/desktop, full motion and side/rear/polar/depth fitting for all nine project presentations, including the two new aliases. Chegg uses work-investing-markets; VOID uses work-atlas. Original accepted seven sculptures remain their own registrations.
+
+Native final built inspection covers all four 390×844 phone openings and 1235×984 desktop openings, complete new desktop accounts, VOID’s phone source table, the Work collection at both sizes and all four homepage chapters at both sizes. Every inspected document has no horizontal overflow. The real four-project footer journey reaches each correct page. Chegg/VOID keyboard right rotates yaw to .1400 and Home resets to zero in reduced motion; VOID pointer drag reaches yaw -1.7023 / pitch -.4643 and double-click resets both. The final built Experiments renderer advances 1,845 frames over 61.329 wall seconds; the renderer reports 29.99 fps, a changing rotor quaternion and warm CPU submission average .159 ms. Main-thread task delta 2,613.230 ms includes observation/test activity. GPU timing and physical-device touch remain unmeasured. Temporary viewport/media/performance overrides are restored.
+
+Validation passes: **702 application tests**, plus the earlier scoped 29 account/navigation/framing checks and 45 metadata/discovery/route/reading checks; application TypeScript; client and SSR builds; generation of 49 readable pages; release/search gate (82 retained redirects, 1,626 asset references, 30 dated feed entries, 298 source citations); source/built/baseline byte audit and diff whitespace check. API/bot source is unchanged by this revision; its existing full CI gate remains required on delivery. All logs, native image/JSON, interaction/cadence and preservation receipts are task-owned under .cache/work-curation-r9/. The test-generated validation JSON was moved into that cache after verifying its sole test ownership; no unrelated files were removed.
+
+| SULLY-DESIGN check | Status | Evidence |
+| --- | --- | --- |
+| Composition / brand | Pass | Four equally featured rows; existing paper/ink/Syne/Newsreader retained; actual Work/home and project openings inspected. |
+| Subject / craft | Pass | Approved assets preserved byte-for-byte; distinct Chegg and VOID forms, VOID’s layered opening refined through presentation only. |
+| Typography | Pass | New accounts use the accepted hierarchy and measure; opening tightened, full desktop bodies and phone table inspected. |
+| Mobile | Pass | All four project openings, Work and four homepage chapters at 390×844; no horizontal overflow. |
+| Interaction / loading | Pass | Ready native GLBs, four-page continuation, chapter jump/focus, keyboard and pointer resets, reduced motion and sustained final rotor cadence. |
+| Content readiness | Pass | Public résumé authority; Atlas’s exact source dates/unknowns preserved; route, proof, schema and readable-document gates pass. |
+
+Durable visual delivery is docs/featured-work-preview-20261014/featured-projects.jpg and work-and-home.jpg. The overview positions unchanged native phone captures at their original pixel size; its README gives account/asset mapping, scope, validation and preview routes. The built preview lease owns only this task’s child process group on port4217 and expires one hour after its recorded start. Next boundary: publish this verified revision to the existing authorized PR #100 and confirm its final checks; no merge or production publication.
+
 ## Revision-8 working brief — abstract sculpture collection (October 14)
 
 ### Integrated result and inspection

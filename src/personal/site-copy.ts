@@ -13,7 +13,7 @@ export const siteCopy = {
   work: {
     selectedLabel: '01 / Selected work',
     heading: ['What I’m building.', 'What I’m studying.'],
-    introduction: 'Internship search, AI research, market analysis, and experiments in light and motion.',
+    introduction: 'Product work at Chegg, growth at Sapien, systems through VOID, and experiments in light and motion.',
     kicker: 'Products, research & experiments',
     title: 'Selected work',
     description: 'Products, research, and experiments.',
@@ -76,7 +76,7 @@ export const siteMetadata = {
   homeTitle: 'The frontier is all that matters',
   description: recruiterCopy.description,
   pages: {
-    work: 'Products, research, and experiments by Sulayman Bowles, including InternshipDeadlines, Sapien, Atlas, and independent market research.',
+    work: 'Selected work by Sulayman Bowles: Chegg product development, Sapien growth, VOID strategy and engineering, and creative experiments.',
     writing: 'Selected essays by Sulayman Bowles on AI-operated businesses, agent evaluation, website audits, and Texas toll road economics.',
     about: 'Sulayman Bowles studies finance at UT Austin, works in product and growth at Chegg and Sapien, and builds AI tools, InternshipDeadlines and Atlas.',
     resume: 'Experience, education, and selected work by Sulayman Bowles across Chegg, Sapien, VOID, and independent products.',

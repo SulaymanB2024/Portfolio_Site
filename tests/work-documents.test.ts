@@ -5,13 +5,14 @@ import { workNarratives } from '../src/personal/projects/work-narratives.ts'
 import { caseNarratives } from '../src/personal/projects/case-narratives.ts'
 import { caseStudies } from '../src/personal/projects/case-studies.ts'
 import { workLinkHref } from '../src/personal/projects/work-document.ts'
+import { canonicalPath } from '../src/personal/public-pages.ts'
 
 const documents = { ...workNarratives, ...caseNarratives }
 const catalog = JSON.parse(readFileSync(new URL('../src/personal/editorial/data/catalog.json', import.meta.url), 'utf8'))
 const articleSlugs = new Set(catalog.map((article: { slug: string }) => article.slug))
 
-test('all seven work documents retain existing chapter bookmarks and unique section identities', () => {
-  assert.deepEqual(Object.keys(documents).sort(), ['atlas', 'internshipdeadlines', 'investing-markets', 'miscellaneous', 'payrollpro', 'sapien', 'viralbench'])
+test('new and retained work documents have valid chapters and preserve existing bookmarks', () => {
+  assert.deepEqual(Object.keys(documents).sort(), ['atlas', 'chegg', 'internshipdeadlines', 'investing-markets', 'miscellaneous', 'payrollpro', 'sapien', 'viralbench', 'void'])
   for (const [slug, document] of Object.entries(documents)) {
     const ids = document.chapters.map((chapter) => chapter.id)
     assert.equal(new Set(ids).size, ids.length, slug)
@@ -44,6 +45,8 @@ test('sources resolve to retained artifacts or actual catalog routes, including 
         assert.ok(articleSlugs.has(link.href.slice('#/writing/'.length)), `${slug}: missing article`)
       } else if (link.href.startsWith('#/work/')) {
         assert.ok(documents[link.href.slice('#/work/'.length)], `${slug}: missing project`)
+      } else if (link.href.startsWith('#/')) {
+        assert.ok(canonicalPath(link.href.slice(2)), `${slug}: missing public page`)
       } else assert.match(link.href, /^https:\/\//)
     }
   }
@@ -52,6 +55,7 @@ test('sources resolve to retained artifacts or actual catalog routes, including 
 test('data-backed comparisons remain beside their supporting accounts without detached widgets', () => {
   const evidence = Object.entries(documents).flatMap(([slug, document]) => document.chapters.filter((chapter) => chapter.table).map((chapter) => [slug, chapter.id]))
   assert.deepEqual(evidence, [
+    ['void', 'practice'],
     ['sapien', 'system'],
     ['miscellaneous', 'assets'],
     ['atlas', 'study-section-3'],
@@ -63,6 +67,17 @@ test('data-backed comparisons remain beside their supporting accounts without de
   }
   const serialized = JSON.stringify(documents)
   assert.doesNotMatch(serialized, /atlas-console\.jpg|internship-offer|\/tools\/offers|texas-toll-roads-stay-tolled-financial-model-2025\.xlsx/)
+})
+
+test('VOID retains Atlas source records and qualifications inside its engineering account', () => {
+  const embedded = workNarratives.void.chapters.find(chapter => chapter.id === 'practice')!
+  const retained = caseNarratives.atlas.chapters.find(chapter => chapter.id === 'study-section-3')!
+  assert.deepEqual(embedded.table, retained.table)
+  assert.deepEqual(embedded.body, retained.body)
+  assert.deepEqual(embedded.links, retained.links)
+  assert.equal(canonicalPath('work/atlas'), '/work/atlas')
+  assert.equal(canonicalPath('work/chegg'), '/work/chegg')
+  assert.equal(canonicalPath('work/void'), '/work/void')
 })
 
 test('the derivative comparison agrees with the current asset manifest', () => {

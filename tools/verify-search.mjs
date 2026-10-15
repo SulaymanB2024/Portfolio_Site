@@ -288,7 +288,10 @@ for (const path of ['/work/internshipdeadlines', '/work/atlas', '/resume']) asse
 const resumeHtml = await read('dist/resume/index.html')
 for (const skill of ['Skills &amp; tools', 'Python', 'SQL', 'TypeScript', 'Growth strategy', 'Product positioning', 'AI workflows']) assert(resumeHtml.includes(skill), `Initial résumé lacks ${skill}`)
 assert(resumeHtml.includes('July 2026 PDF'), 'Historical PDF label changed')
-for (const slug of ['internshipdeadlines', 'sapien', 'atlas']) {
+const workHtml = await read('dist/work/index.html')
+const featuredLinks = [...(workHtml.match(/<h2>Featured projects<\/h2>(.*?)<\/main>/s)?.[1] ?? '').matchAll(/href="(\/work\/[^"?]+)"/g)].map(match => match[1])
+assert.deepEqual(featuredLinks, ['/work/chegg', '/work/sapien', '/work/void', '/work/miscellaneous'], 'Readable Work must feature exactly the four accepted projects in order')
+for (const slug of Object.keys(workContributions)) {
   const html = await read(`dist/work/${slug}/index.html`)
   const main = html.match(/<main>(.*?)<\/main>/s)?.[1]
   assert(main, `${slug}: readable account is missing`)

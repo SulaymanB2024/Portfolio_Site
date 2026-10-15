@@ -8,17 +8,16 @@ import { Box3, Euler, Matrix4, PerspectiveCamera, Vector3 } from 'three'
 import { projectGLBDistance, type ProjectShaftBounds } from '../src/personal/projects/project-glb-framing.ts'
 import { projectPartAngle, projectPartMotion, type ProjectPartMotion } from '../src/personal/projects/project-articulation.ts'
 import { workStudyPose } from '../src/personal/work-study-motion.ts'
+import { projectSculptures } from '../src/personal/projects/project-sculptures.ts'
 
-const definitions = [
-  ['work-internshipdeadlines', -.32, .12, .3], ['work-sapien', -.32, -.05, 1.8],
-  ['work-investing-markets', -.16, .09, 3.1], ['work-miscellaneous', .3, .08, 4.4],
-  ['work-atlas', -.16, .04, 2.4], ['work-payrollpro', -.24, .08, 1.1], ['work-viralbench', -.23, .07, 3.6],
-] as const
+const definitions = Object.entries(projectSculptures).map(([slug, definition]) => ({
+  slug, id: definition.asset ?? `work-${slug}`, ...definition
+}))
 const manifest = JSON.parse(readFileSync(new URL('../public/portfolio-models/manifest.json', import.meta.url), 'utf8'))
 const io = new NodeIO().registerExtensions(ALL_EXTENSIONS).registerDependencies({ 'draco3d.decoder': await draco.createDecoderModule() })
 
-test('the actual seven GLBs fill their portrait and desktop slots without clipping during motion', async () => {
-  for (const [id, yaw, pitch, phase] of definitions) {
+test('all project presentations fill portrait and desktop slots without clipping actual GLB geometry', async () => {
+  for (const { id, yaw, pitch, phase } of definitions) {
     const doc = await io.read(new URL(`../${manifest.assets[id].path}`, import.meta.url).pathname)
     const vectors: Vector3[] = [], orbitVectors: Vector3[] = [], bounds = new Box3()
     const parents = new Map<Node, Node>()
