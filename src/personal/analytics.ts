@@ -122,7 +122,7 @@ export function portfolioActionForHref(value: string): PortfolioAction | undefin
     if (url.username || url.password || url.search || url.hash) return undefined
     if (url.protocol === 'mailto:' && url.pathname === contact.email) return 'email_click'
     if (url.href.replace(/\/$/, '') === contact.linkedin.replace(/\/$/, '')) return 'linkedin_click'
-    if (url.protocol === 'https:' && productionHosts.has(url.hostname) && !url.port && url.pathname === '/Sulayman_Bowles_Resume.pdf') return 'resume_download'
+    if (url.protocol === 'https:' && productionHosts.has(url.hostname) && !url.port && ['/Sulayman_Bowles_Resume.pdf', '/Sulayman_Bowles_Resume_Current.pdf'].includes(url.pathname)) return 'resume_download'
   } catch { /* Malformed or unsupported destinations remain ordinary links. */ }
   return undefined
 }

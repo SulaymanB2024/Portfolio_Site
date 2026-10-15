@@ -119,13 +119,16 @@ test('authenticated opening sync writes once, rejects tampering and retries afte
   assert.equal((await handler(signed([row], 'wrong-secret'.repeat(4)))).status, 401)
 })
 
-test('one exact selected opening reaches readable HTML and React context without a contact roster', () => {
+test('an individual alias keeps its approved context and ordinary homepage without adding its greeting', () => {
   const row = ready()
   const html = outreachDocument(homepage, 'google', 'Google', { id: row.recordId, lines })
   const path = personalizedOpeningPath(row.recordId)
   const company = documentOutreachCompany(documentFor(html), path)!
   assert.deepEqual(company, { slug: 'google', name: 'Google', opening: { id: row.recordId, lines } })
-  assert(html.includes(lines.join(' ')))
+  const body=html.match(/<main\b[^]*?<\/main>/)![0]
+  assert(!body.includes('Hi Alex'))
+  assert(body.includes('Finance BBA student'))
+  assert(body.includes('May 2028'))
   assert(html.includes('Protected content.'))
   assert.equal(resolveRoute('', path, [], path.slice(1)), 'recruiter')
   assert.equal(resolveRoute('#/', path, [], path.slice(1)), '')
@@ -133,7 +136,7 @@ test('one exact selected opening reaches readable HTML and React context without
   assert.equal(documentOutreachCompany(documentFor(html), personalizedOpeningPath(randomUUID())), undefined)
   assert.equal(documentOutreachCompany(documentFor(html.replace(row.recordId, randomUUID())), path), undefined)
   const opening = recruiterOpening(company)
-  assert.deepEqual(opening.lines, lines)
+  assert.equal(opening.lines.join(' '),'The frontier is all that matters.')
   assert.equal(opening.href, '/resume')
   assert.equal(opening.article.href, '/')
   assert(withLandingOpening(opening).slice(1).every((chapter, index) => chapter === CHAPTERS[index + 1]))
@@ -146,7 +149,7 @@ test('selected text is escaped in HTML and inert JSON, including closing-script 
   const html = outreachDocument(homepage, 'google', 'Google', { id, lines: copy })
   assert(!html.includes('</script><script>bad()'))
   assert(html.includes('\\u003c/script\\u003e'))
-  assert(html.includes('&lt;R&amp;D&gt;'))
+  assert(!html.match(/<main\b[^]*?<\/main>/)![0].includes('bad()'))
   assert.deepEqual(documentOutreachCompany(documentFor(html), personalizedOpeningPath(id))?.opening?.lines, copy)
 })
 

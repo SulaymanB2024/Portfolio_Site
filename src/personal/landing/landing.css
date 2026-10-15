@@ -97,6 +97,7 @@
   font: 400 22px/1.4 var(--type-reading, Georgia, serif);
   font-optical-sizing: auto; letter-spacing: -.01em; text-wrap: pretty;
 }
+.landing-recruiter-intro[data-candidate] { max-width: 42ch; }
 .landing-stage[data-chapter]:not([data-chapter='helmet']) .landing-recruiter-intro { display: none; }
 @media screen and (min-width: 701px) and (min-height: 541px) {
   /* Center the reading composition optically, including the deck and links. */

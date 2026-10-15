@@ -7,8 +7,7 @@ import { reservedOutreachSlugs } from '../lib/outreach/reserved.ts'
 import { createSyncHandler, outreachSpreadsheetId, validSyncSignature } from '../lib/outreach/sync.ts'
 import { createOutreachHomeHandler, outreachDocument } from '../lib/outreach/home.ts'
 import { approvedOutreachSlug, documentOutreachCompany } from '../src/personal/outreach-context.ts'
-import { recruiterCompanyProfiles } from '../src/personal/recruiter/company-profiles.ts'
-import { recruiterMetadata, recruiterOpening, renderRecruiterDocument } from '../src/personal/recruiter/landing.ts'
+import { recruiterIntroduction, recruiterMetadata, recruiterOpening, renderRecruiterDocument } from '../src/personal/recruiter/landing.ts'
 import { withLandingOpening } from '../src/personal/landing/opening-copy.ts'
 import { CHAPTERS } from '../src/personal/landing/sequence.ts'
 import { headingRows } from '../src/personal/landing/heading-typography.ts'
@@ -108,9 +107,10 @@ test('runtime registry activates new company documents without changing the appl
   assert(!response.headers.has('Location'))
   const html = await response.text()
   assert.equal(html, outreachDocument(homepage, 'base-power', 'Base Power Company'))
-  assert(html.includes('<h1>Base Power Company</h1>'))
+  assert(html.includes('<h1>Generic opening</h1>'))
+  assert(html.includes(escapeMetadata(recruiterIntroduction)))
   assert(html.includes('name="outreach-company" content="base-power"'))
-  assert(!html.includes('Generic opening'))
+  assert(!html.includes('Generic introduction'))
   assert(html.includes('Original profile, work and writing'))
   assert(html.includes('<header>Standard navigation</header>'))
   assert(html.includes('<footer>Standard footer</footer>'))
@@ -146,30 +146,23 @@ test('public company context needs a name and exact arrival path; query paramete
   assert.equal(documentOutreachCompany(document('bcg', 'private@example.com'), '/bcg'), undefined)
 })
 
-test('all registered companies supply short first-chapter copy and standard destinations', () => {
+test('all company arrivals keep the original opening and ordinary homepage with the requested biography', () => {
   const companies = JSON.parse(readFileSync(new URL('../tools/outreach/recruiter-companies.json',import.meta.url),'utf8')) as {slug:string;name:string}[]
-  const messages = new Set<string>()
   assert.equal(companies.length,80)
-  assert.equal(Object.keys(recruiterCompanyProfiles).length,80)
   for (const company of companies) {
-    const profile = recruiterCompanyProfiles[company.slug]
-    assert(profile, `${company.slug}: missing curated copy`)
-    assert.equal(profile.lines.length,4)
-    const message=profile.lines.join(' ')
-    messages.add(message)
-    assert(message.split(/\s+/).length <= 30, `${company.slug}: opening exceeds the original screen's short headline`)
     const opening=recruiterOpening(company)
+    assert.deepEqual(headingRows(withLandingOpening(opening)[0]),headingRows(CHAPTERS[0]))
+    assert.equal(opening.introduction,recruiterIntroduction)
     assert.equal(opening.category,'')
     assert.equal(opening.href,'/resume')
     assert.equal(opening.linkLabel,'Résumé')
     assert.deepEqual(opening.article,{label:'Explore the site',href:'/'})
     const html=renderRecruiterDocument(homepage,company)
-    assert(html.includes(escapeMetadata(message)))
+    assert.equal(html,homepage.replace('Generic introduction',escapeMetadata(recruiterIntroduction)))
     assert(html.includes('<header>Standard navigation</header>'))
     assert(html.includes('Original profile, work and writing'))
     assert(html.includes('<footer>Standard footer</footer>'))
   }
-  assert.equal(messages.size,80, 'Each company needs a specific interest and relevance message')
 })
 
 test('company copy retains the original sculpture, motion and every later chapter', () => {
@@ -200,7 +193,7 @@ test('future companies get a safe opening while preserving standard homepage con
   const html=await response.text()
   assert(html.includes('New &amp; Future &lt;Team&gt; $&amp; Co.'))
   assert(!html.includes('<Team>'))
-  assert(!html.includes('Generic opening'))
+  assert(!html.includes('Generic introduction'))
   assert(html.includes('Original profile, work and writing'))
   assert(html.includes('<header>Standard navigation</header>'))
   assert(html.includes('<footer>Standard footer</footer>'))

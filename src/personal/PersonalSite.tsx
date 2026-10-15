@@ -57,7 +57,7 @@ function useRoute() {
   useEffect(() => {
     let sequence = 0
     let active: ArtworkTransition | undefined
-    const scroll = installRouteScroll()
+    const scroll = installRouteScroll(window, { nativeRestoration: current.current === 'recruiter' })
     const change = async () => {
       const next = path()
       const ticket = ++sequence

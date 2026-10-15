@@ -6,10 +6,9 @@ import { resumeSections as sections, resumeSectionHref, type ResumeSection } fro
 import './resume.css'
 
 const roleNotes: Record<string, { id: string; link?: [string, string] }> = {
-  'Chegg, Inc.': { id: 'chegg' },
-  'Sapien': { id: 'sapien' },
+  'Chegg, Inc.': { id: 'chegg', link: ['https://www.internships.com/', 'Internships.com'] },
+  'Sapien': { id: 'sapien', link: ['#/work/sapien', 'My work at Sapien'] },
   'VOID Agency': { id: 'void', link: ['#/work/atlas', 'Explore Atlas'] },
-  'InternshipDeadlines': { id: 'internship-deadlines', link: ['https://internshipdeadlines.com/', 'Visit InternshipDeadlines'] },
   'CreativeTrace': { id: 'creative-trace' },
   'Jon Brumley Texas Venture Labs': { id: 'venture-labs' },
   'AI Image Generation Startup': { id: 'ai-venture' },
@@ -23,21 +22,19 @@ function roleNote(organization: string) {
 
 function jumpToSection(event: MouseEvent<HTMLAnchorElement>, id: ResumeSection) {
   if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return
-  // The mounted document owns this movement. A native hashchange would make
-  // the arrival handler cancel it with a second, instant scroll.
+  // Keep long-document navigation immediate and preserve the current view.
   event.preventDefault()
-  history.replaceState(history.state, '', event.currentTarget.href)
+  const query = new URLSearchParams(location.hash.split('?')[1] || '')
+  query.set('section', id)
+  history.replaceState(history.state, '', `#/resume?${query}`)
   const heading = document.getElementById(`resume-${id}`)
   heading?.focus({ preventScroll: true })
-  heading?.scrollIntoView({
-    behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth',
-    block: 'start',
-  })
+  heading?.scrollIntoView({ behavior: 'instant', block: 'start' })
 }
 
-function SectionHeading({ id, number, children }: { id: string; number: string; children: string }) {
+function SectionHeading({ id, children }: { id: string; children: string }) {
   return <h2 id={`resume-${id}`} className="cv-section-title" tabIndex={-1}>
-    <span className="cv-section-number" aria-hidden="true">{number}</span>{children}
+    {children}
   </h2>
 }
 
@@ -49,7 +46,7 @@ function ResumeDocument() {
   return <article className="resume-page cv-page" aria-labelledby="resume-name">
     <header className="cv-masthead">
       <div className="cv-document-line">
-        <p className="cv-kicker">Résumé <span aria-hidden="true">/</span> Austin, Texas</p>
+        <p className="cv-kicker">Austin, Texas</p>
         <p className="cv-review-date">Profile as of <time dateTime={profile.lastReviewed}>{displayDate(profile.lastReviewed)}</time></p>
       </div>
       <div className="cv-introduction">
@@ -60,8 +57,8 @@ function ResumeDocument() {
         <div className="cv-description">
           <p className="cv-intro-text">{resumeReview.introduction}</p>
           <div className="cv-actions resume-actions">
-            <a className="arrow-link" href={`${import.meta.env.BASE_URL}Sulayman_Bowles_Resume.pdf`} download aria-describedby="resume-pdf-note">{resumeReview.pdfLabel}<span aria-hidden="true">↓</span></a>
-            <button className="cv-print-button" onClick={() => window.print()}>Print this page<span aria-hidden="true">↗</span></button>
+            <a className="cv-download" href={`${import.meta.env.BASE_URL}${resumeReview.pdfFile}`} download={resumeReview.pdfFile} aria-describedby="resume-pdf-note">{resumeReview.pdfLabel}<LinkArrow direction="down" /></a>
+            <button type="button" className="cv-print-button" onClick={() => window.print()}>Print this page<span aria-hidden="true">↗</span></button>
           </div>
         </div>
       </div>
@@ -74,19 +71,17 @@ function ResumeDocument() {
         <div className="cv-rail-inner">
           <p className="cv-rail-label">Contents</p>
           <nav className="cv-desktop-nav" aria-label="Résumé sections">
-            {sections.map(([id, label], index) => <a key={id} href={resumeSectionHref(id)} onClick={event => jumpToSection(event, id)}>
-              <span aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>{label}
-            </a>)}
+            {sections.map(([id, label]) => <a key={id} href={resumeSectionHref(id)} onClick={event => jumpToSection(event, id)}>{label}</a>)}
           </nav>
           <details className="cv-mobile-nav">
             <summary>Explore this résumé<span aria-hidden="true">+</span></summary>
             <nav aria-label="Résumé sections on mobile">
-              {sections.map(([id, label], index) => <a key={id} href={resumeSectionHref(id)} onClick={event => {
+              {sections.map(([id, label]) => <a key={id} href={resumeSectionHref(id)} onClick={event => {
                 if (event.button === 0 && !event.metaKey && !event.ctrlKey && !event.shiftKey && !event.altKey) {
                   event.currentTarget.closest('details')?.removeAttribute('open')
                 }
                 jumpToSection(event, id)
-              }}><span aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>{label}</a>)}
+              }}>{label}</a>)}
             </nav>
           </details>
           <DestinationLink className="cv-rail-contact" href="#/contact">Get in touch</DestinationLink>
@@ -95,17 +90,15 @@ function ResumeDocument() {
 
       <div className="cv-content">
         <section className="cv-section cv-experience" aria-labelledby="resume-experience">
-          <SectionHeading id="experience" number="01">Experience</SectionHeading>
+          <SectionHeading id="experience">Experience</SectionHeading>
           {profile.experience.map(item => {
             const note = roleNote(item.organization)
             return <div className="cv-entry" key={item.organization}>
-              <div className="cv-entry-side">
-                <div className="cv-entry-meta"><span>{item.dates}</span>{item.location && <span>{item.location}</span>}</div>
-              </div>
               <div className="cv-entry-main">
                 <div className="cv-entry-heading">
                   <h3 id={`resume-${note.id}`} tabIndex={-1}>{item.organization}</h3>
                   <p className="cv-role">{item.title}</p>
+                  <div className="cv-entry-meta"><span>{item.dates}</span>{item.location && <span>{item.location}</span>}</div>
                 </div>
                 <p className="cv-summary">{item.publicSummary}</p>
                 <ul>{item.bullets.map(bullet => <li key={bullet}>{bullet}</li>)}</ul>
@@ -116,17 +109,14 @@ function ResumeDocument() {
         </section>
 
         <section className="cv-section cv-work" aria-labelledby="resume-selected-work">
-          <SectionHeading id="selected-work" number="02">Selected work</SectionHeading>
-          <p className="cv-section-intro">A closer look at the work.</p>
+          <SectionHeading id="selected-work">Selected work</SectionHeading>
           <div className="cv-work-list">
             <a className="cv-work-link" href="#/work/atlas">
-              <span className="cv-work-type">Python &amp; SQLite<br />Technical SEO</span>
-              <div><h3>Atlas</h3><p>Website crawling, internal-link mapping, and a path from every finding to its evidence.</p><span className="cv-work-read">Read the case study</span></div>
+              <div><h3>Atlas</h3><span className="cv-work-type">Python &amp; SQLite · Technical SEO</span><p>Traceable website audit recommendations, backed by captured pages, links and measurements.</p></div>
               <LinkArrow className="cv-work-arrow" />
             </a>
             <a className="cv-work-link" href="#/work/payrollpro">
-              <span className="cv-work-type">Solana<br />Hackathon prototype</span>
-              <div><h3>PayrollPro</h3><p>Confidential payroll transfers, shared treasury controls, and the boundaries of a prototype.</p><span className="cv-work-read">Read the case study</span></div>
+              <div><h3>PayrollPro</h3><span className="cv-work-type">Solana · Hackathon prototype</span><p>Confidential payroll transfers, shared treasury controls, and the boundaries of a prototype.</p></div>
               <LinkArrow className="cv-work-arrow" />
             </a>
           </div>
@@ -134,20 +124,20 @@ function ResumeDocument() {
         </section>
 
         <section className="cv-section" aria-labelledby="resume-education">
-          <SectionHeading id="education" number="03">Education</SectionHeading>
+          <SectionHeading id="education">Education</SectionHeading>
           <div className="cv-education">
-            <div className="cv-entry-meta"><span>Expected {profile.education.expectedGraduation}</span><span>{profile.education.location}</span></div>
             <div className="cv-education-detail">
               <h3>{profile.education.institution}</h3>
               <p className="cv-role">{profile.education.school}</p>
+              <div className="cv-entry-meta"><span>Expected {profile.education.expectedGraduation}</span><span>{profile.education.location}</span></div>
               <ul className="cv-degrees">{profile.education.degrees.map(item => <li key={item.degree}><span>{item.degree}</span><em>{item.field}</em></li>)}</ul>
-              <p className="cv-coursework"><span>Coursework</span>{profile.education.coursework.join(' · ')}</p>
+              <p className="cv-coursework"><span>Coursework</span>{profile.education.coursework.join(', ')}</p>
             </div>
           </div>
         </section>
 
         <section className="cv-section cv-recognition" aria-labelledby="resume-recognition">
-          <SectionHeading id="recognition" number="04">Awards &amp; leadership</SectionHeading>
+          <SectionHeading id="recognition">Awards &amp; leadership</SectionHeading>
           <div className="cv-awards-grid">
             {awards.map(item => <div className="cv-award" key={item.organization}>
               <div className="cv-award-date"><span>{item.dates}</span>{item.location && <span>{item.location}</span>}</div>
@@ -166,8 +156,8 @@ function ResumeDocument() {
         </section>
 
         <section className="cv-section cv-capabilities" aria-labelledby="resume-skills">
-          <SectionHeading id="skills" number="05">Skills &amp; tools</SectionHeading>
-          <dl className="cv-skills">{profile.skillGroups.map(group => <div key={group.label}><dt>{group.label}</dt><dd>{group.items.join(' · ')}</dd></div>)}</dl>
+          <SectionHeading id="skills">Skills &amp; tools</SectionHeading>
+          <dl className="cv-skills">{profile.skillGroups.map(group => <div key={group.label}><dt>{group.label}</dt><dd>{group.items.join(', ')}</dd></div>)}</dl>
           <div className="cv-additional">
             <div><h3 className="cv-subheading">Certifications</h3><ul>{profile.certifications.map(item => <li key={item}>{item}</li>)}</ul></div>
             <div><h3 className="cv-subheading">Languages</h3><ul>{profile.languages.map(item => <li key={item}>{item}</li>)}</ul></div>

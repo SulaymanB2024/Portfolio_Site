@@ -254,6 +254,8 @@ test('prevented and non-primary activations are excluded while keyboard and modi
 
 test('destination allowlists exclude personal context, arbitrary profiles, PDF files and unsupported origins', () => {
   assert.equal(portfolioActionForHref('https://www.sulayman-bowles.dev/Sulayman_Bowles_Resume.pdf'), 'resume_download')
+  assert.equal(portfolioActionForHref('https://sulayman-bowles.dev/Sulayman_Bowles_Resume_Current.pdf'), 'resume_download')
+  assert.equal(portfolioActionForHref('/Sulayman_Bowles_Resume_Current.pdf?recipient=private'), undefined)
   const unsupported = [
     `mailto:${contact.email}?subject=private-role&cc=person@example.com`, `mailto:${contact.email}#private`, 'mailto:person@example.com',
     `${contact.linkedin}?recipient=person@example.com`, `${contact.linkedin}#private`, `${contact.linkedin}-other`,
