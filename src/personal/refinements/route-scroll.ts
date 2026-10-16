@@ -28,6 +28,7 @@ export function installRouteScroll(host: Window = window) {
     return entry
   }
   let current = ensureEntry()
+  let currentAddress = host.location?.href
   const ownsRestoration = Boolean(current)
   if (ownsRestoration) host.history.scrollRestoration = 'manual'
 
@@ -50,18 +51,32 @@ export function installRouteScroll(host: Window = window) {
     // Native traversal can scroll the old DOM while the destination loads.
     paused = true
   }
+  function traversing() {
+    leaving()
+    // A rejected navigation can restore the source URL in a new history entry.
+    // Traversing identical addresses emits popstate without hashchange.
+    if (host.location?.href && host.location.href === currentAddress) {
+      current = readEntry()
+      const point = current ? positions.get(current) : undefined
+      if (point) host.scrollTo({ ...point, behavior: 'instant' })
+      paused = false
+      capture()
+    }
+  }
   capture()
   host.addEventListener('scroll', capture, { passive: true })
-  host.addEventListener('popstate', leaving)
+  host.addEventListener('popstate', traversing)
 
   return {
     begin(): Arrival {
       leaving()
+      currentAddress = host.location?.href
       const entry = ensureEntry()
       return { entry, point: entry ? positions.get(entry) : undefined }
     },
     samePage(arrival: Arrival) {
       cancelFrame()
+      currentAddress = host.location?.href
       current = arrival.entry
       paused = false
       capture()
@@ -90,7 +105,7 @@ export function installRouteScroll(host: Window = window) {
       disposed = true
       cancelFrame()
       host.removeEventListener('scroll', capture)
-      host.removeEventListener('popstate', leaving)
+      host.removeEventListener('popstate', traversing)
       if (ownsRestoration && host.history.scrollRestoration === 'manual') host.history.scrollRestoration = previousRestoration
       positions.clear()
     },

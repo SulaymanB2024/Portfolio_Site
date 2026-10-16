@@ -5,6 +5,7 @@ import { installRouteScroll } from '../src/personal/refinements/route-scroll.ts'
 function fixture(state: unknown = { retained: 'foreign router state' }) {
   const events = new EventTarget()
   const entries: unknown[] = [state]
+  const addresses = ['https://example.test/']
   let index = 0, serial = 0
   const frames = new Map<number, FrameRequestCallback>()
   const calls: ScrollToOptions[] = []
@@ -14,19 +15,21 @@ function fixture(state: unknown = { retained: 'foreign router state' }) {
     replaceState(value: unknown) { entries[index] = value },
   }
   const host = Object.assign(events, {
-    history, scrollX: 0, scrollY: 0,
+    history, location: { href: addresses[0] }, scrollX: 0, scrollY: 0,
     requestAnimationFrame(callback: FrameRequestCallback) { const id = ++serial; frames.set(id, callback); return id },
     cancelAnimationFrame(id: number) { frames.delete(id) },
     scrollTo(value: ScrollToOptions) { calls.push(value); host.scrollX = value.left ?? 0; host.scrollY = value.top ?? 0 },
   })
   let scroll = installRouteScroll(host as unknown as Window)
   const move = (top: number) => { host.scrollY = top; events.dispatchEvent(new Event('scroll')) }
-  const push = () => { entries.splice(index + 1); entries.push(null); index++; events.dispatchEvent(new Event('popstate')); return scroll.begin() }
-  const back = () => { index--; events.dispatchEvent(new Event('popstate')); return scroll.begin() }
-  const forward = () => { index++; events.dispatchEvent(new Event('popstate')); return scroll.begin() }
+  const push = () => { entries.splice(index + 1); addresses.splice(index + 1); entries.push(null); addresses.push(`https://example.test/#/page-${entries.length}`); index++; host.location.href = addresses[index]; events.dispatchEvent(new Event('popstate')); return scroll.begin() }
+  const traverse = (direction: number) => { index += direction; host.location.href = addresses[index]; events.dispatchEvent(new Event('popstate')) }
+  const back = () => { traverse(-1); return scroll.begin() }
+  const forward = () => { traverse(1); return scroll.begin() }
+  const restoreAddress = (address: string) => { addresses[index] = host.location.href = address }
   const paint = () => { for (const [id, callback] of [...frames]) { frames.delete(id); callback(0) } }
   const remount = () => { scroll.dispose(); scroll = installRouteScroll(host as unknown as Window) }
-  return { entries, host, history, get scroll() { return scroll }, move, push, back, forward, paint, frames, calls, remount }
+  return { entries, host, history, get scroll() { return scroll }, move, push, back, forward, traverse, restoreAddress, paint, frames, calls, remount }
 }
 
 test('Back and Forward restore each entry while a new destination starts at the top', () => {
@@ -128,4 +131,22 @@ test('a remount within one clock tick cannot reuse the previous history-entry ma
     assert.equal(f.host.scrollY, 780)
     f.scroll.dispose()
   } finally { Date.now = clock }
+})
+
+test('Back and Forward restore reading positions after a failed route restores the same URL', () => {
+  const f = fixture()
+  f.move(780)
+  const failed = f.push()
+  f.restoreAddress('https://example.test/')
+  f.scroll.samePage(failed)
+  f.move(1400)
+  // Identical URLs do not emit hashchange, so no router commit follows.
+  f.traverse(-1)
+  assert.equal(f.host.scrollY, 780)
+  f.move(820)
+  f.traverse(1)
+  assert.equal(f.host.scrollY, 1400)
+  f.traverse(-1)
+  assert.equal(f.host.scrollY, 820, 'scroll capture must resume after traversal')
+  f.scroll.dispose()
 })
