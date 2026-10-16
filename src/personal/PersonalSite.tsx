@@ -61,7 +61,7 @@ function useRoute() {
     let active: ArtworkTransition | undefined
     let sourceAddress = location.href
     let navigating = false
-    const scroll = installRouteScroll()
+    const scroll = installRouteScroll(window, { nativeRestoration: current.current === 'recruiter' })
     const change = async (event: HashChangeEvent) => {
       // Keep the displayed page's exact address across rapid pending requests.
       if (!navigating && event.oldURL) sourceAddress = event.oldURL
