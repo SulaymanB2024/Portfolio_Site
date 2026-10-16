@@ -1,0 +1,115 @@
+{
+  "kind": "research",
+  "cluster": "ai-crawlers",
+  "slug": "openai-crawlers-oai-searchbot-gptbot-chatgpt-user-adsbot",
+  "number": "39",
+  "category": "AI CRAWLERS",
+  "title": "OAI-SearchBot vs GPTBot vs ChatGPT-User vs OAI-AdsBot",
+  "seoTitle": "OAI-SearchBot vs GPTBot vs ChatGPT-User vs OAI-AdsBot",
+  "subtitle": "OpenAI now exposes four distinct web-access identities for search, model development, user-triggered fetches, and ad landing-page validation.",
+  "seoDescription": "Compare OAI-SearchBot, GPTBot, ChatGPT-User and OAI-AdsBot: what each does, whether robots.txt applies, and which published IP ranges to verify.",
+  "artwork": {
+    "kind": "study",
+    "variant": "triptych",
+    "label": "OpenAI crawler / product purpose / control",
+    "note": "The same company exposes separate web-access identities because search eligibility, training policy, user fetches, and ads review are different decisions."
+  },
+  "date": "2026.09.23",
+  "lastVerified": "2026.09.23",
+  "readTime": "3 MIN",
+  "author": "SULAYMAN BOWLES",
+  "thesis": "Treat each OpenAI web-access identity as a separate policy surface: OAI-SearchBot controls ChatGPT Search eligibility, GPTBot expresses model-training preference, ChatGPT-User is user-triggered, and OAI-AdsBot validates submitted ad landing pages.",
+  "conclusion": {
+    "title": "Do not write one “OpenAI bot” rule",
+    "content": "Choose the product outcome first, then target the documented token. A publisher can allow OAI-SearchBot while disallowing GPTBot; ChatGPT-User and OAI-AdsBot have different triggering and policy semantics. Verify important traffic with OpenAI’s published network ranges rather than trusting the User-Agent header alone."
+  },
+  "evidenceBoundary": "OpenAI can change crawler names, versions, IP ranges, and product behavior. This page reflects official documentation checked September 23, 2026. robots.txt expresses crawler policy; it does not authenticate a request or secure private content.",
+  "metrics": [
+    {
+      "label": "OpenAI identities compared",
+      "value": "4"
+    },
+    {
+      "label": "Search crawler",
+      "value": "OAI-SEARCHBOT"
+    },
+    {
+      "label": "Training crawler",
+      "value": "GPTBOT"
+    },
+    {
+      "label": "Ads validator",
+      "value": "OAI-ADSBOT"
+    }
+  ],
+  "resources": [
+    {
+      "label": "AI crawler robots.txt policy guide",
+      "href": "/research/ai-crawlers/ai-search-crawler-policy",
+      "description": "Copy-ready policy patterns for separating search discovery, training crawlers, and user-triggered fetchers.",
+      "format": "WEB"
+    },
+    {
+      "label": "robots.txt access-control boundary",
+      "href": "/research/ai-crawlers/robots-txt-courtesy-not-access-control",
+      "description": "Why crawler policy is not authentication or authorization, with RFC 9309 context.",
+      "format": "WEB"
+    }
+  ],
+  "content": [
+    "OpenAI’s crawler names now map to four materially different jobs. OAI-SearchBot is the automatic crawler used to make pages eligible for ChatGPT Search. GPTBot is the crawler associated with content that may be used to improve and train generative foundation models. ChatGPT-User is a user-triggered fetcher used when a ChatGPT or Custom GPT action visits a page. OAI-AdsBot checks landing pages submitted for ChatGPT ads.",
+    "The distinction matters because a single robots.txt decision can produce the wrong product outcome. OpenAI explicitly documents that OAI-SearchBot and GPTBot settings are independent: a site can allow search discovery while disallowing the training crawler."
+  ],
+  "sections": [
+    {
+      "id": "searchbot",
+      "title": "OAI-SearchBot controls automatic ChatGPT Search crawling",
+      "paragraphs": [
+        "OpenAI says OAI-SearchBot is used to surface websites in ChatGPT Search. Sites that opt out are not shown in search answers, though OpenAI notes they can still appear as navigational links. OpenAI recommends allowing both the crawler token and traffic from its published searchbot IP ranges.",
+        "OpenAI also notes that crawler-policy changes can take roughly 24 hours to propagate. That makes production verification a two-step process: fetch the deployed robots.txt immediately, then observe server logs after the policy has had time to be consumed."
+      ]
+    },
+    {
+      "id": "gptbot",
+      "title": "GPTBot is the model-development crawler",
+      "paragraphs": [
+        "GPTBot is documented separately from search. OpenAI says content collected by GPTBot may be used to make generative AI foundation models more useful and safe; disallowing GPTBot indicates that the site’s content should not be used for that training purpose.",
+        "Blocking GPTBot is therefore not the same as opting out of ChatGPT Search. Conflating the two can remove a site from a discovery channel when the publisher only intended to express a training preference."
+      ]
+    },
+    {
+      "id": "user-and-ads",
+      "title": "ChatGPT-User and OAI-AdsBot are triggered by different events",
+      "paragraphs": [
+        "ChatGPT-User supports particular user actions. OpenAI describes it as non-automatic crawling and says robots.txt rules may not apply because the fetch is initiated by a user. It is not the control for Search eligibility.",
+        "OAI-AdsBot visits pages submitted as ads to validate safety and relevance. OpenAI states that the landing-page data collected by OAI-AdsBot is not used to train its generative foundation models. An advertiser that blocks the ads validator can create an ads-review problem without changing its GPTBot policy."
+      ]
+    },
+    {
+      "id": "policy-matrix",
+      "title": "A usable policy matrix",
+      "paragraphs": [
+        "Want ChatGPT Search visibility but no GPTBot training crawl? Allow OAI-SearchBot and disallow GPTBot. Want neither? Block both automatic crawler tokens. Need submitted ads reviewed? Keep OAI-AdsBot reachable. Want to reason about user-triggered fetches? Treat ChatGPT-User separately from the automatic-crawler policy.",
+        "At the firewall or CDN layer, pair the claimed User-Agent with current provider-published IP ranges. A header string is trivial to spoof."
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "id": "S1",
+      "label": "OpenAI — Overview of OpenAI Crawlers",
+      "href": "https://developers.openai.com/api/docs/bots",
+      "lastVerified": "2026.09.23"
+    },
+    {
+      "id": "S2",
+      "label": "OpenAI — ChatGPT Search publisher guidance",
+      "href": "https://help.openai.com/en/articles/9237897-chatgpt-search",
+      "lastVerified": "2026.09.23"
+    }
+  ],
+  "path": "/research/ai-crawlers/openai-crawlers-oai-searchbot-gptbot-chatgpt-user-adsbot",
+  "aliases": [],
+  "dateModified": "2026.09.23",
+  "image": "/images/generative-art/yuru-01.webp"
+}

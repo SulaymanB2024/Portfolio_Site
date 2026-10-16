@@ -22,7 +22,7 @@ type Sculpture = {
   seconds: number
   sample: ReturnType<typeof createResumeSurfaceSampler>
   arrivals: Map<number, ReturnType<typeof orderResumeSurface>>
-  arrivalFit: { aspect: number; distance: number } | null
+  arrivalFit: { aspect: number; distance: number; yaw: number; pitch: number } | null
 }
 
 const printedFragment = /* glsl */ `
@@ -80,6 +80,7 @@ export function mountResumeScene(canvas: HTMLCanvasElement, initialDark: boolean
   renderer.toneMapping = THREE.ACESFilmicToneMapping
   renderer.toneMappingExposure = .95
   const scene = new THREE.Scene(), camera = new THREE.PerspectiveCamera(34, 1, .01, 100)
+  const viewEuler = new THREE.Euler(), viewQuaternion = new THREE.Quaternion()
   const keyLight = new THREE.DirectionalLight(0xffffff, 3), fillLight = new THREE.DirectionalLight(0xffffff, .65)
   keyLight.position.set(-3, 5, 5); fillLight.position.set(5, 2, -3)
   scene.add(keyLight, fillLight, new THREE.AmbientLight(0xffffff, .2))
@@ -94,6 +95,9 @@ export function mountResumeScene(canvas: HTMLCanvasElement, initialDark: boolean
   catch (error) { renderer.dispose(); canvas.dataset.state = 'error'; throw error }
   scene.environment = environment.texture; scene.environmentIntensity = 1.05
   const target = new THREE.WebGLRenderTarget(1, 1)
+  // Home prints an sRGB scene buffer. Use the same input response so metal
+  // highlights and engraved relief survive the shared four-pixel print screen.
+  target.texture.colorSpace = THREE.SRGBColorSpace
   const printThresholds = new THREE.DataTexture(resumeDitherTile(), RESUME_DITHER_SIZE, RESUME_DITHER_SIZE, THREE.RedFormat)
   printThresholds.minFilter = THREE.NearestFilter; printThresholds.magFilter = THREE.NearestFilter
   printThresholds.generateMipmaps = false; printThresholds.needsUpdate = true
@@ -123,8 +127,8 @@ export function mountResumeScene(canvas: HTMLCanvasElement, initialDark: boolean
   const pending = new Map<SceneKey, Promise<Sculpture>>(), primed = new Map<SceneKey, Promise<void>>()
   const transition = createResumeTransition<SceneKey>('knight', false)
   const motion = matchMedia('(prefers-reduced-motion: reduce)')
-  let disposed = false, lost = false, visible = true, loaded = false, playing = true
-  let frame = 0, last: number | null = null, nextPaint: number | null = null, generation = 0, renderFrames = 0, yaw = 0, pitch = 0, manual = false
+  let disposed = false, lost = false, failed = false, visible = true, loaded = false, playing = true
+  let frame = 0, last: number | null = null, nextPaint: number | null = null, generation = 0, renderFrames = 0, yaw = 0, pitch = 0
   let cameraDistance = 6, fitDirty = true, current: SceneKey = 'knight'
   let morph: { from: SceneKey; to: SceneKey; distance: number; fromDistance: number; toDistance: number } | null = null
   let motionStats: { from: SceneKey; to: SceneKey; frames: number; duration: number; maxGap: number; maxDraw: number; done: boolean } | null = null
@@ -182,6 +186,7 @@ export function mountResumeScene(canvas: HTMLCanvasElement, initialDark: boolean
         const copies = original.map(finish => dissolveFinish(finish, cut))
         for (const finish of copies) if (finish instanceof THREE.MeshStandardMaterial) {
           if (key === 'knight') finish.roughness = .23
+          else if (finish.metalness >= .7) finish.roughness = Math.min(finish.roughness, .27)
         }
         node.material = Array.isArray(node.material) ? copies : copies[0]
       })
@@ -235,12 +240,21 @@ export function mountResumeScene(canvas: HTMLCanvasElement, initialDark: boolean
   }
   function cancel() { cancelAnimationFrame(frame); frame = 0; last = null; nextPaint = null; cadenceStats = { frames: 0, elapsed: 0, maxGap: 0, maxDraw: 0 } }
   function wake() {
-    if (!frame && !disposed && !lost && visible && !document.hidden && loaded) frame = requestAnimationFrame(paint)
+    if (!frame && !disposed && !lost && !failed && visible && !document.hidden && loaded) frame = requestAnimationFrame(paint)
+  }
+  function releaseInspection() {
+    const id = pointer?.id
+    pointer = null
+    if (id !== undefined && canvas.hasPointerCapture(id)) canvas.releasePointerCapture(id)
+    fitDirty = true
+  }
+  function fail() {
+    failed = true; cancel(); releaseInspection()
+    canvas.dataset.state = 'error'; status('error')
   }
   function show(keys: SceneKey[]) { for (const [key, record] of sculptures) record.group.visible = keys.includes(key) }
   function fit(record: Sculpture) {
-    record.group.updateMatrix()
-    const rotation = new THREE.Matrix4().makeRotationFromQuaternion(record.group.quaternion), point = new THREE.Vector3()
+    const rotation = new THREE.Matrix4().makeRotationFromEuler(viewEuler.set(pitch, yaw, 0)), point = new THREE.Vector3()
     const tangent = Math.tan(THREE.MathUtils.degToRad(camera.fov / 2))
     let distance = .1
     for (let offset = 0; offset < record.fitPoints.length; offset += 3) {
@@ -264,10 +278,10 @@ export function mountResumeScene(canvas: HTMLCanvasElement, initialDark: boolean
     next.setAttribute('position', new THREE.BufferAttribute(a.points, 3)); next.setAttribute('normal', new THREE.BufferAttribute(a.normals, 3))
     next.setAttribute('destination', new THREE.BufferAttribute(b.points, 3)); next.setAttribute('targetNormal', new THREE.BufferAttribute(b.normals, 3)); next.setAttribute('seed', new THREE.BufferAttribute(seeds, 1))
     cloud.geometry = next; cloudGeometry.dispose(); cloudGeometry = next
-    const toDistance = arriving.arrivalFit?.aspect === camera.aspect ? arriving.arrivalFit.distance : fit(arriving)
+    const toDistance = arriving.arrivalFit?.aspect === camera.aspect && arriving.arrivalFit.yaw === yaw && arriving.arrivalFit.pitch === pitch ? arriving.arrivalFit.distance : fit(arriving)
     morph = { from, to, fromDistance: cameraDistance, toDistance, distance: Math.max(cameraDistance, toDistance) + .08 }
     canvas.dataset.particleCount = String(count)
-    yaw = 0; pitch = 0; manual = false
+    fitDirty = false
   }
   function updateIdle(key: SceneKey, delta: number) {
     const record = sculptures.get(key)!
@@ -276,16 +290,21 @@ export function mountResumeScene(canvas: HTMLCanvasElement, initialDark: boolean
       record.mixer?.update(delta / 1000 * THREE.MathUtils.smoothstep(record.seconds, 0, key === 'knight' ? .9 : .32) * (key === 'knight' ? .42 : .72))
     }
     const t = record.seconds
-    // Authored joints own the movement. The stage stays still until the user
-    // rotates it, so a page turn or iris opening reads as a deliberate action.
-    record.group.rotation.set(pitch, yaw, 0)
+    // Keep authored joints and transfer samples in one fixed coordinate space.
+    // Camera inspection remains available while that surface dissolves/forms.
+    record.group.rotation.set(0, 0, 0)
     record.cut.value = 0; show([key]); cloud.visible = false
     if (fitDirty) { cameraDistance = fit(record); fitDirty = false }
     if (import.meta.env.DEV) { canvas.dataset.clipTime = (record.mixer?.time ?? t).toFixed(3); canvas.dataset.animationClips = record.clips.map(clip => clip.name).join(',') }
   }
+  function setCameraView() {
+    viewQuaternion.setFromEuler(viewEuler.set(pitch, yaw, 0)).invert()
+    camera.position.set(0, 0, cameraDistance).applyQuaternion(viewQuaternion)
+    camera.quaternion.copy(viewQuaternion)
+  }
   function draw() {
     if (import.meta.env.DEV) canvas.dataset.cameraDistance = cameraDistance.toFixed(3)
-    camera.position.set(0, 0, cameraDistance); camera.lookAt(0, 0, 0)
+    setCameraView()
     renderer.setRenderTarget(target); renderer.clear(); renderer.render(scene, camera)
     renderer.setRenderTarget(null); renderer.render(post, postCamera)
   }
@@ -303,8 +322,8 @@ export function mountResumeScene(canvas: HTMLCanvasElement, initialDark: boolean
       const savedDistance = cameraDistance
       try {
         show([key]); cameraDistance = fit(record)
-        record.arrivalFit = { aspect: camera.aspect, distance: cameraDistance }
-        camera.position.set(0, 0, cameraDistance); camera.lookAt(0, 0, 0)
+        record.arrivalFit = { aspect: camera.aspect, distance: cameraDistance, yaw, pitch }
+        setCameraView()
         renderer.setRenderTarget(warmup); renderer.clear(); renderer.render(scene, camera)
       }
       finally { cameraDistance = savedDistance; renderer.setRenderTarget(null); warmup.dispose(); for (const [item, visibility] of before) item.group.visible = visibility }
@@ -316,7 +335,7 @@ export function mountResumeScene(canvas: HTMLCanvasElement, initialDark: boolean
 
   function paint(now: number) {
     frame = 0
-    if (disposed || lost || !visible || document.hidden || !loaded) { last = null; return }
+    if (disposed || lost || failed || !visible || document.hidden || !loaded) { last = null; return }
     const cadence = readPortfolioRenderPolicy().mobile ? 30 : 60
     if (nextPaint !== null && now + .8 < nextPaint) { frame = requestAnimationFrame(paint); return }
     nextPaint = nextPaint === null ? now + 1000 / cadence : Math.max(nextPaint + 1000 / cadence, now)
@@ -330,6 +349,11 @@ export function mountResumeScene(canvas: HTMLCanvasElement, initialDark: boolean
       const stage = resumeMorphPhase(state.progress), from = sculptures.get(state.from)!, to = sculptures.get(state.to)!
       show([state.from, state.to]); from.cut.value = stage.outgoingCut; to.cut.value = stage.incomingCut
       cloud.visible = stage.particles > .01; cloudMaterial.uniforms.travel.value = stage.travel; cloudMaterial.uniforms.amount.value = stage.particles
+      if (fitDirty) {
+        morph!.fromDistance = fit(from); morph!.toDistance = fit(to)
+        morph!.distance = Math.max(morph!.fromDistance, morph!.toDistance) + .08
+        fitDirty = false
+      }
       const distance = THREE.MathUtils.lerp(morph!.fromDistance, morph!.toDistance, THREE.MathUtils.smoothstep(state.progress, 0, 1))
       cameraDistance = THREE.MathUtils.lerp(distance, morph!.distance, stage.pullback)
       canvas.dataset.transitionPhase = state.progress < .42 ? 'dissolving' : state.progress < .65 ? 'transferring' : 'forming'
@@ -384,16 +408,22 @@ export function mountResumeScene(canvas: HTMLCanvasElement, initialDark: boolean
   const viewport = new IntersectionObserver(entries => { visible = entries[0]?.isIntersecting ?? false; visible ? wake() : cancel() }); viewport.observe(canvas)
   function visibility() { document.hidden ? cancel() : wake() }
   function changedMotion() { last = null; fitDirty = true; wake() }
-  function contextLost(event: Event) { event.preventDefault(); lost = true; cancel(); canvas.dataset.state = 'context-lost' }
+  function contextLost(event: Event) {
+    event.preventDefault(); lost = true; cancel(); releaseInspection()
+    canvas.dataset.state = 'context-lost'; status(failed ? 'error' : 'loading')
+  }
   function contextRestored() {
-    try { lost = false; environment.dispose(); environment = createEnvironment(); scene.environment = environment.texture; primed.clear(); canvas.dataset.state = loaded ? 'ready' : 'loading'; status(loaded ? 'ready' : 'loading'); resize(); wake() }
-    catch { lost = true; cancel(); canvas.dataset.state = 'error'; status('error') }
+    try {
+      lost = false; environment.dispose(); environment = createEnvironment(); scene.environment = environment.texture; primed.clear()
+      const next = failed ? 'error' : loaded ? 'ready' : 'loading'
+      canvas.dataset.state = next; status(next); resize(); wake()
+    }
+    catch { lost = true; fail() }
   }
   canvas.addEventListener('webglcontextlost', contextLost); canvas.addEventListener('webglcontextrestored', contextRestored)
   document.addEventListener('visibilitychange', visibility); motion.addEventListener('change', changedMotion)
   function pointerDown(event: PointerEvent) {
-    if (event.button !== 0 || morph) return
-    if (!manual) { const view = sculptures.get(current)?.group.rotation; if (view) { yaw = view.y; pitch = view.x } manual = true }
+    if (event.button !== 0 || !loaded || lost || failed || pointer) return
     pointer = { id: event.pointerId, x: event.clientX, y: event.clientY, yaw, pitch, touch: event.pointerType !== 'mouse', intent: 'pending' }
     if (!pointer.touch) canvas.setPointerCapture(event.pointerId)
   }
@@ -407,31 +437,33 @@ export function mountResumeScene(canvas: HTMLCanvasElement, initialDark: boolean
   }
   function pointerUp(event: PointerEvent) {
     if (pointer?.id !== event.pointerId) return
-    if (canvas.hasPointerCapture(event.pointerId)) canvas.releasePointerCapture(event.pointerId)
-    pointer = null; fitDirty = true; wake()
+    releaseInspection(); wake()
   }
   function keyDown(event: KeyboardEvent) {
-    if (morph || !['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', 'Home'].includes(event.key)) return
+    if (!loaded || lost || failed || !['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', 'Home'].includes(event.key)) return
     event.preventDefault()
-    if (!manual) { const view = sculptures.get(current)?.group.rotation; if (view) { yaw = view.y; pitch = view.x } manual = true }
-    if (event.key === 'Home') { yaw = 0; pitch = 0; manual = false; const record = sculptures.get(current); if (record) { record.seconds = 0; record.mixer?.setTime(0) } }
+    if (event.key === 'Home') {
+      yaw = 0; pitch = 0
+      // Reset the current idle pose without disturbing a sampled transfer.
+      if (!morph) { const record = sculptures.get(current); if (record) { record.seconds = 0; record.mixer?.setTime(0) } }
+    }
     else if (event.key === 'ArrowLeft') yaw -= .12
     else if (event.key === 'ArrowRight') yaw += .12
     else pitch = Math.max(-.45, Math.min(.45, pitch + (event.key === 'ArrowUp' ? -.10 : .10)))
     fitDirty = true; wake()
   }
   canvas.addEventListener('pointerdown', pointerDown); canvas.addEventListener('pointermove', pointerMove)
-  canvas.addEventListener('pointerup', pointerUp); canvas.addEventListener('pointercancel', pointerUp); canvas.addEventListener('keydown', keyDown)
+  canvas.addEventListener('pointerup', pointerUp); canvas.addEventListener('pointercancel', pointerUp); canvas.addEventListener('lostpointercapture', pointerUp); canvas.addEventListener('keydown', keyDown)
   resize()
   const initialPaint = model('knight').then(async () => {
     await prime('knight')
     if (disposed) return false
     loaded = true; fitDirty = true
-    if (!lost) { paint(performance.now()); canvas.dataset.state = 'ready'; status('ready') }
+    if (!lost && !failed) { paint(performance.now()); canvas.dataset.state = 'ready'; status('ready') }
     transition.boot(true, motion.matches || !playing); wake(); return true
   }).catch(error => {
     transition.boot(false, motion.matches || !playing)
-    if (!disposed && !loaded && error?.name !== 'AbortError') { canvas.dataset.state = 'error'; status('error') }
+    if (!disposed && error?.name !== 'AbortError') fail()
     return false
   })
   return {
@@ -445,24 +477,24 @@ export function mountResumeScene(canvas: HTMLCanvasElement, initialDark: boolean
         if (disposed || selectedGeneration !== generation || !transition.ready(ticket, motion.matches || !playing)) return
         fitDirty = true
         if (motion.matches || !playing) {
-          yaw = 0; pitch = 0; manual = false
+          yaw = 0; pitch = 0
           const record = sculptures.get(key)!
           record.seconds = 0; record.mixer?.setTime(0)
         }
         if (!playing) transition.advance(0, true)
-        loaded = true; last = null
+        loaded = true; failed = false; last = null
         if (!lost) { canvas.dataset.state = 'ready'; status('ready') }
         wake()
-      }).catch(error => { if (!disposed && selectedGeneration === generation && error?.name !== 'AbortError') { canvas.dataset.state = 'error'; status('error') } })
+      }).catch(error => { if (!disposed && selectedGeneration === generation && error?.name !== 'AbortError') fail() })
     },
     setDark(dark: boolean) { material.uniforms.ink.value.copy(readPrintPalette(canvas, dark).ink); material.uniforms.dark.value = Number(dark); wake() },
     setPlaying(next: boolean) { playing = next; last = null; nextPaint = null; wake() },
     dispose() {
       if (disposed) return
-      disposed = true; cancel(); generation++; request.abort(); loader.dispose()
+      disposed = true; cancel(); releaseInspection(); generation++; request.abort(); loader.dispose()
       canvas.removeEventListener('webglcontextlost', contextLost); canvas.removeEventListener('webglcontextrestored', contextRestored)
       canvas.removeEventListener('pointerdown', pointerDown); canvas.removeEventListener('pointermove', pointerMove)
-      canvas.removeEventListener('pointerup', pointerUp); canvas.removeEventListener('pointercancel', pointerUp); canvas.removeEventListener('keydown', keyDown)
+      canvas.removeEventListener('pointerup', pointerUp); canvas.removeEventListener('pointercancel', pointerUp); canvas.removeEventListener('lostpointercapture', pointerUp); canvas.removeEventListener('keydown', keyDown)
       document.removeEventListener('visibilitychange', visibility); motion.removeEventListener('change', changedMotion)
       viewport.disconnect(); sizeObserver.disconnect()
       for (const record of sculptures.values()) { record.mixer?.stopAllAction(); if (record.mixer) record.mixer.uncacheRoot(record.mixer.getRoot()) }

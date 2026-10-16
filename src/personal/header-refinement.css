@@ -1,22 +1,19 @@
-/* One header survives the landing rail; its extra links open in place. */
+/* The same five destinations remain available across every desktop route. */
 .personal-site .personal-header { grid-template-columns: 1fr auto auto; gap: 26px; }
 .personal-site .personal-header .identity-name,
-.personal-site .personal-header nav a { font: 400 11px/1.4 'Courier New', monospace; letter-spacing: .08em; text-transform: uppercase; }
+.personal-site .personal-header nav a { font: 400 11px/1.4 var(--type-interface); letter-spacing: .025em; text-transform: uppercase; }
 .personal-site .personal-header .identity-name { font-size: 11px; }
 .personal-site .personal-header nav { gap: 0; }
-.personal-header .nav-slot { display: grid; max-width: 140px; margin-left: 27px; overflow: hidden; transition: max-width 460ms cubic-bezier(.22,1,.36,1), margin-left 460ms cubic-bezier(.22,1,.36,1), opacity 320ms ease, transform 460ms cubic-bezier(.22,1,.36,1); }
+.personal-header .nav-slot { display: grid; margin-left: 27px; }
 .personal-header .nav-slot:first-child { margin-left: 0; }
 .personal-header .nav-slot > a { min-width: 0; white-space: nowrap; min-height: 44px; align-items: center; }
 .personal-site .personal-header nav a::after { left: 0; }
+.personal-site .personal-header .appearance-toggle > svg { display: block; width: 20px; height: 20px; }
 .home-site > .personal-header { position: fixed; inset: 0 0 auto; height: 76px; max-width: 1800px; margin: auto; padding: 0 var(--home-gutter); background: var(--paper); border: 0; z-index: 20; }
-@media (min-width: 1001px) {
-  .personal-header[data-nav-compact='true'] nav:not(.is-open) .nav-extra { max-width: 0; margin-left: 0; opacity: 0; transform: translateY(-4px); pointer-events: none; }
-}
 @media (max-width: 1000px) {
   .personal-site .personal-header { grid-template-columns: 1fr auto; gap: 15px; }
   .personal-site .personal-header .nav-slot { margin: 0; max-width: none; overflow: visible; transition: none; }
   .personal-site .personal-header nav.is-open { gap: 4px 20px; }
-  .personal-site .personal-header nav.is-open a { font-size: 13px; letter-spacing: .06em; }
-  .personal-site .personal-header .nav-toggle { font-family: 'Courier New', monospace; font-weight: 400; }
+  .personal-site .personal-header nav.is-open a { font-size: 13px; letter-spacing: 0; }
+  .personal-site .personal-header .nav-toggle { font-family: var(--type-interface); font-weight: 400; }
 }
-@media (prefers-reduced-motion: reduce) { .personal-header .nav-slot { transition: none; } }

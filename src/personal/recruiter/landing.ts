@@ -3,10 +3,12 @@ import type { LandingOpeningCopy } from '../landing/opening-copy.ts'
 import { escapeMetadata, searchMetadata, type SearchMetadata } from '../search-metadata.ts'
 import { recruiterCompanyProfile } from './company-profiles.ts'
 
-export function recruiterOpening(company: OutreachCompanyContext): LandingOpeningCopy {
-  const profile = recruiterCompanyProfile(company.slug, company.name)
+/** Selected worksheet copy occupies the original introduction, below the unchanged headline. */
+export function recruiterOpening(company: OutreachCompanyContext): LandingOpeningCopy & { introduction: string } {
+  const selected = company.opening?.lines || recruiterCompanyProfile(company.slug, company.name).lines
   return {
-    lines: company.opening?.lines || profile.lines,
+    lines: ['The', 'frontier', 'is all that', 'matters.'],
+    introduction: selected.join(' '),
     category: '',
     href: '/resume',
     linkLabel: 'Résumé',
@@ -16,12 +18,12 @@ export function recruiterOpening(company: OutreachCompanyContext): LandingOpenin
 
 export function recruiterMetadata(company: OutreachCompanyContext, route = 'recruiter'): SearchMetadata {
   if (route !== 'recruiter') return { ...searchMetadata(route), robots: 'noindex, follow' }
-  return { ...searchMetadata(''), route, title: `${company.name} — Sulayman Bowles`, description: recruiterOpening(company).lines.join(' '), robots: 'noindex, follow', schema: null }
+  return { ...searchMetadata(''), route, title: `${company.name} — Sulayman Bowles`, description: recruiterOpening(company).introduction, robots: 'noindex, follow', schema: null }
 }
 
-/** Change only the existing opening text in the ordinary readable homepage. */
+/** Use the same selected opening as React, retaining the ordinary homepage continuation. */
 export function renderRecruiterDocument(homeBody: string, company: OutreachCompanyContext) {
-  const opening = /(<main\b[^>]*>\s*<h1\b[^>]*>)[^]*?(<\/h1>\s*<p\b[^>]*>)[^]*?(<\/p>)/
+  const opening = /(<main\b[^>]*>\s*<h1\b[^>]*>[^]*?<\/h1>\s*<p\b[^>]*>)[^]*?(<\/p>)/
   if (!opening.test(homeBody)) throw new Error('Homepage opening is unavailable')
-  return homeBody.replace(opening, (_, title: string, description: string, end: string) => `${title}${escapeMetadata(company.name)}${description}${escapeMetadata(recruiterOpening(company).lines.join(' '))}${end}`)
+  return homeBody.replace(opening, (_, start: string, end: string) => `${start}${escapeMetadata(recruiterOpening(company).introduction)}${end}`)
 }

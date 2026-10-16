@@ -1,0 +1,127 @@
+{
+  "kind": "research",
+  "cluster": "financial-systems",
+  "slug": "texas-private-toll-rate-controls",
+  "number": "35",
+  "category": "TEXAS INFRASTRUCTURE",
+  "title": "Who Can Raise Texas Toll Rates? Public Boards, TxDOT, and Private Concessions",
+  "seoTitle": "Who Sets Texas Toll Rates? Private Toll Rate Controls Explained",
+  "subtitle": "Texas toll rates are not set by one statewide actor. Public systems use board or state policies; private concessions operate inside contract-defined pricing rules, sharing formulas, and enforcement rights.",
+  "seoDescription": "Who can raise Texas toll rates? See how NTTA, HCTRA, TxDOT and private concession agreements control fixed and dynamically priced tolls.",
+  "artwork": {
+    "kind": "study",
+    "variant": "triptych",
+    "label": "Toll rate / contract formula / public oversight",
+    "note": "A private concession can have pricing discretion without having unlimited pricing power."
+  },
+  "date": "2026.09.23",
+  "lastVerified": "2026.09.23",
+  "readTime": "3 MIN",
+  "author": "SULAYMAN BOWLES",
+  "thesis": "Texas toll pricing power is facility-specific: public authorities set rates through public governance, while private concessions price within detailed contractual frameworks rather than a blank check to charge any amount.",
+  "conclusion": {
+    "title": "There is no single Texas toll-rate switch",
+    "content": "To know who can raise a toll, identify the facility and read its governing rate policy or concession. Public boards and TxDOT govern public systems; concessionaires can have substantial pricing discretion, especially on managed lanes, but that discretion sits inside enforceable contracts, performance standards, revenue-sharing provisions, and termination rights."
+  },
+  "evidenceBoundary": "This is a structural explanation, not legal advice or a claim that one pricing formula applies across Texas. Exact escalation rules, dynamic-pricing algorithms, caps, discounts, HOV treatment, and revenue-sharing terms differ by project and can be amended.",
+  "metrics": [
+    {
+      "label": "Statewide universal toll cap",
+      "value": "NONE"
+    },
+    {
+      "label": "Private CDA term limit",
+      "value": "PROJECT-SPECIFIC"
+    },
+    {
+      "label": "NTE titleholder",
+      "value": "TXDOT"
+    },
+    {
+      "label": "Pricing evidence",
+      "value": "CONTRACT + PUBLIC RATE POLICY"
+    }
+  ],
+  "resources": [
+    {
+      "label": "Texas toll-road ownership dataset",
+      "href": "/research/texas-toll-road-ownership-2026.csv",
+      "description": "Project-level public/private ownership, operator, toll-revenue claimant, concession term, billing agent, and evidence-date records.",
+      "format": "CSV"
+    },
+    {
+      "label": "Texas toll-road ownership investigation",
+      "href": "/markets/who-owns-texas-toll-roads",
+      "description": "The long-form ownership and capital-stack investigation behind this query-specific note.",
+      "format": "WEB"
+    }
+  ],
+  "content": [
+    "No single company or state office sets every Texas toll rate. Public authorities such as NTTA and HCTRA adopt rates through their own public governance. TxDOT sets or administers rates on state toll systems. Private concessionaires on NTE, LBJ, NTE 35W, and SH 130 5–6 operate under project agreements that define the pricing regime and the public counterparty’s enforcement rights.",
+    "That is why “Can a private toll operator charge anything it wants?” has the wrong frame. A concession grants real pricing authority, sometimes including dynamic rates that respond to traffic. It also binds the developer to a contract that covers the term, operations, performance, revenue sharing, defaults, remedies, and handback."
+  ],
+  "sections": [
+    {
+      "id": "public-rates",
+      "title": "Public toll systems use public rate policies",
+      "paragraphs": [
+        "NTTA, HCTRA, TxDOT, and regional mobility authorities are different issuers with different boards, statutes, debt covenants, and rate-setting processes. A rate increase can be tied to inflation, debt capacity, capital plans, operating costs, or a board-approved schedule.",
+        "Revenue-bond covenants can create a financial floor underneath those policy choices by requiring the issuer to maintain adequate revenue for operations and debt service. That does not usually dictate a specific per-mile rate, but it can make “never raise tolls” incompatible with the financing structure."
+      ]
+    },
+    {
+      "id": "concession-rates",
+      "title": "Private concession rates are contract rights",
+      "paragraphs": [
+        "A toll concession is negotiated around a defined pricing mechanism. On managed lanes, the commercial purpose often requires dynamic pricing to keep the lane moving at a target service level. The project agreement allocates how that authority is used and what public approvals, standards, or formulas apply.",
+        "Because the concession company carries traffic risk and project debt, pricing is central to its economics. But TxDOT still retains contractual remedies for noncompliance and public powers that a shareholder does not acquire merely by owning the project company."
+      ]
+    },
+    {
+      "id": "economic-controls",
+      "title": "Revenue sharing and competition can matter as much as a formal cap",
+      "paragraphs": [
+        "Toll control is not only a maximum posted price. Revenue-sharing formulas can move part of upside back to the state. Required general-purpose capacity, HOV rules, performance targets, competing free lanes, and the possibility that users avoid the facility constrain the operator’s economic freedom.",
+        "A theoretically higher toll can reduce transactions enough to lower total revenue. Dynamic-pricing systems therefore balance price against lane speed and demand rather than functioning as a simple monopoly tariff."
+      ]
+    },
+    {
+      "id": "how-to-check",
+      "title": "How to check the rule for one road",
+      "paragraphs": [
+        "Start with the facility’s current toll-rate page or board action. If it is a concession, open the executed comprehensive development or facility agreement and its amendments. Search the agreement for toll rates, managed lanes, revenue payment, HOV, escalation, default, and termination.",
+        "Then separate the posted rate from the legal ceiling and the commercial algorithm. Those are related but not always identical concepts."
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "id": "S1",
+      "label": "NTTA — financial information and debt-obligation transparency",
+      "href": "https://www.ntta.org/about-us/financial-information",
+      "lastVerified": "2026.09.23"
+    },
+    {
+      "id": "S2",
+      "label": "TxDOT — NTE 35W Amended and Restated Facility Agreement",
+      "href": "https://www.txdot.gov/content/dam/docs/business/alt-delivery/north-tarrant-express/nte-seg-3-amend-fac-agree.pdf",
+      "lastVerified": "2026.09.23"
+    },
+    {
+      "id": "S3",
+      "label": "TxDOT — HB 803 Report on Toll Projects, FY2025",
+      "href": "https://www.txdot.gov/content/dam/docs/division/gov/hb-803-report-fy-2025.pdf",
+      "lastVerified": "2026.09.23"
+    },
+    {
+      "id": "S4",
+      "label": "FHWA — Toll Facilities in the United States",
+      "href": "https://www.fhwa.dot.gov/policyinformation/tollpage/page08.cfm",
+      "lastVerified": "2026.09.23"
+    }
+  ],
+  "path": "/research/financial-systems/texas-private-toll-rate-controls",
+  "aliases": [],
+  "dateModified": "2026.09.23",
+  "image": "/images/generative-art/yuru-32.webp"
+}

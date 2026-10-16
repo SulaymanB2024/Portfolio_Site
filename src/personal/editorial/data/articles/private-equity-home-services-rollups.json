@@ -1,0 +1,133 @@
+{
+  "kind": "research",
+  "cluster": "financial-systems",
+  "slug": "private-equity-home-services-rollups",
+  "number": "51",
+  "category": "HOME-SERVICES FINANCE",
+  "title": "How Private-Equity Rollups Work in Home Services",
+  "seoTitle": "How Private Equity Home-Service Rollups Work: Platform + Add-Ons",
+  "subtitle": "The home-services rollup model buys or partners with local HVAC, plumbing, roofing, and pest brands, then layers them into larger operating platforms while often preserving the local name.",
+  "seoDescription": "How private-equity home-services rollups work: platform acquisitions, add-ons, founder rollover, retained brands, centralized systems, leverage and sponsor exits.",
+  "artwork": {
+    "kind": "study",
+    "variant": "triptych",
+    "label": "Local brand / operating platform / sponsor",
+    "note": "The rollup is an ownership and operating architecture: retained local customer acquisition on the front end, consolidated capital and systems above it."
+  },
+  "date": "2026.09.23",
+  "lastVerified": "2026.07.26",
+  "readTime": "3 MIN",
+  "author": "SULAYMAN BOWLES",
+  "thesis": "Home-services rollups create value by combining fragmented local demand and retained brands with larger-platform purchasing, recruiting, dispatch, finance, and acquisition capacity; the structure can also add leverage, integration risk, and ownership opacity.",
+  "conclusion": {
+    "title": "A rollup is a capital system, not merely a list of acquisitions",
+    "content": "The platform has to turn acquired local brands into durable cash flow after purchase price, debt service, integration costs, technician retention, and future maintenance capex. Keeping the local name can preserve customer acquisition, but it also makes common ownership harder for consumers to see."
+  },
+  "evidenceBoundary": "This is a structural analysis grounded in the Austin ownership census and sponsor transaction records. It does not claim that private-equity ownership causes a particular price, service, wage, or customer outcome without separate causal evidence.",
+  "metrics": [
+    {
+      "label": "Austin sponsor-backed brands in census",
+      "value": "14"
+    },
+    {
+      "label": "Full census",
+      "value": "67 BRANDS"
+    },
+    {
+      "label": "Common transaction",
+      "value": "PLATFORM + ADD-ON"
+    },
+    {
+      "label": "Key risk",
+      "value": "INTEGRATION + LEVERAGE"
+    }
+  ],
+  "resources": [
+    {
+      "label": "Austin home-services ownership investigation",
+      "href": "/research/financial-systems/who-owns-austin-home-service-companies",
+      "description": "A 67-brand case study showing how local brands map into platforms, sponsors, franchises, and public companies.",
+      "format": "WEB"
+    },
+    {
+      "label": "Austin ownership dataset",
+      "href": "/research/austin-home-service-ownership-2026.csv",
+      "description": "Machine-readable brand and ownership classifications used as the local empirical base.",
+      "format": "CSV"
+    }
+  ],
+  "content": [
+    "A private-equity home-services rollup usually starts with a platform: an operator large enough to acquire additional HVAC, plumbing, electrical, roofing, foundation, or pest-control businesses. The sponsor supplies equity capital and often acquisition capacity; the platform buys or partners with local companies; founders may sell outright, roll equity, or continue managing the local operation.",
+    "The local brand often survives because its phone number, reviews, technicians, search visibility, and neighborhood reputation are valuable assets. Consolidation therefore can be invisible in the customer interface even while finance, procurement, call-center technology, recruiting, and acquisition decisions move upward."
+  ],
+  "sections": [
+    {
+      "id": "platform-add-on",
+      "title": "Platform first, add-ons second",
+      "paragraphs": [
+        "The first larger investment creates a platform with management, systems, lender relationships, and a repeatable acquisition process. Smaller add-ons can then be purchased and integrated at the platform level. The sponsor is underwriting both the existing cash flow and the ability to keep deploying capital into fragmented local markets.",
+        "That strategy can create multiple expansion if small businesses are bought at lower valuation multiples than the scaled platform eventually receives at exit. But the spread is not free: transaction costs, integration, debt, systems migration, management bandwidth, and lost technicians can consume it."
+      ]
+    },
+    {
+      "id": "retained-brand",
+      "title": "Why acquired companies keep their names",
+      "paragraphs": [
+        "Home services are highly local. A consumer searches for an emergency plumber or AC repair company nearby, not for a holding company. Retaining the acquired name can preserve reviews, local SEO, trucks, licenses, and customer memory while the platform consolidates functions behind the scenes.",
+        "That creates a disclosure problem for consumers and researchers. Multiple brands in the same search result can share a common platform and sponsor, so brand-level competition can look more fragmented than ownership actually is."
+      ]
+    },
+    {
+      "id": "economics",
+      "title": "Where the rollup economics come from",
+      "paragraphs": [
+        "Potential gains include shared procurement, denser technician routing, centralized call conversion, broader recruiting, cross-selling between trades, standardized software, improved working-capital management, and lower-cost access to debt or insurance. Acquisition itself can also be the growth engine.",
+        "The sponsor must still pay for the business. A rollup financed at aggressive leverage or high acquisition multiples can need strong organic performance just to maintain its return. Interest rates and debt covenants therefore matter even in a service industry with little factory equipment."
+      ]
+    },
+    {
+      "id": "risk",
+      "title": "The main failure modes",
+      "paragraphs": [
+        "Technicians and local managers can leave after a transaction. Centralized marketing can raise lead costs instead of lowering them. Cross-selling can damage trust. Integration can break dispatch or pricing. A platform can overpay for add-ons late in a consolidation cycle.",
+        "Ownership opacity is another risk for research quality. Sponsor websites, platform pages, legal disclosures, and transaction announcements need dated verification because an old acquisition headline can remain online long after the sponsor exits."
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "id": "S1",
+      "label": "The Riverside Company — T3 Services Group portfolio entry",
+      "href": "https://www.riversidecompany.com/investment-portfolio/t3-services-group",
+      "lastVerified": "2026.07.26"
+    },
+    {
+      "id": "S2",
+      "label": "Gryphon Investors — majority investment in Southern Home Services holding company",
+      "href": "https://www.gryphon-inv.com/news/gryphon-investors-completes-majority-investment-in-southern-hvac-and-announces-new-home-services-holding-company/",
+      "lastVerified": "2026.07.26"
+    },
+    {
+      "id": "S3",
+      "label": "L Catterton — Master Trades Group investment",
+      "href": "https://www.lcatterton.com/investments.html",
+      "lastVerified": "2026.07.26"
+    },
+    {
+      "id": "S4",
+      "label": "GI Partners — American Residential Services portfolio entry",
+      "href": "https://www.gipartners.com/private-equity/portfolio/american-residential-services",
+      "lastVerified": "2026.07.26"
+    },
+    {
+      "id": "S5",
+      "label": "Dunes Point Capital — Roofing Services Solutions acquisition of Ja-Mar",
+      "href": "https://www.dunespointcapital.com/news/roofing-services-solutions-acquires-ja-mar-roofing-sheet-metal/",
+      "lastVerified": "2026.07.26"
+    }
+  ],
+  "path": "/research/financial-systems/private-equity-home-services-rollups",
+  "aliases": [],
+  "dateModified": "2026.09.23",
+  "image": "/images/generative-art/yuru-10.webp"
+}

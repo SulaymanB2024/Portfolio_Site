@@ -4,6 +4,7 @@ import { execFileSync } from 'node:child_process'
 import { createHash } from 'node:crypto'
 import { originalFields, protectedArticleEvidence } from './article-revision-integrity.mjs'
 import { verifyCodeLabelReadback } from './article-code-label-integrity.mjs'
+import { verifyRestorationExclusions } from './article-publication-integrity.mjs'
 
 const read = path => readFileSync(path, 'utf8')
 const hash = value => createHash('sha256').update(value).digest('hex')
@@ -47,5 +48,5 @@ assert.equal(hash(htmlBaseline.htmlBody), manifest.html.sha256)
 assert.equal(htmlBaseline.htmlBody.trim(), body.trim(), 'HTML recovery archive changed original material')
 for (const id of manifest.html.ids) assert(article.htmlBody.includes(`id="${id}"`), `Lost original target: ${id}`)
 for (const asset of manifest.assets) assert.equal(hash(readFileSync(`public${asset.href}`)), asset.sha256, `Original figure/download drift: ${asset.href}`)
-for (const excluded of manifest.excluded) assert(!catalog.some(article => article.slug === excluded.slug), `Unverified candidate promoted: ${excluded.slug}`)
+verifyRestorationExclusions(manifest.excluded, catalog, JSON.parse(read('docs/article-publications.json')).records, readFileSync)
 console.log(`Article verification passed: ${manifest.restoredCount} original recoveries audited, ${revisions.length} recorded source revisions, ${manifest.retained.length} reviewed-source archives and ${manifest.assets.length} unchanged assets; no files written.`)

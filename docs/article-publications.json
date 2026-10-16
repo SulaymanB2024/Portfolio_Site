@@ -1066,6 +1066,420 @@
       "sourceArticleSha256": "83a8d0d8b2454bd9eb8398e4e70c86dc8540104534ef7c357b5763c875e7106f",
       "sourceRevision": "1a7a83775d54fdf784ae47904ac7453869b4a3f9",
       "integrationNote": "Register the authored manuscript and evidence; align the reading estimate with the site policy. Models and source dates are retained."
+    },
+    {
+      "slug": "openai-crawlers-oai-searchbot-gptbot-chatgpt-user-adsbot",
+      "path": "src/personal/editorial/data/articles/openai-crawlers-oai-searchbot-gptbot-chatgpt-user-adsbot.json",
+      "canonicalPath": "/research/ai-crawlers/openai-crawlers-oai-searchbot-gptbot-chatgpt-user-adsbot",
+      "datePublished": "2026.09.23",
+      "dateModified": "2026.09.23",
+      "articleSha256": "e6f0823db49a9282723e8840339e629494ffe9067563d45bda5a236b9f68db13",
+      "proseWords": 502,
+      "readTime": "3 MIN",
+      "claimsPath": "docs/search-demand-20260923/source-ledger.json",
+      "initialReview": {
+        "reason": "Port the unchanged September 23 manuscript and historical citations from PR #63 into the native reader; add route and source identities and calculate the current reading estimate.",
+        "evidence": [
+          "https://github.com/SulaymanB2024/Portfolio_Site/pull/63",
+          "https://github.com/SulaymanB2024/Portfolio_Site/blob/088e1e7621fa0636ceaa52b96d5beba3085bbe66/src/content/searchDemandCrawlerArticles.ts"
+        ]
+      }
+    },
+    {
+      "slug": "verify-ai-crawlers-server-logs",
+      "path": "src/personal/editorial/data/articles/verify-ai-crawlers-server-logs.json",
+      "canonicalPath": "/research/crawler-engineering/verify-ai-crawlers-server-logs",
+      "datePublished": "2026.09.23",
+      "dateModified": "2026.09.23",
+      "articleSha256": "e2629114983ac450973639527a99bc1e7307c988c3f41644f79a8ba78ddf2a29",
+      "proseWords": 497,
+      "readTime": "3 MIN",
+      "claimsPath": "docs/search-demand-20260923/source-ledger.json",
+      "initialReview": {
+        "reason": "Port the unchanged September 23 manuscript and historical citations from PR #63 into the native reader; add route and source identities and calculate the current reading estimate.",
+        "evidence": [
+          "https://github.com/SulaymanB2024/Portfolio_Site/pull/63",
+          "https://github.com/SulaymanB2024/Portfolio_Site/blob/088e1e7621fa0636ceaa52b96d5beba3085bbe66/src/content/searchDemandCrawlerArticles.ts"
+        ]
+      }
+    },
+    {
+      "slug": "claude-crawlers-claudebot-searchbot-user",
+      "path": "src/personal/editorial/data/articles/claude-crawlers-claudebot-searchbot-user.json",
+      "canonicalPath": "/research/ai-crawlers/claude-crawlers-claudebot-searchbot-user",
+      "datePublished": "2026.09.23",
+      "dateModified": "2026.09.23",
+      "articleSha256": "c788b21859fc676bed386b867eed87bcbb50d498c6e4833d6cc79b5291ae1039",
+      "proseWords": 411,
+      "readTime": "3 MIN",
+      "claimsPath": "docs/search-demand-20260923/source-ledger.json",
+      "initialReview": {
+        "reason": "Port the unchanged September 23 manuscript and historical citations from PR #63 into the native reader; add route and source identities and calculate the current reading estimate.",
+        "evidence": [
+          "https://github.com/SulaymanB2024/Portfolio_Site/pull/63",
+          "https://github.com/SulaymanB2024/Portfolio_Site/blob/088e1e7621fa0636ceaa52b96d5beba3085bbe66/src/content/searchDemandCrawlerArticles.ts"
+        ]
+      }
+    },
+    {
+      "slug": "perplexitybot-vs-perplexity-user",
+      "path": "src/personal/editorial/data/articles/perplexitybot-vs-perplexity-user.json",
+      "canonicalPath": "/research/ai-crawlers/perplexitybot-vs-perplexity-user",
+      "datePublished": "2026.09.23",
+      "dateModified": "2026.09.23",
+      "articleSha256": "ce92faa96726417e248792dd7883341e08b596ecc9a8493a8e536fd22295055b",
+      "proseWords": 419,
+      "readTime": "3 MIN",
+      "claimsPath": "docs/search-demand-20260923/source-ledger.json",
+      "initialReview": {
+        "reason": "Port the unchanged September 23 manuscript and historical citations from PR #63 into the native reader; add route and source identities and calculate the current reading estimate.",
+        "evidence": [
+          "https://github.com/SulaymanB2024/Portfolio_Site/pull/63",
+          "https://github.com/SulaymanB2024/Portfolio_Site/blob/088e1e7621fa0636ceaa52b96d5beba3085bbe66/src/content/searchDemandCrawlerArticles.ts"
+        ]
+      }
+    },
+    {
+      "slug": "google-extended-search-gemini-ai-overviews",
+      "path": "src/personal/editorial/data/articles/google-extended-search-gemini-ai-overviews.json",
+      "canonicalPath": "/research/ai-crawlers/google-extended-search-gemini-ai-overviews",
+      "datePublished": "2026.09.23",
+      "dateModified": "2026.09.23",
+      "articleSha256": "5dbba0e8fd3a2f85717fa507a33b8f8754e2b978ae430cf49070d7184fafc815",
+      "proseWords": 472,
+      "readTime": "3 MIN",
+      "claimsPath": "docs/search-demand-20260923/source-ledger.json",
+      "initialReview": {
+        "reason": "Port the unchanged September 23 manuscript and historical citations from PR #63 into the native reader; add route and source identities and calculate the current reading estimate.",
+        "evidence": [
+          "https://github.com/SulaymanB2024/Portfolio_Site/pull/63",
+          "https://github.com/SulaymanB2024/Portfolio_Site/blob/088e1e7621fa0636ceaa52b96d5beba3085bbe66/src/content/searchDemandCrawlerArticles.ts"
+        ]
+      }
+    },
+    {
+      "slug": "ai-crawler-registry",
+      "path": "src/personal/editorial/data/articles/ai-crawler-registry.json",
+      "canonicalPath": "/research/ai-crawlers/ai-crawler-registry",
+      "datePublished": "2026.09.23",
+      "dateModified": "2026.09.23",
+      "articleSha256": "5a58e054e706f87f23f05813cc90d8d8087bc6a7c03a2bd66473935027502c93",
+      "proseWords": 448,
+      "readTime": "3 MIN",
+      "claimsPath": "docs/search-demand-20260923/source-ledger.json",
+      "initialReview": {
+        "reason": "Port the unchanged September 23 manuscript and historical citations from PR #63 into the native reader; add route and source identities and calculate the current reading estimate.",
+        "evidence": [
+          "https://github.com/SulaymanB2024/Portfolio_Site/pull/63",
+          "https://github.com/SulaymanB2024/Portfolio_Site/blob/088e1e7621fa0636ceaa52b96d5beba3085bbe66/src/content/searchDemandCrawlerArticles.ts"
+        ]
+      }
+    },
+    {
+      "slug": "search-console-query-vs-page-totals",
+      "path": "src/personal/editorial/data/articles/search-console-query-vs-page-totals.json",
+      "canonicalPath": "/research/search-console/search-console-query-vs-page-totals",
+      "datePublished": "2026.09.23",
+      "dateModified": "2026.09.23",
+      "articleSha256": "4b2ed50b4a607d0c19bee68b720080ca2dd76bfb5cdba2442ef7f3caa40f114b",
+      "proseWords": 534,
+      "readTime": "3 MIN",
+      "claimsPath": "docs/search-demand-20260923/source-ledger.json",
+      "initialReview": {
+        "reason": "Port the unchanged September 23 manuscript and historical citations from PR #63 into the native reader; add route and source identities and calculate the current reading estimate.",
+        "evidence": [
+          "https://github.com/SulaymanB2024/Portfolio_Site/pull/63",
+          "https://github.com/SulaymanB2024/Portfolio_Site/blob/088e1e7621fa0636ceaa52b96d5beba3085bbe66/src/content/searchDemandSystemsArticles.ts"
+        ]
+      }
+    },
+    {
+      "slug": "search-console-data-pipeline",
+      "path": "src/personal/editorial/data/articles/search-console-data-pipeline.json",
+      "canonicalPath": "/research/search-console/search-console-data-pipeline",
+      "datePublished": "2026.09.23",
+      "dateModified": "2026.09.23",
+      "articleSha256": "70bfb6c457f43ba24503e54407dad048474ae21513c0249df487d9cfb8549230",
+      "proseWords": 576,
+      "readTime": "3 MIN",
+      "claimsPath": "docs/search-demand-20260923/source-ledger.json",
+      "initialReview": {
+        "reason": "Port the unchanged September 23 manuscript and historical citations from PR #63 into the native reader; add route and source identities and calculate the current reading estimate.",
+        "evidence": [
+          "https://github.com/SulaymanB2024/Portfolio_Site/pull/63",
+          "https://github.com/SulaymanB2024/Portfolio_Site/blob/088e1e7621fa0636ceaa52b96d5beba3085bbe66/src/content/searchDemandSystemsArticles.ts"
+        ]
+      }
+    },
+    {
+      "slug": "coreweave-ddtl-5-5",
+      "path": "src/personal/editorial/data/articles/coreweave-ddtl-5-5.json",
+      "canonicalPath": "/research/financial-systems/coreweave-ddtl-5-5",
+      "datePublished": "2026.09.23",
+      "dateModified": "2026.09.23",
+      "articleSha256": "bc83a43632b610a474f16e5eac3575c87beb26c62afbdcff483c954a8880f5fa",
+      "proseWords": 507,
+      "readTime": "3 MIN",
+      "claimsPath": "docs/search-demand-20260923/source-ledger.json",
+      "initialReview": {
+        "reason": "Port the unchanged September 23 manuscript and historical citations from PR #63 into the native reader; add route and source identities and calculate the current reading estimate.",
+        "evidence": [
+          "https://github.com/SulaymanB2024/Portfolio_Site/pull/63",
+          "https://github.com/SulaymanB2024/Portfolio_Site/blob/088e1e7621fa0636ceaa52b96d5beba3085bbe66/src/content/searchDemandSystemsArticles.ts"
+        ]
+      }
+    },
+    {
+      "slug": "gpu-financing-ai-infrastructure",
+      "path": "src/personal/editorial/data/articles/gpu-financing-ai-infrastructure.json",
+      "canonicalPath": "/research/financial-systems/gpu-financing-ai-infrastructure",
+      "datePublished": "2026.09.23",
+      "dateModified": "2026.09.23",
+      "articleSha256": "f1b3fb1cdeb1e3d3769d270867c137494806588b8bfeb384ca3a8f054c5a8234",
+      "proseWords": 518,
+      "readTime": "3 MIN",
+      "claimsPath": "docs/search-demand-20260923/source-ledger.json",
+      "initialReview": {
+        "reason": "Port the unchanged September 23 manuscript and historical citations from PR #63 into the native reader; add route and source identities and calculate the current reading estimate.",
+        "evidence": [
+          "https://github.com/SulaymanB2024/Portfolio_Site/pull/63",
+          "https://github.com/SulaymanB2024/Portfolio_Site/blob/088e1e7621fa0636ceaa52b96d5beba3085bbe66/src/content/searchDemandSystemsArticles.ts"
+        ]
+      }
+    },
+    {
+      "slug": "who-owns-austin-hvac-companies",
+      "path": "src/personal/editorial/data/articles/who-owns-austin-hvac-companies.json",
+      "canonicalPath": "/research/financial-systems/who-owns-austin-hvac-companies",
+      "datePublished": "2026.09.23",
+      "dateModified": "2026.09.23",
+      "articleSha256": "6f73b94515a8b25ccc506241b6c0e31b041645e4f042c7ea0b8edff2257643cf",
+      "proseWords": 526,
+      "readTime": "3 MIN",
+      "claimsPath": "docs/search-demand-20260923/source-ledger.json",
+      "initialReview": {
+        "reason": "Port the unchanged September 23 manuscript and historical citations from PR #63 into the native reader; add route and source identities and calculate the current reading estimate.",
+        "evidence": [
+          "https://github.com/SulaymanB2024/Portfolio_Site/pull/63",
+          "https://github.com/SulaymanB2024/Portfolio_Site/blob/088e1e7621fa0636ceaa52b96d5beba3085bbe66/src/content/searchDemandSystemsArticles.ts"
+        ]
+      }
+    },
+    {
+      "slug": "who-owns-austin-plumbing-electrical-companies",
+      "path": "src/personal/editorial/data/articles/who-owns-austin-plumbing-electrical-companies.json",
+      "canonicalPath": "/research/financial-systems/who-owns-austin-plumbing-electrical-companies",
+      "datePublished": "2026.09.23",
+      "dateModified": "2026.09.23",
+      "articleSha256": "9e8d7c77e32aa34a6261ca7a5b5e373c12ccefac94d21cbd5b96fae5486af0c9",
+      "proseWords": 484,
+      "readTime": "3 MIN",
+      "claimsPath": "docs/search-demand-20260923/source-ledger.json",
+      "initialReview": {
+        "reason": "Port the unchanged September 23 manuscript and historical citations from PR #63 into the native reader; add route and source identities and calculate the current reading estimate.",
+        "evidence": [
+          "https://github.com/SulaymanB2024/Portfolio_Site/pull/63",
+          "https://github.com/SulaymanB2024/Portfolio_Site/blob/088e1e7621fa0636ceaa52b96d5beba3085bbe66/src/content/searchDemandSystemsArticles.ts"
+        ]
+      }
+    },
+    {
+      "slug": "private-equity-home-services-rollups",
+      "path": "src/personal/editorial/data/articles/private-equity-home-services-rollups.json",
+      "canonicalPath": "/research/financial-systems/private-equity-home-services-rollups",
+      "datePublished": "2026.09.23",
+      "dateModified": "2026.09.23",
+      "articleSha256": "a985e069a30bea0f9d3be8f3def4c3f892066dc106147f6aa84a6f729296276d",
+      "proseWords": 524,
+      "readTime": "3 MIN",
+      "claimsPath": "docs/search-demand-20260923/source-ledger.json",
+      "initialReview": {
+        "reason": "Port the unchanged September 23 manuscript and historical citations from PR #63 into the native reader; add route and source identities and calculate the current reading estimate.",
+        "evidence": [
+          "https://github.com/SulaymanB2024/Portfolio_Site/pull/63",
+          "https://github.com/SulaymanB2024/Portfolio_Site/blob/088e1e7621fa0636ceaa52b96d5beba3085bbe66/src/content/searchDemandSystemsArticles.ts"
+        ]
+      }
+    },
+    {
+      "slug": "airline-loyalty-collateral-valuation",
+      "path": "src/personal/editorial/data/articles/airline-loyalty-collateral-valuation.json",
+      "canonicalPath": "/research/financial-systems/airline-loyalty-collateral-valuation",
+      "datePublished": "2026.09.23",
+      "dateModified": "2026.09.23",
+      "articleSha256": "10d8f8398736f32dfc345a526832128fcc5b7bcd17e8c9d3ac2e0d090e559e01",
+      "proseWords": 589,
+      "readTime": "3 MIN",
+      "claimsPath": "docs/search-demand-20260923/source-ledger.json",
+      "initialReview": {
+        "reason": "Port the unchanged September 23 manuscript and historical citations from PR #63 into the native reader; add route and source identities and calculate the current reading estimate.",
+        "evidence": [
+          "https://github.com/SulaymanB2024/Portfolio_Site/pull/63",
+          "https://github.com/SulaymanB2024/Portfolio_Site/blob/088e1e7621fa0636ceaa52b96d5beba3085bbe66/src/content/searchDemandSystemsArticles.ts"
+        ]
+      }
+    },
+    {
+      "slug": "humanoid-robot-startup-financing",
+      "path": "src/personal/editorial/data/articles/humanoid-robot-startup-financing.json",
+      "canonicalPath": "/research/financial-systems/humanoid-robot-startup-financing",
+      "datePublished": "2026.09.23",
+      "dateModified": "2026.09.23",
+      "articleSha256": "8dc9075ce8559cf952b77106f4a286537eae9c4be34f644182b2cc160fdd0e1e",
+      "proseWords": 547,
+      "readTime": "3 MIN",
+      "claimsPath": "docs/search-demand-20260923/source-ledger.json",
+      "initialReview": {
+        "reason": "Port the unchanged September 23 manuscript and historical citations from PR #63 into the native reader; add route and source identities and calculate the current reading estimate.",
+        "evidence": [
+          "https://github.com/SulaymanB2024/Portfolio_Site/pull/63",
+          "https://github.com/SulaymanB2024/Portfolio_Site/blob/088e1e7621fa0636ceaa52b96d5beba3085bbe66/src/content/searchDemandSystemsArticles.ts"
+        ]
+      }
+    },
+    {
+      "slug": "who-owns-ntta",
+      "path": "src/personal/editorial/data/articles/who-owns-ntta.json",
+      "canonicalPath": "/research/financial-systems/who-owns-ntta",
+      "datePublished": "2026.09.23",
+      "dateModified": "2026.09.23",
+      "articleSha256": "685ecff12780812acc21faaf7b2d31c90c949d5d56abda6bf58071caf29dd082",
+      "proseWords": 548,
+      "readTime": "3 MIN",
+      "claimsPath": "docs/search-demand-20260923/source-ledger.json",
+      "initialReview": {
+        "reason": "Port the unchanged September 23 manuscript and historical citations from PR #63 into the native reader; add route and source identities and calculate the current reading estimate.",
+        "evidence": [
+          "https://github.com/SulaymanB2024/Portfolio_Site/pull/63",
+          "https://github.com/SulaymanB2024/Portfolio_Site/blob/088e1e7621fa0636ceaa52b96d5beba3085bbe66/src/content/searchDemandTollArticles.ts"
+        ]
+      }
+    },
+    {
+      "slug": "texas-toll-roads-public-vs-private",
+      "path": "src/personal/editorial/data/articles/texas-toll-roads-public-vs-private.json",
+      "canonicalPath": "/research/financial-systems/texas-toll-roads-public-vs-private",
+      "datePublished": "2026.09.23",
+      "dateModified": "2026.09.23",
+      "articleSha256": "ea51445166484f6783fb1e5b1d2c4f2e329d11ac54a52426e09471c2eb328cb1",
+      "proseWords": 541,
+      "readTime": "3 MIN",
+      "claimsPath": "docs/search-demand-20260923/source-ledger.json",
+      "initialReview": {
+        "reason": "Port the unchanged September 23 manuscript and historical citations from PR #63 into the native reader; add route and source identities and calculate the current reading estimate.",
+        "evidence": [
+          "https://github.com/SulaymanB2024/Portfolio_Site/pull/63",
+          "https://github.com/SulaymanB2024/Portfolio_Site/blob/088e1e7621fa0636ceaa52b96d5beba3085bbe66/src/content/searchDemandTollArticles.ts"
+        ]
+      }
+    },
+    {
+      "slug": "who-owns-hctra-sam-houston-tollway",
+      "path": "src/personal/editorial/data/articles/who-owns-hctra-sam-houston-tollway.json",
+      "canonicalPath": "/research/financial-systems/who-owns-hctra-sam-houston-tollway",
+      "datePublished": "2026.09.23",
+      "dateModified": "2026.09.23",
+      "articleSha256": "8c504ca6d3b548c1ea68b32be9412269fd132c97afbb7e803730580bd1bde256",
+      "proseWords": 466,
+      "readTime": "3 MIN",
+      "claimsPath": "docs/search-demand-20260923/source-ledger.json",
+      "initialReview": {
+        "reason": "Port the unchanged September 23 manuscript and historical citations from PR #63 into the native reader; add route and source identities and calculate the current reading estimate.",
+        "evidence": [
+          "https://github.com/SulaymanB2024/Portfolio_Site/pull/63",
+          "https://github.com/SulaymanB2024/Portfolio_Site/blob/088e1e7621fa0636ceaa52b96d5beba3085bbe66/src/content/searchDemandTollArticles.ts"
+        ]
+      }
+    },
+    {
+      "slug": "foreign-owned-texas-toll-roads",
+      "path": "src/personal/editorial/data/articles/foreign-owned-texas-toll-roads.json",
+      "canonicalPath": "/research/financial-systems/foreign-owned-texas-toll-roads",
+      "datePublished": "2026.09.23",
+      "dateModified": "2026.09.23",
+      "articleSha256": "0cb0c28654201123713a973d31e1730c0f61028242fe94e522f5039f4ef55015",
+      "proseWords": 560,
+      "readTime": "3 MIN",
+      "claimsPath": "docs/search-demand-20260923/source-ledger.json",
+      "initialReview": {
+        "reason": "Port the unchanged September 23 manuscript and historical citations from PR #63 into the native reader; add route and source identities and calculate the current reading estimate.",
+        "evidence": [
+          "https://github.com/SulaymanB2024/Portfolio_Site/pull/63",
+          "https://github.com/SulaymanB2024/Portfolio_Site/blob/088e1e7621fa0636ceaa52b96d5beba3085bbe66/src/content/searchDemandTollArticles.ts"
+        ]
+      }
+    },
+    {
+      "slug": "texas-private-toll-rate-controls",
+      "path": "src/personal/editorial/data/articles/texas-private-toll-rate-controls.json",
+      "canonicalPath": "/research/financial-systems/texas-private-toll-rate-controls",
+      "datePublished": "2026.09.23",
+      "dateModified": "2026.09.23",
+      "articleSha256": "85be0dae54043ae29f88783a0b2149a322da0619717a50617547c892d722814b",
+      "proseWords": 532,
+      "readTime": "3 MIN",
+      "claimsPath": "docs/search-demand-20260923/source-ledger.json",
+      "initialReview": {
+        "reason": "Port the unchanged September 23 manuscript and historical citations from PR #63 into the native reader; add route and source identities and calculate the current reading estimate.",
+        "evidence": [
+          "https://github.com/SulaymanB2024/Portfolio_Site/pull/63",
+          "https://github.com/SulaymanB2024/Portfolio_Site/blob/088e1e7621fa0636ceaa52b96d5beba3085bbe66/src/content/searchDemandTollArticles.ts"
+        ]
+      }
+    },
+    {
+      "slug": "who-owns-us-toll-roads",
+      "path": "src/personal/editorial/data/articles/who-owns-us-toll-roads.json",
+      "canonicalPath": "/research/financial-systems/who-owns-us-toll-roads",
+      "datePublished": "2026.09.23",
+      "dateModified": "2026.09.23",
+      "articleSha256": "66e8fac8c6765b0da41457c705d428bc05fbba68fb11b814917b1014dd2efa8f",
+      "proseWords": 521,
+      "readTime": "3 MIN",
+      "claimsPath": "docs/search-demand-20260923/source-ledger.json",
+      "initialReview": {
+        "reason": "Port the unchanged September 23 manuscript and historical citations from PR #63 into the native reader; add route and source identities and calculate the current reading estimate.",
+        "evidence": [
+          "https://github.com/SulaymanB2024/Portfolio_Site/pull/63",
+          "https://github.com/SulaymanB2024/Portfolio_Site/blob/088e1e7621fa0636ceaa52b96d5beba3085bbe66/src/content/searchDemandTollArticles.ts"
+        ]
+      }
+    },
+    {
+      "slug": "texas-managed-lanes-ownership-operators",
+      "path": "src/personal/editorial/data/articles/texas-managed-lanes-ownership-operators.json",
+      "canonicalPath": "/research/financial-systems/texas-managed-lanes-ownership-operators",
+      "datePublished": "2026.09.23",
+      "dateModified": "2026.09.23",
+      "articleSha256": "27c09152cf43db75baa1f432a0949cc2b645f0d60c306cad04e1a7766783fb60",
+      "proseWords": 462,
+      "readTime": "3 MIN",
+      "claimsPath": "docs/search-demand-20260923/source-ledger.json",
+      "initialReview": {
+        "reason": "Port the unchanged September 23 manuscript and historical citations from PR #63 into the native reader; add route and source identities and calculate the current reading estimate.",
+        "evidence": [
+          "https://github.com/SulaymanB2024/Portfolio_Site/pull/63",
+          "https://github.com/SulaymanB2024/Portfolio_Site/blob/088e1e7621fa0636ceaa52b96d5beba3085bbe66/src/content/searchDemandTollArticles.ts"
+        ]
+      }
+    },
+    {
+      "slug": "texas-private-toll-concession-expiration-dates",
+      "path": "src/personal/editorial/data/articles/texas-private-toll-concession-expiration-dates.json",
+      "canonicalPath": "/research/financial-systems/texas-private-toll-concession-expiration-dates",
+      "datePublished": "2026.09.23",
+      "dateModified": "2026.09.23",
+      "articleSha256": "24b03ae70626e40703924db756f8b6700028c61a6a8c12e5c7b4f99ae9893788",
+      "proseWords": 462,
+      "readTime": "3 MIN",
+      "claimsPath": "docs/search-demand-20260923/source-ledger.json",
+      "initialReview": {
+        "reason": "Port the unchanged September 23 manuscript and historical citations from PR #63 into the native reader; add route and source identities and calculate the current reading estimate.",
+        "evidence": [
+          "https://github.com/SulaymanB2024/Portfolio_Site/pull/63",
+          "https://github.com/SulaymanB2024/Portfolio_Site/blob/088e1e7621fa0636ceaa52b96d5beba3085bbe66/src/content/searchDemandTollArticles.ts"
+        ]
+      }
     }
   ]
 }

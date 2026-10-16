@@ -2160,5 +2160,774 @@
         "href": "https://github.com/DefiLlama/dimension-adapters/blob/e02384e92cbfb8c058e4de8440644aa8d8b0fc58/dexs/hyperliquid-perp/index.ts"
       }
     ]
+  },
+  "openai-crawlers-oai-searchbot-gptbot-chatgpt-user-adsbot": {
+    "question": "OAI-SearchBot vs GPTBot vs ChatGPT-User vs OAI-AdsBot",
+    "answer": "Treat each OpenAI web-access identity as a separate policy surface: OAI-SearchBot controls ChatGPT Search eligibility, GPTBot expresses model-training preference, ChatGPT-User is user-triggered, and OAI-AdsBot validates submitted ad landing pages.",
+    "paths": [
+      {
+        "label": "OAI-SearchBot controls automatic ChatGPT Search crawling",
+        "section": "searchbot",
+        "description": "OpenAI says OAI-SearchBot is used to surface websites in ChatGPT Search."
+      },
+      {
+        "label": "GPTBot is the model-development crawler",
+        "section": "gptbot",
+        "description": "GPTBot is documented separately from search."
+      },
+      {
+        "label": "ChatGPT-User and OAI-AdsBot are triggered by different events",
+        "section": "user-and-ads",
+        "description": "ChatGPT-User supports particular user actions."
+      }
+    ],
+    "sources": [
+      {
+        "label": "OpenAI — Overview of OpenAI Crawlers",
+        "href": "https://developers.openai.com/api/docs/bots"
+      },
+      {
+        "label": "OpenAI — ChatGPT Search publisher guidance",
+        "href": "https://help.openai.com/en/articles/9237897-chatgpt-search"
+      }
+    ]
+  },
+  "verify-ai-crawlers-server-logs": {
+    "question": "How to Verify an AI Crawler in Server Logs",
+    "answer": "Crawler attribution should be probabilistic until network evidence confirms it: parse the claimed User-Agent, validate the source IP against the provider’s current ranges or verification method, then preserve the HTTP response and robots state.",
+    "paths": [
+      {
+        "label": "First recover the real client IP",
+        "section": "normalize-the-log",
+        "description": "On a site behind Cloudflare, Fastly, a load balancer, or another reverse proxy, the socket peer may be the proxy rather than the crawler."
+      },
+      {
+        "label": "Match the source address to current provider ranges",
+        "section": "match-provider-ranges",
+        "description": "OpenAI publishes separate JSON IP ranges for OAI-SearchBot, GPTBot, ChatGPT-User, and OAI-AdsBot."
+      },
+      {
+        "label": "A verified bot can still be blocked",
+        "section": "join-policy-and-response",
+        "description": "Identity and access are separate fields."
+      }
+    ],
+    "sources": [
+      {
+        "label": "OpenAI — Overview of OpenAI Crawlers",
+        "href": "https://developers.openai.com/api/docs/bots"
+      },
+      {
+        "label": "Anthropic — ClaudeBot, Claude-User, and Claude-SearchBot guidance",
+        "href": "https://support.claude.com/en/articles/8896518-does-anthropic-crawl-data-from-the-web-and-how-can-site-owners-block-the-crawler"
+      },
+      {
+        "label": "Perplexity — crawler and user-agent documentation",
+        "href": "https://docs.perplexity.ai/docs/resources/perplexity-crawlers"
+      }
+    ]
+  },
+  "claude-crawlers-claudebot-searchbot-user": {
+    "question": "ClaudeBot vs Claude-SearchBot vs Claude-User",
+    "answer": "Anthropic’s crawler taxonomy separates training-oriented collection, search indexing, and user-requested retrieval, allowing a publisher to express distinct policies instead of one all-or-nothing Claude decision.",
+    "paths": [
+      {
+        "label": "ClaudeBot: model-development crawling",
+        "section": "claudebot",
+        "description": "Anthropic says ClaudeBot helps improve the utility and safety of its generative models by collecting web content that could potentially contribute to training."
+      },
+      {
+        "label": "Claude-SearchBot: web-search discovery",
+        "section": "searchbot",
+        "description": "Claude-SearchBot is the search-oriented identity."
+      },
+      {
+        "label": "Claude-User: retrieval at a user’s direction",
+        "section": "claude-user",
+        "description": "Claude-User supports fetches initiated by people using Claude."
+      }
+    ],
+    "sources": [
+      {
+        "label": "Anthropic — ClaudeBot, Claude-User, and Claude-SearchBot guidance",
+        "href": "https://support.claude.com/en/articles/8896518-does-anthropic-crawl-data-from-the-web-and-how-can-site-owners-block-the-crawler"
+      }
+    ]
+  },
+  "perplexitybot-vs-perplexity-user": {
+    "question": "PerplexityBot vs Perplexity-User",
+    "answer": "Perplexity separates automatic search discovery from user-requested retrieval: PerplexityBot is the search crawler, while Perplexity-User is a user-triggered fetcher that generally ignores robots.txt.",
+    "paths": [
+      {
+        "label": "PerplexityBot is the search-discovery crawler",
+        "section": "perplexitybot",
+        "description": "Perplexity recommends allowing PerplexityBot in robots.txt and allowing its published IP ranges if a publisher wants the site to appear in Perplexity search results."
+      },
+      {
+        "label": "Perplexity-User is a user-triggered fetcher",
+        "section": "perplexity-user",
+        "description": "Perplexity says Perplexity-User supports actions initiated by users and may visit a page to answer a question and include a link in the response."
+      },
+      {
+        "label": "Perplexity recommends User-Agent plus IP checks at the WAF",
+        "section": "waf",
+        "description": "The current documentation gives explicit WAF guidance: combine User-Agent conditions with source IPs from Perplexity’s official JSON endpoints."
+      }
+    ],
+    "sources": [
+      {
+        "label": "Perplexity — crawler and user-agent documentation",
+        "href": "https://docs.perplexity.ai/docs/resources/perplexity-crawlers"
+      }
+    ]
+  },
+  "google-extended-search-gemini-ai-overviews": {
+    "question": "Does Google-Extended Affect Google Search, Gemini, or AI Overviews?",
+    "answer": "Google-Extended should not be used as a Search opt-out: Google documents it as a standalone product token for certain Gemini training and grounding uses, while Googlebot and normal Search preview controls govern Google Search and its AI features.",
+    "paths": [
+      {
+        "label": "What Google-Extended controls",
+        "section": "what-it-controls",
+        "description": "Google documents Google-Extended as a publisher control for whether crawled site content can be used to train future generations of Gemini models powering Gemini Apps and the Vertex AI API for Gemini, and for specified grounding uses involving the Google Search index."
+      },
+      {
+        "label": "What it does not control",
+        "section": "what-it-does-not-control",
+        "description": "Google explicitly says Google-Extended does not affect inclusion in Google Search and is not a Search ranking signal."
+      },
+      {
+        "label": "AI Overviews and AI Mode are Google Search features",
+        "section": "ai-overviews",
+        "description": "Google’s Search documentation treats AI Overviews and AI Mode as Search features."
+      }
+    ],
+    "sources": [
+      {
+        "label": "Google — common crawlers and Google-Extended",
+        "href": "https://developers.google.com/crawling/docs/crawlers-fetchers/google-common-crawlers"
+      },
+      {
+        "label": "Google Search Central — AI features and publisher controls",
+        "href": "https://developers.google.com/search/docs/appearance/ai-features"
+      },
+      {
+        "label": "Google — verify crawler and fetcher requests",
+        "href": "https://developers.google.com/crawling/docs/crawlers-fetchers/verify-google-requests"
+      }
+    ]
+  },
+  "ai-crawler-registry": {
+    "question": "AI Crawler Registry: Search, Training, User Fetchers, and Product Bots",
+    "answer": "The useful unit in an AI crawler registry is not “AI company”; it is a specific web-access identity with a documented purpose, robots behavior, and verifiable network source.",
+    "paths": [
+      {
+        "label": "Current high-value registry entries",
+        "section": "registry",
+        "description": "OpenAI: OAI-SearchBot for Search, GPTBot for model-development crawling, ChatGPT-User for user-triggered fetches, OAI-AdsBot for ad landing-page validation."
+      },
+      {
+        "label": "Generate policy from purpose, not brand",
+        "section": "policy",
+        "description": "A publisher may want search discovery but not automatic model-development crawling."
+      },
+      {
+        "label": "Keep a network-verification column",
+        "section": "verification",
+        "description": "OpenAI and Perplexity publish product-specific IP JSON files."
+      }
+    ],
+    "sources": [
+      {
+        "label": "OpenAI — Overview of OpenAI Crawlers",
+        "href": "https://developers.openai.com/api/docs/bots"
+      },
+      {
+        "label": "Anthropic — ClaudeBot, Claude-User, and Claude-SearchBot guidance",
+        "href": "https://support.claude.com/en/articles/8896518-does-anthropic-crawl-data-from-the-web-and-how-can-site-owners-block-the-crawler"
+      },
+      {
+        "label": "Perplexity — crawler and user-agent documentation",
+        "href": "https://docs.perplexity.ai/docs/resources/perplexity-crawlers"
+      }
+    ]
+  },
+  "search-console-query-vs-page-totals": {
+    "question": "Why Search Console Query Totals Do Not Match Page Totals",
+    "answer": "Search Console totals reconcile only after accounting for privacy filtering, row truncation, and aggregation level; summing visible query rows is not a valid reconstruction of the property-level chart total.",
+    "paths": [
+      {
+        "label": "Anonymized queries create a deliberate residual",
+        "section": "anonymized",
+        "description": "Google removes rare or privacy-sensitive query strings from the query table."
+      },
+      {
+        "label": "The UI and API are different truncation surfaces",
+        "section": "row-limits",
+        "description": "The Performance table can display a maximum of 1,000 rows."
+      },
+      {
+        "label": "Property aggregation and page aggregation count differently",
+        "section": "aggregation",
+        "description": "At property level, multiple results from the same Search Console property on one search can be consolidated into one property impression."
+      }
+    ],
+    "sources": [
+      {
+        "label": "Google Search Console — Performance report data discrepancies",
+        "href": "https://support.google.com/webmasters/answer/17010575"
+      },
+      {
+        "label": "Google Search Console — Performance report data and aggregation",
+        "href": "https://support.google.com/webmasters/answer/17011364"
+      },
+      {
+        "label": "Google Search Console API — Search Analytics query",
+        "href": "https://developers.google.com/webmaster-tools/v1/searchanalytics/query"
+      }
+    ]
+  },
+  "search-console-data-pipeline": {
+    "question": "How to Build a Search Console Data Pipeline That Preserves Evidence",
+    "answer": "The durable Search Console data model separates immutable raw facts from derived SEO judgments and carries Google’s privacy, truncation, aggregation, and incomplete-data boundaries all the way to the report.",
+    "paths": [
+      {
+        "label": "Layer 1: immutable source facts",
+        "section": "raw-layer",
+        "description": "Store each daily bulk-export partition or API response exactly as received, plus extraction timestamp, property identifier, requested date window, dimensions, filters, search type, dataState, and aggregation type."
+      },
+      {
+        "label": "Layer 2: normalized query, URL, country, device, and appearance keys",
+        "section": "normalized-layer",
+        "description": "Normalize URL casing and canonical host policy only where the semantics are known."
+      },
+      {
+        "label": "Layer 3: materialized summaries instead of dashboard scans",
+        "section": "aggregate-layer",
+        "description": "Google recommends pre-aggregating frequent BigQuery views rather than pointing dashboards at the raw fact tables."
+      }
+    ],
+    "sources": [
+      {
+        "label": "Google Search Console API — Search Analytics query",
+        "href": "https://developers.google.com/webmaster-tools/v1/searchanalytics/query"
+      },
+      {
+        "label": "Google Search Central — bulk Search Console export to BigQuery",
+        "href": "https://developers.google.com/search/blog/2023/02/bulk-data-export"
+      },
+      {
+        "label": "Google Search Central — BigQuery efficiency for Search Console exports",
+        "href": "https://developers.google.com/search/blog/2023/06/bigquery-efficiency-tips"
+      }
+    ]
+  },
+  "coreweave-ddtl-5-5": {
+    "question": "CoreWeave DDTL 5.5: How a $2.6 Billion GPU-Backed Loan Works",
+    "answer": "DDTL 5.5 turns contracted AI-infrastructure demand into financeable asset-level cash flow: a dedicated subsidiary can draw debt as GPU servers and related infrastructure are purchased to perform eligible customer contracts.",
+    "paths": [
+      {
+        "label": "The borrower sits below the public parent",
+        "section": "borrower",
+        "description": "The named borrower is a dedicated financing subsidiary rather than CoreWeave, Inc. itself."
+      },
+      {
+        "label": "Customer contracts make GPU capex more debt-like",
+        "section": "collateral",
+        "description": "CoreWeave’s June 2026 filing says its DDTLs are generally collateralized by the assets underlying contributed customer contracts and pledged contractual cash flows, often with investment-grade counterparties."
+      },
+      {
+        "label": "SOFR + 5.50% is the visible price, not the whole cost",
+        "section": "economics",
+        "description": "The SEC filing gives a floating rate of Term SOFR plus 5.50%, or a base-rate alternative plus 4.50%."
+      }
+    ],
+    "sources": [
+      {
+        "label": "CoreWeave 8-K — DDTL 5.5 facility, August 2026",
+        "href": "https://www.sec.gov/Archives/edgar/data/1769628/000176962826000357/crwv-20260807.htm"
+      },
+      {
+        "label": "CoreWeave 10-Q — debt, DDTL collateral, and June 2026 balance sheet",
+        "href": "https://www.sec.gov/Archives/edgar/data/1769628/000176962826000366/crwv-20260630.htm"
+      },
+      {
+        "label": "CoreWeave — DDTL 5.5 closing release",
+        "href": "https://www.sec.gov/Archives/edgar/data/1769628/000176962826000357/ex991pr.htm"
+      }
+    ]
+  },
+  "gpu-financing-ai-infrastructure": {
+    "question": "How AI Companies Finance GPUs Without Putting Everything on the Parent Balance Sheet",
+    "answer": "At sufficient scale, contracted GPU infrastructure can be financed like project equipment: isolate eligible assets and cash flows, borrow against the contract-backed deployment, and reserve parent-level equity and debt for the risks the asset vehicle cannot absorb.",
+    "paths": [
+      {
+        "label": "The AI infrastructure capital stack",
+        "section": "capital-stack",
+        "description": "Equity absorbs the first-loss and platform risk."
+      },
+      {
+        "label": "Why use a financing subsidiary or SPV",
+        "section": "spv",
+        "description": "A dedicated borrower can separate eligible collateral, pledged accounts, customer contracts, and lender controls from unrelated corporate assets."
+      },
+      {
+        "label": "What a GPU lender is really underwriting",
+        "section": "underwriting",
+        "description": "The lender cares about the customer’s payment obligation, contract termination rights, deployment milestones, power and data-center readiness, server useful life, GPU resale or re-lease value, insurance, maintenance, concentration, and the borrower’s ability to redeploy capacity."
+      }
+    ],
+    "sources": [
+      {
+        "label": "CoreWeave 10-Q — debt, DDTL collateral, and June 2026 balance sheet",
+        "href": "https://www.sec.gov/Archives/edgar/data/1769628/000176962826000366/crwv-20260630.htm"
+      },
+      {
+        "label": "CoreWeave 8-K — DDTL 5.5 facility, August 2026",
+        "href": "https://www.sec.gov/Archives/edgar/data/1769628/000176962826000357/crwv-20260807.htm"
+      },
+      {
+        "label": "CoreWeave — DDTL 5.5 closing release",
+        "href": "https://www.sec.gov/Archives/edgar/data/1769628/000176962826000357/ex991pr.htm"
+      }
+    ]
+  },
+  "who-owns-austin-hvac-companies": {
+    "question": "Who Owns Austin’s HVAC Companies?",
+    "answer": "Austin HVAC is neither “all private equity” nor purely local: the July 2026 ownership census shows retained local brands beside founder-owned operators, public companies, franchisees, and sponsor-backed home-services platforms.",
+    "paths": [
+      {
+        "label": "Private-equity ownership often leaves the local brand in place",
+        "section": "retained-brands",
+        "description": "Home-services platforms commonly retain acquired names because the local brand already has reviews, phone numbers, technician recognition, organic search visibility, and decades of customer memory."
+      },
+      {
+        "label": "Selected Austin HVAC ownership chains",
+        "section": "major-chains",
+        "description": "Radiant → T3 Services Group → The Riverside Company."
+      },
+      {
+        "label": "A brand count is not HVAC market share",
+        "section": "not-market-share",
+        "description": "The census counts qualifying consumer-facing brands once."
+      }
+    ],
+    "sources": [
+      {
+        "label": "The Riverside Company — T3 Services Group portfolio entry",
+        "href": "https://www.riversidecompany.com/investment-portfolio/t3-services-group"
+      },
+      {
+        "label": "Gryphon Investors — majority investment in Southern Home Services holding company",
+        "href": "https://www.gryphon-inv.com/news/gryphon-investors-completes-majority-investment-in-southern-hvac-and-announces-new-home-services-holding-company/"
+      },
+      {
+        "label": "L Catterton — Master Trades Group investment",
+        "href": "https://www.lcatterton.com/investments.html"
+      }
+    ]
+  },
+  "who-owns-austin-plumbing-electrical-companies": {
+    "question": "Who Owns Austin’s Plumbing and Electrical Companies?",
+    "answer": "Austin plumbing and electrical ownership is increasingly multi-trade: several familiar local brands now sit inside broader home-services platforms while founder-owned and franchise businesses remain a large part of the researched universe.",
+    "paths": [
+      {
+        "label": "Why plumbing, HVAC, and electrical ownership increasingly overlaps",
+        "section": "multi-trade",
+        "description": "A home-services platform can cross-sell multiple trades into the same household, dispatch from a shared system, centralize call centers and marketing, and acquire add-on brands with adjacent licenses and technician bases."
+      },
+      {
+        "label": "Selected plumbing and electrical ownership chains",
+        "section": "selected-chains",
+        "description": "Radiant → T3 Services Group → The Riverside Company."
+      },
+      {
+        "label": "Franchise ownership is a different edge from platform ownership",
+        "section": "franchise",
+        "description": "A local franchisee can own or operate the Austin business while using a national brand whose franchisor has its own corporate owner."
+      }
+    ],
+    "sources": [
+      {
+        "label": "The Riverside Company — T3 Services Group portfolio entry",
+        "href": "https://www.riversidecompany.com/investment-portfolio/t3-services-group"
+      },
+      {
+        "label": "Gryphon Investors — majority investment in Southern Home Services holding company",
+        "href": "https://www.gryphon-inv.com/news/gryphon-investors-completes-majority-investment-in-southern-hvac-and-announces-new-home-services-holding-company/"
+      },
+      {
+        "label": "L Catterton — Master Trades Group investment",
+        "href": "https://www.lcatterton.com/investments.html"
+      }
+    ]
+  },
+  "private-equity-home-services-rollups": {
+    "question": "How Private-Equity Rollups Work in Home Services",
+    "answer": "Home-services rollups create value by combining fragmented local demand and retained brands with larger-platform purchasing, recruiting, dispatch, finance, and acquisition capacity; the structure can also add leverage, integration risk, and ownership opacity.",
+    "paths": [
+      {
+        "label": "Platform first, add-ons second",
+        "section": "platform-add-on",
+        "description": "The first larger investment creates a platform with management, systems, lender relationships, and a repeatable acquisition process."
+      },
+      {
+        "label": "Why acquired companies keep their names",
+        "section": "retained-brand",
+        "description": "Home services are highly local."
+      },
+      {
+        "label": "Where the rollup economics come from",
+        "section": "economics",
+        "description": "Potential gains include shared procurement, denser technician routing, centralized call conversion, broader recruiting, cross-selling between trades, standardized software, improved working-capital management, and lower-cost access to debt or insurance."
+      }
+    ],
+    "sources": [
+      {
+        "label": "The Riverside Company — T3 Services Group portfolio entry",
+        "href": "https://www.riversidecompany.com/investment-portfolio/t3-services-group"
+      },
+      {
+        "label": "Gryphon Investors — majority investment in Southern Home Services holding company",
+        "href": "https://www.gryphon-inv.com/news/gryphon-investors-completes-majority-investment-in-southern-hvac-and-announces-new-home-services-holding-company/"
+      },
+      {
+        "label": "L Catterton — Master Trades Group investment",
+        "href": "https://www.lcatterton.com/investments.html"
+      }
+    ]
+  },
+  "airline-loyalty-collateral-valuation": {
+    "question": "How Airline Loyalty Programs Are Valued as Collateral",
+    "answer": "A loyalty program becomes financeable when lenders can isolate recurring partner receipts and control the contracts, accounts, IP, reserves, and intercompany rights around them; valuation therefore starts with cash durability and collateral control rather than a retail cents-per-point estimate.",
+    "paths": [
+      {
+        "label": "Start with recurring partner cash, not point balances",
+        "section": "cash-flow",
+        "description": "The card issuer pays the airline under a long-term commercial relationship that bundles miles, marketing, customer access, brand rights, and benefits."
+      },
+      {
+        "label": "Control of the cash path is part of collateral value",
+        "section": "collateral-control",
+        "description": "A lender receives more protection when partner payments flow through pledged or controlled accounts before excess cash reaches the airline."
+      },
+      {
+        "label": "Program enterprise value and secured debt capacity are different",
+        "section": "enterprise-value",
+        "description": "A program can support $10 billion of debt and still be worth substantially more—or less—depending on cash growth, margins, reinvestment, partner concentration, contract renewal risk, and the discount rate."
+      }
+    ],
+    "sources": [
+      {
+        "label": "American Airlines Group — 2025 Form 10-K",
+        "href": "https://www.sec.gov/Archives/edgar/data/4515/000000620126000014/aal-20251231.htm"
+      },
+      {
+        "label": "American Airlines — $10 billion AAdvantage financing announcement",
+        "href": "https://www.sec.gov/Archives/edgar/data/4515/000000620121000024/aex991securednotespricingp.htm"
+      },
+      {
+        "label": "American Airlines — AAdvantage financing collateral and intercompany structure",
+        "href": "https://www.sec.gov/Archives/edgar/data/4515/000000620121000098/aal-20210930.htm"
+      }
+    ]
+  },
+  "humanoid-robot-startup-financing": {
+    "question": "How Humanoid-Robot Companies Finance Hardware Before Scale",
+    "answer": "Humanoid robotics is still financed mainly as venture and strategic growth equity because the capital must absorb technology, manufacturing, deployment, and market risk before individual robots or customer contracts can support standardized asset-level debt.",
+    "paths": [
+      {
+        "label": "Why equity carries the early hardware risk",
+        "section": "why-equity",
+        "description": "A lender prefers a stable asset value, predictable utilization, enforceable customer payments, and a clear recovery path."
+      },
+      {
+        "label": "Strategic investors can finance both capital and commercialization",
+        "section": "strategic-capital",
+        "description": "Apptronik’s disclosed investors include Google, Mercedes-Benz, AT&T Ventures, John Deere, and other financial investors."
+      },
+      {
+        "label": "The capital is funding factories and AI at the same time",
+        "section": "use-of-funds",
+        "description": "Figure said its Series C would support scaling robots into homes and commercial operations, expanding BotQ manufacturing, building GPU infrastructure for Helix training and simulation, and collecting new data."
+      }
+    ],
+    "sources": [
+      {
+        "label": "Apptronik — more than $935 million Series A financing",
+        "href": "https://apptronik.com/news-collection/apptronik-closes-over-935-million-series-a"
+      },
+      {
+        "label": "Figure — more than $1 billion Series C at $39 billion post-money valuation",
+        "href": "https://www.figure.ai/news/series-c"
+      }
+    ]
+  },
+  "who-owns-ntta": {
+    "question": "Who Owns NTTA? The North Texas Tollway Authority Is Public",
+    "answer": "NTTA is not owned by shareholders. It is a Texas political subdivision whose member counties appoint its public governance, while toll revenues support operations and revenue-backed debt.",
+    "paths": [
+      {
+        "label": "What NTTA legally is",
+        "section": "what-ntta-is",
+        "description": "NTTA is a regional tollway authority governed under Texas law."
+      },
+      {
+        "label": "Who controls the toll money",
+        "section": "who-controls-the-money",
+        "description": "NTTA says its toll projects receive no legislative appropriations and that tolls are collected to repay debt and operate and maintain the roadways."
+      },
+      {
+        "label": "Why TollTag can make private roads look like NTTA roads",
+        "section": "why-tolltag-confuses-ownership",
+        "description": "Electronic tolling separates the customer interface from the underlying asset."
+      }
+    ],
+    "sources": [
+      {
+        "label": "NTTA — September 2026 committee notice and authority description",
+        "href": "https://www.ntta.org/september-committee-meetings-0"
+      },
+      {
+        "label": "NTTA — financial information and debt-obligation transparency",
+        "href": "https://www.ntta.org/about-us/financial-information"
+      }
+    ]
+  },
+  "texas-toll-roads-public-vs-private": {
+    "question": "Are Texas Toll Roads Privately Owned? A Road-by-Road Answer",
+    "answer": "“Private toll road” usually describes a concession right, not private title to Texas highway land; most material systems are public, while four active major concessions hold time-limited private operating and revenue rights.",
+    "paths": [
+      {
+        "label": "The public side: NTTA, HCTRA, TxDOT, counties, and mobility authorities",
+        "section": "public-systems",
+        "description": "NTTA is a Texas political subdivision."
+      },
+      {
+        "label": "The private side: four active major concessions",
+        "section": "private-concessions",
+        "description": "North Tarrant Express, LBJ Express, and NTE 35W are TxDOT corridors in Dallas–Fort Worth with long-term private concession rights that end in 2061."
+      },
+      {
+        "label": "SH 288 shows why the date matters",
+        "section": "former-private",
+        "description": "SH 288’s managed lanes were built and operated under a concession whose original end date was 2068."
+      }
+    ],
+    "sources": [
+      {
+        "label": "NTTA — September 2026 committee notice and authority description",
+        "href": "https://www.ntta.org/september-committee-meetings-0"
+      },
+      {
+        "label": "HCTRA — FY2025 Toll Road Authority Enterprise Fund financial statements",
+        "href": "https://www.hctra.org/-/media/2ba0076447b44da0948e12147ce7a26b.ashx"
+      },
+      {
+        "label": "TxDOT — HB 803 Report on Toll Projects, FY2025",
+        "href": "https://www.txdot.gov/content/dam/docs/division/gov/hb-803-report-fy-2025.pdf"
+      }
+    ]
+  },
+  "who-owns-hctra-sam-houston-tollway": {
+    "question": "Who Owns HCTRA and the Sam Houston Tollway?",
+    "answer": "HCTRA is a public Harris County toll-road enterprise created by Commissioners Court, so the Sam Houston Tollway’s core ownership and governance are county-public rather than private.",
+    "paths": [
+      {
+        "label": "HCTRA is a Harris County authority, not a private company",
+        "section": "authority-structure",
+        "description": "Harris County created HCTRA after voters approved toll-road bond authority."
+      },
+      {
+        "label": "Who owns the Sam Houston Tollway",
+        "section": "sam-houston",
+        "description": "The Sam Houston Tollway belongs inside the HCTRA/Harris County public system."
+      },
+      {
+        "label": "Bondholders finance the system; they do not own the road",
+        "section": "bondholders",
+        "description": "Revenue bonds can give creditors a pledge of toll revenues and contractual protections around reserves, coverage, and additional borrowing."
+      }
+    ],
+    "sources": [
+      {
+        "label": "HCTRA — FY2025 Toll Road Authority Enterprise Fund financial statements",
+        "href": "https://www.hctra.org/-/media/2ba0076447b44da0948e12147ce7a26b.ashx"
+      }
+    ]
+  },
+  "foreign-owned-texas-toll-roads": {
+    "question": "Are Texas Toll Roads Foreign-Owned? What Cintra and Ferrovial Actually Own",
+    "answer": "Claims that foreign companies “own Texas toll roads” mix up two assets: Texas keeps title to the highway, while foreign infrastructure investors can own equity in private companies that hold toll and operating rights until a contract expires.",
+    "paths": [
+      {
+        "label": "What the foreign investor actually owns",
+        "section": "what-is-foreign-owned",
+        "description": "The shareholder owns an interest in a project company."
+      },
+      {
+        "label": "The three DFW concessions",
+        "section": "dfw-projects",
+        "description": "North Tarrant Express, LBJ Express, and NTE 35W all run to 2061 under the current concession schedule."
+      },
+      {
+        "label": "SH 130 shows why old foreign-ownership claims go stale",
+        "section": "sh130-history",
+        "description": "Cintra and Zachry were the original equity sponsors of SH 130 Segments 5–6."
+      }
+    ],
+    "sources": [
+      {
+        "label": "TxDOT — NTE 35W Amended and Restated Facility Agreement",
+        "href": "https://www.txdot.gov/content/dam/docs/business/alt-delivery/north-tarrant-express/nte-seg-3-amend-fac-agree.pdf"
+      },
+      {
+        "label": "TxDOT — HB 803 Report on Toll Projects, FY2025",
+        "href": "https://www.txdot.gov/content/dam/docs/division/gov/hb-803-report-fy-2025.pdf"
+      },
+      {
+        "label": "FHWA — DBFOM toll-concession project profiles",
+        "href": "https://www.fhwa.dot.gov/ipd/p3/defined/new_build_facilities/dbfom_toll_concessions.aspx"
+      }
+    ]
+  },
+  "texas-private-toll-rate-controls": {
+    "question": "Who Can Raise Texas Toll Rates? Public Boards, TxDOT, and Private Concessions",
+    "answer": "Texas toll pricing power is facility-specific: public authorities set rates through public governance, while private concessions price within detailed contractual frameworks rather than a blank check to charge any amount.",
+    "paths": [
+      {
+        "label": "Public toll systems use public rate policies",
+        "section": "public-rates",
+        "description": "NTTA, HCTRA, TxDOT, and regional mobility authorities are different issuers with different boards, statutes, debt covenants, and rate-setting processes."
+      },
+      {
+        "label": "Private concession rates are contract rights",
+        "section": "concession-rates",
+        "description": "A toll concession is negotiated around a defined pricing mechanism."
+      },
+      {
+        "label": "Revenue sharing and competition can matter as much as a formal cap",
+        "section": "economic-controls",
+        "description": "Toll control is not only a maximum posted price."
+      }
+    ],
+    "sources": [
+      {
+        "label": "NTTA — financial information and debt-obligation transparency",
+        "href": "https://www.ntta.org/about-us/financial-information"
+      },
+      {
+        "label": "TxDOT — NTE 35W Amended and Restated Facility Agreement",
+        "href": "https://www.txdot.gov/content/dam/docs/business/alt-delivery/north-tarrant-express/nte-seg-3-amend-fac-agree.pdf"
+      },
+      {
+        "label": "TxDOT — HB 803 Report on Toll Projects, FY2025",
+        "href": "https://www.txdot.gov/content/dam/docs/division/gov/hb-803-report-fy-2025.pdf"
+      }
+    ]
+  },
+  "who-owns-us-toll-roads": {
+    "question": "Who Owns Toll Roads in the United States?",
+    "answer": "U.S. toll roads are predominantly organized through state and local public entities, with private participation concentrated in specific leases and DBFOM toll concessions rather than a single private national network.",
+    "paths": [
+      {
+        "label": "The common public ownership models",
+        "section": "public-models",
+        "description": "Many toll systems are held by a state authority or state DOT."
+      },
+      {
+        "label": "Where private companies enter",
+        "section": "private-models",
+        "description": "FHWA’s P3 library documents long-term leases such as the Chicago Skyway and Indiana Toll Road as well as DBFOM toll concessions including NTE in Texas, I-77 Express Lanes in North Carolina, I-495 and I-95 HOT lanes in Virginia, and other project-specific facilities."
+      },
+      {
+        "label": "Why federal toll inventories list owner and operator separately",
+        "section": "owner-vs-operator",
+        "description": "FHWA facility records make an important distinction between the agency associated with the road and the operating/pricing characteristics of the facility."
+      }
+    ],
+    "sources": [
+      {
+        "label": "FHWA — public-private partnership agreement library",
+        "href": "https://www.fhwa.dot.gov/ipd/p3/p3_projects/agreements.aspx"
+      },
+      {
+        "label": "FHWA — DBFOM toll-concession project profiles",
+        "href": "https://www.fhwa.dot.gov/ipd/p3/defined/new_build_facilities/dbfom_toll_concessions.aspx"
+      },
+      {
+        "label": "FHWA — Toll Facilities in the United States",
+        "href": "https://www.fhwa.dot.gov/policyinformation/tollpage/page08.cfm"
+      }
+    ]
+  },
+  "texas-managed-lanes-ownership-operators": {
+    "question": "Who Owns Texas Managed Lanes and Express Lanes?",
+    "answer": "Texas managed lanes are a service design, not an ownership category: identical-looking express lanes can sit in fully public systems or state-owned corridors whose toll economics are concessioned to private project companies.",
+    "paths": [
+      {
+        "label": "A managed lane can have four different “owners” in casual conversation",
+        "section": "ownership-stack",
+        "description": "The state can own the roadway."
+      },
+      {
+        "label": "NTE, LBJ, and NTE 35W are public corridors with private concession economics",
+        "section": "dfw-concessions",
+        "description": "The three DFW projects run under long-term concession structures to 2061."
+      },
+      {
+        "label": "Other managed lanes can remain fully public",
+        "section": "public-managed-lanes",
+        "description": "FHWA’s toll-facility inventory identifies Texas managed lanes such as I-35E with TxDOT as the owner and describes the dynamic-pricing regime."
+      }
+    ],
+    "sources": [
+      {
+        "label": "TxDOT — NTE 35W Amended and Restated Facility Agreement",
+        "href": "https://www.txdot.gov/content/dam/docs/business/alt-delivery/north-tarrant-express/nte-seg-3-amend-fac-agree.pdf"
+      },
+      {
+        "label": "TxDOT — HB 803 Report on Toll Projects, FY2025",
+        "href": "https://www.txdot.gov/content/dam/docs/division/gov/hb-803-report-fy-2025.pdf"
+      },
+      {
+        "label": "FHWA — Toll Facilities in the United States",
+        "href": "https://www.fhwa.dot.gov/policyinformation/tollpage/page08.cfm"
+      }
+    ]
+  },
+  "texas-private-toll-concession-expiration-dates": {
+    "question": "When Do Texas Private Toll-Road Concessions Expire?",
+    "answer": "Texas private toll concessions are wasting contractual assets: the DFW concessions currently terminate in 2061 and SH 130 5–6 in 2062, after which the private revenue right ends unless the contract is extended or changed.",
+    "paths": [
+      {
+        "label": "The current Texas concession clock",
+        "section": "expiration-table",
+        "description": "NTE Segments 1 and 2W: 2061."
+      },
+      {
+        "label": "What actually expires in 2061 or 2062",
+        "section": "what-expires",
+        "description": "The project company’s contractual operating, leasehold, and toll-revenue rights reach the end of their term, subject to the agreement."
+      },
+      {
+        "label": "Why expiration changes infrastructure valuation",
+        "section": "valuation",
+        "description": "A normal perpetual-company discounted cash-flow model assumes some continuing terminal economics."
+      }
+    ],
+    "sources": [
+      {
+        "label": "TxDOT — HB 803 Report on Toll Projects, FY2025",
+        "href": "https://www.txdot.gov/content/dam/docs/division/gov/hb-803-report-fy-2025.pdf"
+      },
+      {
+        "label": "TxDOT — NTE 35W Amended and Restated Facility Agreement",
+        "href": "https://www.txdot.gov/content/dam/docs/business/alt-delivery/north-tarrant-express/nte-seg-3-amend-fac-agree.pdf"
+      },
+      {
+        "label": "FHWA — public-private partnership agreement library",
+        "href": "https://www.fhwa.dot.gov/ipd/p3/p3_projects/agreements.aspx"
+      }
+    ]
   }
 }

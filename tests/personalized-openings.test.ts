@@ -13,6 +13,8 @@ import { withLandingOpening } from '../src/personal/landing/opening-copy.ts'
 import { CHAPTERS } from '../src/personal/landing/sequence.ts'
 import { resolveRoute } from '../src/personal/editorial/routes.ts'
 import { createPersonalAnalytics, type AnalyticsWindow } from '../src/personal/analytics.ts'
+import { prepareOpeningInputs } from '../tools/outreach/prepare-openings.ts'
+import { escapeMetadata } from '../src/personal/search-metadata.ts'
 
 const lines: OpeningLines = ['Hi Alex — I built Atlas with', 'Python and SQL.', 'I care about answers with', 'checkable sources.']
 const homepage = '<html><head><title>Home</title></head><body><!--public-page:start--><main><h1>Sulayman Bowles</h1><p>Original introduction.</p><section><h2>Standard writing</h2><a href="/resume">Résumé</a><p>Protected content.</p></section></main><!--public-page:end--></body></html>'
@@ -119,13 +121,66 @@ test('authenticated opening sync writes once, rejects tampering and retries afte
   assert.equal((await handler(signed([row], 'wrong-secret'.repeat(4)))).status, 401)
 })
 
-test('one exact selected opening reaches readable HTML and React context without a contact roster', () => {
+test('spreadsheet arguments survive preparation, signed sync and visible rendering at the same URL', async () => {
+  const secret='test-only-worksheet-rendering-secret-'.repeat(2)
+  const cells=Array<string>(23).fill('')
+  cells[0]=randomUUID(); cells[1]='IBM'; cells[2]='private-relationship'; cells[3]='Morgan'
+  cells[4]='private-app-key'; cells[5]='product roles'; cells[6]='https://example.test/private-jd'
+  cells[7]='Private source excerpt'; cells[9]='I build AI tools at Chegg.'
+  cells[12]='I’m interested in enterprise AI.'; cells[17]='Ready'; cells[22]='AI product prototyping'
+  cells.splice(13,4,'{{salutation}} — {{role}}.','{{contribution}} for {{company}}.','{{evidence_1}}','{{why_company}}')
+  const peer=[...cells]; peer[0]=randomUUID(); peer[3]='Taylor'
+  let registry=emptyRegistry()
+  const sync=createSyncHandler({read:async()=>registry,write:async value=>{registry=value}},reserved,secret)
+  const serve=createOutreachHomeHandler(async()=>registry,async missing=>missing?'Not found':homepage)
+  const path=personalizedOpeningPath(cells[0])
+  async function publish() {
+    const response=await sync(signed(prepareOpeningInputs([cells,peer]),secret))
+    assert.equal(response.status,200)
+    const receipt=await response.json()
+    assert.equal(receipt.links.find((link:{recordId:string})=>link.recordId===cells[0]).url,'https://sulayman-bowles.dev'+path)
+  }
+  async function visible(id=cells[0]) {
+    const response=await serve(new Request('https://example.test'+personalizedOpeningPath(id)+'?greeting=Spoof'))
+    assert.equal(response.status,200)
+    const html=await response.text()
+    const context=documentOutreachCompany(documentFor(html),personalizedOpeningPath(id))!
+    const introduction=recruiterOpening(context).introduction
+    assert(html.includes('<h1>Sulayman Bowles</h1><p>'+escapeMetadata(introduction)+'</p>'))
+    for(const field of ['private-relationship','private-app-key','private-jd','Private source excerpt','Spoof']) assert(!html.includes(field),field)
+    assert(html.includes('Protected content.'))
+    return introduction
+  }
+  await publish()
+  const peerBefore=await visible(peer[0])
+  assert.match(await visible(),/^Hi Morgan — product roles\./)
+  for(const [column,value] of [[3,'Riley'],[5,'finance roles'],[22,'financial modeling'],[9,'I build financial models at Texas Venture Labs.'],[12,'I’m interested in business planning.'],[1,'Google']] as const) {
+    const previous=await visible()
+    cells[column]=value
+    await publish()
+    const current=await visible()
+    assert.notEqual(current,previous)
+    assert(current.includes(value))
+    assert.equal(await visible(peer[0]),peerBefore)
+  }
+  cells[3]=''
+  await publish()
+  const published=await visible()
+  assert.match(published,/^Hi Google team — finance roles\./)
+  cells[17]='Draft'; cells[5]='Unpublished edit'
+  await publish()
+  assert.equal(await visible(),published)
+})
+
+test('an individual alias displays its approved worksheet copy in the introduction while preserving the original headline and homepage', () => {
   const row = ready()
   const html = outreachDocument(homepage, 'google', 'Google', { id: row.recordId, lines })
   const path = personalizedOpeningPath(row.recordId)
   const company = documentOutreachCompany(documentFor(html), path)!
   assert.deepEqual(company, { slug: 'google', name: 'Google', opening: { id: row.recordId, lines } })
-  assert(html.includes(lines.join(' ')))
+  const body=html.match(/<main\b[^]*?<\/main>/)![0]
+  assert(body.includes('<h1>Sulayman Bowles</h1>'))
+  assert(body.includes('<p>'+escapeMetadata(lines.join(' '))+'</p>'))
   assert(html.includes('Protected content.'))
   assert.equal(resolveRoute('', path, [], path.slice(1)), 'recruiter')
   assert.equal(resolveRoute('#/', path, [], path.slice(1)), '')
@@ -133,7 +188,8 @@ test('one exact selected opening reaches readable HTML and React context without
   assert.equal(documentOutreachCompany(documentFor(html), personalizedOpeningPath(randomUUID())), undefined)
   assert.equal(documentOutreachCompany(documentFor(html.replace(row.recordId, randomUUID())), path), undefined)
   const opening = recruiterOpening(company)
-  assert.deepEqual(opening.lines, lines)
+  assert.equal(opening.lines.join(' '),'The frontier is all that matters.')
+  assert.equal(opening.introduction,lines.join(' '))
   assert.equal(opening.href, '/resume')
   assert.equal(opening.article.href, '/')
   assert(withLandingOpening(opening).slice(1).every((chapter, index) => chapter === CHAPTERS[index + 1]))
@@ -146,7 +202,9 @@ test('selected text is escaped in HTML and inert JSON, including closing-script 
   const html = outreachDocument(homepage, 'google', 'Google', { id, lines: copy })
   assert(!html.includes('</script><script>bad()'))
   assert(html.includes('\\u003c/script\\u003e'))
-  assert(html.includes('&lt;R&amp;D&gt;'))
+  const visible=html.match(/<main\b[^]*?<\/main>/)![0]
+  assert(visible.includes('&lt;R&amp;D&gt;'))
+  assert(visible.includes('&lt;/script&gt;&lt;script&gt;bad()&lt;/script&gt;'))
   assert.deepEqual(documentOutreachCompany(documentFor(html), personalizedOpeningPath(id))?.opening?.lines, copy)
 })
 

@@ -1,6 +1,6 @@
 import type { ArticleSummary } from './types.ts'
 
-// Editorial order is independent of publication date and search filters.
+// Curated membership and tie order are independent of search filters.
 export const selectedWritingSlugs = [
   'the-first-ai-managers',
   'the-ai-megawatt',
@@ -18,8 +18,19 @@ const noteSlugs = new Set([
   'canonical-identity-personal-seo', 'ai-search-crawler-policy',
 ])
 
+export function newestWritingFirst(articles: ArticleSummary[]) {
+  // Retained manuscripts use both YYYY.MM.DD and ISO YYYY-MM-DD. Normalize
+  // separators before sorting; stable ties retain curated/catalog order.
+  const newestFirst = (a: ArticleSummary, b: ArticleSummary) => b.date.replaceAll('.', '-').localeCompare(a.date.replaceAll('.', '-'))
+  return [...articles].sort(newestFirst)
+}
+
 export function writingSelection(articles: ArticleSummary[]) {
   const selected = selectedWritingSlugs.flatMap(slug => articles.filter(article => article.slug === slug))
   const rest = articles.filter(article => !selectedWritingSlugs.includes(article.slug))
-  return { selected, more: rest.filter(article => !noteSlugs.has(article.slug)), notes: rest.filter(article => noteSlugs.has(article.slug)) }
+  return {
+    selected: newestWritingFirst(selected),
+    more: newestWritingFirst(rest.filter(article => !noteSlugs.has(article.slug))),
+    notes: newestWritingFirst(rest.filter(article => noteSlugs.has(article.slug))),
+  }
 }

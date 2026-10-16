@@ -1,0 +1,133 @@
+{
+  "kind": "research",
+  "cluster": "financial-systems",
+  "slug": "foreign-owned-texas-toll-roads",
+  "number": "34",
+  "category": "TEXAS INFRASTRUCTURE",
+  "title": "Are Texas Toll Roads Foreign-Owned? What Cintra and Ferrovial Actually Own",
+  "seoTitle": "Are Texas Toll Roads Foreign-Owned? Cintra & Ferrovial Explained",
+  "subtitle": "Foreign infrastructure investors own stakes in several Texas concession companies. Texas still owns the underlying state-highway corridors.",
+  "seoDescription": "Are Texas toll roads foreign-owned? Separate state ownership of the road from foreign investor stakes in NTE, LBJ and NTE 35W concession companies.",
+  "artwork": {
+    "kind": "study",
+    "variant": "triptych",
+    "label": "Texas / concession company / foreign investor",
+    "note": "The legally important line runs between public title to the road and equity ownership of the time-limited concession company."
+  },
+  "date": "2026.09.23",
+  "lastVerified": "2026.09.23",
+  "readTime": "3 MIN",
+  "author": "SULAYMAN BOWLES",
+  "thesis": "Claims that foreign companies “own Texas toll roads” mix up two assets: Texas keeps title to the highway, while foreign infrastructure investors can own equity in private companies that hold toll and operating rights until a contract expires.",
+  "conclusion": {
+    "title": "Foreign investors own concession equity, not Texas sovereignty",
+    "content": "NTE, LBJ, and NTE 35W have foreign-linked infrastructure investors in their project companies, but the state retains title to the corridors. The investable asset is a finite bundle of toll, operating, and contractual rights—not perpetual ownership of Texas land."
+  },
+  "evidenceBoundary": "Investor percentages can change through transfers, refinancings, or restructurings. This note uses the project ownership evidence in the site’s 2026 toll-road dataset and current public-source checks; it does not describe any investor as owning the State of Texas roadway itself.",
+  "metrics": [
+    {
+      "label": "DFW concessions reviewed",
+      "value": "3"
+    },
+    {
+      "label": "Road title",
+      "value": "STATE OF TEXAS"
+    },
+    {
+      "label": "DFW concession end",
+      "value": "2061"
+    },
+    {
+      "label": "Ownership object",
+      "value": "PROJECT-COMPANY EQUITY"
+    }
+  ],
+  "resources": [
+    {
+      "label": "Texas toll-road ownership dataset",
+      "href": "/research/texas-toll-road-ownership-2026.csv",
+      "description": "Project-level public/private ownership, operator, toll-revenue claimant, concession term, billing agent, and evidence-date records.",
+      "format": "CSV"
+    },
+    {
+      "label": "Texas toll-road ownership investigation",
+      "href": "/markets/who-owns-texas-toll-roads",
+      "description": "The long-form ownership and capital-stack investigation behind this query-specific note.",
+      "format": "WEB"
+    }
+  ],
+  "content": [
+    "Yes, foreign infrastructure investors hold equity interests in some Texas toll-road concession companies. No, that does not mean a foreign country or company owns the Texas highway itself. The distinction is easiest to see in Dallas–Fort Worth, where TxDOT keeps title to NTE, LBJ Express, and NTE 35W while private project companies hold long-dated operating and toll-revenue rights.",
+    "Ferrovial’s Cintra business is a major shareholder in all three DFW concession companies, alongside infrastructure investors such as Meridiam and APG-managed capital. Those percentages describe ownership of the concession vehicles. TxDOT agreements expressly preserve public title to the facility and right-of-way."
+  ],
+  "sections": [
+    {
+      "id": "what-is-foreign-owned",
+      "title": "What the foreign investor actually owns",
+      "paragraphs": [
+        "The shareholder owns an interest in a project company. The project company owns contractual rights and obligations: it may operate managed lanes, collect defined toll revenue, maintain the facility, service project debt, share revenue with TxDOT, and hand the facility back under specified conditions.",
+        "That equity can be sold, refinanced, pledged, or diluted subject to the concession and financing documents. The highway land is a different asset. TxDOT’s NTE agreement states that fee title remains with TxDOT even while the developer holds a leasehold estate and concession rights."
+      ]
+    },
+    {
+      "id": "dfw-projects",
+      "title": "The three DFW concessions",
+      "paragraphs": [
+        "North Tarrant Express, LBJ Express, and NTE 35W all run to 2061 under the current concession schedule. Ferrovial/Cintra has disclosed controlling or majority stakes in the project companies, with Meridiam and APG interests making up the remaining equity in the published structures.",
+        "These are financially significant private assets. The project companies receive toll cash, carry project debt, and can distribute residual cash to shareholders after operating costs, reserves, debt service, and public-sharing obligations. Calling them “nothing but contractors” would be as inaccurate as saying they own the Texas roadway outright."
+      ]
+    },
+    {
+      "id": "sh130-history",
+      "title": "SH 130 shows why old foreign-ownership claims go stale",
+      "paragraphs": [
+        "Cintra and Zachry were the original equity sponsors of SH 130 Segments 5–6. After traffic materially underperformed forecasts, the project entered Chapter 11 in 2016 and the original equity was eliminated in the 2017 restructuring. Creditors, including Strategic Value Partners-related capital and the U.S. government through its TIFIA recovery, emerged with interests in the reorganized borrower.",
+        "A claim that Spain or Cintra “owns SH 130” based on the original financing is therefore historically stale. Texas remained the titleholder before, during, and after the restructuring; what changed was equity ownership of the concession company."
+      ]
+    },
+    {
+      "id": "language-test",
+      "title": "A better wording test",
+      "paragraphs": [
+        "Use “foreign-backed concession company” when the equity sits with foreign infrastructure investors. Use “publicly owned roadway under private concession” for the physical asset plus operating rights. Reserve “foreign-owned road” for a case where the actual road asset is privately owned by that investor, which is not what the cited Texas concession documents describe.",
+        "This wording is less dramatic but much more useful for understanding who can raise capital, who receives cash, who bears traffic risk, and what disappears when the concession expires."
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "id": "S1",
+      "label": "TxDOT — NTE 35W Amended and Restated Facility Agreement",
+      "href": "https://www.txdot.gov/content/dam/docs/business/alt-delivery/north-tarrant-express/nte-seg-3-amend-fac-agree.pdf",
+      "lastVerified": "2026.09.23"
+    },
+    {
+      "id": "S2",
+      "label": "TxDOT — HB 803 Report on Toll Projects, FY2025",
+      "href": "https://www.txdot.gov/content/dam/docs/division/gov/hb-803-report-fy-2025.pdf",
+      "lastVerified": "2026.09.23"
+    },
+    {
+      "id": "S3",
+      "label": "FHWA — DBFOM toll-concession project profiles",
+      "href": "https://www.fhwa.dot.gov/ipd/p3/defined/new_build_facilities/dbfom_toll_concessions.aspx",
+      "lastVerified": "2026.09.23"
+    },
+    {
+      "id": "S4",
+      "label": "Ferrovial — 2026 Fact Book, concession ownership and project economics",
+      "href": "https://www.sec.gov/Archives/edgar/data/1468522/000162828026032618/ferrovial-factbook2026_s.htm",
+      "lastVerified": "2026.09.23"
+    },
+    {
+      "id": "S5",
+      "label": "U.S. DOT Build America — SH 130 Segments 5–6 financing and restructuring",
+      "href": "https://www.transportation.gov/buildamerica/projects/sh-130-segments-5-and-6",
+      "lastVerified": "2026.09.23"
+    }
+  ],
+  "path": "/research/financial-systems/foreign-owned-texas-toll-roads",
+  "aliases": [],
+  "dateModified": "2026.09.23",
+  "image": "/images/generative-art/yuru-32.webp"
+}

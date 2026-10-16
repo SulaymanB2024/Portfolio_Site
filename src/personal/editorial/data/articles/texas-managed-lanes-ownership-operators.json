@@ -1,0 +1,121 @@
+{
+  "kind": "research",
+  "cluster": "financial-systems",
+  "slug": "texas-managed-lanes-ownership-operators",
+  "number": "37",
+  "category": "TEXAS INFRASTRUCTURE",
+  "title": "Who Owns Texas Managed Lanes and Express Lanes?",
+  "seoTitle": "Who Owns Texas Express Lanes? Owner vs Operator Map",
+  "subtitle": "Managed lanes can be state-owned, authority-owned, or privately operated under concession. The tolling account and operator name are not reliable shortcuts to ownership.",
+  "seoDescription": "Who owns Texas managed and express lanes? Compare TxDOT-owned lanes, NTTA billing, and private concession operators on NTE, LBJ, NTE 35W and other corridors.",
+  "artwork": {
+    "kind": "study",
+    "variant": "triptych",
+    "label": "Managed lane / owner / operator",
+    "note": "One corridor can contain public general-purpose lanes and tolled managed lanes with a separate operator and cash-flow claimant."
+  },
+  "date": "2026.09.23",
+  "lastVerified": "2026.09.23",
+  "readTime": "3 MIN",
+  "author": "SULAYMAN BOWLES",
+  "thesis": "Texas managed lanes are a service design, not an ownership category: identical-looking express lanes can sit in fully public systems or state-owned corridors whose toll economics are concessioned to private project companies.",
+  "conclusion": {
+    "title": "“Managed lane” describes traffic management, not who owns it",
+    "content": "Identify each corridor separately. TxDOT can own the right-of-way, a concessionaire can operate and monetize the managed lanes, NTTA can process toll transactions, and general-purpose lanes can remain free beside them—all at the same location."
+  },
+  "evidenceBoundary": "Facility structures change through amendments, expansions, terminations, and handbacks. This note focuses on representative Texas arrangements and the major DFW concessions rather than every HOV/HOT or express lane in the state.",
+  "metrics": [
+    {
+      "label": "NTE titleholder",
+      "value": "TXDOT"
+    },
+    {
+      "label": "NTE operator",
+      "value": "NTE MOBILITY PARTNERS"
+    },
+    {
+      "label": "NTE end date",
+      "value": "2061"
+    },
+    {
+      "label": "Pricing model",
+      "value": "FIXED OR DYNAMIC BY FACILITY"
+    }
+  ],
+  "resources": [
+    {
+      "label": "Texas toll-road ownership dataset",
+      "href": "/research/texas-toll-road-ownership-2026.csv",
+      "description": "Project-level public/private ownership, operator, toll-revenue claimant, concession term, billing agent, and evidence-date records.",
+      "format": "CSV"
+    },
+    {
+      "label": "Texas toll-road ownership investigation",
+      "href": "/markets/who-owns-texas-toll-roads",
+      "description": "The long-form ownership and capital-stack investigation behind this query-specific note.",
+      "format": "WEB"
+    }
+  ],
+  "content": [
+    "“Managed lane” tells you how a lane is operated, not who owns it. Texas uses tolled express or managed lanes to sell a faster, more reliable trip beside general-purpose lanes. Some are operated directly in public systems. Others are publicly owned corridors with long-term private concession companies controlling the managed-lane toll economics.",
+    "North Tarrant Express is the clearest example. TxDOT retains title to the facility and right-of-way. NTE Mobility Partners holds the concession rights and operates the managed lanes. NTTA’s collection platform can handle billing. Those three roles coexist without being interchangeable."
+  ],
+  "sections": [
+    {
+      "id": "ownership-stack",
+      "title": "A managed lane can have four different “owners” in casual conversation",
+      "paragraphs": [
+        "The state can own the roadway. A private project company can hold a leasehold and concession. A contractor can physically operate or maintain equipment. A toll authority can issue the tag and process payment. Only the first two usually bear on the property and residual economic ownership question.",
+        "This layered structure is why searching only the lane brand often produces contradictory answers. Each source is answering a different layer."
+      ]
+    },
+    {
+      "id": "dfw-concessions",
+      "title": "NTE, LBJ, and NTE 35W are public corridors with private concession economics",
+      "paragraphs": [
+        "The three DFW projects run under long-term concession structures to 2061. Their private project companies carry project debt, operating obligations, and toll-revenue rights subject to contract terms and public sharing.",
+        "TxDOT does not disappear from the structure. It retains public ownership and contractual enforcement powers. At the end of the concession, the private operating and revenue rights expire unless a contract is lawfully extended."
+      ]
+    },
+    {
+      "id": "public-managed-lanes",
+      "title": "Other managed lanes can remain fully public",
+      "paragraphs": [
+        "FHWA’s toll-facility inventory identifies Texas managed lanes such as I-35E with TxDOT as the owner and describes the dynamic-pricing regime. Public ownership and dynamic pricing are therefore compatible; dynamic tolling is not evidence of privatization.",
+        "Likewise, a public authority can operate express lanes using the same transponder technology and similar pricing logic without a private equity concession behind the facility."
+      ]
+    },
+    {
+      "id": "driver-checklist",
+      "title": "The four questions a driver or analyst should ask",
+      "paragraphs": [
+        "First: who holds title to the corridor? Second: who operates the tolled lane? Third: who keeps the toll revenue after collection and required payments? Fourth: does that right expire under a concession or continue in a public system?",
+        "Once those are answered, the transponder brand and payment processor can be treated as what they are: customer infrastructure rather than an ownership shortcut."
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "id": "S1",
+      "label": "TxDOT — NTE 35W Amended and Restated Facility Agreement",
+      "href": "https://www.txdot.gov/content/dam/docs/business/alt-delivery/north-tarrant-express/nte-seg-3-amend-fac-agree.pdf",
+      "lastVerified": "2026.09.23"
+    },
+    {
+      "id": "S2",
+      "label": "TxDOT — HB 803 Report on Toll Projects, FY2025",
+      "href": "https://www.txdot.gov/content/dam/docs/division/gov/hb-803-report-fy-2025.pdf",
+      "lastVerified": "2026.09.23"
+    },
+    {
+      "id": "S3",
+      "label": "FHWA — Toll Facilities in the United States",
+      "href": "https://www.fhwa.dot.gov/policyinformation/tollpage/page08.cfm",
+      "lastVerified": "2026.09.23"
+    }
+  ],
+  "path": "/research/financial-systems/texas-managed-lanes-ownership-operators",
+  "aliases": [],
+  "dateModified": "2026.09.23",
+  "image": "/images/generative-art/yuru-32.webp"
+}

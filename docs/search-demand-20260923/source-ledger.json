@@ -1,0 +1,647 @@
+{
+  "sourceRef": "088e1e7621fa0636ceaa52b96d5beba3085bbe66",
+  "sourcePr": "https://github.com/SulaymanB2024/Portfolio_Site/pull/63",
+  "note": "Historical source labels, URLs, order and verification dates are copied from the September 23 edition. This integration does not refresh or independently reverify them.",
+  "articles": [
+    {
+      "slug": "openai-crawlers-oai-searchbot-gptbot-chatgpt-user-adsbot",
+      "canonicalPath": "/research/ai-crawlers/openai-crawlers-oai-searchbot-gptbot-chatgpt-user-adsbot",
+      "evidenceBoundary": "OpenAI can change crawler names, versions, IP ranges, and product behavior. This page reflects official documentation checked September 23, 2026. robots.txt expresses crawler policy; it does not authenticate a request or secure private content.",
+      "manuscriptLastVerified": "2026.09.23",
+      "sources": [
+        {
+          "id": "S1",
+          "label": "OpenAI — Overview of OpenAI Crawlers",
+          "href": "https://developers.openai.com/api/docs/bots",
+          "lastVerified": "2026.09.23"
+        },
+        {
+          "id": "S2",
+          "label": "OpenAI — ChatGPT Search publisher guidance",
+          "href": "https://help.openai.com/en/articles/9237897-chatgpt-search",
+          "lastVerified": "2026.09.23"
+        }
+      ]
+    },
+    {
+      "slug": "verify-ai-crawlers-server-logs",
+      "canonicalPath": "/research/crawler-engineering/verify-ai-crawlers-server-logs",
+      "evidenceBoundary": "Provider IP ranges can change, proxies can mask client addresses, and some user-triggered fetchers have different robots behavior from automatic crawlers. Network-range matching supports attribution but does not identify the individual end user or prove how fetched content was later used.",
+      "manuscriptLastVerified": "2026.09.23",
+      "sources": [
+        {
+          "id": "S1",
+          "label": "OpenAI — Overview of OpenAI Crawlers",
+          "href": "https://developers.openai.com/api/docs/bots",
+          "lastVerified": "2026.09.23"
+        },
+        {
+          "id": "S2",
+          "label": "Anthropic — ClaudeBot, Claude-User, and Claude-SearchBot guidance",
+          "href": "https://support.claude.com/en/articles/8896518-does-anthropic-crawl-data-from-the-web-and-how-can-site-owners-block-the-crawler",
+          "lastVerified": "2026.09.23"
+        },
+        {
+          "id": "S3",
+          "label": "Perplexity — crawler and user-agent documentation",
+          "href": "https://docs.perplexity.ai/docs/resources/perplexity-crawlers",
+          "lastVerified": "2026.09.23"
+        },
+        {
+          "id": "S4",
+          "label": "Google — verify crawler and fetcher requests",
+          "href": "https://developers.google.com/crawling/docs/crawlers-fetchers/verify-google-requests",
+          "lastVerified": "2026.09.23"
+        }
+      ]
+    },
+    {
+      "slug": "claude-crawlers-claudebot-searchbot-user",
+      "canonicalPath": "/research/ai-crawlers/claude-crawlers-claudebot-searchbot-user",
+      "evidenceBoundary": "Anthropic’s guidance and network ranges can change. robots.txt is a crawler-policy layer, not authentication. This page reports official documentation as checked September 23, 2026 and does not infer training or citation from a server request.",
+      "manuscriptLastVerified": "2026.09.23",
+      "sources": [
+        {
+          "id": "S1",
+          "label": "Anthropic — ClaudeBot, Claude-User, and Claude-SearchBot guidance",
+          "href": "https://support.claude.com/en/articles/8896518-does-anthropic-crawl-data-from-the-web-and-how-can-site-owners-block-the-crawler",
+          "lastVerified": "2026.09.23"
+        }
+      ]
+    },
+    {
+      "slug": "perplexitybot-vs-perplexity-user",
+      "canonicalPath": "/research/ai-crawlers/perplexitybot-vs-perplexity-user",
+      "evidenceBoundary": "Perplexity states that crawler-policy changes can take time and that current IP lists should be treated as the source of truth. This article reflects documentation checked September 23, 2026. A fetch does not prove ranking, citation, or training use.",
+      "manuscriptLastVerified": "2026.09.23",
+      "sources": [
+        {
+          "id": "S1",
+          "label": "Perplexity — crawler and user-agent documentation",
+          "href": "https://docs.perplexity.ai/docs/resources/perplexity-crawlers",
+          "lastVerified": "2026.09.23"
+        }
+      ]
+    },
+    {
+      "slug": "google-extended-search-gemini-ai-overviews",
+      "canonicalPath": "/research/ai-crawlers/google-extended-search-gemini-ai-overviews",
+      "evidenceBoundary": "Google changes product documentation over time. This note reports the documented scope of Google-Extended and Search AI controls as checked September 23, 2026. It does not claim that robots.txt can stop content already indexed from every downstream product use.",
+      "manuscriptLastVerified": "2026.09.23",
+      "sources": [
+        {
+          "id": "S1",
+          "label": "Google — common crawlers and Google-Extended",
+          "href": "https://developers.google.com/crawling/docs/crawlers-fetchers/google-common-crawlers",
+          "lastVerified": "2026.09.23"
+        },
+        {
+          "id": "S2",
+          "label": "Google Search Central — AI features and publisher controls",
+          "href": "https://developers.google.com/search/docs/appearance/ai-features",
+          "lastVerified": "2026.09.23"
+        },
+        {
+          "id": "S3",
+          "label": "Google — verify crawler and fetcher requests",
+          "href": "https://developers.google.com/crawling/docs/crawlers-fetchers/verify-google-requests",
+          "lastVerified": "2026.09.23"
+        }
+      ]
+    },
+    {
+      "slug": "ai-crawler-registry",
+      "canonicalPath": "/research/ai-crawlers/ai-crawler-registry",
+      "evidenceBoundary": "This registry focuses on major publisher-facing identities documented by OpenAI, Anthropic, Perplexity, and Google as of September 23, 2026. It is not a claim that every AI product crawler is listed, and individual providers can change behavior or add agents after the evidence date.",
+      "manuscriptLastVerified": "2026.09.23",
+      "sources": [
+        {
+          "id": "S1",
+          "label": "OpenAI — Overview of OpenAI Crawlers",
+          "href": "https://developers.openai.com/api/docs/bots",
+          "lastVerified": "2026.09.23"
+        },
+        {
+          "id": "S2",
+          "label": "Anthropic — ClaudeBot, Claude-User, and Claude-SearchBot guidance",
+          "href": "https://support.claude.com/en/articles/8896518-does-anthropic-crawl-data-from-the-web-and-how-can-site-owners-block-the-crawler",
+          "lastVerified": "2026.09.23"
+        },
+        {
+          "id": "S3",
+          "label": "Perplexity — crawler and user-agent documentation",
+          "href": "https://docs.perplexity.ai/docs/resources/perplexity-crawlers",
+          "lastVerified": "2026.09.23"
+        },
+        {
+          "id": "S4",
+          "label": "Google — common crawlers and Google-Extended",
+          "href": "https://developers.google.com/crawling/docs/crawlers-fetchers/google-common-crawlers",
+          "lastVerified": "2026.09.23"
+        },
+        {
+          "id": "S5",
+          "label": "Google — verify crawler and fetcher requests",
+          "href": "https://developers.google.com/crawling/docs/crawlers-fetchers/verify-google-requests",
+          "lastVerified": "2026.09.23"
+        }
+      ]
+    },
+    {
+      "slug": "search-console-query-vs-page-totals",
+      "canonicalPath": "/research/search-console/search-console-query-vs-page-totals",
+      "evidenceBoundary": "Search Console privacy thresholds and internal serving limits are not fully exposed, so the exact composition of the hidden residual cannot be reconstructed from the UI. Google explicitly documents anonymized queries and truncation; this page does not attempt to deanonymize them.",
+      "manuscriptLastVerified": "2026.09.23",
+      "sources": [
+        {
+          "id": "S1",
+          "label": "Google Search Console — Performance report data discrepancies",
+          "href": "https://support.google.com/webmasters/answer/17010575",
+          "lastVerified": "2026.09.23"
+        },
+        {
+          "id": "S2",
+          "label": "Google Search Console — Performance report data and aggregation",
+          "href": "https://support.google.com/webmasters/answer/17011364",
+          "lastVerified": "2026.09.23"
+        },
+        {
+          "id": "S3",
+          "label": "Google Search Console API — Search Analytics query",
+          "href": "https://developers.google.com/webmaster-tools/v1/searchanalytics/query",
+          "lastVerified": "2026.09.23"
+        }
+      ]
+    },
+    {
+      "slug": "search-console-data-pipeline",
+      "canonicalPath": "/research/search-console/search-console-data-pipeline",
+      "evidenceBoundary": "Google’s bulk export excludes anonymized query strings and the API can return top rows rather than every row. No pipeline can reconstruct data that Google does not disclose. The design below preserves those boundaries instead of masking them.",
+      "manuscriptLastVerified": "2026.09.23",
+      "sources": [
+        {
+          "id": "S1",
+          "label": "Google Search Console API — Search Analytics query",
+          "href": "https://developers.google.com/webmaster-tools/v1/searchanalytics/query",
+          "lastVerified": "2026.09.23"
+        },
+        {
+          "id": "S2",
+          "label": "Google Search Central — bulk Search Console export to BigQuery",
+          "href": "https://developers.google.com/search/blog/2023/02/bulk-data-export",
+          "lastVerified": "2026.09.23"
+        },
+        {
+          "id": "S3",
+          "label": "Google Search Central — BigQuery efficiency for Search Console exports",
+          "href": "https://developers.google.com/search/blog/2023/06/bigquery-efficiency-tips",
+          "lastVerified": "2026.09.23"
+        },
+        {
+          "id": "S4",
+          "label": "Google Search Console — Performance report data discrepancies",
+          "href": "https://support.google.com/webmasters/answer/17010575",
+          "lastVerified": "2026.09.23"
+        }
+      ]
+    },
+    {
+      "slug": "coreweave-ddtl-5-5",
+      "canonicalPath": "/research/financial-systems/coreweave-ddtl-5-5",
+      "evidenceBoundary": "This page explains disclosed facility terms and capital structure; it is not a credit rating, valuation, or investment recommendation. The full collateral package, borrowing-base mechanics, covenants, and contract eligibility tests should be read in the governing credit documents before drawing a credit conclusion.",
+      "manuscriptLastVerified": "2026.09.23",
+      "sources": [
+        {
+          "id": "S1",
+          "label": "CoreWeave 8-K — DDTL 5.5 facility, August 2026",
+          "href": "https://www.sec.gov/Archives/edgar/data/1769628/000176962826000357/crwv-20260807.htm",
+          "lastVerified": "2026.09.23"
+        },
+        {
+          "id": "S2",
+          "label": "CoreWeave 10-Q — debt, DDTL collateral, and June 2026 balance sheet",
+          "href": "https://www.sec.gov/Archives/edgar/data/1769628/000176962826000366/crwv-20260630.htm",
+          "lastVerified": "2026.09.23"
+        },
+        {
+          "id": "S3",
+          "label": "CoreWeave — DDTL 5.5 closing release",
+          "href": "https://www.sec.gov/Archives/edgar/data/1769628/000176962826000357/ex991pr.htm",
+          "lastVerified": "2026.09.23"
+        }
+      ]
+    },
+    {
+      "slug": "gpu-financing-ai-infrastructure",
+      "canonicalPath": "/research/financial-systems/gpu-financing-ai-infrastructure",
+      "evidenceBoundary": "CoreWeave is the primary public case because it discloses large DDTL facilities. This page uses that case to explain financing mechanics; it does not claim every AI company has access to identical non-recourse debt or that GPU collateral has stable liquidation value.",
+      "manuscriptLastVerified": "2026.09.23",
+      "sources": [
+        {
+          "id": "S1",
+          "label": "CoreWeave 10-Q — debt, DDTL collateral, and June 2026 balance sheet",
+          "href": "https://www.sec.gov/Archives/edgar/data/1769628/000176962826000366/crwv-20260630.htm",
+          "lastVerified": "2026.09.23"
+        },
+        {
+          "id": "S2",
+          "label": "CoreWeave 8-K — DDTL 5.5 facility, August 2026",
+          "href": "https://www.sec.gov/Archives/edgar/data/1769628/000176962826000357/crwv-20260807.htm",
+          "lastVerified": "2026.09.23"
+        },
+        {
+          "id": "S3",
+          "label": "CoreWeave — DDTL 5.5 closing release",
+          "href": "https://www.sec.gov/Archives/edgar/data/1769628/000176962826000357/ex991pr.htm",
+          "lastVerified": "2026.09.23"
+        }
+      ]
+    },
+    {
+      "slug": "who-owns-austin-hvac-companies",
+      "canonicalPath": "/research/financial-systems/who-owns-austin-hvac-companies",
+      "evidenceBoundary": "This vertical page is derived from the site’s July 26, 2026 Austin home-services census. It is a brand-ownership map, not market share, price, service quality, employment, or customer-volume research. Private-company control can change after the cutoff.",
+      "manuscriptLastVerified": "2026.07.26",
+      "sources": [
+        {
+          "id": "S1",
+          "label": "The Riverside Company — T3 Services Group portfolio entry",
+          "href": "https://www.riversidecompany.com/investment-portfolio/t3-services-group",
+          "lastVerified": "2026.07.26"
+        },
+        {
+          "id": "S2",
+          "label": "Gryphon Investors — majority investment in Southern Home Services holding company",
+          "href": "https://www.gryphon-inv.com/news/gryphon-investors-completes-majority-investment-in-southern-hvac-and-announces-new-home-services-holding-company/",
+          "lastVerified": "2026.07.26"
+        },
+        {
+          "id": "S3",
+          "label": "L Catterton — Master Trades Group investment",
+          "href": "https://www.lcatterton.com/investments.html",
+          "lastVerified": "2026.07.26"
+        },
+        {
+          "id": "S4",
+          "label": "GI Partners — American Residential Services portfolio entry",
+          "href": "https://www.gipartners.com/private-equity/portfolio/american-residential-services",
+          "lastVerified": "2026.07.26"
+        },
+        {
+          "id": "S5",
+          "label": "Abacus — privacy policy identifying Wrench Group as parent",
+          "href": "https://www.abacusplumbing.com/privacy-policy/",
+          "lastVerified": "2026.07.26"
+        },
+        {
+          "id": "S6",
+          "label": "Wrench Group — Leonard Green, TSG Consumer and Oak Hill recapitalization",
+          "href": "https://www.wrenchgroup.com/articles/tsg-consumer-partners-and-oak-hill-partner-with-leonard-green-and-management-to-enhance-the-wrench-groups-next-phase-of-growth",
+          "lastVerified": "2026.07.26"
+        },
+        {
+          "id": "S7",
+          "label": "Cortec Group — Goettl investment portfolio evidence",
+          "href": "https://www.cortecgroup.com/",
+          "lastVerified": "2026.07.26"
+        }
+      ]
+    },
+    {
+      "slug": "who-owns-austin-plumbing-electrical-companies",
+      "canonicalPath": "/research/financial-systems/who-owns-austin-plumbing-electrical-companies",
+      "evidenceBoundary": "This page reuses the July 26, 2026 audited Austin home-services ownership dataset. It does not rank service quality or price and does not treat every plumbing or electrical contractor in the Austin metro as part of the census.",
+      "manuscriptLastVerified": "2026.07.26",
+      "sources": [
+        {
+          "id": "S1",
+          "label": "The Riverside Company — T3 Services Group portfolio entry",
+          "href": "https://www.riversidecompany.com/investment-portfolio/t3-services-group",
+          "lastVerified": "2026.07.26"
+        },
+        {
+          "id": "S2",
+          "label": "Gryphon Investors — majority investment in Southern Home Services holding company",
+          "href": "https://www.gryphon-inv.com/news/gryphon-investors-completes-majority-investment-in-southern-hvac-and-announces-new-home-services-holding-company/",
+          "lastVerified": "2026.07.26"
+        },
+        {
+          "id": "S3",
+          "label": "L Catterton — Master Trades Group investment",
+          "href": "https://www.lcatterton.com/investments.html",
+          "lastVerified": "2026.07.26"
+        },
+        {
+          "id": "S4",
+          "label": "Abacus — privacy policy identifying Wrench Group as parent",
+          "href": "https://www.abacusplumbing.com/privacy-policy/",
+          "lastVerified": "2026.07.26"
+        },
+        {
+          "id": "S5",
+          "label": "Wrench Group — Leonard Green, TSG Consumer and Oak Hill recapitalization",
+          "href": "https://www.wrenchgroup.com/articles/tsg-consumer-partners-and-oak-hill-partner-with-leonard-green-and-management-to-enhance-the-wrench-groups-next-phase-of-growth",
+          "lastVerified": "2026.07.26"
+        }
+      ]
+    },
+    {
+      "slug": "private-equity-home-services-rollups",
+      "canonicalPath": "/research/financial-systems/private-equity-home-services-rollups",
+      "evidenceBoundary": "This is a structural analysis grounded in the Austin ownership census and sponsor transaction records. It does not claim that private-equity ownership causes a particular price, service, wage, or customer outcome without separate causal evidence.",
+      "manuscriptLastVerified": "2026.07.26",
+      "sources": [
+        {
+          "id": "S1",
+          "label": "The Riverside Company — T3 Services Group portfolio entry",
+          "href": "https://www.riversidecompany.com/investment-portfolio/t3-services-group",
+          "lastVerified": "2026.07.26"
+        },
+        {
+          "id": "S2",
+          "label": "Gryphon Investors — majority investment in Southern Home Services holding company",
+          "href": "https://www.gryphon-inv.com/news/gryphon-investors-completes-majority-investment-in-southern-hvac-and-announces-new-home-services-holding-company/",
+          "lastVerified": "2026.07.26"
+        },
+        {
+          "id": "S3",
+          "label": "L Catterton — Master Trades Group investment",
+          "href": "https://www.lcatterton.com/investments.html",
+          "lastVerified": "2026.07.26"
+        },
+        {
+          "id": "S4",
+          "label": "GI Partners — American Residential Services portfolio entry",
+          "href": "https://www.gipartners.com/private-equity/portfolio/american-residential-services",
+          "lastVerified": "2026.07.26"
+        },
+        {
+          "id": "S5",
+          "label": "Dunes Point Capital — Roofing Services Solutions acquisition of Ja-Mar",
+          "href": "https://www.dunespointcapital.com/news/roofing-services-solutions-acquires-ja-mar-roofing-sheet-metal/",
+          "lastVerified": "2026.07.26"
+        }
+      ]
+    },
+    {
+      "slug": "airline-loyalty-collateral-valuation",
+      "canonicalPath": "/research/financial-systems/airline-loyalty-collateral-valuation",
+      "evidenceBoundary": "Public filings disclose substantial loyalty economics but not every co-brand price, allocation, renewal term, or lender model. Valuation multiples and DCF outputs remain analytical estimates. The page separates disclosed financing terms from modeled program value.",
+      "manuscriptLastVerified": "2026.09.23",
+      "sources": [
+        {
+          "id": "S1",
+          "label": "American Airlines Group — 2025 Form 10-K",
+          "href": "https://www.sec.gov/Archives/edgar/data/4515/000000620126000014/aal-20251231.htm",
+          "lastVerified": "2026.09.23"
+        },
+        {
+          "id": "S2",
+          "label": "American Airlines — $10 billion AAdvantage financing announcement",
+          "href": "https://www.sec.gov/Archives/edgar/data/4515/000000620121000024/aex991securednotespricingp.htm",
+          "lastVerified": "2026.09.23"
+        },
+        {
+          "id": "S3",
+          "label": "American Airlines — AAdvantage financing collateral and intercompany structure",
+          "href": "https://www.sec.gov/Archives/edgar/data/4515/000000620121000098/aal-20210930.htm",
+          "lastVerified": "2026.09.23"
+        }
+      ]
+    },
+    {
+      "slug": "humanoid-robot-startup-financing",
+      "canonicalPath": "/research/financial-systems/humanoid-robot-startup-financing",
+      "evidenceBoundary": "Apptronik and Figure are illustrative public cases, not a complete industry census. Funding announcements describe committed capital and intended uses but do not disclose full unit economics, cash burn, customer contract terms, or future debt capacity.",
+      "manuscriptLastVerified": "2026.09.23",
+      "sources": [
+        {
+          "id": "S1",
+          "label": "Apptronik — more than $935 million Series A financing",
+          "href": "https://apptronik.com/news-collection/apptronik-closes-over-935-million-series-a",
+          "lastVerified": "2026.09.23"
+        },
+        {
+          "id": "S2",
+          "label": "Figure — more than $1 billion Series C at $39 billion post-money valuation",
+          "href": "https://www.figure.ai/news/series-c",
+          "lastVerified": "2026.09.23"
+        }
+      ]
+    },
+    {
+      "slug": "who-owns-ntta",
+      "canonicalPath": "/research/financial-systems/who-owns-ntta",
+      "evidenceBoundary": "This page describes NTTA’s public legal and operating structure as verified September 23, 2026. It does not imply that every toll lane billed through an NTTA account is owned or operated by NTTA. Project-level ownership must be checked separately.",
+      "manuscriptLastVerified": "2026.09.23",
+      "sources": [
+        {
+          "id": "S1",
+          "label": "NTTA — September 2026 committee notice and authority description",
+          "href": "https://www.ntta.org/september-committee-meetings-0",
+          "lastVerified": "2026.09.23"
+        },
+        {
+          "id": "S2",
+          "label": "NTTA — financial information and debt-obligation transparency",
+          "href": "https://www.ntta.org/about-us/financial-information",
+          "lastVerified": "2026.09.23"
+        }
+      ]
+    },
+    {
+      "slug": "texas-toll-roads-public-vs-private",
+      "canonicalPath": "/research/financial-systems/texas-toll-roads-public-vs-private",
+      "evidenceBoundary": "The comparison uses the material-system inventory and source package behind the July 23, 2026 Texas toll-road study, refreshed against public TxDOT and authority descriptions on September 23, 2026. It is not a census of every tolled lane or local connector in Texas.",
+      "manuscriptLastVerified": "2026.09.23",
+      "sources": [
+        {
+          "id": "S1",
+          "label": "NTTA — September 2026 committee notice and authority description",
+          "href": "https://www.ntta.org/september-committee-meetings-0",
+          "lastVerified": "2026.09.23"
+        },
+        {
+          "id": "S2",
+          "label": "HCTRA — FY2025 Toll Road Authority Enterprise Fund financial statements",
+          "href": "https://www.hctra.org/-/media/2ba0076447b44da0948e12147ce7a26b.ashx",
+          "lastVerified": "2026.09.23"
+        },
+        {
+          "id": "S3",
+          "label": "TxDOT — HB 803 Report on Toll Projects, FY2025",
+          "href": "https://www.txdot.gov/content/dam/docs/division/gov/hb-803-report-fy-2025.pdf",
+          "lastVerified": "2026.09.23"
+        },
+        {
+          "id": "S4",
+          "label": "FHWA — DBFOM toll-concession project profiles",
+          "href": "https://www.fhwa.dot.gov/ipd/p3/defined/new_build_facilities/dbfom_toll_concessions.aspx",
+          "lastVerified": "2026.09.23"
+        }
+      ]
+    },
+    {
+      "slug": "who-owns-hctra-sam-houston-tollway",
+      "canonicalPath": "/research/financial-systems/who-owns-hctra-sam-houston-tollway",
+      "evidenceBoundary": "This page addresses HCTRA’s institutional structure and the public ownership of its toll system. Individual interagency agreements, collection arrangements, service contracts, and bond pledges can allocate narrower rights without changing the core county ownership answer.",
+      "manuscriptLastVerified": "2026.09.23",
+      "sources": [
+        {
+          "id": "S1",
+          "label": "HCTRA — FY2025 Toll Road Authority Enterprise Fund financial statements",
+          "href": "https://www.hctra.org/-/media/2ba0076447b44da0948e12147ce7a26b.ashx",
+          "lastVerified": "2026.09.23"
+        }
+      ]
+    },
+    {
+      "slug": "foreign-owned-texas-toll-roads",
+      "canonicalPath": "/research/financial-systems/foreign-owned-texas-toll-roads",
+      "evidenceBoundary": "Investor percentages can change through transfers, refinancings, or restructurings. This note uses the project ownership evidence in the site’s 2026 toll-road dataset and current public-source checks; it does not describe any investor as owning the State of Texas roadway itself.",
+      "manuscriptLastVerified": "2026.09.23",
+      "sources": [
+        {
+          "id": "S1",
+          "label": "TxDOT — NTE 35W Amended and Restated Facility Agreement",
+          "href": "https://www.txdot.gov/content/dam/docs/business/alt-delivery/north-tarrant-express/nte-seg-3-amend-fac-agree.pdf",
+          "lastVerified": "2026.09.23"
+        },
+        {
+          "id": "S2",
+          "label": "TxDOT — HB 803 Report on Toll Projects, FY2025",
+          "href": "https://www.txdot.gov/content/dam/docs/division/gov/hb-803-report-fy-2025.pdf",
+          "lastVerified": "2026.09.23"
+        },
+        {
+          "id": "S3",
+          "label": "FHWA — DBFOM toll-concession project profiles",
+          "href": "https://www.fhwa.dot.gov/ipd/p3/defined/new_build_facilities/dbfom_toll_concessions.aspx",
+          "lastVerified": "2026.09.23"
+        },
+        {
+          "id": "S4",
+          "label": "Ferrovial — 2026 Fact Book, concession ownership and project economics",
+          "href": "https://www.sec.gov/Archives/edgar/data/1468522/000162828026032618/ferrovial-factbook2026_s.htm",
+          "lastVerified": "2026.09.23"
+        },
+        {
+          "id": "S5",
+          "label": "U.S. DOT Build America — SH 130 Segments 5–6 financing and restructuring",
+          "href": "https://www.transportation.gov/buildamerica/projects/sh-130-segments-5-and-6",
+          "lastVerified": "2026.09.23"
+        }
+      ]
+    },
+    {
+      "slug": "texas-private-toll-rate-controls",
+      "canonicalPath": "/research/financial-systems/texas-private-toll-rate-controls",
+      "evidenceBoundary": "This is a structural explanation, not legal advice or a claim that one pricing formula applies across Texas. Exact escalation rules, dynamic-pricing algorithms, caps, discounts, HOV treatment, and revenue-sharing terms differ by project and can be amended.",
+      "manuscriptLastVerified": "2026.09.23",
+      "sources": [
+        {
+          "id": "S1",
+          "label": "NTTA — financial information and debt-obligation transparency",
+          "href": "https://www.ntta.org/about-us/financial-information",
+          "lastVerified": "2026.09.23"
+        },
+        {
+          "id": "S2",
+          "label": "TxDOT — NTE 35W Amended and Restated Facility Agreement",
+          "href": "https://www.txdot.gov/content/dam/docs/business/alt-delivery/north-tarrant-express/nte-seg-3-amend-fac-agree.pdf",
+          "lastVerified": "2026.09.23"
+        },
+        {
+          "id": "S3",
+          "label": "TxDOT — HB 803 Report on Toll Projects, FY2025",
+          "href": "https://www.txdot.gov/content/dam/docs/division/gov/hb-803-report-fy-2025.pdf",
+          "lastVerified": "2026.09.23"
+        },
+        {
+          "id": "S4",
+          "label": "FHWA — Toll Facilities in the United States",
+          "href": "https://www.fhwa.dot.gov/policyinformation/tollpage/page08.cfm",
+          "lastVerified": "2026.09.23"
+        }
+      ]
+    },
+    {
+      "slug": "who-owns-us-toll-roads",
+      "canonicalPath": "/research/financial-systems/who-owns-us-toll-roads",
+      "evidenceBoundary": "FHWA inventories and P3 libraries classify many facilities but use specific reporting universes and dates. This page does not convert one federal table into a claim about the ownership percentage of every tolled mile in the country.",
+      "manuscriptLastVerified": "2026.09.23",
+      "sources": [
+        {
+          "id": "S1",
+          "label": "FHWA — public-private partnership agreement library",
+          "href": "https://www.fhwa.dot.gov/ipd/p3/p3_projects/agreements.aspx",
+          "lastVerified": "2026.09.23"
+        },
+        {
+          "id": "S2",
+          "label": "FHWA — DBFOM toll-concession project profiles",
+          "href": "https://www.fhwa.dot.gov/ipd/p3/defined/new_build_facilities/dbfom_toll_concessions.aspx",
+          "lastVerified": "2026.09.23"
+        },
+        {
+          "id": "S3",
+          "label": "FHWA — Toll Facilities in the United States",
+          "href": "https://www.fhwa.dot.gov/policyinformation/tollpage/page08.cfm",
+          "lastVerified": "2026.09.23"
+        }
+      ]
+    },
+    {
+      "slug": "texas-managed-lanes-ownership-operators",
+      "canonicalPath": "/research/financial-systems/texas-managed-lanes-ownership-operators",
+      "evidenceBoundary": "Facility structures change through amendments, expansions, terminations, and handbacks. This note focuses on representative Texas arrangements and the major DFW concessions rather than every HOV/HOT or express lane in the state.",
+      "manuscriptLastVerified": "2026.09.23",
+      "sources": [
+        {
+          "id": "S1",
+          "label": "TxDOT — NTE 35W Amended and Restated Facility Agreement",
+          "href": "https://www.txdot.gov/content/dam/docs/business/alt-delivery/north-tarrant-express/nte-seg-3-amend-fac-agree.pdf",
+          "lastVerified": "2026.09.23"
+        },
+        {
+          "id": "S2",
+          "label": "TxDOT — HB 803 Report on Toll Projects, FY2025",
+          "href": "https://www.txdot.gov/content/dam/docs/division/gov/hb-803-report-fy-2025.pdf",
+          "lastVerified": "2026.09.23"
+        },
+        {
+          "id": "S3",
+          "label": "FHWA — Toll Facilities in the United States",
+          "href": "https://www.fhwa.dot.gov/policyinformation/tollpage/page08.cfm",
+          "lastVerified": "2026.09.23"
+        }
+      ]
+    },
+    {
+      "slug": "texas-private-toll-concession-expiration-dates",
+      "canonicalPath": "/research/financial-systems/texas-private-toll-concession-expiration-dates",
+      "evidenceBoundary": "Dates reflect current public agreements and TxDOT reporting as checked September 23, 2026. Agreements can permit early termination or defined extensions. An announced or proposed extension should not be treated as effective until it is documented.",
+      "manuscriptLastVerified": "2026.09.23",
+      "sources": [
+        {
+          "id": "S1",
+          "label": "TxDOT — HB 803 Report on Toll Projects, FY2025",
+          "href": "https://www.txdot.gov/content/dam/docs/division/gov/hb-803-report-fy-2025.pdf",
+          "lastVerified": "2026.09.23"
+        },
+        {
+          "id": "S2",
+          "label": "TxDOT — NTE 35W Amended and Restated Facility Agreement",
+          "href": "https://www.txdot.gov/content/dam/docs/business/alt-delivery/north-tarrant-express/nte-seg-3-amend-fac-agree.pdf",
+          "lastVerified": "2026.09.23"
+        },
+        {
+          "id": "S3",
+          "label": "FHWA — public-private partnership agreement library",
+          "href": "https://www.fhwa.dot.gov/ipd/p3/p3_projects/agreements.aspx",
+          "lastVerified": "2026.09.23"
+        }
+      ]
+    }
+  ]
+}

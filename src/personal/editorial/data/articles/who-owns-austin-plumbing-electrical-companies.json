@@ -1,0 +1,133 @@
+{
+  "kind": "research",
+  "cluster": "financial-systems",
+  "slug": "who-owns-austin-plumbing-electrical-companies",
+  "number": "50",
+  "category": "AUSTIN OWNERSHIP",
+  "title": "Who Owns Austin’s Plumbing and Electrical Companies?",
+  "seoTitle": "Who Owns Austin Plumbing & Electrical Companies?",
+  "subtitle": "Austin plumbing and electrical brands include local operators, multi-trade platforms, sponsor-backed rollups, and franchises. Ownership can sit several layers above the name on the truck.",
+  "seoDescription": "Who owns Austin plumbing and electrical companies? Trace Abacus, Radiant, Stan’s, Daniel’s, Roger’s and multi-trade brands to their platforms and investors.",
+  "artwork": {
+    "kind": "study",
+    "variant": "triptych",
+    "label": "Austin plumbing / electrical / ownership chain",
+    "note": "Multi-trade platforms can acquire a plumbing brand, add HVAC or electrical service, and keep the original consumer name."
+  },
+  "date": "2026.09.23",
+  "lastVerified": "2026.07.26",
+  "readTime": "3 MIN",
+  "author": "SULAYMAN BOWLES",
+  "thesis": "Austin plumbing and electrical ownership is increasingly multi-trade: several familiar local brands now sit inside broader home-services platforms while founder-owned and franchise businesses remain a large part of the researched universe.",
+  "conclusion": {
+    "title": "Trace the legal chain, not the service menu",
+    "content": "A company can add plumbing, HVAC, and electrical services after joining a platform without changing its consumer brand. Current ownership therefore has to be traced through legal entities, parent platforms, sponsors, and franchise relationships rather than inferred from the trade category."
+  },
+  "evidenceBoundary": "This page reuses the July 26, 2026 audited Austin home-services ownership dataset. It does not rank service quality or price and does not treat every plumbing or electrical contractor in the Austin metro as part of the census.",
+  "metrics": [
+    {
+      "label": "Full Austin census",
+      "value": "67 BRANDS"
+    },
+    {
+      "label": "Mechanical-trade records",
+      "value": "26"
+    },
+    {
+      "label": "Sponsor-backed census records",
+      "value": "14"
+    },
+    {
+      "label": "Evidence cutoff",
+      "value": "JUL. 26, 2026"
+    }
+  ],
+  "resources": [
+    {
+      "label": "Full Austin home-services ownership investigation",
+      "href": "/research/financial-systems/who-owns-austin-home-service-companies",
+      "description": "Complete ownership map and methodology across HVAC, plumbing, electrical, roofing, foundation repair, and pest control.",
+      "format": "WEB"
+    },
+    {
+      "label": "Austin ownership dataset",
+      "href": "/research/austin-home-service-ownership-2026.csv",
+      "description": "Brand-level parent, sponsor, owner type, evidence rating, and footprint fields.",
+      "format": "CSV"
+    }
+  ],
+  "content": [
+    "Several Austin plumbing and electrical brands now sit inside multi-trade home-services platforms. Radiant, for example, is an Austin brand inside T3 Services Group and Riverside’s portfolio. Stan’s sits inside Master Trades Group under L Catterton. Daniel’s Plumbing & Air is part of Southern Home Services under Gryphon. Abacus is a Wrench Group subsidiary.",
+    "That does not mean independent businesses disappeared. The broader 67-brand census still contains many founder, family, or locally owned operators as well as franchisees and unresolved private companies. The point of the ownership map is to distinguish those structures rather than using the presence of a local brand name as a proxy for local equity control."
+  ],
+  "sections": [
+    {
+      "id": "multi-trade",
+      "title": "Why plumbing, HVAC, and electrical ownership increasingly overlaps",
+      "paragraphs": [
+        "A home-services platform can cross-sell multiple trades into the same household, dispatch from a shared system, centralize call centers and marketing, and acquire add-on brands with adjacent licenses and technician bases. The consumer brand may therefore expand into a second or third trade after joining the platform.",
+        "This creates a search problem: “Austin plumber” and “Austin HVAC company” can return brands that ultimately have the same parent even though the logos and websites remain separate."
+      ]
+    },
+    {
+      "id": "selected-chains",
+      "title": "Selected plumbing and electrical ownership chains",
+      "paragraphs": [
+        "Radiant → T3 Services Group → The Riverside Company. Stan’s → Master Trades Group → L Catterton. Daniel’s → Southern Home Services → Gryphon Investors. Abacus → Wrench Group.",
+        "These labels describe the supported current chain at the cutoff. They do not imply that every platform owner has 100% of every operating subsidiary or that a founder has no continuing role or rolled equity."
+      ]
+    },
+    {
+      "id": "franchise",
+      "title": "Franchise ownership is a different edge from platform ownership",
+      "paragraphs": [
+        "A local franchisee can own or operate the Austin business while using a national brand whose franchisor has its own corporate owner. Treating the franchisor’s investor as the direct owner of the local franchisee without evidence would collapse two separate legal relationships.",
+        "The dataset therefore records franchise relationships separately from parent-subsidiary and sponsor-control relationships."
+      ]
+    },
+    {
+      "id": "consumer-use",
+      "title": "What ownership can and cannot tell a homeowner",
+      "paragraphs": [
+        "Ownership can tell you whether two brands share a platform, whether a sponsor or public company sits above the operator, and whether a local claim refers to management or equity. It cannot, by itself, tell you which contractor will quote less, arrive faster, or do better work.",
+        "Those outcomes need separate data. The useful contribution here is reducing hidden common ownership before a customer or analyst starts comparing apparently independent brands."
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "id": "S1",
+      "label": "The Riverside Company — T3 Services Group portfolio entry",
+      "href": "https://www.riversidecompany.com/investment-portfolio/t3-services-group",
+      "lastVerified": "2026.07.26"
+    },
+    {
+      "id": "S2",
+      "label": "Gryphon Investors — majority investment in Southern Home Services holding company",
+      "href": "https://www.gryphon-inv.com/news/gryphon-investors-completes-majority-investment-in-southern-hvac-and-announces-new-home-services-holding-company/",
+      "lastVerified": "2026.07.26"
+    },
+    {
+      "id": "S3",
+      "label": "L Catterton — Master Trades Group investment",
+      "href": "https://www.lcatterton.com/investments.html",
+      "lastVerified": "2026.07.26"
+    },
+    {
+      "id": "S4",
+      "label": "Abacus — privacy policy identifying Wrench Group as parent",
+      "href": "https://www.abacusplumbing.com/privacy-policy/",
+      "lastVerified": "2026.07.26"
+    },
+    {
+      "id": "S5",
+      "label": "Wrench Group — Leonard Green, TSG Consumer and Oak Hill recapitalization",
+      "href": "https://www.wrenchgroup.com/articles/tsg-consumer-partners-and-oak-hill-partner-with-leonard-green-and-management-to-enhance-the-wrench-groups-next-phase-of-growth",
+      "lastVerified": "2026.07.26"
+    }
+  ],
+  "path": "/research/financial-systems/who-owns-austin-plumbing-electrical-companies",
+  "aliases": [],
+  "dateModified": "2026.09.23",
+  "image": "/images/generative-art/yuru-10.webp"
+}

@@ -1,0 +1,215 @@
+{
+  "kind": "research",
+  "cluster": "ai-crawlers",
+  "slug": "ai-crawler-registry",
+  "number": "44",
+  "category": "AI CRAWLERS",
+  "title": "AI Crawler Registry: Search, Training, User Fetchers, and Product Bots",
+  "seoTitle": "AI Crawler Registry: GPTBot, ClaudeBot, PerplexityBot & More",
+  "subtitle": "A maintained field guide to the major AI-facing crawler identities, what they are for, how robots.txt applies, and what network evidence can verify them.",
+  "seoDescription": "AI crawler registry for OpenAI, Anthropic, Perplexity and Google: user agents, search vs training purpose, robots controls, user-triggered fetchers and verification sources.",
+  "artwork": {
+    "kind": "study",
+    "variant": "triptych",
+    "label": "Crawler registry / product purpose / verification",
+    "note": "A useful crawler registry classifies purpose before product name: search, model development, user fetch, ads/product validation, or ordinary Search crawling."
+  },
+  "date": "2026.09.23",
+  "lastVerified": "2026.09.23",
+  "readTime": "3 MIN",
+  "author": "SULAYMAN BOWLES",
+  "thesis": "The useful unit in an AI crawler registry is not “AI company”; it is a specific web-access identity with a documented purpose, robots behavior, and verifiable network source.",
+  "conclusion": {
+    "title": "Maintain the registry as operational infrastructure",
+    "content": "Crawler names and IP ranges change. A durable registry stores the provider, token, purpose, automatic-versus-user-triggered class, robots semantics, official network source, and last-verified date. Policy rules and log analytics should both derive from that record instead of hand-maintained folklore."
+  },
+  "evidenceBoundary": "This registry focuses on major publisher-facing identities documented by OpenAI, Anthropic, Perplexity, and Google as of September 23, 2026. It is not a claim that every AI product crawler is listed, and individual providers can change behavior or add agents after the evidence date.",
+  "metrics": [
+    {
+      "label": "Providers covered",
+      "value": "4"
+    },
+    {
+      "label": "Primary classes",
+      "value": "SEARCH / TRAINING / USER / PRODUCT"
+    },
+    {
+      "label": "Verification",
+      "value": "OFFICIAL DOCS + NETWORK"
+    },
+    {
+      "label": "Refresh rule",
+      "value": "DATE EVERY RECORD"
+    }
+  ],
+  "resources": [
+    {
+      "label": "AI crawler robots.txt policy guide",
+      "href": "/research/ai-crawlers/ai-search-crawler-policy",
+      "description": "Copy-ready policy patterns for separating search discovery, training crawlers, and user-triggered fetchers.",
+      "format": "WEB"
+    },
+    {
+      "label": "robots.txt access-control boundary",
+      "href": "/research/ai-crawlers/robots-txt-courtesy-not-access-control",
+      "description": "Why crawler policy is not authentication or authorization, with RFC 9309 context.",
+      "format": "WEB"
+    }
+  ],
+  "content": [
+    "“AI crawler” has become too broad to be an operational category. OAI-SearchBot and PerplexityBot exist for search discovery. GPTBot and ClaudeBot are tied to model-development crawling. ChatGPT-User, Claude-User, and Perplexity-User are user-triggered retrieval identities. OAI-AdsBot exists for ad landing-page review. Google-Extended is not even a separate HTTP crawler; it is a robots product token.",
+    "A registry should make those differences machine-readable. The minimum fields are provider, token, purpose, automatic or user-triggered status, robots policy semantics, full or sample User-Agent, official IP/range endpoint where available, documentation URL, first-seen date, last-verified date, and notes about product-specific exceptions."
+  ],
+  "sections": [
+    {
+      "id": "registry",
+      "title": "Current high-value registry entries",
+      "paragraphs": [
+        "OpenAI: OAI-SearchBot for Search, GPTBot for model-development crawling, ChatGPT-User for user-triggered fetches, OAI-AdsBot for ad landing-page validation. Anthropic: ClaudeBot for model development, Claude-SearchBot for search, Claude-User for user-directed retrieval. Perplexity: PerplexityBot for search and Perplexity-User for user requests.",
+        "Google requires a different mental model. Googlebot powers ordinary Search crawling; Google-Extended is a policy token for defined Gemini uses rather than a separate network User-Agent. Google also documents user-triggered fetchers separately."
+      ],
+      "table": {
+        "caption": "Publisher-facing AI and Search web-access identities",
+        "columns": [
+          "Provider",
+          "Identity",
+          "Primary purpose",
+          "Automatic?",
+          "Key control"
+        ],
+        "rows": [
+          [
+            "OpenAI",
+            "OAI-SearchBot",
+            "ChatGPT Search discovery",
+            "Yes",
+            "robots.txt + published IP ranges"
+          ],
+          [
+            "OpenAI",
+            "GPTBot",
+            "Model-development crawling",
+            "Yes",
+            "robots.txt + published IP ranges"
+          ],
+          [
+            "OpenAI",
+            "ChatGPT-User",
+            "User-triggered retrieval",
+            "No",
+            "Access control; robots may not apply"
+          ],
+          [
+            "OpenAI",
+            "OAI-AdsBot",
+            "Ad landing-page validation",
+            "Triggered by ad submission",
+            "Reachability + published IP ranges"
+          ],
+          [
+            "Anthropic",
+            "ClaudeBot",
+            "Model-development crawling",
+            "Yes",
+            "robots.txt + provider network evidence"
+          ],
+          [
+            "Anthropic",
+            "Claude-SearchBot",
+            "Search crawling",
+            "Yes",
+            "robots.txt + provider network evidence"
+          ],
+          [
+            "Anthropic",
+            "Claude-User",
+            "User-directed retrieval",
+            "No",
+            "Provider-documented bot policy"
+          ],
+          [
+            "Perplexity",
+            "PerplexityBot",
+            "Search discovery",
+            "Yes",
+            "robots.txt + published IP ranges"
+          ],
+          [
+            "Perplexity",
+            "Perplexity-User",
+            "User-triggered retrieval",
+            "No",
+            "Generally ignores robots.txt; IP verification"
+          ],
+          [
+            "Google",
+            "Google-Extended",
+            "Gemini training/grounding policy token",
+            "Not a separate UA",
+            "robots.txt product token"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "policy",
+      "title": "Generate policy from purpose, not brand",
+      "paragraphs": [
+        "A publisher may want search discovery but not automatic model-development crawling. OpenAI and Anthropic expose separate tokens that can express that outcome. A blanket Disallow for every token containing the provider name throws away that granularity.",
+        "User-triggered fetchers need another decision because several providers document robots behavior differently for user requests. Private content still belongs behind authentication regardless of crawler policy."
+      ]
+    },
+    {
+      "id": "verification",
+      "title": "Keep a network-verification column",
+      "paragraphs": [
+        "OpenAI and Perplexity publish product-specific IP JSON files. Google publishes crawler IP data and DNS verification methods. Anthropic publishes bot/network guidance. Store the official endpoint rather than copying a list into a wiki that will age silently.",
+        "When ingesting logs, stamp the exact range-file retrieval time used for classification. That makes a historical attribution reproducible even after the provider changes its current network ranges."
+      ]
+    },
+    {
+      "id": "maintenance",
+      "title": "What should trigger a registry refresh",
+      "paragraphs": [
+        "Refresh when a provider changes crawler documentation, a new token appears in logs, a known token arrives from previously unseen networks, or a product launches a new search, ads, agent, or user-fetch workflow. A periodic scheduled check catches quieter changes.",
+        "Version the registry. Crawler policy is infrastructure: an unrecorded semantic change can alter search visibility, training preference, WAF behavior, and analytics at the same time."
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "id": "S1",
+      "label": "OpenAI — Overview of OpenAI Crawlers",
+      "href": "https://developers.openai.com/api/docs/bots",
+      "lastVerified": "2026.09.23"
+    },
+    {
+      "id": "S2",
+      "label": "Anthropic — ClaudeBot, Claude-User, and Claude-SearchBot guidance",
+      "href": "https://support.claude.com/en/articles/8896518-does-anthropic-crawl-data-from-the-web-and-how-can-site-owners-block-the-crawler",
+      "lastVerified": "2026.09.23"
+    },
+    {
+      "id": "S3",
+      "label": "Perplexity — crawler and user-agent documentation",
+      "href": "https://docs.perplexity.ai/docs/resources/perplexity-crawlers",
+      "lastVerified": "2026.09.23"
+    },
+    {
+      "id": "S4",
+      "label": "Google — common crawlers and Google-Extended",
+      "href": "https://developers.google.com/crawling/docs/crawlers-fetchers/google-common-crawlers",
+      "lastVerified": "2026.09.23"
+    },
+    {
+      "id": "S5",
+      "label": "Google — verify crawler and fetcher requests",
+      "href": "https://developers.google.com/crawling/docs/crawlers-fetchers/verify-google-requests",
+      "lastVerified": "2026.09.23"
+    }
+  ],
+  "path": "/research/ai-crawlers/ai-crawler-registry",
+  "aliases": [],
+  "dateModified": "2026.09.23",
+  "image": "/images/generative-art/yuru-01.webp"
+}

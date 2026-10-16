@@ -1,0 +1,107 @@
+{
+  "kind": "research",
+  "cluster": "financial-systems",
+  "slug": "gpu-financing-ai-infrastructure",
+  "number": "48",
+  "category": "AI INFRASTRUCTURE FINANCE",
+  "title": "How AI Companies Finance GPUs Without Putting Everything on the Parent Balance Sheet",
+  "seoTitle": "How AI Companies Finance GPUs: Asset-Level Debt & Contract SPVs",
+  "subtitle": "CoreWeave’s DDTL platform shows how customer contracts, GPU assets, pledged cash flows, and bankruptcy-remote financing subsidiaries can fund AI infrastructure below the parent company.",
+  "seoDescription": "How AI infrastructure companies finance GPUs with delayed-draw loans, asset-level debt, contract-backed SPVs, pledged cash flows and residual-value underwriting.",
+  "artwork": {
+    "kind": "study",
+    "variant": "triptych",
+    "label": "GPU fleet / customer contract / financing SPV",
+    "note": "Contracted compute demand can be transformed into asset-level collateral when the lender can trace equipment, cash flow, and control rights."
+  },
+  "date": "2026.09.23",
+  "lastVerified": "2026.09.23",
+  "readTime": "3 MIN",
+  "author": "SULAYMAN BOWLES",
+  "thesis": "At sufficient scale, contracted GPU infrastructure can be financed like project equipment: isolate eligible assets and cash flows, borrow against the contract-backed deployment, and reserve parent-level equity and debt for the risks the asset vehicle cannot absorb.",
+  "conclusion": {
+    "title": "GPU finance is converging with infrastructure finance",
+    "content": "The more standardized the equipment, contracts, deployment milestones, and cash-control package become, the easier it is to finance AI capex below the parent. The limit is residual risk: GPUs depreciate economically, customer contracts expire, power capacity is location-specific, and the operating platform still has to redeploy the asset."
+  },
+  "evidenceBoundary": "CoreWeave is the primary public case because it discloses large DDTL facilities. This page uses that case to explain financing mechanics; it does not claim every AI company has access to identical non-recourse debt or that GPU collateral has stable liquidation value.",
+  "metrics": [
+    {
+      "label": "CoreWeave DDTLs outstanding Jun. 2026",
+      "value": "$13.6B"
+    },
+    {
+      "label": "DDTL 5.5",
+      "value": "$2.6B"
+    },
+    {
+      "label": "CoreWeave total indebtedness Jun. 2026",
+      "value": "$35.6B"
+    },
+    {
+      "label": "Core financing object",
+      "value": "ASSET + CONTRACT CASH FLOW"
+    }
+  ],
+  "content": [
+    "The parent-company balance sheet is not the only place to finance GPUs. CoreWeave’s public filings show a repeatable alternative: contribute eligible customer contracts and the associated infrastructure into financing structures, pledge the equipment and contract cash flows, and borrow through dedicated subsidiaries. The result resembles project finance more than a generic venture-backed server purchase.",
+    "The economic logic is straightforward. A three-year take-or-pay or committed cloud contract can support debt against the servers required to deliver it. The financing becomes stronger when the counterparty is creditworthy, the deployment is identifiable, the cash is pledged, and the hardware can be re-leased if the first contract expires before the loan."
+  ],
+  "sections": [
+    {
+      "id": "capital-stack",
+      "title": "The AI infrastructure capital stack",
+      "paragraphs": [
+        "Equity absorbs the first-loss and platform risk. Parent-level debt funds broader corporate needs. Asset-level DDTLs fund defined GPU deployments. Equipment leases, vendor terms, data-center leases, and customer prepayments can sit around those layers depending on the contract.",
+        "The stack lowers the amount of expensive equity needed per dollar of deployed GPU capacity. It also increases fixed claims and refinancing dependence, so leverage can amplify both the scalability and the downside of the operating model."
+      ]
+    },
+    {
+      "id": "spv",
+      "title": "Why use a financing subsidiary or SPV",
+      "paragraphs": [
+        "A dedicated borrower can separate eligible collateral, pledged accounts, customer contracts, and lender controls from unrelated corporate assets. CoreWeave describes some DDTL structures through bankruptcy-remote special-purpose consolidated subsidiaries.",
+        "That isolation can make underwriting simpler and can improve lender confidence in the cash-flow path. It does not make operational dependencies disappear: the SPV still relies on the wider company for data-center operations, software, scheduling, customer support, procurement, and remarketing."
+      ]
+    },
+    {
+      "id": "underwriting",
+      "title": "What a GPU lender is really underwriting",
+      "paragraphs": [
+        "The lender cares about the customer’s payment obligation, contract termination rights, deployment milestones, power and data-center readiness, server useful life, GPU resale or re-lease value, insurance, maintenance, concentration, and the borrower’s ability to redeploy capacity.",
+        "The collateral package is therefore more than a pile of chips. A GPU without power, networking, a customer contract, or an operating platform can be worth materially less than the modeled productive asset."
+      ]
+    },
+    {
+      "id": "failure-modes",
+      "title": "The failure modes are different from SaaS debt",
+      "paragraphs": [
+        "If the customer defaults, the borrower may need to find a replacement before debt service breaks. If a new GPU generation changes price-performance sharply, re-leasing assumptions can weaken. If a data-center build is late, the contract may not begin generating cash when the debt draw occurs.",
+        "That makes contract duration versus debt maturity a central variable. DDTL 5.5’s roughly five-year maturity extending beyond the average three-year underlying customer contract makes the residual-value question explicit rather than hiding it in a terminal-value assumption."
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "id": "S1",
+      "label": "CoreWeave 10-Q — debt, DDTL collateral, and June 2026 balance sheet",
+      "href": "https://www.sec.gov/Archives/edgar/data/1769628/000176962826000366/crwv-20260630.htm",
+      "lastVerified": "2026.09.23"
+    },
+    {
+      "id": "S2",
+      "label": "CoreWeave 8-K — DDTL 5.5 facility, August 2026",
+      "href": "https://www.sec.gov/Archives/edgar/data/1769628/000176962826000357/crwv-20260807.htm",
+      "lastVerified": "2026.09.23"
+    },
+    {
+      "id": "S3",
+      "label": "CoreWeave — DDTL 5.5 closing release",
+      "href": "https://www.sec.gov/Archives/edgar/data/1769628/000176962826000357/ex991pr.htm",
+      "lastVerified": "2026.09.23"
+    }
+  ],
+  "path": "/research/financial-systems/gpu-financing-ai-infrastructure",
+  "aliases": [],
+  "dateModified": "2026.09.23",
+  "image": "/images/generative-art/yuru-44.webp"
+}

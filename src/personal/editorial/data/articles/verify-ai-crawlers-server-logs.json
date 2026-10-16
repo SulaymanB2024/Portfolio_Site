@@ -1,0 +1,127 @@
+{
+  "kind": "research",
+  "cluster": "crawler-engineering",
+  "slug": "verify-ai-crawlers-server-logs",
+  "number": "40",
+  "category": "CRAWLER ENGINEERING",
+  "title": "How to Verify an AI Crawler in Server Logs",
+  "seoTitle": "How to Verify AI Crawlers in Server Logs: UA + IP Checks",
+  "subtitle": "A User-Agent match is a lead, not proof. Verification should join request logs to provider-published IP ranges, response codes, robots policy, and time-bounded network data.",
+  "seoDescription": "Verify GPTBot, OAI-SearchBot, ClaudeBot, PerplexityBot and other AI crawlers in logs using User-Agent parsing, IP-range checks, status codes and request evidence.",
+  "artwork": {
+    "kind": "study",
+    "variant": "triptych",
+    "label": "Server log / User-Agent / IP range",
+    "note": "Identity is an evidence chain: claimed token, source network, request path, response code, and the provider’s current published ranges."
+  },
+  "date": "2026.09.23",
+  "lastVerified": "2026.09.23",
+  "readTime": "3 MIN",
+  "author": "SULAYMAN BOWLES",
+  "thesis": "Crawler attribution should be probabilistic until network evidence confirms it: parse the claimed User-Agent, validate the source IP against the provider’s current ranges or verification method, then preserve the HTTP response and robots state.",
+  "conclusion": {
+    "title": "Log evidence should survive a spoofed User-Agent",
+    "content": "A trustworthy crawler observation names the token, source IP, provider-verification result, URL, timestamp, HTTP status, robots policy in force, and whether a CDN or proxy altered the apparent client address. Anything less is traffic labeling, not identity verification."
+  },
+  "evidenceBoundary": "Provider IP ranges can change, proxies can mask client addresses, and some user-triggered fetchers have different robots behavior from automatic crawlers. Network-range matching supports attribution but does not identify the individual end user or prove how fetched content was later used.",
+  "metrics": [
+    {
+      "label": "Minimum identity signals",
+      "value": "UA + NETWORK"
+    },
+    {
+      "label": "Operational signals",
+      "value": "PATH + STATUS + TIME"
+    },
+    {
+      "label": "Common spoof risk",
+      "value": "USER-AGENT ONLY"
+    },
+    {
+      "label": "Evidence date",
+      "value": "2026.09.23"
+    }
+  ],
+  "resources": [
+    {
+      "label": "AI crawler robots.txt policy guide",
+      "href": "/research/ai-crawlers/ai-search-crawler-policy",
+      "description": "Copy-ready policy patterns for separating search discovery, training crawlers, and user-triggered fetchers.",
+      "format": "WEB"
+    },
+    {
+      "label": "robots.txt access-control boundary",
+      "href": "/research/ai-crawlers/robots-txt-courtesy-not-access-control",
+      "description": "Why crawler policy is not authentication or authorization, with RFC 9309 context.",
+      "format": "WEB"
+    }
+  ],
+  "content": [
+    "Searching access logs for “GPTBot” or “ClaudeBot” is useful, but it is not verification. Any client can send a copied User-Agent string. For crawler analytics, allowlisting, abuse controls, or a public study, the log record should be joined to provider-published network evidence and the actual HTTP response.",
+    "The practical data model is small: timestamp, host, path, query string if retained, claimed User-Agent, source IP after trusted-proxy normalization, HTTP status, bytes, edge/WAF action, and a verification field such as verified-range, failed-range, unknown-range, or user-triggered class."
+  ],
+  "sections": [
+    {
+      "id": "normalize-the-log",
+      "title": "First recover the real client IP",
+      "paragraphs": [
+        "On a site behind Cloudflare, Fastly, a load balancer, or another reverse proxy, the socket peer may be the proxy rather than the crawler. Use the platform’s trusted client-IP field or forwarding header only after configuring a trusted proxy chain; accepting arbitrary X-Forwarded-For headers from the public internet creates another spoofing path.",
+        "Preserve the original request metadata long enough to audit a classification error. A derived daily count without the underlying IP, path, and status code is hard to reproduce."
+      ]
+    },
+    {
+      "id": "match-provider-ranges",
+      "title": "Match the source address to current provider ranges",
+      "paragraphs": [
+        "OpenAI publishes separate JSON IP ranges for OAI-SearchBot, GPTBot, ChatGPT-User, and OAI-AdsBot. Perplexity publishes ranges for PerplexityBot and Perplexity-User. Anthropic publishes bot network information from its crawler guidance. Fetch the current provider file on a schedule instead of hard-coding a list indefinitely.",
+        "For Google, the official method supports matching published IP lists or performing reverse-DNS and forward-DNS verification. That is a useful model for any crawler study: provider network evidence should be stronger than the string in the header."
+      ]
+    },
+    {
+      "id": "join-policy-and-response",
+      "title": "A verified bot can still be blocked",
+      "paragraphs": [
+        "Identity and access are separate fields. Once a request is attributed, record whether robots.txt allowed the automatic crawler and whether the edge actually returned 200, 301, 403, 429, 5xx, or another response. A nominally allowed bot that receives 403 from the WAF is not successfully crawling the page.",
+        "Rate limiting often appears as a traffic-shape problem rather than an explicit robots problem. OpenAI’s advertiser guidance specifically points site owners toward 429 responses, firewall logs, bot-mitigation events, and throttling rules when crawler access fails."
+      ]
+    },
+    {
+      "id": "classification-output",
+      "title": "Store observations, not just totals",
+      "paragraphs": [
+        "A useful record might read: OAI-SearchBot claimed; source IP matched the current OpenAI SearchBot ranges; GET /research/...; 200 response; robots allowed; first seen 14:04:12Z; verification file fetched at 13:00Z. That statement can be audited later.",
+        "Do not infer indexing, citation, model training, or a human user from a successful fetch. The server proves that bytes were requested and served. Product behavior is a separate measurement problem."
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "id": "S1",
+      "label": "OpenAI — Overview of OpenAI Crawlers",
+      "href": "https://developers.openai.com/api/docs/bots",
+      "lastVerified": "2026.09.23"
+    },
+    {
+      "id": "S2",
+      "label": "Anthropic — ClaudeBot, Claude-User, and Claude-SearchBot guidance",
+      "href": "https://support.claude.com/en/articles/8896518-does-anthropic-crawl-data-from-the-web-and-how-can-site-owners-block-the-crawler",
+      "lastVerified": "2026.09.23"
+    },
+    {
+      "id": "S3",
+      "label": "Perplexity — crawler and user-agent documentation",
+      "href": "https://docs.perplexity.ai/docs/resources/perplexity-crawlers",
+      "lastVerified": "2026.09.23"
+    },
+    {
+      "id": "S4",
+      "label": "Google — verify crawler and fetcher requests",
+      "href": "https://developers.google.com/crawling/docs/crawlers-fetchers/verify-google-requests",
+      "lastVerified": "2026.09.23"
+    }
+  ],
+  "path": "/research/crawler-engineering/verify-ai-crawlers-server-logs",
+  "aliases": [],
+  "dateModified": "2026.09.23",
+  "image": "/images/generative-art/yuru-06.webp"
+}

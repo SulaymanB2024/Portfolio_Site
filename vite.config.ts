@@ -5,7 +5,7 @@ import hosting from './vercel.json' with { type: 'json' }
 import { publicPages } from './src/personal/public-pages'
 import { outreachPreview } from './tools/outreach-preview'
 const previewHeaders = Object.fromEntries(Object.entries(hosting.routes.find(route => route.headers?.['Content-Security-Policy'])?.headers || {}).filter(([, value]) => typeof value === 'string')) as Record<string, string>
-export default defineConfig({
+export default defineConfig(({ isSsrBuild }) => ({
   cacheDir: '.cache/vite',
   resolve: { dedupe: ['react', 'react-dom'] },
   plugins: [react(), portfolioRuntimeAssets(), outreachPreview(), {
@@ -22,5 +22,6 @@ export default defineConfig({
   }],
   worker: { format: 'es' },
   preview: { headers: previewHeaders },
-  build: { rolldownOptions: { input: { main: 'index.html', shader: 'shader.html', models: 'models.html' } } }
-})
+  // Only the client output needs public assets; the SSR bundle renders from source.
+  build: { copyPublicDir: !isSsrBuild, rolldownOptions: { input: { main: 'index.html', shader: 'shader.html', models: 'models.html' } } }
+}))

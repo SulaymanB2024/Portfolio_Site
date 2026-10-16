@@ -3,6 +3,7 @@ import { CHAPTERS, type LandingChapter } from './sequence.ts'
 /** Only copy and the existing two destinations can vary at a company arrival. */
 export interface LandingOpeningCopy {
   lines: readonly [string, string, string, string]
+  introduction?: string
   category: string
   href: string
   linkLabel: string

@@ -1,0 +1,115 @@
+{
+  "kind": "research",
+  "cluster": "financial-systems",
+  "slug": "who-owns-ntta",
+  "number": "31",
+  "category": "TEXAS INFRASTRUCTURE",
+  "title": "Who Owns NTTA? The North Texas Tollway Authority Is Public",
+  "seoTitle": "Who Owns NTTA? Public Authority, Not a Private Company",
+  "subtitle": "NTTA is a political subdivision of Texas created as a regional tollway authority—not a private toll-road company or a subsidiary of a foreign investor.",
+  "seoDescription": "Who owns NTTA? NTTA is a public regional tollway authority made up of Dallas, Denton, Collin, and Tarrant counties. See what it owns and where toll money goes.",
+  "artwork": {
+    "kind": "study",
+    "variant": "triptych",
+    "label": "NTTA / public authority / revenue bonds",
+    "note": "The customer-facing toll system is public even though contractors, lenders, and concession companies can sit around parts of the network."
+  },
+  "date": "2026.09.23",
+  "lastVerified": "2026.09.23",
+  "readTime": "3 MIN",
+  "author": "SULAYMAN BOWLES",
+  "thesis": "NTTA is not owned by shareholders. It is a Texas political subdivision whose member counties appoint its public governance, while toll revenues support operations and revenue-backed debt.",
+  "conclusion": {
+    "title": "NTTA has public governance, not private equity owners",
+    "content": "The useful ownership answer is institutional: NTTA is a regional public authority. Bondholders have contractual claims on pledged revenues, vendors perform work, and separate private concessions may use NTTA for billing, but none of those relationships turns NTTA itself into a private company."
+  },
+  "evidenceBoundary": "This page describes NTTA’s public legal and operating structure as verified September 23, 2026. It does not imply that every toll lane billed through an NTTA account is owned or operated by NTTA. Project-level ownership must be checked separately.",
+  "metrics": [
+    {
+      "label": "Member counties",
+      "value": "4"
+    },
+    {
+      "label": "Legal form",
+      "value": "TEXAS POLITICAL SUBDIVISION"
+    },
+    {
+      "label": "Tax-supported NTTA debt",
+      "value": "NONE"
+    },
+    {
+      "label": "Evidence date",
+      "value": "2026.09.23"
+    }
+  ],
+  "resources": [
+    {
+      "label": "Texas toll-road ownership dataset",
+      "href": "/research/texas-toll-road-ownership-2026.csv",
+      "description": "Project-level public/private ownership, operator, toll-revenue claimant, concession term, billing agent, and evidence-date records.",
+      "format": "CSV"
+    },
+    {
+      "label": "Texas toll-road ownership investigation",
+      "href": "/markets/who-owns-texas-toll-roads",
+      "description": "The long-form ownership and capital-stack investigation behind this query-specific note.",
+      "format": "WEB"
+    }
+  ],
+  "content": [
+    "The North Texas Tollway Authority is public. NTTA describes itself as a political subdivision of the State of Texas authorized to acquire, build, maintain, repair, and operate turnpike projects. Its member counties are Dallas, Denton, Collin, and Tarrant; it also serves Ellis and Johnson counties. There is no stock ledger, private parent company, or foreign shareholder that “owns NTTA.”",
+    "That answer is easy to blur because a driver can use one NTTA TollTag across facilities with different legal structures. NTTA can own and operate a road, provide toll-collection services for a TxDOT project, or collect on behalf of a privately operated concession. The billing relationship is not the ownership relationship."
+  ],
+  "sections": [
+    {
+      "id": "what-ntta-is",
+      "title": "What NTTA legally is",
+      "paragraphs": [
+        "NTTA is a regional tollway authority governed under Texas law. Its board is a public governing body rather than a corporate board elected by equity shareholders. Current NTTA notices identify Dallas, Denton, Collin, and Tarrant as the member counties and describe the authority as a political subdivision of Texas.",
+        "NTTA’s core network includes the Dallas North Tollway, President George Bush Turnpike, Sam Rayburn Tollway, Chisholm Trail Parkway, 360 Tollway, and several bridges and tunnels. There are facility-specific nuances: for example, the Sam Rayburn Tollway is held through a state right-of-use arrangement rather than the simplest version of fee-title ownership."
+      ]
+    },
+    {
+      "id": "who-controls-the-money",
+      "title": "Who controls the toll money",
+      "paragraphs": [
+        "NTTA says its toll projects receive no legislative appropriations and that tolls are collected to repay debt and operate and maintain the roadways. That makes the system financially self-supporting in a different sense from a private company. The authority issues revenue-supported obligations rather than equity shares.",
+        "Bondholders therefore matter without becoming owners of NTTA. Debt documents can restrict how pledged revenue is used and require reserves or coverage tests. Those creditor rights are senior financial claims, not equity ownership of the authority or its roads."
+      ]
+    },
+    {
+      "id": "why-tolltag-confuses-ownership",
+      "title": "Why TollTag can make private roads look like NTTA roads",
+      "paragraphs": [
+        "Electronic tolling separates the customer interface from the underlying asset. A TollTag can be accepted on a managed lane whose pavement belongs to TxDOT and whose operating and revenue rights sit with a concession company. NTTA’s collection role does not transfer road title or concession economics to NTTA.",
+        "The practical test is to identify four separate fields: physical owner, statutory authority, operator, and toll-revenue claimant. The linked Texas ownership dataset keeps those fields apart for major systems and concessions."
+      ]
+    },
+    {
+      "id": "direct-answer",
+      "title": "The short answer to “is NTTA private?”",
+      "paragraphs": [
+        "No. NTTA is a public regional tollway authority and Texas political subdivision. It can borrow in the municipal revenue-bond market and contract with private firms, but those relationships do not make it a private company.",
+        "For a specific road, ask the question again at the project level. NTTA itself may be the owner/operator, or it may only be one service provider in a road whose title and cash-flow rights sit elsewhere."
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "id": "S1",
+      "label": "NTTA — September 2026 committee notice and authority description",
+      "href": "https://www.ntta.org/september-committee-meetings-0",
+      "lastVerified": "2026.09.23"
+    },
+    {
+      "id": "S2",
+      "label": "NTTA — financial information and debt-obligation transparency",
+      "href": "https://www.ntta.org/about-us/financial-information",
+      "lastVerified": "2026.09.23"
+    }
+  ],
+  "path": "/research/financial-systems/who-owns-ntta",
+  "aliases": [],
+  "dateModified": "2026.09.23",
+  "image": "/images/generative-art/yuru-32.webp"
+}

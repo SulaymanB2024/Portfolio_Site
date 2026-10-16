@@ -1,0 +1,109 @@
+{
+  "kind": "research",
+  "cluster": "ai-crawlers",
+  "slug": "claude-crawlers-claudebot-searchbot-user",
+  "number": "41",
+  "category": "AI CRAWLERS",
+  "title": "ClaudeBot vs Claude-SearchBot vs Claude-User",
+  "seoTitle": "ClaudeBot vs Claude-SearchBot vs Claude-User: What Each Does",
+  "subtitle": "Anthropic separates model-development crawling, web-search crawling, and user-directed retrieval into three robots with different purposes.",
+  "seoDescription": "Compare ClaudeBot, Claude-SearchBot and Claude-User: training, search, user retrieval, robots.txt controls, crawl-delay support and verification.",
+  "artwork": {
+    "kind": "study",
+    "variant": "triptych",
+    "label": "Anthropic crawler / search / user fetch",
+    "note": "The three Claude identities answer different publisher questions, so a blanket Claude rule discards useful control."
+  },
+  "date": "2026.09.23",
+  "lastVerified": "2026.09.23",
+  "readTime": "3 MIN",
+  "author": "SULAYMAN BOWLES",
+  "thesis": "Anthropic’s crawler taxonomy separates training-oriented collection, search indexing, and user-requested retrieval, allowing a publisher to express distinct policies instead of one all-or-nothing Claude decision.",
+  "conclusion": {
+    "title": "Target the Claude identity that matches the outcome",
+    "content": "ClaudeBot is the model-development crawler, Claude-SearchBot supports search, and Claude-User supports user-directed retrieval. Site owners should maintain separate robots groups when they want separate outcomes and verify important traffic against Anthropic’s current published network information."
+  },
+  "evidenceBoundary": "Anthropic’s guidance and network ranges can change. robots.txt is a crawler-policy layer, not authentication. This page reports official documentation as checked September 23, 2026 and does not infer training or citation from a server request.",
+  "metrics": [
+    {
+      "label": "Anthropic crawler identities",
+      "value": "3"
+    },
+    {
+      "label": "Training",
+      "value": "CLAUDEBOT"
+    },
+    {
+      "label": "Search",
+      "value": "CLAUDE-SEARCHBOT"
+    },
+    {
+      "label": "User retrieval",
+      "value": "CLAUDE-USER"
+    }
+  ],
+  "resources": [
+    {
+      "label": "AI crawler robots.txt policy guide",
+      "href": "/research/ai-crawlers/ai-search-crawler-policy",
+      "description": "Copy-ready policy patterns for separating search discovery, training crawlers, and user-triggered fetchers.",
+      "format": "WEB"
+    },
+    {
+      "label": "robots.txt access-control boundary",
+      "href": "/research/ai-crawlers/robots-txt-courtesy-not-access-control",
+      "description": "Why crawler policy is not authentication or authorization, with RFC 9309 context.",
+      "format": "WEB"
+    }
+  ],
+  "content": [
+    "Anthropic documents three web robots because “Claude accessed my site” can mean three different things. ClaudeBot collects public web content that may contribute to model development. Claude-SearchBot supports web search. Claude-User fetches content when a person asks Claude to visit or use a page.",
+    "The separation is operationally useful. A publisher that is comfortable appearing in Claude search results but does not want future automatic model-development crawling can write different groups instead of blocking every Claude-branded request."
+  ],
+  "sections": [
+    {
+      "id": "claudebot",
+      "title": "ClaudeBot: model-development crawling",
+      "paragraphs": [
+        "Anthropic says ClaudeBot helps improve the utility and safety of its generative models by collecting web content that could potentially contribute to training. Restricting ClaudeBot signals that future material from the site should be excluded from Anthropic’s model-training datasets.",
+        "That policy should not be described as a cryptographic guarantee about every historical copy of content. It is a documented crawler-control signal for future collection behavior."
+      ]
+    },
+    {
+      "id": "searchbot",
+      "title": "Claude-SearchBot: web-search discovery",
+      "paragraphs": [
+        "Claude-SearchBot is the search-oriented identity. It exists so publishers can treat Claude’s search feature differently from model-development crawling.",
+        "As with other search crawlers, a robots allow rule can still be defeated by a WAF, rate limiter, CDN challenge, or network block. Production access has to be checked in server or edge logs."
+      ]
+    },
+    {
+      "id": "claude-user",
+      "title": "Claude-User: retrieval at a user’s direction",
+      "paragraphs": [
+        "Claude-User supports fetches initiated by people using Claude. This class is closer to a user-agent proxy than a conventional discovery crawler, so its traffic pattern and policy meaning differ from ClaudeBot.",
+        "Anthropic’s 2026 guidance also says its bots respect robots directives and supports the non-standard Crawl-delay extension. That implementation detail should be verified against current docs before relying on it as a permanent standard."
+      ]
+    },
+    {
+      "id": "verification",
+      "title": "How to classify Anthropic traffic in logs",
+      "paragraphs": [
+        "Store the exact claimed token, source IP, status code, and timestamp. Then compare the source address with Anthropic’s current bot/network information. Treat an unmatched “ClaudeBot” header as unverified rather than silently counting it as Anthropic.",
+        "Finally, keep the result scoped to access. A 200 response from a verified crawler demonstrates a successful fetch, not whether the page entered a model dataset or appeared in a Claude answer."
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "id": "S1",
+      "label": "Anthropic — ClaudeBot, Claude-User, and Claude-SearchBot guidance",
+      "href": "https://support.claude.com/en/articles/8896518-does-anthropic-crawl-data-from-the-web-and-how-can-site-owners-block-the-crawler",
+      "lastVerified": "2026.09.23"
+    }
+  ],
+  "path": "/research/ai-crawlers/claude-crawlers-claudebot-searchbot-user",
+  "aliases": [],
+  "dateModified": "2026.09.23",
+  "image": "/images/generative-art/yuru-01.webp"
+}

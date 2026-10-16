@@ -1,0 +1,127 @@
+{
+  "kind": "research",
+  "cluster": "financial-systems",
+  "slug": "texas-toll-roads-public-vs-private",
+  "number": "32",
+  "category": "TEXAS INFRASTRUCTURE",
+  "title": "Are Texas Toll Roads Privately Owned? A Road-by-Road Answer",
+  "seoTitle": "Are Texas Toll Roads Privately Owned? Public vs Private Map",
+  "subtitle": "Most major Texas toll systems are public. Four active major concessions give private companies finite operating and toll-revenue rights on state-owned corridors.",
+  "seoDescription": "Are Texas toll roads privately owned? Most are public. See NTTA, HCTRA, TxDOT systems and four major private concessions, with ownership separated from operating rights.",
+  "artwork": {
+    "kind": "study",
+    "variant": "triptych",
+    "label": "Texas toll roads / public title / private concessions",
+    "note": "A road can be publicly owned while a concession company holds a decades-long right to operate managed lanes and collect toll revenue."
+  },
+  "date": "2026.09.23",
+  "lastVerified": "2026.09.23",
+  "readTime": "3 MIN",
+  "author": "SULAYMAN BOWLES",
+  "thesis": "“Private toll road” usually describes a concession right, not private title to Texas highway land; most material systems are public, while four active major concessions hold time-limited private operating and revenue rights.",
+  "conclusion": {
+    "title": "Public versus private is not one field",
+    "content": "Texas toll-road ownership is mostly public, but the cash-flow layer can be private. The right answer names the public titleholder, the operator, the revenue claimant, and the concession expiration rather than forcing each road into a single public/private label."
+  },
+  "evidenceBoundary": "The comparison uses the material-system inventory and source package behind the July 23, 2026 Texas toll-road study, refreshed against public TxDOT and authority descriptions on September 23, 2026. It is not a census of every tolled lane or local connector in Texas.",
+  "metrics": [
+    {
+      "label": "Active major private concessions",
+      "value": "4"
+    },
+    {
+      "label": "DFW concession end",
+      "value": "2061"
+    },
+    {
+      "label": "SH 130 5–6 end",
+      "value": "2062"
+    },
+    {
+      "label": "SH 288 status",
+      "value": "PUBLIC SINCE 2024"
+    }
+  ],
+  "resources": [
+    {
+      "label": "Texas toll-road ownership dataset",
+      "href": "/research/texas-toll-road-ownership-2026.csv",
+      "description": "Project-level public/private ownership, operator, toll-revenue claimant, concession term, billing agent, and evidence-date records.",
+      "format": "CSV"
+    },
+    {
+      "label": "Texas toll-road ownership investigation",
+      "href": "/markets/who-owns-texas-toll-roads",
+      "description": "The long-form ownership and capital-stack investigation behind this query-specific note.",
+      "format": "WEB"
+    }
+  ],
+  "content": [
+    "Most Texas toll roads are not privately owned. NTTA, HCTRA, regional mobility authorities, counties, and TxDOT own or control most of the major systems. The important exception is a small group of long-term public-private concessions where Texas keeps title to the corridor but a project company receives contractual rights to operate tolled managed lanes and keep defined toll revenue.",
+    "The current material concession set is North Tarrant Express, LBJ Express, NTE 35W, and SH 130 Segments 5–6. SH 288 used to belong in that list, but Texas terminated and bought out the concession in October 2024, so treating it as currently privately operated would be stale."
+  ],
+  "sections": [
+    {
+      "id": "public-systems",
+      "title": "The public side: NTTA, HCTRA, TxDOT, counties, and mobility authorities",
+      "paragraphs": [
+        "NTTA is a Texas political subdivision. HCTRA is an enterprise function of Harris County. TxDOT’s Central Texas Turnpike System, Grand Parkway system, I-35E managed lanes, and SH 249 system sit in state public structures. Regional and county toll authorities fill out much of the remaining network.",
+        "Public ownership does not mean toll-free. These systems use tolls to operate roads, fund maintenance and capital projects, build reserves, and service revenue-supported debt. The existence of long-lived debt is not evidence that a road was sold to bondholders."
+      ]
+    },
+    {
+      "id": "private-concessions",
+      "title": "The private side: four active major concessions",
+      "paragraphs": [
+        "North Tarrant Express, LBJ Express, and NTE 35W are TxDOT corridors in Dallas–Fort Worth with long-term private concession rights that end in 2061. SH 130 Segments 5–6 is also state-owned, with a concession scheduled through 2062.",
+        "The concession company can have private shareholders, project debt, operations obligations, rate-setting rules, revenue sharing, and a residual claim on cash. That is economically meaningful ownership of a contractual asset, but it is not the same as owning Texas highway land forever."
+      ]
+    },
+    {
+      "id": "former-private",
+      "title": "SH 288 shows why the date matters",
+      "paragraphs": [
+        "SH 288’s managed lanes were built and operated under a concession whose original end date was 2068. Texas terminated the concession in 2024 and shifted the facility back into a public structure. A search result or article written before that transaction can therefore give a technically historical but currently wrong answer.",
+        "The same distinction will matter again when other concessions expire, are refinanced, restructured, extended, or bought out. Toll-road ownership is a dated contract map, not a permanent label."
+      ]
+    },
+    {
+      "id": "how-to-read",
+      "title": "How to tell whether a specific Texas toll road is private",
+      "paragraphs": [
+        "Check the facility owner first, then the operator, then the party entitled to toll revenue, and finally the concession term. A private operator may work under a service contract with no residual toll claim; a concessionaire can hold the revenue right for decades while the state keeps title.",
+        "The companion dataset exposes those fields directly so “private” can be tested against a specific legal relationship rather than inferred from the toll price, logo, billing statement, or name of the operator."
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "id": "S1",
+      "label": "NTTA — September 2026 committee notice and authority description",
+      "href": "https://www.ntta.org/september-committee-meetings-0",
+      "lastVerified": "2026.09.23"
+    },
+    {
+      "id": "S2",
+      "label": "HCTRA — FY2025 Toll Road Authority Enterprise Fund financial statements",
+      "href": "https://www.hctra.org/-/media/2ba0076447b44da0948e12147ce7a26b.ashx",
+      "lastVerified": "2026.09.23"
+    },
+    {
+      "id": "S3",
+      "label": "TxDOT — HB 803 Report on Toll Projects, FY2025",
+      "href": "https://www.txdot.gov/content/dam/docs/division/gov/hb-803-report-fy-2025.pdf",
+      "lastVerified": "2026.09.23"
+    },
+    {
+      "id": "S4",
+      "label": "FHWA — DBFOM toll-concession project profiles",
+      "href": "https://www.fhwa.dot.gov/ipd/p3/defined/new_build_facilities/dbfom_toll_concessions.aspx",
+      "lastVerified": "2026.09.23"
+    }
+  ],
+  "path": "/research/financial-systems/texas-toll-roads-public-vs-private",
+  "aliases": [],
+  "dateModified": "2026.09.23",
+  "image": "/images/generative-art/yuru-32.webp"
+}

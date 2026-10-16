@@ -3,7 +3,7 @@ type Arrival = { entry?: string; point?: Point }
 const ENTRY = '__portfolioScrollEntry'
 
 /** Retain history positions without writing history state on every scroll frame. */
-export function installRouteScroll(host: Window = window) {
+export function installRouteScroll(host: Window = window, { nativeRestoration = false } = {}) {
   const positions = new Map<string, Point>()
   const prefix = `${Date.now().toString(36)}-${Math.random().toString(36).slice(2)}`
   let serial = 0
@@ -27,9 +27,11 @@ export function installRouteScroll(host: Window = window) {
     try { host.history.replaceState({ ...state, [ENTRY]: entry }, '') } catch { return undefined }
     return entry
   }
+  // Recruiter documents keep browser restoration for native destinations, but
+  // their later chapters still use hash routes and need per-entry positions.
   let current = ensureEntry()
   let currentAddress = host.location?.href
-  const ownsRestoration = Boolean(current)
+  const ownsRestoration = Boolean(current) && !nativeRestoration
   if (ownsRestoration) host.history.scrollRestoration = 'manual'
 
   function capture() {

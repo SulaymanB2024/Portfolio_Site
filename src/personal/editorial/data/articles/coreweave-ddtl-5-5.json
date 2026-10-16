@@ -1,0 +1,107 @@
+{
+  "kind": "research",
+  "cluster": "financial-systems",
+  "slug": "coreweave-ddtl-5-5",
+  "number": "47",
+  "category": "AI INFRASTRUCTURE FINANCE",
+  "title": "CoreWeave DDTL 5.5: How a $2.6 Billion GPU-Backed Loan Works",
+  "seoTitle": "CoreWeave DDTL 5.5: $2.6B GPU Loan Structure Explained",
+  "subtitle": "The August 2026 facility finances GPU servers and related infrastructure against customer-contract economics through a dedicated CoreWeave financing subsidiary.",
+  "seoDescription": "CoreWeave DDTL 5.5 explained: $2.6B delayed-draw loan, SOFR + 5.50%, 2031 maturity, GPU collateral, customer contracts and asset-level financing structure.",
+  "artwork": {
+    "kind": "study",
+    "variant": "triptych",
+    "label": "Customer contract / GPU asset / delayed-draw loan",
+    "note": "The financing connects contracted AI demand to specific infrastructure capex rather than funding the entire company through one unsecured corporate balance sheet."
+  },
+  "date": "2026.09.23",
+  "lastVerified": "2026.09.23",
+  "readTime": "3 MIN",
+  "author": "SULAYMAN BOWLES",
+  "thesis": "DDTL 5.5 turns contracted AI-infrastructure demand into financeable asset-level cash flow: a dedicated subsidiary can draw debt as GPU servers and related infrastructure are purchased to perform eligible customer contracts.",
+  "conclusion": {
+    "title": "The innovation is contract-backed asset finance at AI scale",
+    "content": "CoreWeave is matching infrastructure debt to deployed GPU assets and customer cash flows rather than relying exclusively on parent-level unsecured capital. That reduces some financing mismatch but leaves residual-value, re-leasing, customer concentration, refinancing, and technology-obsolescence risk inside the credit."
+  },
+  "evidenceBoundary": "This page explains disclosed facility terms and capital structure; it is not a credit rating, valuation, or investment recommendation. The full collateral package, borrowing-base mechanics, covenants, and contract eligibility tests should be read in the governing credit documents before drawing a credit conclusion.",
+  "metrics": [
+    {
+      "label": "Facility size",
+      "value": "$2.6B"
+    },
+    {
+      "label": "SOFR margin",
+      "value": "+5.50%"
+    },
+    {
+      "label": "Maturity",
+      "value": "SEP. 1, 2031"
+    },
+    {
+      "label": "Draw window",
+      "value": "THROUGH DEC. 2026"
+    }
+  ],
+  "content": [
+    "CoreWeave’s DDTL 5.5 is a $2.6 billion delayed-draw term loan entered into in August 2026 through CoreWeave Financing DDTL V-V, LLC, an indirect subsidiary. CoreWeave’s SEC filing says the facility is primarily intended to finance capital expenditures required to perform customer contracts, including GPU servers and related infrastructure.",
+    "The structure matters because AI cloud companies spend enormous amounts before the matching customer revenue arrives. A delayed-draw facility lets the borrower fund qualifying deployments as the capex is incurred instead of holding the full debt proceeds from day one. The loan matures September 1, 2031 and prices at Term SOFR plus 5.50% for SOFR borrowings."
+  ],
+  "sections": [
+    {
+      "id": "borrower",
+      "title": "The borrower sits below the public parent",
+      "paragraphs": [
+        "The named borrower is a dedicated financing subsidiary rather than CoreWeave, Inc. itself. CoreWeave has used similar special-purpose or asset-level structures across its DDTL platform, allowing lenders to underwrite a defined pool of infrastructure and contract cash flows.",
+        "A financing subsidiary does not mean the economics are isolated from CoreWeave’s operating platform. The GPU deployments still depend on CoreWeave’s ability to build, power, network, operate, and re-market the capacity."
+      ]
+    },
+    {
+      "id": "collateral",
+      "title": "Customer contracts make GPU capex more debt-like",
+      "paragraphs": [
+        "CoreWeave’s June 2026 filing says its DDTLs are generally collateralized by the assets underlying contributed customer contracts and pledged contractual cash flows, often with investment-grade counterparties. That is a stronger underwriting object than speculative GPU purchases with no contracted user.",
+        "The lender is still exposed to contract duration and asset life. CoreWeave’s closing release notes that DDTL 5.5 has an approximately five-year maturity while underlying customer contracts average about three years, so repayment can depend on renewal or re-leasing after the initial contract."
+      ]
+    },
+    {
+      "id": "economics",
+      "title": "SOFR + 5.50% is the visible price, not the whole cost",
+      "paragraphs": [
+        "The SEC filing gives a floating rate of Term SOFR plus 5.50%, or a base-rate alternative plus 4.50%. Commitment fees, original issue economics, hedging, amortization, collateral requirements, reserves, and transaction costs can change the all-in economics.",
+        "Because the facility is delayed draw, unused commitments and draw timing also matter. Debt should arrive as qualifying capex ramps, which can reduce negative carry compared with borrowing the entire amount before deployment."
+      ]
+    },
+    {
+      "id": "residual-risk",
+      "title": "The credit ultimately depends on what happens after the first contract",
+      "paragraphs": [
+        "A GPU server can have useful life beyond one customer contract, but its market value is not fixed. New accelerators can reduce the relative value of older hardware, and data-center capacity can be constrained or advantaged by power, network, cooling, and location.",
+        "CoreWeave’s release explicitly frames renewal or re-leasing as part of the structure. That turns residual-value and remarketing capability into credit variables alongside the initial contract counterparty."
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "id": "S1",
+      "label": "CoreWeave 8-K — DDTL 5.5 facility, August 2026",
+      "href": "https://www.sec.gov/Archives/edgar/data/1769628/000176962826000357/crwv-20260807.htm",
+      "lastVerified": "2026.09.23"
+    },
+    {
+      "id": "S2",
+      "label": "CoreWeave 10-Q — debt, DDTL collateral, and June 2026 balance sheet",
+      "href": "https://www.sec.gov/Archives/edgar/data/1769628/000176962826000366/crwv-20260630.htm",
+      "lastVerified": "2026.09.23"
+    },
+    {
+      "id": "S3",
+      "label": "CoreWeave — DDTL 5.5 closing release",
+      "href": "https://www.sec.gov/Archives/edgar/data/1769628/000176962826000357/ex991pr.htm",
+      "lastVerified": "2026.09.23"
+    }
+  ],
+  "path": "/research/financial-systems/coreweave-ddtl-5-5",
+  "aliases": [],
+  "dateModified": "2026.09.23",
+  "image": "/images/generative-art/yuru-44.webp"
+}

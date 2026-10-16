@@ -1,19 +1,20 @@
 import originalProfile from './editorial/data/profile.json' with { type: 'json' }
 
-// Public prose updated from the September 30, 2026 résumés. The original
+// Public prose follows the September 30 résumés and October 12 user corrections. The original
 // profile/PDF remain historical source artifacts; private source links stay
 // in evidence/copy/sources.json rather than the client bundle.
 export const resumeReview = {
-  asOf: '2026-09-30',
+  asOf: '2026-10-12',
   introduction: 'I work in product, growth, and commercial research at Chegg, Sapien, and VOID, and build independent products.',
   educationNote: 'I study finance at UT Austin, compose, and play double bass.',
-  pdfLabel: 'Download July résumé',
-  pdfNote: 'July 2026 PDF · September 2026 web résumé.',
+  pdfLabel: 'Download résumé',
+  pdfFile: 'Sulayman_Bowles_Resume_Current.pdf',
+  pdfNote: 'Product, growth, AI and commercial research.',
 }
 
 export const resumeProfile = {
   ...originalProfile,
-  currentSummary: 'Sulayman Bowles studies finance at UT Austin, works in product and growth at Chegg, leads growth at Sapien, and runs VOID. His products include InternshipDeadlines and Atlas.',
+  currentSummary: 'Sulayman Bowles studies finance at UT Austin, works on product, recruiting data and SEO for Internships.com at Chegg, leads growth at Sapien, and runs VOID. He built Atlas to connect website audit decisions to captured evidence, researches the economics of AI, software and infrastructure, and plays double bass.',
   positioning: 'Product, growth, AI, and research.',
   education: {
     ...originalProfile.education,
@@ -27,9 +28,10 @@ export const resumeProfile = {
       location: 'Austin, TX / Remote',
       title: 'Product Intern, Growth — Internships.com',
       dates: 'May 2026 — Present',
-      publicSummary: 'Develop internship-search workflows and AI tools through student research.',
+      publicSummary: 'Build the recruiting-data and search workflows behind Internships.com, with student research and SEO strategy guiding discovery.',
       bullets: [
-        'Build and validate recruiting-data pipelines with product, engineering, data science, and marketing teams.',
+        'Built an internship scraper and recruiting-data pipelines, validating sources, normalizing listings and retaining provenance with product, engineering, data science and marketing teams.',
+        'Work on SEO strategy and search discovery for Internships.com, connecting student questions with internship and application content.',
         'Analyze public social posts with embeddings and machine learning to inform student-focused growth experiments.',
         'Built an AI mock interviewer with adaptive follow-ups, conversation memory, failure recovery, and feedback.',
       ],
@@ -53,24 +55,11 @@ export const resumeProfile = {
       location: 'Austin, TX',
       title: 'Founder',
       dates: 'Jan 2026 — Present',
-      publicSummary: 'Founded a consultancy for growth strategy, financial analysis, AI workflows, and web systems.',
+      publicSummary: 'Founded a consultancy connecting growth strategy, financial analysis and software with client operating decisions.',
       bullets: [
         'Develop operating plans and software tools for small businesses and technology clients.',
         'Collected $50K+ in revenue.',
-        'Built Atlas, a Python and SQLite console connecting website crawls, findings, and evidence.',
-      ],
-      visibility: 'public',
-    },
-    {
-      organization: 'InternshipDeadlines',
-      location: 'Austin, TX',
-      title: 'Founder & Product Lead',
-      dates: 'Sep 2026 — Present',
-      publicSummary: 'Built and launched a student product for internship search and application planning.',
-      bullets: [
-        'Designed a pipeline for source validation, listing normalization, deduplication, and provenance.',
-        'Combine local language models for role classification and query understanding with search ranking.',
-        'Connect internship search with employer research, preparation, and cost and offer comparisons.',
+        'Built Atlas, a Python and SQLite console that turns captured website pages and audit findings into traceable recommendations and exports.',
       ],
       visibility: 'public',
     },
@@ -157,7 +146,7 @@ export const resumeProfile = {
     { label: 'Research & creative work', items: ['Research synthesis', 'AI workflows', 'Technical SEO', 'Writing', 'Figma', 'Creative experimentation'] },
   ],
   projects: [
-    { name: 'InternshipDeadlines', path: 'https://internshipdeadlines.com/', status: 'Launched; active development' },
+    { name: 'Chegg · Internships.com', path: 'https://www.internships.com/', status: 'Product, recruiting data and SEO' },
     { name: 'Sapien', path: 'https://www.asksapien.ai/', status: 'Growth and positioning' },
     ...originalProfile.projects,
     { name: 'CreativeTrace', path: '#/work/miscellaneous', status: 'Research and experimentation' },

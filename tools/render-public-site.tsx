@@ -57,7 +57,7 @@ function Body({ route }: { route: string }) {
   if (route.startsWith('writing/') && article) return <PublicArticle article={article} />
   if (route === 'writing') {
     const selection = writingSelection(catalog)
-    return <><p>{siteCopy.writing.introduction}</p><PublicWritingStories articles={selection.selected} eagerFirst /><h2>Reading paths</h2><ReadingPaths /><h2>Further reading</h2><PublicWritingStories articles={selection.more} /><h2>Notes</h2><PublicWritingStories articles={selection.notes} /></>
+    return <><p>{siteCopy.writing.introduction}</p><h2>Featured</h2><PublicWritingStories articles={selection.selected} eagerFirst /><h2>Reading paths</h2><ReadingPaths /><h2>Further reading</h2><PublicWritingStories articles={selection.more} /><h2>Notes</h2><PublicWritingStories articles={selection.notes} /></>
   }
   if (route === 'work') {
     const workPages = publicPages.filter(page => page.route.startsWith('work/'))
@@ -70,7 +70,16 @@ function Body({ route }: { route: string }) {
   const study = caseStudies.find(study => route === `work/${study.slug}`)
   if (study) return <ProjectDocument document={caseNarratives[study.slug]} slug={study.slug} caseStudy />
   if (route === 'about') return <><PersonalProfile />{personalObjects.map(object => <section key={object.id}><h2>{object.label}</h2></section>)}</>
-  if (route === 'resume') return <><p>{resumeReview.introduction}</p><h2>Education</h2><p>{resumeProfile.education.institution} · {resumeProfile.education.degrees.map(degree => `${degree.degree}, ${degree.field}`).join('; ')} · {resumeProfile.education.expectedGraduation}</p><h2>Experience</h2>{resumeProfile.experience.map((job: any) => <section key={job.organization}><h3>{job.organization}</h3><p>{job.title} · {job.dates}</p><p>{job.publicSummary}</p><ul>{job.bullets.map((bullet: string, i: number) => <li key={i}>{bullet}</li>)}</ul></section>)}<h2>Awards and leadership</h2>{resumeProfile.awardsAndLeadership.map((award: any) => <section key={award.organization}><h3>{award.organization}</h3><p>{award.title} · {award.dates}</p><p>{award.detail}</p></section>)}<h2>Skills &amp; tools</h2><dl>{resumeProfile.skillGroups.map(group => <div key={group.label}><dt>{group.label}</dt><dd>{group.items.join(" · ")}</dd></div>)}</dl><p>{resumeReview.pdfNote}</p><a href="/Sulayman_Bowles_Resume.pdf">{resumeReview.pdfLabel}</a></>
+  if (route === 'resume') return <>
+    <p>{resumeReview.introduction}</p>
+    <h2>Education</h2><p>{resumeProfile.education.institution} · {resumeProfile.education.degrees.map(degree => degree.degree + ', ' + degree.field).join('; ')} · Expected {resumeProfile.education.expectedGraduation}</p>
+    <h2>Experience</h2>{resumeProfile.experience.map(job => <section key={job.organization}><h3>{job.organization}</h3><p>{job.title} · {job.dates}</p><p>{job.publicSummary}</p><ul>{job.bullets.map((bullet, i) => <li key={i}>{bullet}</li>)}</ul></section>)}
+    <h2>Awards and leadership</h2>{resumeProfile.awardsAndLeadership.map(award => <section key={award.organization}><h3>{award.organization}</h3><p>{award.title} · {award.dates}</p><p>{award.detail}</p></section>)}
+    <h2>Skills &amp; tools</h2><dl>{resumeProfile.skillGroups.map(group => <div key={group.label}><dt>{group.label}</dt><dd>{group.items.join(', ')}</dd></div>)}</dl>
+    <h2>Certifications</h2><ul>{resumeProfile.certifications.map(item => <li key={item}>{item}</li>)}</ul>
+    <h2>Languages</h2><ul>{resumeProfile.languages.map(item => <li key={item}>{item}</li>)}</ul>
+    <p>{resumeReview.pdfNote}</p><a href={'/' + resumeReview.pdfFile}>{resumeReview.pdfLabel}</a>
+  </>
   if (route === 'contact') return <><p>{siteCopy.contact.description}</p><a href={`mailto:${contact.email}`}>{contact.email}</a><p><a href={contact.linkedin}>LinkedIn</a></p></>
   if (route === '404') return <p>This address does not exist. <a href="/">Return home</a>.</p>
   return <><p>{siteCopy.home.description}</p><PersonalProfile compact /><h2>Selected work</h2>{links(featuredWorkSlugs.map(slug => publicPages.find(page => page.route === `work/${slug}`)!))}<h2>Selected writing</h2>{links(publicPages.filter(page => page.route.startsWith('writing/')))}<p>{siteCopy.home.contact}</p><p><a href="/resume">Résumé</a> · <a href="/about">About Sulayman</a> · <a href="/contact">Contact</a></p></>

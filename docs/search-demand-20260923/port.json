@@ -1,0 +1,292 @@
+{
+  "version": 1,
+  "sourceRef": "088e1e7621fa0636ceaa52b96d5beba3085bbe66",
+  "sourcePr": "https://github.com/SulaymanB2024/Portfolio_Site/pull/63",
+  "integratedAt": "2026-10-16",
+  "sourceRecordsPath": "docs/search-demand-20260923/source-records.json",
+  "sourceRecordsSha256": "ede95cd0221d1508bc893e2715880cac157615e29f573700eeed7ea930c6e46f",
+  "collections": [
+    {
+      "path": "src/content/searchDemandCrawlerArticles.ts",
+      "gitBlob": "c97974f3ccefbe9deeb94b07d29e2236f86650be",
+      "sha256": "a368e9a684c920fea911b46f944df5935a47500df38108bd1bc6c037cdf4a116",
+      "articles": [
+        "openai-crawlers-oai-searchbot-gptbot-chatgpt-user-adsbot",
+        "verify-ai-crawlers-server-logs",
+        "claude-crawlers-claudebot-searchbot-user",
+        "perplexitybot-vs-perplexity-user",
+        "google-extended-search-gemini-ai-overviews",
+        "ai-crawler-registry"
+      ]
+    },
+    {
+      "path": "src/content/searchDemandSystemsArticles.ts",
+      "gitBlob": "717478bfc87315702d5ea748ec05a7ef649fc506",
+      "sha256": "1062a354e6028f7869267dc7a373fee2ab50d1e10975a52bff23c8d59f7ca403",
+      "articles": [
+        "search-console-query-vs-page-totals",
+        "search-console-data-pipeline",
+        "coreweave-ddtl-5-5",
+        "gpu-financing-ai-infrastructure",
+        "who-owns-austin-hvac-companies",
+        "who-owns-austin-plumbing-electrical-companies",
+        "private-equity-home-services-rollups",
+        "airline-loyalty-collateral-valuation",
+        "humanoid-robot-startup-financing"
+      ]
+    },
+    {
+      "path": "src/content/searchDemandTollArticles.ts",
+      "gitBlob": "b8106ee671ea2816e238154db8c2378812cb24de",
+      "sha256": "3f5e93ed6ec9eba7c1163eb8ef4723cd8cbe1c9e0d1aef0a9869d6e85274a604",
+      "articles": [
+        "who-owns-ntta",
+        "texas-toll-roads-public-vs-private",
+        "who-owns-hctra-sam-houston-tollway",
+        "foreign-owned-texas-toll-roads",
+        "texas-private-toll-rate-controls",
+        "who-owns-us-toll-roads",
+        "texas-managed-lanes-ownership-operators",
+        "texas-private-toll-concession-expiration-dates"
+      ]
+    }
+  ],
+  "allowedAdaptations": [
+    "Add canonical path, empty aliases and retained local social artwork.",
+    "Set the edition date to the original publication date; preserve all original dates and verification cutoffs.",
+    "Add stable S1-based source IDs without changing citation content or order.",
+    "Recalculate reading estimates at the existing 220-words-per-minute rate."
+  ],
+  "records": [
+    {
+      "slug": "openai-crawlers-oai-searchbot-gptbot-chatgpt-user-adsbot",
+      "sourcePath": "src/content/searchDemandCrawlerArticles.ts",
+      "originalSha256": "1715bf149fa15d71fd92966c4a3cbcf0693f74f7baa3dc231ca01911835beb5f",
+      "path": "src/personal/editorial/data/articles/openai-crawlers-oai-searchbot-gptbot-chatgpt-user-adsbot.json",
+      "canonicalPath": "/research/ai-crawlers/openai-crawlers-oai-searchbot-gptbot-chatgpt-user-adsbot",
+      "originalReadTime": "8 MIN",
+      "readTime": "3 MIN",
+      "artwork": "yuru-01"
+    },
+    {
+      "slug": "verify-ai-crawlers-server-logs",
+      "sourcePath": "src/content/searchDemandCrawlerArticles.ts",
+      "originalSha256": "38bec6c0885405866c77b893e16f540eb333f31adaca68268e636f70baa1a7f0",
+      "path": "src/personal/editorial/data/articles/verify-ai-crawlers-server-logs.json",
+      "canonicalPath": "/research/crawler-engineering/verify-ai-crawlers-server-logs",
+      "originalReadTime": "10 MIN",
+      "readTime": "3 MIN",
+      "artwork": "yuru-06"
+    },
+    {
+      "slug": "claude-crawlers-claudebot-searchbot-user",
+      "sourcePath": "src/content/searchDemandCrawlerArticles.ts",
+      "originalSha256": "2dc46495123a3829b24c4f2384afed4bb11ac753864c68c173fd44d2ded8bb08",
+      "path": "src/personal/editorial/data/articles/claude-crawlers-claudebot-searchbot-user.json",
+      "canonicalPath": "/research/ai-crawlers/claude-crawlers-claudebot-searchbot-user",
+      "originalReadTime": "7 MIN",
+      "readTime": "3 MIN",
+      "artwork": "yuru-01"
+    },
+    {
+      "slug": "perplexitybot-vs-perplexity-user",
+      "sourcePath": "src/content/searchDemandCrawlerArticles.ts",
+      "originalSha256": "b40dcfcca463561881b1f50a2c0de8c2abb0c8768fbd0533919fdf1a6d7f151a",
+      "path": "src/personal/editorial/data/articles/perplexitybot-vs-perplexity-user.json",
+      "canonicalPath": "/research/ai-crawlers/perplexitybot-vs-perplexity-user",
+      "originalReadTime": "7 MIN",
+      "readTime": "3 MIN",
+      "artwork": "yuru-01"
+    },
+    {
+      "slug": "google-extended-search-gemini-ai-overviews",
+      "sourcePath": "src/content/searchDemandCrawlerArticles.ts",
+      "originalSha256": "ff2ef5f0b2b24e0e1c66577c1d7c432156e9a89d70bb6ffbd80712043716bdbf",
+      "path": "src/personal/editorial/data/articles/google-extended-search-gemini-ai-overviews.json",
+      "canonicalPath": "/research/ai-crawlers/google-extended-search-gemini-ai-overviews",
+      "originalReadTime": "8 MIN",
+      "readTime": "3 MIN",
+      "artwork": "yuru-01"
+    },
+    {
+      "slug": "ai-crawler-registry",
+      "sourcePath": "src/content/searchDemandCrawlerArticles.ts",
+      "originalSha256": "7373a857906998979edb084b3f11f98be07069664a19968cb4a1b9c82d34d51e",
+      "path": "src/personal/editorial/data/articles/ai-crawler-registry.json",
+      "canonicalPath": "/research/ai-crawlers/ai-crawler-registry",
+      "originalReadTime": "11 MIN",
+      "readTime": "3 MIN",
+      "artwork": "yuru-01"
+    },
+    {
+      "slug": "search-console-query-vs-page-totals",
+      "sourcePath": "src/content/searchDemandSystemsArticles.ts",
+      "originalSha256": "01fcee517e37bad7c98a6085e362829e4c9e692a28680804e00e7f8fea635bea",
+      "path": "src/personal/editorial/data/articles/search-console-query-vs-page-totals.json",
+      "canonicalPath": "/research/search-console/search-console-query-vs-page-totals",
+      "originalReadTime": "9 MIN",
+      "readTime": "3 MIN",
+      "artwork": "yuru-12"
+    },
+    {
+      "slug": "search-console-data-pipeline",
+      "sourcePath": "src/content/searchDemandSystemsArticles.ts",
+      "originalSha256": "abe6fcd16ef23d7228003165b10f6fae74bae03bff489ff15480c59990a0a80c",
+      "path": "src/personal/editorial/data/articles/search-console-data-pipeline.json",
+      "canonicalPath": "/research/search-console/search-console-data-pipeline",
+      "originalReadTime": "11 MIN",
+      "readTime": "3 MIN",
+      "artwork": "yuru-12"
+    },
+    {
+      "slug": "coreweave-ddtl-5-5",
+      "sourcePath": "src/content/searchDemandSystemsArticles.ts",
+      "originalSha256": "edc1e08fc30473259b0945cf05fad6a927c18a7969d8d63012f1c7cff7f76384",
+      "path": "src/personal/editorial/data/articles/coreweave-ddtl-5-5.json",
+      "canonicalPath": "/research/financial-systems/coreweave-ddtl-5-5",
+      "originalReadTime": "10 MIN",
+      "readTime": "3 MIN",
+      "artwork": "yuru-44"
+    },
+    {
+      "slug": "gpu-financing-ai-infrastructure",
+      "sourcePath": "src/content/searchDemandSystemsArticles.ts",
+      "originalSha256": "afd1adad9e2b47d26a504b53b1ad7d7834e8ad094c0223ee15afd4af0060da92",
+      "path": "src/personal/editorial/data/articles/gpu-financing-ai-infrastructure.json",
+      "canonicalPath": "/research/financial-systems/gpu-financing-ai-infrastructure",
+      "originalReadTime": "11 MIN",
+      "readTime": "3 MIN",
+      "artwork": "yuru-44"
+    },
+    {
+      "slug": "who-owns-austin-hvac-companies",
+      "sourcePath": "src/content/searchDemandSystemsArticles.ts",
+      "originalSha256": "3cfb144bd89d5ed04348918a94e0541a1eb36e2bbf337b3c6747d38ad05071b9",
+      "path": "src/personal/editorial/data/articles/who-owns-austin-hvac-companies.json",
+      "canonicalPath": "/research/financial-systems/who-owns-austin-hvac-companies",
+      "originalReadTime": "10 MIN",
+      "readTime": "3 MIN",
+      "artwork": "yuru-10"
+    },
+    {
+      "slug": "who-owns-austin-plumbing-electrical-companies",
+      "sourcePath": "src/content/searchDemandSystemsArticles.ts",
+      "originalSha256": "ad9b4930fac6e29ea1269d1d4756b46f74d2de5f6cbc639f371581c8882e3790",
+      "path": "src/personal/editorial/data/articles/who-owns-austin-plumbing-electrical-companies.json",
+      "canonicalPath": "/research/financial-systems/who-owns-austin-plumbing-electrical-companies",
+      "originalReadTime": "9 MIN",
+      "readTime": "3 MIN",
+      "artwork": "yuru-10"
+    },
+    {
+      "slug": "private-equity-home-services-rollups",
+      "sourcePath": "src/content/searchDemandSystemsArticles.ts",
+      "originalSha256": "3dd45e1d74d85ebc84cd6cc248739c7b9036a0f96b25c81877b2e39173481488",
+      "path": "src/personal/editorial/data/articles/private-equity-home-services-rollups.json",
+      "canonicalPath": "/research/financial-systems/private-equity-home-services-rollups",
+      "originalReadTime": "11 MIN",
+      "readTime": "3 MIN",
+      "artwork": "yuru-10"
+    },
+    {
+      "slug": "airline-loyalty-collateral-valuation",
+      "sourcePath": "src/content/searchDemandSystemsArticles.ts",
+      "originalSha256": "ff37b7e14f2f884ff4660a126b2e554ed26b0bf31eaac7b2ad081b778d40930d",
+      "path": "src/personal/editorial/data/articles/airline-loyalty-collateral-valuation.json",
+      "canonicalPath": "/research/financial-systems/airline-loyalty-collateral-valuation",
+      "originalReadTime": "11 MIN",
+      "readTime": "3 MIN",
+      "artwork": "yuru-21"
+    },
+    {
+      "slug": "humanoid-robot-startup-financing",
+      "sourcePath": "src/content/searchDemandSystemsArticles.ts",
+      "originalSha256": "7dd23e4c19554bf5e25c00e3510e115040134f54bfb22f7a4cb63ea8cf5ca39b",
+      "path": "src/personal/editorial/data/articles/humanoid-robot-startup-financing.json",
+      "canonicalPath": "/research/financial-systems/humanoid-robot-startup-financing",
+      "originalReadTime": "10 MIN",
+      "readTime": "3 MIN",
+      "artwork": "yuru-44"
+    },
+    {
+      "slug": "who-owns-ntta",
+      "sourcePath": "src/content/searchDemandTollArticles.ts",
+      "originalSha256": "bbf47b8d9903b5ecef0b4b6a9723b400cb0b17466b67f5a0b543fec64bc88c84",
+      "path": "src/personal/editorial/data/articles/who-owns-ntta.json",
+      "canonicalPath": "/research/financial-systems/who-owns-ntta",
+      "originalReadTime": "7 MIN",
+      "readTime": "3 MIN",
+      "artwork": "yuru-32"
+    },
+    {
+      "slug": "texas-toll-roads-public-vs-private",
+      "sourcePath": "src/content/searchDemandTollArticles.ts",
+      "originalSha256": "a36ed63e94297e560448380f38207b0c2ae25b27f9c74f77129bde328f4d8ea7",
+      "path": "src/personal/editorial/data/articles/texas-toll-roads-public-vs-private.json",
+      "canonicalPath": "/research/financial-systems/texas-toll-roads-public-vs-private",
+      "originalReadTime": "8 MIN",
+      "readTime": "3 MIN",
+      "artwork": "yuru-32"
+    },
+    {
+      "slug": "who-owns-hctra-sam-houston-tollway",
+      "sourcePath": "src/content/searchDemandTollArticles.ts",
+      "originalSha256": "d9496e5f053eb07eb86a2c433dcdcaf586ab5818dc2a9ebe09d923e4ab45a9c1",
+      "path": "src/personal/editorial/data/articles/who-owns-hctra-sam-houston-tollway.json",
+      "canonicalPath": "/research/financial-systems/who-owns-hctra-sam-houston-tollway",
+      "originalReadTime": "7 MIN",
+      "readTime": "3 MIN",
+      "artwork": "yuru-32"
+    },
+    {
+      "slug": "foreign-owned-texas-toll-roads",
+      "sourcePath": "src/content/searchDemandTollArticles.ts",
+      "originalSha256": "bf22b566ecdcf00e601363e1f2a5438caa0339d0f84b777c7c8e7a8c98ca8061",
+      "path": "src/personal/editorial/data/articles/foreign-owned-texas-toll-roads.json",
+      "canonicalPath": "/research/financial-systems/foreign-owned-texas-toll-roads",
+      "originalReadTime": "9 MIN",
+      "readTime": "3 MIN",
+      "artwork": "yuru-32"
+    },
+    {
+      "slug": "texas-private-toll-rate-controls",
+      "sourcePath": "src/content/searchDemandTollArticles.ts",
+      "originalSha256": "12fe1d561a8efd5dfe166660c909486000e26ebb8bc7269eb3f2d48ef2f6f70a",
+      "path": "src/personal/editorial/data/articles/texas-private-toll-rate-controls.json",
+      "canonicalPath": "/research/financial-systems/texas-private-toll-rate-controls",
+      "originalReadTime": "9 MIN",
+      "readTime": "3 MIN",
+      "artwork": "yuru-32"
+    },
+    {
+      "slug": "who-owns-us-toll-roads",
+      "sourcePath": "src/content/searchDemandTollArticles.ts",
+      "originalSha256": "5b997039bb578e36f43a2aa8034a40e81ee0e1cd2257cabadb476ed00a0bbfd0",
+      "path": "src/personal/editorial/data/articles/who-owns-us-toll-roads.json",
+      "canonicalPath": "/research/financial-systems/who-owns-us-toll-roads",
+      "originalReadTime": "8 MIN",
+      "readTime": "3 MIN",
+      "artwork": "yuru-32"
+    },
+    {
+      "slug": "texas-managed-lanes-ownership-operators",
+      "sourcePath": "src/content/searchDemandTollArticles.ts",
+      "originalSha256": "3552acfa4bb1216a8b629d07088b3be5eebbdbaee83563ff96c88d5eb80c9aff",
+      "path": "src/personal/editorial/data/articles/texas-managed-lanes-ownership-operators.json",
+      "canonicalPath": "/research/financial-systems/texas-managed-lanes-ownership-operators",
+      "originalReadTime": "8 MIN",
+      "readTime": "3 MIN",
+      "artwork": "yuru-32"
+    },
+    {
+      "slug": "texas-private-toll-concession-expiration-dates",
+      "sourcePath": "src/content/searchDemandTollArticles.ts",
+      "originalSha256": "0d313b9f33f0bf1d37a7f16ec714e5d7efab8d6fff597fa53697858dd9c2596e",
+      "path": "src/personal/editorial/data/articles/texas-private-toll-concession-expiration-dates.json",
+      "canonicalPath": "/research/financial-systems/texas-private-toll-concession-expiration-dates",
+      "originalReadTime": "8 MIN",
+      "readTime": "3 MIN",
+      "artwork": "yuru-32"
+    }
+  ]
+}

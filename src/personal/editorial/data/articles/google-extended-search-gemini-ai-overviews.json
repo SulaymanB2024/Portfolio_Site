@@ -1,0 +1,121 @@
+{
+  "kind": "research",
+  "cluster": "ai-crawlers",
+  "slug": "google-extended-search-gemini-ai-overviews",
+  "number": "43",
+  "category": "AI CRAWLERS",
+  "title": "Does Google-Extended Affect Google Search, Gemini, or AI Overviews?",
+  "seoTitle": "Google-Extended: Gemini Control, Not Google Search or AI Overviews",
+  "subtitle": "Google-Extended is a robots.txt product token for certain Gemini training and grounding uses. Google says it does not affect Search inclusion or Search ranking.",
+  "seoDescription": "What does Google-Extended block? It controls certain Gemini training and grounding uses, not Google Search inclusion or ranking. Learn how AI Overviews differ.",
+  "artwork": {
+    "kind": "study",
+    "variant": "triptych",
+    "label": "Googlebot / Google-Extended / Gemini",
+    "note": "Google-Extended is a policy token, not a separate crawler User-Agent and not the control for ordinary Google Search visibility."
+  },
+  "date": "2026.09.23",
+  "lastVerified": "2026.09.23",
+  "readTime": "3 MIN",
+  "author": "SULAYMAN BOWLES",
+  "thesis": "Google-Extended should not be used as a Search opt-out: Google documents it as a standalone product token for certain Gemini training and grounding uses, while Googlebot and normal Search preview controls govern Google Search and its AI features.",
+  "conclusion": {
+    "title": "Google-Extended and Google Search are separate controls",
+    "content": "Blocking Google-Extended does not remove a site from Google Search or act as a Search ranking signal according to Google. AI Overviews and AI Mode are Search features governed through normal Google Search crawl, index, and preview controls rather than a separate Google-Extended crawler."
+  },
+  "evidenceBoundary": "Google changes product documentation over time. This note reports the documented scope of Google-Extended and Search AI controls as checked September 23, 2026. It does not claim that robots.txt can stop content already indexed from every downstream product use.",
+  "metrics": [
+    {
+      "label": "Separate HTTP UA",
+      "value": "NO"
+    },
+    {
+      "label": "Affects Search inclusion",
+      "value": "NO, PER GOOGLE"
+    },
+    {
+      "label": "Search ranking signal",
+      "value": "NO, PER GOOGLE"
+    },
+    {
+      "label": "Gemini uses",
+      "value": "TRAINING + GROUNDING CONTROLS"
+    }
+  ],
+  "resources": [
+    {
+      "label": "AI crawler robots.txt policy guide",
+      "href": "/research/ai-crawlers/ai-search-crawler-policy",
+      "description": "Copy-ready policy patterns for separating search discovery, training crawlers, and user-triggered fetchers.",
+      "format": "WEB"
+    },
+    {
+      "label": "robots.txt access-control boundary",
+      "href": "/research/ai-crawlers/robots-txt-courtesy-not-access-control",
+      "description": "Why crawler policy is not authentication or authorization, with RFC 9309 context.",
+      "format": "WEB"
+    }
+  ],
+  "content": [
+    "Google-Extended is easy to misread because its name looks like a crawler. Google says it has no separate HTTP User-Agent string. It is a robots.txt product token that tells Google whether content it crawls may be used for certain Gemini model training and grounding uses.",
+    "Google also says Google-Extended does not affect whether a site is included in Google Search and is not used as a Search ranking signal. That means it is not the right control for removing a site from Google results, AI Overviews, or AI Mode."
+  ],
+  "sections": [
+    {
+      "id": "what-it-controls",
+      "title": "What Google-Extended controls",
+      "paragraphs": [
+        "Google documents Google-Extended as a publisher control for whether crawled site content can be used to train future generations of Gemini models powering Gemini Apps and the Vertex AI API for Gemini, and for specified grounding uses involving the Google Search index.",
+        "Because the token has no independent HTTP User-Agent, you should not expect a distinct “Google-Extended” request line in access logs. The control is read from robots.txt and applied within Google’s product systems."
+      ]
+    },
+    {
+      "id": "what-it-does-not-control",
+      "title": "What it does not control",
+      "paragraphs": [
+        "Google explicitly says Google-Extended does not affect inclusion in Google Search and is not a Search ranking signal. Blocking it should therefore not be described as blocking Googlebot or opting out of organic Search.",
+        "If the goal is to prevent Google from crawling or indexing a page, use the normal Search mechanisms appropriate to that goal, such as robots.txt for crawl control, noindex for indexing control, or authentication for private content."
+      ]
+    },
+    {
+      "id": "ai-overviews",
+      "title": "AI Overviews and AI Mode are Google Search features",
+      "paragraphs": [
+        "Google’s Search documentation treats AI Overviews and AI Mode as Search features. Pages must be eligible for normal Google Search crawling and indexing to participate, and Search preview controls such as nosnippet can affect what Google displays.",
+        "So the important distinction is product boundary: Google-Extended is a Gemini-related publisher token; Googlebot and Search controls determine Search participation, including Search’s AI presentation layers."
+      ]
+    },
+    {
+      "id": "logs",
+      "title": "Why log analysis cannot find a Google-Extended bot",
+      "paragraphs": [
+        "There is no separate Google-Extended request User-Agent to count. Access logs will show the Google crawler/fetcher that actually made a request, not the product token Google later applies to downstream uses.",
+        "For Google crawler identity, Google publishes IP-based and DNS verification methods. Apply those to the actual request identity, then evaluate Google-Extended as a robots policy state rather than a network identity."
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "id": "S1",
+      "label": "Google — common crawlers and Google-Extended",
+      "href": "https://developers.google.com/crawling/docs/crawlers-fetchers/google-common-crawlers",
+      "lastVerified": "2026.09.23"
+    },
+    {
+      "id": "S2",
+      "label": "Google Search Central — AI features and publisher controls",
+      "href": "https://developers.google.com/search/docs/appearance/ai-features",
+      "lastVerified": "2026.09.23"
+    },
+    {
+      "id": "S3",
+      "label": "Google — verify crawler and fetcher requests",
+      "href": "https://developers.google.com/crawling/docs/crawlers-fetchers/verify-google-requests",
+      "lastVerified": "2026.09.23"
+    }
+  ],
+  "path": "/research/ai-crawlers/google-extended-search-gemini-ai-overviews",
+  "aliases": [],
+  "dateModified": "2026.09.23",
+  "image": "/images/generative-art/yuru-01.webp"
+}
