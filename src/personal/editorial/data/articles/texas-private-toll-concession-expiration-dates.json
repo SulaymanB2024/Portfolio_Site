@@ -1,0 +1,162 @@
+{
+  "kind": "research",
+  "cluster": "financial-systems",
+  "slug": "texas-private-toll-concession-expiration-dates",
+  "number": "38",
+  "category": "TEXAS INFRASTRUCTURE",
+  "title": "When Do Texas Private Toll-Road Concessions Expire?",
+  "seoTitle": "Texas Private Toll Road Expiration Dates: 2061 and 2062",
+  "subtitle": "NTE, LBJ Express, and NTE 35W run to 2061; SH 130 Segments 5–6 runs to 2062. SH 288’s concession ended early in 2024.",
+  "seoDescription": "Texas private toll concession expiration dates: NTE, LBJ and NTE 35W end in 2061; SH 130 Segments 5–6 ends in 2062. See what actually expires.",
+  "artwork": {
+    "kind": "study",
+    "variant": "triptych",
+    "label": "Concession clock / handback / residual value",
+    "note": "The road survives the concession. What expires is the private bundle of operating and toll-revenue rights."
+  },
+  "date": "2026.09.23",
+  "lastVerified": "2026.09.23",
+  "readTime": "3 MIN",
+  "author": "SULAYMAN BOWLES",
+  "thesis": "Texas private toll concessions are wasting contractual assets: the DFW concessions currently terminate in 2061 and SH 130 5–6 in 2062, after which the private revenue right ends unless the contract is extended or changed.",
+  "conclusion": {
+    "title": "Expiration destroys the concession’s terminal value, not the highway",
+    "content": "A private toll-road investor owns a finite stream of rights. At handback, the public asset remains. Valuation therefore has to model the remaining concession life, required maintenance, handback condition, debt maturity, and any extension as a separate contingent outcome rather than a perpetual terminal value."
+  },
+  "evidenceBoundary": "Dates reflect current public agreements and TxDOT reporting as checked September 23, 2026. Agreements can permit early termination or defined extensions. An announced or proposed extension should not be treated as effective until it is documented.",
+  "metrics": [
+    {
+      "label": "NTE expiration",
+      "value": "2061"
+    },
+    {
+      "label": "LBJ expiration",
+      "value": "2061"
+    },
+    {
+      "label": "NTE 35W expiration",
+      "value": "2061"
+    },
+    {
+      "label": "SH 130 5–6 expiration",
+      "value": "2062"
+    }
+  ],
+  "resources": [
+    {
+      "label": "Texas toll-road ownership dataset",
+      "href": "/research/texas-toll-road-ownership-2026.csv",
+      "description": "Project-level public/private ownership, operator, toll-revenue claimant, concession term, billing agent, and evidence-date records.",
+      "format": "CSV"
+    },
+    {
+      "label": "Texas toll-road ownership investigation",
+      "href": "/markets/who-owns-texas-toll-roads",
+      "description": "The long-form ownership and capital-stack investigation behind this query-specific note.",
+      "format": "WEB"
+    }
+  ],
+  "content": [
+    "The three major Dallas–Fort Worth private toll concessions—North Tarrant Express, LBJ Express, and NTE 35W—currently end in 2061. SH 130 Segments 5–6 ends in 2062. Those dates come from TxDOT’s concession reporting and executed project documents, not from the maturity date of any one bond.",
+    "The expiration date matters because the private asset is the concession, not the permanent road. Shareholders can receive cash only while the contract gives the project company toll and operating rights, subject to debt, reserves, public sharing, maintenance, and handback obligations."
+  ],
+  "sections": [
+    {
+      "id": "expiration-table",
+      "title": "The current Texas concession clock",
+      "paragraphs": [
+        "NTE Segments 1 and 2W: 2061. LBJ/IH-635 managed lanes: 2061. NTE 35W: 2061. SH 130 Segments 5–6: 2062. TxDOT’s toll-project report also shows SH 288’s original contractual termination in 2068, but that concession was terminated decades early in October 2024.",
+        "A financing instrument can mature before the concession. That simply means the project may refinance, deleverage, or distribute more cash later; it does not extend the legal right to collect tolls."
+      ],
+      "table": {
+        "caption": "Major Texas toll concessions and current termination status",
+        "columns": [
+          "Project",
+          "Public titleholder",
+          "Private concession end",
+          "Current private status"
+        ],
+        "rows": [
+          [
+            "North Tarrant Express",
+            "TxDOT / State of Texas",
+            "2061",
+            "Active"
+          ],
+          [
+            "LBJ Express",
+            "TxDOT / State of Texas",
+            "2061",
+            "Active"
+          ],
+          [
+            "NTE 35W",
+            "TxDOT / State of Texas",
+            "2061",
+            "Active"
+          ],
+          [
+            "SH 130 Segments 5–6",
+            "TxDOT / State of Texas",
+            "2062",
+            "Active"
+          ],
+          [
+            "SH 288 managed lanes",
+            "TxDOT / State of Texas",
+            "Original 2068",
+            "Terminated in 2024"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "what-expires",
+      "title": "What actually expires in 2061 or 2062",
+      "paragraphs": [
+        "The project company’s contractual operating, leasehold, and toll-revenue rights reach the end of their term, subject to the agreement. The state’s fee title does not expire. Neither does the physical road.",
+        "The agreement can require handback in a specified condition. That creates a late-life capital obligation: an operator cannot simply maximize distributions and return a deteriorated asset without regard to contractual standards."
+      ]
+    },
+    {
+      "id": "valuation",
+      "title": "Why expiration changes infrastructure valuation",
+      "paragraphs": [
+        "A normal perpetual-company discounted cash-flow model assumes some continuing terminal economics. A finite concession does not. Each remaining year is a wasting asset unless an extension is contractually granted.",
+        "That makes traffic growth, toll escalation, leverage, required maintenance, and the exact remaining term inseparable. A concession with strong current EBITDA can still be overvalued if the purchase price assumes cash flow beyond handback."
+      ]
+    },
+    {
+      "id": "early-termination",
+      "title": "SH 288 proves the scheduled end date is not guaranteed",
+      "paragraphs": [
+        "Texas terminated the SH 288 concession in 2024 and paid to recover the private rights, years before the original 2068 date. The road remained public title throughout; the transaction extinguished the private concession early.",
+        "An expiration table is therefore a base legal schedule, not a prediction that every contract will survive unchanged. Buyouts, defaults, restructurings, negotiated extensions, and statutory actions can alter the path."
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "id": "S1",
+      "label": "TxDOT — HB 803 Report on Toll Projects, FY2025",
+      "href": "https://www.txdot.gov/content/dam/docs/division/gov/hb-803-report-fy-2025.pdf",
+      "lastVerified": "2026.09.23"
+    },
+    {
+      "id": "S2",
+      "label": "TxDOT — NTE 35W Amended and Restated Facility Agreement",
+      "href": "https://www.txdot.gov/content/dam/docs/business/alt-delivery/north-tarrant-express/nte-seg-3-amend-fac-agree.pdf",
+      "lastVerified": "2026.09.23"
+    },
+    {
+      "id": "S3",
+      "label": "FHWA — public-private partnership agreement library",
+      "href": "https://www.fhwa.dot.gov/ipd/p3/p3_projects/agreements.aspx",
+      "lastVerified": "2026.09.23"
+    }
+  ],
+  "path": "/research/financial-systems/texas-private-toll-concession-expiration-dates",
+  "aliases": [],
+  "dateModified": "2026.09.23",
+  "image": "/images/generative-art/yuru-32.webp"
+}

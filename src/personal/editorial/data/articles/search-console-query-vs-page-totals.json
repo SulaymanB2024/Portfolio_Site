@@ -1,0 +1,107 @@
+{
+  "kind": "research",
+  "cluster": "search-console",
+  "slug": "search-console-query-vs-page-totals",
+  "number": "45",
+  "category": "SEARCH CONSOLE",
+  "title": "Why Search Console Query Totals Do Not Match Page Totals",
+  "seoTitle": "Why Search Console Query Totals Don’t Match Page Totals",
+  "subtitle": "Anonymized queries, 1,000-row UI limits, top-row API behavior, and property-vs-page aggregation make apparently inconsistent Search Console totals mathematically legitimate.",
+  "seoDescription": "Why do Search Console query totals differ from page totals? Learn anonymized queries, row limits, API truncation and property-vs-page aggregation with a reproducible reconciliation method.",
+  "artwork": {
+    "kind": "study",
+    "variant": "triptych",
+    "label": "Search Console / hidden query rows / aggregation",
+    "note": "A dashboard total, page table, and query table can all be correct while answering different aggregation and privacy questions."
+  },
+  "date": "2026.09.23",
+  "lastVerified": "2026.09.23",
+  "readTime": "3 MIN",
+  "author": "SULAYMAN BOWLES",
+  "thesis": "Search Console totals reconcile only after accounting for privacy filtering, row truncation, and aggregation level; summing visible query rows is not a valid reconstruction of the property-level chart total.",
+  "conclusion": {
+    "title": "Treat the chart total as a different dataset, not a broken sum",
+    "content": "Query tables intentionally omit some data and page grouping can change aggregation. Reconciliation should record the date range, filters, search type, aggregation mode, visible-row total, and chart/property total, then classify the residual instead of forcing it into named queries."
+  },
+  "evidenceBoundary": "Search Console privacy thresholds and internal serving limits are not fully exposed, so the exact composition of the hidden residual cannot be reconstructed from the UI. Google explicitly documents anonymized queries and truncation; this page does not attempt to deanonymize them.",
+  "metrics": [
+    {
+      "label": "UI table cap",
+      "value": "1,000 ROWS"
+    },
+    {
+      "label": "API max rowLimit",
+      "value": "25,000 / REQUEST"
+    },
+    {
+      "label": "API guarantee of all rows",
+      "value": "NO"
+    },
+    {
+      "label": "Anonymized queries in query table",
+      "value": "OMITTED"
+    }
+  ],
+  "content": [
+    "Search Console can show 10,000 impressions in the chart while the visible query rows add to much less. That is expected behavior, not necessarily a data bug. Google documents three major reasons: the query table omits anonymized low-frequency queries, the interface only displays up to 1,000 rows, and grouping by page or Search appearance changes the aggregation compared with the property-level chart.",
+    "The API adds another trap. A request can page through rows with startRow and rowLimit, but Google states that Search Analytics is bounded by internal limitations and does not guarantee every row. “I paginated the API” is therefore not proof that the named-query rows reconstruct the full property total."
+  ],
+  "sections": [
+    {
+      "id": "anonymized",
+      "title": "Anonymized queries create a deliberate residual",
+      "paragraphs": [
+        "Google removes rare or privacy-sensitive query strings from the query table. Their clicks and impressions can still contribute to the unfiltered chart total. As a result, named queries plus “queries not containing X” can fail to equal the property total when a query filter causes the anonymized bucket to disappear.",
+        "The correct analytical treatment is an unattributed residual. Do not invent an “other” keyword distribution or proportionally allocate the missing impressions across visible queries."
+      ]
+    },
+    {
+      "id": "row-limits",
+      "title": "The UI and API are different truncation surfaces",
+      "paragraphs": [
+        "The Performance table can display a maximum of 1,000 rows. The Search Analytics API supports a rowLimit up to 25,000 and startRow pagination, but the API documentation still warns that internal Search Console limitations mean it returns top rows rather than a guaranteed complete universe.",
+        "For a small property, those limits may not matter on most days. For long-tail analysis, they can dominate. A sudden gap between chart totals and exported query rows can reflect visibility into the tail rather than a change in actual impressions."
+      ]
+    },
+    {
+      "id": "aggregation",
+      "title": "Property aggregation and page aggregation count differently",
+      "paragraphs": [
+        "At property level, multiple results from the same Search Console property on one search can be consolidated into one property impression. When grouping by page, individual URLs are credited separately. Summing URL rows can therefore differ from the property-level chart even before privacy filtering.",
+        "Position also changes meaning across aggregation choices because the topmost result for the property can differ from individual URL positions. A pipeline should never join property-level and page-level metrics without carrying the aggregation type."
+      ]
+    },
+    {
+      "id": "reconciliation",
+      "title": "A reproducible reconciliation table",
+      "paragraphs": [
+        "Store five numbers for every extraction: property chart clicks/impressions, visible query-row clicks/impressions, visible page-row clicks/impressions, API-row totals under the exact dimensions requested, and the residual versus the property total. Also store search type, dates, filters, and dataState.",
+        "The residual is itself useful. If it grows while page impressions grow, the site may be accumulating more long-tail exposure. But because anonymization and serving limits are mixed together, label that interpretation as a measurement hypothesis rather than a count of hidden keywords."
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "id": "S1",
+      "label": "Google Search Console — Performance report data discrepancies",
+      "href": "https://support.google.com/webmasters/answer/17010575",
+      "lastVerified": "2026.09.23"
+    },
+    {
+      "id": "S2",
+      "label": "Google Search Console — Performance report data and aggregation",
+      "href": "https://support.google.com/webmasters/answer/17011364",
+      "lastVerified": "2026.09.23"
+    },
+    {
+      "id": "S3",
+      "label": "Google Search Console API — Search Analytics query",
+      "href": "https://developers.google.com/webmaster-tools/v1/searchanalytics/query",
+      "lastVerified": "2026.09.23"
+    }
+  ],
+  "path": "/research/search-console/search-console-query-vs-page-totals",
+  "aliases": [],
+  "dateModified": "2026.09.23",
+  "image": "/images/generative-art/yuru-12.webp"
+}

@@ -1,0 +1,115 @@
+{
+  "kind": "research",
+  "cluster": "financial-systems",
+  "slug": "airline-loyalty-collateral-valuation",
+  "number": "52",
+  "category": "LOYALTY FINANCE",
+  "title": "How Airline Loyalty Programs Are Valued as Collateral",
+  "seoTitle": "How Airline Loyalty Programs Are Valued as Collateral",
+  "subtitle": "Lenders value the recurring partner-cash system around a loyalty program—co-brand agreements, pledged accounts, IP, data rights, reserves, and cash-flow durability—not a pile of points.",
+  "seoDescription": "How are airline loyalty programs valued as collateral? Follow partner cash, co-brand contracts, pledged accounts, AAdvantage debt capacity and the gap between debt and equity value.",
+  "artwork": {
+    "kind": "study",
+    "variant": "triptych",
+    "label": "Co-brand cash / loyalty IP / secured debt",
+    "note": "Collateral value comes from controllable recurring cash and legal rights; program enterprise value, debt capacity, and airline equity value are separate measurements."
+  },
+  "date": "2026.09.23",
+  "lastVerified": "2026.09.23",
+  "readTime": "3 MIN",
+  "author": "SULAYMAN BOWLES",
+  "thesis": "A loyalty program becomes financeable when lenders can isolate recurring partner receipts and control the contracts, accounts, IP, reserves, and intercompany rights around them; valuation therefore starts with cash durability and collateral control rather than a retail cents-per-point estimate.",
+  "conclusion": {
+    "title": "Debt capacity is evidence of cash-flow quality, not the program’s full value",
+    "content": "American’s $10 billion AAdvantage financing showed that loyalty cash flows could support very large secured debt, but the borrowing amount is not an appraisal of program equity. A valuation must still forecast partner economics, redemption and fulfillment cost, contract concentration, required reinvestment, debt, and dependence on the airline network."
+  },
+  "evidenceBoundary": "Public filings disclose substantial loyalty economics but not every co-brand price, allocation, renewal term, or lender model. Valuation multiples and DCF outputs remain analytical estimates. The page separates disclosed financing terms from modeled program value.",
+  "metrics": [
+    {
+      "label": "AAdvantage financing at close",
+      "value": "$10.0B"
+    },
+    {
+      "label": "2025 American partner cash",
+      "value": "$6.2B"
+    },
+    {
+      "label": "2025 AAdvantage liability",
+      "value": "$10.564B"
+    },
+    {
+      "label": "Core collateral",
+      "value": "CONTRACTS + CASH + IP + ACCOUNTS"
+    }
+  ],
+  "resources": [
+    {
+      "label": "Full loyalty-financing investigation",
+      "href": "/research/financial-systems/how-airlines-borrow-against-loyalty-programs",
+      "description": "The complete cash-flow, accounting, collateral, debt-waterfall, and valuation investigation.",
+      "format": "WEB"
+    }
+  ],
+  "content": [
+    "Lenders do not value an airline loyalty program by multiplying outstanding miles by a consumer redemption value. The secured asset is the cash-producing commercial system around the program: recurring payments from co-brand banks and other partners, key agreements, controlled deposit accounts, reserves, loyalty intellectual property and data rights, and the intercompany contracts needed to keep the program functioning.",
+    "American’s 2021 AAdvantage financing makes that structure visible. The airline and a loyalty IP vehicle raised $10.0 billion through secured notes and a term loan. SEC filings describe collateral including specified AAdvantage agreements and payments, IP licenses, program rights, deposit and reserve accounts, equity in the loyalty vehicles, and other assets of those special-purpose entities."
+  ],
+  "sections": [
+    {
+      "id": "cash-flow",
+      "title": "Start with recurring partner cash, not point balances",
+      "paragraphs": [
+        "The card issuer pays the airline under a long-term commercial relationship that bundles miles, marketing, customer access, brand rights, and benefits. That partner payment can arrive well before the member redeems the award, creating recurring cash that is more useful to a lender than the nominal number of points outstanding.",
+        "American reported $6.2 billion of cash remuneration from co-branded credit-card and other partners in 2025 in the source package underlying the companion investigation. That figure is not the same as loyalty revenue because accounting recognition and cash collection occur on different clocks."
+      ]
+    },
+    {
+      "id": "collateral-control",
+      "title": "Control of the cash path is part of collateral value",
+      "paragraphs": [
+        "A lender receives more protection when partner payments flow through pledged or controlled accounts before excess cash reaches the airline. Reserve requirements, coverage tests, sweep mechanics, and early-amortization triggers reduce the ability to move value away from creditors after the debt is issued.",
+        "The legal collateral package also matters because the program cannot be separated cleanly from the airline by economics alone. IP licenses and intercompany agreements help preserve the lender’s claim on the loyalty operating system through stress or restructuring."
+      ]
+    },
+    {
+      "id": "enterprise-value",
+      "title": "Program enterprise value and secured debt capacity are different",
+      "paragraphs": [
+        "A program can support $10 billion of debt and still be worth substantially more—or less—depending on cash growth, margins, reinvestment, partner concentration, contract renewal risk, and the discount rate. The maximum prudent loan is constrained by lender coverage and downside recovery, not just the midpoint of an equity valuation.",
+        "This is why headlines comparing a loyalty-program valuation with the airline’s market capitalization can mislead. Program enterprise value includes cash flows that depend on the airline ecosystem, while airline equity market value sits below the airline’s own debt and other claims."
+      ]
+    },
+    {
+      "id": "risk",
+      "title": "What reduces collateral value",
+      "paragraphs": [
+        "A co-brand bank can renegotiate economics at renewal. Card spending can slow. Members can redeem faster. The airline can have fewer attractive seats to offer. A devaluation can protect economics but damage engagement. Regulatory or data-use changes can affect the partnership.",
+        "The strongest valuation therefore stresses both partner cash and fulfillment. A loyalty program is unusually financeable because its cash can be recurring and asset-light, but its durability still depends on a healthy airline, valuable currency, engaged members, and powerful distribution partners."
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "id": "S1",
+      "label": "American Airlines Group — 2025 Form 10-K",
+      "href": "https://www.sec.gov/Archives/edgar/data/4515/000000620126000014/aal-20251231.htm",
+      "lastVerified": "2026.09.23"
+    },
+    {
+      "id": "S2",
+      "label": "American Airlines — $10 billion AAdvantage financing announcement",
+      "href": "https://www.sec.gov/Archives/edgar/data/4515/000000620121000024/aex991securednotespricingp.htm",
+      "lastVerified": "2026.09.23"
+    },
+    {
+      "id": "S3",
+      "label": "American Airlines — AAdvantage financing collateral and intercompany structure",
+      "href": "https://www.sec.gov/Archives/edgar/data/4515/000000620121000098/aal-20210930.htm",
+      "lastVerified": "2026.09.23"
+    }
+  ],
+  "path": "/research/financial-systems/airline-loyalty-collateral-valuation",
+  "aliases": [],
+  "dateModified": "2026.09.23",
+  "image": "/images/generative-art/yuru-21.webp"
+}

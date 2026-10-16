@@ -27,9 +27,11 @@ export function installRouteScroll(host: Window = window, { nativeRestoration = 
     try { host.history.replaceState({ ...state, [ENTRY]: entry }, '') } catch { return undefined }
     return entry
   }
-  let current = nativeRestoration ? undefined : ensureEntry()
+  // Recruiter documents keep browser restoration for native destinations, but
+  // their later chapters still use hash routes and need per-entry positions.
+  let current = ensureEntry()
   let currentAddress = host.location?.href
-  const ownsRestoration = Boolean(current)
+  const ownsRestoration = Boolean(current) && !nativeRestoration
   if (ownsRestoration) host.history.scrollRestoration = 'manual'
 
   function capture() {
@@ -56,7 +58,7 @@ export function installRouteScroll(host: Window = window, { nativeRestoration = 
     // A rejected navigation can restore the source URL in a new history entry.
     // Traversing identical addresses emits popstate without hashchange.
     if (host.location?.href && host.location.href === currentAddress) {
-      current = nativeRestoration ? undefined : readEntry()
+      current = readEntry()
       const point = current ? positions.get(current) : undefined
       if (point) host.scrollTo({ ...point, behavior: 'instant' })
       paused = false
@@ -71,7 +73,7 @@ export function installRouteScroll(host: Window = window, { nativeRestoration = 
     begin(): Arrival {
       leaving()
       currentAddress = host.location?.href
-      const entry = nativeRestoration ? undefined : ensureEntry()
+      const entry = ensureEntry()
       return { entry, point: entry ? positions.get(entry) : undefined }
     },
     samePage(arrival: Arrival) {

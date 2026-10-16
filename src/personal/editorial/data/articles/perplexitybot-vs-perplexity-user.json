@@ -1,0 +1,109 @@
+{
+  "kind": "research",
+  "cluster": "ai-crawlers",
+  "slug": "perplexitybot-vs-perplexity-user",
+  "number": "42",
+  "category": "AI CRAWLERS",
+  "title": "PerplexityBot vs Perplexity-User",
+  "seoTitle": "PerplexityBot vs Perplexity-User: Search Crawl vs User Fetch",
+  "subtitle": "PerplexityBot is the automatic search crawler; Perplexity-User retrieves pages in response to user requests. Perplexity publishes separate IP ranges for both.",
+  "seoDescription": "PerplexityBot vs Perplexity-User: learn which bot supports search indexing, which fetches on user request, how robots.txt differs, and how to verify both.",
+  "artwork": {
+    "kind": "study",
+    "variant": "triptych",
+    "label": "PerplexityBot / Perplexity-User / verification",
+    "note": "Automatic search crawling and user-triggered page retrieval use separate identities and published network ranges."
+  },
+  "date": "2026.09.23",
+  "lastVerified": "2026.09.23",
+  "readTime": "3 MIN",
+  "author": "SULAYMAN BOWLES",
+  "thesis": "Perplexity separates automatic search discovery from user-requested retrieval: PerplexityBot is the search crawler, while Perplexity-User is a user-triggered fetcher that generally ignores robots.txt.",
+  "conclusion": {
+    "title": "Perplexity exposes two different access paths",
+    "content": "Use PerplexityBot when reasoning about automatic Search visibility and Perplexity-User when reasoning about user-triggered retrieval. Verify either identity with the published IP endpoints plus the User-Agent instead of trusting the header alone."
+  },
+  "evidenceBoundary": "Perplexity states that crawler-policy changes can take time and that current IP lists should be treated as the source of truth. This article reflects documentation checked September 23, 2026. A fetch does not prove ranking, citation, or training use.",
+  "metrics": [
+    {
+      "label": "Automatic search crawler",
+      "value": "PERPLEXITYBOT"
+    },
+    {
+      "label": "User-triggered fetcher",
+      "value": "PERPLEXITY-USER"
+    },
+    {
+      "label": "Training use of PerplexityBot",
+      "value": "NO, PER DOCS"
+    },
+    {
+      "label": "Published IP lists",
+      "value": "2"
+    }
+  ],
+  "resources": [
+    {
+      "label": "AI crawler robots.txt policy guide",
+      "href": "/research/ai-crawlers/ai-search-crawler-policy",
+      "description": "Copy-ready policy patterns for separating search discovery, training crawlers, and user-triggered fetchers.",
+      "format": "WEB"
+    },
+    {
+      "label": "robots.txt access-control boundary",
+      "href": "/research/ai-crawlers/robots-txt-courtesy-not-access-control",
+      "description": "Why crawler policy is not authentication or authorization, with RFC 9309 context.",
+      "format": "WEB"
+    }
+  ],
+  "content": [
+    "Perplexity documents two web-access identities. PerplexityBot automatically gathers and indexes information so websites can surface and be linked in Perplexity search results. Perplexity-User fetches pages in response to a person’s question.",
+    "Perplexity explicitly says PerplexityBot is not used to crawl content for AI foundation models. It also says Perplexity-User is not used for web crawling or foundation-model training. Those statements make the pair different from a search-versus-training split such as OAI-SearchBot versus GPTBot."
+  ],
+  "sections": [
+    {
+      "id": "perplexitybot",
+      "title": "PerplexityBot is the search-discovery crawler",
+      "paragraphs": [
+        "Perplexity recommends allowing PerplexityBot in robots.txt and allowing its published IP ranges if a publisher wants the site to appear in Perplexity search results. The crawler has its own full User-Agent string and current JSON IP source.",
+        "Blocking the token expresses an automatic crawling preference. A separate WAF block can still prevent access even when robots.txt permits it."
+      ]
+    },
+    {
+      "id": "perplexity-user",
+      "title": "Perplexity-User is a user-triggered fetcher",
+      "paragraphs": [
+        "Perplexity says Perplexity-User supports actions initiated by users and may visit a page to answer a question and include a link in the response. Because a user requested the fetch, the documentation says this fetcher generally ignores robots.txt.",
+        "That makes it operationally different from the automatic search crawler. A site that needs strict access control cannot rely on robots.txt to protect private paths from user-triggered fetch mechanisms; authentication belongs at the application or edge layer."
+      ]
+    },
+    {
+      "id": "waf",
+      "title": "Perplexity recommends User-Agent plus IP checks at the WAF",
+      "paragraphs": [
+        "The current documentation gives explicit WAF guidance: combine User-Agent conditions with source IPs from Perplexity’s official JSON endpoints. It advises fetching those current ranges rather than assuming a static list.",
+        "This is also a sound analytics rule. If a request claims PerplexityBot but comes from an unrelated network, classify it as spoofed or unverified instead of contaminating crawler counts."
+      ]
+    },
+    {
+      "id": "publisher-policy",
+      "title": "The publisher decision is search visibility versus user retrieval",
+      "paragraphs": [
+        "For automatic Perplexity discovery, the relevant token is PerplexityBot. For a user asking Perplexity to retrieve a page, the relevant identity is Perplexity-User. The two requests may hit the same URL but represent different product flows.",
+        "Keep the access evidence separate from answer-system performance. Server logs can establish a request and response; they cannot establish why an answer cited or did not cite the page."
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "id": "S1",
+      "label": "Perplexity — crawler and user-agent documentation",
+      "href": "https://docs.perplexity.ai/docs/resources/perplexity-crawlers",
+      "lastVerified": "2026.09.23"
+    }
+  ],
+  "path": "/research/ai-crawlers/perplexitybot-vs-perplexity-user",
+  "aliases": [],
+  "dateModified": "2026.09.23",
+  "image": "/images/generative-art/yuru-01.webp"
+}

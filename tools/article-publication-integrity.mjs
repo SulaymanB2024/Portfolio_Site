@@ -28,6 +28,19 @@ export function verifyInitialPublication(bytes, record) {
   return article
 }
 
+// A historical exclusion protects that manuscript and URL. A later, separately
+// reviewed edition may share its slug only at a different canonical path, with
+// no alias that silently revives the excluded URL.
+export function verifyRestorationExclusions(exclusions, catalog, publications, readArticle) {
+  for (const excluded of exclusions) for (const summary of catalog.filter(article => article.slug === excluded.slug)) {
+    assert(excluded.path && summary.path !== excluded.path && !summary.aliases?.includes(excluded.path), `Unverified historical candidate promoted: ${excluded.slug}`)
+    const receipt = publications.find(record => record.slug === summary.slug && record.canonicalPath === summary.path)
+    assert(receipt, `Different-path candidate requires an initial-publication receipt: ${excluded.slug}`)
+    const article = verifyInitialPublication(readArticle(receipt.path), receipt)
+    assert.equal(article.path, summary.path, `${excluded.slug}: admitted edition path`)
+  }
+}
+
 // Keep the original receipt immutable. Later reviewed editions form an explicit
 // hash chain with a reason and primary evidence; the publication date stays fixed.
 export function publicationReceipt(record) {

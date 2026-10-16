@@ -1,0 +1,328 @@
+[
+  {
+    "canvas": "ready",
+    "overflow": false,
+    "selected": "sapien",
+    "title": "Sapien",
+    "url": "http://127.0.0.1:4349/#/resume"
+  },
+  {
+    "focus": "Sapien, Growth Manager, Aug 2026 — Present",
+    "view": "overview"
+  },
+  {
+    "canvas": "ready",
+    "overflow": false,
+    "selected": "creative-trace",
+    "title": "CreativeTrace",
+    "url": "http://127.0.0.1:4349/#/resume"
+  },
+  {
+    "focus": "CreativeTrace, Creator, AI Creative Experimentation, Jul 2026 — Present",
+    "view": "overview"
+  },
+  {
+    "canvas": "ready",
+    "overflow": false,
+    "selected": "chegg",
+    "title": "Chegg",
+    "url": "http://127.0.0.1:4349/#/resume"
+  },
+  {
+    "focus": "Chegg, Product Intern, Growth — Internships.com, May 2026 — Present",
+    "view": "overview"
+  },
+  {
+    "canvas": "ready",
+    "overflow": false,
+    "selected": "void",
+    "title": "VOID",
+    "url": "http://127.0.0.1:4349/#/resume"
+  },
+  {
+    "focus": "VOID, Founder, Jan 2026 — Present",
+    "view": "overview"
+  },
+  {
+    "canvas": "ready",
+    "overflow": false,
+    "selected": "venture-labs",
+    "title": "Texas Venture Labs",
+    "url": "http://127.0.0.1:4349/#/resume"
+  },
+  {
+    "focus": "Texas Venture Labs, Student Associate, Sep 2025 — Present",
+    "view": "overview"
+  },
+  {
+    "canvas": "ready",
+    "overflow": false,
+    "selected": "ai-venture",
+    "title": "AI Image Venture",
+    "url": "http://127.0.0.1:4349/#/resume"
+  },
+  {
+    "focus": "AI Image Venture, Co-Founder, Product & Go-to-Market, Jan 2025 — Sep 2025",
+    "view": "overview"
+  },
+  {
+    "check": "document contents",
+    "focus": "resume-education",
+    "overflow": false,
+    "url": "http://127.0.0.1:4349/#/resume?view=full&section=education"
+  },
+  {
+    "check": "document return",
+    "focus": "Read full résumé",
+    "view": "overview"
+  },
+  {
+    "check": "phone chapter",
+    "focus": "resume-chapter-title",
+    "overflow": false,
+    "title": "Sapien"
+  },
+  {
+    "check": "phone return",
+    "view": "overview"
+  },
+  {
+    "check": "phone chapter",
+    "focus": "resume-chapter-title",
+    "overflow": false,
+    "title": "CreativeTrace"
+  },
+  {
+    "check": "phone return",
+    "view": "overview"
+  },
+  {
+    "check": "phone chapter",
+    "focus": "resume-chapter-title",
+    "overflow": false,
+    "title": "Chegg"
+  },
+  {
+    "check": "phone return",
+    "view": "overview"
+  },
+  {
+    "check": "phone chapter",
+    "focus": "resume-chapter-title",
+    "overflow": false,
+    "title": "VOID"
+  },
+  {
+    "check": "phone return",
+    "view": "overview"
+  },
+  {
+    "check": "phone chapter",
+    "focus": "resume-chapter-title",
+    "overflow": false,
+    "title": "Texas Venture Labs"
+  },
+  {
+    "check": "phone return",
+    "view": "overview"
+  },
+  {
+    "check": "phone chapter",
+    "focus": "resume-chapter-title",
+    "overflow": false,
+    "title": "AI Image Venture"
+  },
+  {
+    "check": "phone return",
+    "view": "overview"
+  },
+  {
+    "check": "44-word synthetic recruiter desktop",
+    "intro": "Hi Morgan — I build evidence-backed product prototypes and financial models. My Chegg work connects recruiting-data pipelines with search-discovery and commercial decisions. At UT Austin, I study finance and build inspectable research software. I’m interested in helping Google turn complex questions into useful products.",
+    "links": [
+      {
+        "bottom": 807.625,
+        "href": "/resume",
+        "label": "Résumé"
+      },
+      {
+        "bottom": 807.625,
+        "href": "/",
+        "label": "Explore the site"
+      }
+    ],
+    "overflow": false,
+    "url": "http://127.0.0.1:4349/for/00000000-0000-4000-8000-000000000001"
+  },
+  {
+    "check": "native recruiter résumé pointer",
+    "title": "Résumé.",
+    "url": "http://127.0.0.1:4349/resume"
+  },
+  {
+    "check": "native document back",
+    "top": 97.0546875,
+    "url": "http://127.0.0.1:4349/for/00000000-0000-4000-8000-000000000001"
+  },
+  {
+    "check": "native recruiter résumé keyboard",
+    "title": "Résumé.",
+    "url": "http://127.0.0.1:4349/resume"
+  },
+  {
+    "check": "built recruiter hash project arrival",
+    "url": "http://127.0.0.1:4349/google#/work/chegg",
+    "y": 0
+  },
+  {
+    "chapter": "chegg",
+    "check": "built recruiter hash back",
+    "url": "http://127.0.0.1:4349/google",
+    "y": 1181.5
+  },
+  {
+    "check": "built recruiter hash forward",
+    "url": "http://127.0.0.1:4349/google#/work/chegg",
+    "y": 844
+  },
+  {
+    "check": "built UI surface",
+    "overflow": false,
+    "title": "The frontier is all that matters.",
+    "url": "http://127.0.0.1:4349/",
+    "width": 1280
+  },
+  {
+    "check": "built UI surface",
+    "overflow": false,
+    "title": "Writing.",
+    "url": "http://127.0.0.1:4349/writing",
+    "width": 1280
+  },
+  {
+    "check": "built UI surface",
+    "overflow": false,
+    "title": "Résumé.",
+    "url": "http://127.0.0.1:4349/resume",
+    "width": 1280
+  },
+  {
+    "check": "built UI surface",
+    "overflow": false,
+    "title": "Résumé.",
+    "url": "http://127.0.0.1:4349/#/resume?view=full",
+    "width": 1280
+  },
+  {
+    "check": "built UI surface",
+    "overflow": false,
+    "title": "The frontier is all that matters.",
+    "url": "http://127.0.0.1:4349/google",
+    "width": 1280
+  },
+  {
+    "check": "built UI surface",
+    "overflow": false,
+    "title": "Contact",
+    "url": "http://127.0.0.1:4349/contact",
+    "width": 1280
+  },
+  {
+    "check": "built UI surface",
+    "overflow": false,
+    "title": "The frontier is all that matters.",
+    "url": "http://127.0.0.1:4349/",
+    "width": 390
+  },
+  {
+    "check": "built UI surface",
+    "overflow": false,
+    "title": "Writing.",
+    "url": "http://127.0.0.1:4349/writing",
+    "width": 390
+  },
+  {
+    "check": "built UI surface",
+    "overflow": false,
+    "title": "Résumé.",
+    "url": "http://127.0.0.1:4349/resume",
+    "width": 390
+  },
+  {
+    "check": "built UI surface",
+    "overflow": false,
+    "title": "Résumé.",
+    "url": "http://127.0.0.1:4349/#/resume?view=full",
+    "width": 390
+  },
+  {
+    "check": "built UI surface",
+    "overflow": false,
+    "title": "The frontier is all that matters.",
+    "url": "http://127.0.0.1:4349/google",
+    "width": 390
+  },
+  {
+    "check": "built UI surface",
+    "overflow": false,
+    "title": "Contact",
+    "url": "http://127.0.0.1:4349/contact",
+    "width": 390
+  },
+  {
+    "check": "built full résumé",
+    "overflow": false,
+    "roles": 6,
+    "title": "Sulayman Bowles.",
+    "width": 390
+  },
+  {
+    "check": "built full résumé",
+    "overflow": false,
+    "roles": 6,
+    "title": "Sulayman Bowles.",
+    "width": 1280
+  },
+  {
+    "check": "Writing filtered reader arrival",
+    "title": "CoreWeave DDTL 5.5: How a $2.6 Billion GPU-Backed Loan Works",
+    "url": "http://127.0.0.1:4349/writing#/writing/coreweave-ddtl-5-5?from=%23%2Fwriting%3Fq%3DCoreWeave%26at%3Dcoreweave-ddtl-5-5"
+  },
+  {
+    "check": "Writing filter return",
+    "focus": "#/writing/coreweave-ddtl-5-5?from=%23%2Fwriting%3Fq%3DCoreWeave%26at%3Dcoreweave-ddtl-5-5",
+    "query": "CoreWeave",
+    "url": "http://127.0.0.1:4349/writing#/writing?q=CoreWeave&at=coreweave-ddtl-5-5"
+  },
+  {
+    "check": "print studio close",
+    "open": false,
+    "url": "http://127.0.0.1:4349/#/work/miscellaneous"
+  },
+  {
+    "check": "phone table keyboard access",
+    "overflow": false,
+    "table": [
+      {
+        "available": 301,
+        "role": "region",
+        "scrollLeft": 120,
+        "tab": "0"
+      }
+    ],
+    "url": "http://127.0.0.1:4349/research/ai-crawlers/ai-crawler-registry"
+  },
+  {
+    "check": "phone table keyboard access",
+    "overflow": false,
+    "table": [
+      {
+        "available": 170,
+        "role": "region",
+        "scrollLeft": 120,
+        "tab": "0"
+      }
+    ],
+    "url": "http://127.0.0.1:4349/research/financial-systems/texas-private-toll-concession-expiration-dates"
+  }
+]

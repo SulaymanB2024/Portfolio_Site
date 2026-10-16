@@ -1,0 +1,145 @@
+{
+  "kind": "research",
+  "cluster": "financial-systems",
+  "slug": "who-owns-austin-hvac-companies",
+  "number": "49",
+  "category": "AUSTIN OWNERSHIP",
+  "title": "Who Owns Austin’s HVAC Companies?",
+  "seoTitle": "Who Owns Austin HVAC Companies? PE Platforms & Local Brands",
+  "subtitle": "Austin HVAC brands span founder-owned shops, private-equity-backed platforms, public-company brands, and franchise operators. The local name often survives the transaction.",
+  "seoDescription": "Who owns Austin HVAC companies? Trace Radiant, Stan’s, Fox, Daniel’s, Precision, Abacus, ARS, Goettl and other brands to current platforms and sponsors.",
+  "artwork": {
+    "kind": "study",
+    "variant": "triptych",
+    "label": "Austin HVAC brand / platform / sponsor",
+    "note": "The logo on a service truck can remain local while the equity chain moves through a national platform and institutional sponsor."
+  },
+  "date": "2026.09.23",
+  "lastVerified": "2026.07.26",
+  "readTime": "3 MIN",
+  "author": "SULAYMAN BOWLES",
+  "thesis": "Austin HVAC is neither “all private equity” nor purely local: the July 2026 ownership census shows retained local brands beside founder-owned operators, public companies, franchisees, and sponsor-backed home-services platforms.",
+  "conclusion": {
+    "title": "The brand and the owner are separate fields",
+    "content": "Radiant, Stan’s, Fox, Daniel’s, Precision, Abacus, ARS, Goettl, and other Austin-facing HVAC brands sit in different ownership chains. A local operating identity can survive acquisition, so current ownership has to be verified through platform and sponsor records rather than inferred from a company’s founding story."
+  },
+  "evidenceBoundary": "This vertical page is derived from the site’s July 26, 2026 Austin home-services census. It is a brand-ownership map, not market share, price, service quality, employment, or customer-volume research. Private-company control can change after the cutoff.",
+  "metrics": [
+    {
+      "label": "HVAC/plumbing/electrical census records",
+      "value": "26"
+    },
+    {
+      "label": "Full Austin census",
+      "value": "67 BRANDS"
+    },
+    {
+      "label": "Full source ledger",
+      "value": "130 RECORDS"
+    },
+    {
+      "label": "Evidence cutoff",
+      "value": "JUL. 26, 2026"
+    }
+  ],
+  "resources": [
+    {
+      "label": "Full Austin home-services ownership investigation",
+      "href": "/research/financial-systems/who-owns-austin-home-service-companies",
+      "description": "The complete 67-brand ownership map, methodology, evidence ratings, conflicts, and limitations.",
+      "format": "WEB"
+    },
+    {
+      "label": "Austin ownership dataset",
+      "href": "/research/austin-home-service-ownership-2026.csv",
+      "description": "Normalized brand-level ownership table behind the July 2026 census.",
+      "format": "CSV"
+    }
+  ],
+  "content": [
+    "Austin’s HVAC market contains several different ownership models under customer-facing names that still feel local. Radiant traces through T3 Services Group to The Riverside Company. Stan’s sits inside Master Trades Group, an L Catterton investment. Fox Service Company, Precision Heating & Air, and Daniel’s Plumbing & Air sit inside Southern Home Services, where Gryphon Investors holds a majority investment through the holding-company structure.",
+    "Other chains differ again. Abacus is disclosed as a Wrench Group subsidiary. ARS/Rescue Rooter Austin traces to American Residential Services and GI Partners at the July cutoff, while a sale process had been reported but not closed. Goettl is a Cortec investment. Those relationships describe equity and platform control; they do not by themselves establish how the local branch is managed or whether service changed after acquisition."
+  ],
+  "sections": [
+    {
+      "id": "retained-brands",
+      "title": "Private-equity ownership often leaves the local brand in place",
+      "paragraphs": [
+        "Home-services platforms commonly retain acquired names because the local brand already has reviews, phone numbers, technician recognition, organic search visibility, and decades of customer memory. The acquisition can therefore be economically significant while barely changing the logo a homeowner sees.",
+        "Fox is a useful example: the company can accurately describe local management and operations while ownership records place the brand inside Southern Home Services and Gryphon’s broader platform. “Locally operated” and “locally owned” answer different questions."
+      ]
+    },
+    {
+      "id": "major-chains",
+      "title": "Selected Austin HVAC ownership chains",
+      "paragraphs": [
+        "Radiant → T3 Services Group → The Riverside Company. Stan’s → Master Trades Group → L Catterton. Fox, Precision, and Daniel’s → Southern Home Services → Gryphon Investors. Abacus → Wrench Group, with the investor structure sitting above Wrench. ARS/Rescue Rooter → American Residential Services → GI Partners at the research cutoff.",
+        "The full census retains confidence ratings and dates because private ownership can change through add-on deals, sponsor exits, recapitalizations, and founder rollovers."
+      ]
+    },
+    {
+      "id": "not-market-share",
+      "title": "A brand count is not HVAC market share",
+      "paragraphs": [
+        "The census counts qualifying consumer-facing brands once. A one-location founder business and a multi-state platform brand therefore have equal weight in the denominator. Revenue, trucks, service calls, technicians, permits, paid-search share, and organic visibility would produce different concentration measures.",
+        "This page should be used to answer “who owns this brand?” rather than “who controls Austin HVAC demand?” The latter requires transaction or operating data that the public ownership record does not provide."
+      ]
+    },
+    {
+      "id": "verification",
+      "title": "How the ownership chain was verified",
+      "paragraphs": [
+        "The underlying project gives priority to current sponsor portfolio pages, buyer and seller announcements, company legal/privacy disclosures, government records, and current platform brand lists. Old acquisition press releases are checked for later exits before being treated as current ownership.",
+        "Unresolved or pending transactions stay labeled that way. A reported sale process is not a completed sale, and a minority investment is not automatically control."
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "id": "S1",
+      "label": "The Riverside Company — T3 Services Group portfolio entry",
+      "href": "https://www.riversidecompany.com/investment-portfolio/t3-services-group",
+      "lastVerified": "2026.07.26"
+    },
+    {
+      "id": "S2",
+      "label": "Gryphon Investors — majority investment in Southern Home Services holding company",
+      "href": "https://www.gryphon-inv.com/news/gryphon-investors-completes-majority-investment-in-southern-hvac-and-announces-new-home-services-holding-company/",
+      "lastVerified": "2026.07.26"
+    },
+    {
+      "id": "S3",
+      "label": "L Catterton — Master Trades Group investment",
+      "href": "https://www.lcatterton.com/investments.html",
+      "lastVerified": "2026.07.26"
+    },
+    {
+      "id": "S4",
+      "label": "GI Partners — American Residential Services portfolio entry",
+      "href": "https://www.gipartners.com/private-equity/portfolio/american-residential-services",
+      "lastVerified": "2026.07.26"
+    },
+    {
+      "id": "S5",
+      "label": "Abacus — privacy policy identifying Wrench Group as parent",
+      "href": "https://www.abacusplumbing.com/privacy-policy/",
+      "lastVerified": "2026.07.26"
+    },
+    {
+      "id": "S6",
+      "label": "Wrench Group — Leonard Green, TSG Consumer and Oak Hill recapitalization",
+      "href": "https://www.wrenchgroup.com/articles/tsg-consumer-partners-and-oak-hill-partner-with-leonard-green-and-management-to-enhance-the-wrench-groups-next-phase-of-growth",
+      "lastVerified": "2026.07.26"
+    },
+    {
+      "id": "S7",
+      "label": "Cortec Group — Goettl investment portfolio evidence",
+      "href": "https://www.cortecgroup.com/",
+      "lastVerified": "2026.07.26"
+    }
+  ],
+  "path": "/research/financial-systems/who-owns-austin-hvac-companies",
+  "aliases": [],
+  "dateModified": "2026.09.23",
+  "image": "/images/generative-art/yuru-10.webp"
+}

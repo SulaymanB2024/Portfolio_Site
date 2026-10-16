@@ -1,0 +1,121 @@
+{
+  "sourceRef": "088e1e7621fa0636ceaa52b96d5beba3085bbe66",
+  "ported": [
+    {
+      "slug": "openai-crawlers-oai-searchbot-gptbot-chatgpt-user-adsbot",
+      "sourceBlob": "c97974f3ccefbe9deeb94b07d29e2236f86650be",
+      "matched": true
+    },
+    {
+      "slug": "verify-ai-crawlers-server-logs",
+      "sourceBlob": "c97974f3ccefbe9deeb94b07d29e2236f86650be",
+      "matched": true
+    },
+    {
+      "slug": "claude-crawlers-claudebot-searchbot-user",
+      "sourceBlob": "c97974f3ccefbe9deeb94b07d29e2236f86650be",
+      "matched": true
+    },
+    {
+      "slug": "perplexitybot-vs-perplexity-user",
+      "sourceBlob": "c97974f3ccefbe9deeb94b07d29e2236f86650be",
+      "matched": true
+    },
+    {
+      "slug": "google-extended-search-gemini-ai-overviews",
+      "sourceBlob": "c97974f3ccefbe9deeb94b07d29e2236f86650be",
+      "matched": true
+    },
+    {
+      "slug": "ai-crawler-registry",
+      "sourceBlob": "c97974f3ccefbe9deeb94b07d29e2236f86650be",
+      "matched": true
+    },
+    {
+      "slug": "search-console-query-vs-page-totals",
+      "sourceBlob": "717478bfc87315702d5ea748ec05a7ef649fc506",
+      "matched": true
+    },
+    {
+      "slug": "search-console-data-pipeline",
+      "sourceBlob": "717478bfc87315702d5ea748ec05a7ef649fc506",
+      "matched": true
+    },
+    {
+      "slug": "coreweave-ddtl-5-5",
+      "sourceBlob": "717478bfc87315702d5ea748ec05a7ef649fc506",
+      "matched": true
+    },
+    {
+      "slug": "gpu-financing-ai-infrastructure",
+      "sourceBlob": "717478bfc87315702d5ea748ec05a7ef649fc506",
+      "matched": true
+    },
+    {
+      "slug": "who-owns-austin-hvac-companies",
+      "sourceBlob": "717478bfc87315702d5ea748ec05a7ef649fc506",
+      "matched": true
+    },
+    {
+      "slug": "who-owns-austin-plumbing-electrical-companies",
+      "sourceBlob": "717478bfc87315702d5ea748ec05a7ef649fc506",
+      "matched": true
+    },
+    {
+      "slug": "private-equity-home-services-rollups",
+      "sourceBlob": "717478bfc87315702d5ea748ec05a7ef649fc506",
+      "matched": true
+    },
+    {
+      "slug": "airline-loyalty-collateral-valuation",
+      "sourceBlob": "717478bfc87315702d5ea748ec05a7ef649fc506",
+      "matched": true
+    },
+    {
+      "slug": "humanoid-robot-startup-financing",
+      "sourceBlob": "717478bfc87315702d5ea748ec05a7ef649fc506",
+      "matched": true
+    },
+    {
+      "slug": "who-owns-ntta",
+      "sourceBlob": "b8106ee671ea2816e238154db8c2378812cb24de",
+      "matched": true
+    },
+    {
+      "slug": "texas-toll-roads-public-vs-private",
+      "sourceBlob": "b8106ee671ea2816e238154db8c2378812cb24de",
+      "matched": true
+    },
+    {
+      "slug": "who-owns-hctra-sam-houston-tollway",
+      "sourceBlob": "b8106ee671ea2816e238154db8c2378812cb24de",
+      "matched": true
+    },
+    {
+      "slug": "foreign-owned-texas-toll-roads",
+      "sourceBlob": "b8106ee671ea2816e238154db8c2378812cb24de",
+      "matched": true
+    },
+    {
+      "slug": "texas-private-toll-rate-controls",
+      "sourceBlob": "b8106ee671ea2816e238154db8c2378812cb24de",
+      "matched": true
+    },
+    {
+      "slug": "who-owns-us-toll-roads",
+      "sourceBlob": "b8106ee671ea2816e238154db8c2378812cb24de",
+      "matched": true
+    },
+    {
+      "slug": "texas-managed-lanes-ownership-operators",
+      "sourceBlob": "b8106ee671ea2816e238154db8c2378812cb24de",
+      "matched": true
+    },
+    {
+      "slug": "texas-private-toll-concession-expiration-dates",
+      "sourceBlob": "b8106ee671ea2816e238154db8c2378812cb24de",
+      "matched": true
+    }
+  ],
+  "existingManuscriptsUnchanged": 62
+}

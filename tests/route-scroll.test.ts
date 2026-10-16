@@ -119,14 +119,14 @@ test('primitive foreign history state stays intact and native restoration remain
   f.scroll.dispose()
 })
 
-test('native document destinations retain browser restoration and their original history state', () => {
+test('native documents retain browser restoration and foreign history metadata', () => {
   const initial = { retained: 'candidate context' }
   const f = fixture(initial, true)
-  assert.deepEqual(f.history.state, initial)
+  assert.equal((f.history.state as typeof initial).retained, initial.retained)
   assert.equal(f.history.scrollRestoration, 'auto')
   f.move(1900)
   f.scroll.samePage(f.push())
-  assert.equal(f.history.state, null)
+  assert.equal(initial.retained, 'candidate context')
   assert.equal(f.history.scrollRestoration, 'auto')
   assert.equal(f.calls.length, 0)
   f.scroll.dispose()
@@ -147,7 +147,24 @@ test('a remount within one clock tick cannot reuse the previous history-entry ma
   } finally { Date.now = clock }
 })
 
-test('native same-address traversal never adopts a previous manual restoration marker', () => {
+test('native policy restores recruiter hash journeys after the browser scrolls the old DOM', () => {
+  const f = fixture({ retained: 'candidate context' }, true)
+  f.move(6000)
+  f.scroll.commit(f.push()); f.paint()
+  assert.equal(f.host.scrollY, 0)
+  f.move(420)
+  const home = f.back()
+  f.move(6000)
+  f.scroll.commit(home); f.paint()
+  assert.equal(f.host.scrollY, 6000)
+  f.scroll.commit(f.forward()); f.paint()
+  assert.equal(f.host.scrollY, 420)
+  assert.equal(f.history.scrollRestoration, 'auto')
+  f.scroll.dispose()
+  assert.equal(f.history.scrollRestoration, 'auto')
+})
+
+test('native policy retains same-address positions without taking browser restoration', () => {
   const initial = { retained: 'candidate context', __portfolioScrollEntry: 'previous-visit' }
   const f = fixture(initial, true)
   f.move(780)
@@ -159,7 +176,7 @@ test('native same-address traversal never adopts a previous manual restoration m
   f.move(820)
   f.traverse(1)
   f.traverse(-1)
-  assert.equal(f.calls.length, 0)
+  assert.equal(f.host.scrollY, 820)
   assert.deepEqual(f.history.state, initial)
   assert.equal(f.history.scrollRestoration, 'auto')
   f.scroll.dispose()

@@ -1,0 +1,889 @@
+[
+  {
+    "slug": "openai-crawlers-oai-searchbot-gptbot-chatgpt-user-adsbot",
+    "width": 390,
+    "author": false,
+    "brokenImages": [],
+    "overflow": false,
+    "sections": [
+      "searchbot",
+      "gptbot",
+      "user-and-ads",
+      "policy-matrix",
+      "conclusion",
+      "sources",
+      "reader-downloads"
+    ],
+    "sources": 2,
+    "tables": 0,
+    "title": "OAI-SearchBot vs GPTBot vs ChatGPT-User vs OAI-AdsBot",
+    "url": "http://127.0.0.1:4349/research/ai-crawlers/openai-crawlers-oai-searchbot-gptbot-chatgpt-user-adsbot"
+  },
+  {
+    "slug": "verify-ai-crawlers-server-logs",
+    "width": 390,
+    "author": false,
+    "brokenImages": [],
+    "overflow": false,
+    "sections": [
+      "normalize-the-log",
+      "match-provider-ranges",
+      "join-policy-and-response",
+      "classification-output",
+      "conclusion",
+      "sources",
+      "reader-downloads"
+    ],
+    "sources": 4,
+    "tables": 0,
+    "title": "How to Verify an AI Crawler in Server Logs",
+    "url": "http://127.0.0.1:4349/research/crawler-engineering/verify-ai-crawlers-server-logs"
+  },
+  {
+    "slug": "claude-crawlers-claudebot-searchbot-user",
+    "width": 390,
+    "author": false,
+    "brokenImages": [],
+    "overflow": false,
+    "sections": [
+      "claudebot",
+      "searchbot",
+      "claude-user",
+      "verification",
+      "conclusion",
+      "sources",
+      "reader-downloads"
+    ],
+    "sources": 1,
+    "tables": 0,
+    "title": "ClaudeBot vs Claude-SearchBot vs Claude-User",
+    "url": "http://127.0.0.1:4349/research/ai-crawlers/claude-crawlers-claudebot-searchbot-user"
+  },
+  {
+    "slug": "perplexitybot-vs-perplexity-user",
+    "width": 390,
+    "author": false,
+    "brokenImages": [],
+    "overflow": false,
+    "sections": [
+      "perplexitybot",
+      "perplexity-user",
+      "waf",
+      "publisher-policy",
+      "conclusion",
+      "sources",
+      "reader-downloads"
+    ],
+    "sources": 1,
+    "tables": 0,
+    "title": "PerplexityBot vs Perplexity-User",
+    "url": "http://127.0.0.1:4349/research/ai-crawlers/perplexitybot-vs-perplexity-user"
+  },
+  {
+    "slug": "google-extended-search-gemini-ai-overviews",
+    "width": 390,
+    "author": false,
+    "brokenImages": [],
+    "overflow": false,
+    "sections": [
+      "what-it-controls",
+      "what-it-does-not-control",
+      "ai-overviews",
+      "logs",
+      "conclusion",
+      "sources",
+      "reader-downloads"
+    ],
+    "sources": 3,
+    "tables": 0,
+    "title": "Does Google-Extended Affect Google Search, Gemini, or AI Overviews?",
+    "url": "http://127.0.0.1:4349/research/ai-crawlers/google-extended-search-gemini-ai-overviews"
+  },
+  {
+    "slug": "ai-crawler-registry",
+    "width": 390,
+    "author": false,
+    "brokenImages": [],
+    "overflow": false,
+    "sections": [
+      "registry",
+      "policy",
+      "verification",
+      "maintenance",
+      "conclusion",
+      "sources",
+      "reader-downloads"
+    ],
+    "sources": 5,
+    "tables": 1,
+    "title": "AI Crawler Registry: Search, Training, User Fetchers, and Product Bots",
+    "url": "http://127.0.0.1:4349/research/ai-crawlers/ai-crawler-registry"
+  },
+  {
+    "slug": "search-console-query-vs-page-totals",
+    "width": 390,
+    "author": false,
+    "brokenImages": [],
+    "overflow": false,
+    "sections": [
+      "anonymized",
+      "row-limits",
+      "aggregation",
+      "reconciliation",
+      "conclusion",
+      "sources"
+    ],
+    "sources": 3,
+    "tables": 0,
+    "title": "Why Search Console Query Totals Do Not Match Page Totals",
+    "url": "http://127.0.0.1:4349/research/search-console/search-console-query-vs-page-totals"
+  },
+  {
+    "slug": "search-console-data-pipeline",
+    "width": 390,
+    "author": false,
+    "brokenImages": [],
+    "overflow": false,
+    "sections": [
+      "raw-layer",
+      "normalized-layer",
+      "aggregate-layer",
+      "decision-layer",
+      "qa",
+      "conclusion",
+      "sources"
+    ],
+    "sources": 4,
+    "tables": 0,
+    "title": "How to Build a Search Console Data Pipeline That Preserves Evidence",
+    "url": "http://127.0.0.1:4349/research/search-console/search-console-data-pipeline"
+  },
+  {
+    "slug": "coreweave-ddtl-5-5",
+    "width": 390,
+    "author": false,
+    "brokenImages": [],
+    "overflow": false,
+    "sections": [
+      "borrower",
+      "collateral",
+      "economics",
+      "residual-risk",
+      "conclusion",
+      "sources"
+    ],
+    "sources": 3,
+    "tables": 0,
+    "title": "CoreWeave DDTL 5.5: How a $2.6 Billion GPU-Backed Loan Works",
+    "url": "http://127.0.0.1:4349/research/financial-systems/coreweave-ddtl-5-5"
+  },
+  {
+    "slug": "gpu-financing-ai-infrastructure",
+    "width": 390,
+    "author": false,
+    "brokenImages": [],
+    "overflow": false,
+    "sections": [
+      "capital-stack",
+      "spv",
+      "underwriting",
+      "failure-modes",
+      "conclusion",
+      "sources"
+    ],
+    "sources": 3,
+    "tables": 0,
+    "title": "How AI Companies Finance GPUs Without Putting Everything on the Parent Balance Sheet",
+    "url": "http://127.0.0.1:4349/research/financial-systems/gpu-financing-ai-infrastructure"
+  },
+  {
+    "slug": "who-owns-austin-hvac-companies",
+    "width": 390,
+    "author": false,
+    "brokenImages": [],
+    "overflow": false,
+    "sections": [
+      "retained-brands",
+      "major-chains",
+      "not-market-share",
+      "verification",
+      "conclusion",
+      "sources",
+      "reader-downloads"
+    ],
+    "sources": 7,
+    "tables": 0,
+    "title": "Who Owns Austin’s HVAC Companies?",
+    "url": "http://127.0.0.1:4349/research/financial-systems/who-owns-austin-hvac-companies"
+  },
+  {
+    "slug": "who-owns-austin-plumbing-electrical-companies",
+    "width": 390,
+    "author": false,
+    "brokenImages": [],
+    "overflow": false,
+    "sections": [
+      "multi-trade",
+      "selected-chains",
+      "franchise",
+      "consumer-use",
+      "conclusion",
+      "sources",
+      "reader-downloads"
+    ],
+    "sources": 5,
+    "tables": 0,
+    "title": "Who Owns Austin’s Plumbing and Electrical Companies?",
+    "url": "http://127.0.0.1:4349/research/financial-systems/who-owns-austin-plumbing-electrical-companies"
+  },
+  {
+    "slug": "private-equity-home-services-rollups",
+    "width": 390,
+    "author": false,
+    "brokenImages": [],
+    "overflow": false,
+    "sections": [
+      "platform-add-on",
+      "retained-brand",
+      "economics",
+      "risk",
+      "conclusion",
+      "sources",
+      "reader-downloads"
+    ],
+    "sources": 5,
+    "tables": 0,
+    "title": "How Private-Equity Rollups Work in Home Services",
+    "url": "http://127.0.0.1:4349/research/financial-systems/private-equity-home-services-rollups"
+  },
+  {
+    "slug": "airline-loyalty-collateral-valuation",
+    "width": 390,
+    "author": false,
+    "brokenImages": [],
+    "overflow": false,
+    "sections": [
+      "cash-flow",
+      "collateral-control",
+      "enterprise-value",
+      "risk",
+      "conclusion",
+      "sources",
+      "reader-downloads"
+    ],
+    "sources": 3,
+    "tables": 0,
+    "title": "How Airline Loyalty Programs Are Valued as Collateral",
+    "url": "http://127.0.0.1:4349/research/financial-systems/airline-loyalty-collateral-valuation"
+  },
+  {
+    "slug": "humanoid-robot-startup-financing",
+    "width": 390,
+    "author": false,
+    "brokenImages": [],
+    "overflow": false,
+    "sections": [
+      "why-equity",
+      "strategic-capital",
+      "use-of-funds",
+      "future-debt",
+      "conclusion",
+      "sources"
+    ],
+    "sources": 2,
+    "tables": 0,
+    "title": "How Humanoid-Robot Companies Finance Hardware Before Scale",
+    "url": "http://127.0.0.1:4349/research/financial-systems/humanoid-robot-startup-financing"
+  },
+  {
+    "slug": "who-owns-ntta",
+    "width": 390,
+    "author": false,
+    "brokenImages": [],
+    "overflow": false,
+    "sections": [
+      "what-ntta-is",
+      "who-controls-the-money",
+      "why-tolltag-confuses-ownership",
+      "direct-answer",
+      "conclusion",
+      "sources",
+      "reader-downloads"
+    ],
+    "sources": 2,
+    "tables": 0,
+    "title": "Who Owns NTTA? The North Texas Tollway Authority Is Public",
+    "url": "http://127.0.0.1:4349/research/financial-systems/who-owns-ntta"
+  },
+  {
+    "slug": "texas-toll-roads-public-vs-private",
+    "width": 390,
+    "author": false,
+    "brokenImages": [],
+    "overflow": false,
+    "sections": [
+      "public-systems",
+      "private-concessions",
+      "former-private",
+      "how-to-read",
+      "conclusion",
+      "sources",
+      "reader-downloads"
+    ],
+    "sources": 4,
+    "tables": 0,
+    "title": "Are Texas Toll Roads Privately Owned? A Road-by-Road Answer",
+    "url": "http://127.0.0.1:4349/research/financial-systems/texas-toll-roads-public-vs-private"
+  },
+  {
+    "slug": "who-owns-hctra-sam-houston-tollway",
+    "width": 390,
+    "author": false,
+    "brokenImages": [],
+    "overflow": false,
+    "sections": [
+      "authority-structure",
+      "sam-houston",
+      "bondholders",
+      "billing-vs-ownership",
+      "conclusion",
+      "sources",
+      "reader-downloads"
+    ],
+    "sources": 1,
+    "tables": 0,
+    "title": "Who Owns HCTRA and the Sam Houston Tollway?",
+    "url": "http://127.0.0.1:4349/research/financial-systems/who-owns-hctra-sam-houston-tollway"
+  },
+  {
+    "slug": "foreign-owned-texas-toll-roads",
+    "width": 390,
+    "author": false,
+    "brokenImages": [],
+    "overflow": false,
+    "sections": [
+      "what-is-foreign-owned",
+      "dfw-projects",
+      "sh130-history",
+      "language-test",
+      "conclusion",
+      "sources",
+      "reader-downloads"
+    ],
+    "sources": 5,
+    "tables": 0,
+    "title": "Are Texas Toll Roads Foreign-Owned? What Cintra and Ferrovial Actually Own",
+    "url": "http://127.0.0.1:4349/research/financial-systems/foreign-owned-texas-toll-roads"
+  },
+  {
+    "slug": "texas-private-toll-rate-controls",
+    "width": 390,
+    "author": false,
+    "brokenImages": [],
+    "overflow": false,
+    "sections": [
+      "public-rates",
+      "concession-rates",
+      "economic-controls",
+      "how-to-check",
+      "conclusion",
+      "sources",
+      "reader-downloads"
+    ],
+    "sources": 4,
+    "tables": 0,
+    "title": "Who Can Raise Texas Toll Rates? Public Boards, TxDOT, and Private Concessions",
+    "url": "http://127.0.0.1:4349/research/financial-systems/texas-private-toll-rate-controls"
+  },
+  {
+    "slug": "who-owns-us-toll-roads",
+    "width": 390,
+    "author": false,
+    "brokenImages": [],
+    "overflow": false,
+    "sections": [
+      "public-models",
+      "private-models",
+      "owner-vs-operator",
+      "research-method",
+      "conclusion",
+      "sources"
+    ],
+    "sources": 3,
+    "tables": 0,
+    "title": "Who Owns Toll Roads in the United States?",
+    "url": "http://127.0.0.1:4349/research/financial-systems/who-owns-us-toll-roads"
+  },
+  {
+    "slug": "texas-managed-lanes-ownership-operators",
+    "width": 390,
+    "author": false,
+    "brokenImages": [],
+    "overflow": false,
+    "sections": [
+      "ownership-stack",
+      "dfw-concessions",
+      "public-managed-lanes",
+      "driver-checklist",
+      "conclusion",
+      "sources",
+      "reader-downloads"
+    ],
+    "sources": 3,
+    "tables": 0,
+    "title": "Who Owns Texas Managed Lanes and Express Lanes?",
+    "url": "http://127.0.0.1:4349/research/financial-systems/texas-managed-lanes-ownership-operators"
+  },
+  {
+    "slug": "texas-private-toll-concession-expiration-dates",
+    "width": 390,
+    "author": false,
+    "brokenImages": [],
+    "overflow": false,
+    "sections": [
+      "expiration-table",
+      "what-expires",
+      "valuation",
+      "early-termination",
+      "conclusion",
+      "sources",
+      "reader-downloads"
+    ],
+    "sources": 3,
+    "tables": 1,
+    "title": "When Do Texas Private Toll-Road Concessions Expire?",
+    "url": "http://127.0.0.1:4349/research/financial-systems/texas-private-toll-concession-expiration-dates"
+  },
+  {
+    "slug": "openai-crawlers-oai-searchbot-gptbot-chatgpt-user-adsbot",
+    "width": 1280,
+    "brokenImages": [],
+    "overflow": false,
+    "sections": [
+      "searchbot",
+      "gptbot",
+      "user-and-ads",
+      "policy-matrix",
+      "conclusion",
+      "sources",
+      "reader-downloads"
+    ],
+    "sources": 2,
+    "tables": 0,
+    "title": "OAI-SearchBot vs GPTBot vs ChatGPT-User vs OAI-AdsBot",
+    "url": "http://127.0.0.1:4349/research/ai-crawlers/openai-crawlers-oai-searchbot-gptbot-chatgpt-user-adsbot"
+  },
+  {
+    "slug": "verify-ai-crawlers-server-logs",
+    "width": 1280,
+    "brokenImages": [],
+    "overflow": false,
+    "sections": [
+      "normalize-the-log",
+      "match-provider-ranges",
+      "join-policy-and-response",
+      "classification-output",
+      "conclusion",
+      "sources",
+      "reader-downloads"
+    ],
+    "sources": 4,
+    "tables": 0,
+    "title": "How to Verify an AI Crawler in Server Logs",
+    "url": "http://127.0.0.1:4349/research/crawler-engineering/verify-ai-crawlers-server-logs"
+  },
+  {
+    "slug": "claude-crawlers-claudebot-searchbot-user",
+    "width": 1280,
+    "brokenImages": [],
+    "overflow": false,
+    "sections": [
+      "claudebot",
+      "searchbot",
+      "claude-user",
+      "verification",
+      "conclusion",
+      "sources",
+      "reader-downloads"
+    ],
+    "sources": 1,
+    "tables": 0,
+    "title": "ClaudeBot vs Claude-SearchBot vs Claude-User",
+    "url": "http://127.0.0.1:4349/research/ai-crawlers/claude-crawlers-claudebot-searchbot-user"
+  },
+  {
+    "slug": "perplexitybot-vs-perplexity-user",
+    "width": 1280,
+    "brokenImages": [],
+    "overflow": false,
+    "sections": [
+      "perplexitybot",
+      "perplexity-user",
+      "waf",
+      "publisher-policy",
+      "conclusion",
+      "sources",
+      "reader-downloads"
+    ],
+    "sources": 1,
+    "tables": 0,
+    "title": "PerplexityBot vs Perplexity-User",
+    "url": "http://127.0.0.1:4349/research/ai-crawlers/perplexitybot-vs-perplexity-user"
+  },
+  {
+    "slug": "google-extended-search-gemini-ai-overviews",
+    "width": 1280,
+    "brokenImages": [],
+    "overflow": false,
+    "sections": [
+      "what-it-controls",
+      "what-it-does-not-control",
+      "ai-overviews",
+      "logs",
+      "conclusion",
+      "sources",
+      "reader-downloads"
+    ],
+    "sources": 3,
+    "tables": 0,
+    "title": "Does Google-Extended Affect Google Search, Gemini, or AI Overviews?",
+    "url": "http://127.0.0.1:4349/research/ai-crawlers/google-extended-search-gemini-ai-overviews"
+  },
+  {
+    "slug": "ai-crawler-registry",
+    "width": 1280,
+    "brokenImages": [],
+    "overflow": false,
+    "sections": [
+      "registry",
+      "policy",
+      "verification",
+      "maintenance",
+      "conclusion",
+      "sources",
+      "reader-downloads"
+    ],
+    "sources": 5,
+    "tables": 1,
+    "title": "AI Crawler Registry: Search, Training, User Fetchers, and Product Bots",
+    "url": "http://127.0.0.1:4349/research/ai-crawlers/ai-crawler-registry"
+  },
+  {
+    "slug": "search-console-query-vs-page-totals",
+    "width": 1280,
+    "brokenImages": [],
+    "overflow": false,
+    "sections": [
+      "anonymized",
+      "row-limits",
+      "aggregation",
+      "reconciliation",
+      "conclusion",
+      "sources"
+    ],
+    "sources": 3,
+    "tables": 0,
+    "title": "Why Search Console Query Totals Do Not Match Page Totals",
+    "url": "http://127.0.0.1:4349/research/search-console/search-console-query-vs-page-totals"
+  },
+  {
+    "slug": "search-console-data-pipeline",
+    "width": 1280,
+    "brokenImages": [],
+    "overflow": false,
+    "sections": [
+      "raw-layer",
+      "normalized-layer",
+      "aggregate-layer",
+      "decision-layer",
+      "qa",
+      "conclusion",
+      "sources"
+    ],
+    "sources": 4,
+    "tables": 0,
+    "title": "How to Build a Search Console Data Pipeline That Preserves Evidence",
+    "url": "http://127.0.0.1:4349/research/search-console/search-console-data-pipeline"
+  },
+  {
+    "slug": "coreweave-ddtl-5-5",
+    "width": 1280,
+    "brokenImages": [],
+    "overflow": false,
+    "sections": [
+      "borrower",
+      "collateral",
+      "economics",
+      "residual-risk",
+      "conclusion",
+      "sources"
+    ],
+    "sources": 3,
+    "tables": 0,
+    "title": "CoreWeave DDTL 5.5: How a $2.6 Billion GPU-Backed Loan Works",
+    "url": "http://127.0.0.1:4349/research/financial-systems/coreweave-ddtl-5-5"
+  },
+  {
+    "slug": "gpu-financing-ai-infrastructure",
+    "width": 1280,
+    "brokenImages": [],
+    "overflow": false,
+    "sections": [
+      "capital-stack",
+      "spv",
+      "underwriting",
+      "failure-modes",
+      "conclusion",
+      "sources"
+    ],
+    "sources": 3,
+    "tables": 0,
+    "title": "How AI Companies Finance GPUs Without Putting Everything on the Parent Balance Sheet",
+    "url": "http://127.0.0.1:4349/research/financial-systems/gpu-financing-ai-infrastructure"
+  },
+  {
+    "slug": "who-owns-austin-hvac-companies",
+    "width": 1280,
+    "brokenImages": [],
+    "overflow": false,
+    "sections": [
+      "retained-brands",
+      "major-chains",
+      "not-market-share",
+      "verification",
+      "conclusion",
+      "sources",
+      "reader-downloads"
+    ],
+    "sources": 7,
+    "tables": 0,
+    "title": "Who Owns Austin’s HVAC Companies?",
+    "url": "http://127.0.0.1:4349/research/financial-systems/who-owns-austin-hvac-companies"
+  },
+  {
+    "slug": "who-owns-austin-plumbing-electrical-companies",
+    "width": 1280,
+    "brokenImages": [],
+    "overflow": false,
+    "sections": [
+      "multi-trade",
+      "selected-chains",
+      "franchise",
+      "consumer-use",
+      "conclusion",
+      "sources",
+      "reader-downloads"
+    ],
+    "sources": 5,
+    "tables": 0,
+    "title": "Who Owns Austin’s Plumbing and Electrical Companies?",
+    "url": "http://127.0.0.1:4349/research/financial-systems/who-owns-austin-plumbing-electrical-companies"
+  },
+  {
+    "slug": "private-equity-home-services-rollups",
+    "width": 1280,
+    "brokenImages": [],
+    "overflow": false,
+    "sections": [
+      "platform-add-on",
+      "retained-brand",
+      "economics",
+      "risk",
+      "conclusion",
+      "sources",
+      "reader-downloads"
+    ],
+    "sources": 5,
+    "tables": 0,
+    "title": "How Private-Equity Rollups Work in Home Services",
+    "url": "http://127.0.0.1:4349/research/financial-systems/private-equity-home-services-rollups"
+  },
+  {
+    "slug": "airline-loyalty-collateral-valuation",
+    "width": 1280,
+    "brokenImages": [],
+    "overflow": false,
+    "sections": [
+      "cash-flow",
+      "collateral-control",
+      "enterprise-value",
+      "risk",
+      "conclusion",
+      "sources",
+      "reader-downloads"
+    ],
+    "sources": 3,
+    "tables": 0,
+    "title": "How Airline Loyalty Programs Are Valued as Collateral",
+    "url": "http://127.0.0.1:4349/research/financial-systems/airline-loyalty-collateral-valuation"
+  },
+  {
+    "slug": "humanoid-robot-startup-financing",
+    "width": 1280,
+    "brokenImages": [],
+    "overflow": false,
+    "sections": [
+      "why-equity",
+      "strategic-capital",
+      "use-of-funds",
+      "future-debt",
+      "conclusion",
+      "sources"
+    ],
+    "sources": 2,
+    "tables": 0,
+    "title": "How Humanoid-Robot Companies Finance Hardware Before Scale",
+    "url": "http://127.0.0.1:4349/research/financial-systems/humanoid-robot-startup-financing"
+  },
+  {
+    "slug": "who-owns-ntta",
+    "width": 1280,
+    "brokenImages": [],
+    "overflow": false,
+    "sections": [
+      "what-ntta-is",
+      "who-controls-the-money",
+      "why-tolltag-confuses-ownership",
+      "direct-answer",
+      "conclusion",
+      "sources",
+      "reader-downloads"
+    ],
+    "sources": 2,
+    "tables": 0,
+    "title": "Who Owns NTTA? The North Texas Tollway Authority Is Public",
+    "url": "http://127.0.0.1:4349/research/financial-systems/who-owns-ntta"
+  },
+  {
+    "slug": "texas-toll-roads-public-vs-private",
+    "width": 1280,
+    "brokenImages": [],
+    "overflow": false,
+    "sections": [
+      "public-systems",
+      "private-concessions",
+      "former-private",
+      "how-to-read",
+      "conclusion",
+      "sources",
+      "reader-downloads"
+    ],
+    "sources": 4,
+    "tables": 0,
+    "title": "Are Texas Toll Roads Privately Owned? A Road-by-Road Answer",
+    "url": "http://127.0.0.1:4349/research/financial-systems/texas-toll-roads-public-vs-private"
+  },
+  {
+    "slug": "who-owns-hctra-sam-houston-tollway",
+    "width": 1280,
+    "brokenImages": [],
+    "overflow": false,
+    "sections": [
+      "authority-structure",
+      "sam-houston",
+      "bondholders",
+      "billing-vs-ownership",
+      "conclusion",
+      "sources",
+      "reader-downloads"
+    ],
+    "sources": 1,
+    "tables": 0,
+    "title": "Who Owns HCTRA and the Sam Houston Tollway?",
+    "url": "http://127.0.0.1:4349/research/financial-systems/who-owns-hctra-sam-houston-tollway"
+  },
+  {
+    "slug": "foreign-owned-texas-toll-roads",
+    "width": 1280,
+    "brokenImages": [],
+    "overflow": false,
+    "sections": [
+      "what-is-foreign-owned",
+      "dfw-projects",
+      "sh130-history",
+      "language-test",
+      "conclusion",
+      "sources",
+      "reader-downloads"
+    ],
+    "sources": 5,
+    "tables": 0,
+    "title": "Are Texas Toll Roads Foreign-Owned? What Cintra and Ferrovial Actually Own",
+    "url": "http://127.0.0.1:4349/research/financial-systems/foreign-owned-texas-toll-roads"
+  },
+  {
+    "slug": "texas-private-toll-rate-controls",
+    "width": 1280,
+    "brokenImages": [],
+    "overflow": false,
+    "sections": [
+      "public-rates",
+      "concession-rates",
+      "economic-controls",
+      "how-to-check",
+      "conclusion",
+      "sources",
+      "reader-downloads"
+    ],
+    "sources": 4,
+    "tables": 0,
+    "title": "Who Can Raise Texas Toll Rates? Public Boards, TxDOT, and Private Concessions",
+    "url": "http://127.0.0.1:4349/research/financial-systems/texas-private-toll-rate-controls"
+  },
+  {
+    "slug": "who-owns-us-toll-roads",
+    "width": 1280,
+    "brokenImages": [],
+    "overflow": false,
+    "sections": [
+      "public-models",
+      "private-models",
+      "owner-vs-operator",
+      "research-method",
+      "conclusion",
+      "sources"
+    ],
+    "sources": 3,
+    "tables": 0,
+    "title": "Who Owns Toll Roads in the United States?",
+    "url": "http://127.0.0.1:4349/research/financial-systems/who-owns-us-toll-roads"
+  },
+  {
+    "slug": "texas-managed-lanes-ownership-operators",
+    "width": 1280,
+    "brokenImages": [],
+    "overflow": false,
+    "sections": [
+      "ownership-stack",
+      "dfw-concessions",
+      "public-managed-lanes",
+      "driver-checklist",
+      "conclusion",
+      "sources",
+      "reader-downloads"
+    ],
+    "sources": 3,
+    "tables": 0,
+    "title": "Who Owns Texas Managed Lanes and Express Lanes?",
+    "url": "http://127.0.0.1:4349/research/financial-systems/texas-managed-lanes-ownership-operators"
+  },
+  {
+    "slug": "texas-private-toll-concession-expiration-dates",
+    "width": 1280,
+    "brokenImages": [],
+    "overflow": false,
+    "sections": [
+      "expiration-table",
+      "what-expires",
+      "valuation",
+      "early-termination",
+      "conclusion",
+      "sources",
+      "reader-downloads"
+    ],
+    "sources": 3,
+    "tables": 1,
+    "title": "When Do Texas Private Toll-Road Concessions Expire?",
+    "url": "http://127.0.0.1:4349/research/financial-systems/texas-private-toll-concession-expiration-dates"
+  }
+]

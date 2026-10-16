@@ -1,0 +1,109 @@
+{
+  "kind": "research",
+  "cluster": "financial-systems",
+  "slug": "who-owns-hctra-sam-houston-tollway",
+  "number": "33",
+  "category": "TEXAS INFRASTRUCTURE",
+  "title": "Who Owns HCTRA and the Sam Houston Tollway?",
+  "seoTitle": "Who Owns HCTRA? Harris County Owns the Toll System",
+  "subtitle": "HCTRA is a Harris County public toll-road enterprise. The Sam Houston Tollway is not a privately owned highway, even though contractors and bondholders participate in the system.",
+  "seoDescription": "Who owns HCTRA and the Sam Houston Tollway? HCTRA is a Harris County public enterprise created under Texas law. Learn who governs it and where toll revenue goes.",
+  "artwork": {
+    "kind": "study",
+    "variant": "triptych",
+    "label": "HCTRA / Harris County / toll enterprise",
+    "note": "County ownership, enterprise accounting, operating contractors, and bondholder claims answer different parts of the ownership question."
+  },
+  "date": "2026.09.23",
+  "lastVerified": "2026.09.23",
+  "readTime": "3 MIN",
+  "author": "SULAYMAN BOWLES",
+  "thesis": "HCTRA is a public Harris County toll-road enterprise created by Commissioners Court, so the Sam Houston Tollway’s core ownership and governance are county-public rather than private.",
+  "conclusion": {
+    "title": "HCTRA is part of Harris County’s public finance system",
+    "content": "The Sam Houston Tollway is not owned by a private concessionaire. Harris County controls HCTRA; toll revenues support the enterprise, including operations, capital needs, and debt. Contractors and lenders can hold important contractual rights without becoming road owners."
+  },
+  "evidenceBoundary": "This page addresses HCTRA’s institutional structure and the public ownership of its toll system. Individual interagency agreements, collection arrangements, service contracts, and bond pledges can allocate narrower rights without changing the core county ownership answer.",
+  "metrics": [
+    {
+      "label": "HCTRA established",
+      "value": "1983"
+    },
+    {
+      "label": "Public owner",
+      "value": "HARRIS COUNTY"
+    },
+    {
+      "label": "Legal basis",
+      "value": "TEXAS TRANSPORTATION CODE CH. 284"
+    },
+    {
+      "label": "Accounting structure",
+      "value": "ENTERPRISE FUND"
+    }
+  ],
+  "resources": [
+    {
+      "label": "Texas toll-road ownership dataset",
+      "href": "/research/texas-toll-road-ownership-2026.csv",
+      "description": "Project-level public/private ownership, operator, toll-revenue claimant, concession term, billing agent, and evidence-date records.",
+      "format": "CSV"
+    },
+    {
+      "label": "Texas toll-road ownership investigation",
+      "href": "/markets/who-owns-texas-toll-roads",
+      "description": "The long-form ownership and capital-stack investigation behind this query-specific note.",
+      "format": "WEB"
+    }
+  ],
+  "content": [
+    "HCTRA is public. Harris County Commissioners Court established the Harris County Toll Road Authority in 1983 under Chapter 284 of the Texas Transportation Code. HCTRA operates as a Harris County enterprise fund, with toll revenue supporting the toll system rather than flowing to private shareholders.",
+    "That structure covers the central ownership question for the Sam Houston Tollway. Private construction firms, technology vendors, road operators, and bond investors can have contracts or financial claims tied to the system, but they do not thereby own the county toll road."
+  ],
+  "sections": [
+    {
+      "id": "authority-structure",
+      "title": "HCTRA is a Harris County authority, not a private company",
+      "paragraphs": [
+        "Harris County created HCTRA after voters approved toll-road bond authority. The authority’s financial activity is reflected within the county’s public financial structure. Policy and major governance ultimately run through county institutions rather than an equity-holder vote.",
+        "The enterprise-fund format matters because it makes the toll system look businesslike: users pay charges, the system records operating expenses, capital assets, liabilities, and debt service. Enterprise accounting does not turn the enterprise into a private corporation."
+      ]
+    },
+    {
+      "id": "sam-houston",
+      "title": "Who owns the Sam Houston Tollway",
+      "paragraphs": [
+        "The Sam Houston Tollway belongs inside the HCTRA/Harris County public system. It is different from a TxDOT corridor under a long-term revenue concession such as NTE or LBJ Express.",
+        "A driver may experience the roads similarly—electronic collection, variable trip cost, maintenance crews, debt-funded capital—but the legal cash-flow rights are different. HCTRA’s residual economics remain in a county public structure."
+      ]
+    },
+    {
+      "id": "bondholders",
+      "title": "Bondholders finance the system; they do not own the road",
+      "paragraphs": [
+        "Revenue bonds can give creditors a pledge of toll revenues and contractual protections around reserves, coverage, and additional borrowing. Those protections can constrain management decisions, especially during financial stress.",
+        "A lien on pledged revenue is not fee title to the roadway and is not common equity in HCTRA. The distinction is the same one that applies to a mortgage lender versus the owner of a house, though municipal revenue-bond documents have their own legal structure."
+      ]
+    },
+    {
+      "id": "billing-vs-ownership",
+      "title": "Billing and interoperability are separate from ownership",
+      "paragraphs": [
+        "Texas toll agencies interoperate, so a tag issued by one authority can be used on another system. Collection technology is a payment rail. It should not be used to infer which government owns the road or which entity is entitled to the toll cash.",
+        "For any Houston facility, the reliable method is still project-specific: identify the titleholder, governing authority, operator, billing agent, and revenue claimant independently."
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "id": "S1",
+      "label": "HCTRA — FY2025 Toll Road Authority Enterprise Fund financial statements",
+      "href": "https://www.hctra.org/-/media/2ba0076447b44da0948e12147ce7a26b.ashx",
+      "lastVerified": "2026.09.23"
+    }
+  ],
+  "path": "/research/financial-systems/who-owns-hctra-sam-houston-tollway",
+  "aliases": [],
+  "dateModified": "2026.09.23",
+  "image": "/images/generative-art/yuru-32.webp"
+}

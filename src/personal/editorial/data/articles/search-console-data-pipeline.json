@@ -1,0 +1,121 @@
+{
+  "kind": "research",
+  "cluster": "search-console",
+  "slug": "search-console-data-pipeline",
+  "number": "46",
+  "category": "SEARCH CONSOLE",
+  "title": "How to Build a Search Console Data Pipeline That Preserves Evidence",
+  "seoTitle": "Search Console Data Pipeline: API, BigQuery, Evidence & QA",
+  "subtitle": "A production Search Console pipeline should preserve raw extracts, aggregation metadata, incomplete-data flags, anonymized-query boundaries, and reproducible derived tables.",
+  "seoDescription": "Build a Search Console data pipeline with raw API or BigQuery exports, partitioned facts, query/page aggregates, evidence snapshots, QA checks and reproducible SEO reports.",
+  "artwork": {
+    "kind": "study",
+    "variant": "triptych",
+    "label": "Search Console / raw facts / derived metrics",
+    "note": "The pipeline should make every chart traceable back to an extraction window, aggregation mode, and immutable raw record."
+  },
+  "date": "2026.09.23",
+  "lastVerified": "2026.09.23",
+  "readTime": "3 MIN",
+  "author": "SULAYMAN BOWLES",
+  "thesis": "The durable Search Console data model separates immutable raw facts from derived SEO judgments and carries Google’s privacy, truncation, aggregation, and incomplete-data boundaries all the way to the report.",
+  "conclusion": {
+    "title": "Preserve the evidence boundary with the metric",
+    "content": "A useful SEO pipeline can answer not just “what changed?” but “which source rows, date state, aggregation rule, and transformation produced this claim?” BigQuery bulk export is the strongest base for large properties; the API remains useful for targeted pulls and operational checks."
+  },
+  "evidenceBoundary": "Google’s bulk export excludes anonymized query strings and the API can return top rows rather than every row. No pipeline can reconstruct data that Google does not disclose. The design below preserves those boundaries instead of masking them.",
+  "metrics": [
+    {
+      "label": "Raw layers",
+      "value": "SITE + URL IMPRESSION"
+    },
+    {
+      "label": "Preferred large-site feed",
+      "value": "BIGQUERY BULK EXPORT"
+    },
+    {
+      "label": "Anonymized query value",
+      "value": "EMPTY STRING IN BULK EXPORT"
+    },
+    {
+      "label": "Core rule",
+      "value": "RAW → NORMALIZED → DERIVED"
+    }
+  ],
+  "content": [
+    "A Search Console pipeline becomes unreliable when the same table mixes Google’s source data, cleaned dimensions, opportunity scores, and human judgments. The fix is a layered model: retain the raw export, normalize it without changing meaning, materialize stable aggregates, and compute SEO decisions in a separate derived layer.",
+    "Google’s BigQuery bulk export is the cleanest source for large or long-lived properties because it delivers ongoing daily data without the ordinary daily row limit, apart from anonymized queries. For smaller or tactical workflows, the Search Analytics API is still useful, but the extraction job should preserve its dimensions, filters, aggregation type, row limits, and incomplete-data metadata."
+  ],
+  "sections": [
+    {
+      "id": "raw-layer",
+      "title": "Layer 1: immutable source facts",
+      "paragraphs": [
+        "Store each daily bulk-export partition or API response exactly as received, plus extraction timestamp, property identifier, requested date window, dimensions, filters, search type, dataState, and aggregation type. Do not overwrite yesterday’s raw response with a refreshed one without versioning the change.",
+        "For API pulls that include fresh data, persist Google’s first_incomplete_date or first_incomplete_hour metadata. A ranking alert built on still-changing rows should be labeled provisional."
+      ]
+    },
+    {
+      "id": "normalized-layer",
+      "title": "Layer 2: normalized query, URL, country, device, and appearance keys",
+      "paragraphs": [
+        "Normalize URL casing and canonical host policy only where the semantics are known. Keep Google’s credited URL as a source field. For bulk export, preserve empty query strings as the anonymized-query bucket instead of dropping them during ingestion unless a downstream analysis explicitly asks for named queries only.",
+        "Generate stable surrogate keys for the property, URL, query, device, country, search type, and appearance dimensions. Store the raw string beside the normalized value so a future normalization bug can be reversed."
+      ]
+    },
+    {
+      "id": "aggregate-layer",
+      "title": "Layer 3: materialized summaries instead of dashboard scans",
+      "paragraphs": [
+        "Google recommends pre-aggregating frequent BigQuery views rather than pointing dashboards at the raw fact tables. A daily URL table, daily query table, query-by-URL table, and rolling 7/28/90-day comparison layer cover most SEO diagnostics without rescanning the full dataset on every page load.",
+        "Partition by data date and apply date filters early. For exploratory analyses where exactness is unnecessary, BigQuery’s approximate functions can cut processing costs."
+      ]
+    },
+    {
+      "id": "decision-layer",
+      "title": "Layer 4: derived opportunity records with provenance",
+      "paragraphs": [
+        "A content-opportunity record should store the query cluster, target URL, current impressions, clicks, CTR, average position, comparison window, scoring formula version, evidence-row IDs, and a status such as observe, rewrite, create, consolidate, or reject. The recommendation is derived data; the underlying Google facts remain untouched.",
+        "This separation makes strategy auditable. When an article is created, the system can later compare its pre-publication query cluster with post-publication data without pretending that every change was caused by the article."
+      ]
+    },
+    {
+      "id": "qa",
+      "title": "QA gates before a metric becomes a claim",
+      "paragraphs": [
+        "Check date completeness, aggregation compatibility, duplicate ingestion, zero-impression anomalies, unexpectedly missing partitions, canonical URL changes, and query-table residuals. A chart should carry its extraction cutoff and whether fresh/incomplete data was included.",
+        "Finally, preserve the exact SQL or transformation version used to create important public results. “Search Console says” is not reproducible unless another analyst can regenerate the number from the retained source rows."
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "id": "S1",
+      "label": "Google Search Console API — Search Analytics query",
+      "href": "https://developers.google.com/webmaster-tools/v1/searchanalytics/query",
+      "lastVerified": "2026.09.23"
+    },
+    {
+      "id": "S2",
+      "label": "Google Search Central — bulk Search Console export to BigQuery",
+      "href": "https://developers.google.com/search/blog/2023/02/bulk-data-export",
+      "lastVerified": "2026.09.23"
+    },
+    {
+      "id": "S3",
+      "label": "Google Search Central — BigQuery efficiency for Search Console exports",
+      "href": "https://developers.google.com/search/blog/2023/06/bigquery-efficiency-tips",
+      "lastVerified": "2026.09.23"
+    },
+    {
+      "id": "S4",
+      "label": "Google Search Console — Performance report data discrepancies",
+      "href": "https://support.google.com/webmasters/answer/17010575",
+      "lastVerified": "2026.09.23"
+    }
+  ],
+  "path": "/research/search-console/search-console-data-pipeline",
+  "aliases": [],
+  "dateModified": "2026.09.23",
+  "image": "/images/generative-art/yuru-12.webp"
+}

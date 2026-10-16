@@ -1,0 +1,107 @@
+{
+  "kind": "research",
+  "cluster": "financial-systems",
+  "slug": "who-owns-us-toll-roads",
+  "number": "36",
+  "category": "U.S. INFRASTRUCTURE",
+  "title": "Who Owns Toll Roads in the United States?",
+  "seoTitle": "Who Owns U.S. Toll Roads? Public Authorities vs Concessions",
+  "subtitle": "There is no national toll-road owner. States, public authorities, counties, bridge agencies, and a smaller set of private concession companies control different assets and revenue rights.",
+  "seoDescription": "Who owns toll roads in the U.S.? Learn the difference between state and public-authority ownership, municipal toll systems, and private concession rights.",
+  "artwork": {
+    "kind": "study",
+    "variant": "triptych",
+    "label": "U.S. toll roads / public agencies / P3 concessions",
+    "note": "The national map is a patchwork of public owners and project-specific private operating rights rather than one federal or corporate system."
+  },
+  "date": "2026.09.23",
+  "lastVerified": "2026.09.23",
+  "readTime": "3 MIN",
+  "author": "SULAYMAN BOWLES",
+  "thesis": "U.S. toll roads are predominantly organized through state and local public entities, with private participation concentrated in specific leases and DBFOM toll concessions rather than a single private national network.",
+  "conclusion": {
+    "title": "Ask “which facility?” before asking “who owns toll roads?”",
+    "content": "The United States has no single ownership model. A turnpike authority can own a statewide system, a state DOT can own managed lanes operated by a concessionaire, and a city can lease an existing toll road for decades. Facility-level documents determine the answer."
+  },
+  "evidenceBoundary": "FHWA inventories and P3 libraries classify many facilities but use specific reporting universes and dates. This page does not convert one federal table into a claim about the ownership percentage of every tolled mile in the country.",
+  "metrics": [
+    {
+      "label": "National owner",
+      "value": "NONE"
+    },
+    {
+      "label": "Common public owners",
+      "value": "STATE + AUTHORITY + COUNTY"
+    },
+    {
+      "label": "Private model",
+      "value": "LEASE / DBFOM CONCESSION"
+    },
+    {
+      "label": "Primary source",
+      "value": "FHWA"
+    }
+  ],
+  "content": [
+    "The federal government does not own one national toll-road system, and no private company owns all U.S. toll roads. Ownership is fragmented across state departments of transportation, turnpike and bridge authorities, counties, regional bodies, and local governments. Private capital enters through specific concessions and long-term leases.",
+    "That produces several legally different arrangements that can look identical from the driver’s seat. An electronic toll sign can sit over a road owned and operated by a public authority, a state-owned managed lane run by a private concessionaire, or a formerly public toll facility leased to a private operator for decades."
+  ],
+  "sections": [
+    {
+      "id": "public-models",
+      "title": "The common public ownership models",
+      "paragraphs": [
+        "Many toll systems are held by a state authority or state DOT. Others sit with counties, bridge and tunnel authorities, port authorities, or regional transportation entities. These owners often issue revenue bonds backed by toll receipts and operate outside the ordinary tax-funded highway budget.",
+        "Public ownership does not imply low leverage or short-lived tolling. A mature public toll authority can carry billions of dollars of revenue-supported debt and maintain tolling long after the original construction bonds are gone because the network continues to fund maintenance, expansion, reserves, and new capital."
+      ]
+    },
+    {
+      "id": "private-models",
+      "title": "Where private companies enter",
+      "paragraphs": [
+        "FHWA’s P3 library documents long-term leases such as the Chicago Skyway and Indiana Toll Road as well as DBFOM toll concessions including NTE in Texas, I-77 Express Lanes in North Carolina, I-495 and I-95 HOT lanes in Virginia, and other project-specific facilities.",
+        "In these structures, the private company’s asset is usually a leasehold or concession bundle: operating rights, toll-revenue rights, contractual protections, and obligations over a defined term. The public sector can retain underlying title and regulatory powers."
+      ]
+    },
+    {
+      "id": "owner-vs-operator",
+      "title": "Why federal toll inventories list owner and operator separately",
+      "paragraphs": [
+        "FHWA facility records make an important distinction between the agency associated with the road and the operating/pricing characteristics of the facility. A state DOT can remain the listed owner of managed lanes even where a private project company has a contractual operating role.",
+        "That is the safest way to read a national toll map: do not infer ownership from the brand on the website, the transponder accepted, or the company that performs maintenance."
+      ]
+    },
+    {
+      "id": "research-method",
+      "title": "How to verify a specific U.S. toll road",
+      "paragraphs": [
+        "Use the state DOT or authority page to identify the public asset, then check FHWA’s P3 profile or the executed lease/concession agreement if a private operator is involved. Municipal bond official statements are useful for public systems; project-finance and concession documents are useful for private ones.",
+        "The final answer should name the physical owner, operating entity, toll-revenue claimant, debt issuer or borrower, and contract expiration. “Public” or “private” alone loses most of the economics."
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "id": "S1",
+      "label": "FHWA — public-private partnership agreement library",
+      "href": "https://www.fhwa.dot.gov/ipd/p3/p3_projects/agreements.aspx",
+      "lastVerified": "2026.09.23"
+    },
+    {
+      "id": "S2",
+      "label": "FHWA — DBFOM toll-concession project profiles",
+      "href": "https://www.fhwa.dot.gov/ipd/p3/defined/new_build_facilities/dbfom_toll_concessions.aspx",
+      "lastVerified": "2026.09.23"
+    },
+    {
+      "id": "S3",
+      "label": "FHWA — Toll Facilities in the United States",
+      "href": "https://www.fhwa.dot.gov/policyinformation/tollpage/page08.cfm",
+      "lastVerified": "2026.09.23"
+    }
+  ],
+  "path": "/research/financial-systems/who-owns-us-toll-roads",
+  "aliases": [],
+  "dateModified": "2026.09.23",
+  "image": "/images/generative-art/yuru-32.webp"
+}
