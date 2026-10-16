@@ -1,9 +1,36 @@
-/** Roles and implementation states from the retained project narratives and source records. */
+import { featuredProjectSlugs } from '../content.ts'
+
+/** Roles and implementation states from the retained project narratives and public résumé. */
 export const workContributions: Record<string, {
   role: string; status: string; decision: string; summary: string
   searchTitle: string; searchDescription: string
   proofs: { label: string; href: string }[]
 }> = {
+  chegg: {
+    role: 'Product Intern, Growth · Internships.com',
+    status: 'Product & research work',
+    decision: 'Connect student research to internship-search workflows and AI tools.',
+    summary: 'At Chegg, I develop internship-search workflows and AI tools for Internships.com, combining student research, recruiting data and cross-functional product work.',
+    searchTitle: 'Chegg — Product & AI Tools at Internships.com — Sulayman Bowles',
+    searchDescription: 'Sulayman Bowles’s product work at Chegg spans Internships.com, student research, recruiting-data pipelines, growth analysis and an AI mock interviewer.',
+    proofs: [
+      { label: 'Role & contributions', href: '/resume' },
+      { label: 'Internships.com', href: 'https://www.internships.com/' },
+    ],
+  },
+  void: {
+    role: 'Founder · Strategy & engineering',
+    status: 'Consultancy · Atlas local workflow shipped',
+    decision: 'Connect a business decision to a system whose work can be inspected.',
+    summary: 'I founded VOID to build operating plans, AI workflows and web systems. Atlas, a Python and SQLite audit console, connects website findings to the captured evidence behind them.',
+    searchTitle: 'VOID — Strategy, AI Workflows & Atlas Engineering — Sulayman Bowles',
+    searchDescription: 'Sulayman Bowles founded VOID, a consultancy for growth strategy, financial analysis, AI workflows and web systems, including the Atlas audit console.',
+    proofs: [
+      { label: 'VOID', href: 'https://www.void-agency.com/' },
+      { label: 'Atlas implementation', href: 'https://github.com/SulaymanB2024/Thick-Scraper-VOID-/blob/ef3bad25ea0f43f7b4a854fa56c74af5a50fc8db/README.md' },
+      { label: 'Role & contributions', href: '/resume' },
+    ],
+  },
   internshipdeadlines: {
     role: 'Founder & product lead',
     status: 'Public product',
@@ -42,17 +69,4 @@ export const workContributions: Record<string, {
   },
 }
 
-export const featuredWorkSlugs = ['internshipdeadlines', 'atlas', 'sapien'] as const
-
-/** Continue through the same selection shown on Work; retain other case-study exits. */
-export function curatedNextProject(slug: string) {
-  const sequence = [
-    { slug: 'internshipdeadlines', name: 'InternshipDeadlines', category: 'Product' },
-    { slug: 'atlas', name: 'Atlas', category: 'Product & systems' },
-    { slug: 'sapien', name: 'Sapien', category: 'AI' },
-    { slug: 'investing-markets', name: 'Investing & Markets', category: 'Markets' },
-    { slug: 'miscellaneous', name: 'Experiments', category: 'Experiments' },
-  ]
-  const index = sequence.findIndex(project => project.slug === slug)
-  return index < 0 ? undefined : sequence[(index + 1) % sequence.length]
-}
+export const featuredWorkSlugs = featuredProjectSlugs

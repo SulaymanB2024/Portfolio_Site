@@ -74,4 +74,36 @@ export const projects: Project[] = [
     ],
     link: { label: 'Try the shader study', href: './shader.html' },
   },
+  {
+    slug: 'chegg', number: '01', name: 'Chegg', kind: 'globe', category: 'Product',
+    tags: ['Product', 'Student research', 'AI tools'],
+    summary: 'Internship search and AI tools, built around the student journey at Internships.com.',
+    headline: ['Research becomes', 'a useful product.'],
+    overview: 'As Product Intern, Growth at Chegg, I develop internship-search workflows and AI tools for Internships.com through student research, recruiting-data pipelines and cross-functional product work.',
+    areas: [
+      { title: 'Student research', description: 'Connect student research with internship-search workflows and AI tools.' },
+      { title: 'Recruiting data', description: 'Build and validate recruiting-data pipelines with product, engineering, data science and marketing.' },
+      { title: 'AI mock interviewer', description: 'Adaptive follow-ups, conversation memory, failure recovery and feedback.' },
+      { title: 'Growth research', description: 'Analyze public social posts with embeddings and machine learning to inform student-focused experiments.' },
+    ],
+    link: { label: 'Internships.com', href: 'https://www.internships.com/' },
+  },
+  {
+    slug: 'void', number: '03', name: 'VOID', kind: 'crystal', category: 'Product',
+    tags: ['Strategy', 'Engineering', 'AI workflows'],
+    summary: 'A consultancy connecting business decisions with working software. Atlas is one of the systems I built.',
+    headline: ['From a question', 'to a working system.'],
+    overview: 'I founded VOID to build operating plans, financial analysis, AI workflows and web systems for small businesses and technology clients. Atlas, a Python and SQLite website audit console, makes the engineering work inspectable.',
+    areas: [
+      { title: 'Operating plans', description: 'Develop growth strategy, financial analysis and operating plans for client decisions.' },
+      { title: 'Software delivery', description: 'Build AI workflows and web systems around the work a business needs to do.' },
+      { title: 'Atlas', description: 'Connect website crawls, findings and measurements with retained evidence.' },
+      { title: 'Reviewable records', description: 'Keep source captures, interpretation versions and collection gaps available for review.' },
+    ],
+    link: { label: 'VOID', href: 'https://www.void-agency.com/' },
+  },
 ]
+
+/** The primary Work journey; the full catalog above preserves existing routes. */
+export const featuredProjectSlugs = ['chegg', 'sapien', 'void', 'miscellaneous'] as const
+export const featuredProjects = featuredProjectSlugs.map(slug => projects.find(project => project.slug === slug)!)

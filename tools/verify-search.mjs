@@ -6,6 +6,7 @@ import { answerNotes, readerModifiedDate, questionAnchor } from '../src/personal
 import { documentModifiedDate } from './search-sitemap.ts'
 import { findReadingTopic, topicQuestions } from '../src/personal/editorial/topics.ts'
 import { nativeArtworkPosterSource } from '../src/personal/editorial/artwork-poster-source.ts'
+import { workContributions } from '../src/personal/projects/work-curation.ts'
 
 const origin = 'https://sulayman-bowles.dev'
 const read = path => readFile(path, 'utf8')
@@ -287,9 +288,17 @@ for (const path of ['/work/internshipdeadlines', '/work/atlas', '/resume']) asse
 const resumeHtml = await read('dist/resume/index.html')
 for (const skill of ['Skills &amp; tools', 'Python', 'SQL', 'TypeScript', 'Growth strategy', 'Product positioning', 'AI workflows']) assert(resumeHtml.includes(skill), `Initial résumé lacks ${skill}`)
 assert(resumeHtml.includes('July 2026 PDF'), 'Historical PDF label changed')
-for (const slug of ['internshipdeadlines', 'sapien', 'atlas']) {
+const workHtml = await read('dist/work/index.html')
+const featuredLinks = [...(workHtml.match(/<h2>Featured projects<\/h2>(.*?)<\/main>/s)?.[1] ?? '').matchAll(/href="(\/work\/[^"?]+)"/g)].map(match => match[1])
+assert.deepEqual(featuredLinks, ['/work/chegg', '/work/sapien', '/work/void', '/work/miscellaneous'], 'Readable Work must feature exactly the four accepted projects in order')
+for (const slug of Object.keys(workContributions)) {
   const html = await read(`dist/work/${slug}/index.html`)
-  assert(html.includes('aria-label="Project evidence"'), `${slug}: opening lacks proof destinations`)
-  assert(html.includes('Key decision'), `${slug}: opening lost contribution context`)
+  const main = html.match(/<main>(.*?)<\/main>/s)?.[1]
+  assert(main, `${slug}: readable account is missing`)
+  const opening = main.match(/class="project-detail project-readable"><p>(.*?)<\/p><nav aria-label="In this project">/s)?.[1]
+  assert.equal(decode(opening ?? ''), workContributions[slug].summary, `${slug}: opening must retain one current contribution summary`)
+  assert(main.includes('class="project-account-section"'), `${slug}: contribution lacks its supporting narrative`)
+  for (const proof of workContributions[slug].proofs)
+    assert(main.includes(`href="${proof.href}"`), `${slug}: account lacks proof destination ${proof.href}`)
 }
 console.log(`Search gate passed: ${urls.length} unique canonical pages, visible biographies, coherent identity/social/schema metadata, ${catalog.length} dated feed entries, ${citations} source citations, complete HTML sections, search crawler access, and generated discovery.`)

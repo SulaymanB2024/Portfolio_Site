@@ -3,3 +3,15 @@
   margin-inline: var(--home-gutter, 20px);
   padding-block-start: 76px;
 }
+.personal-site .route-opening.route-retry {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  width: max-content;
+  padding-block: 4px;
+  pointer-events: auto;
+}
+.route-retry > span { flex: 1; min-width: 0; }
+.route-retry a { display: inline-flex; align-items: center; min-height: 44px; white-space: nowrap; text-decoration: underline; text-underline-offset: 4px; }
+.route-retry button { min-width: 44px; min-height: 44px; padding: 0; border: 0; background: transparent; color: inherit; font: 20px/1 Arial, sans-serif; }
+.route-retry :is(a,button):focus-visible { outline: 1px solid var(--ink); outline-offset: 3px; }

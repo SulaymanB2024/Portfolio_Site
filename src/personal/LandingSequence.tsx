@@ -1,5 +1,5 @@
 import { Fragment, useEffect, useRef } from 'react'
-import { projects } from './content'
+import { featuredProjects } from './content'
 import { portfolioAssetUrl } from './portfolio-assets'
 import { DestinationLink, LinkArrow } from './DestinationLink'
 import type { LandingOpeningCopy } from './landing/opening-copy'
@@ -79,12 +79,12 @@ export default function LandingSequence({ onActiveChange, opening }: { onActiveC
       </button>
       <p ref={loading} className="landing-loading" role="status" hidden>Loading sculpture</p>
       <nav className="landing-fallback-nav" aria-label="Project pages">
-        {projects.map(item => <DestinationLink key={item.slug} href={`#/work/${item.slug}`}>{item.name}</DestinationLink>)}
+        {featuredProjects.map(item => <DestinationLink key={item.slug} href={`#/work/${item.slug}`}>{item.name}</DestinationLink>)}
         <DestinationLink href="#/writing">Writing</DestinationLink>
       </nav>
     </div>
     <nav className="landing-screen-reader-nav" aria-label="All selected projects">
-      {projects.map(item => <a key={item.slug} href={`#/work/${item.slug}`} tabIndex={-1}>{item.name}</a>)}
+      {featuredProjects.map(item => <a key={item.slug} href={`#/work/${item.slug}`} tabIndex={-1}>{item.name}</a>)}
     </nav>
   </section>
 }

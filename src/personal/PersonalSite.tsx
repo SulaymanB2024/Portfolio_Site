@@ -25,7 +25,8 @@ import { focusWithoutWarmup } from './refinements/warmup-policy'
 import RouteBoundary from './RouteBoundary'
 import BrandIdentity from './BrandIdentity'
 import { DestinationLink } from './DestinationLink'
-import { prepareRouteResources } from './route-preparation'
+import { completeRoutePreparation, prepareRouteResources } from './route-preparation'
+import { canonicalPath } from './public-pages'
 import { installRouteScroll } from './refinements/route-scroll'
 import { installTableOverflowHints } from './refinements/table-overflow'
 import './editorial/artwork-continuity.css'
@@ -53,17 +54,26 @@ const path = () => resolveRoute(location.hash, location.pathname, articles, docu
 function useRoute() {
   const [route, setRoute] = useState(path)
   const [pending, setPending] = useState(false)
+  const [failedNavigation, setFailedNavigation] = useState<string | null>(null)
   const current = useRef(route)
   useEffect(() => {
     let sequence = 0
     let active: ArtworkTransition | undefined
+    let sourceAddress = location.href
+    let navigating = false
     const scroll = installRouteScroll()
-    const change = async () => {
+    const change = async (event: HashChangeEvent) => {
+      // Keep the displayed page's exact address across rapid pending requests.
+      if (!navigating && event.oldURL) sourceAddress = event.oldURL
+      navigating = true
       const next = path()
       const ticket = ++sequence
       const arrival = scroll.begin()
+      setFailedNavigation(null)
       active?.skipTransition()
       if (next === current.current) {
+        sourceAddress = location.href
+        navigating = false
         scroll.samePage(arrival)
         setPending(false)
         document.documentElement.dataset.artTransition = 'idle'
@@ -71,11 +81,15 @@ function useRoute() {
       }
       setPending(true)
       const prepared = prepareRouteResources(next, prepareRoutePage, slug => prepareArticleArrival(slug, location.hash, location.pathname))
+      // A document retry also refreshes failed browser module/CSS caches.
+      const query = location.hash.includes('?') ? `?${location.hash.split('?').slice(1).join('?')}` : location.search
+      const retryHref = `${canonicalPath(next) ?? location.pathname}${query}`
       const journey = galleryArticleJourney(current.current, next)
       const canAnimate = journey && !matchMedia('(prefers-reduced-motion: reduce)').matches
-      const update = async () => {
-        if (ticket !== sequence || path() !== next) return
+      const update = () => completeRoutePreparation(prepared, () => ticket === sequence && path() === next, async () => {
         current.current = next
+        sourceAddress = location.href
+        navigating = false
         flushSync(() => { setRoute(next); setPending(false) })
         await scroll.commit(arrival, () => {
           if (next.startsWith('writing/')) {
@@ -91,10 +105,17 @@ function useRoute() {
           // Position the destination before the browser captures its new artwork box.
           link?.scrollIntoView({ block: 'center', behavior: 'instant' })
         })
-      }
+      }, () => {
+        // Keep the address consistent with the retained page. The retry link
+        // targets the failed destination with a fresh document request.
+        history.replaceState(history.state, '', sourceAddress)
+        navigating = false
+        scroll.samePage(arrival)
+        setPending(false)
+        setFailedNavigation(retryHref)
+      })
       if (!canAnimate) {
         document.documentElement.dataset.artTransition = matchMedia('(prefers-reduced-motion: reduce)').matches ? 'reduced' : 'idle'
-        await prepared
         await update()
         return
       }
@@ -105,7 +126,6 @@ function useRoute() {
       const name = article ? artworkTransitionName(getArticleGenerativeArtwork(article.path)) : ''
       active = startArtworkTransition(name, async () => {
         // Keep the source's live canvas mounted until both page and article are ready.
-        await prepared
         await update()
       })
       void active.ready.catch(() => { /* Failed preparation must not break navigation. */ })
@@ -123,7 +143,7 @@ function useRoute() {
     recordPersonalPageView(document, window)
   }, [route])
   useEffect(() => installPortfolioActionTracking(document, window), [])
-  return { route, pending }
+  return { route, pending, failedNavigation, dismissFailure: () => setFailedNavigation(null) }
 }
 
 function useAppearance() {
@@ -148,7 +168,7 @@ export default function PersonalSite() {
 }
 
 function SitePages() {
-  const { route, pending } = useRoute()
+  const { route, pending, failedNavigation, dismissFailure } = useRoute()
   const company = documentOutreachCompany(document, location.pathname)
   const { dark, setDark } = useAppearance()
   const [menuOpen, setMenuOpen] = useState(false)
@@ -210,6 +230,11 @@ function SitePages() {
       <div className="header-end"><button className="appearance-toggle" aria-label={`Switch to ${dark ? 'light' : 'dark'} mode`} onClick={() => setDark(!dark)}><span aria-hidden="true">◐</span></button><button ref={menuButton} className="nav-toggle" aria-expanded={menuOpen} aria-controls="main-navigation" onClick={event => { focusMenuOnOpen.current = event.detail === 0; setMenuOpen(!menuOpen) }}>{menuOpen ? 'Close' : 'Menu'}<span aria-hidden="true">{menuOpen ? '−' : '+'}</span></button></div>
     </header>
     {pending && <p className="route-opening mono" role="status">Opening the page…</p>}
+    {failedNavigation && <aside className="route-opening route-retry mono" role="alert">
+      <span>That page couldn’t load.</span>
+      <a href={failedNavigation}>Try again<span aria-hidden="true"> ↗</span></a>
+      <button type="button" aria-label="Dismiss page loading message" onClick={dismissFailure}>×</button>
+    </aside>}
     <main ref={main} id="main-content" tabIndex={-1} key={route} aria-busy={pending || undefined}>
       <RouteBoundary homeRoute={isHome} onError={() => setLandingActive(false)}><Suspense fallback={<p className="reader-loading mono" role="status">Opening the page…</p>}>{isRecruiter && company ? <RecruiterLandingPage company={company} dark={isDark} onLandingActiveChange={setLandingActive} /> : project ? <ProjectPage project={project} dark={isDark} /> : study ? <CaseStudyPage study={study} dark={isDark} /> : article ? <ArticlePage slug={article.slug} /> : topic ? <TopicPage slug={topic.slug} /> : route === 'writing' ? <WritingIndex /> : route === 'resume' ? <ResumePage dark={isDark} /> : route === 'work' ? <WorkPage dark={isDark} /> : route === 'about' ? <AboutPage dark={isDark} /> : route === 'contact' ? <Contact dark={isDark} /> : route === '' || route === 'home' ? <Home dark={isDark} onLandingActiveChange={setLandingActive} /> : <NotFound />}</Suspense></RouteBoundary>
     </main>

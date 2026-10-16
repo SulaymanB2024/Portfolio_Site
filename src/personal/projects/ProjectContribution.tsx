@@ -20,10 +20,10 @@ export function ProjectContribution({ slug, compact = false }: { slug: string; c
 /** Actual product destinations, with no invented query result or saved application. */
 export function InternshipProductPath() {
   return <section className="project-product-path" aria-labelledby="internship-product-path-title">
-    <div className="product-path-intro"><span className="mono">The product in practice</span><h2 id="internship-product-path-title">Search, check, then plan.</h2></div>
+    <div className="product-path-intro"><span className="mono">The product in practice</span><h2 id="internship-product-path-title">Prepare, check, then plan.</h2></div>
     <ol>
-      <li><a href="https://internshipdeadlines.com/" target="_blank" rel="noreferrer"><h3>Find a role <span aria-hidden="true">↗</span></h3><p>Search by role, employer, and location.</p></a></li>
-      <li><a href="https://internshipdeadlines.com/internships/nvidia-e63b7085/nvidia-spring-2027-internships-developer-and-performance-technology-a24959af/" target="_blank" rel="noreferrer"><h3>Check its source <span aria-hidden="true">↗</span></h3><p>Inspect the dated NVIDIA record and its employer reference.</p></a></li>
+      <li><a href="https://internshipdeadlines.com/guides/first-internship-resume" target="_blank" rel="noreferrer"><h3>Prepare your résumé <span aria-hidden="true">↗</span></h3><p>Turn a posting’s tasks into evidence from your own experience.</p></a></li>
+      <li><a href="https://internshipdeadlines.com/methodology/" target="_blank" rel="noreferrer"><h3>Check the listing rules <span aria-hidden="true">↗</span></h3><p>See how employer checks, unconfirmed deadlines, and closures are handled.</p></a></li>
       <li><a href="https://internshipdeadlines.com/saved/" target="_blank" rel="noreferrer"><h3>Plan the application <span aria-hidden="true">↗</span></h3><p>Keep a personal stage, next action, target date, and notes.</p></a></li>
     </ol>
   </section>

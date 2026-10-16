@@ -13,51 +13,36 @@ export const caseNarratives: Record<string, WorkDocument> = {
       {
         id: 'study-section-1',
         label: 'Crawler & records',
-        title: 'The crawl and its retained record',
-        artifact: 'atlas',
+        title: 'A crawl with a reviewable record',
         body: [
-          'Atlas normalizes URLs, deduplicates requests, handles robots and sitemaps, and records a bounded crawl. A failed fetch stays distinguishable from a successfully fetched page with no extractable content. Run limits remain part of the context when reviewing coverage.',
-          'The Python console combines raw HTML extraction, optional browser rendering, link-graph calculations, and provider collection. Reviewers can filter local runs, compare them, inspect findings, and export reports. The shipped local workflow does not include distributed crawling, hosted delivery, rank tracking, or GA4 integration.'
+          'I built the Python crawler and local console around retained page state. URL normalization, deduplication, robots, and sitemaps feed a bounded run; SQLite keeps the records, and CSV/Markdown exports carry pages, links, findings, measurements, and collection events into review. A failed fetch remains distinct from a successful page with no extractable content.'
         ],
-        table: {
-          caption: 'Selected outputs documented by the implementation',
-          columns: ['Output', 'Retained material'],
-          rows: [
-            ['audit.sqlite', 'Runs, captured page state, and related audit records.'],
-            ['pages.csv / links.csv', 'Page observations and the links used by graph analysis.'],
-            ['issues.csv / scores.csv', 'Findings and scoring outputs for review.'],
-            ['run_events.csv / report.md', 'Collection events and the readable audit report.']
-          ],
-          note: 'These are implementation output names. The downloadable July example below is a separate retained source sample.'
-        }
       },
       {
         id: 'study-section-2',
         label: 'Versioned cache',
-        title: 'Reusing content without freezing its interpretation',
+        title: 'Cache bytes without freezing meaning',
         body: [
-          'Incremental crawling separates unchanged page bytes from unchanged extracted facts. A 304 can reuse valid cached artifacts; an unchanged 200 can skip parsing when the matching artifact is still valid.',
-          'The artifact identity includes the content hash, artifact type, and version token. Changing extractor, schema, or scoring versions forces parsing even if the page body has not changed. Otherwise a faster crawl could silently preserve an old interpretation.'
+          'An unchanged response can reuse cached work only while its artifact version is valid. Content hash, artifact type, and extractor/schema/scoring versions form the identity. A 304 can reuse a matching artifact; the same bytes must be parsed again when the interpretation changes.'
         ],
-        table: {
-          caption: 'Cases covered by the pinned incremental tests',
-          columns: ['Response', 'Artifact state', 'Parser action'],
-          rows: [
-            ['304 Not Modified', 'Matching cached artifact', 'Reuse the cached result.'],
-            ['200; same body hash', 'Matching artifact and version', 'Skip redundant parsing.'],
-            ['200; same body hash', 'Extractor, schema, or scoring version changed', 'Parse again for the new version.']
-          ]
-        },
         links: [{ label: 'Incremental-crawl tests', href: `${atlasRevision}/tests/test_incremental_crawl.py`, description: 'The inspected source cases behind this cache policy.' }]
       },
       {
         id: 'study-section-3',
         label: 'Source & render',
-        title: 'Source facts and effective page facts',
+        title: 'A 200 response is not the whole page',
         body: [
-          'The retained July 16 sample compares two successful responses. The static page contains ten quote cards; the JavaScript page contains no source quote cards but embeds ten runtime records. Both retain pagination addresses and lack a source canonical. That evidence calls for a render check before judging visible content.',
-          'A separate implementation test exercises an empty raw H1 and an incorrect raw canonical. Rendering supplies one effective H1 and a corrected canonical. Atlas keeps the raw-only findings while avoiding missing-H1, thin-content, and canonical-mismatch findings against the effective page.'
+          'The retained July 16, 2026 sample contains two successful responses with different evidence. Ten quote cards exist in static HTML; the JavaScript page embeds ten records but no source quote cards. The latter needs a render check before judging visible content. The implementation separately retains raw-only findings while using effective rendered facts for page conclusions.'
         ],
+        table: {
+          caption: 'Retained source captures · Quotes to Scrape',
+          columns: ['Capture', 'HTML quote cards', 'Embedded records'],
+          rows: [
+            ['Static HTML', '10', 'Not recorded'],
+            ['JavaScript source', '0', '10']
+          ],
+          note: 'Saved HTML from July 16, 2026; not a fresh crawl, rendered-page measurement, or search-performance result.'
+        },
         links: [
           {
             label: 'Rendered-page tests',
@@ -69,10 +54,9 @@ export const caseNarratives: Record<string, WorkDocument> = {
       {
         id: 'study-section-4',
         label: 'Findings & gaps',
-        title: 'Recording collection gaps beside the findings',
+        title: 'Keep missing evidence visible',
         body: [
-          'A source observation and a severity assignment are different records. The sample’s absent canonical is retained without an assigned defect or severity. Effective links feed the graph; missing depth remains unknown.',
-          'Optional measurement providers have explicit availability states, including skipped collection when a key is absent. A provider gap must not become a bad website score. The report needs the page state, rule version, and collection limits beside the recommendation so a reviewer can see which evidence was actually available.'
+          'A collection gap must not become a bad website score. Provider states record skipped or partial collection, while findings retain page state and rule versions. The sample’s absent canonical is an observation without an assigned severity. This separation makes a recommendation traceable to the evidence actually collected.'
         ],
         links: [
           {
@@ -85,9 +69,9 @@ export const caseNarratives: Record<string, WorkDocument> = {
       {
         id: 'study-section-5',
         label: 'Source material',
-        title: 'Code, captures, and the full study',
+        title: 'Code and retained captures',
         body: [
-          'The repository documents the local console and its current implementation. The July source captures provide a small reproducible reading example; they are not client traffic, a fresh browser-render measurement, or evidence of search gains.'
+          'The public repository documents the shipped local workflow. The pinned tests and July source sample establish inspectable behavior; hosted delivery, distributed crawling, rank tracking, and traffic gains are outside this case study.'
         ],
         links: [
           { label: 'Atlas implementation', href: `${atlasRevision}/README.md`, description: 'Pinned README covering collection, run comparison, exports, providers, and scope.' },
@@ -111,64 +95,49 @@ export const caseNarratives: Record<string, WorkDocument> = {
   },
   payrollpro: {
     role: 'Team lead · Three-person team',
-    deck: 'Confidential transfers and payroll batch state on Solana.',
-    summary:
-      'I led the three-person PayrollPro team at the June 2025 OnionDAO Hackathon. The prototype combined Token-2022 confidential-transfer mechanics, shared treasury authorization, and an inspectable payroll record.',
+    deck: 'Private salary payments with shared treasury approval.',
+    summary: 'I led a three-person team building confidential payroll on Solana, combining private transfer mechanics, shared treasury approval, and inspectable batch state.',
     chapters: [
       {
         id: 'study-section-1',
         label: 'Team build',
-        title: 'Three requirements in the payroll prototype',
+        title: 'Privacy, approval, and a payroll record',
         body: [
-          'The build brought together confidential payment amounts, multisig treasury control, and payroll state that could be reviewed. These are separate requirements: transfer privacy does not determine who authorizes a payment or how a scheduled batch can change.',
-          'Our teammate’s public recap describes private salary payments, Token-2022, multisig wallets, Solana Pay, and QR payouts. The retained code-derived record gives a narrower view of the batch logic and transfer entry points, including the unfinished paths.'
+          'The prototype separates three jobs: keep payment amounts confidential, require shared treasury approval, and retain an inspectable payroll batch. I coordinated the three-person build around those boundaries, using Token-2022 confidential-transfer mechanics and multisig treasury control.'
         ],
-        table: {
-          caption: 'The requirements combined in the team build',
-          columns: ['Concern', 'Implementation area'],
-          rows: [
-            ['Payment amounts', 'Token-2022 confidential-transfer mechanics.'],
-            ['Treasury authorization', 'Shared control through multisig wallets.'],
-            ['Payroll record', 'Batch identity, Merkle root, release timestamp, total amount, and frozen state.']
-          ]
-        }
       },
       {
         id: 'study-section-2',
         label: 'Batch operations',
-        title: 'The batch definition and its state guards',
+        title: 'The batch and its state guards',
         body: [
-          'Scheduling records five fields: batch ID, Merkle root, release timestamp, total amount, and frozen=true. An amendment can replace the root while frozen. Thaw requires the release time to pass before clearing that flag.',
-          'Cancellation emits the batch ID and amount. The retained record does not describe a refund or extra cancellation guard. These operations describe possible changes to batch state, rather than four executed transactions in chronological order.'
-        ],
-        artifact: 'payroll'
-      },
-      {
-        id: 'study-section-3',
-        label: 'Transfer paths',
-        title: 'Transfer instructions and the unfinished test',
-        body: [
-          'The program exposes confidential deposit, transfer, and withdrawal, plus reserve deposit and redemption. Batch scheduling defines the payroll state; those instructions are the separate value-transfer entry points.',
-          'The source marks confidential mint and burn behavior as simplified. The payroll test contains TODOs and does not build or submit end-to-end transactions. Those are concrete gaps in the prototype: the state summary is not a completed payout receipt or a production test result.'
+          'A scheduled batch records its ID, Merkle root, release timestamp, total amount, and frozen state. The important constraint is when that definition can change. These are code-derived operations, not a sequence of executed payment receipts.'
         ],
         table: {
-          caption: 'What the retained program record establishes',
-          columns: ['Area', 'Recorded behavior'],
+          caption: 'Recorded payroll operations · program revision 9d38b02',
+          columns: ['Operation', 'Recorded condition or effect'],
           rows: [
-            ['Confidential balances', 'Deposit, transfer, and withdrawal entry points.'],
-            ['Reserve balances', 'Deposit and redemption paths.'],
-            ['Mint / burn', 'Explicitly simplified confidential behavior.'],
-            ['Payroll test', 'Skeleton with TODOs; no end-to-end transaction submission.']
+            ['Schedule', 'Set the batch definition and frozen=true.'],
+            ['Amend', 'Replace the Merkle root while the batch is frozen.'],
+            ['Thaw', 'Require the release time to pass, then clear frozen.'],
+            ['Cancel', 'Emit the batch ID and amount; no refund is established.']
           ]
         }
       },
       {
+        id: 'study-section-3',
+        label: 'Transfer paths',
+        title: 'What the prototype establishes',
+        body: [
+          'The program exposes confidential deposit, transfer, and withdrawal, plus reserve deposit and redemption. Confidential mint and burn are simplified, and the payroll test remains a skeleton with end-to-end TODOs. The retained state record makes those implementation limits inspectable.'
+        ],
+      },
+      {
         id: 'study-section-4',
         label: 'Source material',
-        title: 'The prototype record and team recap',
+        title: 'The build and its public evidence',
         body: [
-          'The structured state record summarizes authored program revision 9d38b02 and its implementation limits. The full local application repository is not published through this packet. The cookbook fork is inspectable related reference code.',
-          'The résumé records first place, and the teammate recap corroborates a win. The retained packet does not include an organizer placement record.'
+          'Our teammate’s recap names the team and corroborates its win at the June 2025 OnionDAO Hackathon. The structured record summarizes program revision 9d38b02; the cookbook fork provides related Token-2022 reference code. The complete application and an organizer placement record are outside the retained public packet.'
         ],
         links: [
           {
@@ -194,76 +163,47 @@ export const caseNarratives: Record<string, WorkDocument> = {
   },
   viralbench: {
     role: 'Code audit · Evaluation design',
-    deck: 'An audit of a marketing agent and a proposed improvement harness.',
-    summary:
-      'I inspected ViralBench’s research, image-generation, preview, and draft workflow, then designed a separate trace, replay, and evaluation process for making bounded engineering changes.',
+    deck: 'Making a marketing agent’s drafts and engineering changes reviewable.',
+    summary: 'I audited ViralBench’s marketing agent and proposed a trace, replay, and independent-review harness for making its engineering changes verifiable.',
     chapters: [
       {
         id: 'study-section-1',
         label: 'Code audit',
-        title: 'What the standalone agent actually does',
+        title: 'The audit’s useful findings',
         body: [
-          'The audited agent has five tools, an 18-round limit, a six-call research budget, labeled visual references, and ten loaded reflection notes. The pinned standalone configuration uses one account and AUTO_QUEUE=false, leaving a draft for review.',
-          'I traced how information moves from research into image generation, preview, publishing checks, saved snapshots, and later reflection. The existing agent is ViralBench’s work. My contribution is the code audit and the proposed engineering harness.'
+          'I traced ViralBench’s research, image generation, preview, draft checks, saved snapshots, and reflection. The preview stops at six slides, yet a longer payload can pass checks. Snapshots omit the complete artifact trace, and caption-prefix matching can attach outcomes to the wrong draft. The existing agent is ViralBench’s work; my contribution is the audit and proposed harness.'
         ],
-        table: {
-          caption: 'Selected findings from the pinned code',
-          columns: ['Finding', 'Consequence'],
-          rows: [
-            ['Preview shows at most six slides', 'A longer final payload can contain slides the agent has not reviewed.'],
-            ['Publish checks are not tied to a full-preview receipt', 'Nonempty slides, caption, and usable URLs pass checks without proving the final payload was previewed.'],
-            ['Snapshot omits the complete tool and artifact trace', 'The retained state cannot fully reconstruct the decisions behind the post.'],
-            ['Metrics use caption-prefix matching', 'Without stable public post identity, outcomes can be assigned to the wrong draft.'],
-            ['Same-round actions use Promise.all', 'An image action cannot reliably consume a label created by a simultaneous dependent action.']
-          ]
-        }
       },
       {
         id: 'study-section-2',
         label: 'Preview gate',
-        title: 'A preview receipt tied to the final payload',
+        title: 'Tie review to the final payload',
         body: [
-          'One proposed experiment fixes the preview boundary: render every slide, issue a receipt tied to the exact final payload, and reject a changed or incompletely previewed payload. The experiment would retain the patch, regression case, manifest, and validation record.',
-          'A trace recorder would keep research responses, generated media, tool calls, preview results, and draft identity. Codex could use that evidence to propose a small patch. A separate evaluator and release controller would decide whether the change passes and can advance.'
+          'The proposed preview gate renders every slide and issues a receipt tied to the exact final payload. A changed or incompletely previewed draft must fail that gate. Trace recording would retain research responses, generated media, tool calls, and draft identity so a separate evaluator can judge a bounded engineering change.'
         ],
-        artifact: 'viral',
-        note: 'The improvement harness and preview receipt are an engineering design, not a deployed service or a measured experiment.'
       },
       {
         id: 'study-section-3',
         label: 'Replay cases',
-        title: 'Reproducing failures before a live trial',
+        title: 'Replay the failure before a live trial',
         body: [
-          'Replay would freeze the research responses, media, account state, render responses, and publishing mocks for a task. That makes it possible to inspect whether a patch handles the same conditions without spending another live post on a known failure.',
-          'The proposed fixtures include duplicate generated images, missing final slides, tool timeouts, absent draft-review URLs, delayed metrics, and ambiguous caption matching. Reflection notes would retain supporting and contrary evidence and an expiration condition, rather than accumulating ten unqualified narrative lessons.'
+          'Replay freezes the research, media, account state, renderer responses, and publishing mocks. Proposed cases cover an unreviewed seventh slide, a payload changed after preview, tool timeouts, missing draft-review URLs, and ambiguous post identity. A patch must handle the retained conditions before entering a controlled live trial.'
         ],
-        table: {
-          caption: 'Proposed replay checks',
-          columns: ['Fixture', 'Check'],
-          rows: [
-            ['Seven-slide final post', 'All seven slides must appear in the preview receipt.'],
-            ['Payload edited after preview', 'The prior receipt must not authorize the changed draft.'],
-            ['Tool timeout or missing draft URL', 'Retain the failure and prevent an unreviewable handoff.'],
-            ['Two posts with similar captions', 'Require stable post identity before attaching performance metrics.']
-          ]
-        }
       },
       {
         id: 'study-section-5',
         label: 'Live evaluation',
-        title: 'Separating replay correctness from external performance',
+        title: 'Evaluation outside the proposing agent',
         body: [
-          'Replay answers whether the system handles retained conditions correctly. A live trial answers a different question: whether a change improves external performance under current distribution conditions.',
-          'The proposed live design pairs baseline and treatment by account, publishing slot, and time, fixes measurement windows in advance, and retains raw outcomes. It treats outliers and distribution noise explicitly. No causal lift or completed trial is reported.',
-          'Codex’s editable scope would exclude raw traces, primary metrics, credentials, release rules, and publishing policy. The recorder, evaluator, and release controller keep their own responsibilities, so the engineering agent cannot rewrite the evidence used to judge its patch.'
+          'The live design pairs baseline and treatment by account, slot, and time, fixes measurement windows, and keeps raw outcomes with independent evaluation and release controls. The engineering agent’s scope excludes primary metrics, traces, credentials, and release policy. This is a published design; no completed live trial or causal lift is reported.'
         ]
       },
       {
         id: 'study-section-4',
         label: 'Source material',
-        title: 'The audit and the inspected revision',
+        title: 'The inspected revision and full proposal',
         body: [
-          'The full study contains eight audit findings, a proposed trace model, preview-gate experiment, replay design, and live-evaluation plan. Its handoff identifiers and thresholds are illustrative design examples.'
+          'The July 2026 engineering study contains eight audit findings, the trace model, preview-gate experiment, and replay/evaluation plan. The pinned agent source supports the audit; the handoff thresholds are illustrative design examples.'
         ],
         links: [
           {

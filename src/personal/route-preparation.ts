@@ -11,3 +11,19 @@ export function prepareRouteResources(
   // A failure cannot commit before the other resource is ready or failed.
   return Promise.allSettled([page, data])
 }
+
+/** Failed page code must leave the current page mounted; article data owns its retry UI. */
+export async function completeRoutePreparation(
+  resources: ReturnType<typeof prepareRouteResources>,
+  isCurrent: () => boolean,
+  commit: () => void | Promise<void>,
+  failed: () => void,
+) {
+  const [page] = await resources
+  if (!isCurrent()) return
+  if (page.status === 'rejected') {
+    failed()
+    return
+  }
+  await commit()
+}

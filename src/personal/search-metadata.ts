@@ -7,7 +7,7 @@ import type { ArticleSummary } from './editorial/types.ts'
 import { articleTopic, findReadingTopic, topicReadings } from './editorial/topics.ts'
 import { answerNotes, readerModifiedDate } from './editorial/answer-notes.ts'
 import { recruiterCopy } from './recruiter-copy.ts'
-import { workContributions } from './projects/work-curation.ts'
+import { featuredWorkSlugs, workContributions } from './projects/work-curation.ts'
 
 export const personId = `${siteOrigin}/#person`
 export const websiteId = `${siteOrigin}/#website`
@@ -141,7 +141,7 @@ export function searchMetadata(route: string): SearchMetadata {
   }
   if (collection) graph.push({
     '@type': 'ItemList', '@id': `${canonical}#list`,
-    itemListElement: (topic ? topicReadings(topic).map(({ article }) => ({ path: article.path, title: article.displayTitle || article.title })) : publicPages.filter(item => item.route.startsWith(`${normalized}/`))).map((item, index) => ({
+    itemListElement: (topic ? topicReadings(topic).map(({ article }) => ({ path: article.path, title: article.displayTitle || article.title })) : normalized === 'work' ? featuredWorkSlugs.map(slug => publicPages.find(item => item.route === `work/${slug}`)!) : publicPages.filter(item => item.route.startsWith(`${normalized}/`))).map((item, index) => ({
       '@type': 'ListItem', position: index + 1, url: `${siteOrigin}${item.path}`,
       name: item.title.replace(' — Sulayman Bowles', ''),
     })),

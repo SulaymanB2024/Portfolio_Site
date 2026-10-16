@@ -1,5 +1,6 @@
 import { PORTFOLIO_DITHER_GLSL } from './dither-kernel'
 import { STUDY_INK_GLSL } from './work-study-ink'
+import { scrollInkShader } from './landing/scroll-dither'
 
 export const WORK_STUDY_VERTEX = /* glsl */ `
   varying vec2 studyUv;
@@ -20,9 +21,15 @@ export const WORK_STUDY_FRAGMENT = /* glsl */ `
   uniform vec2 studyFlight;
   uniform vec3 studyResolution;
   uniform vec2 studyCssResolution;
+  uniform bool studyEngraved;
+  uniform vec2 studyPrintResolution;
+  uniform float studyGrain;
+  uniform float studyDark;
   varying vec2 studyUv;
+  #include <tonemapping_pars_fragment>
   ${PORTFOLIO_DITHER_GLSL}
   ${STUDY_INK_GLSL}
+  ${scrollInkShader}
   float inkTone(vec4 model) {
     return portfolioDisplayLuminance(model.rgb);
   }
@@ -32,6 +39,21 @@ export const WORK_STUDY_FRAGMENT = /* glsl */ `
     // needs neither ordered thresholds nor animated grain.
     if (model.a <= .0001 && studyFlight.y <= 0.0) {
       gl_FragColor = vec4(0.0);
+      return;
+    }
+    if (studyEngraved) {
+      // Use the approved opening helmet's actual screen and chrome coverage.
+      // Keep its print grid independent of the detailed, multisampled surface.
+      vec2 pixel = floor(studyUv * studyPrintResolution);
+      vec3 surface = ACESFilmicToneMapping(portfolioStraightColor(model));
+      // Helmet coverage averages to 1 - luminance squared. Normalize the
+      // project's HDR tone first so its darker materials keep their carving.
+      float luminance = sqrt(portfolioDisplayLuminance(surface));
+      float threshold = portfolioLiveThreshold(sculptureBayer(pixel), pixel, studyTime, studyGrain);
+      float density = 1.0 - step(threshold, luminance) * clamp(luminance, 0.0, 1.0);
+      density = mix(density, 1.0 - density, studyDark);
+      gl_FragColor = vec4(studyInk, model.a * density);
+      #include <colorspace_fragment>
       return;
     }
     float hover = 0.0;

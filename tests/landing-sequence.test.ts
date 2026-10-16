@@ -3,7 +3,7 @@ import assert from 'node:assert/strict'
 import { readFile } from 'node:fs/promises'
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js'
 import { Box3, Vector3 } from 'three'
-import { projects } from '../src/personal/content.ts'
+import { featuredProjects } from '../src/personal/content.ts'
 import { CHAPTERS, railProgress, sceneSequence, textSequence, advanceScrollMotion, requiredScene } from '../src/personal/landing/sequence.ts'
 import { thresholdMotion, sculpturePose, createScaleSampler, createApertureSampler, pacedTravel, cinematicShot, portalPose, cinematicPhase } from '../src/personal/landing/motion-curves.ts'
 import { scrollInkStrength } from '../src/personal/landing/scroll-dither.ts'
@@ -18,9 +18,9 @@ test('the homepage intro offers Work and About while all four chapters retain th
   assert.equal(CHAPTERS[0].href, '#/work')
   assert.equal(CHAPTERS[0].linkLabel, 'Work')
   assert.deepEqual(CHAPTERS[0].article, { label: 'About me', href: '#/about' })
-  assert.deepEqual(CHAPTERS.slice(1).map(chapter => chapter.href), projects.map(project => `#/work/${project.slug}`))
-  assert.deepEqual(CHAPTERS.slice(1).map(chapter => chapter.label), projects.map(project => project.name))
-  assert.equal(CHAPTERS[3].article?.href, '#/writing/who-owns-texas-toll-roads')
+  assert.deepEqual(CHAPTERS.slice(1).map(chapter => chapter.href), featuredProjects.map(project => `#/work/${project.slug}`))
+  assert.deepEqual(CHAPTERS.slice(1).map(chapter => chapter.label), featuredProjects.map(project => project.name))
+  assert.equal(CHAPTERS[3].article?.href, '#/writing/atlas-building-an-evidence-console')
   for (const chapter of CHAPTERS) {
     const asset = await readFile(new URL(`../public/${chapter.asset}`, import.meta.url))
     assert.equal(asset.readUInt32LE(0), 0x46546c67)
@@ -29,7 +29,9 @@ test('the homepage intro offers Work and About while all four chapters retain th
   for (const chapter of CHAPTERS) {
     const optimized = await readFile(new URL(`../public/${urls[chapter.assetId].split('?')[0]}`, import.meta.url))
     assert.equal(optimized.readUInt32LE(0), 0x46546c67)
-    assert.ok(optimized.length < (await readFile(new URL(`../public/${chapter.asset}`, import.meta.url))).length)
+    const authored = await readFile(new URL(`../public/${chapter.asset}`, import.meta.url))
+    if (chapter.asset.startsWith('portfolio-models/')) assert.deepEqual(optimized, authored)
+    else assert.ok(optimized.length < authored.length)
   }
 })
 

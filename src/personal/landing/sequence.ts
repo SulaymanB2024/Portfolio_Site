@@ -1,7 +1,7 @@
 import { TITLE_TIMING, MOBILE_TITLE_TIMING, easeBetween, thresholdMotion } from './motion-curves.ts'
 
 export interface LandingChapter {
-  id: 'helmet' | 'product' | 'sapien' | 'markets' | 'experiments'
+  id: 'helmet' | 'chegg' | 'sapien' | 'void' | 'experiments'
   lines: readonly string[]
   label: string
   category: string
@@ -15,9 +15,9 @@ export interface LandingChapter {
 /** The approved study's opening and four project chapters, in site order. */
 export const CHAPTERS: readonly LandingChapter[] = [
   { id: 'helmet', lines: ['The frontier', 'is all that', 'matters.'], label: 'Sulayman Bowles', category: '', asset: 'helmet-balanced.glb', assetId: 'helmet', href: '#/work', linkLabel: 'Work', article: { label: 'About me', href: '#/about' } },
-  { id: 'product', lines: ['Internship', 'Deadlines.'], label: 'InternshipDeadlines', category: 'Product', asset: 'work-studies/internshipdeadlines.glb', assetId: 'work-internshipdeadlines', href: '#/work/internshipdeadlines', linkLabel: 'Explore project' },
+  { id: 'chegg', lines: ['Chegg.'], label: 'Chegg', category: 'Product', asset: 'work-studies/investing-markets.glb', assetId: 'work-investing-markets', href: '#/work/chegg', linkLabel: 'Explore project' },
   { id: 'sapien', lines: ['Sapien.'], label: 'Sapien', category: 'AI', asset: 'work-studies/sapien.glb', assetId: 'work-sapien', href: '#/work/sapien', linkLabel: 'Explore project' },
-  { id: 'markets', lines: ['Investing', '& Markets.'], label: 'Investing & Markets', category: 'Markets', asset: 'work-studies/investing-markets.glb', assetId: 'work-investing-markets', href: '#/work/investing-markets', linkLabel: 'Explore project', article: { label: 'Who owns Texas toll roads?', href: '#/writing/who-owns-texas-toll-roads' } },
+  { id: 'void', lines: ['VOID.'], label: 'VOID', category: 'Strategy & engineering', asset: 'portfolio-models/work-atlas.glb', assetId: 'work-atlas', href: '#/work/void', linkLabel: 'Explore project', article: { label: 'Building Atlas', href: '#/writing/atlas-building-an-evidence-console' } },
   { id: 'experiments', lines: ['Experiments.'], label: 'Experiments', category: 'Experiments', asset: 'work-studies/miscellaneous.glb', assetId: 'work-miscellaneous', href: '#/work/miscellaneous', linkLabel: 'Explore project' },
 ]
 

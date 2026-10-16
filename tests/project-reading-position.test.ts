@@ -1,6 +1,6 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
-import { projectReaderSection, requestedProjectChapter, projectChapterHref } from '../src/personal/projects/project-reading-position.ts'
+import { projectReaderSection, requestedProjectChapter, projectChapterHref, projectIndexScroll } from '../src/personal/projects/project-reading-position.ts'
 
 const chapters = [
   { id: 'question', top: 900 },
@@ -15,10 +15,23 @@ test('a chapter reached below a wrapped sticky index stays current on a short sc
   assert.equal(projectReaderSection(chapters, 1464, 600, 110, 'question'), 'question')
 })
 
-test('mobile reading uses the viewport line without reserving space for a static index', () => {
+test('a static reading index uses the viewport line without reserving sticky space', () => {
   assert.equal(projectReaderSection(chapters, 1479, 750, 0, 'question'), 'question')
   assert.equal(projectReaderSection(chapters, 1480, 750, 0, 'question'), 'system')
   assert.equal(projectReaderSection(chapters, 1520, 400, 0, 'question'), 'system')
+})
+
+test('phone chapter arrivals respect the sticky index on short screens', () => {
+  assert.equal(projectReaderSection(chapters, 1509, 400, 66, 'question'), 'system')
+  assert.equal(projectReaderSection(chapters, 1508, 400, 66, 'question'), 'question')
+})
+
+test('a narrow index reveals later and earlier chapters while preserving visible links', () => {
+  assert.equal(projectIndexScroll(0, 350, 340, 110, 700), 116)
+  assert.equal(projectIndexScroll(116, 350, 340, 110, 700), 116)
+  assert.equal(projectIndexScroll(116, 350, 12, 90, 700), 0)
+  assert.equal(projectIndexScroll(0, 350, 610, 90, 700), 350)
+  assert.equal(projectIndexScroll(0, 1000, 610, 90, 700), 0)
 })
 
 test('backward navigation and measured reflow replace stale chapter state', () => {
