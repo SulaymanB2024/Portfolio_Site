@@ -1,5 +1,6 @@
 .writing-page .writing-header h1 { font-size: clamp(44px, 5vw, 64px); margin-bottom: 18px; }
 .writing-page .writing-introduction { font: 18px/1.6 var(--editorial-serif); max-width: 57ch; }
+.personal-site.personal-site[data-section][data-appearance] .writing-featured-label { margin: 0 0 20px; font: 600 13px/1.6 var(--type-interface); letter-spacing: 0; }
 .writing-selected { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 64px; }
 .writing-selected .writing-story { min-width: 0; }
 .writing-story[data-layout='lead'] { grid-column: 1 / -1; grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr); align-items: start; gap: 40px; padding: 50px 0 64px; border-bottom: 1px solid var(--ink); }
@@ -36,25 +37,54 @@
   .writing-story[data-layout='lead'] .writing-deck { font-size: 19px; }
   .writing-story[data-layout='report'] { grid-template-columns: 200px minmax(0, 1fr); gap: 40px; }
 }
-@media (max-width: 680px) {
+@media screen and (max-width: 680px) {
   .writing-selected { display: block; }
-  .writing-story[data-layout='lead'], .writing-story[data-layout='selected'], .writing-story[data-layout='report'] { display: flex; flex-direction: column; align-items: stretch; gap: 20px; padding: 32px 0; }
-  .writing-story[data-layout='lead'] h2 { max-width: 13ch; font-size: clamp(46px, 12vw, 68px); line-height: 1.03; }
-  .writing-story[data-layout='lead'] .writing-deck { font: 18px/1.6 var(--editorial-serif); }
-  .writing-story[data-layout='lead'] .writing-art { width: min(100%, 330px); }
-  .writing-story[data-layout='selected'] h2, .writing-story[data-layout='report'] h2 { font-size: 32px; }
-  .writing-story[data-layout='selected'] .writing-art { order: 3; width: 210px; margin: 0; }
-  .writing-story[data-layout='report'] .writing-art { width: 230px; }
   .writing-secondary { margin-top: 44px; }
-  .writing-story[data-layout='compact'] { display: grid; grid-template-columns: minmax(0, 1fr) 70px; gap: 20px; padding: 24px 0; }
-  .writing-story[data-layout='compact'] .writing-story-copy { display: block; }
-  .writing-story[data-layout='compact'] h2 { font-size: 25px; margin-bottom: 10px; }
-  .writing-story[data-layout='compact'] .writing-art { width: 70px; }
-  .writing-story[data-layout='compact'] .writing-story-action { margin-left: 0; }
-  .writing-story[data-layout='note'] { grid-template-columns: minmax(0, 1fr) 70px; gap: 20px; }
-  .writing-story[data-layout='note'] .writing-story-copy { display: block; }
-  .writing-story[data-layout='note'] .writing-art { width: 70px; }
-  .writing-story[data-layout='note'] h2 { font-size: 21px; }
-  .writing-story[data-layout='note'] .writing-deck { margin-top: 8px; }
-  .writing-story[data-layout='note'] .writing-story-meta { justify-content: start; margin-top: 10px; }
+
+  /* Keep the title's complete measure. Only the summary shares its row with
+     the smaller artwork; the same link and title/deck IDs retain return focus. */
+  .personal-site.personal-site[data-section][data-appearance] .writing-page .writing-gallery .writing-story[data-layout] {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 104px;
+    align-items: start;
+    gap: 12px 18px;
+    padding: 28px 0;
+  }
+  .personal-site.personal-site[data-section][data-appearance] .writing-page .writing-gallery .writing-story[data-layout] .writing-story-copy { display: contents; }
+  .personal-site.personal-site[data-section][data-appearance] .writing-page .writing-gallery .writing-story[data-layout] .writing-story-topic {
+    display: block;
+    grid-column: 1 / -1;
+    grid-row: 1;
+    margin: 0;
+  }
+  .personal-site.personal-site[data-section][data-appearance] .writing-page .writing-gallery .writing-story[data-layout] h2 {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    max-width: 100%;
+    max-inline-size: 100%;
+    margin: 0 0 4px;
+  }
+  .personal-site.personal-site[data-section][data-appearance] .writing-page .writing-gallery .writing-story[data-layout] .writing-deck {
+    grid-column: 1;
+    grid-row: 3;
+    max-width: none;
+    margin: 0;
+    font: 400 18px/1.55 var(--type-reading);
+  }
+  .personal-site.personal-site[data-section][data-appearance] .writing-page .writing-gallery .writing-story[data-layout] .writing-art {
+    grid-column: 2;
+    grid-row: 3;
+    width: 104px;
+    max-width: 104px;
+    align-self: start;
+    margin: 0;
+  }
+  .personal-site.personal-site[data-section][data-appearance] .writing-page .writing-gallery .writing-story[data-layout] .writing-story-meta {
+    grid-column: 1 / -1;
+    grid-row: 4;
+    justify-content: start;
+    gap: 8px 20px;
+    margin-top: 4px;
+  }
+  .personal-site.personal-site[data-section][data-appearance] .writing-page .writing-gallery .writing-story[data-layout] .writing-story-action { margin-left: 0; }
 }

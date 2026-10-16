@@ -27,7 +27,8 @@
 :root {
   --type-display: 'Syne', Arial, Helvetica, sans-serif;
   --type-reading: 'Newsreader', Georgia, 'Times New Roman', serif;
-  --type-interface: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --type-interface: var(--type-display);
+  --type-code: 'SFMono-Regular', Consolas, 'Liberation Mono', monospace;
   --type-display-tracking: -.04em;
   --type-heading-tracking: -.02em;
 }
@@ -41,13 +42,28 @@
     font-family: var(--type-reading);
     font-optical-sizing: auto;
   }
+  .static-site.static-site {
+    --editorial-serif: var(--type-reading);
+    --editorial-sans: var(--type-interface);
+    --editorial-mono: var(--type-interface);
+  }
   .personal-site.personal-site[data-section][data-appearance] :is(.article-page, .writing-page, .topic-page) {
     --editorial-serif: var(--type-reading);
     --editorial-sans: var(--type-interface);
+    --editorial-mono: var(--type-interface);
   }
-  .personal-site.personal-site[data-section][data-appearance] .cv-page { --cv-serif: var(--type-reading); }
+  /* Legacy mono tokens are used by metadata and controls. Literal source code
+     has a separate role below, while the printed résumé keeps its own fonts. */
+  .personal-site.personal-site[data-section][data-appearance] .cv-page { --cv-serif: var(--type-reading); --cv-mono: var(--type-interface); }
+  .personal-site.personal-site[data-section][data-appearance] :is(.case-study, .study-index) { --study-mono: var(--type-interface); }
+  .personal-site.personal-site[data-section][data-appearance] .performance-programs { --performance-mono: var(--type-interface); }
+  .personal-site.personal-site[data-section][data-appearance] .about-chess-game { --chess-notation: var(--type-interface); }
   .static-site.static-site :is(h1, h2, h3) { font-family: var(--type-display); font-weight: 600; letter-spacing: -.035em; }
   .static-site.static-site header, .static-site.static-site nav { font: 400 13px/1.6 var(--type-interface); }
+  .static-site.static-site :is(time, figcaption, .study-search-label, .study-search small, .study-index,
+    .study-schedule-wide svg, .study-schedule-narrow svg, .study-schedule-period text,
+    .study-axis-label, .study-schedule-finish text) { font-family: var(--type-interface); }
+  .static-site.static-site .public-writing-story h2 { font-family: var(--type-reading); font-weight: 400; }
   .personal-site.personal-site[data-section][data-appearance] :is(h1, h2, h3, h4) {
     font-family: var(--type-display);
     font-weight: 600;
@@ -66,7 +82,7 @@
   .personal-site[data-section][data-appearance] .personal-header .identity .identity-name {
     display: grid;
     font: 600 17px/1.08 var(--type-display);
-    letter-spacing: .045em;
+    letter-spacing: .025em;
     text-transform: uppercase;
     white-space: nowrap;
   }
@@ -75,7 +91,7 @@
   .personal-site.personal-site[data-section][data-appearance] .personal-header :is(nav a, .nav-toggle) {
     font: 600 12px/1.4 var(--type-display);
     font-synthesis: none;
-    letter-spacing: .065em;
+    letter-spacing: .025em;
     text-transform: uppercase;
   }
   .personal-site.personal-site[data-section][data-appearance] .personal-header nav a {
@@ -84,6 +100,27 @@
     transition: opacity 160ms ease;
   }
   .personal-site.personal-site[data-section][data-appearance] .personal-header nav a:is(:hover, :focus-visible, [aria-current='page']) { opacity: 1; }
+
+  .personal-site.personal-site[data-section][data-appearance] :is(button, input, select, summary, label, kbd, time,
+    .art-status, .work-filters, .personal-footer, .work-study-tags, .work-study-failure, .work-study-toolbar > span,
+    .project-index a, .story-index > a, .story-note, .study-context-link, .reader-table-note,
+    .article-citation, .source-publisher, .reader-disclosure dt, .reader-disclosure > a,
+    .reader-metrics dt, .reader-metrics p, .reader-endnote nav, .article-table-wrap th,
+    .writing-story-topic, .writing-result-count, .reading-path-action, .reading-duration, .reading-step,
+    .about-reveal-top, .about-personal-detail > a, .bass-technique-label, .bass-string-number,
+    .bass-solo-choice, .bass-solo-composer, .bass-recording-performer, .music-manuscript-heading,
+    .music-measure-beats, .about-interaction-note, .about-phrase-index, .chess-worlds, .chess-world-line,
+    .chess-thinking, .chess-search-axis, .landing-loading, .landing-fallback-nav) {
+    font-family: var(--type-interface);
+    letter-spacing: 0;
+  }
+  .personal-site.personal-site[data-section][data-appearance] :is(figcaption,
+    .article-original-figures span, .article-original-figures dt, .article-original-figures dd,
+    .article-original-figures small, .viralbench-architecture__rail, .about-chess-board > button > small,
+    .composer-key > small, .chess-thinking text, .study-art text) {
+    font-family: var(--type-interface);
+    letter-spacing: 0;
+  }
 
   /* Shared action letterforms tie navigation back to the name and display.
      A short arrow carries the cue; an underline appears on interaction. */
@@ -286,8 +323,8 @@
     letter-spacing: 0;
   }
   .personal-site[data-section][data-appearance] .cv-introduction h1 { font-size: clamp(40px, 5.3vw, 66px); line-height: 1.1; }
-  .personal-site .reader-prose :is(pre, code),
-  .personal-site .article-citation { font-family: var(--editorial-mono, 'Courier New', monospace); }
+  .static-site.static-site :is(pre, code),
+  .personal-site.personal-site[data-section][data-appearance] :is(pre, code) { font-family: var(--type-code); }
 
   /* Story titles have their own reading voice; the mastheads retain Syne. */
   .personal-site.personal-site[data-section][data-appearance] :is(.journal-essay h3, .writing-story h2, .story-link h2, .reading-paths h2, .topic-readings h2) {
@@ -382,6 +419,7 @@
   .print-room .print-room-copy h2 { font-family: var(--type-reading); font-weight: 400; letter-spacing: -.025em; }
   .print-room .print-room-copy p { font: 400 18px/1.55 var(--type-reading); }
   .print-room .print-room-saved { font-family: var(--type-interface); }
+  .print-room.print-room :is(button, .print-room-mono) { font-family: var(--type-interface); letter-spacing: 0; }
 }
 
 @media screen and (max-width: 760px) {

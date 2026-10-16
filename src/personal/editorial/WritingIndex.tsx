@@ -11,7 +11,7 @@ import './writing-craft.css'
 import { artworkTransitionName } from './artwork-continuity'
 import { siteCopy, withWritingCopy } from '../site-copy'
 import '../copy.css'
-import { writingSelection } from './writing-selection'
+import { newestWritingFirst, writingSelection } from './writing-selection'
 import { DestinationCue } from '../DestinationLink'
 import './writing-selection.css'
 import { ReadingPaths } from './TopicPage'
@@ -59,7 +59,7 @@ export default function WritingIndex() {
     })
     return () => { cancelAnimationFrame(frame); window.removeEventListener('hashchange', change) }
   }, [])
-  const visible = useMemo(() => filterWritingArticles(articles, { category, query }), [category, query])
+  const visible = useMemo(() => newestWritingFirst(filterWritingArticles(articles, { category, query })), [category, query])
   const selection = writingSelection(visible)
   const searching = category !== 'All' || Boolean(query.trim())
   function story(article: ArticleSummary, layout: 'lead' | 'selected' | 'report' | 'compact' | 'note', index: number) {
@@ -82,7 +82,7 @@ export default function WritingIndex() {
       </div></details></div>
     </header>
     {searching ? <div className="writing-gallery writing-results">{visible.map((article, index) => story(article, 'compact', index))}</div> : <>
-      <div className="writing-gallery writing-selected">{selection.selected.map((article, index) => story(article, index === 0 ? 'lead' : index === 3 || index === 4 ? 'report' : 'selected', index))}</div>
+      <section className="writing-featured" aria-labelledby="writing-featured"><h2 id="writing-featured" className="writing-featured-label">Featured</h2><div className="writing-gallery writing-selected">{selection.selected.map((article, index) => story(article, index === 0 ? 'lead' : index === 3 || index === 4 ? 'report' : 'selected', index))}</div></section>
       <section className="writing-secondary" aria-labelledby="writing-paths"><h2 id="writing-paths">Reading paths</h2><ReadingPaths interactive /></section>
       {selection.more.length > 0 && <section className="writing-secondary" aria-labelledby="writing-more"><h2 id="writing-more">Further reading</h2><div className="writing-gallery">{selection.more.map((article, index) => story(article, 'compact', index + 7))}</div></section>}
       {selection.notes.length > 0 && <section className="writing-secondary writing-notes" aria-labelledby="writing-notes"><h2 id="writing-notes">Notes</h2><div className="writing-gallery">{selection.notes.map((article, index) => story(article, 'note', index + 16))}</div></section>}

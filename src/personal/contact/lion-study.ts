@@ -46,7 +46,8 @@ export function createLionStudy(source: THREE.Object3D, sampleCount = 42000) {
   const field = new THREE.Uniform(rest)
   const pixelRatio = new THREE.Uniform(1)
   const time = new THREE.Uniform(0)
-  let phase = 0
+  // Begin with a short intact opening; retain the full holds on later loops.
+  let phase = 4 - .2
   let playing = true
   let target = rest
   let seed = 7183

@@ -216,18 +216,13 @@ function SitePages() {
   }
   const isRecruiter = route === 'recruiter' && Boolean(company)
   const isHome = route === '' || route === 'home' || isRecruiter
-  const compactNav = isHome && landingActive
   return <div className={`personal-site ${project ? 'project-site' : ''} ${isHome ? 'home-site' : ''} ${isRecruiter ? 'recruiter-site' : ''}`} data-appearance={isDark ? 'dark' : 'light'} data-section={section} data-landing-active={isHome ? String(landingActive) : undefined}>
     {isHome && <div className="page-wash" aria-hidden="true" />}
     <a className="skip-link" href="#main-content" onClick={e => { e.preventDefault(); document.getElementById('main-content')?.focus() }}>Skip to content</a>
-    <header className="personal-header" data-nav-compact={compactNav}>
+    <header className="personal-header">
       <a href={company ? '/' : '#/'} className="identity" aria-label="Sulayman Bowles — home" onClick={event => { if (company || !isHome || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return; event.preventDefault(); main.current?.focus({ preventScroll: true }); window.scrollTo({ top: 0, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth' }) }}><BrandIdentity /></a>
-      <nav id="main-navigation" aria-label="Main navigation" className={menuOpen ? 'is-open' : ''}>{navItems.map(([item, slug]) => {
-        const extra = slug !== 'about' && slug !== 'writing'
-        const collapsed = compactNav && !menuOpen && extra
-        return <span key={slug} className={`nav-slot${extra ? ' nav-extra' : ''}`} inert={collapsed}><a href={company ? `/${slug}` : `#/${slug}`} tabIndex={collapsed ? -1 : undefined} aria-current={section === slug ? 'page' : undefined} onClick={event => { if (!activateMenuLink(event, () => setMenuOpen(false))) return; if (menuOpen && route === slug) requestAnimationFrame(() => menuButton.current?.focus({ preventScroll: true })) }}>{item}</a></span>
-      })}</nav>
-      <div className="header-end"><button className="appearance-toggle" aria-label={`Switch to ${dark ? 'light' : 'dark'} mode`} onClick={() => setDark(!dark)}><span aria-hidden="true">◐</span></button><button ref={menuButton} className="nav-toggle" aria-expanded={menuOpen} aria-controls="main-navigation" onClick={event => { focusMenuOnOpen.current = event.detail === 0; setMenuOpen(!menuOpen) }}>{menuOpen ? 'Close' : 'Menu'}<span aria-hidden="true">{menuOpen ? '−' : '+'}</span></button></div>
+      <nav id="main-navigation" aria-label="Main navigation" className={menuOpen ? 'is-open' : ''}>{navItems.map(([item, slug]) => <span key={slug} className="nav-slot"><a href={company ? `/${slug}` : `#/${slug}`} aria-current={section === slug ? 'page' : undefined} onClick={event => { if (!activateMenuLink(event, () => setMenuOpen(false))) return; if (menuOpen && route === slug) requestAnimationFrame(() => menuButton.current?.focus({ preventScroll: true })) }}>{item}</a></span>)}</nav>
+      <div className="header-end"><button className="appearance-toggle" aria-label={`Switch to ${dark ? 'light' : 'dark'} mode`} onClick={() => setDark(!dark)}><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 3a9 9 0 0 0 0 18Z" fill="currentColor" /><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" strokeWidth="1.5" /></svg></button><button ref={menuButton} className="nav-toggle" aria-expanded={menuOpen} aria-controls="main-navigation" onClick={event => { focusMenuOnOpen.current = event.detail === 0; setMenuOpen(!menuOpen) }}>{menuOpen ? 'Close' : 'Menu'}<span aria-hidden="true">{menuOpen ? '−' : '+'}</span></button></div>
     </header>
     {pending && <p className="route-opening mono" role="status">Opening the page…</p>}
     {failedNavigation && <aside className="route-opening route-retry mono" role="alert">

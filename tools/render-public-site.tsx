@@ -57,7 +57,7 @@ function Body({ route }: { route: string }) {
   if (route.startsWith('writing/') && article) return <PublicArticle article={article} />
   if (route === 'writing') {
     const selection = writingSelection(catalog)
-    return <><p>{siteCopy.writing.introduction}</p><PublicWritingStories articles={selection.selected} eagerFirst /><h2>Reading paths</h2><ReadingPaths /><h2>Further reading</h2><PublicWritingStories articles={selection.more} /><h2>Notes</h2><PublicWritingStories articles={selection.notes} /></>
+    return <><p>{siteCopy.writing.introduction}</p><h2>Featured</h2><PublicWritingStories articles={selection.selected} eagerFirst /><h2>Reading paths</h2><ReadingPaths /><h2>Further reading</h2><PublicWritingStories articles={selection.more} /><h2>Notes</h2><PublicWritingStories articles={selection.notes} /></>
   }
   if (route === 'work') {
     const workPages = publicPages.filter(page => page.route.startsWith('work/'))

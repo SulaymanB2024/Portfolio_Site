@@ -93,9 +93,10 @@ test('autoplay repeatedly dissolves and reforms, while pause, manual input and r
   }
   assert.ok(Math.max(...samples) > .87 && Math.max(...samples) <= .880001)
   assert.ok(Math.min(...samples) >= 0 && Math.min(...samples) < .01)
-  assert.equal(samples[90], 0) // Complete form, without an invisible grain draw.
+  assert.equal(samples[2], 0) // Complete form, without an invisible grain draw.
+  assert.ok(samples[12] > 0, 'the initial form starts releasing after its 0.2-second hold')
   assert.ok(samples[400] > samples[200])
-  assert.equal(samples[540], .88)
+  assert.equal(samples[420], .88)
   assert.ok(samples[850] < samples[650])
   assert.equal(samples[1050], 0)
   study.setPlaying(false)
