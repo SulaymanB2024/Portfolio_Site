@@ -7,7 +7,8 @@ import { reservedOutreachSlugs } from '../lib/outreach/reserved.ts'
 import { createSyncHandler, outreachSpreadsheetId, validSyncSignature } from '../lib/outreach/sync.ts'
 import { createOutreachHomeHandler, outreachDocument } from '../lib/outreach/home.ts'
 import { approvedOutreachSlug, documentOutreachCompany } from '../src/personal/outreach-context.ts'
-import { recruiterIntroduction, recruiterMetadata, recruiterOpening, renderRecruiterDocument } from '../src/personal/recruiter/landing.ts'
+import { recruiterMetadata, recruiterOpening, renderRecruiterDocument } from '../src/personal/recruiter/landing.ts'
+import { recruiterCompanyProfile } from '../src/personal/recruiter/company-profiles.ts'
 import { withLandingOpening } from '../src/personal/landing/opening-copy.ts'
 import { CHAPTERS } from '../src/personal/landing/sequence.ts'
 import { headingRows } from '../src/personal/landing/heading-typography.ts'
@@ -108,7 +109,7 @@ test('runtime registry activates new company documents without changing the appl
   const html = await response.text()
   assert.equal(html, outreachDocument(homepage, 'base-power', 'Base Power Company'))
   assert(html.includes('<h1>Generic opening</h1>'))
-  assert(html.includes(escapeMetadata(recruiterIntroduction)))
+  assert(html.includes(escapeMetadata(recruiterCompanyProfile('base-power','Base Power Company').lines.join(' '))))
   assert(html.includes('name="outreach-company" content="base-power"'))
   assert(!html.includes('Generic introduction'))
   assert(html.includes('Original profile, work and writing'))
@@ -146,19 +147,21 @@ test('public company context needs a name and exact arrival path; query paramete
   assert.equal(documentOutreachCompany(document('bcg', 'private@example.com'), '/bcg'), undefined)
 })
 
-test('all company arrivals keep the original opening and ordinary homepage with the requested biography', () => {
+test('all company arrivals personalize the original introduction and retain the original headline and continuation', () => {
   const companies = JSON.parse(readFileSync(new URL('../tools/outreach/recruiter-companies.json',import.meta.url),'utf8')) as {slug:string;name:string}[]
   assert.equal(companies.length,80)
   for (const company of companies) {
     const opening=recruiterOpening(company)
     assert.deepEqual(headingRows(withLandingOpening(opening)[0]),headingRows(CHAPTERS[0]))
-    assert.equal(opening.introduction,recruiterIntroduction)
+    const selected=recruiterCompanyProfile(company.slug,company.name).lines.join(' ')
+    assert.equal(opening.introduction,selected)
     assert.equal(opening.category,'')
     assert.equal(opening.href,'/resume')
     assert.equal(opening.linkLabel,'Résumé')
     assert.deepEqual(opening.article,{label:'Explore the site',href:'/'})
     const html=renderRecruiterDocument(homepage,company)
-    assert.equal(html,homepage.replace('Generic introduction',escapeMetadata(recruiterIntroduction)))
+    assert.equal(html,homepage.replace('Generic introduction',escapeMetadata(selected)))
+    assert.equal(recruiterMetadata(company).description,selected)
     assert(html.includes('<header>Standard navigation</header>'))
     assert(html.includes('Original profile, work and writing'))
     assert(html.includes('<footer>Standard footer</footer>'))
