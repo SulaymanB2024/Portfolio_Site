@@ -22,6 +22,10 @@ Actual native visual delivery is [page-recovery-preview-20261016](page-recovery-
 
 The task-owned built preview on port 4217 owns PID 77973 and expires **October 16 at 10:44:56 PM EDT**. Its wrapper only stops its own child process group. Committed native screenshots remain reviewable beyond that temporary lease. Next boundary: final-head MR checks and human review/merge through an approval-capable surface; no further artwork or redesign work is required for this bug.
 
+### MR delivery
+
+Normally pushed the integrated repair, five regression tests and native screenshots as **98c1fb6697c676a3b96a4abaab3dd3c43eeb8fd1** to the existing [MR #100](https://github.com/SulaymanB2024/Portfolio_Site/pull/100). GitHub's [Generated output integrity verification](https://github.com/SulaymanB2024/Portfolio_Site/actions/runs/38921287138) passes in 1m5s; Vercel deployment and preview-comment checks also pass on that code commit. The MR description now covers the complete final sculpture/curation/recovery scope and pins the actual native visuals to their source commits. This documentation-only follow-up records the delivered result; final-head status is retained in .cache/page-recovery-r11/mr-delivery.json. The working preview is healthy. Remaining boundary is review/merge under the previously rejected approval policy; no merge or production publication occurred.
+
 ## Revision-10 result — local preview recovery (October 14)
 
 The user reported blank/error pages at http://127.0.0.1:4217/work#/. The existing in-app tab displayed the route error boundary. The task’s previous one-hour preview lease had stopped its own server at 9:52 PM EDT; port4217 had no listener, so uncached page modules could no longer load. The retained build and application source were unchanged at 4be352992feba6282323c16f762f4cdae6060d6a. No application defect was reproduced with that same build after restoring service.
