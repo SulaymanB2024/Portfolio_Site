@@ -75,9 +75,9 @@ test('previously withdrawn manuscripts keep their own canonical response and boo
   }
 })
 
-test('the curated collection leads with Shopkeeper and separates substantial essays from implementation notes', () => {
+test('the curated collection retains its membership in date order and separates implementation notes', () => {
   const selection = writingSelection(catalog)
-  assert.equal(selection.selected[0].slug, 'the-first-ai-managers')
+  assert.equal(selection.selected[0].slug, 'jane-street-exact-search-solver-verification')
   assert.equal(selection.selected.length, 7)
   assert(!selection.selected.some(article => article.slug === 'canonical-identity-personal-seo'))
   const all = [...selection.selected, ...selection.more, ...selection.notes]
