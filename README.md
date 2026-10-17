@@ -1,6 +1,6 @@
 # Sulayman Bowles — personal site
 
-The source for [sulayman-bowles.dev](https://sulayman-bowles.dev): selected work, 29 sourced essays, four reading paths, a current web résumé, personal interests, and interactive 3D and generative studies.
+The source for [sulayman-bowles.dev](https://sulayman-bowles.dev): selected work, 85 sourced essays, seven reading paths, a current web résumé, personal interests, and interactive 3D and generative studies.
 
 ## Development
 
@@ -16,9 +16,9 @@ npm run verify:release
 npm run preview
 ```
 
-`build` creates the Vite application and 46 route-specific canonical HTML documents using the same public copy, article records and reading guides. Each document has readable initial content, canonical metadata, social metadata, and structured data. React mounts the interactive site; hash navigation and historical article bookmarks remain supported. `dist/sitemap.xml` uses the canonical document paths. Unknown paths return the site's 404 with a real HTTP 404 status. The original local shader and model collection are separate entry points.
+`build` creates the Vite application and 107 route-specific canonical HTML documents using the same public copy, article records and reading guides. Each document has readable initial content, canonical metadata, social metadata, and structured data. React mounts the interactive site; hash navigation and historical article bookmarks remain supported. `dist/sitemap.xml` uses the canonical document paths. Unknown paths return the site's 404 with a real HTTP 404 status. The original local shader and model collection are separate entry points.
 
-Reader guides answer a concrete question and link to existing evidence sections. They are maintained separately from the frozen manuscript revision records; the original source cutoffs, publication dates, quantities and assets remain protected. Topic collections cover all 29 essays and use the same links in the initial HTML and interactive reader.
+Reader guides answer a concrete question and link to existing evidence sections. They are maintained separately from the frozen manuscript revision records; the original source cutoffs, publication dates, quantities and assets remain protected. Topic collections cover all 85 essays and use the same links in the initial HTML and interactive reader.
 
 ## Release
 

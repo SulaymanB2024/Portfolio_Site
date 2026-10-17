@@ -8,6 +8,7 @@ import { articleTopic, findReadingTopic, topicReadings } from './editorial/topic
 import { answerNotes, readerModifiedDate } from './editorial/answer-notes.ts'
 import { recruiterCopy } from './recruiter-copy.ts'
 import { featuredWorkSlugs, workContributions } from './projects/work-curation.ts'
+import { researchDatasets } from './editorial/research-datasets.ts'
 
 export const personId = `${siteOrigin}/#person`
 export const websiteId = `${siteOrigin}/#website`
@@ -83,7 +84,10 @@ export function searchMetadata(route: string): SearchMetadata {
   const profile = normalized === 'about' || normalized === 'resume'
   const topic = normalized.startsWith('topics/') ? findReadingTopic(normalized.slice('topics/'.length)) : undefined
   const collection = normalized === 'writing' || normalized === 'work' || Boolean(topic)
+  const parent = article ? articleTopic(article.slug) : undefined
+  const datasets = article ? researchDatasets[article.slug] || [] : []
   const webpageId = `${canonical}#webpage`
+  const breadcrumbId = `${canonical}#breadcrumb`
   const imageId = `${image.url}#image`
   const graph: SchemaNode[] = [
     {
@@ -105,6 +109,7 @@ export function searchMetadata(route: string): SearchMetadata {
       '@id': webpageId, url: canonical, name: page.title,
       description, inLanguage: 'en-US', isPartOf: reference(websiteId),
       primaryImageOfPage: reference(imageId),
+      ...(normalized ? { breadcrumb: reference(breadcrumbId) } : {}),
       ...(profile ? { mainEntity: reference(personId) } : {}),
       ...(article ? { mainEntity: reference(`${canonical}#article`) } : {}),
       ...(collection ? { mainEntity: reference(`${canonical}#list`) } : {}),
@@ -116,8 +121,22 @@ export function searchMetadata(route: string): SearchMetadata {
       ...(size ? { width: size[0], height: size[1] } : {}),
     },
   ]
+  // Follow the site's visible navigation and reading paths, not URL segments:
+  // older /markets and /research addresses still belong to Writing.
+  if (normalized) {
+    const trail = [{ path: '/', name: 'Sulayman Bowles' }]
+    if (normalized.startsWith('work/')) trail.push({ path: '/work', name: 'Work' })
+    if (article || topic) trail.push({ path: '/writing', name: 'Writing' })
+    if (parent) trail.push({ path: `/topics/${parent.slug}`, name: parent.title })
+    trail.push({ path: page.path, name: page.title.replace(' — Sulayman Bowles', '') })
+    graph.push({
+      '@type': 'BreadcrumbList', '@id': breadcrumbId,
+      itemListElement: trail.map((item, index) => ({
+        '@type': 'ListItem', position: index + 1, name: item.name, item: `${siteOrigin}${item.path}`,
+      })),
+    })
+  }
   if (article) {
-    const parent = articleTopic(article.slug)
     const parentUrl = parent ? `${siteOrigin}/topics/${parent.slug}` : undefined
     const parentId = parentUrl ? `${parentUrl}#webpage` : undefined
     if (parent && parentId) graph.push({
@@ -134,9 +153,18 @@ export function searchMetadata(route: string): SearchMetadata {
       mainEntityOfPage: reference(webpageId),
       isPartOf: parentId ? [reference(websiteId), reference(parentId)] : reference(websiteId),
       image: reference(imageId), inLanguage: 'en-US', articleSection: article.category,
+      ...(datasets.length ? { hasPart: datasets.map(dataset => reference(`${siteOrigin}${dataset.href}#dataset`)) } : {}),
       ...(citation.length ? { citation } : {}),
       ...(published ? { datePublished: published } : {}),
       ...(modified ? { dateModified: modified } : {}),
+    })
+    for (const dataset of datasets) graph.push({
+      '@type': 'Dataset', '@id': `${siteOrigin}${dataset.href}#dataset`,
+      name: dataset.name, description: dataset.description,
+      url: `${canonical}#reader-downloads`, creator: reference(personId),
+      isPartOf: reference(`${canonical}#article`), inLanguage: 'en-US',
+      isAccessibleForFree: true,
+      distribution: { '@type': 'DataDownload', contentUrl: `${siteOrigin}${dataset.href}`, encodingFormat: 'text/csv' },
     })
   }
   if (collection) graph.push({
