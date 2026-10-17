@@ -15,6 +15,7 @@ import { newestWritingFirst, writingSelection } from './writing-selection'
 import { DestinationCue } from '../DestinationLink'
 import './writing-selection.css'
 import { ReadingPaths } from './TopicPage'
+import './editorial-finish.css'
 
 const articles = (catalog as ArticleSummary[]).map(withWritingCopy)
 const categories = ['All', ...new Set(articles.map(article => article.category))]
@@ -70,7 +71,7 @@ export default function WritingIndex() {
     </a>
   }
 
-  return <section className="writing-page">
+  return <section className="writing-page writing-edition">
     <header className="writing-header">
       <div className="writing-heading-copy"><h1 className="writing-heading">Writing<span className="period">.</span></h1><p className="writing-introduction">{siteCopy.writing.introduction}</p></div>
       <div className="writing-tools"><details className="writing-discovery" open={toolsOpen} onToggle={event => setToolsOpen(event.currentTarget.open)} onKeyDown={event => { if (event.key === 'Escape' && !event.defaultPrevented && !event.nativeEvent.isComposing && toolsOpen) { event.preventDefault(); setToolsOpen(false); discoveryToggle.current?.focus({ preventScroll: true }) } }}>

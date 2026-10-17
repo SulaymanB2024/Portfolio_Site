@@ -1,0 +1,254 @@
+[
+  {
+    "name": "about-desktop",
+    "source": "first-about-desktop.jpg",
+    "bytes": 60335,
+    "sha256": "4fcea604ef183e0c47d37586677b801dff53477cc406bc145895bf3a39a3811b"
+  },
+  {
+    "name": "about-phone",
+    "source": "final-about-phone.jpg",
+    "bytes": 33472,
+    "sha256": "edf3e19df37921bed5f5cdff30459992646ac3d7a1dab55f6834e4c118f3da7d"
+  },
+  {
+    "name": "resume-desktop",
+    "source": "final-resume-desktop.jpg",
+    "bytes": 79697,
+    "sha256": "22ac97c4cbd88c4f64019dff5ae0338e70370bd1856523a5c45bd0cd461367ac"
+  },
+  {
+    "name": "resume-phone",
+    "source": "final-resume-phone.jpg",
+    "bytes": 29593,
+    "sha256": "5bd2ca54ace8330b7fa4581271f101e25b784a0bcc546b21abd4b5c37c44a757"
+  },
+  {
+    "name": "contact-desktop",
+    "source": "final-contact-desktop.jpg",
+    "bytes": 138358,
+    "sha256": "1e4a68e0bcc1701334c2aeac6e70ed83be0d92feb0f4fe5619b08fcee4dd34d3"
+  },
+  {
+    "name": "contact-phone",
+    "source": "final-contact-phone.jpg",
+    "bytes": 39885,
+    "sha256": "81f6c5f25c5ef295943e9f2270b51f35a9d9974c730dcafcd54659be741f5e2e"
+  },
+  {
+    "name": "writing-desktop",
+    "source": "final-writing-desktop.jpg",
+    "bytes": 60364,
+    "sha256": "8c8cc47e15fef0989c8cc1f37e5e15c5d316112b107662dcd6b9ea4460f7b3b4"
+  },
+  {
+    "name": "writing-phone",
+    "source": "final-writing-phone.jpg",
+    "bytes": 33976,
+    "sha256": "043264cab04154cbbda203b7114538e374105f2aee057b3e7c442beaeaf05dab"
+  },
+  {
+    "name": "topic-desktop",
+    "source": "final-topic-desktop.jpg",
+    "bytes": 98157,
+    "sha256": "aad1099595b2805e8a43f58548d5ab30a70a0fc5866a1389bc4e756d27f48d60"
+  },
+  {
+    "name": "topic-phone",
+    "source": "final-topic-phone.jpg",
+    "bytes": 54304,
+    "sha256": "86f92ffc785df53b050117d61d12f0ff13422f2744a9a2ee36c75fa16eb5de8b"
+  },
+  {
+    "name": "reader-desktop",
+    "source": "first-reader-desktop.jpg",
+    "bytes": 78429,
+    "sha256": "f4270ae2bbc9b60e96d9c6a5e8f5decade62aed86e6366a631a15a3db086ee10"
+  },
+  {
+    "name": "reader-phone",
+    "source": "first-reader-phone.jpg",
+    "bytes": 38044,
+    "sha256": "1e48daf19490bdbd21904d856b55d95d77b73ec2dc905a8557bce13d365c4667"
+  },
+  {
+    "name": "writing-filtered-phone",
+    "source": "final-writing-filtered-phone.jpg",
+    "bytes": 35353,
+    "sha256": "9cdcec64ea8f122685e72864bb41da817ec99167272fab85dad84072a2254140"
+  },
+  {
+    "name": "writing-empty-phone",
+    "source": "final-writing-empty-phone.jpg",
+    "bytes": 25073,
+    "sha256": "4f79a1be48c1b77d2ce10155161341ddc7ec4a5dc73f99f83fda4054b7b83991"
+  },
+  {
+    "name": "writing-paths-phone",
+    "source": "final-writing-paths-phone.jpg",
+    "bytes": 37503,
+    "sha256": "5613d05233e19a35af1a7bfac7791342996eb2399754bfa233742a391d8978a5"
+  },
+  {
+    "name": "writing-paths-ending-phone",
+    "source": "final-writing-paths-ending-phone.jpg",
+    "bytes": 44842,
+    "sha256": "908122cb7c359e43b77f6786e0af4b05ad731db5d4ff1930e647516dc2684873"
+  },
+  {
+    "name": "writing-ending-phone",
+    "source": "final-writing-ending-phone.jpg",
+    "bytes": 26762,
+    "sha256": "7d8b13c6e0b43bc794dcc2edb56bf33bc501f151435aa2bc9c06edfff1874c44"
+  },
+  {
+    "name": "topic-long-phone",
+    "source": "final-topic-long-phone.jpg",
+    "bytes": 56559,
+    "sha256": "0cf0f780c1488955a4bc14e9bfcf094d45751a3629fc4a8b254736be85604b6a"
+  },
+  {
+    "name": "topic-ending-phone",
+    "source": "final-topic-ending-phone.jpg",
+    "bytes": 37303,
+    "sha256": "b364e36b54dfcc074f6b6f9384070e913eea261900a9ef1043cc52fddc44f83e"
+  },
+  {
+    "name": "reader-guide-phone",
+    "source": "final-reader-guide-phone.jpg",
+    "bytes": 47711,
+    "sha256": "36254189cf4607934116e4c2f0e70a72b307aa05a51f830cfd3f5e6e609a5c0d"
+  },
+  {
+    "name": "reader-body-phone",
+    "source": "final-reader-body-phone.jpg",
+    "bytes": 46099,
+    "sha256": "592437b8c22376af4bf70bee68fca5f88c2e21ce6980692176a8c0b8e44a3729"
+  },
+  {
+    "name": "reader-ending-phone",
+    "source": "first-reader-ending-phone.jpg",
+    "bytes": 33823,
+    "sha256": "230587e258589ce0afd5be5c2c7a5542bc4e799f24912b2f6e83ee4dd731bc58"
+  },
+  {
+    "name": "reader-ending-desktop",
+    "source": "first-reader-ending-desktop.jpg",
+    "bytes": 59560,
+    "sha256": "13435ca721b7739858431b7b4dd757a98336ce7e1dfccaf2828239fffce730ba"
+  },
+  {
+    "name": "reader-model-phone",
+    "source": "final-reader-model-phone.jpg",
+    "bytes": 34733,
+    "sha256": "4718bfd3545fe30ba3211661eae7ef4aea3cf08b3622025ab42b11cbbc6e78fe"
+  },
+  {
+    "name": "reader-notebook-phone",
+    "source": "final-reader-notebook-phone.jpg",
+    "bytes": 28083,
+    "sha256": "85764a3968c3895ea29334b4feae177fe3d7feee66d02acf72fb8fa248636903"
+  },
+  {
+    "name": "reader-proof-phone",
+    "source": "final-reader-proof-phone.jpg",
+    "bytes": 31801,
+    "sha256": "02f1690bb9ab7bf19a5cb4253bd76e4948deecd5b2c6e5059451b6a02885a47f"
+  },
+  {
+    "name": "resume-document-desktop",
+    "source": "final-resume-document-desktop.jpg",
+    "bytes": 401725,
+    "sha256": "750dd8f08a95ed5cb92d71f5ce311dfb732838b10cc7711b1b011e904016ee9a"
+  },
+  {
+    "name": "resume-document-phone",
+    "source": "final-resume-document-phone-full.jpg",
+    "bytes": 354481,
+    "sha256": "a8848de0ee95038b02b6bbda9e7a400fa6e0759c58a96bacc07b5b8b51c77907"
+  },
+  {
+    "name": "about-performances-phone",
+    "source": "final-about-performances-phone.jpg",
+    "bytes": 32691,
+    "sha256": "c29db9a1485be1dbf14ff7d298679667df48ed10e3e0387fdc4bbeb2997b1383"
+  },
+  {
+    "name": "about-ending-phone",
+    "source": "final-about-ending-phone.jpg",
+    "bytes": 52004,
+    "sha256": "9c1bdf51801f77b9e7a2359ce488931ef95eecf55b12dcdebe594a5de557d923"
+  },
+  {
+    "name": "resume-chapter-phone-0",
+    "source": "final-resume-chapter-phone-0.jpg",
+    "bytes": 38961,
+    "sha256": "b3df5c254ee03a58d548bb5c613a8b5135086e7ac3518dd728af8354f6c1ec1e"
+  },
+  {
+    "name": "resume-chapter-desktop-0",
+    "source": "final-resume-chapter-desktop-0.jpg",
+    "bytes": 98204,
+    "sha256": "585ecae02ace65c4088cd90bddba4108d4b57c72ddc3a6d156f9ca9d6048e09f"
+  },
+  {
+    "name": "resume-chapter-phone-1",
+    "source": "final-resume-chapter-phone-1.jpg",
+    "bytes": 44380,
+    "sha256": "e4e8e460a5f03e124ea68c63482e6d509bb91620a0cec2790a79b386b6fc20d5"
+  },
+  {
+    "name": "resume-chapter-desktop-1",
+    "source": "final-resume-chapter-desktop-1.jpg",
+    "bytes": 84965,
+    "sha256": "ddfd83cbc32e166e12fec3b99f79bd3f54d6887ee203701c7e0f48232b1b6c26"
+  },
+  {
+    "name": "resume-chapter-phone-2",
+    "source": "final-resume-chapter-phone-2.jpg",
+    "bytes": 38265,
+    "sha256": "586d5d3889dd0b6d32e281594792bf0ff08f913ff2b314dad3ca5b2cf0ef9337"
+  },
+  {
+    "name": "resume-chapter-desktop-2",
+    "source": "final-resume-chapter-desktop-2.jpg",
+    "bytes": 92326,
+    "sha256": "38aac26b015c8d0eec06299b3f6c43fbf5c5fe03b929aaf8d264cf7cc09336a8"
+  },
+  {
+    "name": "resume-chapter-phone-3",
+    "source": "final-resume-chapter-phone-3.jpg",
+    "bytes": 35278,
+    "sha256": "682b20c021a6839165327a7c5cf3548f36a1079f83a06d7e4cababa475737fa8"
+  },
+  {
+    "name": "resume-chapter-desktop-3",
+    "source": "final-resume-chapter-desktop-3.jpg",
+    "bytes": 79150,
+    "sha256": "03aa32fdf50220ccebffc1c0c7044656600f2cebe7e334ef3b2b4bd2941ecaf6"
+  },
+  {
+    "name": "resume-chapter-phone-4",
+    "source": "final-resume-chapter-phone-4.jpg",
+    "bytes": 37653,
+    "sha256": "2e58e1573cf08208d517720c7b41666df0dfee81f8433de86af5d018e4bc5da1"
+  },
+  {
+    "name": "resume-chapter-desktop-4",
+    "source": "final-resume-chapter-desktop-4.jpg",
+    "bytes": 78500,
+    "sha256": "4e628f7f499f646d9c03937bea195fd71fbc33ee66bf801da2df95eb8cb436e5"
+  },
+  {
+    "name": "resume-chapter-phone-5",
+    "source": "final-resume-chapter-phone-5.jpg",
+    "bytes": 40075,
+    "sha256": "dc5fca7f30d7405003b2aac100d6168549799277ff12d11c2f170c3b20b2dcf0"
+  },
+  {
+    "name": "resume-chapter-desktop-5",
+    "source": "final-resume-chapter-desktop-5.jpg",
+    "bytes": 90781,
+    "sha256": "15eeee4626b6255aee5626c6572b96583fc098151fd8f2ba982b6441560b614e"
+  }
+]

@@ -30,6 +30,7 @@ import './restored-articles.css'
 import './article-refinement.css'
 import './article-distinction.css'
 import './article-evidence.css'
+import './editorial-finish.css'
 import ArticleTitle from './ArticleTitle'
 import ArticleStudyFigure from './ArticleStudyFigure'
 import { articlePresentation } from './article-presentation'
@@ -217,7 +218,7 @@ export default function ArticlePage({ slug }: { slug: string }) {
   const heroImage = article.pageContent?.hero?.image
   const modified = readerModifiedDate(article.slug, article.dateModified)
   const nextReading = readingPath ? nextTopicReading(readingPath, article.slug) : undefined
-  return <article className="article-page" data-story={article.slug} data-form={presentation.form} onClick={citationClick}>
+  return <article className="article-page reader-edition" data-story={article.slug} data-form={presentation.form} onClick={citationClick}>
     <DestinationLink className="project-back mono" href={backHref} direction="left">{backLabel}</DestinationLink>
     <header className="article-cover"><div className="reader-heading"><p className="eyebrow">{displayWritingTopic(article.category)}</p><h1><ArticleTitle article={article} /></h1><p className="reader-subtitle">{copy.subtitle}</p><div className="reader-signature"><a className="reader-author" href="/about" rel="author">Sulayman Bowles</a><div className="reader-byline"><time dateTime={article.date.replaceAll('.', '-')}>{displayDate(article.date)}</time><span className="writing-story-readtime">{displayReadTime(article.readTime)}</span>{modified && modified !== article.date.replaceAll('.', '-') && <span>Updated <time dateTime={modified}>{displayDate(modified)}</time></span>}</div></div><ArticleUtilities /></div><ArtCube key={article.slug} artwork={artwork} /></header>
     <div className="reader-layout" id="reader-start"><ReaderNavigation key={article.slug} sections={headings} href={location.hash} /><div className="reader-prose">

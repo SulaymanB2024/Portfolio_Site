@@ -1,0 +1,116 @@
+[
+  {
+    "canvas": {
+      "assets": "animated-glb",
+      "currentModel": "sapien",
+      "engine": "three.js r186",
+      "modelAsset": "/resume-sculptures/sapien-529b71ff3296.glb",
+      "particleCount": "4000",
+      "progress": "1.0000",
+      "renderFrames": "2223",
+      "requestedModel": "sapien",
+      "scene": "resume",
+      "state": "ready",
+      "transitionPhase": "rest"
+    },
+    "h1": "Sapien",
+    "overflow": false,
+    "selected": "sapien",
+    "returnFocus": "Sapien, Growth Manager, Aug 2026 — Present"
+  },
+  {
+    "canvas": {
+      "assets": "animated-glb",
+      "currentModel": "creative-trace",
+      "engine": "three.js r186",
+      "modelAsset": "/resume-sculptures/creative-trace-446f03178c8c.glb",
+      "particleCount": "4000",
+      "progress": "1.0000",
+      "renderFrames": "2393",
+      "requestedModel": "creative-trace",
+      "scene": "resume",
+      "state": "ready",
+      "transitionPhase": "rest"
+    },
+    "h1": "CreativeTrace",
+    "overflow": false,
+    "selected": "creative-trace",
+    "returnFocus": "CreativeTrace, Creator, AI Creative Experimentation, Jul 2026 — Present"
+  },
+  {
+    "canvas": {
+      "assets": "animated-glb",
+      "currentModel": "chegg",
+      "engine": "three.js r186",
+      "modelAsset": "/resume-sculptures/chegg-82c7d6095892.glb",
+      "particleCount": "4000",
+      "progress": "1.0000",
+      "renderFrames": "2545",
+      "requestedModel": "chegg",
+      "scene": "resume",
+      "state": "ready",
+      "transitionPhase": "rest"
+    },
+    "h1": "Chegg",
+    "overflow": false,
+    "selected": "chegg",
+    "returnFocus": "Chegg, Product Intern, Growth — Internships.com, May 2026 — Present"
+  },
+  {
+    "canvas": {
+      "assets": "animated-glb",
+      "currentModel": "void",
+      "engine": "three.js r186",
+      "modelAsset": "/resume-sculptures/void-10f8185598c2.glb",
+      "particleCount": "4000",
+      "progress": "1.0000",
+      "renderFrames": "3383",
+      "requestedModel": "void",
+      "scene": "resume",
+      "state": "ready",
+      "transitionPhase": "rest"
+    },
+    "h1": "VOID",
+    "overflow": false,
+    "selected": "void",
+    "returnFocus": "VOID, Founder, Jan 2026 — Present"
+  },
+  {
+    "canvas": {
+      "assets": "animated-glb",
+      "currentModel": "venture-labs",
+      "engine": "three.js r186",
+      "modelAsset": "/resume-sculptures/venture-labs-e0226a39be7d.glb",
+      "particleCount": "4000",
+      "progress": "1.0000",
+      "renderFrames": "3529",
+      "requestedModel": "venture-labs",
+      "scene": "resume",
+      "state": "ready",
+      "transitionPhase": "rest"
+    },
+    "h1": "Texas Venture Labs",
+    "overflow": false,
+    "selected": "venture-labs",
+    "returnFocus": "Texas Venture Labs, Student Associate, Sep 2025 — Present"
+  },
+  {
+    "canvas": {
+      "assets": "animated-glb",
+      "currentModel": "ai-venture",
+      "engine": "three.js r186",
+      "modelAsset": "/resume-sculptures/ai-venture-1cc20a592b97.glb",
+      "particleCount": "4000",
+      "progress": "1.0000",
+      "renderFrames": "3672",
+      "requestedModel": "ai-venture",
+      "scene": "resume",
+      "state": "ready",
+      "transitionPhase": "rest"
+    },
+    "h1": "AI Image Venture",
+    "overflow": false,
+    "selected": "ai-venture",
+    "returnFocus": "AI Image Venture, Co-Founder, Product & Go-to-Market, Jan 2025 — Sep 2025"
+  }
+]

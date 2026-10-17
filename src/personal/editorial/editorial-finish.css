@@ -1,0 +1,121 @@
+/* Editorial route composition. The explicit edition classes keep these
+   relationships independent of later-loaded shared placement styles. */
+@media screen {
+  .personal-site.personal-site[data-section][data-appearance] .writing-page.writing-edition .writing-header { gap: 12px; margin-bottom: 30px; }
+  .personal-site.personal-site[data-section][data-appearance] .writing-page.writing-edition .writing-tools { margin-left: calc(50% + var(--placement-column-gap) / 2); }
+  .personal-site.personal-site[data-section][data-appearance] .writing-edition .writing-discovery { width: 100%; max-width: 430px; }
+  .personal-site.personal-site[data-section][data-appearance] .writing-edition .writing-discovery > summary { display: flex; justify-content: space-between; gap: 24px; width: 100%; min-height: 44px; }
+  .personal-site.personal-site[data-section][data-appearance] .writing-edition .writing-discovery[open] > summary { border-bottom: 1px solid var(--line); }
+  .personal-site.personal-site[data-section][data-appearance] .writing-edition .writing-discovery .writing-toolbar { padding-top: 4px; }
+  .personal-site.personal-site[data-section][data-appearance] .writing-edition .writing-featured-label { margin-bottom: 8px; }
+  .personal-site.personal-site[data-section][data-appearance] .writing-edition .writing-story[data-layout='lead'] { padding-top: 30px; padding-bottom: 48px; }
+  .personal-site.personal-site[data-section][data-appearance] .writing-edition .writing-secondary > h2 { margin-bottom: 8px; }
+
+  /* Paths form a directory, distinct from the illustrated essay selection. */
+  .reading-path-directory { column-gap: clamp(32px, 5vw, 64px); margin-top: 20px; }
+  .reading-path-directory > a { display: grid; grid-template-columns: 32px minmax(0, 1fr); gap: 16px; padding-block: 28px; }
+  .reading-path-index { padding-top: 2px; font: 400 12px/1.6 var(--type-interface, var(--editorial-sans)); color: var(--muted); font-variant-numeric: tabular-nums; }
+  .reading-path-copy { min-width: 0; }
+  .personal-site.personal-site[data-section][data-appearance] .reading-path-directory h2 { margin: 10px 0 12px; }
+  .personal-site.personal-site[data-section][data-appearance] .reading-path-directory p { margin: 0 0 16px; }
+  .personal-site.personal-site[data-section][data-appearance] .reading-path-directory .reading-path-action { font-size: 12px; }
+
+  .personal-site.personal-site[data-section][data-appearance] .topic-page.topic-edition { padding: 48px 0 80px; max-width: 1140px; }
+  .personal-site.personal-site[data-section][data-appearance] .topic-edition > header { max-width: none; padding-bottom: 32px; border-bottom: 0; }
+  .personal-site.personal-site[data-section][data-appearance] .topic-edition > header h1 { max-width: 20ch; margin: 20px 0 24px; font-size: clamp(44px, 5.5vw, 72px); line-height: 1.08; }
+  .personal-site.personal-site[data-section][data-appearance] .topic-edition .topic-deck { max-width: 52ch; margin: 0; font: 400 23px/1.5 var(--type-reading); }
+  .topic-briefing { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, .85fr); gap: clamp(36px, 6vw, 80px); margin: 12px 0 48px; }
+  .personal-site.personal-site[data-section][data-appearance] .topic-edition .topic-introduction { margin: 0; max-width: 52ch; font-size: 20px; }
+  .topic-context > .topic-introduction > p { margin: 0 0 20px; }
+  .topic-context > .topic-return { margin: 24px 0 0; padding-top: 0; border: 0; font: 400 13px/1.7 var(--editorial-sans); }
+  .personal-site.personal-site[data-section][data-appearance] .topic-edition .topic-questions { margin: 0; padding: 0 0 0 28px; border: 0; border-left: 1px solid var(--line); max-width: none; }
+  .personal-site.personal-site[data-section][data-appearance] .topic-edition .topic-questions h2 { margin: 0 0 16px; font: 500 16px/1.5 var(--type-interface); letter-spacing: -.01em; }
+  .topic-briefing .topic-questions ul { list-style: none; margin: 0; padding: 0; }
+  .topic-briefing .topic-questions li { padding: 0; margin: 0 0 16px; font-size: 14px; line-height: 1.6; }
+  .topic-briefing .topic-questions a { text-decoration-thickness: 1px; text-decoration-color: var(--line); text-underline-offset: 4px; }
+  .topic-briefing .topic-questions a:hover { text-decoration-color: var(--ink); }
+  .topic-updated { margin: 0 0 16px; }
+  .personal-site.personal-site[data-section][data-appearance] .topic-edition .topic-readings { max-width: none; margin: 0; }
+  .personal-site.personal-site[data-section][data-appearance] .topic-edition .topic-readings li { grid-template-columns: 48px minmax(0, 1fr); gap: 24px; padding: 30px 0; }
+  .personal-site.personal-site[data-section][data-appearance] .topic-edition .topic-readings h2 { max-width: 30ch; font-size: clamp(28px, 3.1vw, 38px); }
+  .personal-site.personal-site[data-section][data-appearance] .topic-edition .topic-readings p { max-width: 62ch; margin: 12px 0; }
+}
+
+@media screen and (max-width: 760px) {
+  .personal-site.personal-site[data-section][data-appearance] .writing-page.writing-edition .writing-header { margin-bottom: 20px; gap: 14px; }
+  .personal-site.personal-site[data-section][data-appearance] .writing-page.writing-edition .writing-tools { margin-left: 0; }
+  .personal-site.personal-site[data-section][data-appearance] .writing-edition .writing-discovery { max-width: none; }
+  .personal-site.personal-site[data-section][data-appearance] .writing-edition .writing-featured-label { margin-bottom: 0; }
+  .personal-site.personal-site[data-section][data-appearance] .topic-page.topic-edition { padding: 30px 0 56px; }
+  .personal-site.personal-site[data-section][data-appearance] .topic-edition > header { padding-bottom: 24px; }
+  .personal-site.personal-site[data-section][data-appearance] .topic-edition > header h1 { margin: 18px 0 24px; font-size: clamp(38px, 10.8vw, 52px); line-height: 1.09; }
+  .personal-site.personal-site[data-section][data-appearance] .topic-edition .topic-deck { font-size: 21px; line-height: 1.5; }
+  .topic-briefing { display: block; margin: 8px 0 32px; }
+  .personal-site.personal-site[data-section][data-appearance] .topic-edition .topic-introduction { font-size: 19px; line-height: 1.6; }
+  .personal-site.personal-site[data-section][data-appearance] .topic-edition .topic-questions { border-left: 0; padding: 0; margin: 32px 0 0; }
+  .topic-briefing .topic-questions li { margin-bottom: 14px; }
+  .personal-site.personal-site[data-section][data-appearance] .topic-edition .topic-readings li { grid-template-columns: 24px minmax(0, 1fr); gap: 16px; padding-block: 26px; }
+  .personal-site.personal-site[data-section][data-appearance] .topic-edition .topic-readings h2 { font-size: 29px; }
+  .personal-site.personal-site[data-section][data-appearance] .topic-edition .topic-readings p { font-size: 18px; }
+  .reading-path-directory > a { grid-template-columns: 24px minmax(0, 1fr); gap: 14px; padding-block: 24px; }
+}
+
+@media screen and (max-width: 680px) {
+  /* A lead has a complete reading measure and a study beside its colophon.
+     The archive keeps its existing compact, searchable composition. */
+  .personal-site.personal-site[data-section][data-appearance] .writing-page.writing-edition .writing-gallery .writing-story[data-layout='lead'] { grid-template-columns: minmax(0, 1fr) 112px; gap: 18px 20px; padding-block: 24px 30px; }
+  .personal-site.personal-site[data-section][data-appearance] .writing-page.writing-edition .writing-gallery .writing-story[data-layout='lead'] .writing-deck { grid-column: 1 / -1; grid-row: 3; font: 400 20px/1.5 var(--type-reading); }
+  .personal-site.personal-site[data-section][data-appearance] .writing-page.writing-edition .writing-gallery .writing-story[data-layout='lead'] .writing-art { grid-column: 1; grid-row: 4; width: min(100%, 218px); max-width: 218px; justify-self: start; }
+  .personal-site.personal-site[data-section][data-appearance] .writing-page.writing-edition .writing-gallery .writing-story[data-layout='lead'] .writing-story-meta { grid-column: 2; grid-row: 4; flex-direction: column; align-items: start; align-self: center; gap: 8px; margin: 0; }
+  .personal-site.personal-site[data-section][data-appearance] .writing-page.writing-edition .writing-gallery .writing-story[data-layout='lead'] .writing-story-action { margin-top: 8px; white-space: normal; }
+}
+
+@media print {
+  .reading-path-index { display: none; }
+  .topic-briefing { display: block; }
+}
+
+@media screen {
+  /* Keep the manuscript's form-specific cover direction and its full study. */
+  .personal-site.personal-site[data-section][data-appearance] .article-page.reader-edition .article-cover { margin-bottom: 32px; padding-bottom: 28px; }
+  .personal-site.personal-site[data-section][data-appearance] .reader-edition .reader-navigation { margin-bottom: 20px; }
+  .personal-site.personal-site[data-section][data-appearance] .reader-edition .reader-guide { margin-top: 0; margin-bottom: 28px; padding-block: 22px; }
+  .personal-site.personal-site[data-section][data-appearance] .reader-edition .reader-guide > h2 { font: 450 26px/1.2 var(--type-reading); max-width: 38ch; margin: 10px 0 14px; }
+  .personal-site.personal-site[data-section][data-appearance] .reader-edition .reader-guide-answer { font-size: 17px; line-height: 1.65; margin-bottom: 20px; }
+  .personal-site.personal-site[data-section][data-appearance] .reader-edition .reader-guide-paths { gap: 22px; margin-block: 20px; }
+  .personal-site.personal-site[data-section][data-appearance] .reader-edition .reader-guide-sources { line-height: 1.7; margin-bottom: 8px; }
+  .personal-site.personal-site[data-section][data-appearance] .reader-edition .reader-guide-sources:last-child { margin-bottom: 0; }
+}
+
+@media screen and (max-width: 760px) {
+  .personal-site.personal-site[data-section][data-appearance] .article-page.reader-edition .article-cover { gap: 12px; margin-block: 20px 24px; padding-bottom: 0; }
+  .personal-site.personal-site[data-section][data-appearance] .reader-edition .article-cover .reader-heading > .eyebrow { margin-bottom: 14px; }
+  .personal-site.personal-site[data-section][data-appearance] .reader-edition .article-cover h1 { margin-bottom: 16px; }
+  .personal-site.personal-site[data-section][data-appearance] .reader-edition .article-cover .reader-subtitle { margin-bottom: 18px; }
+  .personal-site.personal-site[data-section][data-appearance] .reader-edition .article-cover .article-utilities { margin-top: 8px; gap: 6px 24px; }
+  .personal-site.personal-site[data-section][data-appearance] .reader-edition .article-art-cube { width: min(100%, 210px); }
+  .personal-site.personal-site[data-section][data-appearance] .reader-edition[data-form='notebook'] .article-art-cube { width: 170px; }
+  .personal-site.personal-site[data-section][data-appearance] .reader-edition .reader-guide { padding-block: 20px; margin-bottom: 24px; }
+  .personal-site.personal-site[data-section][data-appearance] .reader-edition .reader-guide > h2 { font-size: 24px; }
+  .personal-site.personal-site[data-section][data-appearance] .reader-edition .reader-guide-answer { font-size: 16px; }
+  .personal-site.personal-site[data-section][data-appearance] .reader-edition .reader-guide-paths { display: grid; grid-template-columns: 1fr; gap: 18px; }
+  .personal-site.personal-site[data-section][data-appearance] .reader-edition .reader-guide-paths > div { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: 18px; align-items: start; }
+  .personal-site.personal-site[data-section][data-appearance] .reader-edition .reader-guide-paths a { font-size: 14px; line-height: 1.5; }
+  .personal-site.personal-site[data-section][data-appearance] .reader-edition .reader-guide-paths p { margin: 0; font-size: 13px; line-height: 1.6; }
+
+  /* The continuation title remains full width; the study and deck share the
+     next row instead of creating a second full-height cover for every link. */
+  .personal-site.personal-site[data-section][data-appearance] .reader-edition .reader-further { margin-top: 56px; padding-top: 0; }
+  .personal-site.personal-site[data-section][data-appearance] .reader-edition .reader-further .story-link { position: relative; grid-template-columns: 128px minmax(0, 1fr); gap: 16px 20px; align-items: start; padding-block: 28px; }
+  .personal-site.personal-site[data-section][data-appearance] .reader-edition .reader-further .story-link h2 { grid-column: 1 / -1; grid-row: 1; margin: 0; padding-right: 24px; font-size: 29px; }
+  .personal-site.personal-site[data-section][data-appearance] .reader-edition .reader-further .story-link-art { grid-column: 1; grid-row: 2; width: 128px; justify-self: start; }
+  .personal-site.personal-site[data-section][data-appearance] .reader-edition .reader-further .story-link-deck { grid-column: 2; grid-row: 2; margin: 0; font-size: 16px; line-height: 1.55; overflow: visible; }
+  .personal-site.personal-site[data-section][data-appearance] .reader-edition .reader-further .story-link-meta { grid-column: 1 / -1; grid-row: 3; gap: 6px 18px; margin: 0; }
+  .personal-site.personal-site[data-section][data-appearance] .reader-edition .reader-further .story-link-arrow { position: absolute; top: 30px; right: 0; margin: 0; }
+}
+
+@media screen and (max-width: 370px) {
+  .personal-site.personal-site[data-section][data-appearance] .reader-edition .reader-further .story-link { grid-template-columns: 108px minmax(0, 1fr); column-gap: 16px; }
+  .personal-site.personal-site[data-section][data-appearance] .reader-edition .reader-further .story-link-art { width: 108px; }
+  .personal-site.personal-site[data-section][data-appearance] .reader-edition .reader-further .story-link-deck { font-size: 15px; }
+}

@@ -94,3 +94,51 @@
   .lion-study-credit .mono { font-size: 10px; line-height: 1.7; }
 }
 @media (prefers-reduced-motion: reduce) { .lion-contact * { transition: none !important; } }
+
+/* Keep the invitation and its destinations together, ahead of the live study. */
+#contact-invitation .lion-contact-heading { gap: 16px 32px; }
+#contact-invitation .lion-contact-entry {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 36px 64px;
+  align-items: start;
+  padding-top: 24px;
+}
+#contact-invitation .lion-contact-introduction { margin: 0; max-inline-size: 42ch; }
+#contact-invitation .lion-contact-rail {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 6px 24px;
+  min-width: 0;
+  padding: 0;
+  border: 0;
+}
+#contact-invitation .lion-contact-email { display: contents; }
+#contact-invitation .lion-contact-email > a {
+  grid-column: 1 / -1;
+  width: fit-content;
+  max-width: 100%;
+  min-height: 44px;
+  font: 400 clamp(22px, 2.35vw, 30px)/1.35 var(--type-reading, Georgia, serif);
+  letter-spacing: -.025em;
+  overflow-wrap: anywhere;
+}
+#contact-invitation .lion-contact-email .destination-link-label { margin: 0; font: inherit; }
+#contact-invitation .lion-contact-copy { grid-column: 1; grid-row: 2; flex-wrap: wrap; }
+#contact-invitation .lion-contact-linkedin { grid-column: 2; grid-row: 2; padding: 0; }
+#contact-invitation .lion-contact-linkedin > a { font-size: 14px; min-height: 44px; }
+#contact-invitation .lion-study { grid-template-rows: minmax(0, 1fr) auto; }
+
+@media (max-width: 760px) {
+  #contact-invitation .lion-contact-heading { flex-direction: row; align-items: baseline; flex-wrap: wrap; gap: 8px 20px; }
+  #contact-invitation .lion-contact-entry { grid-template-columns: minmax(0, 1fr); gap: 22px; padding-top: 22px; }
+  #contact-invitation .lion-contact-introduction { max-inline-size: 38ch; }
+  #contact-invitation .lion-contact-rail { max-width: 500px; }
+  #contact-invitation .lion-contact-email > a { font-size: clamp(21px, 5.65vw, 28px); }
+  #contact-invitation .lion-study { grid-template-rows: clamp(240px, 32svh, 340px) auto; }
+}
+@media (max-width: 360px) {
+  #contact-invitation .lion-contact-heading .mono { font-size: 10px; }
+  #contact-invitation .lion-contact-rail { column-gap: 16px; }
+  #contact-invitation .lion-contact-email > a { font-size: 20px; }
+}

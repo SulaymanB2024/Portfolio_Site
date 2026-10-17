@@ -28,17 +28,18 @@ export default function ContactPage({ dark }: { dark: boolean }) {
     } finally { copying.current = false }
   }
 
-  return <section className="lion-contact" aria-labelledby="lion-contact-title">
+  return <section id="contact-invitation" className="lion-contact" aria-labelledby="lion-contact-title">
     <header className="lion-contact-heading"><div><h1 id="lion-contact-title">Contact</h1></div><span className="mono">Austin, Texas</span></header>
+    <div className="lion-contact-entry">
     <p className="lion-contact-introduction">{siteCopy.contact.description}</p>
-    <ContactSculpture dark={dark}>
-    <div className="lion-contact-rail" aria-label="Contact links">
+    <nav className="lion-contact-rail" aria-label="Contact links">
     <div className="lion-contact-note lion-contact-email">
       <DestinationLink href={`mailto:${contact.email}`} direction="external" emphasis="contact">{contact.email}</DestinationLink>
       <div className="lion-contact-copy mono"><button type="button" onClick={copyAddress} data-copied={copyStatus === 'Copied'}>{copyStatus === 'Copied' ? 'Copied' : 'Copy address'}</button><span className={copyStatus === 'Copied' ? 'sr-only' : undefined} role="status">{copyStatus === 'Copied' ? 'Address copied.' : copyStatus}</span></div>
     </div>
     <div className="lion-contact-note lion-contact-linkedin"><DestinationLink href={contact.linkedin}>LinkedIn</DestinationLink></div>
+    </nav>
     </div>
-    </ContactSculpture>
+    <ContactSculpture dark={dark} />
   </section>
 }
