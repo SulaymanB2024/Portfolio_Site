@@ -1,6 +1,7 @@
 import * as THREE from 'three'
 import { PORTFOLIO_DITHER_GLSL } from '../dither-kernel'
 import { PortfolioRuntime } from '../portfolio-runtime'
+import { subscribeMenuMotion } from '../menu-motion'
 import { createPortfolioModelLoader } from '../portfolio-model-loader'
 import { portfolioAssetUrl } from '../portfolio-assets'
 import { disposeModel } from '../../model-resources'
@@ -159,7 +160,8 @@ export function mountInterestScene(canvas: HTMLCanvasElement, dark: boolean, eve
   canvas.dataset.renderPasses = '2'
 
   let enabled = true
-  function active() { return enabled && !disposed && !lost && visible && !document.hidden }
+  let menuOpen = false
+  function active() { return enabled && !disposed && !lost && visible && !document.hidden && !menuOpen }
   function idleCursor() { return !selected || selected === 'bass' || selected === 'knight' && gameState ? 'pointer' : 'grab' }
   function schedule(now = performance.now()) {
     if (!active() || raf || frameTimer) return
@@ -480,6 +482,13 @@ export function mountInterestScene(canvas: HTMLCanvasElement, dark: boolean, eve
   resize.observe(canvas)
   const observer = new IntersectionObserver(entries => { visible = entries[0]?.isIntersecting ?? false; runtime.suspend(); if (visible) wake(); else { cancelFrame(); stats(true) } })
   observer.observe(canvas)
+  const stopMenu = subscribeMenuMotion(open => {
+    if (disposed) return
+    menuOpen = open
+    canvas.dataset.menuSuspended = String(open)
+    cancelFrame(); runtime.suspend(); stats(true)
+    if (!open) wake()
+  })
   measure()
 
   let failed = 0
@@ -630,7 +639,7 @@ export function mountInterestScene(canvas: HTMLCanvasElement, dark: boolean, eve
     resetView() { manualYaw = 0; manualPitch = 0; wake() },
     dispose() {
       if (disposed) return
-      stats(true); disposed = true; runtime.suspend(); cancelFrame(); controller.abort(); loader.dispose(); resize.disconnect(); observer.disconnect()
+      stats(true); disposed = true; stopMenu(); runtime.suspend(); cancelFrame(); controller.abort(); loader.dispose(); resize.disconnect(); observer.disconnect()
       for (const specimen of specimens) { specimen.boardBatch?.dispose(); specimen.boardLabels?.dispose() }
       for (const geometry of geometries) geometry.dispose()
       for (const material of materials) material.dispose()

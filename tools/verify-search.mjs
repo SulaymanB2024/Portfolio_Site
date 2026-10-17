@@ -106,6 +106,34 @@ for (const url of urls) {
     Object.values(value).forEach(checkReferences)
   }
   checkReferences(graph)
+  const breadcrumb = graph.find(node => node['@type'] === 'BreadcrumbList')
+  if (url.pathname === '/') assert.equal(breadcrumb, undefined)
+  else {
+    assert(breadcrumb, `Missing navigation breadcrumb: ${url.pathname}`)
+    assert.deepEqual(page.breadcrumb, { '@id': breadcrumb['@id'] })
+    assert(breadcrumb.itemListElement.length >= 2)
+    assert.equal(breadcrumb.itemListElement.at(-1).item, url.href)
+    const seen = new Set()
+    breadcrumb.itemListElement.forEach((item, index) => {
+      assert.equal(item['@type'], 'ListItem'); assert.equal(item.position, index + 1)
+      assert(item.name?.trim())
+      assert(urls.some(target => target.href === item.item), `Noncanonical breadcrumb: ${item.item}`)
+      assert(!seen.has(item.item)); seen.add(item.item)
+    })
+  }
+  for (const dataset of graph.filter(node => node['@type'] === 'Dataset')) {
+    assert(dataset.name?.trim())
+    assert(dataset.description?.length >= 50 && dataset.description.length <= 5000)
+    assert(decode(body.replace(/<[^>]+>/g, ' ')).replace(/\s+/g, ' ').includes(dataset.description), `Dataset description is not visible: ${url.pathname}`)
+    assert(body.includes('id="reader-downloads"'))
+    assert.equal(dataset.url, `${url.href}#reader-downloads`)
+    assert.equal(dataset.creator['@id'], `${origin}/#person`)
+    assert.equal(dataset.distribution['@type'], 'DataDownload')
+    const download = new URL(dataset.distribution.contentUrl)
+    assert.equal(download.origin, origin)
+    assert(body.includes(`href="${download.pathname}"`), `Dataset download is not visible: ${url.pathname}`)
+    assert((await stat(join('dist', download.pathname))).isFile())
+  }
   if (['/about', '/resume'].includes(url.pathname)) {
     assert.equal(page['@type'], 'ProfilePage')
     assert.equal(page.mainEntity['@id'], person['@id'])

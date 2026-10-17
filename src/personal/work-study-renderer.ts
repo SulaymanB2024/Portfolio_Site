@@ -1,5 +1,6 @@
 import * as THREE from 'three'
 import { PortfolioRuntime } from './portfolio-runtime'
+import { subscribeMenuMotion } from './menu-motion'
 import { createPortfolioModelLoader } from './portfolio-model-loader'
 import { portfolioAssetUrl } from './portfolio-assets'
 import { clampStudy, settleWorkStudy, workStudyPose, workStudyRenderSize } from './work-study-motion'
@@ -78,6 +79,9 @@ export function mountWorkStudies(canvas: HTMLCanvasElement, root: HTMLElement): 
   let disposed = false
   let contextLost = false
   let playing = true
+  let menuOpen = false
+  let menuSuspendedAt: number | null = null
+  let stopMenu = () => {}
   let raf = 0
   let wakeTimer = 0
   let urgent = true
@@ -143,7 +147,7 @@ export function mountWorkStudies(canvas: HTMLCanvasElement, root: HTMLElement): 
   }
 
   function resumeFlight() {
-    if (flightSuspendedAt === null || document.hidden || contextLost) return
+    if (flightSuspendedAt === null || document.hidden || contextLost || menuOpen) return
     if (opening && !frameReview?.paused()) opening.start += performance.now() - flightSuspendedAt
     flightSuspendedAt = null
   }
@@ -157,13 +161,13 @@ export function mountWorkStudies(canvas: HTMLCanvasElement, root: HTMLElement): 
 
   function requestRender(immediate = true) {
     urgent ||= immediate
-    if (disposed || contextLost || document.hidden || raf) return
+    if (disposed || contextLost || document.hidden || menuOpen || raf) return
     if (urgent) { window.clearTimeout(wakeTimer); wakeTimer = 0 }
     if (wakeTimer) return
     const delay = urgent || frameReview?.paused() ? 0 : runtime.paintDelay(performance.now())
     if (delay > 0) wakeTimer = window.setTimeout(() => {
       wakeTimer = 0
-      if (!disposed && !contextLost && !document.hidden && !raf) raf = requestAnimationFrame(render)
+      if (!disposed && !contextLost && !document.hidden && !menuOpen && !raf) raf = requestAnimationFrame(render)
     }, delay)
     else raf = requestAnimationFrame(render)
   }
@@ -390,7 +394,7 @@ export function mountWorkStudies(canvas: HTMLCanvasElement, root: HTMLElement): 
   function render(time: number) {
     time = frameReview?.now(time) ?? time
     raf = 0
-    if (disposed || contextLost || document.hidden || !renderer || !target || !dither) return
+    if (disposed || contextLost || document.hidden || menuOpen || !renderer || !target || !dither) return
     if (!runtime.canPaint(time, urgent || !!frameReview?.paused())) { requestRender(false); return }
     // Re-anchor only when replacing the bitmap. Native scrolling carries the
     // previous image with its slots between these bounded GPU paints.
@@ -684,6 +688,7 @@ export function mountWorkStudies(canvas: HTMLCanvasElement, root: HTMLElement): 
   function dispose() {
     if (disposed) return
     disposed = true
+    stopMenu()
     frameReview?.dispose()
     opening = null
     stats(false, true)
@@ -741,6 +746,7 @@ export function mountWorkStudies(canvas: HTMLCanvasElement, root: HTMLElement): 
         postScene.add(flightInk.points)
       }
       opening = { study, start: frameReview?.begin(performance.now()) ?? performance.now(), phase: 'depart', from: study.element.getBoundingClientRect(), distance: study.camera.position.distanceTo(study.controls.target), aspect: study.camera.aspect, onDeparted }
+      if (menuOpen) flightSuspendedAt ??= performance.now()
       canvas.dataset.flight = 'depart'
       requestRender()
       return true
@@ -775,7 +781,7 @@ export function mountWorkStudies(canvas: HTMLCanvasElement, root: HTMLElement): 
       resizeObserver?.observe(slot)
       opening.phase = 'dock'
       opening.start = (frameReview?.now(performance.now()) ?? performance.now()) - (reducedMotion.matches ? STUDY_DOCK_MS : 0)
-      flightSuspendedAt = document.hidden || contextLost ? performance.now() : null
+      flightSuspendedAt = document.hidden || contextLost || menuOpen ? performance.now() : null
       opening.onComplete = onComplete
       canvas.dataset.flight = 'dock'
       refresh()
@@ -923,6 +929,26 @@ export function mountWorkStudies(canvas: HTMLCanvasElement, root: HTMLElement): 
       }
     }, { rootMargin: '700px 300px' })
     for (const study of studies) nearObserver.observe(study.element)
+    stopMenu = subscribeMenuMotion(open => {
+      if (disposed) return
+      menuOpen = open
+      canvas.dataset.menuSuspended = String(open)
+      cancelFrame(); runtime.suspend()
+      if (open) {
+        menuSuspendedAt ??= performance.now()
+        if (opening) flightSuspendedAt ??= performance.now()
+        stats(false, true)
+      } else {
+        if (menuSuspendedAt !== null) {
+          const pausedFor = performance.now() - menuSuspendedAt
+          for (const study of studies) if (study.fadeStart >= 0) study.fadeStart += pausedFor
+          menuSuspendedAt = null
+        }
+        resumeFlight()
+        boundsDirty = true
+        requestRender()
+      }
+    })
     canvas.style.visibility = ''
     resize()
     refresh()

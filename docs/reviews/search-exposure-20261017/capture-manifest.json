@@ -1,0 +1,62 @@
+[
+  {
+    "file": "dataset-final-desktop.png",
+    "sha256": "7cd13e0e927cb471eaa540a8ac94e28f2652b91801c36ed55786dd734f32a016",
+    "source": "Unedited native in-app browser screenshot",
+    "date": "2026-10-17"
+  },
+  {
+    "file": "work-final-desktop.png",
+    "sha256": "52e4cdd58c78a012ea3735d4aa03b071c57122f315cfd0a8368d51bb6fd97c1b",
+    "source": "Unedited native in-app browser screenshot",
+    "date": "2026-10-17"
+  },
+  {
+    "file": "resume-final-phone.png",
+    "sha256": "2f4331a0c1ff5f6687d862bc091462a166fa2d69e1835d2656081319434e52c3",
+    "source": "Unedited native in-app browser screenshot",
+    "date": "2026-10-17"
+  },
+  {
+    "file": "contact-final-desktop.png",
+    "sha256": "49efd7562a2fe840dc32d21b3028ac11b36e61334cc8967bfcdf566cbcdef3d3",
+    "source": "Unedited native in-app browser screenshot",
+    "date": "2026-10-17"
+  },
+  {
+    "file": "contact-final-phone.png",
+    "sha256": "b94069ad1fc5645afd620c3589a93ae91ddb0be4bab38d27346bde8568fbd950",
+    "source": "Unedited native in-app browser screenshot",
+    "date": "2026-10-17"
+  },
+  {
+    "file": "print-final-desktop.png",
+    "sha256": "bd75ec4fda73c71ea4292de8952c1bf9d269722b09c425ea2b977f8f6d08a1ae",
+    "source": "Unedited native in-app browser screenshot",
+    "date": "2026-10-17"
+  },
+  {
+    "file": "print-final-phone.png",
+    "sha256": "9a96a20fe75014faffc6d08aa59e0ba5e4bad5bc8dea8c78c9f2ced4eb186ef5",
+    "source": "Unedited native in-app browser screenshot",
+    "date": "2026-10-17"
+  },
+  {
+    "file": "work-final-phone-a.png",
+    "sha256": "4a5d60f3a0fe744b88230170c0ba09e0b40f259302cd3d3705de8f663bfa7828",
+    "source": "Unedited native in-app browser screenshot; PNG bytes preserved",
+    "date": "2026-10-17"
+  },
+  {
+    "file": "work-final-phone-b.png",
+    "sha256": "79857e1bb3ffe12d3bc0c54ffc3b53fc9b4dd672203d3cca8a00a7eced14c6ee",
+    "source": "Unedited native in-app browser screenshot; PNG bytes preserved",
+    "date": "2026-10-17"
+  },
+  {
+    "file": "about-final-desktop.png",
+    "sha256": "cfa47ba9c0eec5d482a90528c20d87363d712a7d0f66979dd568e4824af9677a",
+    "source": "Unedited native in-app browser screenshot",
+    "date": "2026-10-17"
+  }
+]

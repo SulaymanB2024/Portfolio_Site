@@ -11,6 +11,7 @@ import { createPortfolioModelLoader } from './portfolio-model-loader.ts'
 import { portfolioAssetUrl } from './portfolio-assets.ts'
 import { readPortfolioRenderPolicy } from './mobile-render-policy.ts'
 import { installObjectTouchOrbit } from './object-touch-orbit.ts'
+import { subscribeMenuMotion } from './menu-motion.ts'
 
 export type ObjectKind = 'helmet' | 'crystal' | 'ribbon' | 'globe' | 'cross' | 'headrest'
 export interface ObjectHandle {
@@ -176,12 +177,14 @@ export function mountObject(canvas: HTMLCanvasElement, kind: ObjectKind, dark: b
     let visible = initialRect.bottom > 0 && initialRect.top < window.innerHeight && initialRect.right > 0 && initialRect.left < window.innerWidth
     let contextLost = false
     let fitDistance = 4
+    let menuOpen = false
+    let stopMenu = () => {}
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)')
     const mobilePolicy = readPortfolioRenderPolicy()
     canvas.dataset.spinning = 'false'
 
     function active() {
-      return !disposed && visible && !document.hidden && !contextLost && !loadFailed && !scrolling
+      return !disposed && visible && !document.hidden && !contextLost && !loadFailed && !scrolling && !menuOpen
     }
     function requestRender(force: unknown = true) {
       urgent ||= !painting && Boolean(force)
@@ -452,6 +455,7 @@ export function mountObject(canvas: HTMLCanvasElement, kind: ObjectKind, dark: b
     reducedMotion.addEventListener('change', onMotionChange)
 
     teardown = () => {
+      stopMenu()
       pause()
       window.clearTimeout(scrollTimer)
       releaseTouchOrbit()
@@ -479,6 +483,13 @@ export function mountObject(canvas: HTMLCanvasElement, kind: ObjectKind, dark: b
       renderer.dispose()
       canvas.style.touchAction = previousTouchAction
     }
+    stopMenu = subscribeMenuMotion(open => {
+      if (disposed) return
+      menuOpen = open
+      canvas.dataset.menuSuspended = String(open)
+      pause()
+      if (!open) requestRender()
+    })
     setDark(dark)
     resize()
     void load()

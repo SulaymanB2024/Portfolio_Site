@@ -4,6 +4,73 @@ import { searchMetadata, sourceDate, metadataTags, withSearchHead, serializeSche
 import { documentHref, withDocumentLinks } from '../tools/public-document-links.ts'
 import { identity } from '../src/personal/identity.ts'
 import { recruiterCopy } from '../src/personal/recruiter-copy.ts'
+import { publicPages, siteOrigin } from '../src/personal/public-pages.ts'
+import { researchDatasets } from '../src/personal/editorial/research-datasets.ts'
+import { articleDownloads } from '../src/personal/editorial/article-content.ts'
+import { readFile } from 'node:fs/promises'
+import type { WritingArticle } from '../src/personal/editorial/types.ts'
+
+test('canonical documents have resolved breadcrumbs following the visible navigation and reading paths', () => {
+  const paths = new Set(publicPages.map(page => `${siteOrigin}${page.path}`))
+  for (const page of publicPages) {
+    const graph = searchMetadata(page.route).schema!['@graph']
+    const trail = graph.find(node => node['@type'] === 'BreadcrumbList')
+    if (!page.route) { assert.equal(trail, undefined); continue }
+    assert(trail)
+    const items = trail.itemListElement as { position: number; name: string; item: string }[]
+    assert(items.length >= 2)
+    assert.equal(items[0].item, `${siteOrigin}/`)
+    assert.equal(items.at(-1)?.item, `${siteOrigin}${page.path}`)
+    assert.equal(new Set(items.map(item => item.item)).size, items.length)
+    items.forEach((item, index) => { assert.equal(item.position, index + 1); assert(item.name.trim()); assert(paths.has(item.item)) })
+    assert.deepEqual(graph.find(node => node['@id'] === `${siteOrigin}${page.path}#webpage`)?.breadcrumb, { '@id': trail['@id'] })
+  }
+  const legacyPath = searchMetadata('writing/who-owns-texas-toll-roads').schema!['@graph'].find(node => node['@type'] === 'BreadcrumbList')!
+  assert.deepEqual((legacyPath.itemListElement as { item: string }[]).map(item => new URL(item.item).pathname), ['/', '/writing', '/topics/financial-systems', '/markets/who-owns-texas-toll-roads'])
+})
+
+test('Dataset metadata describes visible free downloads without inventing dates or reuse rights', async () => {
+  for (const [slug, datasets] of Object.entries(researchDatasets)) {
+    const source = JSON.parse(await readFile(new URL(`../src/personal/editorial/data/articles/${slug}.json`, import.meta.url), 'utf8')) as WritingArticle
+    const downloads = articleDownloads(source)
+    const metadata = searchMetadata(`writing/${slug}`)
+    const graph = metadata.schema!['@graph']
+    const article = graph.find(node => node['@type'] === 'Article')!
+    for (const dataset of datasets) {
+      const node = graph.find(node => node['@id'] === `${siteOrigin}${dataset.href}#dataset`)!
+      const download = downloads.find(item => item.href === dataset.href)
+      assert(download)
+      assert.equal(node['@type'], 'Dataset')
+      assert.equal(node.description, download.description)
+      assert(dataset.description.length >= 50 && dataset.description.length <= 5000)
+      assert.equal(node.url, `${metadata.canonical}#reader-downloads`)
+      assert.equal(node.isAccessibleForFree, true)
+      assert.equal(node.license, undefined)
+      assert.equal(node.datePublished, undefined)
+      assert.equal(node.dateModified, undefined)
+      assert.deepEqual(node.creator, { '@id': personId })
+      assert.deepEqual(node.distribution, { '@type': 'DataDownload', contentUrl: `${siteOrigin}${dataset.href}`, encodingFormat: 'text/csv' })
+      assert((article.hasPart as { '@id': string }[]).some(part => part['@id'] === node['@id']))
+      const csv = await readFile(new URL(`../public${dataset.href}`, import.meta.url), 'utf8')
+      assert(csv.trim().split('\n').length > 1)
+    }
+  }
+  assert(searchMetadata('contact').schema!['@graph'].every(node => node['@type'] !== 'Dataset'))
+})
+
+test('initial document links bypass aliases and retain anchors, chapter state and source artifacts', () => {
+  assert.equal(documentHref('/research'), '/writing')
+  assert.equal(documentHref('/markets'), '/writing')
+  assert.equal(documentHref('https://sulayman-bowles.dev/atlas'), '/work/atlas')
+  assert.equal(documentHref('/atlas/sample-crawl'), '/work/atlas#study-section-3')
+  assert.equal(documentHref('/atlas/sample-crawl#study-section-2'), '/work/atlas#study-section-2')
+  assert.equal(documentHref('/work/chegg?chapter=practice'), '/work/chegg?chapter=practice')
+  assert.equal(documentHref('/writing/the-first-ai-managers#case-inventory'), '/research/ai-systems/the-first-ai-managers#case-inventory')
+  assert.equal(documentHref('/research/software-buyout-cohort-2020-2022'), '/research/software-buyout-cohort-2020-2022')
+  assert.equal(documentHref('https://example.com/research'), 'https://example.com/research')
+  assert.equal(withDocumentLinks('<a href="/research">Research</a><a href="https://example.com/?x=1&amp;y=2">Source</a>'), '<a href="/writing">Research</a><a href="https://example.com/?x=1&amp;y=2">Source</a>')
+  assert.equal(withDocumentLinks('<pre>&lt;a href="/research"&gt;Literal example&lt;/a&gt;</pre>'), '<pre>&lt;a href="/research"&gt;Literal example&lt;/a&gt;</pre>')
+})
 
 test('recruiter positioning reaches search and social previews without replacing the headline', () => {
   const home = searchMetadata('home')

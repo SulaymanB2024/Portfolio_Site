@@ -5,6 +5,7 @@ import { createPortfolioModelLoader } from '../portfolio-model-loader'
 import { PORTFOLIO_DITHER_GLSL } from '../dither-kernel'
 import { readPrintPalette, printPixelRatio } from '../print-palette'
 import { readPortfolioRenderPolicy, touchOrbitIntent } from '../mobile-render-policy'
+import { subscribeMenuMotion } from '../menu-motion'
 import { disposeModel, frameModel } from '../../model-resources'
 import { createResumeTransition } from './resume-scene-transition'
 import { createResumeSurfaceSampler, orderResumeSurface, RESUME_DITHER_SIZE, resumeDitherTile, resumeMorphPhase } from './resume-surface'
@@ -128,6 +129,7 @@ export function mountResumeScene(canvas: HTMLCanvasElement, initialDark: boolean
   const transition = createResumeTransition<SceneKey>('knight', false)
   const motion = matchMedia('(prefers-reduced-motion: reduce)')
   let disposed = false, lost = false, failed = false, visible = true, loaded = false, playing = true
+  let menuOpen = false
   let frame = 0, last: number | null = null, nextPaint: number | null = null, generation = 0, renderFrames = 0, yaw = 0, pitch = 0
   let cameraDistance = 6, fitDirty = true, current: SceneKey = 'knight'
   let morph: { from: SceneKey; to: SceneKey; distance: number; fromDistance: number; toDistance: number } | null = null
@@ -240,7 +242,7 @@ export function mountResumeScene(canvas: HTMLCanvasElement, initialDark: boolean
   }
   function cancel() { cancelAnimationFrame(frame); frame = 0; last = null; nextPaint = null; cadenceStats = { frames: 0, elapsed: 0, maxGap: 0, maxDraw: 0 } }
   function wake() {
-    if (!frame && !disposed && !lost && !failed && visible && !document.hidden && loaded) frame = requestAnimationFrame(paint)
+    if (!frame && !disposed && !lost && !failed && visible && !document.hidden && !menuOpen && loaded) frame = requestAnimationFrame(paint)
   }
   function releaseInspection() {
     const id = pointer?.id
@@ -335,7 +337,7 @@ export function mountResumeScene(canvas: HTMLCanvasElement, initialDark: boolean
 
   function paint(now: number) {
     frame = 0
-    if (disposed || lost || failed || !visible || document.hidden || !loaded) { last = null; return }
+    if (disposed || lost || failed || !visible || document.hidden || menuOpen || !loaded) { last = null; return }
     const cadence = readPortfolioRenderPolicy().mobile ? 30 : 60
     if (nextPaint !== null && now + .8 < nextPaint) { frame = requestAnimationFrame(paint); return }
     nextPaint = nextPaint === null ? now + 1000 / cadence : Math.max(nextPaint + 1000 / cadence, now)
@@ -422,6 +424,13 @@ export function mountResumeScene(canvas: HTMLCanvasElement, initialDark: boolean
   }
   canvas.addEventListener('webglcontextlost', contextLost); canvas.addEventListener('webglcontextrestored', contextRestored)
   document.addEventListener('visibilitychange', visibility); motion.addEventListener('change', changedMotion)
+  const stopMenu = subscribeMenuMotion(open => {
+    if (disposed) return
+    menuOpen = open
+    canvas.dataset.menuSuspended = String(open)
+    cancel()
+    if (!open) wake()
+  })
   function pointerDown(event: PointerEvent) {
     if (event.button !== 0 || !loaded || lost || failed || pointer) return
     pointer = { id: event.pointerId, x: event.clientX, y: event.clientY, yaw, pitch, touch: event.pointerType !== 'mouse', intent: 'pending' }
@@ -491,7 +500,7 @@ export function mountResumeScene(canvas: HTMLCanvasElement, initialDark: boolean
     setPlaying(next: boolean) { playing = next; last = null; nextPaint = null; wake() },
     dispose() {
       if (disposed) return
-      disposed = true; cancel(); releaseInspection(); generation++; request.abort(); loader.dispose()
+      disposed = true; stopMenu(); cancel(); releaseInspection(); generation++; request.abort(); loader.dispose()
       canvas.removeEventListener('webglcontextlost', contextLost); canvas.removeEventListener('webglcontextrestored', contextRestored)
       canvas.removeEventListener('pointerdown', pointerDown); canvas.removeEventListener('pointermove', pointerMove)
       canvas.removeEventListener('pointerup', pointerUp); canvas.removeEventListener('pointercancel', pointerUp); canvas.removeEventListener('lostpointercapture', pointerUp); canvas.removeEventListener('keydown', keyDown)

@@ -26,10 +26,15 @@ export function mountPrintInstrument(canvas: HTMLCanvasElement, initial: PrintCo
   const ctx = canvas.getContext('2d')
   if (!ctx) return null
   let composition = normalizePrint(initial), points = printPoints(composition)
-  let held = false, frame = 0, previous = 0, disposed = false
+  let held = false, frame = 0, previous = 0, disposed = false, visible = true
   let frames = 0, drawTotal = 0, observationStarted = 0, observationFrames = 0
+  const scrollport = canvas.closest<HTMLDialogElement>('dialog.print-room')
+  const header = scrollport?.querySelector<HTMLElement>('.print-room-header') ?? null
+  let viewport: IntersectionObserver | null = null
+  let viewportMargin = ''
+  let viewportGeneration = 0
   const query = matchMedia('(prefers-reduced-motion: reduce)')
-  const eligible = () => !disposed && !held && !document.hidden && !query.matches
+  const eligible = () => !disposed && !held && visible && !document.hidden && !query.matches
   function draw() {
     const started = performance.now()
     drawPrint(ctx!, points, composition, canvas.width)
@@ -58,31 +63,53 @@ export function mountPrintInstrument(canvas: HTMLCanvasElement, initial: PrintCo
     frame = requestAnimationFrame(tick)
   }
   function sync() {
+    if (disposed) return
     cancel()
     canvas.dataset.state = eligible() ? 'running' : 'held'
-    draw()
+    if (visible) draw()
     if (eligible()) frame = requestAnimationFrame(tick)
   }
   function resize() {
+    if (disposed) return
     const box = canvas.getBoundingClientRect()
     const size = Math.max(1, Math.round(Math.min(900, box.width * Math.min(2, devicePixelRatio || 1))))
     if (canvas.width !== size || canvas.height !== size) { canvas.width = size; canvas.height = size; draw() }
+    observeVisibility()
+  }
+  function observeVisibility() {
+    // The scrollport clips geometry; its opaque sticky header covers a further strip.
+    const inset = header ? Math.max(0, header.getBoundingClientRect().height) : 0
+    const margin = `${-inset}px 0px 0px 0px`
+    if (viewport && viewportMargin === margin) return
+    const generation = ++viewportGeneration
+    viewport?.disconnect()
+    viewportMargin = margin
+    viewport = new IntersectionObserver(entries => {
+      if (disposed || generation !== viewportGeneration) return
+      const entry = entries[entries.length - 1]
+      if (!entry || visible === entry.isIntersecting) return
+      visible = entry.isIntersecting
+      sync()
+    }, { root: scrollport, rootMargin: margin })
+    viewport.observe(canvas)
   }
   const observer = new ResizeObserver(resize)
   observer.observe(canvas)
+  if (header) observer.observe(header)
   document.addEventListener('visibilitychange', sync)
   query.addEventListener('change', sync)
   resize(); sync()
   return {
     snapshot: () => ({ ...composition }),
-    setHeld(value: boolean) { held = value; sync() },
+    setHeld(value: boolean) { if (disposed) return; held = value; sync() },
     update(input: PrintComposition) {
+      if (disposed) return
       const next = normalizePrint(input)
       if (next.form !== composition.form || next.seed !== composition.seed || next.tension !== composition.tension) points = printPoints(next)
       // Parameter edits retain the live phase; a held composition uses its exact pose.
       next.phase = composition.phase
       composition = next; draw()
     },
-    dispose() { disposed = true; cancel(); observer.disconnect(); document.removeEventListener('visibilitychange', sync); query.removeEventListener('change', sync); canvas.dataset.state = 'closed' },
+    dispose() { if (disposed) return; disposed = true; cancel(); observer.disconnect(); viewport?.disconnect(); document.removeEventListener('visibilitychange', sync); query.removeEventListener('change', sync); canvas.dataset.state = 'closed' },
   }
 }
