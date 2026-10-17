@@ -1,0 +1,27 @@
+[
+  {
+    "slug": "chegg",
+    "ready": true,
+    "orbit": "ArrowRight",
+    "reset": "Home",
+    "overflow": false
+  },
+  {
+    "heading": "Sapien.",
+    "overflow": false,
+    "ready": true,
+    "slug": "sapien"
+  },
+  {
+    "heading": "VOID.",
+    "overflow": false,
+    "ready": true,
+    "slug": "void"
+  },
+  {
+    "heading": "Experiments.",
+    "overflow": false,
+    "ready": true,
+    "slug": "miscellaneous"
+  }
+]

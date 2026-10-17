@@ -1,0 +1,751 @@
+[
+  {
+    "path": "/",
+    "status": 200,
+    "canonical": "https://sulayman-bowles.dev/",
+    "heading": true,
+    "passed": true
+  },
+  {
+    "path": "/about",
+    "status": 200,
+    "canonical": "https://sulayman-bowles.dev/about",
+    "heading": true,
+    "passed": true
+  },
+  {
+    "path": "/contact",
+    "status": 200,
+    "canonical": "https://sulayman-bowles.dev/contact",
+    "heading": true,
+    "passed": true
+  },
+  {
+    "path": "/markets/who-owns-texas-toll-roads",
+    "status": 200,
+    "canonical": "https://sulayman-bowles.dev/markets/who-owns-texas-toll-roads",
+    "heading": true,
+    "passed": true
+  },
+  {
+    "path": "/research/ai-crawlers/ai-crawler-registry",
+    "status": 200,
+    "canonical": "https://sulayman-bowles.dev/research/ai-crawlers/ai-crawler-registry",
+    "heading": true,
+    "passed": true
+  },
+  {
+    "path": "/research/ai-crawlers/ai-search-crawler-policy",
+    "status": 200,
+    "canonical": "https://sulayman-bowles.dev/research/ai-crawlers/ai-search-crawler-policy",
+    "heading": true,
+    "passed": true
+  },
+  {
+    "path": "/research/ai-crawlers/claude-crawlers-claudebot-searchbot-user",
+    "status": 200,
+    "canonical": "https://sulayman-bowles.dev/research/ai-crawlers/claude-crawlers-claudebot-searchbot-user",
+    "heading": true,
+    "passed": true
+  },
+  {
+    "path": "/research/ai-crawlers/google-extended-search-gemini-ai-overviews",
+    "status": 200,
+    "canonical": "https://sulayman-bowles.dev/research/ai-crawlers/google-extended-search-gemini-ai-overviews",
+    "heading": true,
+    "passed": true
+  },
+  {
+    "path": "/research/ai-crawlers/openai-crawlers-oai-searchbot-gptbot-chatgpt-user-adsbot",
+    "status": 200,
+    "canonical": "https://sulayman-bowles.dev/research/ai-crawlers/openai-crawlers-oai-searchbot-gptbot-chatgpt-user-adsbot",
+    "heading": true,
+    "passed": true
+  },
+  {
+    "path": "/research/ai-crawlers/perplexitybot-vs-perplexity-user",
+    "status": 200,
+    "canonical": "https://sulayman-bowles.dev/research/ai-crawlers/perplexitybot-vs-perplexity-user",
+    "heading": true,
+    "passed": true
+  },
+  {
+    "path": "/research/ai-crawlers/robots-txt-courtesy-not-access-control",
+    "status": 200,
+    "canonical": "https://sulayman-bowles.dev/research/ai-crawlers/robots-txt-courtesy-not-access-control",
+    "heading": true,
+    "passed": true
+  },
+  {
+    "path": "/research/ai-systems/replayable-traces-ai-agent-evaluation",
+    "status": 200,
+    "canonical": "https://sulayman-bowles.dev/research/ai-systems/replayable-traces-ai-agent-evaluation",
+    "heading": true,
+    "passed": true
+  },
+  {
+    "path": "/research/ai-systems/the-ai-megawatt",
+    "status": 200,
+    "canonical": "https://sulayman-bowles.dev/research/ai-systems/the-ai-megawatt",
+    "heading": true,
+    "passed": true
+  },
+  {
+    "path": "/research/ai-systems/the-first-ai-managers",
+    "status": 200,
+    "canonical": "https://sulayman-bowles.dev/research/ai-systems/the-first-ai-managers",
+    "heading": true,
+    "passed": true
+  },
+  {
+    "path": "/research/crawler-engineering/crawl-frontier-state-machine",
+    "status": 200,
+    "canonical": "https://sulayman-bowles.dev/research/crawler-engineering/crawl-frontier-state-machine",
+    "heading": true,
+    "passed": true
+  },
+  {
+    "path": "/research/crawler-engineering/verify-ai-crawlers-server-logs",
+    "status": 200,
+    "canonical": "https://sulayman-bowles.dev/research/crawler-engineering/verify-ai-crawlers-server-logs",
+    "heading": true,
+    "passed": true
+  },
+  {
+    "path": "/research/data-systems/audit-findings-derived-records",
+    "status": 200,
+    "canonical": "https://sulayman-bowles.dev/research/data-systems/audit-findings-derived-records",
+    "heading": true,
+    "passed": true
+  },
+  {
+    "path": "/research/data-systems/jane-street-exact-search-solver-verification",
+    "status": 200,
+    "canonical": "https://sulayman-bowles.dev/research/data-systems/jane-street-exact-search-solver-verification",
+    "heading": true,
+    "passed": true
+  },
+  {
+    "path": "/research/data-systems/sqlite-crawl-pipelines",
+    "status": 200,
+    "canonical": "https://sulayman-bowles.dev/research/data-systems/sqlite-crawl-pipelines",
+    "heading": true,
+    "passed": true
+  },
+  {
+    "path": "/research/data-systems/us-rare-earth-magnet-manufacturing-capacity",
+    "status": 200,
+    "canonical": "https://sulayman-bowles.dev/research/data-systems/us-rare-earth-magnet-manufacturing-capacity",
+    "heading": true,
+    "passed": true
+  },
+  {
+    "path": "/research/financial-systems/adobe-paid-workflows",
+    "status": 200,
+    "canonical": "https://sulayman-bowles.dev/research/financial-systems/adobe-paid-workflows",
+    "heading": true,
+    "passed": true
+  },
+  {
+    "path": "/research/financial-systems/airline-loyalty-collateral-valuation",
+    "status": 200,
+    "canonical": "https://sulayman-bowles.dev/research/financial-systems/airline-loyalty-collateral-valuation",
+    "heading": true,
+    "passed": true
+  },
+  {
+    "path": "/research/financial-systems/anduril-valuation-capital-productivity",
+    "status": 200,
+    "canonical": "https://sulayman-bowles.dev/research/financial-systems/anduril-valuation-capital-productivity",
+    "heading": true,
+    "passed": true
+  },
+  {
+    "path": "/research/financial-systems/chegg-cash-flow-turnaround",
+    "status": 200,
+    "canonical": "https://sulayman-bowles.dev/research/financial-systems/chegg-cash-flow-turnaround",
+    "heading": true,
+    "passed": true
+  },
+  {
+    "path": "/research/financial-systems/coreweave-ddtl-5-5",
+    "status": 200,
+    "canonical": "https://sulayman-bowles.dev/research/financial-systems/coreweave-ddtl-5-5",
+    "heading": true,
+    "passed": true
+  },
+  {
+    "path": "/research/financial-systems/crocs-cash-and-brand-test",
+    "status": 200,
+    "canonical": "https://sulayman-bowles.dev/research/financial-systems/crocs-cash-and-brand-test",
+    "heading": true,
+    "passed": true
+  },
+  {
+    "path": "/research/financial-systems/elevenlabs-cost-of-accepted-work",
+    "status": 200,
+    "canonical": "https://sulayman-bowles.dev/research/financial-systems/elevenlabs-cost-of-accepted-work",
+    "heading": true,
+    "passed": true
+  },
+  {
+    "path": "/research/financial-systems/expedia-network-and-cash",
+    "status": 200,
+    "canonical": "https://sulayman-bowles.dev/research/financial-systems/expedia-network-and-cash",
+    "heading": true,
+    "passed": true
+  },
+  {
+    "path": "/research/financial-systems/flock-safety-installed-cohort-cash",
+    "status": 200,
+    "canonical": "https://sulayman-bowles.dev/research/financial-systems/flock-safety-installed-cohort-cash",
+    "heading": true,
+    "passed": true
+  },
+  {
+    "path": "/research/financial-systems/foreign-owned-texas-toll-roads",
+    "status": 200,
+    "canonical": "https://sulayman-bowles.dev/research/financial-systems/foreign-owned-texas-toll-roads",
+    "heading": true,
+    "passed": true
+  },
+  {
+    "path": "/research/financial-systems/gpu-financing-ai-infrastructure",
+    "status": 200,
+    "canonical": "https://sulayman-bowles.dev/research/financial-systems/gpu-financing-ai-infrastructure",
+    "heading": true,
+    "passed": true
+  },
+  {
+    "path": "/research/financial-systems/harvey-who-keeps-the-value-of-legal-ai",
+    "status": 200,
+    "canonical": "https://sulayman-bowles.dev/research/financial-systems/harvey-who-keeps-the-value-of-legal-ai",
+    "heading": true,
+    "passed": true
+  },
+  {
+    "path": "/research/financial-systems/hidden-financing-hardware-startups",
+    "status": 200,
+    "canonical": "https://sulayman-bowles.dev/research/financial-systems/hidden-financing-hardware-startups",
+    "heading": true,
+    "passed": true
+  },
+  {
+    "path": "/research/financial-systems/how-airlines-borrow-against-loyalty-programs",
+    "status": 200,
+    "canonical": "https://sulayman-bowles.dev/research/financial-systems/how-airlines-borrow-against-loyalty-programs",
+    "heading": true,
+    "passed": true
+  },
+  {
+    "path": "/research/financial-systems/humanoid-robot-startup-financing",
+    "status": 200,
+    "canonical": "https://sulayman-bowles.dev/research/financial-systems/humanoid-robot-startup-financing",
+    "heading": true,
+    "passed": true
+  },
+  {
+    "path": "/research/financial-systems/hyperliquid-valuation",
+    "status": 200,
+    "canonical": "https://sulayman-bowles.dev/research/financial-systems/hyperliquid-valuation",
+    "heading": true,
+    "passed": true
+  },
+  {
+    "path": "/research/financial-systems/kalshi-40-billion-question",
+    "status": 200,
+    "canonical": "https://sulayman-bowles.dev/research/financial-systems/kalshi-40-billion-question",
+    "heading": true,
+    "passed": true
+  },
+  {
+    "path": "/research/financial-systems/paypal-margin-dollar-recovery",
+    "status": 200,
+    "canonical": "https://sulayman-bowles.dev/research/financial-systems/paypal-margin-dollar-recovery",
+    "heading": true,
+    "passed": true
+  },
+  {
+    "path": "/research/financial-systems/private-equity-home-services-rollups",
+    "status": 200,
+    "canonical": "https://sulayman-bowles.dev/research/financial-systems/private-equity-home-services-rollups",
+    "heading": true,
+    "passed": true
+  },
+  {
+    "path": "/research/financial-systems/ramp-saving-money-and-retaining-contribution",
+    "status": 200,
+    "canonical": "https://sulayman-bowles.dev/research/financial-systems/ramp-saving-money-and-retaining-contribution",
+    "heading": true,
+    "passed": true
+  },
+  {
+    "path": "/research/financial-systems/software-buyout-boom-2020-2022-exit-audit",
+    "status": 200,
+    "canonical": "https://sulayman-bowles.dev/research/financial-systems/software-buyout-boom-2020-2022-exit-audit",
+    "heading": true,
+    "passed": true
+  },
+  {
+    "path": "/research/financial-systems/texas-managed-lanes-ownership-operators",
+    "status": 200,
+    "canonical": "https://sulayman-bowles.dev/research/financial-systems/texas-managed-lanes-ownership-operators",
+    "heading": true,
+    "passed": true
+  },
+  {
+    "path": "/research/financial-systems/texas-private-toll-concession-expiration-dates",
+    "status": 200,
+    "canonical": "https://sulayman-bowles.dev/research/financial-systems/texas-private-toll-concession-expiration-dates",
+    "heading": true,
+    "passed": true
+  },
+  {
+    "path": "/research/financial-systems/texas-private-toll-rate-controls",
+    "status": 200,
+    "canonical": "https://sulayman-bowles.dev/research/financial-systems/texas-private-toll-rate-controls",
+    "heading": true,
+    "passed": true
+  },
+  {
+    "path": "/research/financial-systems/texas-toll-roads-public-vs-private",
+    "status": 200,
+    "canonical": "https://sulayman-bowles.dev/research/financial-systems/texas-toll-roads-public-vs-private",
+    "heading": true,
+    "passed": true
+  },
+  {
+    "path": "/research/financial-systems/toast-gross-profit-engine",
+    "status": 200,
+    "canonical": "https://sulayman-bowles.dev/research/financial-systems/toast-gross-profit-engine",
+    "heading": true,
+    "passed": true
+  },
+  {
+    "path": "/research/financial-systems/vanta-after-the-audit",
+    "status": 200,
+    "canonical": "https://sulayman-bowles.dev/research/financial-systems/vanta-after-the-audit",
+    "heading": true,
+    "passed": true
+  },
+  {
+    "path": "/research/financial-systems/waymo-hardware-financing",
+    "status": 200,
+    "canonical": "https://sulayman-bowles.dev/research/financial-systems/waymo-hardware-financing",
+    "heading": true,
+    "passed": true
+  },
+  {
+    "path": "/research/financial-systems/west-campus-student-housing",
+    "status": 200,
+    "canonical": "https://sulayman-bowles.dev/research/financial-systems/west-campus-student-housing",
+    "heading": true,
+    "passed": true
+  },
+  {
+    "path": "/research/financial-systems/what-happens-when-an-index-decides-a-company-matters",
+    "status": 200,
+    "canonical": "https://sulayman-bowles.dev/research/financial-systems/what-happens-when-an-index-decides-a-company-matters",
+    "heading": true,
+    "passed": true
+  },
+  {
+    "path": "/research/financial-systems/where-online-returns-actually-go",
+    "status": 200,
+    "canonical": "https://sulayman-bowles.dev/research/financial-systems/where-online-returns-actually-go",
+    "heading": true,
+    "passed": true
+  },
+  {
+    "path": "/research/financial-systems/who-owns-austin-home-service-companies",
+    "status": 200,
+    "canonical": "https://sulayman-bowles.dev/research/financial-systems/who-owns-austin-home-service-companies",
+    "heading": true,
+    "passed": true
+  },
+  {
+    "path": "/research/financial-systems/who-owns-austin-hvac-companies",
+    "status": 200,
+    "canonical": "https://sulayman-bowles.dev/research/financial-systems/who-owns-austin-hvac-companies",
+    "heading": true,
+    "passed": true
+  },
+  {
+    "path": "/research/financial-systems/who-owns-austin-plumbing-electrical-companies",
+    "status": 200,
+    "canonical": "https://sulayman-bowles.dev/research/financial-systems/who-owns-austin-plumbing-electrical-companies",
+    "heading": true,
+    "passed": true
+  },
+  {
+    "path": "/research/financial-systems/who-owns-hctra-sam-houston-tollway",
+    "status": 200,
+    "canonical": "https://sulayman-bowles.dev/research/financial-systems/who-owns-hctra-sam-houston-tollway",
+    "heading": true,
+    "passed": true
+  },
+  {
+    "path": "/research/financial-systems/who-owns-ntta",
+    "status": 200,
+    "canonical": "https://sulayman-bowles.dev/research/financial-systems/who-owns-ntta",
+    "heading": true,
+    "passed": true
+  },
+  {
+    "path": "/research/financial-systems/who-owns-us-toll-roads",
+    "status": 200,
+    "canonical": "https://sulayman-bowles.dev/research/financial-systems/who-owns-us-toll-roads",
+    "heading": true,
+    "passed": true
+  },
+  {
+    "path": "/research/financial-systems/why-texas-toll-roads-stay-tolled",
+    "status": 200,
+    "canonical": "https://sulayman-bowles.dev/research/financial-systems/why-texas-toll-roads-stay-tolled",
+    "heading": true,
+    "passed": true
+  },
+  {
+    "path": "/research/personal-seo/canonical-identity-personal-seo",
+    "status": 200,
+    "canonical": "https://sulayman-bowles.dev/research/personal-seo/canonical-identity-personal-seo",
+    "heading": true,
+    "passed": true
+  },
+  {
+    "path": "/research/search-console/search-console-data-pipeline",
+    "status": 200,
+    "canonical": "https://sulayman-bowles.dev/research/search-console/search-console-data-pipeline",
+    "heading": true,
+    "passed": true
+  },
+  {
+    "path": "/research/search-console/search-console-query-vs-page-totals",
+    "status": 200,
+    "canonical": "https://sulayman-bowles.dev/research/search-console/search-console-query-vs-page-totals",
+    "heading": true,
+    "passed": true
+  },
+  {
+    "path": "/research/search-console/technical-seo-public-data-infrastructure",
+    "status": 200,
+    "canonical": "https://sulayman-bowles.dev/research/search-console/technical-seo-public-data-infrastructure",
+    "heading": true,
+    "passed": true
+  },
+  {
+    "path": "/research/strategy-systems/choosing-a-growth-channel-under-a-capacity-limit",
+    "status": 200,
+    "canonical": "https://sulayman-bowles.dev/research/strategy-systems/choosing-a-growth-channel-under-a-capacity-limit",
+    "heading": true,
+    "passed": true
+  },
+  {
+    "path": "/research/technical-seo/canonicalization-graph-consistency",
+    "status": 200,
+    "canonical": "https://sulayman-bowles.dev/research/technical-seo/canonicalization-graph-consistency",
+    "heading": true,
+    "passed": true
+  },
+  {
+    "path": "/research/technical-seo/internal-links-directed-retrieval-graph",
+    "status": 200,
+    "canonical": "https://sulayman-bowles.dev/research/technical-seo/internal-links-directed-retrieval-graph",
+    "heading": true,
+    "passed": true
+  },
+  {
+    "path": "/research/technical-seo/raw-html-rendered-dom-evidence",
+    "status": 200,
+    "canonical": "https://sulayman-bowles.dev/research/technical-seo/raw-html-rendered-dom-evidence",
+    "heading": true,
+    "passed": true
+  },
+  {
+    "path": "/research/technical-seo/structured-data-without-content-drift",
+    "status": 200,
+    "canonical": "https://sulayman-bowles.dev/research/technical-seo/structured-data-without-content-drift",
+    "heading": true,
+    "passed": true
+  },
+  {
+    "path": "/research/technical-seo/technical-seo-migration-release-gates",
+    "status": 200,
+    "canonical": "https://sulayman-bowles.dev/research/technical-seo/technical-seo-migration-release-gates",
+    "heading": true,
+    "passed": true
+  },
+  {
+    "path": "/research/texas/texas-ai-law-business-compliance",
+    "status": 200,
+    "canonical": "https://sulayman-bowles.dev/research/texas/texas-ai-law-business-compliance",
+    "heading": true,
+    "passed": true
+  },
+  {
+    "path": "/research/texas/texas-automated-vehicle-authorization",
+    "status": 200,
+    "canonical": "https://sulayman-bowles.dev/research/texas/texas-automated-vehicle-authorization",
+    "heading": true,
+    "passed": true
+  },
+  {
+    "path": "/research/texas/texas-autonomous-trucking-operators",
+    "status": 200,
+    "canonical": "https://sulayman-bowles.dev/research/texas/texas-autonomous-trucking-operators",
+    "heading": true,
+    "passed": true
+  },
+  {
+    "path": "/research/texas/texas-business-court-contract-decisions",
+    "status": 200,
+    "canonical": "https://sulayman-bowles.dev/research/texas/texas-business-court-contract-decisions",
+    "heading": true,
+    "passed": true
+  },
+  {
+    "path": "/research/texas/texas-commercial-property-insurance-diligence",
+    "status": 200,
+    "canonical": "https://sulayman-bowles.dev/research/texas/texas-commercial-property-insurance-diligence",
+    "heading": true,
+    "passed": true
+  },
+  {
+    "path": "/research/texas/texas-cross-border-logistics-business-planning",
+    "status": 200,
+    "canonical": "https://sulayman-bowles.dev/research/texas/texas-cross-border-logistics-business-planning",
+    "heading": true,
+    "passed": true
+  },
+  {
+    "path": "/research/texas/texas-data-center-sales-tax-project-economics",
+    "status": 200,
+    "canonical": "https://sulayman-bowles.dev/research/texas/texas-data-center-sales-tax-project-economics",
+    "heading": true,
+    "passed": true
+  },
+  {
+    "path": "/research/texas/texas-driverless-freight-route-economics",
+    "status": 200,
+    "canonical": "https://sulayman-bowles.dev/research/texas/texas-driverless-freight-route-economics",
+    "heading": true,
+    "passed": true
+  },
+  {
+    "path": "/research/texas/texas-franchise-tax-reporting-business-decisions",
+    "status": 200,
+    "canonical": "https://sulayman-bowles.dev/research/texas/texas-franchise-tax-reporting-business-decisions",
+    "heading": true,
+    "passed": true
+  },
+  {
+    "path": "/research/texas/texas-hiring-labor-cost-planning",
+    "status": 200,
+    "canonical": "https://sulayman-bowles.dev/research/texas/texas-hiring-labor-cost-planning",
+    "heading": true,
+    "passed": true
+  },
+  {
+    "path": "/research/texas/texas-jeti-incentives-project-underwriting",
+    "status": 200,
+    "canonical": "https://sulayman-bowles.dev/research/texas/texas-jeti-incentives-project-underwriting",
+    "heading": true,
+    "passed": true
+  },
+  {
+    "path": "/research/texas/texas-manufacturing-capacity-procurement",
+    "status": 200,
+    "canonical": "https://sulayman-bowles.dev/research/texas/texas-manufacturing-capacity-procurement",
+    "heading": true,
+    "passed": true
+  },
+  {
+    "path": "/research/texas/texas-power-large-load-business-diligence",
+    "status": 200,
+    "canonical": "https://sulayman-bowles.dev/research/texas/texas-power-large-load-business-diligence",
+    "heading": true,
+    "passed": true
+  },
+  {
+    "path": "/research/texas/texas-property-tax-business-underwriting",
+    "status": 200,
+    "canonical": "https://sulayman-bowles.dev/research/texas/texas-property-tax-business-underwriting",
+    "heading": true,
+    "passed": true
+  },
+  {
+    "path": "/research/texas/texas-robotaxi-business-service-map",
+    "status": 200,
+    "canonical": "https://sulayman-bowles.dev/research/texas/texas-robotaxi-business-service-map",
+    "heading": true,
+    "passed": true
+  },
+  {
+    "path": "/research/texas/texas-water-facility-site-diligence",
+    "status": 200,
+    "canonical": "https://sulayman-bowles.dev/research/texas/texas-water-facility-site-diligence",
+    "heading": true,
+    "passed": true
+  },
+  {
+    "path": "/research/texas/texas-waymo-business-travel",
+    "status": 200,
+    "canonical": "https://sulayman-bowles.dev/research/texas/texas-waymo-business-travel",
+    "heading": true,
+    "passed": true
+  },
+  {
+    "path": "/research/texas/texas-zoox-market-entry-business",
+    "status": 200,
+    "canonical": "https://sulayman-bowles.dev/research/texas/texas-zoox-market-entry-business",
+    "heading": true,
+    "passed": true
+  },
+  {
+    "path": "/resume",
+    "status": 200,
+    "canonical": "https://sulayman-bowles.dev/resume",
+    "heading": true,
+    "passed": true
+  },
+  {
+    "path": "/topics/ai-and-verification",
+    "status": 200,
+    "canonical": "https://sulayman-bowles.dev/topics/ai-and-verification",
+    "heading": true,
+    "passed": true
+  },
+  {
+    "path": "/topics/business-models",
+    "status": 200,
+    "canonical": "https://sulayman-bowles.dev/topics/business-models",
+    "heading": true,
+    "passed": true
+  },
+  {
+    "path": "/topics/crawler-evidence",
+    "status": 200,
+    "canonical": "https://sulayman-bowles.dev/topics/crawler-evidence",
+    "heading": true,
+    "passed": true
+  },
+  {
+    "path": "/topics/financial-systems",
+    "status": 200,
+    "canonical": "https://sulayman-bowles.dev/topics/financial-systems",
+    "heading": true,
+    "passed": true
+  },
+  {
+    "path": "/topics/industrial-capacity",
+    "status": 200,
+    "canonical": "https://sulayman-bowles.dev/topics/industrial-capacity",
+    "heading": true,
+    "passed": true
+  },
+  {
+    "path": "/topics/texas-autonomy",
+    "status": 200,
+    "canonical": "https://sulayman-bowles.dev/topics/texas-autonomy",
+    "heading": true,
+    "passed": true
+  },
+  {
+    "path": "/topics/texas-business",
+    "status": 200,
+    "canonical": "https://sulayman-bowles.dev/topics/texas-business",
+    "heading": true,
+    "passed": true
+  },
+  {
+    "path": "/viralbench-codex-agent-harness",
+    "status": 200,
+    "canonical": "https://sulayman-bowles.dev/viralbench-codex-agent-harness",
+    "heading": true,
+    "passed": true
+  },
+  {
+    "path": "/work",
+    "status": 200,
+    "canonical": "https://sulayman-bowles.dev/work",
+    "heading": true,
+    "passed": true
+  },
+  {
+    "path": "/work/atlas",
+    "status": 200,
+    "canonical": "https://sulayman-bowles.dev/work/atlas",
+    "heading": true,
+    "passed": true
+  },
+  {
+    "path": "/work/chegg",
+    "status": 200,
+    "canonical": "https://sulayman-bowles.dev/work/chegg",
+    "heading": true,
+    "passed": true
+  },
+  {
+    "path": "/work/internshipdeadlines",
+    "status": 200,
+    "canonical": "https://sulayman-bowles.dev/work/internshipdeadlines",
+    "heading": true,
+    "passed": true
+  },
+  {
+    "path": "/work/investing-markets",
+    "status": 200,
+    "canonical": "https://sulayman-bowles.dev/work/investing-markets",
+    "heading": true,
+    "passed": true
+  },
+  {
+    "path": "/work/miscellaneous",
+    "status": 200,
+    "canonical": "https://sulayman-bowles.dev/work/miscellaneous",
+    "heading": true,
+    "passed": true
+  },
+  {
+    "path": "/work/payrollpro",
+    "status": 200,
+    "canonical": "https://sulayman-bowles.dev/work/payrollpro",
+    "heading": true,
+    "passed": true
+  },
+  {
+    "path": "/work/sapien",
+    "status": 200,
+    "canonical": "https://sulayman-bowles.dev/work/sapien",
+    "heading": true,
+    "passed": true
+  },
+  {
+    "path": "/work/viralbench",
+    "status": 200,
+    "canonical": "https://sulayman-bowles.dev/work/viralbench",
+    "heading": true,
+    "passed": true
+  },
+  {
+    "path": "/work/void",
+    "status": 200,
+    "canonical": "https://sulayman-bowles.dev/work/void",
+    "heading": true,
+    "passed": true
+  },
+  {
+    "path": "/writing",
+    "status": 200,
+    "canonical": "https://sulayman-bowles.dev/writing",
+    "heading": true,
+    "passed": true
+  },
+  {
+    "path": "/writing/atlas-building-an-evidence-console",
+    "status": 200,
+    "canonical": "https://sulayman-bowles.dev/writing/atlas-building-an-evidence-console",
+    "heading": true,
+    "passed": true
+  }
+]

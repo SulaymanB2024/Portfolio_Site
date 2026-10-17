@@ -149,7 +149,7 @@ export default function ResumePage({ dark }: { dark: boolean }) {
           <div className="rx-title-copy">{chapter ? <p className="rx-context">Résumé</p> : <><h1 id="resume-explorer-title">Résumé.</h1><p className="rx-positioning">{profile.positioning}</p></>}</div>
           <div className="rx-entry-actions">
             <a className="rx-download" href={`${import.meta.env.BASE_URL}${resumeReview.pdfFile}`} download={resumeReview.pdfFile} aria-describedby="resume-overview-pdf-note">{resumeReview.pdfLabel}<LinkArrow direction="down" /></a>
-            <button ref={documentToggle} type="button" className="rx-document-toggle" aria-expanded={documentOpen} aria-controls="resume-document" onClick={toggleDocument}>{documentOpen ? 'Close full résumé' : 'Read full résumé'}<LinkArrow direction={documentOpen ? 'up' : 'down'} /></button>
+            <button ref={documentToggle} type="button" className="rx-document-toggle" aria-expanded={documentOpen} aria-controls="resume-document" onClick={toggleDocument}>{documentOpen ? 'Close full résumé' : 'Read full résumé'}<LinkArrow direction={documentOpen ? 'up' : 'right'} /></button>
             <span className="sr-only" id="resume-overview-pdf-note">{resumeReview.pdfNote}</span>
           </div>
         </header>

@@ -262,6 +262,10 @@ export default function AboutPage({ dark }: { dark: boolean }) {
       <div className="about-biography"><p>{recruiterCopy.summary}</p><p>I founded <a href="#/work/internshipdeadlines">InternshipDeadlines</a> and built <a href="#/work/atlas">Atlas</a>.</p></div>
       <nav className="about-biography-links mono" aria-label="More about my work"><DestinationLink href="#/work">Selected work</DestinationLink><DestinationLink href="#/resume">Résumé</DestinationLink></nav>
     </header>}
+    {!selected && <header className="about-collection-heading">
+      <h2>Outside work.</h2>
+      <p>Choose an object to explore.</p>
+    </header>}
     <div className="about-object-stage">
       <canvas ref={canvas} className="about-object-canvas" aria-label={selected === 'knight' && boardMode === 'game' ? 'Playable three-dimensional chess board. Click a piece, then a marked square. Drag in any direction to orbit; arrow keys rotate and tilt, Home resets the view. Choose 2D in the board toolbar for keyboard play.' : selected === 'bass' ? 'Interactive three-dimensional double bass. Drag to rotate. Play a string using the string buttons or A, S, D, F.' : selected === 'score' ? 'Interactive three-dimensional score. Drag to rotate. Use the score editor below to compose.' : selected === 'knight' ? 'Interactive knight puzzle. Choose a marked square or use the legal move buttons.' : 'Three-dimensional double bass, score, and chess knight. Choose an object or its interest button to explore.'} role="img" aria-hidden={selected === 'knight' && boardMode === 'game' && boardView === '2d'} tabIndex={selected && !(selected === 'knight' && boardMode === 'game' && boardView === '2d') ? 0 : -1} aria-describedby={selected === 'knight' && boardMode === 'game' ? undefined : selected ? 'about-view-instructions' : undefined} onKeyDown={event => {
         const direction = { ArrowLeft: [-.08, 0], ArrowRight: [.08, 0], ArrowUp: [0, -.04], ArrowDown: [0, .04] }[event.key]

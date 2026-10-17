@@ -1,0 +1,13 @@
+{
+  "documentArrival": {
+    "educationTop": 24.21875,
+    "focus": "resume-education",
+    "overflow": false,
+    "pdf": "/Sulayman_Bowles_Resume_Current.pdf",
+    "url": "http://127.0.0.1:4217/resume#/resume?view=full&section=education"
+  },
+  "documentReturn": {
+    "documentOpen": "false",
+    "focus": "Read full résumé"
+  }
+}

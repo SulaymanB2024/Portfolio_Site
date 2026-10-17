@@ -1,0 +1,894 @@
+{
+  "base": "d300c44edb3d232e6fa1b47bd0c675c82349a86d",
+  "registeredModels": 16,
+  "models": [
+    {
+      "path": "public/about-objects/bass.glb",
+      "source": "433c628dca5d6ac8a8653c9d99e7cb159d1eb944c45fa37844b8cd4356a4c785",
+      "baseline": "433c628dca5d6ac8a8653c9d99e7cb159d1eb944c45fa37844b8cd4356a4c785",
+      "built": "433c628dca5d6ac8a8653c9d99e7cb159d1eb944c45fa37844b8cd4356a4c785",
+      "unchanged": true
+    },
+    {
+      "path": "public/about-objects/chess-pieces.glb",
+      "source": "4e393f1f7bd9641b42e9a5d32cb66a9c4aa34b4e8ed7291d4244a021ccba3d13",
+      "baseline": "4e393f1f7bd9641b42e9a5d32cb66a9c4aa34b4e8ed7291d4244a021ccba3d13",
+      "built": "4e393f1f7bd9641b42e9a5d32cb66a9c4aa34b4e8ed7291d4244a021ccba3d13",
+      "unchanged": true
+    },
+    {
+      "path": "public/about-objects/knight.glb",
+      "source": "38526699f03a698840fd64cb6229587fdf2f1fed07ab98faebd6c886c06add4b",
+      "baseline": "38526699f03a698840fd64cb6229587fdf2f1fed07ab98faebd6c886c06add4b",
+      "built": "38526699f03a698840fd64cb6229587fdf2f1fed07ab98faebd6c886c06add4b",
+      "unchanged": true
+    },
+    {
+      "path": "public/about-objects/score.glb",
+      "source": "8653df9dac501709c8550e30f153c50a24515f2078e155ca7a78f071cc810899",
+      "baseline": "8653df9dac501709c8550e30f153c50a24515f2078e155ca7a78f071cc810899",
+      "built": "8653df9dac501709c8550e30f153c50a24515f2078e155ca7a78f071cc810899",
+      "unchanged": true
+    },
+    {
+      "path": "public/helmet-balanced.glb",
+      "source": "3ad692906d0a79e9c44269de93c8ec6d6a327a84e34e20ce1d83fc964835f1fe",
+      "baseline": "3ad692906d0a79e9c44269de93c8ec6d6a327a84e34e20ce1d83fc964835f1fe",
+      "built": "3ad692906d0a79e9c44269de93c8ec6d6a327a84e34e20ce1d83fc964835f1fe",
+      "unchanged": true
+    },
+    {
+      "path": "public/jousting_helmet-transformed.glb",
+      "source": "d3e73c036c16d0cbc075dbf58ba00d6a64e7ff4e2c8b291cab90128103a850bf",
+      "baseline": "d3e73c036c16d0cbc075dbf58ba00d6a64e7ff4e2c8b291cab90128103a850bf",
+      "built": "d3e73c036c16d0cbc075dbf58ba00d6a64e7ff4e2c8b291cab90128103a850bf",
+      "unchanged": true
+    },
+    {
+      "path": "public/landing/threshold-iris.glb",
+      "source": "8194c906cf67357f503e9851f1977354a370e030e88ff1d7f35d8abebdc71a2d",
+      "baseline": "8194c906cf67357f503e9851f1977354a370e030e88ff1d7f35d8abebdc71a2d",
+      "built": "8194c906cf67357f503e9851f1977354a370e030e88ff1d7f35d8abebdc71a2d",
+      "unchanged": true
+    },
+    {
+      "path": "public/landing/threshold-lens.glb",
+      "source": "d9a932ba7a1bf1435cf1902031d64b5767184b4f39bc3a2d06373f04e0beef20",
+      "baseline": "d9a932ba7a1bf1435cf1902031d64b5767184b4f39bc3a2d06373f04e0beef20",
+      "built": "d9a932ba7a1bf1435cf1902031d64b5767184b4f39bc3a2d06373f04e0beef20",
+      "unchanged": true
+    },
+    {
+      "path": "public/landing/threshold-visor.glb",
+      "source": "b3edf3d45e72171fd0d2ef93669603cc6c5fc257e86fea1374b89a32d8f2eca9",
+      "baseline": "b3edf3d45e72171fd0d2ef93669603cc6c5fc257e86fea1374b89a32d8f2eca9",
+      "built": "b3edf3d45e72171fd0d2ef93669603cc6c5fc257e86fea1374b89a32d8f2eca9",
+      "unchanged": true
+    },
+    {
+      "path": "public/models/crystal-cluster-balanced.glb",
+      "source": "63d6501c292e5c964bf765f1bb2da0af185edd5774a22dbf34d609cd1da3e9dd",
+      "baseline": "63d6501c292e5c964bf765f1bb2da0af185edd5774a22dbf34d609cd1da3e9dd",
+      "built": "63d6501c292e5c964bf765f1bb2da0af185edd5774a22dbf34d609cd1da3e9dd",
+      "unchanged": true
+    },
+    {
+      "path": "public/models/crystal-cluster-glass-balanced.glb",
+      "source": "2de71d8083de8d155f9534fd5c71031ff62373a983bf64d1578c09312f9ee1c3",
+      "baseline": "2de71d8083de8d155f9534fd5c71031ff62373a983bf64d1578c09312f9ee1c3",
+      "built": "2de71d8083de8d155f9534fd5c71031ff62373a983bf64d1578c09312f9ee1c3",
+      "unchanged": true
+    },
+    {
+      "path": "public/models/crystal-cluster-glass-studio.glb",
+      "source": "2de71d8083de8d155f9534fd5c71031ff62373a983bf64d1578c09312f9ee1c3",
+      "baseline": "2de71d8083de8d155f9534fd5c71031ff62373a983bf64d1578c09312f9ee1c3",
+      "built": "2de71d8083de8d155f9534fd5c71031ff62373a983bf64d1578c09312f9ee1c3",
+      "unchanged": true
+    },
+    {
+      "path": "public/models/crystal-cluster-glass.glb",
+      "source": "1316725031320518cf79d518e255c7b52935d3bdc04fa3de26ab3c2511c85dc4",
+      "baseline": "1316725031320518cf79d518e255c7b52935d3bdc04fa3de26ab3c2511c85dc4",
+      "built": "1316725031320518cf79d518e255c7b52935d3bdc04fa3de26ab3c2511c85dc4",
+      "unchanged": true
+    },
+    {
+      "path": "public/models/crystal-cluster-studio.glb",
+      "source": "63d6501c292e5c964bf765f1bb2da0af185edd5774a22dbf34d609cd1da3e9dd",
+      "baseline": "63d6501c292e5c964bf765f1bb2da0af185edd5774a22dbf34d609cd1da3e9dd",
+      "built": "63d6501c292e5c964bf765f1bb2da0af185edd5774a22dbf34d609cd1da3e9dd",
+      "unchanged": true
+    },
+    {
+      "path": "public/models/crystal-cluster.glb",
+      "source": "4b8cadbed7885eac5fc416cf05cbbbc595041c3682ebd52c4a96f5f6a2a849a2",
+      "baseline": "4b8cadbed7885eac5fc416cf05cbbbc595041c3682ebd52c4a96f5f6a2a849a2",
+      "built": "4b8cadbed7885eac5fc416cf05cbbbc595041c3682ebd52c4a96f5f6a2a849a2",
+      "unchanged": true
+    },
+    {
+      "path": "public/models/farnese-atlas-balanced.glb",
+      "source": "9cc9c22d54fca38857a61fe8cb2731762dcce28d04d70d1750ce0370a8f8cfe5",
+      "baseline": "9cc9c22d54fca38857a61fe8cb2731762dcce28d04d70d1750ce0370a8f8cfe5",
+      "built": "9cc9c22d54fca38857a61fe8cb2731762dcce28d04d70d1750ce0370a8f8cfe5",
+      "unchanged": true
+    },
+    {
+      "path": "public/models/farnese-atlas-studio.glb",
+      "source": "29e03838a426f4910548752c937e4b3923482bc43991f5f0b9a0e5e2636b88c1",
+      "baseline": "29e03838a426f4910548752c937e4b3923482bc43991f5f0b9a0e5e2636b88c1",
+      "built": "29e03838a426f4910548752c937e4b3923482bc43991f5f0b9a0e5e2636b88c1",
+      "unchanged": true
+    },
+    {
+      "path": "public/models/headrest-three-lions-balanced.glb",
+      "source": "20a29d7d8f96e07a7382fafb641bc846bc07bd5a168fa00870241e39cbe25f58",
+      "baseline": "20a29d7d8f96e07a7382fafb641bc846bc07bd5a168fa00870241e39cbe25f58",
+      "built": "20a29d7d8f96e07a7382fafb641bc846bc07bd5a168fa00870241e39cbe25f58",
+      "unchanged": true
+    },
+    {
+      "path": "public/models/headrest-three-lions-studio.glb",
+      "source": "640284b892da1e3d8a41ce7f3fc75fa21d733b94845c31aa32f69e07420881c8",
+      "baseline": "640284b892da1e3d8a41ce7f3fc75fa21d733b94845c31aa32f69e07420881c8",
+      "built": "640284b892da1e3d8a41ce7f3fc75fa21d733b94845c31aa32f69e07420881c8",
+      "unchanged": true
+    },
+    {
+      "path": "public/models/henry-ii-armour-balanced.glb",
+      "source": "35ffdb8874e3d49da0975445f7617bc51d60d8d29bcc949c8dc528cacf2f89c2",
+      "baseline": "35ffdb8874e3d49da0975445f7617bc51d60d8d29bcc949c8dc528cacf2f89c2",
+      "built": "35ffdb8874e3d49da0975445f7617bc51d60d8d29bcc949c8dc528cacf2f89c2",
+      "unchanged": true
+    },
+    {
+      "path": "public/models/henry-ii-armour-studio.glb",
+      "source": "bc6d60f0399bbc3d6561825f25ec6f2ee375d8370c563e743fa5a2e40461d471",
+      "baseline": "bc6d60f0399bbc3d6561825f25ec6f2ee375d8370c563e743fa5a2e40461d471",
+      "built": "bc6d60f0399bbc3d6561825f25ec6f2ee375d8370c563e743fa5a2e40461d471",
+      "unchanged": true
+    },
+    {
+      "path": "public/models/jousting-helmet-balanced.glb",
+      "source": "f024ed8ed6c93df57e71c8d8a21a569d7d09df1fbc3661556b1b696cc6680a6f",
+      "baseline": "f024ed8ed6c93df57e71c8d8a21a569d7d09df1fbc3661556b1b696cc6680a6f",
+      "built": "f024ed8ed6c93df57e71c8d8a21a569d7d09df1fbc3661556b1b696cc6680a6f",
+      "unchanged": true
+    },
+    {
+      "path": "public/models/jousting-helmet-studio.glb",
+      "source": "782056a9f0023232ec6c60398b3fd4c5fb10ea9d973d1d3d91333a1bf96fd4b1",
+      "baseline": "782056a9f0023232ec6c60398b3fd4c5fb10ea9d973d1d3d91333a1bf96fd4b1",
+      "built": "782056a9f0023232ec6c60398b3fd4c5fb10ea9d973d1d3d91333a1bf96fd4b1",
+      "unchanged": true
+    },
+    {
+      "path": "public/models/king-erik-xiv-balanced.glb",
+      "source": "7eb1f9dd516cf902cc5d1c68db7fddef559694c8986a4e54eaadc9f42cd77642",
+      "baseline": "7eb1f9dd516cf902cc5d1c68db7fddef559694c8986a4e54eaadc9f42cd77642",
+      "built": "7eb1f9dd516cf902cc5d1c68db7fddef559694c8986a4e54eaadc9f42cd77642",
+      "unchanged": true
+    },
+    {
+      "path": "public/models/king-erik-xiv-studio.glb",
+      "source": "bb690bfd933518e442a716a13d881e193676b68d7610617811ccaebd186bb28b",
+      "baseline": "bb690bfd933518e442a716a13d881e193676b68d7610617811ccaebd186bb28b",
+      "built": "bb690bfd933518e442a716a13d881e193676b68d7610617811ccaebd186bb28b",
+      "unchanged": true
+    },
+    {
+      "path": "public/models/wireframe-globe-balanced.glb",
+      "source": "c4f7d6c9c204edfaf3258a896c1df41cab647ca604f03d88adb69bf90a2f892d",
+      "baseline": "c4f7d6c9c204edfaf3258a896c1df41cab647ca604f03d88adb69bf90a2f892d",
+      "built": "c4f7d6c9c204edfaf3258a896c1df41cab647ca604f03d88adb69bf90a2f892d",
+      "unchanged": true
+    },
+    {
+      "path": "public/models/wireframe-globe-studio.glb",
+      "source": "c4f7d6c9c204edfaf3258a896c1df41cab647ca604f03d88adb69bf90a2f892d",
+      "baseline": "c4f7d6c9c204edfaf3258a896c1df41cab647ca604f03d88adb69bf90a2f892d",
+      "built": "c4f7d6c9c204edfaf3258a896c1df41cab647ca604f03d88adb69bf90a2f892d",
+      "unchanged": true
+    },
+    {
+      "path": "public/models/wireframe-globe.glb",
+      "source": "05010ed3f6543e39550d0eb4fcb2e7b6c83930b839b40e908d0d849bb17907c9",
+      "baseline": "05010ed3f6543e39550d0eb4fcb2e7b6c83930b839b40e908d0d849bb17907c9",
+      "built": "05010ed3f6543e39550d0eb4fcb2e7b6c83930b839b40e908d0d849bb17907c9",
+      "unchanged": true
+    },
+    {
+      "path": "public/portfolio-models/about-bass.glb",
+      "source": "0ef2a84d530f56ada42e83bc967cc7a23559fe1d0f55b14215296577acf67f7b",
+      "baseline": "0ef2a84d530f56ada42e83bc967cc7a23559fe1d0f55b14215296577acf67f7b",
+      "built": "0ef2a84d530f56ada42e83bc967cc7a23559fe1d0f55b14215296577acf67f7b",
+      "unchanged": true
+    },
+    {
+      "path": "public/portfolio-models/about-chess-pieces.glb",
+      "source": "0f4996f7c64e11b61b29ff8544cf259d916244f712e074b44446bd0816b65030",
+      "baseline": "0f4996f7c64e11b61b29ff8544cf259d916244f712e074b44446bd0816b65030",
+      "built": "0f4996f7c64e11b61b29ff8544cf259d916244f712e074b44446bd0816b65030",
+      "unchanged": true
+    },
+    {
+      "path": "public/portfolio-models/about-knight.glb",
+      "source": "33fb2db410b11863528ebde62b61d1fe535b56f07a6dd0dd30071be95360eb1f",
+      "baseline": "33fb2db410b11863528ebde62b61d1fe535b56f07a6dd0dd30071be95360eb1f",
+      "built": "33fb2db410b11863528ebde62b61d1fe535b56f07a6dd0dd30071be95360eb1f",
+      "unchanged": true
+    },
+    {
+      "path": "public/portfolio-models/about-score.glb",
+      "source": "3724670c49d983c096328535995bad8056d3b5a0e766bc5366db45726f2dd550",
+      "baseline": "3724670c49d983c096328535995bad8056d3b5a0e766bc5366db45726f2dd550",
+      "built": "3724670c49d983c096328535995bad8056d3b5a0e766bc5366db45726f2dd550",
+      "unchanged": true
+    },
+    {
+      "path": "public/portfolio-models/headrest.glb",
+      "source": "52f20eae814557d2dc2fb2884216ba126777f61e9cdcfe0868ea6ee9106973e2",
+      "baseline": "52f20eae814557d2dc2fb2884216ba126777f61e9cdcfe0868ea6ee9106973e2",
+      "built": "52f20eae814557d2dc2fb2884216ba126777f61e9cdcfe0868ea6ee9106973e2",
+      "unchanged": true
+    },
+    {
+      "path": "public/portfolio-models/helmet.glb",
+      "source": "676a60e268e5a984953efedc29eb7cafe55e6acf0913ea080fb674173159b025",
+      "baseline": "676a60e268e5a984953efedc29eb7cafe55e6acf0913ea080fb674173159b025",
+      "built": "676a60e268e5a984953efedc29eb7cafe55e6acf0913ea080fb674173159b025",
+      "unchanged": true
+    },
+    {
+      "path": "public/portfolio-models/resume-work-areas.glb",
+      "source": "1324ef148b9447b561abd8e731f05ec84567f71e990f51563220f33467805a12",
+      "baseline": "1324ef148b9447b561abd8e731f05ec84567f71e990f51563220f33467805a12",
+      "built": "1324ef148b9447b561abd8e731f05ec84567f71e990f51563220f33467805a12",
+      "unchanged": true
+    },
+    {
+      "path": "public/portfolio-models/work-atlas.glb",
+      "source": "5f046c96671caf61ef0c20b8b8f26e27969ba34ed19b2ba0add3beaafda55397",
+      "baseline": "5f046c96671caf61ef0c20b8b8f26e27969ba34ed19b2ba0add3beaafda55397",
+      "built": "5f046c96671caf61ef0c20b8b8f26e27969ba34ed19b2ba0add3beaafda55397",
+      "unchanged": true
+    },
+    {
+      "path": "public/portfolio-models/work-internshipdeadlines.glb",
+      "source": "7f238de590c2231b8aec96c81ce3c7dc00d318d7be475ceb0828460a292662d3",
+      "baseline": "7f238de590c2231b8aec96c81ce3c7dc00d318d7be475ceb0828460a292662d3",
+      "built": "7f238de590c2231b8aec96c81ce3c7dc00d318d7be475ceb0828460a292662d3",
+      "unchanged": true
+    },
+    {
+      "path": "public/portfolio-models/work-investing-markets.glb",
+      "source": "a3ffeab08c804354cde142db120b776d2c553e96c1612030e493a910234450de",
+      "baseline": "a3ffeab08c804354cde142db120b776d2c553e96c1612030e493a910234450de",
+      "built": "a3ffeab08c804354cde142db120b776d2c553e96c1612030e493a910234450de",
+      "unchanged": true
+    },
+    {
+      "path": "public/portfolio-models/work-miscellaneous.glb",
+      "source": "831ee0ab5082f467f153611801d7c9c411cac5ecf7223dc61e19c964fb2ad0d6",
+      "baseline": "831ee0ab5082f467f153611801d7c9c411cac5ecf7223dc61e19c964fb2ad0d6",
+      "built": "831ee0ab5082f467f153611801d7c9c411cac5ecf7223dc61e19c964fb2ad0d6",
+      "unchanged": true
+    },
+    {
+      "path": "public/portfolio-models/work-payrollpro.glb",
+      "source": "6f6e4e7504abdbd37e6fe0166ade5976c6f4397e1ac5ec49370f8f541eff8a6f",
+      "baseline": "6f6e4e7504abdbd37e6fe0166ade5976c6f4397e1ac5ec49370f8f541eff8a6f",
+      "built": "6f6e4e7504abdbd37e6fe0166ade5976c6f4397e1ac5ec49370f8f541eff8a6f",
+      "unchanged": true
+    },
+    {
+      "path": "public/portfolio-models/work-sapien.glb",
+      "source": "dc0efe814f6979a63e6fe7fa12c7df7312a6c92dbfa3d96972b5a9eb247649e4",
+      "baseline": "dc0efe814f6979a63e6fe7fa12c7df7312a6c92dbfa3d96972b5a9eb247649e4",
+      "built": "dc0efe814f6979a63e6fe7fa12c7df7312a6c92dbfa3d96972b5a9eb247649e4",
+      "unchanged": true
+    },
+    {
+      "path": "public/portfolio-models/work-viralbench.glb",
+      "source": "b8be29b82f684cfd36a052065c2c8a69265086c40677f01d209f390e81207a9d",
+      "baseline": "b8be29b82f684cfd36a052065c2c8a69265086c40677f01d209f390e81207a9d",
+      "built": "b8be29b82f684cfd36a052065c2c8a69265086c40677f01d209f390e81207a9d",
+      "unchanged": true
+    },
+    {
+      "path": "public/resume-knight/knight-cf6755a48863.glb",
+      "source": "cf6755a4886382a581bc5cbe2881329081eb176e1df101e6b2cbd2f29b200705",
+      "baseline": "cf6755a4886382a581bc5cbe2881329081eb176e1df101e6b2cbd2f29b200705",
+      "built": "cf6755a4886382a581bc5cbe2881329081eb176e1df101e6b2cbd2f29b200705",
+      "unchanged": true
+    },
+    {
+      "path": "public/resume-objects/work-areas.glb",
+      "source": "4370f343ac91613b20bb655c5cc3cd7a8ee1d6890d5a40fa3cec6edbd1fee6b3",
+      "baseline": "4370f343ac91613b20bb655c5cc3cd7a8ee1d6890d5a40fa3cec6edbd1fee6b3",
+      "built": "4370f343ac91613b20bb655c5cc3cd7a8ee1d6890d5a40fa3cec6edbd1fee6b3",
+      "unchanged": true
+    },
+    {
+      "path": "public/resume-sculptures/ai-venture-1ac9faa4d9b9.glb",
+      "source": "1ac9faa4d9b96e4acb92a6292cefbb293820e50831a44f2e97585e8a8e16b8b2",
+      "baseline": "1ac9faa4d9b96e4acb92a6292cefbb293820e50831a44f2e97585e8a8e16b8b2",
+      "built": "1ac9faa4d9b96e4acb92a6292cefbb293820e50831a44f2e97585e8a8e16b8b2",
+      "unchanged": true
+    },
+    {
+      "path": "public/resume-sculptures/ai-venture-1cc20a592b97.glb",
+      "source": "1cc20a592b970c14a547f5ac3705baab6bbc2398518c8e7dcbc161be6e8a286c",
+      "baseline": "1cc20a592b970c14a547f5ac3705baab6bbc2398518c8e7dcbc161be6e8a286c",
+      "built": "1cc20a592b970c14a547f5ac3705baab6bbc2398518c8e7dcbc161be6e8a286c",
+      "unchanged": true
+    },
+    {
+      "path": "public/resume-sculptures/ai-venture-201497f12abf.glb",
+      "source": "201497f12abffc9256fde746034c7d6dd364635dab1913b0f4d1888ea0fe583e",
+      "baseline": "201497f12abffc9256fde746034c7d6dd364635dab1913b0f4d1888ea0fe583e",
+      "built": "201497f12abffc9256fde746034c7d6dd364635dab1913b0f4d1888ea0fe583e",
+      "unchanged": true
+    },
+    {
+      "path": "public/resume-sculptures/ai-venture-20ff65ddf232.glb",
+      "source": "20ff65ddf232f668e3f149c62ad5e1300a877c252cf3e4ea7424d21e60e936e4",
+      "baseline": "20ff65ddf232f668e3f149c62ad5e1300a877c252cf3e4ea7424d21e60e936e4",
+      "built": "20ff65ddf232f668e3f149c62ad5e1300a877c252cf3e4ea7424d21e60e936e4",
+      "unchanged": true
+    },
+    {
+      "path": "public/resume-sculptures/ai-venture-4aff8e8d4cbf.glb",
+      "source": "4aff8e8d4cbfc53c3563715d14cded57f2151deea59f2b392ca84d2637ff1943",
+      "baseline": "4aff8e8d4cbfc53c3563715d14cded57f2151deea59f2b392ca84d2637ff1943",
+      "built": "4aff8e8d4cbfc53c3563715d14cded57f2151deea59f2b392ca84d2637ff1943",
+      "unchanged": true
+    },
+    {
+      "path": "public/resume-sculptures/ai-venture-4fa93faa804c.glb",
+      "source": "4fa93faa804cbb66d61a24b394e1274ce394f1df72bfd6d87583c4ea044a4ba4",
+      "baseline": "4fa93faa804cbb66d61a24b394e1274ce394f1df72bfd6d87583c4ea044a4ba4",
+      "built": "4fa93faa804cbb66d61a24b394e1274ce394f1df72bfd6d87583c4ea044a4ba4",
+      "unchanged": true
+    },
+    {
+      "path": "public/resume-sculptures/ai-venture-564c705b556c.glb",
+      "source": "564c705b556c22dd29db336770d0eec750b2d84f369ec29fad7b4ec9cd201ffe",
+      "baseline": "564c705b556c22dd29db336770d0eec750b2d84f369ec29fad7b4ec9cd201ffe",
+      "built": "564c705b556c22dd29db336770d0eec750b2d84f369ec29fad7b4ec9cd201ffe",
+      "unchanged": true
+    },
+    {
+      "path": "public/resume-sculptures/ai-venture-64d23cc0ce43.glb",
+      "source": "64d23cc0ce43e32235207ebe4fac81c5e93e81c9ef433b7808488fbdcfbf8f7a",
+      "baseline": "64d23cc0ce43e32235207ebe4fac81c5e93e81c9ef433b7808488fbdcfbf8f7a",
+      "built": "64d23cc0ce43e32235207ebe4fac81c5e93e81c9ef433b7808488fbdcfbf8f7a",
+      "unchanged": true
+    },
+    {
+      "path": "public/resume-sculptures/ai-venture-6cd9cf643c0f.glb",
+      "source": "6cd9cf643c0fcfd0d512e39608d499c1ea85ed5bca128fddd1aa4eb13e66fff5",
+      "baseline": "6cd9cf643c0fcfd0d512e39608d499c1ea85ed5bca128fddd1aa4eb13e66fff5",
+      "built": "6cd9cf643c0fcfd0d512e39608d499c1ea85ed5bca128fddd1aa4eb13e66fff5",
+      "unchanged": true
+    },
+    {
+      "path": "public/resume-sculptures/ai-venture-9c7801a13600.glb",
+      "source": "9c7801a136005de6544368cceb35fe5fbbf1a463e30f27627e685fe48f6f0d2c",
+      "baseline": "9c7801a136005de6544368cceb35fe5fbbf1a463e30f27627e685fe48f6f0d2c",
+      "built": "9c7801a136005de6544368cceb35fe5fbbf1a463e30f27627e685fe48f6f0d2c",
+      "unchanged": true
+    },
+    {
+      "path": "public/resume-sculptures/ai-venture-a47710652654.glb",
+      "source": "a47710652654dd381454a1bb966432eb5388753cd6e264772f5fe126e494f80c",
+      "baseline": "a47710652654dd381454a1bb966432eb5388753cd6e264772f5fe126e494f80c",
+      "built": "a47710652654dd381454a1bb966432eb5388753cd6e264772f5fe126e494f80c",
+      "unchanged": true
+    },
+    {
+      "path": "public/resume-sculptures/ai-venture-bbcd1cc21009.glb",
+      "source": "bbcd1cc21009802aa2605edc32fd2ea1f51d293a95a56c3c9edae17c768388c9",
+      "baseline": "bbcd1cc21009802aa2605edc32fd2ea1f51d293a95a56c3c9edae17c768388c9",
+      "built": "bbcd1cc21009802aa2605edc32fd2ea1f51d293a95a56c3c9edae17c768388c9",
+      "unchanged": true
+    },
+    {
+      "path": "public/resume-sculptures/ai-venture-bea7227d520e.glb",
+      "source": "bea7227d520e003b93efcc405cb38335583013558e685c080e748daee14d6317",
+      "baseline": "bea7227d520e003b93efcc405cb38335583013558e685c080e748daee14d6317",
+      "built": "bea7227d520e003b93efcc405cb38335583013558e685c080e748daee14d6317",
+      "unchanged": true
+    },
+    {
+      "path": "public/resume-sculptures/ai-venture-bff96ab6f825.glb",
+      "source": "bff96ab6f82580f370484d3201be0bf341defc6bc63e1218a8f51044fbdc82f6",
+      "baseline": "bff96ab6f82580f370484d3201be0bf341defc6bc63e1218a8f51044fbdc82f6",
+      "built": "bff96ab6f82580f370484d3201be0bf341defc6bc63e1218a8f51044fbdc82f6",
+      "unchanged": true
+    },
+    {
+      "path": "public/resume-sculptures/ai-venture-c199123985d1.glb",
+      "source": "c199123985d19ed7c49ae038f77d13ab45c2275f3f61c04713dd3d2ef611774e",
+      "baseline": "c199123985d19ed7c49ae038f77d13ab45c2275f3f61c04713dd3d2ef611774e",
+      "built": "c199123985d19ed7c49ae038f77d13ab45c2275f3f61c04713dd3d2ef611774e",
+      "unchanged": true
+    },
+    {
+      "path": "public/resume-sculptures/ai-venture-c9bdfafd1539.glb",
+      "source": "c9bdfafd15399fc43b72aa7837ec1ce199031a4e912ad8a9b7025bbeede1703d",
+      "baseline": "c9bdfafd15399fc43b72aa7837ec1ce199031a4e912ad8a9b7025bbeede1703d",
+      "built": "c9bdfafd15399fc43b72aa7837ec1ce199031a4e912ad8a9b7025bbeede1703d",
+      "unchanged": true
+    },
+    {
+      "path": "public/resume-sculptures/ai-venture-eee60bf9b36b.glb",
+      "source": "eee60bf9b36bbe8dd98b857061637049ecba68ace1f4427706047f9cf5a7b1aa",
+      "baseline": "eee60bf9b36bbe8dd98b857061637049ecba68ace1f4427706047f9cf5a7b1aa",
+      "built": "eee60bf9b36bbe8dd98b857061637049ecba68ace1f4427706047f9cf5a7b1aa",
+      "unchanged": true
+    },
+    {
+      "path": "public/resume-sculptures/chegg-1d7bd1f8844a.glb",
+      "source": "1d7bd1f8844ac0170de3d04c1dd9794a83d3fb411cdfe84c327365696e0aa71b",
+      "baseline": "1d7bd1f8844ac0170de3d04c1dd9794a83d3fb411cdfe84c327365696e0aa71b",
+      "built": "1d7bd1f8844ac0170de3d04c1dd9794a83d3fb411cdfe84c327365696e0aa71b",
+      "unchanged": true
+    },
+    {
+      "path": "public/resume-sculptures/chegg-1d8dc9721810.glb",
+      "source": "1d8dc9721810f6de2a528ba2d32320f26e12bfbd98895a1bb4f6334cc9810921",
+      "baseline": "1d8dc9721810f6de2a528ba2d32320f26e12bfbd98895a1bb4f6334cc9810921",
+      "built": "1d8dc9721810f6de2a528ba2d32320f26e12bfbd98895a1bb4f6334cc9810921",
+      "unchanged": true
+    },
+    {
+      "path": "public/resume-sculptures/chegg-3a0e13761023.glb",
+      "source": "3a0e13761023aefa4a6c22a85b4473c1cd4940aa885f06f008a6002eda9389c5",
+      "baseline": "3a0e13761023aefa4a6c22a85b4473c1cd4940aa885f06f008a6002eda9389c5",
+      "built": "3a0e13761023aefa4a6c22a85b4473c1cd4940aa885f06f008a6002eda9389c5",
+      "unchanged": true
+    },
+    {
+      "path": "public/resume-sculptures/chegg-4ac810f0a27d.glb",
+      "source": "4ac810f0a27dc525566636c486bb8aa3eb3f5859cfc37bf70f94ac90ea9d41e9",
+      "baseline": "4ac810f0a27dc525566636c486bb8aa3eb3f5859cfc37bf70f94ac90ea9d41e9",
+      "built": "4ac810f0a27dc525566636c486bb8aa3eb3f5859cfc37bf70f94ac90ea9d41e9",
+      "unchanged": true
+    },
+    {
+      "path": "public/resume-sculptures/chegg-82c7d6095892.glb",
+      "source": "82c7d6095892795b6ee6c5fc2c316f02c8b160b7d620f5b3f3de2aaf9ac1a109",
+      "baseline": "82c7d6095892795b6ee6c5fc2c316f02c8b160b7d620f5b3f3de2aaf9ac1a109",
+      "built": "82c7d6095892795b6ee6c5fc2c316f02c8b160b7d620f5b3f3de2aaf9ac1a109",
+      "unchanged": true
+    },
+    {
+      "path": "public/resume-sculptures/chegg-b5abdbb22280.glb",
+      "source": "b5abdbb2228058e069e50d95d29b8a10cd09a0361c281745348742b5065098fc",
+      "baseline": "b5abdbb2228058e069e50d95d29b8a10cd09a0361c281745348742b5065098fc",
+      "built": "b5abdbb2228058e069e50d95d29b8a10cd09a0361c281745348742b5065098fc",
+      "unchanged": true
+    },
+    {
+      "path": "public/resume-sculptures/chegg-be08298c1445.glb",
+      "source": "be08298c14452e16c366f4ed8c92abd91aaeaedbf3a9b076ed8b71d2bcdb5543",
+      "baseline": "be08298c14452e16c366f4ed8c92abd91aaeaedbf3a9b076ed8b71d2bcdb5543",
+      "built": "be08298c14452e16c366f4ed8c92abd91aaeaedbf3a9b076ed8b71d2bcdb5543",
+      "unchanged": true
+    },
+    {
+      "path": "public/resume-sculptures/chegg-da1aa2fb301c.glb",
+      "source": "da1aa2fb301cb70b1d5d65f0b6c543de9c103fe907c1fad6baa98774a837dbb5",
+      "baseline": "da1aa2fb301cb70b1d5d65f0b6c543de9c103fe907c1fad6baa98774a837dbb5",
+      "built": "da1aa2fb301cb70b1d5d65f0b6c543de9c103fe907c1fad6baa98774a837dbb5",
+      "unchanged": true
+    },
+    {
+      "path": "public/resume-sculptures/chegg-f68a4215ec74.glb",
+      "source": "f68a4215ec744e45d6b73065e0003c0688b123c4c4e3a2992da3cafc97ad0e2c",
+      "baseline": "f68a4215ec744e45d6b73065e0003c0688b123c4c4e3a2992da3cafc97ad0e2c",
+      "built": "f68a4215ec744e45d6b73065e0003c0688b123c4c4e3a2992da3cafc97ad0e2c",
+      "unchanged": true
+    },
+    {
+      "path": "public/resume-sculptures/chegg-fec813bd1393.glb",
+      "source": "fec813bd1393b96ade6a787de0740f64095ca96e23b648d65f9df777351044ad",
+      "baseline": "fec813bd1393b96ade6a787de0740f64095ca96e23b648d65f9df777351044ad",
+      "built": "fec813bd1393b96ade6a787de0740f64095ca96e23b648d65f9df777351044ad",
+      "unchanged": true
+    },
+    {
+      "path": "public/resume-sculptures/creative-trace-3f06f519663e.glb",
+      "source": "3f06f519663e5f5d8c32de7cb0ab85b0f3941a3db74facb311466d8e94a8498b",
+      "baseline": "3f06f519663e5f5d8c32de7cb0ab85b0f3941a3db74facb311466d8e94a8498b",
+      "built": "3f06f519663e5f5d8c32de7cb0ab85b0f3941a3db74facb311466d8e94a8498b",
+      "unchanged": true
+    },
+    {
+      "path": "public/resume-sculptures/creative-trace-446f03178c8c.glb",
+      "source": "446f03178c8ca808c467280b61784192092a159d7bf4163e395ddea67783df6b",
+      "baseline": "446f03178c8ca808c467280b61784192092a159d7bf4163e395ddea67783df6b",
+      "built": "446f03178c8ca808c467280b61784192092a159d7bf4163e395ddea67783df6b",
+      "unchanged": true
+    },
+    {
+      "path": "public/resume-sculptures/creative-trace-5a2732e5e1db.glb",
+      "source": "5a2732e5e1dbbf2ff8b31d55626567e533d6603c18796fb8c99efc168728d760",
+      "baseline": "5a2732e5e1dbbf2ff8b31d55626567e533d6603c18796fb8c99efc168728d760",
+      "built": "5a2732e5e1dbbf2ff8b31d55626567e533d6603c18796fb8c99efc168728d760",
+      "unchanged": true
+    },
+    {
+      "path": "public/resume-sculptures/creative-trace-84782cb184ba.glb",
+      "source": "84782cb184ba29be17bac56b369408a7f64ce471e1a83b0064dc495df218508c",
+      "baseline": "84782cb184ba29be17bac56b369408a7f64ce471e1a83b0064dc495df218508c",
+      "built": "84782cb184ba29be17bac56b369408a7f64ce471e1a83b0064dc495df218508c",
+      "unchanged": true
+    },
+    {
+      "path": "public/resume-sculptures/creative-trace-94e8512c4961.glb",
+      "source": "94e8512c49614428d378ca1c2b4d9f12367ac7984f95730e2480dfcbc6938316",
+      "baseline": "94e8512c49614428d378ca1c2b4d9f12367ac7984f95730e2480dfcbc6938316",
+      "built": "94e8512c49614428d378ca1c2b4d9f12367ac7984f95730e2480dfcbc6938316",
+      "unchanged": true
+    },
+    {
+      "path": "public/resume-sculptures/creative-trace-99e67899e855.glb",
+      "source": "99e67899e8551c4b565264fe1f2a5f35b3156a8919d87d876313aaa724772d3e",
+      "baseline": "99e67899e8551c4b565264fe1f2a5f35b3156a8919d87d876313aaa724772d3e",
+      "built": "99e67899e8551c4b565264fe1f2a5f35b3156a8919d87d876313aaa724772d3e",
+      "unchanged": true
+    },
+    {
+      "path": "public/resume-sculptures/creative-trace-a4829e4260ca.glb",
+      "source": "a4829e4260ca71730db1d41672e8a93559b21abd7f9c7d7629977da2d68adc1b",
+      "baseline": "a4829e4260ca71730db1d41672e8a93559b21abd7f9c7d7629977da2d68adc1b",
+      "built": "a4829e4260ca71730db1d41672e8a93559b21abd7f9c7d7629977da2d68adc1b",
+      "unchanged": true
+    },
+    {
+      "path": "public/resume-sculptures/creative-trace-b55038776aae.glb",
+      "source": "b55038776aaee39173df7ac9cc6f1aa7a2ab9637e8fc177847cdb316d1b23577",
+      "baseline": "b55038776aaee39173df7ac9cc6f1aa7a2ab9637e8fc177847cdb316d1b23577",
+      "built": "b55038776aaee39173df7ac9cc6f1aa7a2ab9637e8fc177847cdb316d1b23577",
+      "unchanged": true
+    },
+    {
+      "path": "public/resume-sculptures/creative-trace-e04537543525.glb",
+      "source": "e045375435250935ca2b1780acd27d4801b48b377744d0ccaaa97e23ab7fc055",
+      "baseline": "e045375435250935ca2b1780acd27d4801b48b377744d0ccaaa97e23ab7fc055",
+      "built": "e045375435250935ca2b1780acd27d4801b48b377744d0ccaaa97e23ab7fc055",
+      "unchanged": true
+    },
+    {
+      "path": "public/resume-sculptures/internship-deadlines-0cbf17a17bfe.glb",
+      "source": "0cbf17a17bfe488f0fdf153ed4ba7fab9d2061e8ae207f8829f407975dd5ab16",
+      "baseline": "0cbf17a17bfe488f0fdf153ed4ba7fab9d2061e8ae207f8829f407975dd5ab16",
+      "built": "0cbf17a17bfe488f0fdf153ed4ba7fab9d2061e8ae207f8829f407975dd5ab16",
+      "unchanged": true
+    },
+    {
+      "path": "public/resume-sculptures/internship-deadlines-0dfe3d3c29a6.glb",
+      "source": "0dfe3d3c29a64786475aeb331f382c461c639cdc34e3082bca68e85b41a4c0d0",
+      "baseline": "0dfe3d3c29a64786475aeb331f382c461c639cdc34e3082bca68e85b41a4c0d0",
+      "built": "0dfe3d3c29a64786475aeb331f382c461c639cdc34e3082bca68e85b41a4c0d0",
+      "unchanged": true
+    },
+    {
+      "path": "public/resume-sculptures/internship-deadlines-2485572f98e4.glb",
+      "source": "2485572f98e48e964454ea6bd8b5f1880e9cac342daddc0bdb29b9b88a0b62a3",
+      "baseline": "2485572f98e48e964454ea6bd8b5f1880e9cac342daddc0bdb29b9b88a0b62a3",
+      "built": "2485572f98e48e964454ea6bd8b5f1880e9cac342daddc0bdb29b9b88a0b62a3",
+      "unchanged": true
+    },
+    {
+      "path": "public/resume-sculptures/internship-deadlines-2b4bbe629813.glb",
+      "source": "2b4bbe629813ed927fcb609961494becbbfc9d2f5d5975e829ceed502c872edd",
+      "baseline": "2b4bbe629813ed927fcb609961494becbbfc9d2f5d5975e829ceed502c872edd",
+      "built": "2b4bbe629813ed927fcb609961494becbbfc9d2f5d5975e829ceed502c872edd",
+      "unchanged": true
+    },
+    {
+      "path": "public/resume-sculptures/internship-deadlines-3d4ac07df842.glb",
+      "source": "3d4ac07df84279d9ebd22fffb1963b89c0dac5469a5a5bcd61d8bf26c0daae08",
+      "baseline": "3d4ac07df84279d9ebd22fffb1963b89c0dac5469a5a5bcd61d8bf26c0daae08",
+      "built": "3d4ac07df84279d9ebd22fffb1963b89c0dac5469a5a5bcd61d8bf26c0daae08",
+      "unchanged": true
+    },
+    {
+      "path": "public/resume-sculptures/internship-deadlines-4fb38791bcbd.glb",
+      "source": "4fb38791bcbd96df468d4cf04b9d691a284a7d545d56cd532148d35dbb0fb151",
+      "baseline": "4fb38791bcbd96df468d4cf04b9d691a284a7d545d56cd532148d35dbb0fb151",
+      "built": "4fb38791bcbd96df468d4cf04b9d691a284a7d545d56cd532148d35dbb0fb151",
+      "unchanged": true
+    },
+    {
+      "path": "public/resume-sculptures/internship-deadlines-51776f5b7763.glb",
+      "source": "51776f5b7763bbae28f9be0c4b7df5e50f9ed712fdf3b97eb4bd263894a945cb",
+      "baseline": "51776f5b7763bbae28f9be0c4b7df5e50f9ed712fdf3b97eb4bd263894a945cb",
+      "built": "51776f5b7763bbae28f9be0c4b7df5e50f9ed712fdf3b97eb4bd263894a945cb",
+      "unchanged": true
+    },
+    {
+      "path": "public/resume-sculptures/internship-deadlines-8f2a721cad9b.glb",
+      "source": "8f2a721cad9ba9fca80c64626e8cb08d6ecb75236a9b8104614322f02111fa63",
+      "baseline": "8f2a721cad9ba9fca80c64626e8cb08d6ecb75236a9b8104614322f02111fa63",
+      "built": "8f2a721cad9ba9fca80c64626e8cb08d6ecb75236a9b8104614322f02111fa63",
+      "unchanged": true
+    },
+    {
+      "path": "public/resume-sculptures/internship-deadlines-902f83cffb1c.glb",
+      "source": "902f83cffb1c3ee36017ef034d1d8bb8d47593d85fe91f06fe2d801c1134513d",
+      "baseline": "902f83cffb1c3ee36017ef034d1d8bb8d47593d85fe91f06fe2d801c1134513d",
+      "built": "902f83cffb1c3ee36017ef034d1d8bb8d47593d85fe91f06fe2d801c1134513d",
+      "unchanged": true
+    },
+    {
+      "path": "public/resume-sculptures/internship-deadlines-93f057ab06d8.glb",
+      "source": "93f057ab06d8d515310cb7b679e600943f134c53ce53c9511a5c5b8f5dbf4c1a",
+      "baseline": "93f057ab06d8d515310cb7b679e600943f134c53ce53c9511a5c5b8f5dbf4c1a",
+      "built": "93f057ab06d8d515310cb7b679e600943f134c53ce53c9511a5c5b8f5dbf4c1a",
+      "unchanged": true
+    },
+    {
+      "path": "public/resume-sculptures/internship-deadlines-a0b463aaa591.glb",
+      "source": "a0b463aaa591fb7d53840754533188f477438fc44953867a4a83802703e684ae",
+      "baseline": "a0b463aaa591fb7d53840754533188f477438fc44953867a4a83802703e684ae",
+      "built": "a0b463aaa591fb7d53840754533188f477438fc44953867a4a83802703e684ae",
+      "unchanged": true
+    },
+    {
+      "path": "public/resume-sculptures/internship-deadlines-d12e5166df2b.glb",
+      "source": "d12e5166df2b77c0b6d7ee677cf4493fe6442b289740ac3d7eae8fec0c7bf53f",
+      "baseline": "d12e5166df2b77c0b6d7ee677cf4493fe6442b289740ac3d7eae8fec0c7bf53f",
+      "built": "d12e5166df2b77c0b6d7ee677cf4493fe6442b289740ac3d7eae8fec0c7bf53f",
+      "unchanged": true
+    },
+    {
+      "path": "public/resume-sculptures/sapien-21141cf4a7b1.glb",
+      "source": "21141cf4a7b10211f22e200f44c491249e3ff1bc5c63da3a737cfa212a872b67",
+      "baseline": "21141cf4a7b10211f22e200f44c491249e3ff1bc5c63da3a737cfa212a872b67",
+      "built": "21141cf4a7b10211f22e200f44c491249e3ff1bc5c63da3a737cfa212a872b67",
+      "unchanged": true
+    },
+    {
+      "path": "public/resume-sculptures/sapien-529b71ff3296.glb",
+      "source": "529b71ff3296a7da0bb7e9acf909950e5d61701ee5c90e40a81c34622f0d32bb",
+      "baseline": "529b71ff3296a7da0bb7e9acf909950e5d61701ee5c90e40a81c34622f0d32bb",
+      "built": "529b71ff3296a7da0bb7e9acf909950e5d61701ee5c90e40a81c34622f0d32bb",
+      "unchanged": true
+    },
+    {
+      "path": "public/resume-sculptures/sapien-5a42207cc472.glb",
+      "source": "5a42207cc472e6f091492386e388abb4c345b5e29a9c94abe776d4aafcc3cb8e",
+      "baseline": "5a42207cc472e6f091492386e388abb4c345b5e29a9c94abe776d4aafcc3cb8e",
+      "built": "5a42207cc472e6f091492386e388abb4c345b5e29a9c94abe776d4aafcc3cb8e",
+      "unchanged": true
+    },
+    {
+      "path": "public/resume-sculptures/sapien-6aca908bd0c8.glb",
+      "source": "6aca908bd0c8119932e94eec963a9d4c7dcd0326ba467fd7572a2ee60098a524",
+      "baseline": "6aca908bd0c8119932e94eec963a9d4c7dcd0326ba467fd7572a2ee60098a524",
+      "built": "6aca908bd0c8119932e94eec963a9d4c7dcd0326ba467fd7572a2ee60098a524",
+      "unchanged": true
+    },
+    {
+      "path": "public/resume-sculptures/sapien-b8f581f88789.glb",
+      "source": "b8f581f8878958809ce6dfc0352d27da12a01f20d8b92726fb18177c89cb93ea",
+      "baseline": "b8f581f8878958809ce6dfc0352d27da12a01f20d8b92726fb18177c89cb93ea",
+      "built": "b8f581f8878958809ce6dfc0352d27da12a01f20d8b92726fb18177c89cb93ea",
+      "unchanged": true
+    },
+    {
+      "path": "public/resume-sculptures/sapien-e62335c66194.glb",
+      "source": "e62335c661944d967cae345c16e47a7a8e3111b13522b18d497b401b5e9bac6e",
+      "baseline": "e62335c661944d967cae345c16e47a7a8e3111b13522b18d497b401b5e9bac6e",
+      "built": "e62335c661944d967cae345c16e47a7a8e3111b13522b18d497b401b5e9bac6e",
+      "unchanged": true
+    },
+    {
+      "path": "public/resume-sculptures/venture-labs-25c04d8c7f21.glb",
+      "source": "25c04d8c7f21ea83524426720ec8c61ca55299ee7691db82f161b72f066c5142",
+      "baseline": "25c04d8c7f21ea83524426720ec8c61ca55299ee7691db82f161b72f066c5142",
+      "built": "25c04d8c7f21ea83524426720ec8c61ca55299ee7691db82f161b72f066c5142",
+      "unchanged": true
+    },
+    {
+      "path": "public/resume-sculptures/venture-labs-2aca7ca39a26.glb",
+      "source": "2aca7ca39a2641beeb942f152170e06fbfc9fc732b270a86fd333604f6439e94",
+      "baseline": "2aca7ca39a2641beeb942f152170e06fbfc9fc732b270a86fd333604f6439e94",
+      "built": "2aca7ca39a2641beeb942f152170e06fbfc9fc732b270a86fd333604f6439e94",
+      "unchanged": true
+    },
+    {
+      "path": "public/resume-sculptures/venture-labs-491a5e86c9e2.glb",
+      "source": "491a5e86c9e2d6aefb8ff51ad9c8ea858a2a97193e339f1cdd52077d30b43f0a",
+      "baseline": "491a5e86c9e2d6aefb8ff51ad9c8ea858a2a97193e339f1cdd52077d30b43f0a",
+      "built": "491a5e86c9e2d6aefb8ff51ad9c8ea858a2a97193e339f1cdd52077d30b43f0a",
+      "unchanged": true
+    },
+    {
+      "path": "public/resume-sculptures/venture-labs-4aaa2717d795.glb",
+      "source": "4aaa2717d795f35cc40a3e4a0c662f6b239ad96862adb6ae2bde57fde73bc476",
+      "baseline": "4aaa2717d795f35cc40a3e4a0c662f6b239ad96862adb6ae2bde57fde73bc476",
+      "built": "4aaa2717d795f35cc40a3e4a0c662f6b239ad96862adb6ae2bde57fde73bc476",
+      "unchanged": true
+    },
+    {
+      "path": "public/resume-sculptures/venture-labs-4d003238c1e9.glb",
+      "source": "4d003238c1e99cd0b013d24aec85f886eade5f17c5545784e7400c9e4fa7a3cc",
+      "baseline": "4d003238c1e99cd0b013d24aec85f886eade5f17c5545784e7400c9e4fa7a3cc",
+      "built": "4d003238c1e99cd0b013d24aec85f886eade5f17c5545784e7400c9e4fa7a3cc",
+      "unchanged": true
+    },
+    {
+      "path": "public/resume-sculptures/venture-labs-53d620af1a40.glb",
+      "source": "53d620af1a40ad806aaf06510b35da21cffbfe7d839635ea2bfa80be7a5ca971",
+      "baseline": "53d620af1a40ad806aaf06510b35da21cffbfe7d839635ea2bfa80be7a5ca971",
+      "built": "53d620af1a40ad806aaf06510b35da21cffbfe7d839635ea2bfa80be7a5ca971",
+      "unchanged": true
+    },
+    {
+      "path": "public/resume-sculptures/venture-labs-69e57601e357.glb",
+      "source": "69e57601e357bbfeb1c305cb183a2327fe7df508a64fd3a618626942cdb534eb",
+      "baseline": "69e57601e357bbfeb1c305cb183a2327fe7df508a64fd3a618626942cdb534eb",
+      "built": "69e57601e357bbfeb1c305cb183a2327fe7df508a64fd3a618626942cdb534eb",
+      "unchanged": true
+    },
+    {
+      "path": "public/resume-sculptures/venture-labs-ae811a448e3b.glb",
+      "source": "ae811a448e3bd6a834219711d78c32f6a070b6b41653105d28dffc6c465c7cca",
+      "baseline": "ae811a448e3bd6a834219711d78c32f6a070b6b41653105d28dffc6c465c7cca",
+      "built": "ae811a448e3bd6a834219711d78c32f6a070b6b41653105d28dffc6c465c7cca",
+      "unchanged": true
+    },
+    {
+      "path": "public/resume-sculptures/venture-labs-b421807ec5b3.glb",
+      "source": "b421807ec5b31400bc1e69f496c5c89bee434da0b1b9884157f411f6488b235b",
+      "baseline": "b421807ec5b31400bc1e69f496c5c89bee434da0b1b9884157f411f6488b235b",
+      "built": "b421807ec5b31400bc1e69f496c5c89bee434da0b1b9884157f411f6488b235b",
+      "unchanged": true
+    },
+    {
+      "path": "public/resume-sculptures/venture-labs-b7d58438147b.glb",
+      "source": "b7d58438147b610e104cb60f52e303783541941b0ef77c06a41804782288f543",
+      "baseline": "b7d58438147b610e104cb60f52e303783541941b0ef77c06a41804782288f543",
+      "built": "b7d58438147b610e104cb60f52e303783541941b0ef77c06a41804782288f543",
+      "unchanged": true
+    },
+    {
+      "path": "public/resume-sculptures/venture-labs-e0226a39be7d.glb",
+      "source": "e0226a39be7d39dda4f4a770e5e56afb3e81e202b510d6d35d22fce1e7a54273",
+      "baseline": "e0226a39be7d39dda4f4a770e5e56afb3e81e202b510d6d35d22fce1e7a54273",
+      "built": "e0226a39be7d39dda4f4a770e5e56afb3e81e202b510d6d35d22fce1e7a54273",
+      "unchanged": true
+    },
+    {
+      "path": "public/resume-sculptures/venture-labs-f783ef1ee1b6.glb",
+      "source": "f783ef1ee1b6fa2806667ab8a136aeb19c4bcd386c073fe4e2a28d8e3004823d",
+      "baseline": "f783ef1ee1b6fa2806667ab8a136aeb19c4bcd386c073fe4e2a28d8e3004823d",
+      "built": "f783ef1ee1b6fa2806667ab8a136aeb19c4bcd386c073fe4e2a28d8e3004823d",
+      "unchanged": true
+    },
+    {
+      "path": "public/resume-sculptures/void-10f8185598c2.glb",
+      "source": "10f8185598c2727137e98445ca1ae9f2f9703f8f4b3445f41bdbbbb5773374c8",
+      "baseline": "10f8185598c2727137e98445ca1ae9f2f9703f8f4b3445f41bdbbbb5773374c8",
+      "built": "10f8185598c2727137e98445ca1ae9f2f9703f8f4b3445f41bdbbbb5773374c8",
+      "unchanged": true
+    },
+    {
+      "path": "public/resume-sculptures/void-318cdeeb13a1.glb",
+      "source": "318cdeeb13a1b49713d8d37246dc610ede1cfa5d79df2beb6cff0190731058d7",
+      "baseline": "318cdeeb13a1b49713d8d37246dc610ede1cfa5d79df2beb6cff0190731058d7",
+      "built": "318cdeeb13a1b49713d8d37246dc610ede1cfa5d79df2beb6cff0190731058d7",
+      "unchanged": true
+    },
+    {
+      "path": "public/resume-sculptures/void-7894766b7260.glb",
+      "source": "7894766b7260ce8d841fb4dd456dc50468dfff61889b4988d4d0e6d702130d56",
+      "baseline": "7894766b7260ce8d841fb4dd456dc50468dfff61889b4988d4d0e6d702130d56",
+      "built": "7894766b7260ce8d841fb4dd456dc50468dfff61889b4988d4d0e6d702130d56",
+      "unchanged": true
+    },
+    {
+      "path": "public/resume-sculptures/void-afcee21023d4.glb",
+      "source": "afcee21023d416cffb7b522f9110588018e9ab3cf3932c56a347685361b3880a",
+      "baseline": "afcee21023d416cffb7b522f9110588018e9ab3cf3932c56a347685361b3880a",
+      "built": "afcee21023d416cffb7b522f9110588018e9ab3cf3932c56a347685361b3880a",
+      "unchanged": true
+    },
+    {
+      "path": "public/resume-sculptures/void-c750aa7bfba5.glb",
+      "source": "c750aa7bfba5dab29c4ec596174028a56214d091792883d2bae2884747dbfe80",
+      "baseline": "c750aa7bfba5dab29c4ec596174028a56214d091792883d2bae2884747dbfe80",
+      "built": "c750aa7bfba5dab29c4ec596174028a56214d091792883d2bae2884747dbfe80",
+      "unchanged": true
+    },
+    {
+      "path": "public/resume-sculptures/void-d171d58aa3cb.glb",
+      "source": "d171d58aa3cbfeeb1ac18d4d85543dd6fdc01528066ab1bcb90c713af8ff4b20",
+      "baseline": "d171d58aa3cbfeeb1ac18d4d85543dd6fdc01528066ab1bcb90c713af8ff4b20",
+      "built": "d171d58aa3cbfeeb1ac18d4d85543dd6fdc01528066ab1bcb90c713af8ff4b20",
+      "unchanged": true
+    },
+    {
+      "path": "public/resume-sculptures/void-d5833f4932ac.glb",
+      "source": "d5833f4932aca2123db76ded15855727b7d920ae63502646aeacec2259ae7748",
+      "baseline": "d5833f4932aca2123db76ded15855727b7d920ae63502646aeacec2259ae7748",
+      "built": "d5833f4932aca2123db76ded15855727b7d920ae63502646aeacec2259ae7748",
+      "unchanged": true
+    },
+    {
+      "path": "public/resume-sculptures/void-e861cdc1680f.glb",
+      "source": "e861cdc1680f32b63a22aa801f9eda84c95b25c69881584f443eb162d5dd0c70",
+      "baseline": "e861cdc1680f32b63a22aa801f9eda84c95b25c69881584f443eb162d5dd0c70",
+      "built": "e861cdc1680f32b63a22aa801f9eda84c95b25c69881584f443eb162d5dd0c70",
+      "unchanged": true
+    },
+    {
+      "path": "public/resume-sculptures/void-ffb521eca315.glb",
+      "source": "ffb521eca31563ad09c32aa31b4fa2167e22a3c19954ca40628cf8a0ca85dabc",
+      "baseline": "ffb521eca31563ad09c32aa31b4fa2167e22a3c19954ca40628cf8a0ca85dabc",
+      "built": "ffb521eca31563ad09c32aa31b4fa2167e22a3c19954ca40628cf8a0ca85dabc",
+      "unchanged": true
+    },
+    {
+      "path": "public/work-studies/internshipdeadlines.glb",
+      "source": "e8c76730aef8c7659dd05bd2347f5cd30f2721b562596d795ca6b56294a5db83",
+      "baseline": "e8c76730aef8c7659dd05bd2347f5cd30f2721b562596d795ca6b56294a5db83",
+      "built": "e8c76730aef8c7659dd05bd2347f5cd30f2721b562596d795ca6b56294a5db83",
+      "unchanged": true
+    },
+    {
+      "path": "public/work-studies/investing-markets.glb",
+      "source": "e038ce3301c56b4421d500162c8e318b4cd13818e3a14f8633e6b4fa24f45031",
+      "baseline": "e038ce3301c56b4421d500162c8e318b4cd13818e3a14f8633e6b4fa24f45031",
+      "built": "e038ce3301c56b4421d500162c8e318b4cd13818e3a14f8633e6b4fa24f45031",
+      "unchanged": true
+    },
+    {
+      "path": "public/work-studies/miscellaneous.glb",
+      "source": "8f673fae44ddbf01758a4224831f73ab747e3f29068932a3bcf5e075c7acaab0",
+      "baseline": "8f673fae44ddbf01758a4224831f73ab747e3f29068932a3bcf5e075c7acaab0",
+      "built": "8f673fae44ddbf01758a4224831f73ab747e3f29068932a3bcf5e075c7acaab0",
+      "unchanged": true
+    },
+    {
+      "path": "public/work-studies/sapien.glb",
+      "source": "d5c3b29276cbaca3e1ed6e2b0f10c0c3c3ad2b6713b42b63e51b238e134ebb3f",
+      "baseline": "d5c3b29276cbaca3e1ed6e2b0f10c0c3c3ad2b6713b42b63e51b238e134ebb3f",
+      "built": "d5c3b29276cbaca3e1ed6e2b0f10c0c3c3ad2b6713b42b63e51b238e134ebb3f",
+      "unchanged": true
+    }
+  ],
+  "protectedPaths": [
+    "public",
+    "src/personal/editorial/data",
+    "src/personal/editorial/generative",
+    "src/personal/profile-copy.ts",
+    "src/personal/recruiter-copy.ts",
+    "src/personal/site-copy.ts",
+    "src/personal/content.ts",
+    "src/personal/portfolio-assets.ts",
+    "src/personal/work-study-shader.ts",
+    "src/personal/work-study-renderer.ts",
+    "src/personal/dither-kernel.ts",
+    "src/personal/live-dither.ts",
+    "src/personal/object-renderer.ts",
+    "src/personal/mobile-render-policy.ts",
+    "src/personal/about/interest-renderer.ts",
+    "src/personal/about/interest-audio.ts",
+    "src/personal/editorial/resume-scene.ts",
+    "src/personal/editorial/resume-chapters.ts",
+    "src/personal/editorial/ResumeDocument.tsx",
+    "src/personal/editorial/resume-navigation.ts",
+    "src/personal/route-preparation.ts",
+    "src/personal/refinements/route-scroll.ts"
+  ],
+  "changedProtectedFiles": [],
+  "articleCount": 85,
+  "passed": true
+}

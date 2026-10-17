@@ -3,12 +3,13 @@ import { findReadingTopic, readingTopics, topicReadings, topicQuestions } from '
 import { readingPathHref, sectionHref } from './library'
 import { displayDate, displayReadTime } from './types'
 import './reading-guides.css'
+import './editorial-finish.css'
 
 export function ReadingPaths({ interactive = false }: { interactive?: boolean }) {
-  return <nav className="reading-paths" aria-label="Reading paths">
-    {readingTopics.map(topic => <a key={topic.slug} href={`${interactive ? '#' : ''}/topics/${topic.slug}`}>
-      <span className="eyebrow">{topic.readings.length} essays</span>
-      <h2>{topic.title}</h2><p>{topic.description}</p><span className="reading-path-action">Explore the reading path <span aria-hidden="true">↗</span></span>
+  return <nav className="reading-paths reading-path-directory" aria-label="Reading paths">
+    {readingTopics.map((topic, index) => <a key={topic.slug} href={`${interactive ? '#' : ''}/topics/${topic.slug}`}>
+      <span className="reading-path-index" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span><div className="reading-path-copy"><span className="eyebrow">{topic.readings.length} essays</span>
+      <h2>{topic.title}</h2><p>{topic.description}</p><span className="reading-path-action">Explore the reading path <span aria-hidden="true">↗</span></span></div>
     </a>)}
   </nav>
 }
@@ -21,11 +22,11 @@ export function TopicBody({ slug, interactive = false }: { slug: string; interac
     history.replaceState(history.state, '', `${location.pathname}${location.search}${readingPathHref(slug, selected)}`)
   }
   return <>
-    <div className="topic-introduction">{topic.introduction.map(paragraph => <p key={paragraph}>{paragraph}</p>)}</div>
+    <div className="topic-briefing"><div className="topic-context"><div className="topic-introduction">{topic.introduction.map(paragraph => <p key={paragraph}>{paragraph}</p>)}</div>
     {topic.featuredPath ? <p className="topic-return"><a href={`${interactive ? '#' : ''}/topics/${topic.featuredPath.slug}`}>{topic.featuredPath.label} <span aria-hidden="true">↗</span></a></p> : null}
     {topic.sourceDownload ? <p className="topic-return"><a href={topic.sourceDownload.href} download>{topic.sourceDownload.label} <span aria-hidden="true">↗</span></a></p> : null}
-    <nav className="topic-questions" aria-labelledby="topic-questions-title"><h2 id="topic-questions-title">Start with a question</h2><ul>{topicQuestions(topic).map(({ question, section, article }) => <li key={question}><a href={interactive ? sectionHref(`#/writing/${article.slug}?from=${encodeURIComponent(readingPathHref(slug, article.slug))}`, section) : `${article.path}#${encodeURIComponent(section)}`} onClick={interactive ? event => rememberReading(event, article.slug) : undefined}>{question}</a></li>)}</ul></nav>
-    <p className="reading-duration">Reading path updated <time dateTime={topic.questionsUpdated}>{displayDate(topic.questionsUpdated)}</time>.</p>
+    </div><nav className="topic-questions" aria-labelledby="topic-questions-title"><h2 id="topic-questions-title">Start with a question</h2><ul>{topicQuestions(topic).map(({ question, section, article }) => <li key={question}><a href={interactive ? sectionHref(`#/writing/${article.slug}?from=${encodeURIComponent(readingPathHref(slug, article.slug))}`, section) : `${article.path}#${encodeURIComponent(section)}`} onClick={interactive ? event => rememberReading(event, article.slug) : undefined}>{question}</a></li>)}</ul></nav></div>
+    <p className="reading-duration topic-updated">Reading path updated <time dateTime={topic.questionsUpdated}>{displayDate(topic.questionsUpdated)}</time>.</p>
     <ol className="topic-readings">{topicReadings(topic).map(({ article, reason }, index) => <li key={article.slug}>
       <span className="reading-step" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
       <div><h2><a data-slug={article.slug} href={interactive ? `#/writing/${article.slug}?from=${encodeURIComponent(readingPathHref(slug, article.slug))}` : article.path} onClick={interactive ? event => rememberReading(event, article.slug) : undefined}>{article.displayTitle || article.title}</a></h2><p>{reason}</p><span className="reading-duration">{displayReadTime(article.readTime)}</span></div>
@@ -50,8 +51,8 @@ export default function TopicPage({ slug }: { slug: string }) {
     })
     return () => cancelAnimationFrame(frame)
   }, [topic])
-  if (!topic) return <section className="topic-page"><h1>Reading path not found</h1><a href="#/writing">Browse writing</a></section>
-  return <section className="topic-page">
+  if (!topic) return <section className="topic-page topic-edition"><h1>Reading path not found</h1><a href="#/writing">Browse writing</a></section>
+  return <section className="topic-page topic-edition">
     <header><a className="eyebrow" href="#/writing">Writing / Reading paths</a><h1>{topic.title}</h1><p className="topic-deck">{topic.description}</p></header>
     <TopicBody slug={slug} interactive />
   </section>
